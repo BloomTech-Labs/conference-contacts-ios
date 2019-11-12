@@ -97,12 +97,14 @@
 		37A185A2237A3579002191B5 /* swaap */ = {
 			isa = PBXGroup;
 			children = (
-				37A185A3237A3579002191B5 /* AppDelegate.swift */,
-				37A185A7237A3579002191B5 /* ViewController.swift */,
-				37A185A9237A3579002191B5 /* Main.storyboard */,
-				37A185AC237A357C002191B5 /* Assets.xcassets */,
-				37A185AE237A357C002191B5 /* LaunchScreen.storyboard */,
-				37A185B1237A357C002191B5 /* Info.plist */,
+				37A185D5237A376F002191B5 /* Storyboards */,
+				37A185D7237A37A2002191B5 /* Views */,
+				37A185D4237A375E002191B5 /* View Controllers */,
+				37A185D8237A37A8002191B5 /* Models */,
+				37A185DA237A37BB002191B5 /* Model Controllers */,
+				37A185DB237A37D1002191B5 /* Helpers */,
+				37A185D3237A374C002191B5 /* Support */,
+				37A185D6237A3791002191B5 /* Resources */,
 			);
 			path = swaap;
 			sourceTree = "<group>";
@@ -123,6 +125,68 @@
 				37A185C7237A357C002191B5 /* Info.plist */,
 			);
 			path = swaapUITests;
+			sourceTree = "<group>";
+		};
+		37A185D3237A374C002191B5 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				37A185A3237A3579002191B5 /* AppDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		37A185D4237A375E002191B5 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				37A185A7237A3579002191B5 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		37A185D5237A376F002191B5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				37A185AE237A357C002191B5 /* LaunchScreen.storyboard */,
+				37A185A9237A3579002191B5 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		37A185D6237A3791002191B5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				37A185AC237A357C002191B5 /* Assets.xcassets */,
+				37A185B1237A357C002191B5 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		37A185D7237A37A2002191B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		37A185D8237A37A8002191B5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		37A185DA237A37BB002191B5 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Model Controllers";
+			sourceTree = "<group>";
+		};
+		37A185DB237A37D1002191B5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,7 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = swaap/Info.plist;
+				INFOPLIST_FILE = swaap/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,7 +513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = swaap/Info.plist;
+				INFOPLIST_FILE = swaap/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
