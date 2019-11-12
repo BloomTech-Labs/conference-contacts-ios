@@ -16,6 +16,9 @@
 		37A185C6237A357C002191B5 /* swaapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185C5237A357C002191B5 /* swaapUITests.swift */; };
 		37A185E8237A40B8002191B5 /* NetworkHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E6237A40B8002191B5 /* NetworkHandler.framework */; };
 		37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */; };
+		37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */; };
+		37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */; };
+		37A185F2237A43D5002191B5 /* StoryboardThree.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185F1237A43D5002191B5 /* StoryboardThree.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		37A185E3237A3BCF002191B5 /* input.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
 		37A185E6237A40B8002191B5 /* NetworkHandler.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkHandler.framework; path = Carthage/Build/iOS/NetworkHandler.framework; sourceTree = "<group>"; };
 		37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyAcknowledgements.framework; path = Carthage/Build/iOS/SwiftyAcknowledgements.framework; sourceTree = "<group>"; };
+		37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardOne.storyboard; sourceTree = "<group>"; };
+		37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardTwo.storyboard; sourceTree = "<group>"; };
+		37A185F1237A43D5002191B5 /* StoryboardThree.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardThree.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,9 @@
 			children = (
 				37A185AE237A357C002191B5 /* LaunchScreen.storyboard */,
 				37A185A9237A3579002191B5 /* Main.storyboard */,
+				37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */,
+				37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */,
+				37A185F1237A43D5002191B5 /* StoryboardThree.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -320,9 +329,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37A185F2237A43D5002191B5 /* StoryboardThree.storyboard in Resources */,
 				37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
+				37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */,
 				37A185AB237A3579002191B5 /* Main.storyboard in Resources */,
+				37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
