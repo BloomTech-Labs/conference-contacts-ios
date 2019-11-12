@@ -1,0 +1,3 @@
+$(SRCROOT)/Carthage/Build/iOS/SwiftyAcknowledgements.framework
+$(SRCROOT)/Carthage/Build/iOS/NetworkHandler.framework
+
