@@ -11,10 +11,10 @@ import ChevronAnimatable
 class LoginViewController: UIViewController {
 
 
-	@IBOutlet weak var scrollView: UIScrollView!
-	@IBOutlet weak var stackView: UIStackView!
-	@IBOutlet weak var loginView: UIView!
-	@IBOutlet weak var chevron: ChevronView!
+	@IBOutlet private weak var scrollView: UIScrollView!
+	@IBOutlet private weak var stackView: UIStackView!
+	@IBOutlet private weak var loginView: UIView!
+	@IBOutlet private weak var chevron: ChevronView!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
 			let range = endRotationAt - startRotationAt
 			let currentValue = scrollView.contentOffset.y - startRotationAt
 			let normalizedCurrentValue = ((currentValue / range) * 2) - 1
+			chevron.curviness = CGFloat(1 - abs(normalizedCurrentValue) + 0.1)
 			chevron.pointHeight = normalizedCurrentValue
 		} else {
 			chevron.pointHeight = 1
@@ -53,6 +54,5 @@ class LoginViewController: UIViewController {
 extension LoginViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		updateChevron()
-//		print(scrollView.contentOffset, chevronButton.transform)
 	}
 }
