@@ -21,6 +21,7 @@ class LoginViewController: UIViewController {
 		scrollView.isPagingEnabled = true
 		scrollView.delegate = self
 		updateChevron()
+		scrollView.delaysContentTouches = false
 	}
 
 	private func updateChevron() {

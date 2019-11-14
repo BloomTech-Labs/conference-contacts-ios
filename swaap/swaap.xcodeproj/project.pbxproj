@@ -28,6 +28,8 @@
 		37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A2F40C237CFF0C00C1EF3B /* Login.storyboard */; };
 		37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; };
 		37A2F418237CFF5E00C1EF3B /* ChevronAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37A2F41B237D23FF00C1EF3B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F41A237D23FF00C1EF3B /* SignUpViewController.swift */; };
+		37A2F41D237D543B00C1EF3B /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F41C237D543B00C1EF3B /* ButtonHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,9 @@
 		37A2F40A237CFEFE00C1EF3B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		37A2F40C237CFF0C00C1EF3B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChevronAnimatable.xcodeproj; path = Carthage/Checkouts/ChevronAnimatable/ChevronAnimatable.xcodeproj; sourceTree = "<group>"; };
+		37A2F41A237D23FF00C1EF3B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		37A2F41C237D543B00C1EF3B /* ButtonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
+		37A2F41E237DDDF000C1EF3B /* swaap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swaap.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +195,7 @@
 		37A185A2237A3579002191B5 /* swaap */ = {
 			isa = PBXGroup;
 			children = (
+				37A2F41E237DDDF000C1EF3B /* swaap.entitlements */,
 				37A185D5237A376F002191B5 /* Storyboards */,
 				37A185D7237A37A2002191B5 /* Views */,
 				37A185D4237A375E002191B5 /* View Controllers */,
@@ -225,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				37A185A3237A3579002191B5 /* AppDelegate.swift */,
+				37A2F41C237D543B00C1EF3B /* ButtonHelper.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -234,6 +241,7 @@
 			children = (
 				3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */,
 				37A2F40A237CFEFE00C1EF3B /* LoginViewController.swift */,
+				37A2F41A237D23FF00C1EF3B /* SignUpViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -528,8 +536,10 @@
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
 				3398EDB6237B378E00D57DF8 /* CoordinatorProtocols.swift in Sources */,
 				3398EDB8237B37E000D57DF8 /* AuthCoordinator.swift in Sources */,
+				37A2F41B237D23FF00C1EF3B /* SignUpViewController.swift in Sources */,
 				3398EDB0237B307100D57DF8 /* Coordinator.swift in Sources */,
 				335E668F237B6BF00099EEA1 /* ContactsCoordinator.swift in Sources */,
+				37A2F41D237D543B00C1EF3B /* ButtonHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,7 +712,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D6VB3396MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -713,8 +726,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.swaapcompany.swaap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marlonraskin.swaap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -724,7 +738,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D6VB3396MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -735,8 +752,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.swaapcompany.swaap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marlonraskin.swaap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
