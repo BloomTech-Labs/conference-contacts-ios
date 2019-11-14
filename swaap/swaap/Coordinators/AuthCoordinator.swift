@@ -20,17 +20,11 @@ class AuthCoordinator: Coordinator, TabBarControllerAccessor {
 	}
 
 	func start() {
-		let tempVC = UIViewController()
-		let label = UILabel()
-		label.text = "Test"
-
-		tempVC.view.addSubview(label)
-		label.translatesAutoresizingMaskIntoConstraints = false
-		label.centerYAnchor.constraint(equalTo: tempVC.view.centerYAnchor).isActive = true
-		label.centerXAnchor.constraint(equalTo: tempVC.view.centerXAnchor).isActive = true
-		navigationController.pushViewController(tempVC, animated: false)
+		let storyboard = UIStoryboard(name: "Login", bundle: nil)
+		let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+		navigationController.pushViewController(loginVC, animated: false)
 		navigationController.modalPresentationStyle = .fullScreen
-
+		navigationController.isNavigationBarHidden = true
 		self.rootTabBarController.present(self.navigationController, animated: false)
 	}
 }

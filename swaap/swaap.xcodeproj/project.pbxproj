@@ -14,7 +14,6 @@
 		3398EDB8237B37E000D57DF8 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB7237B37E000D57DF8 /* AuthCoordinator.swift */; };
 		3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */; };
 		37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185A3237A3579002191B5 /* AppDelegate.swift */; };
-		37A185A8237A3579002191B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185A7237A3579002191B5 /* ViewController.swift */; };
 		37A185AB237A3579002191B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185A9237A3579002191B5 /* Main.storyboard */; };
 		37A185AD237A357C002191B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37A185AC237A357C002191B5 /* Assets.xcassets */; };
 		37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185AE237A357C002191B5 /* LaunchScreen.storyboard */; };
@@ -25,6 +24,10 @@
 		37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */; };
 		37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */; };
 		37A185F2237A43D5002191B5 /* StoryboardThree.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185F1237A43D5002191B5 /* StoryboardThree.storyboard */; };
+		37A2F40B237CFEFE00C1EF3B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F40A237CFEFE00C1EF3B /* LoginViewController.swift */; };
+		37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A2F40C237CFF0C00C1EF3B /* Login.storyboard */; };
+		37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; };
+		37A2F418237CFF5E00C1EF3B /* ChevronAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +45,35 @@
 			remoteGlobalIDString = 37A1859F237A3579002191B5;
 			remoteInfo = swaap;
 		};
+		37A2F413237CFF5400C1EF3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37A2F3AC237BAB6800C1EF3B;
+			remoteInfo = ChevronAnimatable;
+		};
+		37A2F415237CFF5400C1EF3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 37A2F3B5237BAB6800C1EF3B;
+			remoteInfo = ChevronAnimatableTests;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		37A2F419237CFF5E00C1EF3B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				37A2F418237CFF5E00C1EF3B /* ChevronAnimatable.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
@@ -53,7 +84,6 @@
 		3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		37A185A0237A3579002191B5 /* swaap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swaap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37A185A3237A3579002191B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37A185A7237A3579002191B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		37A185AA237A3579002191B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37A185AC237A357C002191B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37A185AF237A357C002191B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,6 +103,9 @@
 		37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardOne.storyboard; sourceTree = "<group>"; };
 		37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardTwo.storyboard; sourceTree = "<group>"; };
 		37A185F1237A43D5002191B5 /* StoryboardThree.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardThree.storyboard; sourceTree = "<group>"; };
+		37A2F40A237CFEFE00C1EF3B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		37A2F40C237CFF0C00C1EF3B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChevronAnimatable.xcodeproj; path = Carthage/Checkouts/ChevronAnimatable/ChevronAnimatable.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
+				37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */,
 				37A185E8237A40B8002191B5 /* NetworkHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,8 +232,8 @@
 		37A185D4237A375E002191B5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				37A185A7237A3579002191B5 /* ViewController.swift */,
 				3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */,
+				37A2F40A237CFEFE00C1EF3B /* LoginViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -212,6 +246,7 @@
 				37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */,
 				37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */,
 				37A185F1237A43D5002191B5 /* StoryboardThree.storyboard */,
+				37A2F40C237CFF0C00C1EF3B /* Login.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -250,10 +285,20 @@
 		37A185E5237A4087002191B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */,
 				37A185E6237A40B8002191B5 /* NetworkHandler.framework */,
 				37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37A2F40F237CFF5400C1EF3B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */,
+				37A2F416237CFF5400C1EF3B /* ChevronAnimatableTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +314,7 @@
 				37A185DE237A39EA002191B5 /* Run Script - swiftlint */,
 				37A185DF237A3A4D002191B5 /* Run Script - Generate Acknowledgments */,
 				37A185E0237A3AAA002191B5 /* Run Script - Carthage */,
+				37A2F419237CFF5E00C1EF3B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -349,6 +395,12 @@
 			mainGroup = 37A18597237A3579002191B5;
 			productRefGroup = 37A185A1237A3579002191B5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 37A2F40F237CFF5400C1EF3B /* Products */;
+					ProjectRef = 37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				37A1859F237A3579002191B5 /* swaap */,
@@ -358,6 +410,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ChevronAnimatable.framework;
+			remoteRef = 37A2F413237CFF5400C1EF3B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		37A2F416237CFF5400C1EF3B /* ChevronAnimatableTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChevronAnimatableTests.xctest;
+			remoteRef = 37A2F415237CFF5400C1EF3B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		37A1859E237A3579002191B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -365,6 +434,7 @@
 			files = (
 				37A185F2237A43D5002191B5 /* StoryboardThree.storyboard in Resources */,
 				37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */,
+				37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
 				37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */,
 				37A185AB237A3579002191B5 /* Main.storyboard in Resources */,
@@ -452,8 +522,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37A2F40B237CFEFE00C1EF3B /* LoginViewController.swift in Sources */,
 				335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */,
-				37A185A8237A3579002191B5 /* ViewController.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
 				3398EDB6237B378E00D57DF8 /* CoordinatorProtocols.swift in Sources */,

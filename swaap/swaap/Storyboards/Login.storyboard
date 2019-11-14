@@ -61,7 +61,7 @@
         <!--Login View Controller-->
         <scene sceneID="iwO-8v-1EZ">
             <objects>
-                <viewController id="skd-AL-Jhm" customClass="LoginViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="skd-AL-Jhm" customClass="LoginViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="paR-oh-pN3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,11 +92,15 @@
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="PK7-sZ-0If" firstAttribute="top" secondItem="1lR-u9-dIK" secondAttribute="top" id="6gk-TL-XXB"/>
                                                     <constraint firstAttribute="bottom" secondItem="PK7-sZ-0If" secondAttribute="bottom" id="VoU-VB-iSt"/>
                                                     <constraint firstItem="PK7-sZ-0If" firstAttribute="centerX" secondItem="1lR-u9-dIK" secondAttribute="centerX" id="xZb-2v-xYC"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="eTF-rT-WzC" appends="YES" id="M6X-jw-Fj8"/>
+                                                </connections>
                                             </view>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Qv-eP-Gph">
                                                 <rect key="frame" x="0.0" y="806" width="414" height="747"/>
@@ -128,12 +132,18 @@
                         <viewLayoutGuide key="safeArea" id="Gmw-Ig-GmK"/>
                     </view>
                     <connections>
+                        <outlet property="chevron" destination="PK7-sZ-0If" id="eSx-Hu-sXs"/>
                         <outlet property="loginView" destination="9Qv-eP-Gph" id="oFq-Ko-cGT"/>
                         <outlet property="scrollView" destination="DRP-2s-YKY" id="UcC-0H-ZWQ"/>
                         <outlet property="stackView" destination="9PR-2l-g8e" id="fup-lC-hkm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29S-ZA-dZJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eTF-rT-WzC">
+                    <connections>
+                        <action selector="chevronTapped:" destination="skd-AL-Jhm" id="wKE-Fv-Xbk"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1265.217391304348" y="122.54464285714285"/>
         </scene>
