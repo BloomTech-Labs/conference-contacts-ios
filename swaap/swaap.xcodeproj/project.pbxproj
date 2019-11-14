@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		335E668B237B56D30099EEA1 /* Window2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668A237B56D30099EEA1 /* Window2.swift */; };
+		335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668C237B6BAA0099EEA1 /* ContactsController.swift */; };
+		335E668F237B6BF00099EEA1 /* ContactsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668E237B6BF00099EEA1 /* ContactsCoordinator.swift */; };
 		3398EDB0237B307100D57DF8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDAF237B307100D57DF8 /* Coordinator.swift */; };
 		3398EDB6237B378E00D57DF8 /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB5237B378E00D57DF8 /* CoordinatorProtocols.swift */; };
 		3398EDB8237B37E000D57DF8 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB7237B37E000D57DF8 /* AuthCoordinator.swift */; };
@@ -44,7 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		335E668A237B56D30099EEA1 /* Window2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window2.swift; sourceTree = "<group>"; };
+		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
+		335E668E237B6BF00099EEA1 /* ContactsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCoordinator.swift; sourceTree = "<group>"; };
 		3398EDAF237B307100D57DF8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = ../Coordinator.swift; sourceTree = "<group>"; };
 		3398EDB5237B378E00D57DF8 /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
 		3398EDB7237B37E000D57DF8 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				3398EDB7237B37E000D57DF8 /* AuthCoordinator.swift */,
+				335E668E237B6BF00099EEA1 /* ContactsCoordinator.swift */,
 				3398EDB4237B376900D57DF8 /* Coordinator Protocols */,
 			);
 			path = Coordinators;
@@ -112,7 +115,6 @@
 		3398EDB3237B35CC00D57DF8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				335E668A237B56D30099EEA1 /* Window2.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -240,6 +242,7 @@
 		37A185DA237A37BB002191B5 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				335E668C237B6BAA0099EEA1 /* ContactsController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -449,13 +452,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */,
 				37A185A8237A3579002191B5 /* ViewController.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
 				3398EDB6237B378E00D57DF8 /* CoordinatorProtocols.swift in Sources */,
 				3398EDB8237B37E000D57DF8 /* AuthCoordinator.swift in Sources */,
-				335E668B237B56D30099EEA1 /* Window2.swift in Sources */,
 				3398EDB0237B307100D57DF8 /* Coordinator.swift in Sources */,
+				335E668F237B6BF00099EEA1 /* ContactsCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,7 +679,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = swaapTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -696,7 +700,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = swaapTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -716,6 +720,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = swaapUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -735,6 +740,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = swaapUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

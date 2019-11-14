@@ -8,19 +8,14 @@
 
 import UIKit
 
-class AuthCoordinator: NSObject, Coordinator, TabBarControllerAccessor {
+class AuthCoordinator: Coordinator, TabBarControllerAccessor {
 	var rootTabBarController: UITabBarController
 	var childCoordinators: [Coordinator] = []
 
 	var navigationController: UINavigationController
 
-	init(navigationController: UINavigationController? = nil, rootTabBarController: UITabBarController) {
-		if let navigationController = navigationController {
-			self.navigationController = navigationController
-		} else {
-			self.navigationController = UINavigationController()
-		}
-
+	init(navigationController: UINavigationController = UINavigationController(), rootTabBarController: UITabBarController) {
+		self.navigationController = navigationController
 		self.rootTabBarController = rootTabBarController
 	}
 
@@ -36,9 +31,7 @@ class AuthCoordinator: NSObject, Coordinator, TabBarControllerAccessor {
 		navigationController.pushViewController(tempVC, animated: false)
 		navigationController.modalPresentationStyle = .fullScreen
 
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-			self.rootTabBarController.present(self.navigationController, animated: false)
-//		}
+		self.rootTabBarController.present(self.navigationController, animated: false)
 	}
 }
 
