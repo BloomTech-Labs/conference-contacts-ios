@@ -7,10 +7,21 @@
 //
 
 import UIKit
-
+import AuthenticationServices
 
 class SignUpViewController: UIViewController {
 
+//	let appleAuthButton: ASAuthorizationAppleIDButton = {
+//		let traitCollection = UITraitCollection()
+//		switch traitCollection.userInterfaceStyle {
+//		case .light:
+//			return ASAuthorizationAppleIDButton(type: .default, style: .black)
+//		case .dark:
+//			return ASAuthorizationAppleIDButton(type: .default, style: .black)
+//		default:
+//			return ASAuthorizationAppleIDButton(type: .default, style: .black)
+//		}
+//	}()
 
 	@IBOutlet private weak var nameTextField: UITextField!
 	@IBOutlet private weak var nameLine: UIView!
@@ -21,18 +32,23 @@ class SignUpViewController: UIViewController {
 	@IBOutlet private weak var passwordButton: UIButton!
 	@IBOutlet private weak var signupButton: UIButton!
 	@IBOutlet private weak var mainStackView: UIStackView!
+	@IBOutlet private weak var appleAuthButtonLight: ASAuthorizationAppleIDButton!
+	@IBOutlet private weak var appleAuthButtonDark: ASAuthorizationAppleIDButton!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		[nameTextField, emailTextField, passwordTextField].forEach { $0?.delegate = self }
-		[nameLine, emailLine, passwordLine, passwordButton].forEach { $0?.alpha = 0 }
-		signupButton.layer.cornerRadius = 8
-		signupButton.layer.cornerCurve = .continuous
-		signupButton.backgroundColor = UIColor(red: 0.40, green: 0.45, blue: 0.88, alpha: 1.00)
+		[appleAuthButtonDark, appleAuthButtonLight].forEach { $0.addTarget(self, action: #selector(handleSignInWithAppleIDButtonTap), for: .touchUpInside) }
+		performExistingAccountSetupFlows()
+		setupUI()
     }
 
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		appleAuthButtonLight.overrideUserInterfaceStyle = .light
+	}
+
 	@IBAction func signUpTapped(_ sender: UIButton) {
-		animateSignUpbutton()
+		// Manual sign In/ Sign Up goes here
 	}
 
 	private func animateTextFieldLines(textField: UITextField, line: UIView) {
@@ -47,13 +63,44 @@ class SignUpViewController: UIViewController {
 		}
 	}
 
-	private func animateSignUpbutton() {
-		if signupButton.isHighlighted {
-			UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 10.0, options: [.allowUserInteraction], animations: {
-				self.signupButton.transform = self.signupButton.isHighlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
-			}, completion: nil)
-		}
+	private func configureAppleAuthButtons() {
+
+
 	}
+
+	@objc private func handleSignInWithAppleIDButtonTap(_ sender: ASAuthorizationAppleIDButton) {
+		let appleIDProvider = ASAuthorizationAppleIDProvider()
+		let request = appleIDProvider.createRequest()
+		request.requestedScopes = [.email, .fullName]
+
+		let authController = ASAuthorizationController(authorizationRequests: [request])
+		authController.delegate = self
+		authController.presentationContextProvider = self
+		authController.performRequests()
+	}
+
+	private func performExistingAccountSetupFlows() {
+		// Prepare requests for both Apple ID  and password providers
+		let requests = [ASAuthorizationAppleIDProvider().createRequest(), ASAuthorizationPasswordProvider().createRequest()]
+
+		// Create an authorization controller with the given requests
+		let authController = ASAuthorizationController(authorizationRequests: requests)
+		authController.delegate = self
+		authController.presentationContextProvider = self
+		authController.performRequests()
+	}
+
+	private func setupUI() {
+		[nameTextField, emailTextField, passwordTextField].forEach { $0?.delegate = self }
+		[nameLine, emailLine, passwordLine, passwordButton].forEach { $0?.alpha = 0 }
+		signupButton.layer.cornerRadius = 8
+		signupButton.layer.cornerCurve = .continuous
+		signupButton.backgroundColor = UIColor(red: 0.40, green: 0.45, blue: 0.88, alpha: 1.00)
+		appleAuthButtonLight.cornerRadius = 8
+		appleAuthButtonLight.heightAnchor.constraint(equalToConstant: 45.0).isActive = true
+//		mainStackView.addArrangedSubview(appleAuthButton)
+	}
+
 }
 
 extension SignUpViewController: UITextFieldDelegate {
@@ -93,5 +140,39 @@ extension SignUpViewController: UITextFieldDelegate {
 
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
+	}
+}
+
+extension SignUpViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+	func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+//		let authFailureAlert = UIAlertController(title: "Authorization Failed", message: nil, preferredStyle: .alert)
+//		authFailureAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//		present(authFailureAlert, animated: true, completion: nil)
+		NSLog("Authorization failed: \(error)")
+	}
+
+	func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+		if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+			let userID = appleIDCredential.user
+			if let userFirstName = appleIDCredential.fullName?.givenName,
+				let userLastName = appleIDCredential.fullName?.familyName,
+				let userEmail = appleIDCredential.email {
+				print("ID: \(userID), First Name: \(userFirstName), Last name: \(userLastName), Email: \(userEmail)")
+			}
+
+		} else if let passwordCredential = authorization.credential as? ASPasswordCredential {
+			// Sign in using an existing iCloud Keychain credential.
+			let username = passwordCredential.user
+			let password = passwordCredential.password
+
+			print("Username: \(username), Password: \(password)")
+
+			// Navigate to other View Controller
+		}
+	}
+
+
+	func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+		return self.view.window!
 	}
 }
