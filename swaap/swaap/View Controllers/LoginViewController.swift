@@ -16,12 +16,16 @@ class LoginViewController: UIViewController {
 	@IBOutlet private weak var loginView: UIView!
 	@IBOutlet private weak var chevron: ChevronView!
 
+	let feedback = UIImpactFeedbackGenerator(style: .rigid)
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		scrollView.isPagingEnabled = true
 		scrollView.delegate = self
 		updateChevron()
 		scrollView.delaysContentTouches = false
+		feedback.prepare()
+
 	}
 
 	private func updateChevron() {
@@ -56,4 +60,6 @@ extension LoginViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		updateChevron()
 	}
+
+	
 }

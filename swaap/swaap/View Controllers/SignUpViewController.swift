@@ -98,7 +98,6 @@ class SignUpViewController: UIViewController {
 		signupButton.backgroundColor = UIColor(red: 0.40, green: 0.45, blue: 0.88, alpha: 1.00)
 		appleAuthButtonLight.cornerRadius = 8
 		appleAuthButtonLight.heightAnchor.constraint(equalToConstant: 45.0).isActive = true
-//		mainStackView.addArrangedSubview(appleAuthButton)
 	}
 
 }

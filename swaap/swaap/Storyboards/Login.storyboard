@@ -44,6 +44,7 @@
                                                                     </textField>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="A0v-HX-5YB">
                                                                         <rect key="frame" x="0.0" y="10" width="25" height="19.5"/>
+                                                                        <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="25" id="3sR-1a-hec"/>
                                                                             <constraint firstAttribute="width" secondItem="A0v-HX-5YB" secondAttribute="height" multiplier="1:1" id="scs-YQ-xcR"/>
@@ -84,6 +85,7 @@
                                                                     </textField>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="paperplane" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ftl-jR-c5X">
                                                                         <rect key="frame" x="0.0" y="8" width="25" height="24.5"/>
+                                                                        <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="Ftl-jR-c5X" secondAttribute="height" multiplier="1:1" id="FYH-ka-hET"/>
                                                                             <constraint firstAttribute="height" constant="25" id="fJ2-Ad-PRw"/>
@@ -126,6 +128,7 @@
                                                                             </textField>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="lock.shield" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-zX-gDy">
                                                                                 <rect key="frame" x="0.0" y="8" width="25" height="24"/>
+                                                                                <color key="tintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="E0w-zX-gDy" secondAttribute="height" multiplier="1:1" id="J9V-Ui-qHy"/>
                                                                                     <constraint firstAttribute="height" constant="25" id="i7L-Fm-PCQ"/>
