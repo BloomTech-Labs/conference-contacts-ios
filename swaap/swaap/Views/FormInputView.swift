@@ -16,17 +16,29 @@ class FormInputView: IBPreviewView {
 	@IBOutlet private weak var textField: UITextField!
 	@IBOutlet private weak var bottomBorderView: UIView!
 
-	var text: String? {
-		get { textField.text }
-		set { textField.text = newValue }
+	@IBInspectable var text: String? {
+		get { textField?.text }
+		set { textField?.text = newValue }
 	}
-	var placeholderText: String? {
-		get { textField.placeholder }
-		set { textField.placeholder = newValue }
+	@IBInspectable var placeholderText: String? {
+		get { textField?.placeholder }
+		set { textField?.placeholder = newValue }
 	}
-	var iconImage: UIImage? {
-		get { iconImageView.image }
-		set { iconImageView.image = newValue }
+	@IBInspectable var iconImage: UIImage? {
+		get { iconImageView?.image }
+		set { iconImageView?.image = newValue }
+	}
+	var keyboardType: UIKeyboardType {
+		get { textField.keyboardType }
+		set { textField.keyboardType = newValue }
+	}
+	var contentType: UITextContentType {
+		get { textField.textContentType }
+		set { textField.textContentType = newValue }
+	}
+	@IBInspectable var isSecure: Bool {
+		get { textField?.isSecureTextEntry ?? false }
+		set { textField?.isSecureTextEntry = newValue }
 	}
 
 	override init(frame: CGRect) {
