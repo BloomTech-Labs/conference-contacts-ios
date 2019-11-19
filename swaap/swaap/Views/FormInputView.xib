@@ -19,27 +19,43 @@
             <rect key="frame" x="0.0" y="0.0" width="283" height="49"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tSy-cz-D60">
-                    <rect key="frame" x="4" y="4" width="275" height="40"/>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tSy-cz-D60">
+                    <rect key="frame" x="0.0" y="4" width="283" height="40"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k8U-ca-HQu">
-                            <rect key="frame" x="0.0" y="10" width="25" height="19.5"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hm-bc-ckj">
+                            <rect key="frame" x="0.0" y="0.0" width="25" height="40"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k8U-ca-HQu">
+                                    <rect key="frame" x="0.0" y="10" width="25" height="19.5"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="k8U-ca-HQu" secondAttribute="height" id="U9o-6l-DcC"/>
+                                        <constraint firstAttribute="height" constant="25" id="aZC-gt-6aJ"/>
+                                    </constraints>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="small"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="25" id="aZC-gt-6aJ"/>
-                                <constraint firstAttribute="width" secondItem="k8U-ca-HQu" secondAttribute="height" multiplier="1:1" id="cXY-uj-kpp"/>
+                                <constraint firstAttribute="trailing" secondItem="k8U-ca-HQu" secondAttribute="trailing" id="J3r-AX-PRe"/>
+                                <constraint firstItem="k8U-ca-HQu" firstAttribute="leading" secondItem="6hm-bc-ckj" secondAttribute="leading" id="NKY-iy-B1m"/>
+                                <constraint firstItem="k8U-ca-HQu" firstAttribute="centerY" secondItem="6hm-bc-ckj" secondAttribute="centerY" id="Opr-mB-m2t"/>
                             </constraints>
-                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="small"/>
-                        </imageView>
+                        </view>
                         <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ctr-iG-lTx">
-                            <rect key="frame" x="28" y="9.5" width="247" height="21"/>
+                            <rect key="frame" x="28" y="0.0" width="255" height="40"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <textInputTraits key="textInputTraits" textContentType="username"/>
+                            <connections>
+                                <action selector="textFieldFinished:" destination="-1" eventType="editingDidEnd" id="gmW-UT-5EQ"/>
+                                <action selector="textFieldTouched:" destination="-1" eventType="editingDidBegin" id="DBp-c4-qLc"/>
+                                <outlet property="delegate" destination="-1" id="dvs-PJ-f56"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="pIj-pH-EzC"/>
+                        <constraint firstAttribute="height" priority="999" constant="40" id="pIj-pH-EzC"/>
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGs-hs-L7t">
@@ -56,9 +72,9 @@
                 <constraint firstItem="tSy-cz-D60" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="JJw-1o-TSw"/>
                 <constraint firstAttribute="bottom" secondItem="NGs-hs-L7t" secondAttribute="bottom" id="W5B-pF-GyT"/>
                 <constraint firstItem="NGs-hs-L7t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bhz-nX-jC4"/>
-                <constraint firstAttribute="trailing" secondItem="tSy-cz-D60" secondAttribute="trailing" constant="4" id="eg9-Cg-raS"/>
+                <constraint firstAttribute="trailing" secondItem="tSy-cz-D60" secondAttribute="trailing" id="eg9-Cg-raS"/>
                 <constraint firstAttribute="trailing" secondItem="NGs-hs-L7t" secondAttribute="trailing" id="vrl-9j-gVf"/>
-                <constraint firstItem="tSy-cz-D60" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="vtg-f8-FcH"/>
+                <constraint firstItem="tSy-cz-D60" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vtg-f8-FcH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="202.17391304347828" y="-123.54910714285714"/>

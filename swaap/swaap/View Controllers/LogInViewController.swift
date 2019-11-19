@@ -14,12 +14,9 @@ class LogInViewController: UIViewController {
 	let appleAuthButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
 
 	// MARK: - Outlets
-	@IBOutlet private weak var nameTextField: UITextField!
-	@IBOutlet private weak var nameLine: UIView!
-	@IBOutlet private weak var passwordTextField: UITextField!
-	@IBOutlet private weak var passwordLine: UIView!
-	@IBOutlet private weak var passwordButton: UIButton!
 	@IBOutlet private weak var signupButton: UIButton!
+	@IBOutlet private weak var usernameForm: FormInputView!
+	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var mainStackView: UIStackView!
 	@IBOutlet private weak var appleSigninContainer: UIView!
 	@IBOutlet private weak var googleSigninButton: ButtonHelper!
@@ -89,44 +86,10 @@ class LogInViewController: UIViewController {
 	}
 
 	private func setupUI() {
-		[nameTextField, passwordTextField].forEach { $0?.delegate = self }
-		[nameLine, passwordLine, passwordButton].forEach { $0?.alpha = 0 }
 	}
 
 }
 
-// MARK: - TextFieldDelegate
-extension LogInViewController: UITextFieldDelegate {
-	func textFieldDidBeginEditing(_ textField: UITextField) {
-		if textField == nameTextField {
-			UIView.animate(withDuration: 0.5) {
-				self.nameLine.alpha = 1
-			}
-		} else {
-			UIView.animate(withDuration: 0.5) {
-				self.passwordLine.alpha = 1
-				self.passwordButton.alpha = 1
-			}
-		}
-	}
-
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		if textField == nameTextField {
-			UIView.animate(withDuration: 0.5) {
-				self.nameLine.alpha = 0
-			}
-		} else {
-			UIView.animate(withDuration: 0.5) {
-				self.passwordLine.alpha = 0
-				self.passwordButton.alpha = 0
-			}
-		}
-	}
-
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		textField.resignFirstResponder()
-	}
-}
 
 // MARK: - Sign in with Apple Delegate
 extension LogInViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {

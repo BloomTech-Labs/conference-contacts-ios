@@ -9,11 +9,25 @@
 import UIKit
 import IBPreview
 
+@IBDesignable
 class FormInputView: IBPreviewView {
 	@IBOutlet private var contentView: UIView!
 	@IBOutlet private weak var iconImageView: UIImageView!
 	@IBOutlet private weak var textField: UITextField!
 	@IBOutlet private weak var bottomBorderView: UIView!
+
+	var text: String? {
+		get { textField.text }
+		set { textField.text = newValue }
+	}
+	var placeholderText: String? {
+		get { textField.placeholder }
+		set { textField.placeholder = newValue }
+	}
+	var iconImage: UIImage? {
+		get { iconImageView.image }
+		set { iconImageView.image = newValue }
+	}
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -26,6 +40,9 @@ class FormInputView: IBPreviewView {
 	}
 
 	private func commonInit() {
+		#if TARGET_INTERFACE_BUILDER
+		return
+		#endif
 		let nib = UINib(nibName: "FormInputView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 
@@ -35,5 +52,34 @@ class FormInputView: IBPreviewView {
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+		bottomBorderView.alpha = 0
+	}
+
+	@IBAction func textFieldTouched(_ sender: UITextField) {
+		fadeBorderIn()
+	}
+
+	@IBAction func textFieldFinished(_ sender: UITextField) {
+		fadeBorderOut()
+	}
+
+	// MARK: - Utilities
+	private func fadeBorderIn() {
+		UIView.animate(withDuration: 0.5) {
+			self.bottomBorderView.alpha = 1
+		}
+	}
+
+	private func fadeBorderOut() {
+		UIView.animate(withDuration: 0.5) {
+			self.bottomBorderView.alpha = 0
+		}
+	}
+}
+
+extension FormInputView: UITextFieldDelegate {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
 	}
 }

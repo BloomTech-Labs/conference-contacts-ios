@@ -30,114 +30,32 @@
                                         <rect key="frame" x="0.0" y="154" width="283" height="394"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qYk-lP-Rrj">
-                                                <rect key="frame" x="0.0" y="0.0" width="283" height="169"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="100"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-5x-m0O" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="283" height="44"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubf-ye-bt6" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="283" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="44" id="R7H-bl-4cU"/>
+                                                            <constraint firstAttribute="height" constant="40" placeholder="YES" id="LcF-SF-XND"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Username Form"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="UMX-gt-0G1">
-                                                        <rect key="frame" x="0.0" y="64" width="283" height="44"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="U3Q-Sd-dz9">
-                                                                <rect key="frame" x="0.0" y="0.0" width="283" height="40"/>
-                                                                <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m0L-iu-JAy">
-                                                                        <rect key="frame" x="28" y="0.0" width="255" height="40"/>
-                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                        <textInputTraits key="textInputTraits" textContentType="username"/>
-                                                                    </textField>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="A0v-HX-5YB">
-                                                                        <rect key="frame" x="0.0" y="10" width="25" height="19.5"/>
-                                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="25" id="3sR-1a-hec"/>
-                                                                            <constraint firstAttribute="width" secondItem="A0v-HX-5YB" secondAttribute="height" multiplier="1:1" id="scs-YQ-xcR"/>
-                                                                        </constraints>
-                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="small"/>
-                                                                    </imageView>
-                                                                </subviews>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="A0v-HX-5YB" firstAttribute="leading" secondItem="U3Q-Sd-dz9" secondAttribute="leading" id="Ae6-QN-QiW"/>
-                                                                    <constraint firstItem="m0L-iu-JAy" firstAttribute="top" secondItem="U3Q-Sd-dz9" secondAttribute="top" id="Kz9-J9-C7r"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="m0L-iu-JAy" secondAttribute="trailing" id="UGA-3O-roX"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="m0L-iu-JAy" secondAttribute="bottom" id="UxJ-jv-QLi"/>
-                                                                    <constraint firstAttribute="height" constant="40" id="c7F-xr-I1K"/>
-                                                                    <constraint firstItem="m0L-iu-JAy" firstAttribute="leading" secondItem="A0v-HX-5YB" secondAttribute="trailing" constant="3" id="fgH-jG-Znz"/>
-                                                                    <constraint firstItem="A0v-HX-5YB" firstAttribute="centerY" secondItem="U3Q-Sd-dz9" secondAttribute="centerY" id="i0Q-iB-nfc"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUf-AE-OLe">
-                                                                <rect key="frame" x="0.0" y="43" width="283" height="1"/>
-                                                                <color key="backgroundColor" name="swaapBorder"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="1" id="B7Y-eC-iLJ"/>
-                                                                </constraints>
-                                                            </view>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aOI-SE-utV">
-                                                        <rect key="frame" x="0.0" y="128" width="283" height="41"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QkT-Rs-vsz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="283" height="40"/>
-                                                                <subviews>
-                                                                    <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Eho-K4-RTd">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="283" height="40"/>
-                                                                        <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9So-Kz-hDk">
-                                                                                <rect key="frame" x="28" y="0.0" width="255" height="40"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                                                            </textField>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="lock.shield" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-zX-gDy">
-                                                                                <rect key="frame" x="0.0" y="8" width="25" height="24"/>
-                                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="width" secondItem="E0w-zX-gDy" secondAttribute="height" multiplier="1:1" id="J9V-Ui-qHy"/>
-                                                                                    <constraint firstAttribute="height" constant="25" id="i7L-Fm-PCQ"/>
-                                                                                </constraints>
-                                                                            </imageView>
-                                                                        </subviews>
-                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="9So-Kz-hDk" secondAttribute="trailing" id="1NE-gH-Qrl"/>
-                                                                            <constraint firstItem="9So-Kz-hDk" firstAttribute="top" secondItem="Eho-K4-RTd" secondAttribute="top" id="8gn-zo-yM5"/>
-                                                                            <constraint firstAttribute="height" constant="40" id="PXF-ip-iD8"/>
-                                                                            <constraint firstItem="9So-Kz-hDk" firstAttribute="leading" secondItem="E0w-zX-gDy" secondAttribute="trailing" constant="3" id="RrZ-gg-zNk"/>
-                                                                            <constraint firstItem="E0w-zX-gDy" firstAttribute="centerY" secondItem="Eho-K4-RTd" secondAttribute="centerY" id="bnQ-Ir-kNV"/>
-                                                                            <constraint firstItem="E0w-zX-gDy" firstAttribute="leading" secondItem="Eho-K4-RTd" secondAttribute="leading" id="e4y-Ei-Fre"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="9So-Kz-hDk" secondAttribute="bottom" id="yGJ-k1-kqp"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                </subviews>
-                                                            </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXc-rn-AYX">
-                                                                <rect key="frame" x="0.0" y="40" width="283" height="1"/>
-                                                                <color key="backgroundColor" name="swaapBorder"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="1" id="zHn-FG-xn7"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5D1-Zr-Sdd">
-                                                                <rect key="frame" x="0.0" y="41" width="283" height="0.0"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                <state key="normal" title="Forgot Password?">
-                                                                    <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
-                                                                </state>
-                                                            </button>
-                                                        </subviews>
-                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEe-Ck-NTS" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="60" width="283" height="40"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" placeholder="YES" id="kQ5-4Z-7Wr"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Password Form"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G2-yd-boj" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="187" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="118" width="283" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -152,17 +70,17 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNr-mE-GZN">
-                                                <rect key="frame" x="0.0" y="250" width="283" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="181" width="283" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24P-yN-osu">
-                                                <rect key="frame" x="0.0" y="268" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="219.5" width="283" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8os-y4-9JG" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="331" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="282.5" width="283" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -177,7 +95,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="FgW-nl-Szl">
-                                                <rect key="frame" x="0.0" y="394" width="283" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="345.5" width="283" height="48.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -203,12 +121,9 @@
                         <outlet property="appleSigninContainer" destination="24P-yN-osu" id="Gl2-0M-vLI"/>
                         <outlet property="googleSigninButton" destination="8os-y4-9JG" id="FLu-Wa-ihE"/>
                         <outlet property="mainStackView" destination="9K7-3y-Fkh" id="3xP-Fh-9Fz"/>
-                        <outlet property="nameLine" destination="sUf-AE-OLe" id="qaW-Lh-cbU"/>
-                        <outlet property="nameTextField" destination="m0L-iu-JAy" id="wk1-1e-TLW"/>
-                        <outlet property="passwordButton" destination="5D1-Zr-Sdd" id="trP-Ez-Xvm"/>
-                        <outlet property="passwordLine" destination="iXc-rn-AYX" id="Gn0-L6-0rq"/>
-                        <outlet property="passwordTextField" destination="9So-Kz-hDk" id="KwG-Sa-XBv"/>
+                        <outlet property="passwordForm" destination="bEe-Ck-NTS" id="Bfd-X9-CNC"/>
                         <outlet property="signupButton" destination="3G2-yd-boj" id="oYR-0A-qHz"/>
+                        <outlet property="usernameForm" destination="ubf-ye-bt6" id="DDu-RW-5Ir"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ypm-aY-kYl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
