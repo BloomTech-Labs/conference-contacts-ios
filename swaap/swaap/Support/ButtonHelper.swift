@@ -8,7 +8,17 @@
 
 import UIKit
 
+@IBDesignable
 class ButtonHelper: UIButton {
+
+	@IBInspectable var cornerRadius: CGFloat {
+		get {
+			layer.cornerRadius
+		}
+		set {
+			layer.cornerRadius = newValue
+		}
+	}
 
 	override var isHighlighted: Bool {
 		didSet {
@@ -29,7 +39,7 @@ class ButtonHelper: UIButton {
 	}
 
 	private func commonInit() {
-		layer.cornerRadius = 8
+		cornerRadius = 8
 		layer.cornerCurve = .continuous
 	}
 }

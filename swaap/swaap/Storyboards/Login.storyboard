@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="1018" y="224"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="nNr-TQ-DIt">
             <objects>
-                <viewController id="d72-bg-Hjq" sceneMemberID="viewController">
+                <viewController id="d72-bg-Hjq" customClass="SignUpViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Pl-OS-IvA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="596"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -341,6 +341,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G6V-MN-MvT"/>
                     </view>
+                    <connections>
+                        <outlet property="emailForm" destination="LjY-t6-Qdf" id="9dj-Db-9Pa"/>
+                        <outlet property="passwordConfirmForm" destination="lPq-eb-sbA" id="DH4-cB-qpx"/>
+                        <outlet property="passwordForm" destination="al0-YZ-Fyq" id="eQZ-uv-gbM"/>
+                        <outlet property="signUpButton" destination="wgV-bm-31u" id="ahZ-Gd-mJH"/>
+                        <outlet property="usernameForm" destination="Tvc-Rg-WKL" id="dfJ-dV-bTS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPQ-lb-rSf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

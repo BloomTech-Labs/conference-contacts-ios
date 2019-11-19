@@ -29,24 +29,14 @@ class LogInViewController: UIViewController {
 		setupUI()
     }
 
-	override func viewWillLayoutSubviews() {
-		super.viewWillLayoutSubviews()
+	private func setupUI() {
+		overrideUserInterfaceStyle = .light
+		usernameForm.contentType = .username
+		passwordForm.contentType = .password
 	}
 
 	@IBAction func signUpTapped(_ sender: UIButton) {
 		// Manual sign In/ Sign Up goes here
-	}
-
-	private func animateTextFieldLines(textField: UITextField, line: UIView) {
-		if textField.becomeFirstResponder() {
-			UIView.animate(withDuration: 0.3) {
-				line.isHidden = false
-			}
-		} else if textField.resignFirstResponder() {
-			UIView.animate(withDuration: 0.3) {
-				line.isHidden = true
-			}
-		}
 	}
 
 	private func configureAppleAuthButton() {
@@ -84,10 +74,6 @@ class LogInViewController: UIViewController {
 		authController.presentationContextProvider = self
 		authController.performRequests()
 	}
-
-	private func setupUI() {
-	}
-
 }
 
 
