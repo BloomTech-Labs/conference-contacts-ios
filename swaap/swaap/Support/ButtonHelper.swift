@@ -20,11 +20,16 @@ class ButtonHelper: UIButton {
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-//		setUpButton()
+		commonInit()
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-//		setUpButton()
+		commonInit()
+	}
+
+	private func commonInit() {
+		layer.cornerRadius = 8
+		layer.cornerCurve = .continuous
 	}
 }

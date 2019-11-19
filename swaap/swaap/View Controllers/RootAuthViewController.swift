@@ -8,7 +8,7 @@
 import UIKit
 import ChevronAnimatable
 
-class LoginViewController: UIViewController {
+class RootAuthViewController: UIViewController {
 
 
 	@IBOutlet private weak var scrollView: UIScrollView!
@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
 	}
 }
 
-extension LoginViewController: UIScrollViewDelegate {
+extension RootAuthViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		updateChevron()
 	}
