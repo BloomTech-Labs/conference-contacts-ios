@@ -16,6 +16,10 @@
 		33FEE0C923836AC3006BE880 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0C823836AC3006BE880 /* Auth0.plist */; };
 		33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0CE23837D8D006BE880 /* GradientView.swift */; };
 		33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0D123838ADD006BE880 /* ColorHelper.swift */; };
+		33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; };
+		33FEE0E02384657D006BE880 /* IBPreview.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		33FEE0E2238465A9006BE880 /* FormInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0E1238465A8006BE880 /* FormInputView.swift */; };
+		33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0E3238466AE006BE880 /* FormInputView.xib */; };
 		37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185A3237A3579002191B5 /* AppDelegate.swift */; };
 		37A185AB237A3579002191B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185A9237A3579002191B5 /* Main.storyboard */; };
 		37A185AD237A357C002191B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37A185AC237A357C002191B5 /* Assets.xcassets */; };
@@ -36,6 +40,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		33FEE0DB2384656A006BE880 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33952A5A2384562F0085558C;
+			remoteInfo = IBPreview;
+		};
+		33FEE0DD2384656A006BE880 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33952A632384562F0085558C;
+			remoteInfo = IBPreviewTests;
+		};
 		37A185B7237A357C002191B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37A18598237A3579002191B5 /* Project object */;
@@ -73,6 +91,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				33FEE0E02384657D006BE880 /* IBPreview.framework in Embed Frameworks */,
 				37A2F418237CFF5E00C1EF3B /* ChevronAnimatable.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -91,6 +110,9 @@
 		33FEE0CE23837D8D006BE880 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		33FEE0D123838ADD006BE880 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		33FEE0D523838D2D006BE880 /* uiGradientColors.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = uiGradientColors.txt; sourceTree = "<group>"; };
+		33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IBPreview.xcodeproj; path = Carthage/Checkouts/IBPreview/IBPreview.xcodeproj; sourceTree = "<group>"; };
+		33FEE0E1238465A8006BE880 /* FormInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputView.swift; sourceTree = "<group>"; };
+		33FEE0E3238466AE006BE880 /* FormInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormInputView.xib; sourceTree = "<group>"; };
 		37A185A0237A3579002191B5 /* swaap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swaap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37A185A3237A3579002191B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37A185AA237A3579002191B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
 				37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */,
 				37A185E8237A40B8002191B5 /* NetworkHandler.framework in Frameworks */,
@@ -173,6 +196,15 @@
 				3398EDB5237B378E00D57DF8 /* CoordinatorProtocols.swift */,
 			);
 			path = "Coordinator Protocols";
+			sourceTree = "<group>";
+		};
+		33FEE0D72384656A006BE880 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33FEE0DC2384656A006BE880 /* IBPreview.framework */,
+				33FEE0DE2384656A006BE880 /* IBPreviewTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		37A18597237A3579002191B5 = {
@@ -282,6 +314,8 @@
 			isa = PBXGroup;
 			children = (
 				33FEE0CE23837D8D006BE880 /* GradientView.swift */,
+				33FEE0E1238465A8006BE880 /* FormInputView.swift */,
+				33FEE0E3238466AE006BE880 /* FormInputView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */,
+				33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */,
 				37A185E6237A40B8002191B5 /* NetworkHandler.framework */,
 				37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */,
 			);
@@ -419,6 +454,10 @@
 					ProductGroup = 37A2F40F237CFF5400C1EF3B /* Products */;
 					ProjectRef = 37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */;
 				},
+				{
+					ProductGroup = 33FEE0D72384656A006BE880 /* Products */;
+					ProjectRef = 33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -430,6 +469,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		33FEE0DC2384656A006BE880 /* IBPreview.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IBPreview.framework;
+			remoteRef = 33FEE0DB2384656A006BE880 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		33FEE0DE2384656A006BE880 /* IBPreviewTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = IBPreviewTests.xctest;
+			remoteRef = 33FEE0DD2384656A006BE880 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -452,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37A185F2237A43D5002191B5 /* StoryboardThree.storyboard in Resources */,
+				33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */,
 				37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */,
 				37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
@@ -553,6 +607,7 @@
 				37A2F41B237D23FF00C1EF3B /* LogInViewController.swift in Sources */,
 				3398EDB0237B307100D57DF8 /* Coordinator.swift in Sources */,
 				335E668F237B6BF00099EEA1 /* ContactsCoordinator.swift in Sources */,
+				33FEE0E2238465A9006BE880 /* FormInputView.swift in Sources */,
 				37A2F41D237D543B00C1EF3B /* ButtonHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

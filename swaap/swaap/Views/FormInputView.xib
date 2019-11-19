@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomBorderView" destination="NGs-hs-L7t" id="mvU-XV-93h"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="ikS-3w-Gqx"/>
+                <outlet property="iconImageView" destination="k8U-ca-HQu" id="DjV-4X-o4L"/>
+                <outlet property="textField" destination="Ctr-iG-lTx" id="Q6A-Rb-pxq"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="283" height="49"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tSy-cz-D60">
+                    <rect key="frame" x="4" y="4" width="275" height="40"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="k8U-ca-HQu">
+                            <rect key="frame" x="0.0" y="10" width="25" height="19.5"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="aZC-gt-6aJ"/>
+                                <constraint firstAttribute="width" secondItem="k8U-ca-HQu" secondAttribute="height" multiplier="1:1" id="cXY-uj-kpp"/>
+                            </constraints>
+                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="small"/>
+                        </imageView>
+                        <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ctr-iG-lTx">
+                            <rect key="frame" x="28" y="9.5" width="247" height="21"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textInputTraits key="textInputTraits" textContentType="username"/>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="pIj-pH-EzC"/>
+                    </constraints>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGs-hs-L7t">
+                    <rect key="frame" x="0.0" y="48" width="283" height="1"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="eje-71-Zrm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="NGs-hs-L7t" firstAttribute="top" secondItem="tSy-cz-D60" secondAttribute="bottom" constant="4" id="GaM-qY-n8b"/>
+                <constraint firstItem="tSy-cz-D60" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="JJw-1o-TSw"/>
+                <constraint firstAttribute="bottom" secondItem="NGs-hs-L7t" secondAttribute="bottom" id="W5B-pF-GyT"/>
+                <constraint firstItem="NGs-hs-L7t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bhz-nX-jC4"/>
+                <constraint firstAttribute="trailing" secondItem="tSy-cz-D60" secondAttribute="trailing" constant="4" id="eg9-Cg-raS"/>
+                <constraint firstAttribute="trailing" secondItem="NGs-hs-L7t" secondAttribute="trailing" id="vrl-9j-gVf"/>
+                <constraint firstItem="tSy-cz-D60" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="vtg-f8-FcH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="202.17391304347828" y="-123.54910714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="person" catalog="system" width="64" height="58"/>
+    </resources>
+</document>
