@@ -112,6 +112,10 @@ class LogInViewController: UIViewController {
 		authController.presentationContextProvider = self
 		authController.performRequests()
 	}
+
+	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
+
+	}
 }
 
 
