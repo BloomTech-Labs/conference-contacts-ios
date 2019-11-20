@@ -13,7 +13,7 @@ import SimpleKeychain
 
 class LogInViewController: UIViewController {
 
-	let appleAuthButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
+	let appleAuthButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
 
 	// MARK: - Outlets
 	@IBOutlet private weak var signupButton: UIButton!
