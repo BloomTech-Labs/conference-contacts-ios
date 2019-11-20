@@ -84,7 +84,7 @@
                                                 <rect key="frame" x="0.0" y="219.5" width="283" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8os-y4-9JG" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8os-y4-9JG" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="282.5" width="283" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
@@ -92,7 +92,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="fWz-pj-cXE"/>
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Surrender to the Google">
+                                                <state key="normal" image="signInWithGoogle">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -358,6 +358,7 @@
         <image name="lock.shield" catalog="system" width="64" height="60"/>
         <image name="paperplane" catalog="system" width="64" height="60"/>
         <image name="person" catalog="system" width="64" height="58"/>
+        <image name="signInWithGoogle" width="203" height="23"/>
         <image name="swaap logo" width="840" height="333"/>
         <namedColor name="swaapBackground">
             <color red="1" green="0.29411764705882354" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

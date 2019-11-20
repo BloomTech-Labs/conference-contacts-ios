@@ -139,7 +139,6 @@ extension LogInViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
 			}
 
 			Auth0.authentication().tokenExchange(withAppleAuthorizationCode: authCode).start { result in
-
 				switch result {
 				case .success(let credentials):
 					print("Auth0 success: \(credentials)")
