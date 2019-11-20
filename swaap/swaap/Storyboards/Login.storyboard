@@ -323,6 +323,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="signUpTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="cvx-PU-ywV"/>
+                                                    <action selector="signupTapped:" destination="d72-bg-Hjq" eventType="touchUpInside" id="r7e-Oo-do7"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Mm1-DL-Uor" userLabel="spacer">
