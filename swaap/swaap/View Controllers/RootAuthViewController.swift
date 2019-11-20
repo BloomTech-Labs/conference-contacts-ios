@@ -23,7 +23,6 @@ class RootAuthViewController: UIViewController {
 		scrollView.isPagingEnabled = true
 		scrollView.delegate = self
 		updateChevron()
-		scrollView.delaysContentTouches = false
 		feedback.prepare()
 
 	}
