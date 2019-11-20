@@ -114,7 +114,14 @@ class LogInViewController: UIViewController {
 	}
 
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
-
+		Auth0.webAuth().scope("openid profile").audience("https://api.swaap.co/").start { result in
+			switch result {
+			case .failure(let error):
+				NSLog("Error: \(error)")
+			case .success(let credentials):
+				NSLog("Credentials: \(credentials)")
+			}
+		}
 	}
 }
 
