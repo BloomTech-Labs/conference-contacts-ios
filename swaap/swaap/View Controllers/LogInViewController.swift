@@ -9,6 +9,7 @@
 import UIKit
 import AuthenticationServices
 import Auth0
+import SimpleKeychain
 
 class LogInViewController: UIViewController {
 
@@ -22,12 +23,31 @@ class LogInViewController: UIViewController {
 	@IBOutlet private weak var appleSigninContainer: UIView!
 	@IBOutlet private weak var googleSigninButton: ButtonHelper!
 
+
+	// MARK: - Properties
+	let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
+	let keychain = A0SimpleKeychain()
+
+	var credentials: Credentials?
+
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
         super.viewDidLoad()
 		configureAppleAuthButton()
-//		performExistingAccountSetupFlows()
 		setupUI()
+		tryRenewAuth { credentials, error in
+			if let error = error {
+				NSLog("Unable to renew authorization: \(error)")
+				return
+			}
+			DispatchQueue.main.async {
+				guard let credentials = credentials else {
+					print("Failed restoring credentials")
+					return
+				}
+				print("restored saved credentials: \(credentials)")
+			}
+		}
     }
 
 	private func setupUI() {
@@ -53,6 +73,34 @@ class LogInViewController: UIViewController {
 		[appleAuthButton].forEach { $0.addTarget(self, action: #selector(handleSignInWithAppleIDButtonTap), for: .touchUpInside) }
 	}
 
+
+	func tryRenewAuth(_ callback: @escaping (Credentials?, Error?) -> Void) {
+		let provider = ASAuthorizationAppleIDProvider()
+
+		guard let userID = keychain.string(forKey: "userID") else {
+			return callback(nil, nil)
+		}
+
+		provider.getCredentialState(forUserID: userID) { state, error in
+			switch state {
+			case .authorized:
+				self.credentialsManager.credentials { error, credentials in
+					guard error == nil, let credentials = credentials else {
+						return callback(nil, error)
+					}
+					self.credentials = credentials
+					callback(credentials, nil)
+					print("Credentials state is Authorized: \(credentials)")
+				}
+			default:
+				self.keychain.deleteEntry(forKey: "userID")
+				_ = self.credentialsManager.clear()
+				print("Credential state is unauthorized")
+				callback(nil, error)
+			}
+		}
+	}
+
 	// MARK: - IBActions
 	@objc private func handleSignInWithAppleIDButtonTap(_ sender: ASAuthorizationAppleIDButton?) {
 		let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -60,17 +108,6 @@ class LogInViewController: UIViewController {
 		request.requestedScopes = [.email, .fullName]
 
 		let authController = ASAuthorizationController(authorizationRequests: [request])
-		authController.delegate = self
-		authController.presentationContextProvider = self
-		authController.performRequests()
-	}
-
-	private func performExistingAccountSetupFlows() {
-		// Prepare requests for both Apple ID  and password providers
-		let requests = [ASAuthorizationAppleIDProvider().createRequest(), ASAuthorizationPasswordProvider().createRequest()]
-
-		// Create an authorization controller with the given requests
-		let authController = ASAuthorizationController(authorizationRequests: requests)
 		authController.delegate = self
 		authController.presentationContextProvider = self
 		authController.performRequests()
@@ -106,17 +143,13 @@ extension LogInViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
 				switch result {
 				case .success(let credentials):
 					print("Auth0 success: \(credentials)")
+					self.keychain.setString(appleIDCredential.user, forKey: "userID")
+					self.credentials = credentials
+					_ = self.credentialsManager.store(credentials: credentials)
 				case .failure(let error):
 					NSLog("Exchange failed: \(error)")
 				}
 			}
-
-		} else if let passwordCredential = authorization.credential as? ASPasswordCredential {
-			// Sign in using an existing iCloud Keychain credential.
-			let username = passwordCredential.user
-			let password = passwordCredential.password
-
-			print("Username: \(username), Password: \(password)")
 		}
 	}
 
