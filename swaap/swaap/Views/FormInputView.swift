@@ -67,6 +67,20 @@ class FormInputView: IBPreviewView {
 		bottomBorderView.alpha = 0
 	}
 
+	// This is the only method called when light & dark mode is toggled
+	override func tintColorDidChange() {
+		super.tintColorDidChange()
+		guard let style = window?.traitCollection.userInterfaceStyle else { return }
+		switch style {
+		case .dark:
+			textField.keyboardAppearance = .dark
+		case .light:
+			textField.keyboardAppearance = .light
+		default:
+			break
+		}
+	}
+
 	@IBAction func textFieldTouched(_ sender: UITextField) {
 		fadeBorderIn()
 	}
