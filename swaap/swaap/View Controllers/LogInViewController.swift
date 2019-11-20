@@ -108,6 +108,7 @@ extension LogInViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
 
 
 	func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-		return self.view.window!
+		guard let window = view.window else { fatalError("No window to attach to") }
+		return window
 	}
 }
