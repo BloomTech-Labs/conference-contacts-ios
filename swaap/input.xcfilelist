@@ -1,3 +1,4 @@
 $(SRCROOT)/Carthage/Build/iOS/SwiftyAcknowledgements.framework
 $(SRCROOT)/Carthage/Build/iOS/NetworkHandler.framework
-
+$(SRCROOT)/Carthage/Build/iOS/Auth0.framework
+$(SRCROOT)/Carthage/Build/iOS/SimpleKeychain.framework

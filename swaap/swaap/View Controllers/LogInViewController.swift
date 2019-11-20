@@ -8,6 +8,7 @@
 
 import UIKit
 import AuthenticationServices
+import Auth0
 
 class LogInViewController: UIViewController {
 
@@ -25,7 +26,7 @@ class LogInViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		configureAppleAuthButton()
-		performExistingAccountSetupFlows()
+//		performExistingAccountSetupFlows()
 		setupUI()
     }
 
@@ -95,14 +96,27 @@ extension LogInViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
 				print("ID: \(userID), First Name: \(userFirstName), Last name: \(userLastName), Email: \(userEmail)")
 			}
 
+			guard let authCodeData = appleIDCredential.authorizationCode, let authCode = String(data: authCodeData, encoding: .utf8) else {
+				NSLog("Problem with Auth Code: \(appleIDCredential.authorizationCode as Any)")
+				return
+			}
+
+			Auth0.authentication().tokenExchange(withAppleAuthorizationCode: authCode).start { result in
+
+				switch result {
+				case .success(let credentials):
+					print("Auth0 success: \(credentials)")
+				case .failure(let error):
+					NSLog("Exchange failed: \(error)")
+				}
+			}
+
 		} else if let passwordCredential = authorization.credential as? ASPasswordCredential {
 			// Sign in using an existing iCloud Keychain credential.
 			let username = passwordCredential.user
 			let password = passwordCredential.password
 
 			print("Username: \(username), Password: \(password)")
-
-			// Navigate to other View Controller
 		}
 	}
 

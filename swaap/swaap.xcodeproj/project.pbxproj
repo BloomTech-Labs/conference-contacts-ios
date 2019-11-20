@@ -10,6 +10,7 @@
 		335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668C237B6BAA0099EEA1 /* ContactsController.swift */; };
 		335E668F237B6BF00099EEA1 /* ContactsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668E237B6BF00099EEA1 /* ContactsCoordinator.swift */; };
 		33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33917DF323849A2400BC1501 /* SignUpViewController.swift */; };
+		33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33917DF92384C3B000BC1501 /* Auth0.framework */; };
 		3398EDB0237B307100D57DF8 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDAF237B307100D57DF8 /* Coordinator.swift */; };
 		3398EDB6237B378E00D57DF8 /* CoordinatorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB5237B378E00D57DF8 /* CoordinatorProtocols.swift */; };
 		3398EDB8237B37E000D57DF8 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB7237B37E000D57DF8 /* AuthCoordinator.swift */; };
@@ -104,6 +105,7 @@
 		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
 		335E668E237B6BF00099EEA1 /* ContactsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCoordinator.swift; sourceTree = "<group>"; };
 		33917DF323849A2400BC1501 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		33917DF92384C3B000BC1501 /* Auth0.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Auth0.framework; path = Carthage/Build/iOS/Auth0.framework; sourceTree = "<group>"; };
 		3398EDAF237B307100D57DF8 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = ../Coordinator.swift; sourceTree = "<group>"; };
 		3398EDB5237B378E00D57DF8 /* CoordinatorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocols.swift; sourceTree = "<group>"; };
 		3398EDB7237B37E000D57DF8 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
 				37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */,
 				37A185E8237A40B8002191B5 /* NetworkHandler.framework in Frameworks */,
+				33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +344,7 @@
 		37A185E5237A4087002191B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33917DF92384C3B000BC1501 /* Auth0.framework */,
 				37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */,
 				33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */,
 				37A185E6237A40B8002191B5 /* NetworkHandler.framework */,
