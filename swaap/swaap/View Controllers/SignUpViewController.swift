@@ -134,3 +134,9 @@ class SignUpViewController: UIViewController {
 		return (email, password)
 	}
 }
+
+extension SignUpViewController: RootAuthViewControllerDelegate {
+	func controllerWillScroll(_ controller: RootAuthViewController) {
+		[emailForm, passwordForm, passwordConfirmForm].forEach { _ = $0.resignFirstResponder() }
+	}
+}

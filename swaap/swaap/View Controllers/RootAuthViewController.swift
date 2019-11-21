@@ -8,8 +8,11 @@
 import UIKit
 import ChevronAnimatable
 
-class RootAuthViewController: UIViewController {
+protocol RootAuthViewControllerDelegate: AnyObject {
+	func controllerWillScroll(_ controller: RootAuthViewController)
+}
 
+class RootAuthViewController: UIViewController {
 
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var stackView: UIStackView!
@@ -17,6 +20,7 @@ class RootAuthViewController: UIViewController {
 	@IBOutlet private weak var chevron: ChevronView!
 
 	let feedback = UIImpactFeedbackGenerator(style: .rigid)
+	weak var delegate: RootAuthViewControllerDelegate?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -25,6 +29,11 @@ class RootAuthViewController: UIViewController {
 		updateChevron()
 		feedback.prepare()
 
+		children.forEach {
+			if let delegate = $0 as? RootAuthViewControllerDelegate {
+				self.delegate = delegate
+			}
+		}
 	}
 
 	private func updateChevron() {
@@ -60,5 +69,7 @@ extension RootAuthViewController: UIScrollViewDelegate {
 		updateChevron()
 	}
 
-	
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		delegate?.controllerWillScroll(self)
+	}
 }
