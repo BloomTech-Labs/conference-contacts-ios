@@ -90,10 +90,10 @@ class FormInputView: IBPreviewControl {
 		switch validationState {
 		case .pass:
 			validationImage.image = UIImage(systemName: "checkmark.circle")
-			validationImage.tintColor = .systemGreen
+			validationImage.tintColor = .secondarySystemBackground
 		case .fail:
 			validationImage.image = UIImage(systemName: "exclamationmark.octagon")
-			validationImage.tintColor = .systemRed
+			validationImage.tintColor = .secondarySystemGroupedBackground
 		case .hidden:
 			validationContainer.isHidden = true
 		case .custom(let image, let color):
