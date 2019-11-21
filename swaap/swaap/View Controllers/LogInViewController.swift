@@ -56,28 +56,6 @@ class LogInViewController: UIViewController {
 		passwordForm.contentType = .password
 	}
 
-	@IBAction func signInTapped(_ sender: UIButton) {
-		showWebAuth()
-		// Manual sign In/ Sign Up goes here
-		// apparently this won't work unless an unsafe change is made online - just showing the web auth instead
-//		guard let username = usernameForm.text, !username.isEmpty,
-//			let password = passwordForm.text, !password.isEmpty else { return }
-
-//		Auth0.authentication().login(usernameOrEmail: username,
-//									 password: password,
-//									 realm: "Username-Password-Authentication",
-//									 audience: "https://api.swaap.co",
-//									 scope: "openid profile",
-//									 parameters: nil).start { result in
-//			switch result {
-//			case .failure(let error):
-//				NSLog("Error: \(error)")
-//			case .success(let credentials):
-//				NSLog("Credentials: \(credentials)")
-//			}
-//		}
-	}
-
 	private func configureAppleAuthButton() {
 		appleSigninContainer.addSubview(appleAuthButton)
 		appleSigninContainer.backgroundColor = .clear
@@ -134,6 +112,35 @@ class LogInViewController: UIViewController {
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
 		showWebAuth()
 	}
+
+	@IBAction func signInTapped(_ sender: UIButton) {
+		showWebAuth()
+		// Manual sign In/ Sign Up goes here
+		// apparently this won't work unless an unsafe change is made online - just showing the web auth instead
+//		guard let username = usernameForm.text, !username.isEmpty,
+//			let password = passwordForm.text, !password.isEmpty else { return }
+
+//		Auth0.authentication().login(usernameOrEmail: username,
+//									 password: password,
+//									 realm: "Username-Password-Authentication",
+//									 audience: "https://api.swaap.co",
+//									 scope: "openid profile",
+//									 parameters: nil).start { result in
+//			switch result {
+//			case .failure(let error):
+//				NSLog("Error: \(error)")
+//			case .success(let credentials):
+//				NSLog("Credentials: \(credentials)")
+//			}
+//		}
+	}
+
+	@IBAction func logoutTapped(_ sender: ButtonHelper) {
+		Auth0.webAuth().clearSession(federated: false) { success in
+			print("Successful logout: \(success)")
+		}
+	}
+
 
 	private func showWebAuth() {
 		Auth0.webAuth().scope("openid profile").audience("https://api.swaap.co/").start { result in
