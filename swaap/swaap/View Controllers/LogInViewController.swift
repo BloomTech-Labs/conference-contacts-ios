@@ -17,8 +17,6 @@ class LogInViewController: UIViewController {
 
 	// MARK: - Outlets
 	@IBOutlet private weak var signupButton: UIButton!
-	@IBOutlet private weak var usernameForm: FormInputView!
-	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var mainStackView: UIStackView!
 	@IBOutlet private weak var appleSigninContainer: UIView!
 	@IBOutlet private weak var googleSigninButton: ButtonHelper!
@@ -52,8 +50,6 @@ class LogInViewController: UIViewController {
 
 	private func setupUI() {
 		overrideUserInterfaceStyle = .light
-		usernameForm.contentType = .username
-		passwordForm.contentType = .password
 	}
 
 	private func configureAppleAuthButton() {
@@ -115,24 +111,6 @@ class LogInViewController: UIViewController {
 
 	@IBAction func signInTapped(_ sender: UIButton) {
 		showWebAuth()
-		// Manual sign In/ Sign Up goes here
-		// apparently this won't work unless an unsafe change is made online - just showing the web auth instead
-//		guard let username = usernameForm.text, !username.isEmpty,
-//			let password = passwordForm.text, !password.isEmpty else { return }
-
-//		Auth0.authentication().login(usernameOrEmail: username,
-//									 password: password,
-//									 realm: "Username-Password-Authentication",
-//									 audience: "https://api.swaap.co",
-//									 scope: "openid profile",
-//									 parameters: nil).start { result in
-//			switch result {
-//			case .failure(let error):
-//				NSLog("Error: \(error)")
-//			case .success(let credentials):
-//				NSLog("Credentials: \(credentials)")
-//			}
-//		}
 	}
 
 	@IBAction func logoutTapped(_ sender: ButtonHelper) {
@@ -140,7 +118,6 @@ class LogInViewController: UIViewController {
 			print("Successful logout: \(success)")
 		}
 	}
-
 
 	private func showWebAuth() {
 		Auth0.webAuth().scope("openid profile").audience("https://api.swaap.co/").start { result in
