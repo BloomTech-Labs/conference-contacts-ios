@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="skd-AL-Jhm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="skd-AL-Jhm">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -262,7 +262,7 @@
                                         <rect key="frame" x="0.0" y="154" width="283" height="394"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1IH-Dg-nHy">
-                                                <rect key="frame" x="0.0" y="0.0" width="283" height="160"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="196"/>
                                                 <subviews>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tvc-Rg-WKL" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="-40" width="283" height="40"/>
@@ -290,6 +290,7 @@
                                                         <connections>
                                                             <action selector="emailFormDidFinish:" destination="d72-bg-Hjq" eventType="editingDidEnd" id="4jx-Bh-z2g"/>
                                                             <action selector="textFieldChanged:" destination="d72-bg-Hjq" eventType="editingChanged" id="TJc-eT-eOu"/>
+                                                            <action selector="textFieldDidBeginEditing:" destination="d72-bg-Hjq" eventType="editingDidBegin" id="ruO-F5-gRK"/>
                                                         </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="al0-YZ-Fyq" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
@@ -305,12 +306,20 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSecure" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
+                                                            <action selector="passwordFieldDidChange:" destination="d72-bg-Hjq" eventType="editingChanged" id="0HN-ed-RS2"/>
                                                             <action selector="passwordFormDidFinish:" destination="d72-bg-Hjq" eventType="editingDidEnd" id="muF-se-QbC"/>
                                                             <action selector="textFieldChanged:" destination="d72-bg-Hjq" eventType="editingChanged" id="kK8-Kb-lGg"/>
+                                                            <action selector="textFieldDidBeginEditing:" destination="d72-bg-Hjq" eventType="editingDidBegin" id="nlt-0i-B4p"/>
                                                         </connections>
                                                     </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNe-yl-6pv">
+                                                        <rect key="frame" x="0.0" y="120" width="283" height="16"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPq-eb-sbA" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="120" width="283" height="40"/>
+                                                        <rect key="frame" x="0.0" y="156" width="283" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" placeholder="YES" id="AtH-YW-lUR"/>
@@ -324,12 +333,13 @@
                                                         <connections>
                                                             <action selector="confirmPasswordFormDidFinish:" destination="d72-bg-Hjq" eventType="editingDidEnd" id="oZN-Ts-p87"/>
                                                             <action selector="textFieldChanged:" destination="d72-bg-Hjq" eventType="editingChanged" id="6RB-SL-O4A"/>
+                                                            <action selector="textFieldDidBeginEditing:" destination="d72-bg-Hjq" eventType="editingDidBegin" id="KFp-t8-Mft"/>
                                                         </connections>
                                                     </view>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgV-bm-31u" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="178" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="214" width="283" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -348,7 +358,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Mm1-DL-Uor" userLabel="spacer">
-                                                <rect key="frame" x="0.0" y="241" width="283" height="153"/>
+                                                <rect key="frame" x="0.0" y="277" width="283" height="117"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -369,6 +379,7 @@
                         <outlet property="emailForm" destination="LjY-t6-Qdf" id="9dj-Db-9Pa"/>
                         <outlet property="passwordConfirmForm" destination="lPq-eb-sbA" id="DH4-cB-qpx"/>
                         <outlet property="passwordForm" destination="al0-YZ-Fyq" id="eQZ-uv-gbM"/>
+                        <outlet property="passwordStrengthLabel" destination="eNe-yl-6pv" id="Lc1-To-bdc"/>
                         <outlet property="signUpButton" destination="wgV-bm-31u" id="ahZ-Gd-mJH"/>
                         <outlet property="usernameForm" destination="Tvc-Rg-WKL" id="dfJ-dV-bTS"/>
                     </connections>

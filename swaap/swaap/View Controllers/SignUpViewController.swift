@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController {
 	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var passwordConfirmForm: FormInputView!
 	@IBOutlet private weak var signUpButton: ButtonHelper!
+	@IBOutlet private weak var passwordStrengthLabel: UILabel!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,6 +30,7 @@ class SignUpViewController: UIViewController {
 		passwordForm.contentType = .newPassword
 		passwordConfirmForm.contentType = .newPassword
 		updateSignUpButtonEnabled()
+		updatePasswordStrengthLabel()
 	}
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
@@ -61,6 +63,14 @@ class SignUpViewController: UIViewController {
 		sender.validationState = checkPasswordStrength() != nil ? .pass : .fail
 	}
 
+	@IBAction func textFieldDidBeginEditing(_ sender: FormInputView) {
+		sender.validationState = .hidden
+	}
+
+	@IBAction func passwordFieldDidChange(_ sender: FormInputView) {
+		updatePasswordStrengthLabel()
+	}
+
 	@IBAction func confirmPasswordFormDidFinish(_ sender: FormInputView) {
 		sender.validationState = (checkPasswordStrength() != nil && checkPasswordMatch()) ? .pass : .fail
 	}
@@ -68,6 +78,38 @@ class SignUpViewController: UIViewController {
 	// MARK: - Form Validation
 	private func updateSignUpButtonEnabled() {
 		signUpButton.isEnabled = checkFormValidity() != nil
+	}
+
+	private func updatePasswordStrengthLabel() {
+		let passwordStrengthText = """
+			Password must be at least 8 characters, have at least one lowercase & uppercase character, a symbol, \
+			and at least one number. It cannot contain any part of your email.
+			""" as NSString
+		let attrStr = NSMutableAttributedString(string: passwordStrengthText as String, attributes: [.font: UIFont.preferredFont(forTextStyle: .footnote)])
+		if let password = passwordForm.text {
+			let color: UIColor = .systemTeal
+			if password.hasAtLeastXCharacters(8) {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "8 characters"))
+			}
+
+			if password.hasALowercaseCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "lowercase"))
+			}
+
+			if password.hasAnUppercaseCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "uppercase"))
+			}
+
+			if password.hasANumericalCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least one number"))
+			}
+
+			if password.hasASpecialCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "symbol"))
+			}
+		}
+
+		passwordStrengthLabel.attributedText = attrStr
 	}
 
 	private func checkEmail() -> String? {
