@@ -9,12 +9,21 @@
 import UIKit
 import IBPreview
 
+enum ValidationState {
+	case pass
+	case fail
+	case hidden
+	case custom(image: UIImage, color: UIColor)
+}
+
 @IBDesignable
-class FormInputView: IBPreviewView {
+class FormInputView: IBPreviewControl {
 	@IBOutlet private var contentView: UIView!
 	@IBOutlet private weak var iconImageView: UIImageView!
 	@IBOutlet private weak var textField: UITextField!
 	@IBOutlet private weak var bottomBorderView: UIView!
+	@IBOutlet private weak var validationContainer: UIView!
+	@IBOutlet private weak var validationImage: UIImageView!
 
 	@IBInspectable var text: String? {
 		get { textField?.text }
@@ -39,6 +48,11 @@ class FormInputView: IBPreviewView {
 	@IBInspectable var isSecure: Bool {
 		get { textField?.isSecureTextEntry ?? false }
 		set { textField?.isSecureTextEntry = newValue }
+	}
+	var validationState = ValidationState.hidden {
+		didSet {
+			updateValidationState()
+		}
 	}
 
 	override init(frame: CGRect) {
@@ -65,6 +79,27 @@ class FormInputView: IBPreviewView {
 		contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		bottomBorderView.alpha = 0
+
+		try? forwardTargetActionsFrom(subviewControl: textField)
+
+		updateValidationState()
+	}
+
+	private func updateValidationState() {
+		validationContainer.isHidden = false
+		switch validationState {
+		case .pass:
+			validationImage.image = UIImage(systemName: "checkmark.circle")
+			validationImage.tintColor = .systemGreen
+		case .fail:
+			validationImage.image = UIImage(systemName: "exclamationmark.octagon")
+			validationImage.tintColor = .systemRed
+		case .hidden:
+			validationContainer.isHidden = true
+		case .custom(let image, let color):
+			validationImage.image = image
+			validationImage.tintColor = color
+		}
 	}
 
 	// This is the only method called when light & dark mode is toggled

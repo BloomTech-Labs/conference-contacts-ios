@@ -29,7 +29,7 @@ class SignUpViewController: UIViewController {
 		emailForm.keyboardType = .emailAddress
 		passwordForm.contentType = .newPassword
 		passwordConfirmForm.contentType = .newPassword
-//		signUpButton.isEnabled = false
+		updateSignUpButtonEnabled()
 	}
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
@@ -47,6 +47,28 @@ class SignUpViewController: UIViewController {
 					print("Failed with \(error)")
 				}
 		}
+		[sender, emailForm, passwordForm, passwordConfirmForm].forEach { $0.resignFirstResponder() }
+	}
+
+	@IBAction func textFieldChanged(_ sender: FormInputView) {
+		updateSignUpButtonEnabled()
+	}
+
+	@IBAction func emailFormDidFinish(_ sender: FormInputView) {
+		sender.validationState = checkEmail() != nil ? .pass : .fail
+	}
+
+	@IBAction func passwordFormDidFinish(_ sender: FormInputView) {
+		sender.validationState = checkPasswordStrength() != nil ? .pass : .fail
+	}
+
+	@IBAction func confirmPasswordFormDidFinish(_ sender: FormInputView) {
+		sender.validationState = (checkPasswordStrength() != nil && checkPasswordMatch()) ? .pass : .fail
+	}
+
+	// MARK: - Form Validation
+	private func updateSignUpButtonEnabled() {
+		signUpButton.isEnabled = checkFormValidity() != nil
 	}
 
 	private func checkEmail() -> String? {
@@ -54,7 +76,12 @@ class SignUpViewController: UIViewController {
 	}
 
 	private func checkPasswordStrength() -> String? {
-		guard let password = passwordForm.text, password.count >= 8 else { return nil }
+		guard let password = passwordForm.text,
+			password.hasAtLeastXCharacters(8),
+			password.hasALowercaseCharacter,
+			password.hasAnUppercaseCharacter,
+			password.hasANumericalCharacter,
+			password.hasASpecialCharacter else { return nil }
 		return password
 	}
 
