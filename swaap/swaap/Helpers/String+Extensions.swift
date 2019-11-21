@@ -31,7 +31,7 @@ extension String {
 	}
 
 	var hasASpecialCharacter: Bool {
-		let specialSet = CharacterSet(charactersIn: ".!@#$%^&*()-=+~")
+		let specialSet = CharacterSet(charactersIn: ##".!@#$%^&*()-=+~?[]{};/\`"##)
 		return rangeOfCharacter(from: specialSet) != nil
 	}
 }
