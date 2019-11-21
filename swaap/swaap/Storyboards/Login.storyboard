@@ -349,7 +349,6 @@
                         <outlet property="passwordForm" destination="al0-YZ-Fyq" id="eQZ-uv-gbM"/>
                         <outlet property="passwordStrengthLabel" destination="eNe-yl-6pv" id="Lc1-To-bdc"/>
                         <outlet property="signUpButton" destination="wgV-bm-31u" id="ahZ-Gd-mJH"/>
-                        <outlet property="usernameForm" destination="Tvc-Rg-WKL" id="dfJ-dV-bTS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPQ-lb-rSf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

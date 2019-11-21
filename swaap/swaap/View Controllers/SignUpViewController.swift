@@ -10,7 +10,6 @@ import UIKit
 import Auth0
 
 class SignUpViewController: UIViewController {
-	@IBOutlet private weak var usernameForm: FormInputView!
 	@IBOutlet private weak var emailForm: FormInputView!
 	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var passwordConfirmForm: FormInputView!
@@ -24,7 +23,6 @@ class SignUpViewController: UIViewController {
 
 	private func setupUI() {
 		overrideUserInterfaceStyle = .light
-		usernameForm.contentType = .username
 		emailForm.contentType = .emailAddress
 		emailForm.keyboardType = .emailAddress
 		passwordForm.contentType = .newPassword
