@@ -30,9 +30,9 @@
                                         <rect key="frame" x="0.0" y="154" width="283" height="394"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qYk-lP-Rrj">
-                                                <rect key="frame" x="0.0" y="0.0" width="283" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="283" height="78.5"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubf-ye-bt6" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubf-ye-bt6" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="283" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -44,8 +44,8 @@
                                                             <userDefinedRuntimeAttribute type="image" keyPath="iconImage" value="person" catalog="system"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEe-Ck-NTS" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="60" width="283" height="40"/>
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEe-Ck-NTS" customClass="FormInputView" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="283" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" placeholder="YES" id="kQ5-4Z-7Wr"/>
@@ -60,7 +60,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G2-yd-boj" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="118" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="96.5" width="283" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -68,25 +68,19 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Sign In">
+                                                <state key="normal" title="Sign in with Your Email">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signUpTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="dC0-Y7-1Be"/>
+                                                    <action selector="signInTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="dC0-Y7-1Be"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNr-mE-GZN">
-                                                <rect key="frame" x="0.0" y="181" width="283" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24P-yN-osu">
-                                                <rect key="frame" x="0.0" y="219.5" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="159.5" width="283" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8os-y4-9JG" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="282.5" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="222.5" width="283" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -98,11 +92,11 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="googleSignInTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="tZD-nf-Ep3"/>
-                                                    <action selector="signUpTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="JhD-fM-IZ0"/>
+                                                    <action selector="signInTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="JhD-fM-IZ0"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="FgW-nl-Szl">
-                                                <rect key="frame" x="0.0" y="345.5" width="283" height="48.5"/>
+                                                <rect key="frame" x="0.0" y="285.5" width="283" height="108.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -337,7 +331,7 @@
                                                     <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signUpTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="cvx-PU-ywV"/>
+                                                    <action selector="signInTapped:" destination="2OZ-fg-nF6" eventType="touchUpInside" id="cvx-PU-ywV"/>
                                                     <action selector="signupTapped:" destination="d72-bg-Hjq" eventType="touchUpInside" id="r7e-Oo-do7"/>
                                                 </connections>
                                             </button>

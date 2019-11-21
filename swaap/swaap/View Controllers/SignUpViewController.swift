@@ -16,7 +16,6 @@ class SignUpViewController: UIViewController {
 	@IBOutlet private weak var passwordConfirmForm: FormInputView!
 	@IBOutlet private weak var signUpButton: ButtonHelper!
 
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
