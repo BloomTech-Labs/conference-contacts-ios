@@ -105,6 +105,10 @@ class SignUpViewController: UIViewController {
 			if password.hasASpecialCharacter {
 				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "symbol"))
 			}
+
+			if !password.hasPartOfEmailAddress(checkEmail()) {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "part of your email"))
+			}
 		}
 
 		passwordStrengthLabel.attributedText = attrStr
@@ -120,7 +124,8 @@ class SignUpViewController: UIViewController {
 			password.hasALowercaseCharacter,
 			password.hasAnUppercaseCharacter,
 			password.hasANumericalCharacter,
-			password.hasASpecialCharacter else { return nil }
+			password.hasASpecialCharacter,
+			!password.hasPartOfEmailAddress(checkEmail()) else { return nil }
 		return password
 	}
 

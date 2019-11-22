@@ -34,4 +34,14 @@ extension String {
 		let specialSet = CharacterSet(charactersIn: ##".!@#$%^&*()-=+~?[]{};/\`"##)
 		return rangeOfCharacter(from: specialSet) != nil
 	}
+
+	func hasPartOfEmailAddress(_ emailAddress: String?) -> Bool {
+		let lcEmail = emailAddress?.lowercased()
+		let emailParts = lcEmail?.split(separator: "@")
+		guard let alias = emailParts?.first,
+			let domain = emailParts?.last?.split(separator: ".").first else { return false }
+		let lcSelf = lowercased()
+
+		return (lcSelf.contains(alias) || lcSelf.contains(domain))
+	}
 }
