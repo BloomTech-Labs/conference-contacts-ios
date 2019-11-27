@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j9t-B2-wS8">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Connect-->
+        <scene sceneID="2C4-Bh-qqa">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j9t-B2-wS8" customClass="ProfileViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UHq-o5-Toi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rfj-im-HaX">
+                                <rect key="frame" x="20" y="44" width="374" height="669"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="669"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uVY-7s-0Rc" secondAttribute="bottom" id="37y-KO-WCZ"/>
+                                    <constraint firstItem="uVY-7s-0Rc" firstAttribute="leading" secondItem="Rfj-im-HaX" secondAttribute="leading" id="AXm-dY-a8B"/>
+                                    <constraint firstAttribute="trailing" secondItem="uVY-7s-0Rc" secondAttribute="trailing" id="CPg-Fn-wFV"/>
+                                    <constraint firstItem="uVY-7s-0Rc" firstAttribute="top" secondItem="Rfj-im-HaX" secondAttribute="top" id="mWi-4j-hc1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="Rfj-im-HaX" secondAttribute="bottom" constant="40" id="0nZ-gc-RQp"/>
+                            <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="Rfj-im-HaX" secondAttribute="trailing" constant="20" id="3u4-Lw-dwi"/>
+                            <constraint firstItem="Rfj-im-HaX" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" id="hCy-Om-eGG"/>
+                            <constraint firstItem="Rfj-im-HaX" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="20" id="ix3-Wr-UEY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Connect" image="arrow.right.arrow.left.circle" catalog="system" id="UhS-VM-r7a"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="profileCardContainerView" destination="Rfj-im-HaX" id="hig-wn-f5j"/>
+                        <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bcr-xl-S0G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="148" y="153"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="60"/>
+    </resources>
+</document>
