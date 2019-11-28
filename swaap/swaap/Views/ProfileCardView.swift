@@ -25,19 +25,17 @@ class ProfileCardView: IBPreviewView {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		commonInit()
-		setupImageView()
 	}
 
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		commonInit()
-		setupImageView()
 	}
 
 	override func updateConstraints() {
 		let constant = bounds.width * 0.214
-		leftImageOffsetConstraint.constant = constant
-		topImageOffsetConstraint.constant = -constant
+		leftImageOffsetConstraint?.constant = constant
+		topImageOffsetConstraint?.constant = -constant
 		super.updateConstraints()
 		setupImageView()
 	}
@@ -56,10 +54,11 @@ class ProfileCardView: IBPreviewView {
 		contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+		setupImageView()
 	}
 
 	private func setupImageView() {
-		profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+		profileImageView?.layer.cornerRadius = profileImageView.frame.width / 2
 	}
 
 	@IBAction func socialButtonTapped(_ sender: UIButton) {
