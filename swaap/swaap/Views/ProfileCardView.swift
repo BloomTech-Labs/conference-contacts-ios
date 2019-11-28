@@ -54,7 +54,6 @@ class ProfileCardView: IBPreviewView {
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		setupImageView()
 
-		imageMaskView.removeFromSuperview()
 		profileImageView.mask = imageMaskView
 
 		for platform in SocialButton.SocialPlatform.allCases {
@@ -67,6 +66,9 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func setupImageView() {
+		let size = profileImageView.bounds.size * 1.25
+		let position = (profileImageView.bounds.size * -0.25).toPoint
+		imageMaskView.frame = CGRect(origin: position, size: size)
 		imageMaskView.backgroundColor = .white
 		imageMaskView?.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
