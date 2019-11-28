@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="chevron" destination="cmC-BM-emx" id="rqm-Of-U7o"/>
                 <outlet property="contentView" destination="mIx-fE-GQb" id="5wF-48-m93"/>
+                <outlet property="imageMaskView" destination="f2w-0M-HYO" id="YEd-fK-LIh"/>
                 <outlet property="leftImageOffsetConstraint" destination="awc-kW-wrf" id="cck-2N-8cq"/>
                 <outlet property="profileImageView" destination="KOK-Ma-gRP" id="wFg-2d-XF8"/>
                 <outlet property="stackView" destination="HqP-mc-ziA" id="yoC-FJ-13l"/>
@@ -23,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="KOK-Ma-gRP">
-                    <rect key="frame" x="-80" y="-80" width="400" height="400"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320.00000000000011" height="320.00000000000011"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="KOK-Ma-gRP" secondAttribute="height" multiplier="1:1" id="hmL-Hp-jKW"/>
                     </constraints>
@@ -106,19 +107,27 @@
                         </view>
                     </subviews>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2w-0M-HYO">
+                    <rect key="frame" x="-80" y="-80" width="400" height="400"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="KOK-Ma-gRP" firstAttribute="width" secondItem="mIx-fE-GQb" secondAttribute="width" multiplier="1.07" id="0km-Gz-KW7"/>
+                <constraint firstItem="KOK-Ma-gRP" firstAttribute="width" secondItem="mIx-fE-GQb" secondAttribute="width" multiplier="0.855615" id="0km-Gz-KW7"/>
+                <constraint firstItem="f2w-0M-HYO" firstAttribute="trailing" secondItem="KOK-Ma-gRP" secondAttribute="trailing" id="0vW-Ri-Kmc"/>
                 <constraint firstItem="HqP-mc-ziA" firstAttribute="centerX" secondItem="mIx-fE-GQb" secondAttribute="centerX" id="1fh-2K-8GD"/>
+                <constraint firstItem="f2w-0M-HYO" firstAttribute="top" secondItem="KOK-Ma-gRP" secondAttribute="top" constant="-80" id="5aq-e8-G4d"/>
+                <constraint firstItem="f2w-0M-HYO" firstAttribute="leading" secondItem="KOK-Ma-gRP" secondAttribute="leading" constant="-80" id="9kr-EC-xf4"/>
                 <constraint firstItem="zVZ-0p-x4f" firstAttribute="centerX" secondItem="mIx-fE-GQb" secondAttribute="centerX" id="D5n-u2-wl8"/>
                 <constraint firstItem="zVZ-0p-x4f" firstAttribute="top" secondItem="HqP-mc-ziA" secondAttribute="bottom" constant="40" id="Du7-e6-K03"/>
                 <constraint firstItem="wru-5D-37G" firstAttribute="trailing" secondItem="NX2-4T-Xk5" secondAttribute="trailing" constant="20" id="EN1-Wv-lF2"/>
-                <constraint firstItem="KOK-Ma-gRP" firstAttribute="top" secondItem="mIx-fE-GQb" secondAttribute="top" constant="-80" id="Ep7-BW-BBE"/>
+                <constraint firstItem="KOK-Ma-gRP" firstAttribute="top" secondItem="mIx-fE-GQb" secondAttribute="top" id="Ep7-BW-BBE"/>
+                <constraint firstItem="f2w-0M-HYO" firstAttribute="bottom" secondItem="KOK-Ma-gRP" secondAttribute="bottom" id="NEc-ng-mxR"/>
                 <constraint firstItem="cmC-BM-emx" firstAttribute="top" secondItem="zVZ-0p-x4f" secondAttribute="bottom" constant="8" id="OvL-hI-MBg"/>
                 <constraint firstItem="cmC-BM-emx" firstAttribute="centerX" secondItem="mIx-fE-GQb" secondAttribute="centerX" id="Wsm-Ws-EkB"/>
                 <constraint firstItem="NX2-4T-Xk5" firstAttribute="top" secondItem="wru-5D-37G" secondAttribute="top" constant="20" id="YQ0-oE-d41"/>
-                <constraint firstAttribute="leading" secondItem="KOK-Ma-gRP" secondAttribute="leading" constant="80" id="awc-kW-wrf"/>
+                <constraint firstAttribute="leading" secondItem="KOK-Ma-gRP" secondAttribute="leading" id="awc-kW-wrf"/>
                 <constraint firstAttribute="bottom" secondItem="cmC-BM-emx" secondAttribute="bottom" constant="8" id="jtz-Gi-RAd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -128,6 +137,6 @@
     </objects>
     <resources>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
-        <image name="him" width="1121" height="1280"/>
+        <image name="him" width="735" height="735"/>
     </resources>
 </document>
