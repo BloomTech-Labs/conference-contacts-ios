@@ -17,10 +17,10 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private var contentView: UIView!
 	@IBInspectable var imageCornerRadius: CGFloat = 12
 	@IBOutlet private weak var profileImageView: UIImageView!
-	@IBOutlet private weak var button: UIButton!
 	@IBOutlet private weak var chevron: ChevronView!
 	@IBOutlet private weak var leftImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
+	@IBOutlet weak var stackView: UIStackView!
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -55,6 +55,14 @@ class ProfileCardView: IBPreviewView {
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		setupImageView()
+
+		for platform in SocialButton.SocialPlatform.allCases {
+			let button = SocialButton()
+			button.socialPlatform = (platform, "Lorem Ipsum")
+			button.translatesAutoresizingMaskIntoConstraints = false
+			button.heightAnchor.constraint(equalToConstant: 35).isActive = true
+			stackView.addArrangedSubview(button)
+		}
 	}
 
 	private func setupImageView() {
