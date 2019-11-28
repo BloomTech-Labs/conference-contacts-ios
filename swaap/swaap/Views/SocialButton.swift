@@ -94,14 +94,17 @@ class SocialButton: IBPreviewControl {
 			mainColorBackgroundView.backgroundColor = .systemGreen
 			translucentView.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.3)
 			iconView.image = .socialPhoneIcon
+			iconView.tintColor = .systemGreen
 		case .email:
 			mainColorBackgroundView.backgroundColor = .systemTeal
 			translucentView.backgroundColor = UIColor.systemTeal.withAlphaComponent(0.3)
 			iconView.image = .socialEmailIcon
+			iconView.tintColor = .systemTeal
 		case .text:
 			mainColorBackgroundView.backgroundColor = .systemBlue
 			translucentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
 			iconView.image = .socialTextIcon
+			iconView.tintColor = .systemBlue
 		case .twitter:
 			mainColorBackgroundView.backgroundColor = .socialButtonTwitterMain
 			translucentView.backgroundColor = .socialButtonTwitterSecondary
@@ -120,7 +123,6 @@ class SocialButton: IBPreviewControl {
 			iconView.image = .socialFacebookIcon
 		}
 		handleLabel.text = info
-		iconView.tintColor = .label
 	}
 
 	func setSocialButton(socialPlatform: SocialPlatform) {
