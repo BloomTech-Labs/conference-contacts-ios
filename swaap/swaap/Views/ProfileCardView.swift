@@ -17,6 +17,7 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private var contentView: UIView!
 	@IBInspectable var imageCornerRadius: CGFloat = 12
 	@IBOutlet private weak var profileImageView: UIImageView!
+	@IBOutlet private weak var imageMaskView: UIView!
 	@IBOutlet private weak var chevron: ChevronView!
 	@IBOutlet private weak var leftImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
@@ -33,9 +34,6 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	override func updateConstraints() {
-		let constant = bounds.width * 0.214
-		leftImageOffsetConstraint?.constant = constant
-		topImageOffsetConstraint?.constant = -constant
 		super.updateConstraints()
 		setupImageView()
 	}
@@ -56,6 +54,9 @@ class ProfileCardView: IBPreviewView {
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		setupImageView()
 
+		imageMaskView.removeFromSuperview()
+		profileImageView.mask = imageMaskView
+
 		for platform in SocialButton.SocialPlatform.allCases {
 			let button = SocialButton()
 			button.socialPlatform = (platform, "Lorem Ipsum")
@@ -66,7 +67,8 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func setupImageView() {
-		profileImageView?.layer.cornerRadius = profileImageView.frame.width / 2
+		imageMaskView.backgroundColor = .white
+		imageMaskView?.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
 
 	@IBAction func socialButtonTapped(_ sender: UIButton) {
