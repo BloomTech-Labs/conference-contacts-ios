@@ -130,10 +130,13 @@ class SocialButton: IBPreviewControl {
 		handleLabel.text = info
 	}
 
+	#warning("temp var - marlon tweak to preference and then hardcode (or keep, but rename)")
 	private let animationTime = 0.05
+	#warning("talk to me about why I put this here - we can decide together ultimately if we want to keep it or not")
 	private var isDepressed = false
 	
 	private func animateDepress() {
+		guard !isDepressed else { return }
 		depressFadeView.isHidden = false
 		depressFadeView.alpha = 0
 		isDepressed = true
@@ -145,6 +148,7 @@ class SocialButton: IBPreviewControl {
 	}
 
 	private func animateRelease() {
+		guard isDepressed else { return }
 		depressFadeView.isHidden = false
 		depressFadeView.alpha = 1
 		isDepressed = false
