@@ -28,7 +28,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="KOK-Ma-gRP">
-                    <rect key="frame" x="0.0" y="0.0" width="320.00000000000011" height="320.00000000000011"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="KOK-Ma-gRP" secondAttribute="height" multiplier="1:1" id="hmL-Hp-jKW"/>
                     </constraints>

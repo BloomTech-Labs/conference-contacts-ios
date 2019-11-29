@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3345A34F2390C6B700859F29 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3345A34E2390C6B700859F29 /* VectorTests.swift */; };
+		335A520B23910C5100FA5623 /* RangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335A520A23910C5100FA5623 /* RangeExtensions.swift */; };
 		335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668C237B6BAA0099EEA1 /* ContactsController.swift */; };
 		335E668F237B6BF00099EEA1 /* ContactsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668E237B6BF00099EEA1 /* ContactsCoordinator.swift */; };
 		33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33917DF323849A2400BC1501 /* SignUpViewController.swift */; };
@@ -116,6 +117,7 @@
 
 /* Begin PBXFileReference section */
 		3345A34E2390C6B700859F29 /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
+		335A520A23910C5100FA5623 /* RangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtensions.swift; sourceTree = "<group>"; };
 		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
 		335E668E237B6BF00099EEA1 /* ContactsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCoordinator.swift; sourceTree = "<group>"; };
 		33917DF323849A2400BC1501 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				37218AFC238F8750008BFC24 /* ImageHelper.swift */,
 				37218B02238FA161008BFC24 /* FontHelper.swift */,
 				33C00787238FDDEC000D72A7 /* VectorExtensions.swift */,
+				335A520A23910C5100FA5623 /* RangeExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				37218B03238FA161008BFC24 /* FontHelper.swift in Sources */,
 				3797A57223887F1500CB8621 /* ProfileCardView.swift in Sources */,
 				33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */,
+				335A520B23910C5100FA5623 /* RangeExtensions.swift in Sources */,
 				3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */,
 				3797A56223874DF000CB8621 /* AuthManager.swift in Sources */,
 				33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */,
