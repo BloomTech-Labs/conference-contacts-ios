@@ -84,6 +84,12 @@ class ProfileCardView: IBPreviewView {
 	private var maxTranslate: CGFloat {
 		-0.9 * bounds.height
 	}
+	private let swipeVelocity: CGFloat = 550
+	/// 0 is when it's slid all the way down, 1.0 when it's slid all the way to its max sliding height
+	private var currentSlidingProgress: Double {
+		let range = 0...abs(maxTranslate)
+		return range.normalizedIndex(-transform.ty)
+	}
 
 	@IBAction func panGuesturePanning(_ sender: UIPanGestureRecognizer) {
 		var translate = sender.translation(in: superview)
@@ -99,23 +105,20 @@ class ProfileCardView: IBPreviewView {
 
 		if sender.state == .ended {
 			let velocity = sender.velocity(in: self)
-			if velocity.y < -550 {
+			if velocity.y > swipeVelocity {
+				animateToPrimaryPosition()
+			} else if velocity.y < -swipeVelocity || currentSlidingProgress > 0.8 {
 				animateToTopPosition()
 			} else {
-				print("send back")
 				animateToPrimaryPosition()
 			}
-			print(velocity)
 		} else {
 			layer.removeAllAnimations()
 		}
 	}
 
 	private func animateToPrimaryPosition() {
-		let range = 0...abs(maxTranslate)
-		let currentProgress = range.normalizedIndex(-transform.ty)
-		let duration = max(0.1, currentProgress * 0.2)
-		print(duration)
+		let duration = max(0.1, currentSlidingProgress * 0.2)
 
 		UIView.animate(withDuration: duration, delay: 0.0, options: .allowUserInteraction, animations: {
 			self.transform = .identity
@@ -123,10 +126,7 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func animateToTopPosition() {
-		let range = 0...abs(maxTranslate)
-		let currentProgress = range.normalizedIndex(-transform.ty)
-		let duration = max(0.1, (1 - currentProgress) * 0.2)
-		print(duration)
+		let duration = max(0.1, (1 - currentSlidingProgress) * 0.2)
 
 		UIView.animate(withDuration: duration, delay: 0.0, options: .allowUserInteraction, animations: {
 			self.transform.ty = self.maxTranslate
