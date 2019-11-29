@@ -10,19 +10,23 @@ import UIKit
 
 class ProfileViewController: UIViewController, Storyboarded {
 
-	@IBOutlet private weak var profileCardContainerView: UIView!
 	@IBOutlet private weak var profileCardView: UIView!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationController?.navigationBar.isHidden = true
 
-		profileCardView.layer.masksToBounds = true
-		[profileCardView, profileCardContainerView].forEach { $0?.layer.cornerRadius = 20 }
-		[profileCardView, profileCardContainerView].forEach { $0?.layer.cornerCurve = .continuous }
+		profileCardView.layer.cornerRadius = 20
+		profileCardView.layer.cornerCurve = .continuous
 
+		setupCardShadow()
 		updateViews()
     }
+
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		setupCardShadow()
+	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -30,33 +34,16 @@ class ProfileViewController: UIViewController, Storyboarded {
 		updateViews()
 	}
 
-	private func updateViews() {
-		profileCardContainerView.layer.shadowPath = UIBezierPath(rect: profileCardView.bounds).cgPath
-		profileCardContainerView.layer.shadowRadius = 14
-		profileCardContainerView.layer.shadowOffset = .zero
-		profileCardContainerView.layer.shadowOpacity = 0.3
+	private func setupCardShadow() {
+		profileCardView.layer.shadowPath = UIBezierPath(rect: profileCardView.bounds).cgPath
+		profileCardView.layer.shadowRadius = 14
+		profileCardView.layer.shadowOffset = .zero
+		profileCardView.layer.shadowOpacity = 0.3
 	}
 
-//	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-////		viewDidLoad()
-//	}
-//
-//	required init?(coder: NSCoder) {
-//		super.init(coder: coder)
-////		viewDidLoad()
-//	}
-    
+	private func updateViews() {
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	}
 
 	@IBAction func testButtonPressed(_ sender: UIButton) {
 		print("tested")

@@ -22,38 +22,25 @@
                                     <action selector="testButtonPressed:" destination="j9t-B2-wS8" eventType="touchUpInside" id="1Dk-rL-lJf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rfj-im-HaX">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
                                 <rect key="frame" x="20" y="44" width="374" height="729"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="729"/>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="uVY-7s-0Rc" secondAttribute="bottom" id="37y-KO-WCZ"/>
-                                    <constraint firstItem="uVY-7s-0Rc" firstAttribute="leading" secondItem="Rfj-im-HaX" secondAttribute="leading" id="AXm-dY-a8B"/>
-                                    <constraint firstAttribute="trailing" secondItem="uVY-7s-0Rc" secondAttribute="trailing" id="CPg-Fn-wFV"/>
-                                    <constraint firstItem="uVY-7s-0Rc" firstAttribute="top" secondItem="Rfj-im-HaX" secondAttribute="top" id="mWi-4j-hc1"/>
-                                </constraints>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="Rfj-im-HaX" secondAttribute="bottom" constant="40" id="0nZ-gc-RQp"/>
-                            <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="Rfj-im-HaX" secondAttribute="trailing" constant="20" id="3u4-Lw-dwi"/>
+                            <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="uVY-7s-0Rc" secondAttribute="trailing" constant="20" id="6Sl-1R-mkM"/>
+                            <constraint firstItem="uVY-7s-0Rc" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" id="7Aj-MN-apA"/>
+                            <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="uVY-7s-0Rc" secondAttribute="bottom" constant="40" id="7dD-mx-ibr"/>
                             <constraint firstItem="xjI-NE-xAX" firstAttribute="centerY" secondItem="UHq-o5-Toi" secondAttribute="centerY" id="Z2A-SZ-W2y"/>
+                            <constraint firstItem="uVY-7s-0Rc" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="20" id="awe-CX-foi"/>
                             <constraint firstItem="xjI-NE-xAX" firstAttribute="centerX" secondItem="UHq-o5-Toi" secondAttribute="centerX" id="ewG-HL-C0F"/>
-                            <constraint firstItem="Rfj-im-HaX" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" id="hCy-Om-eGG"/>
-                            <constraint firstItem="Rfj-im-HaX" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="20" id="ix3-Wr-UEY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Connect" image="arrow.right.arrow.left.circle" catalog="system" id="UhS-VM-r7a"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="profileCardContainerView" destination="Rfj-im-HaX" id="hig-wn-f5j"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
                     </connections>
                 </viewController>

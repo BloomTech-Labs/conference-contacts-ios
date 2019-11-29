@@ -52,10 +52,15 @@ class ProfileCardView: IBPreviewView {
 		contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-		setupImageView()
+		contentView.layer.cornerCurve = .continuous
+		contentView.layer.cornerRadius = 20
 
+		setupImageView()
 		profileImageView.mask = imageMaskView
 
+		backgroundColor = .clear
+
+		// FIXME: - just for testing - remove
 		for platform in SocialButton.SocialPlatform.allCases {
 			let button = SocialButton()
 			button.socialPlatform = (platform, "Lorem Ipsum")
