@@ -66,11 +66,12 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func setupImageView() {
+		guard !isInterfaceBuilder else { return }
 		let size = profileImageView.bounds.size * 1.25
 		let position = (profileImageView.bounds.size * -0.25).toPoint
 		imageMaskView.frame = CGRect(origin: position, size: size)
 		imageMaskView.backgroundColor = .white
-		imageMaskView?.layer.cornerRadius = imageMaskView.frame.width / 2
+		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
 
 	@IBAction func panGuesturePanning(_ sender: UIPanGestureRecognizer) {
