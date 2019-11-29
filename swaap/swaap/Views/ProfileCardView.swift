@@ -21,6 +21,7 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var chevron: ChevronView!
 	@IBOutlet private weak var leftImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
+	// FIXME: - just for testing - remove
 	@IBOutlet weak var stackView: UIStackView!
 
 	override init(frame: CGRect) {
