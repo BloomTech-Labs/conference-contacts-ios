@@ -53,6 +53,7 @@ class SocialButton: IBPreviewControl {
 	@IBOutlet private weak var translucentView: UIView!
 	@IBOutlet private weak var iconView: UIImageView!
 	@IBOutlet private weak var handleLabel: UILabel!
+	@IBOutlet private weak var depressFadeView: UIView!
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -80,10 +81,14 @@ class SocialButton: IBPreviewControl {
 		contentHeightAnchor = contentView.heightAnchor.constraint(equalToConstant: 35)
 		contentHeightAnchor?.isActive = true
 		handleLabel.font = .roundedFont(ofSize: handleLabel.font?.pointSize ?? 15.0, weight: .regular)
+
 		updateSocialPlatformType()
-		clipsToBounds = true
+
 		cornerRadius = 8
 		layer.cornerCurve = .continuous
+		clipsToBounds = true
+
+		depressFadeView.isHidden = true
 	}
 
 	private func updateSocialPlatformType() {
@@ -123,7 +128,63 @@ class SocialButton: IBPreviewControl {
 		iconView.tintColor = .label
 	}
 
-	func setSocialButton(socialPlatform: SocialPlatform) {
+	private let animationTime = 0.05
+	private var isDepressed = false
+	
+	private func animateDepress() {
+		depressFadeView.isHidden = false
+		depressFadeView.alpha = 0
+		isDepressed = true
+		UIView.animate(withDuration: animationTime) {
+			let scale: CGFloat = 0.95
+			self.transform = CGAffineTransform(scaleX: scale, y: scale)
+			self.depressFadeView.alpha = 1
+		}
+	}
 
+	private func animateRelease() {
+		depressFadeView.isHidden = false
+		depressFadeView.alpha = 1
+		isDepressed = false
+		UIView.animate(withDuration: animationTime, animations: {
+			self.transform = .identity
+			self.depressFadeView.alpha = 0
+		}) { _ in
+			self.depressFadeView.isHidden = true
+		}
+	}
+
+	override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+		animateDepress()
+		sendActions(for: .touchDown)
+		return true
+	}
+
+	override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+		let location = touch.location(in: self)
+		if bounds.contains(location) {
+			sendActions(for: .touchDragInside)
+			if !isDepressed { animateDepress() }
+		} else {
+			sendActions(for: .touchDragOutside)
+			if isDepressed { animateRelease() }
+		}
+		return true
+	}
+
+	override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+		animateRelease()
+		guard let touch = touch else { return }
+		let location = touch.location(in: self)
+		if bounds.contains(location) {
+			sendActions(for: .touchUpInside)
+		} else {
+			sendActions(for: .touchUpOutside)
+		}
+	}
+
+	override func cancelTracking(with event: UIEvent?) {
+		animateRelease()
+		sendActions(for: .touchCancel)
 	}
 }
