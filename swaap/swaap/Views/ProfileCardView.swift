@@ -73,7 +73,22 @@ class ProfileCardView: IBPreviewView {
 		imageMaskView?.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
 
-	@IBAction func socialButtonTapped(_ sender: UIButton) {
-		
+	@IBAction func panGuesturePanning(_ sender: UIPanGestureRecognizer) {
+		var translate = sender.translation(in: superview)
+		let maxTranslate = -0.9327846364883402 * bounds.height
+
+		translate.y = max(maxTranslate, translate.y)
+		translate.y = min(0, translate.y)
+		superview?.transform.ty = translate.y
+
+		if sender.state == .ended {
+			returnToPrimaryPosition()
+		}
+	}
+
+	private func returnToPrimaryPosition() {
+		UIView.animate(withDuration: 0.2, animations: {
+			self.superview?.transform = .identity
+		}, completion: nil)
 	}
 }

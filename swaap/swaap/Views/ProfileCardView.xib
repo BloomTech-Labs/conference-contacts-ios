@@ -28,7 +28,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="KOK-Ma-gRP">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320.00000000000011" height="320.00000000000011"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="KOK-Ma-gRP" secondAttribute="height" multiplier="1:1" id="hmL-Hp-jKW"/>
                     </constraints>
@@ -108,6 +108,7 @@
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="KOK-Ma-gRP" firstAttribute="width" secondItem="mIx-fE-GQb" secondAttribute="width" multiplier="0.855615" id="0km-Gz-KW7"/>
                 <constraint firstItem="f2w-0M-HYO" firstAttribute="trailing" secondItem="KOK-Ma-gRP" secondAttribute="trailing" id="0vW-Ri-Kmc"/>
@@ -127,8 +128,16 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="wru-5D-37G"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="yLA-WI-VT9" appends="YES" id="cax-uc-OU4"/>
+            </connections>
             <point key="canvasLocation" x="95.652173913043484" y="122.54464285714285"/>
         </view>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="yLA-WI-VT9">
+            <connections>
+                <action selector="panGuesturePanning:" destination="-1" id="x6O-t6-3hl"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
     <resources>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
