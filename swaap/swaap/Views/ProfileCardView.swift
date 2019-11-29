@@ -79,22 +79,56 @@ class ProfileCardView: IBPreviewView {
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
 
+	private var slideOffset: CGFloat = 0
+	private var maxTranslate: CGFloat {
+		-0.9 * bounds.height
+	}
+
 	@IBAction func panGuesturePanning(_ sender: UIPanGestureRecognizer) {
 		var translate = sender.translation(in: superview)
-		let maxTranslate = -0.9327846364883402 * bounds.height
 
+		if sender.state == .began {
+			slideOffset = transform.ty
+		}
+
+		translate.y += slideOffset
 		translate.y = max(maxTranslate, translate.y)
 		translate.y = min(0, translate.y)
-		superview?.transform.ty = translate.y
+		transform.ty = translate.y
 
 		if sender.state == .ended {
-			returnToPrimaryPosition()
+			let velocity = sender.velocity(in: self)
+			if velocity.y < -550 {
+				animateToTopPosition()
+			} else {
+				print("send back")
+				animateToPrimaryPosition()
+			}
+			print(velocity)
+		} else {
+			layer.removeAllAnimations()
 		}
 	}
 
-	private func returnToPrimaryPosition() {
-		UIView.animate(withDuration: 0.2, animations: {
-			self.superview?.transform = .identity
+	private func animateToPrimaryPosition() {
+		let range = 0...abs(maxTranslate)
+		let currentProgress = range.normalizedIndex(-transform.ty)
+		let duration = max(0.1, currentProgress * 0.2)
+		print(duration)
+
+		UIView.animate(withDuration: duration, delay: 0.0, options: .allowUserInteraction, animations: {
+			self.transform = .identity
+		}, completion: nil)
+	}
+
+	private func animateToTopPosition() {
+		let range = 0...abs(maxTranslate)
+		let currentProgress = range.normalizedIndex(-transform.ty)
+		let duration = max(0.1, (1 - currentProgress) * 0.2)
+		print(duration)
+
+		UIView.animate(withDuration: duration, delay: 0.0, options: .allowUserInteraction, animations: {
+			self.transform.ty = self.maxTranslate
 		}, completion: nil)
 	}
 }
