@@ -80,6 +80,7 @@ class ProfileCardView: IBPreviewView {
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
 
+	// MARK: - Pan Gesture properties
 	private var slideOffset: CGFloat = 0
 	private var maxTranslate: CGFloat {
 		-0.9 * bounds.height
@@ -91,6 +92,7 @@ class ProfileCardView: IBPreviewView {
 		return range.normalizedIndex(-transform.ty)
 	}
 
+	// MARK: - Pan Gesture Logic
 	@IBAction func panGuesturePanning(_ sender: UIPanGestureRecognizer) {
 		var translate = sender.translation(in: superview)
 
@@ -100,14 +102,15 @@ class ProfileCardView: IBPreviewView {
 
 		translate.y += slideOffset
 		translate.y = max(maxTranslate, translate.y)
-		translate.y = min(0, translate.y)
+		// Positive value is for tug animation. A Value of 0 would result in locking into place.
+		translate.y = min(10, translate.y)
 		transform.ty = translate.y
 
 		if sender.state == .ended {
 			let velocity = sender.velocity(in: self)
 			if velocity.y > swipeVelocity {
 				animateToPrimaryPosition()
-			} else if velocity.y < -swipeVelocity || currentSlidingProgress > 0.8 {
+			} else if velocity.y < -swipeVelocity || currentSlidingProgress > 0.65 {
 				animateToTopPosition()
 			} else {
 				animateToPrimaryPosition()
@@ -118,17 +121,23 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func animateToPrimaryPosition() {
-		let duration = max(0.1, currentSlidingProgress * 0.2)
-
-		UIView.animate(withDuration: duration, delay: 0.0, options: .allowUserInteraction, animations: {
+		UIView.animate(withDuration: 0.3,
+					   delay: 0.0,
+					   usingSpringWithDamping: 0.8,
+					   initialSpringVelocity: 0.0,
+					   options: [.allowUserInteraction, .curveEaseOut],
+					   animations: {
 			self.transform = .identity
 		}, completion: nil)
 	}
 
 	private func animateToTopPosition() {
-		let duration = max(0.1, (1 - currentSlidingProgress) * 0.2)
-
-		UIView.animate(withDuration: duration, delay: 0.0, options: .allowUserInteraction, animations: {
+		UIView.animate(withDuration: 0.3,
+					   delay: 0.0,
+					   usingSpringWithDamping: 0.8,
+					   initialSpringVelocity: 0.0,
+					   options: [.allowUserInteraction, .curveEaseOut],
+					   animations: {
 			self.transform.ty = self.maxTranslate
 		}, completion: nil)
 	}

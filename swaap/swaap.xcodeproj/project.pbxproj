@@ -27,6 +27,7 @@
 		33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0E3238466AE006BE880 /* FormInputView.xib */; };
 		37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218AFC238F8750008BFC24 /* ImageHelper.swift */; };
 		37218B03238FA161008BFC24 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218B02238FA161008BFC24 /* FontHelper.swift */; };
+		375CBF292391EB6700C3D50A /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CBF242391EB6700C3D50A /* HapticFeedback.swift */; };
 		3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797A55C238603A400CB8621 /* String+Extensions.swift */; };
 		3797A56223874DF000CB8621 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797A56123874DF000CB8621 /* AuthManager.swift */; };
 		3797A56A2388596900CB8621 /* ProfileCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3797A5692388596900CB8621 /* ProfileCardView.xib */; };
@@ -136,6 +137,7 @@
 		33FEE0E3238466AE006BE880 /* FormInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormInputView.xib; sourceTree = "<group>"; };
 		37218AFC238F8750008BFC24 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		37218B02238FA161008BFC24 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
+		375CBF242391EB6700C3D50A /* HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		3797A55C238603A400CB8621 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		3797A56123874DF000CB8621 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		3797A5692388596900CB8621 /* ProfileCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCardView.xib; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				37218B02238FA161008BFC24 /* FontHelper.swift */,
 				33C00787238FDDEC000D72A7 /* VectorExtensions.swift */,
 				335A520A23910C5100FA5623 /* RangeExtensions.swift */,
+				375CBF242391EB6700C3D50A /* HapticFeedback.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37A2F40B237CFEFE00C1EF3B /* RootAuthViewController.swift in Sources */,
+				375CBF292391EB6700C3D50A /* HapticFeedback.swift in Sources */,
 				335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */,
 				33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
