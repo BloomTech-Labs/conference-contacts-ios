@@ -42,6 +42,7 @@ class RootTabBarController: UITabBarController {
 
 	private func runAuthCoordinator() {
 		// check if user is logged in, only run if logged out:
+		authManager.credentialsLoading.wait()
 		if authManager.credentials == nil {
 			let authCoordinator = AuthCoordinator(rootTabBarController: self, authManager: authManager)
 			self.authCoordinator = authCoordinator

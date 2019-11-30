@@ -21,25 +21,32 @@ class AuthManager: NSObject {
 	let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 	let keychain = A0SimpleKeychain()
 
-	// FIXME: vulnerable to race condition since reloading previous credentials is async
-	private(set) var credentials: Credentials?
+	private(set) var credentials: Credentials? {
+		didSet {
+			DispatchQueue.main.async {
+				// send notification that credentials changed
+			}
+		}
+	}
+	let credentialsLoading: DispatchSemaphore
 
 	// MARK: - Lifecycle
 	override init() {
+		credentialsLoading = DispatchSemaphore(value: 0)
 		super.init()
+
 		tryRenewAuth { credentials, error in
 			if let error = error {
 				NSLog("Unable to renew authorization: \(error)")
 				return
 			}
-			DispatchQueue.main.async {
-				guard let credentials = credentials else {
-					print("Failed restoring credentials: \(error)")
-					return
-				}
-				self.credentials = credentials
-				print("restored saved credentials: \(credentials)")
+			guard let credentials = credentials else {
+				print("Failed restoring credentials")
+				return
 			}
+			self.credentials = credentials
+			print("restored saved credentials: \(credentials)")
+			self.credentialsLoading.signal()
 		}
 	}
 
@@ -50,12 +57,7 @@ class AuthManager: NSObject {
 			case .failure(let error):
 				NSLog("Error: \(error)")
 			case .success(let credentials):
-				#warning("Fix me")
 				self.storeCredentials(appleID: nil, credentials: credentials)
-//				self.keychain.setString(appleIDCredential.user, forKey: .userIDKey)
-//				self.credentials = credentials
-//				_ = self.credentialsManager.store(credentials: credentials)
-				NSLog("Credentials: \(credentials)")
 			}
 		}
 	}
