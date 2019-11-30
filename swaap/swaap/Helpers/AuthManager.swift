@@ -34,9 +34,10 @@ class AuthManager: NSObject {
 			}
 			DispatchQueue.main.async {
 				guard let credentials = credentials else {
-					print("Failed restoring credentials")
+					print("Failed restoring credentials: \(error)")
 					return
 				}
+				self.credentials = credentials
 				print("restored saved credentials: \(credentials)")
 			}
 		}
@@ -50,6 +51,7 @@ class AuthManager: NSObject {
 				NSLog("Error: \(error)")
 			case .success(let credentials):
 				#warning("Fix me")
+				self.storeCredentials(appleID: nil, credentials: credentials)
 //				self.keychain.setString(appleIDCredential.user, forKey: .userIDKey)
 //				self.credentials = credentials
 //				_ = self.credentialsManager.store(credentials: credentials)
@@ -70,28 +72,44 @@ class AuthManager: NSObject {
 	}
 
 	func tryRenewAuth(_ callback: @escaping (Credentials?, Error?) -> Void) {
-		let provider = ASAuthorizationAppleIDProvider()
 
-		guard let userID = keychain.string(forKey: .userIDKey) else {
-			return callback(nil, nil)
+		guard let signInWithAppleUsed = keychain.string(forKey: .signInWithAppleOptionToggleKey) else {
+			callback(nil, nil)
+			return
 		}
 
-		provider.getCredentialState(forUserID: userID) { state, error in
-			switch state {
-			case .authorized:
-				self.credentialsManager.credentials { error, credentials in
-					guard error == nil, let credentials = credentials else {
-						return callback(nil, error)
+		if signInWithAppleUsed == "true" {
+			let provider = ASAuthorizationAppleIDProvider()
+
+			guard let userID = keychain.string(forKey: .userIDKey) else {
+				return callback(nil, nil)
+			}
+
+			provider.getCredentialState(forUserID: userID) { state, error in
+				switch state {
+				case .authorized:
+					self.credentialsManager.credentials { error, credentials in
+						guard error == nil, let credentials = credentials else {
+							return callback(nil, error)
+						}
+//						self.credentials = credentials
+						callback(credentials, nil)
+						print("Credentials state is Authorized: \(credentials)")
 					}
-					self.credentials = credentials
-					callback(credentials, nil)
-					print("Credentials state is Authorized: \(credentials)")
+				default:
+					self.keychain.deleteEntry(forKey: .userIDKey)
+					_ = self.credentialsManager.clear()
+					print("Credential state is unauthorized")
+					callback(nil, error)
 				}
-			default:
-				self.keychain.deleteEntry(forKey: .userIDKey)
-				_ = self.credentialsManager.clear()
-				print("Credential state is unauthorized")
-				callback(nil, error)
+			}
+		} else if signInWithAppleUsed == "false" {
+			credentialsManager.credentials { error, credentials in
+				guard error == nil, let credentials = credentials else {
+					return callback(nil, error)
+				}
+				callback(credentials, nil)
+				print("Credentials state is Authorized: \(credentials)")
 			}
 		}
 	}
@@ -117,11 +135,21 @@ class AuthManager: NSObject {
 		Auth0.webAuth().clearSession(federated: false) { success in
 			print("Successful logout: \(success)")
 		}
+		_ = self.credentialsManager.clear()
+//		keychain.setString("", forKey: .signInWithAppleOptionToggleKey)
+		keychain.deleteEntry(forKey: .signInWithAppleOptionToggleKey)
 	}
 
 	// MARK: - Utilities
-	private func storeCredentials() {
+	private func storeCredentials(appleID: String?, credentials: Credentials) {
 		// Add stuff
+		if let appleID = appleID {
+			keychain.setString(appleID, forKey: .userIDKey)
+			keychain.setString("true", forKey: .signInWithAppleOptionToggleKey)
+		} else {
+			keychain.setString("false", forKey: .signInWithAppleOptionToggleKey)
+		}
+		_ = self.credentialsManager.store(credentials: credentials)
 	}
 }
 
@@ -150,9 +178,10 @@ extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControl
 			switch result {
 			case .success(let credentials):
 				print("Auth0 success: \(credentials)")
-				self.keychain.setString(appleIDCredential.user, forKey: .userIDKey)
+//				self.keychain.setString(appleIDCredential.user, forKey: .userIDKey)
 				self.credentials = credentials
-				_ = self.credentialsManager.store(credentials: credentials)
+//				_ = self.credentialsManager.store(credentials: credentials)
+				self.storeCredentials(appleID: appleIDCredential.user, credentials: credentials)
 			case .failure(let error):
 				NSLog("Exchange failed: \(error)")
 			}
@@ -162,4 +191,5 @@ extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControl
 
 fileprivate extension String {
 	static let userIDKey = "userID"
+	static let signInWithAppleOptionToggleKey = "signInWithAppleUsed"
 }
