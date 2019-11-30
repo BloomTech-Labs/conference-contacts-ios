@@ -130,18 +130,18 @@ class SocialButton: IBPreviewControl {
 		handleLabel.text = info
 	}
 
-	#warning("temp var - marlon tweak to preference and then hardcode (or keep, but rename)")
-	private let animationTime = 0.05
-	#warning("talk to me about why I put this here - we can decide together ultimately if we want to keep it or not")
+	// MARK: - Animation Properties
+	private let animationTime = 0.07
 	private var isDepressed = false
-	
+
+	// MARK: - Animation Logic
 	private func animateDepress() {
 		guard !isDepressed else { return }
 		depressFadeView.isHidden = false
 		depressFadeView.alpha = 0
 		isDepressed = true
 		UIView.animate(withDuration: animationTime) {
-			let scale: CGFloat = 0.95
+			let scale: CGFloat = 0.98
 			self.transform = CGAffineTransform(scaleX: scale, y: scale)
 			self.depressFadeView.alpha = 1
 		}
