@@ -11,7 +11,7 @@ import AuthenticationServices
 import Auth0
 import SimpleKeychain
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, AuthAccessor {
 
 	// MARK: - Outlets
 	@IBOutlet private weak var signupButton: UIButton!
@@ -22,7 +22,7 @@ class LogInViewController: UIViewController {
 	let appleAuthButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
 
 	// MARK: - Properties
-	let authManager = AuthManager()
+	var authManager: AuthManager?
 
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -50,18 +50,18 @@ class LogInViewController: UIViewController {
 
 	// MARK: - IBActions
 	@objc private func handleSignInWithAppleIDButtonTap(_ sender: ASAuthorizationAppleIDButton?) {
-		authManager.signInWithApple()
+		authManager?.signInWithApple()
 	}
 
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
-		authManager.showWebAuth()
+		authManager?.showWebAuth()
 	}
 
 	@IBAction func signInTapped(_ sender: UIButton) {
-		authManager.showWebAuth()
+		authManager?.showWebAuth()
 	}
 
 	@IBAction func logoutTapped(_ sender: ButtonHelper) {
-		authManager.clearSession()
+		authManager?.clearSession()
 	}
 }

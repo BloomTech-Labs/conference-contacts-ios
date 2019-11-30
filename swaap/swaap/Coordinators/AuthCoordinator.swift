@@ -14,15 +14,21 @@ class AuthCoordinator: Coordinator, TabBarControllerAccessor {
 
 	var navigationController: UINavigationController
 
-	init(navigationController: UINavigationController = UINavigationController(), rootTabBarController: UITabBarController) {
+	let authManager: AuthManager
+
+	init(navigationController: UINavigationController = UINavigationController(), rootTabBarController: UITabBarController, authManager: AuthManager) {
 		self.navigationController = navigationController
 		self.rootTabBarController = rootTabBarController
+		self.authManager = authManager
 	}
 
 	func start() {
 		let storyboard = UIStoryboard(name: "Login", bundle: nil)
-		let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-		navigationController.pushViewController(loginVC, animated: false)
+		let rootAuthVC = storyboard.instantiateViewController(withIdentifier: "RootAuthViewController")
+		if let authAccessor = rootAuthVC as? AuthAccessor {
+			authAccessor.authManager = authManager
+		}
+		navigationController.pushViewController(rootAuthVC, animated: false)
 		navigationController.modalPresentationStyle = .fullScreen
 		navigationController.isNavigationBarHidden = true
 		self.rootTabBarController.present(self.navigationController, animated: false)

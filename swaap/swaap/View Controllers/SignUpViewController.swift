@@ -9,14 +9,14 @@
 import UIKit
 import Auth0
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, AuthAccessor {
 	@IBOutlet private weak var emailForm: FormInputView!
 	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var passwordConfirmForm: FormInputView!
 	@IBOutlet private weak var signUpButton: ButtonHelper!
 	@IBOutlet private weak var passwordStrengthLabel: UILabel!
 
-	let authManager = AuthManager()
+	var authManager: AuthManager?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,7 +35,7 @@ class SignUpViewController: UIViewController {
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
 		guard let (email, password) = checkFormValidity() else { return }
-		authManager.signUp(with: email, password: password)
+		authManager?.signUp(with: email, password: password)
 
 		[sender, emailForm, passwordForm, passwordConfirmForm].forEach { $0.resignFirstResponder() }
 	}

@@ -11,6 +11,9 @@ import Auth0
 import SimpleKeychain
 import AuthenticationServices
 
+protocol AuthAccessor: AnyObject {
+	var authManager: AuthManager? { get set }
+}
 
 class AuthManager: NSObject {
 
@@ -18,6 +21,7 @@ class AuthManager: NSObject {
 	let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 	let keychain = A0SimpleKeychain()
 
+	// FIXME: vulnerable to race condition since reloading previous credentials is async
 	private(set) var credentials: Credentials?
 
 	// MARK: - Lifecycle

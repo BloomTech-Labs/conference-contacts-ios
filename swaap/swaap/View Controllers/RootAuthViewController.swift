@@ -12,7 +12,8 @@ protocol RootAuthViewControllerDelegate: AnyObject {
 	func controllerWillScroll(_ controller: RootAuthViewController)
 }
 
-class RootAuthViewController: UIViewController {
+class RootAuthViewController: UIViewController, AuthAccessor {
+	var authManager: AuthManager?
 
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var stackView: UIStackView!
@@ -32,6 +33,9 @@ class RootAuthViewController: UIViewController {
 		children.forEach {
 			if let delegate = $0 as? RootAuthViewControllerDelegate {
 				self.delegate = delegate
+			}
+			if let authAccessor = $0 as? AuthAccessor {
+				authAccessor.authManager = authManager
 			}
 		}
 	}

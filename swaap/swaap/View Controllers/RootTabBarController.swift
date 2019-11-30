@@ -9,6 +9,7 @@
 import UIKit
 
 class RootTabBarController: UITabBarController {
+	let authManager = AuthManager()
 	// top level coordinators go here - they will be passed in as arguments to the initializer
 	var authCoordinator: AuthCoordinator?
 	lazy var contactsCoordinator = ContactsCoordinator(contactsController: self.contactsController)
@@ -41,8 +42,8 @@ class RootTabBarController: UITabBarController {
 
 	private func runAuthCoordinator() {
 		// check if user is logged in, only run if logged out:
-		if true {
-			let authCoordinator = AuthCoordinator(rootTabBarController: self)
+		if authManager.credentials == nil {
+			let authCoordinator = AuthCoordinator(rootTabBarController: self, authManager: authManager)
 			self.authCoordinator = authCoordinator
 			authCoordinator.start()
 		}
