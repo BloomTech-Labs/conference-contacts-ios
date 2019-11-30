@@ -92,6 +92,23 @@ class AuthManager: NSObject {
 		}
 	}
 
+	// TODO: Add closure to inform users what's happening
+	func signUp(with email: String, password: String) {
+		Auth0.authentication()
+			.createUser(email: email,
+						password: password,
+						connection: "Username-Password-Authentication",
+						userMetadata: ["first_name": "First", "last_name": "Last"])
+			.start { result in
+				switch result {
+				case .success(let user):
+					print("User Signed up: \(user)")
+				case .failure(let error):
+					print("Failed with \(error)")
+				}
+		}
+	}
+
 	func clearSession() {
 		Auth0.webAuth().clearSession(federated: false) { success in
 			print("Successful logout: \(success)")

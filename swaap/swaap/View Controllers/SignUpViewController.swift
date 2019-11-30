@@ -16,6 +16,8 @@ class SignUpViewController: UIViewController {
 	@IBOutlet private weak var signUpButton: ButtonHelper!
 	@IBOutlet private weak var passwordStrengthLabel: UILabel!
 
+	let authManager = AuthManager()
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
@@ -33,19 +35,8 @@ class SignUpViewController: UIViewController {
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
 		guard let (email, password) = checkFormValidity() else { return }
-		Auth0.authentication()
-			.createUser(email: email,
-						password: password,
-						connection: "Username-Password-Authentication",
-						userMetadata: ["first_name": "First", "last_name": "Last"])
-			.start { result in
-				switch result {
-				case .success(let user):
-					print("User Signed up: \(user)")
-				case .failure(let error):
-					print("Failed with \(error)")
-				}
-		}
+		authManager.signUp(with: email, password: password)
+
 		[sender, emailForm, passwordForm, passwordConfirmForm].forEach { $0.resignFirstResponder() }
 	}
 
