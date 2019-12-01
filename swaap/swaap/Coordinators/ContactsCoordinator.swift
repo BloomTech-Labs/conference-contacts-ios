@@ -20,6 +20,15 @@ class ContactsCoordinator: Coordinator {
 	}
 
 	func start() {
+		let vc = UIViewController()
+		navigationController.pushViewController(vc, animated: false)
 
+		let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(testFunc))
+		vc.navigationItem.rightBarButtonItem = button
+	}
+
+	@objc func testFunc() {
+		AuthManager().clearSession()
 	}
 }
+

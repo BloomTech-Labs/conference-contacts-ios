@@ -24,6 +24,7 @@ class RootTabBarController: UITabBarController {
 		super.init(nibName: nil, bundle: nil)
 
 		viewControllers = [contactsCoordinator.navigationController]
+		contactsCoordinator.start()
 
 		// weird double optional BS
 		guard let windowOpt = UIApplication.shared.delegate?.window else { return }
