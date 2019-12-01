@@ -28,14 +28,14 @@ class AuthManager: NSObject {
 			}
 		}
 	}
-	let credentialsLoading: DispatchSemaphore
+	let credentialsLoading = DispatchSemaphore(value: 0)
 
 	// MARK: - Lifecycle
 	override init() {
-		credentialsLoading = DispatchSemaphore(value: 0)
 		super.init()
 
 		tryRenewAuth { credentials, error in
+			defer { self.credentialsLoading.signal() }
 			if let error = error {
 				NSLog("Unable to renew authorization: \(error)")
 				return
@@ -46,7 +46,6 @@ class AuthManager: NSObject {
 			}
 			self.credentials = credentials
 			print("restored saved credentials: \(credentials)")
-			self.credentialsLoading.signal()
 		}
 	}
 
