@@ -73,7 +73,6 @@ class AuthManager: NSObject {
 	}
 
 	func tryRenewAuth(_ callback: @escaping (Credentials?, Error?) -> Void) {
-
 		guard let signInWithAppleUsed = keychain.string(forKey: .signInWithAppleOptionToggleKey) else {
 			callback(nil, nil)
 			return
@@ -93,7 +92,6 @@ class AuthManager: NSObject {
 						guard error == nil, let credentials = credentials else {
 							return callback(nil, error)
 						}
-//						self.credentials = credentials
 						callback(credentials, nil)
 						print("Credentials state is Authorized: \(credentials)")
 					}
@@ -137,7 +135,6 @@ class AuthManager: NSObject {
 			print("Successful logout: \(success)")
 		}
 		_ = self.credentialsManager.clear()
-//		keychain.setString("", forKey: .signInWithAppleOptionToggleKey)
 		keychain.deleteEntry(forKey: .signInWithAppleOptionToggleKey)
 	}
 
@@ -157,7 +154,6 @@ class AuthManager: NSObject {
 
 // MARK: - Sign in with Apple Delegate
 extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-	#warning("Fix me?")
 	func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
 		guard let window = UIApplication.shared.delegate?.window as? UIWindow else { fatalError("No window") }
 		return window
@@ -179,9 +175,7 @@ extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControl
 			switch result {
 			case .success(let credentials):
 				print("Auth0 success: \(credentials)")
-//				self.keychain.setString(appleIDCredential.user, forKey: .userIDKey)
 				self.credentials = credentials
-//				_ = self.credentialsManager.store(credentials: credentials)
 				self.storeCredentials(appleID: appleIDCredential.user, credentials: credentials)
 			case .failure(let error):
 				NSLog("Exchange failed: \(error)")
