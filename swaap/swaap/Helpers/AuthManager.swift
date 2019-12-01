@@ -15,7 +15,13 @@ protocol AuthAccessor: AnyObject {
 	var authManager: AuthManager? { get set }
 }
 
+extension NSNotification.Name {
+	static let swaapCredentialsChanged = NSNotification.Name("com.swaapapp.credentialsChanged")
+}
+
 class AuthManager: NSObject {
+
+	typealias AuthCallbackHandler = (Error?) -> Void
 
 	// MARK: - Properties
 	let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
@@ -25,6 +31,7 @@ class AuthManager: NSObject {
 		didSet {
 			DispatchQueue.main.async {
 				// send notification that credentials changed
+				NotificationCenter.default.post(name: .swaapCredentialsChanged, object: nil)
 			}
 		}
 	}
@@ -50,21 +57,27 @@ class AuthManager: NSObject {
 	}
 
 	// MARK: - Auth Methods (The Guts)
-	func showWebAuth() {
+	func showWebAuth(completion: @escaping AuthCallbackHandler) {
 		Auth0.webAuth().scope("openid profile").audience("https://api.swaap.co/").start { result in
 			switch result {
-			case .failure(let error):
-				NSLog("Error: \(error)")
 			case .success(let credentials):
 				self.storeCredentials(appleID: nil, credentials: credentials)
+				completion(nil)
+			case .failure(let error):
+				NSLog("Error: \(error)")
+				completion(error)
 			}
 		}
 	}
 
-	func signInWithApple() {
+	private var signInWithAppleCallbackHandler: AuthCallbackHandler?
+
+	func signInWithApple(completion: @escaping AuthCallbackHandler) {
 		let appleIDProvider = ASAuthorizationAppleIDProvider()
 		let request = appleIDProvider.createRequest()
 		request.requestedScopes = [.email, .fullName]
+
+		signInWithAppleCallbackHandler = completion
 
 		let authController = ASAuthorizationController(authorizationRequests: [request])
 		authController.delegate = self
@@ -113,8 +126,7 @@ class AuthManager: NSObject {
 		}
 	}
 
-	// TODO: Add closure to inform users what's happening
-	func signUp(with email: String, password: String) {
+	func signUp(with email: String, password: String, completion: @escaping AuthCallbackHandler) {
 		Auth0.authentication()
 			.createUser(email: email,
 						password: password,
@@ -124,8 +136,10 @@ class AuthManager: NSObject {
 				switch result {
 				case .success(let user):
 					print("User Signed up: \(user)")
+					completion(nil)
 				case .failure(let error):
 					print("Failed with \(error)")
+					completion(error)
 				}
 		}
 	}
@@ -177,9 +191,12 @@ extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControl
 				print("Auth0 success: \(credentials)")
 				self.credentials = credentials
 				self.storeCredentials(appleID: appleIDCredential.user, credentials: credentials)
+				self.signInWithAppleCallbackHandler?(nil)
 			case .failure(let error):
 				NSLog("Exchange failed: \(error)")
+				self.signInWithAppleCallbackHandler?(error)
 			}
+			self.signInWithAppleCallbackHandler = nil
 		}
 	}
 }

@@ -35,7 +35,11 @@ class SignUpViewController: UIViewController, AuthAccessor {
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
 		guard let (email, password) = checkFormValidity() else { return }
-		authManager?.signUp(with: email, password: password)
+		authManager?.signUp(with: email, password: password, completion: { error in
+			if let error = error {
+				NSLog("Show an alert with this error, stupid programmer: \(error)")
+			}
+		})
 
 		[sender, emailForm, passwordForm, passwordConfirmForm].forEach { $0.resignFirstResponder() }
 	}

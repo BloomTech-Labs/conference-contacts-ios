@@ -50,15 +50,27 @@ class LogInViewController: UIViewController, AuthAccessor {
 
 	// MARK: - IBActions
 	@objc private func handleSignInWithAppleIDButtonTap(_ sender: ASAuthorizationAppleIDButton?) {
-		authManager?.signInWithApple()
+		authManager?.signInWithApple(completion: { error in
+			if let error = error {
+				NSLog("Show an alert with this error, stupid programmer: \(error)")
+			}
+		})
 	}
 
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
-		authManager?.showWebAuth()
+		authManager?.showWebAuth(completion: { error in
+			if let error = error {
+				NSLog("Show an alert with this error, stupid programmer: \(error)")
+			}
+		})
 	}
 
 	@IBAction func signInTapped(_ sender: UIButton) {
-		authManager?.showWebAuth()
+		authManager?.showWebAuth(completion: { error in
+			if let error = error {
+				NSLog("Show an alert with this error, stupid programmer: \(error)")
+			}
+		})
 	}
 
 	@IBAction func logoutTapped(_ sender: ButtonHelper) {
