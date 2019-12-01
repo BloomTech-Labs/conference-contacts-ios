@@ -35,6 +35,7 @@ class AuthManager: NSObject {
 			}
 		}
 	}
+	private(set) var credentialsCheckedFromLastSession = false
 	let credentialsLoading = DispatchSemaphore(value: 0)
 
 	// MARK: - Lifecycle
@@ -42,7 +43,10 @@ class AuthManager: NSObject {
 		super.init()
 
 		tryRenewAuth { credentials, error in
-			defer { self.credentialsLoading.signal() }
+			defer {
+				self.credentialsCheckedFromLastSession = true
+				self.credentialsLoading.signal()
+			}
 			if let error = error {
 				NSLog("Unable to renew authorization: \(error)")
 				return

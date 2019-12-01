@@ -53,6 +53,10 @@ class LogInViewController: UIViewController, AuthAccessor {
 		authManager?.signInWithApple(completion: { error in
 			if let error = error {
 				NSLog("Show an alert with this error, stupid programmer: \(error)")
+				return
+			}
+			DispatchQueue.main.async {
+				self.navigationController?.dismiss(animated: true)
 			}
 		})
 	}
@@ -61,6 +65,10 @@ class LogInViewController: UIViewController, AuthAccessor {
 		authManager?.showWebAuth(completion: { error in
 			if let error = error {
 				NSLog("Show an alert with this error, stupid programmer: \(error)")
+				return
+			}
+			DispatchQueue.main.async {
+				self.navigationController?.dismiss(animated: true)
 			}
 		})
 	}
@@ -69,6 +77,10 @@ class LogInViewController: UIViewController, AuthAccessor {
 		authManager?.showWebAuth(completion: { error in
 			if let error = error {
 				NSLog("Show an alert with this error, stupid programmer: \(error)")
+				return
+			}
+			DispatchQueue.main.async {
+				self.navigationController?.dismiss(animated: true)
 			}
 		})
 	}

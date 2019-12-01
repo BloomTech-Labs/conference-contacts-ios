@@ -17,6 +17,7 @@ class RootTabBarController: UITabBarController {
 	/// property observer (cannot present a view when its parent isn't part of the view hierarchy, so we need to watch
 	/// for when the parent is in the hierarchy
 	private var windowObserver: NSKeyValueObservation?
+	private var credentialObserver: NSObjectProtocol?
 
 	let contactsController = ContactsController()
 
@@ -25,6 +26,10 @@ class RootTabBarController: UITabBarController {
 
 		viewControllers = [contactsCoordinator.navigationController]
 		contactsCoordinator.start()
+
+		credentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsChanged, object: nil, queue: nil) { [weak self] _ in
+			self?.runAuthCoordinator()
+		}
 
 		// weird double optional BS
 		guard let windowOpt = UIApplication.shared.delegate?.window else { return }
@@ -42,8 +47,10 @@ class RootTabBarController: UITabBarController {
 	}
 
 	private func runAuthCoordinator() {
+		if !authManager.credentialsCheckedFromLastSession {
+			authManager.credentialsLoading.wait()
+		}
 		// check if user is logged in, only run if logged out:
-		authManager.credentialsLoading.wait()
 		if authManager.credentials == nil {
 			let authCoordinator = AuthCoordinator(rootTabBarController: self, authManager: authManager)
 			self.authCoordinator = authCoordinator
