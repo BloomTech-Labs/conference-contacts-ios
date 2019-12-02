@@ -14,7 +14,6 @@ class ProfileViewController: UIViewController, Storyboarded {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-//		navigationController?.navigationBar.isHidden = true
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
@@ -22,6 +21,11 @@ class ProfileViewController: UIViewController, Storyboarded {
 		setupCardShadow()
 		updateViews()
     }
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.setNavigationBarHidden(true, animated: true)
+	}
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()

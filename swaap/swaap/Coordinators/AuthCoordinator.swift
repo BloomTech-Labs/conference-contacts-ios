@@ -13,6 +13,7 @@ class AuthCoordinator: Coordinator, TabBarControllerAccessor {
 	var childCoordinators: [Coordinator] = []
 
 	var navigationController: UINavigationController
+	var popRecognizer: InteractivePopRecognizer?
 
 	let authManager: AuthManager
 

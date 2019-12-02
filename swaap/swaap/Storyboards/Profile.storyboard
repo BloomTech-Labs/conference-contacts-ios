@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evD-mI-al0">
-                                <rect key="frame" x="68" y="114" width="46" height="30"/>
+                                <rect key="frame" x="318" y="502" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
@@ -47,7 +47,7 @@
                                     <action selector="testButtonPressed:" destination="j9t-B2-wS8" eventType="touchUpInside" id="1Dk-rL-lJf"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
                                 <rect key="frame" x="20" y="44" width="374" height="729"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>

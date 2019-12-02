@@ -11,6 +11,7 @@ import UIKit
 class ProfileCoordinator: Coordinator {
 	var childCoordinators: [Coordinator] = []
 	var navigationController: UINavigationController
+	var popRecognizer: InteractivePopRecognizer?
 
 	init(navigationController: UINavigationController = UINavigationController()) {
 		self.navigationController = navigationController
@@ -27,5 +28,6 @@ class ProfileCoordinator: Coordinator {
 	func showThing() {
 		let profileVC = ProfileViewController.instantiate(storyboardName: "Profile")
 		navigationController.pushViewController(profileVC, animated: true)
+		fixUINavigationBarHideAndUnhideWhenSwipingBackToPreviousUIViewControllerWhenPoppingTopViewControllerOnNavigationStack()
 	}
 }

@@ -28,6 +28,7 @@
 		33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0E3238466AE006BE880 /* FormInputView.xib */; };
 		37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218AFC238F8750008BFC24 /* ImageHelper.swift */; };
 		37218B03238FA161008BFC24 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218B02238FA161008BFC24 /* FontHelper.swift */; };
+		3750E8462395C180005BBDA5 /* InteractivePopRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */; };
 		375CBF292391EB6700C3D50A /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CBF242391EB6700C3D50A /* HapticFeedback.swift */; };
 		3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797A55C238603A400CB8621 /* String+Extensions.swift */; };
 		3797A56223874DF000CB8621 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797A56123874DF000CB8621 /* AuthManager.swift */; };
@@ -139,6 +140,7 @@
 		33FEE0E3238466AE006BE880 /* FormInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormInputView.xib; sourceTree = "<group>"; };
 		37218AFC238F8750008BFC24 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		37218B02238FA161008BFC24 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
+		3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractivePopRecognizer.swift; sourceTree = "<group>"; };
 		375CBF242391EB6700C3D50A /* HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		3797A55C238603A400CB8621 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		3797A56123874DF000CB8621 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				33C00787238FDDEC000D72A7 /* VectorExtensions.swift */,
 				335A520A23910C5100FA5623 /* RangeExtensions.swift */,
 				375CBF242391EB6700C3D50A /* HapticFeedback.swift */,
+				3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */,
 				3797A56223874DF000CB8621 /* AuthManager.swift in Sources */,
 				33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */,
+				3750E8462395C180005BBDA5 /* InteractivePopRecognizer.swift in Sources */,
 				37A2F41B237D23FF00C1EF3B /* LogInViewController.swift in Sources */,
 				3398EDB0237B307100D57DF8 /* Coordinator.swift in Sources */,
 				335E668F237B6BF00099EEA1 /* ContactsCoordinator.swift in Sources */,
@@ -856,7 +860,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L5UZAT7KA9;
+				DEVELOPMENT_TEAM = D6VB3396MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -882,7 +886,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L5UZAT7KA9;
+				DEVELOPMENT_TEAM = D6VB3396MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

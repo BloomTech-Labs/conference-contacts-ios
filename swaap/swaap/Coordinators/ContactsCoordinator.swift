@@ -11,6 +11,7 @@ import UIKit
 class ContactsCoordinator: Coordinator {
 	var childCoordinators: [Coordinator] = []
 	var navigationController: UINavigationController
+	var popRecognizer: InteractivePopRecognizer?
 
 	let contactsController: ContactsController
 
