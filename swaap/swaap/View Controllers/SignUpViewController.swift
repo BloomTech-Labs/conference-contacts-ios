@@ -9,12 +9,14 @@
 import UIKit
 import Auth0
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, AuthAccessor {
 	@IBOutlet private weak var emailForm: FormInputView!
 	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var passwordConfirmForm: FormInputView!
 	@IBOutlet private weak var signUpButton: ButtonHelper!
 	@IBOutlet private weak var passwordStrengthLabel: UILabel!
+
+	var authManager: AuthManager?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,19 +35,15 @@ class SignUpViewController: UIViewController {
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
 		guard let (email, password) = checkFormValidity() else { return }
-		Auth0.authentication()
-			.createUser(email: email,
-						password: password,
-						connection: "Username-Password-Authentication",
-						userMetadata: ["first_name": "First", "last_name": "Last"])
-			.start { result in
-				switch result {
-				case .success(let user):
-					print("User Signed up: \(user)")
-				case .failure(let error):
-					print("Failed with \(error)")
+		authManager?.signUp(with: email, password: password, completion: {  [weak self] error in
+			DispatchQueue.main.async {
+				if let error = error {
+					let alertVC = UIAlertController(error: error)
+					self?.present(alertVC, animated: true)
 				}
-		}
+			}
+		})
+
 		[sender, emailForm, passwordForm, passwordConfirmForm].forEach { $0.resignFirstResponder() }
 	}
 
@@ -80,34 +78,42 @@ class SignUpViewController: UIViewController {
 
 	private func updatePasswordStrengthLabel() {
 		let passwordStrengthText = """
-			Password must be at least 8 characters, have at least one lowercase & uppercase character, a symbol, \
-			and at least one number. It cannot contain any part of your email.
+			Password requirements:
+			• 8 Characters
+			• at least 1 lowercase
+			• at least 1 uppercase
+			• at least 1 symbol
+			• at least 1 number
+			• no identifying portion of your email
 			""" as NSString
-		let attrStr = NSMutableAttributedString(string: passwordStrengthText as String, attributes: [.font: UIFont.preferredFont(forTextStyle: .footnote)])
+		let font = UIFont.preferredFont(forTextStyle: .footnote)
+		let boldFont = UIFont.boldSystemFont(ofSize: font.pointSize)
+		let attrStr = NSMutableAttributedString(string: passwordStrengthText as String, attributes: [.font: font])
+		attrStr.addAttribute(.font, value: boldFont, range: passwordStrengthText.range(of: "Password requirements:"))
 		if let password = passwordForm.text {
 			let color: UIColor = .systemTeal
 			if password.hasAtLeastXCharacters(8) {
-				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "8 characters"))
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "8 Characters"))
 			}
 
 			if password.hasALowercaseCharacter {
-				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "lowercase"))
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 lowercase"))
 			}
 
 			if password.hasAnUppercaseCharacter {
-				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "uppercase"))
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 uppercase"))
 			}
 
 			if password.hasANumericalCharacter {
-				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least one number"))
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 number"))
 			}
 
 			if password.hasASpecialCharacter {
-				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "symbol"))
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 symbol"))
 			}
 
 			if !password.hasPartOfEmailAddress(checkEmail()) {
-				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "part of your email"))
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "no identifying portion of your email"))
 			}
 		}
 

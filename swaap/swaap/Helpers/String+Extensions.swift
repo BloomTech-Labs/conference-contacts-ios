@@ -36,6 +36,7 @@ extension String {
 	}
 
 	func hasPartOfEmailAddress(_ emailAddress: String?) -> Bool {
+		guard !self.isEmpty else { return true }
 		let lcEmail = emailAddress?.lowercased()
 		let emailParts = lcEmail?.split(separator: "@")
 		guard let alias = emailParts?.first,
