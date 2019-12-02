@@ -24,9 +24,8 @@ class AuthCoordinator: Coordinator, TabBarControllerAccessor {
 
 	func start() {
 		let storyboard = UIStoryboard(name: "Login", bundle: nil)
-		let rootAuthVC = storyboard.instantiateViewController(withIdentifier: "RootAuthViewController")
-		if let authAccessor = rootAuthVC as? AuthAccessor {
-			authAccessor.authManager = authManager
+		let rootAuthVC = storyboard.instantiateViewController(identifier: "RootAuthViewController") { coder in
+			RootAuthViewController(coder: coder, authManager: self.authManager)
 		}
 		navigationController.pushViewController(rootAuthVC, animated: false)
 		navigationController.modalPresentationStyle = .fullScreen

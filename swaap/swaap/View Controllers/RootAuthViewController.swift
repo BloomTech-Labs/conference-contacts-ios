@@ -12,8 +12,8 @@ protocol RootAuthViewControllerDelegate: AnyObject {
 	func controllerWillScroll(_ controller: RootAuthViewController)
 }
 
-class RootAuthViewController: UIViewController, AuthAccessor {
-	var authManager: AuthManager?
+class RootAuthViewController: UIViewController {
+	let authManager: AuthManager
 
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var stackView: UIStackView!
@@ -22,6 +22,16 @@ class RootAuthViewController: UIViewController, AuthAccessor {
 
 	let feedback = UIImpactFeedbackGenerator(style: .rigid)
 	weak var delegate: RootAuthViewControllerDelegate?
+
+	init?(coder: NSCoder, authManager: AuthManager) {
+		self.authManager = authManager
+		super.init(coder: coder)
+	}
+
+	@available(*, unavailable)
+	required init?(coder: NSCoder) {
+		fatalError("this vc requires an auth manager")
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
