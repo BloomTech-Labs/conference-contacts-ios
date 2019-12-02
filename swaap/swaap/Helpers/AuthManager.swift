@@ -149,11 +149,13 @@ class AuthManager: NSObject {
 	}
 
 	func clearSession() {
+		keychain.deleteEntry(forKey: .signInWithAppleOptionToggleKey)
+		_ = credentialsManager.clear()
+		credentials = nil
+
 		Auth0.webAuth().clearSession(federated: false) { success in
 			print("Successful logout: \(success)")
 		}
-		_ = self.credentialsManager.clear()
-		keychain.deleteEntry(forKey: .signInWithAppleOptionToggleKey)
 	}
 
 	// MARK: - Utilities

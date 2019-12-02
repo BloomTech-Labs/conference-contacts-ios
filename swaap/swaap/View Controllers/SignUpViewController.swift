@@ -35,9 +35,10 @@ class SignUpViewController: UIViewController, AuthAccessor {
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
 		guard let (email, password) = checkFormValidity() else { return }
-		authManager?.signUp(with: email, password: password, completion: { error in
+		authManager?.signUp(with: email, password: password, completion: {  [weak self] error in
 			if let error = error {
-				NSLog("Show an alert with this error, stupid programmer: \(error)")
+				let alertVC = UIAlertController(error: error)
+				self?.present(alertVC, animated: true)
 			}
 		})
 

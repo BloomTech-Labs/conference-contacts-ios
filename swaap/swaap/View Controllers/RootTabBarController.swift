@@ -24,6 +24,8 @@ class RootTabBarController: UITabBarController {
 	init() {
 		super.init(nibName: nil, bundle: nil)
 
+		// FIXME: This line is currently here only for debugging. Can be removed.
+		contactsCoordinator.tempAuthManager = authManager
 		viewControllers = [contactsCoordinator.navigationController]
 		contactsCoordinator.start()
 
@@ -52,6 +54,10 @@ class RootTabBarController: UITabBarController {
 		}
 		// check if user is logged in, only run if logged out:
 		if authManager.credentials == nil {
+			// check to confirm that theres either no presented VC or if there is, it's not the auth screen (prevent multiple auth screen layers)
+			guard presentedViewController == nil ||
+				(presentedViewController != nil && presentedViewController != authCoordinator?.navigationController)
+				else { return }
 			let authCoordinator = AuthCoordinator(rootTabBarController: self, authManager: authManager)
 			self.authCoordinator = authCoordinator
 			authCoordinator.start()

@@ -10,6 +10,7 @@ import UIKit
 import AuthenticationServices
 import Auth0
 import SimpleKeychain
+import NetworkHandler
 
 class LogInViewController: UIViewController, AuthAccessor {
 
@@ -50,37 +51,40 @@ class LogInViewController: UIViewController, AuthAccessor {
 
 	// MARK: - IBActions
 	@objc private func handleSignInWithAppleIDButtonTap(_ sender: ASAuthorizationAppleIDButton?) {
-		authManager?.signInWithApple(completion: { error in
+		authManager?.signInWithApple(completion: { [weak self] error in
 			if let error = error {
-				NSLog("Show an alert with this error, stupid programmer: \(error)")
+				let alertVC = UIAlertController(error: error)
+				self?.present(alertVC, animated: true)
 				return
 			}
 			DispatchQueue.main.async {
-				self.navigationController?.dismiss(animated: true)
+				self?.navigationController?.dismiss(animated: true)
 			}
 		})
 	}
 
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
-		authManager?.showWebAuth(completion: { error in
+		authManager?.showWebAuth(completion: { [weak self] error in
 			if let error = error {
-				NSLog("Show an alert with this error, stupid programmer: \(error)")
+				let alertVC = UIAlertController(error: error)
+				self?.present(alertVC, animated: true)
 				return
 			}
 			DispatchQueue.main.async {
-				self.navigationController?.dismiss(animated: true)
+				self?.navigationController?.dismiss(animated: true)
 			}
 		})
 	}
 
 	@IBAction func signInTapped(_ sender: UIButton) {
-		authManager?.showWebAuth(completion: { error in
+		authManager?.showWebAuth(completion: { [weak self] error in
 			if let error = error {
-				NSLog("Show an alert with this error, stupid programmer: \(error)")
+				let alertVC = UIAlertController(error: error)
+				self?.present(alertVC, animated: true)
 				return
 			}
 			DispatchQueue.main.async {
-				self.navigationController?.dismiss(animated: true)
+				self?.navigationController?.dismiss(animated: true)
 			}
 		})
 	}
