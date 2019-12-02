@@ -87,5 +87,6 @@ identifier_name:
     - id
     - fm
     - nc
+    - vc
 cyclomatic_complexity:
   ignores_case_statements: true
