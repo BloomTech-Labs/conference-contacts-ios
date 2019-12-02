@@ -79,7 +79,7 @@ class SignUpViewController: UIViewController, AuthAccessor {
 	private func updatePasswordStrengthLabel() {
 		let passwordStrengthText = """
 			Password requirements:
-			• 8 Characters
+			• minimum of 8 Characters
 			• at least 1 lowercase
 			• at least 1 uppercase
 			• at least 1 symbol
@@ -93,7 +93,7 @@ class SignUpViewController: UIViewController, AuthAccessor {
 		if let password = passwordForm.text {
 			let color: UIColor = .systemTeal
 			if password.hasAtLeastXCharacters(8) {
-				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "8 Characters"))
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "minimum of 8 Characters"))
 			}
 
 			if password.hasALowercaseCharacter {
