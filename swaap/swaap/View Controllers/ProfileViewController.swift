@@ -11,12 +11,11 @@ import UIKit
 class ProfileViewController: UIViewController, Storyboarded {
 
 	@IBOutlet private weak var profileCardView: UIView!
-	@IBOutlet weak var visualFXView: UIVisualEffectView!
-	@IBOutlet weak var backButton: UIButton!
+	@IBOutlet private weak var visualFXView: UIVisualEffectView!
+	@IBOutlet private weak var backButton: UIButton!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		navigationController?.navigationBar.isHidden = true
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
@@ -25,6 +24,11 @@ class ProfileViewController: UIViewController, Storyboarded {
 		setupFXView()
 		updateViews()
     }
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.setNavigationBarHidden(true, animated: true)
+	}
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
@@ -38,7 +42,7 @@ class ProfileViewController: UIViewController, Storyboarded {
 	}
 
 	@IBAction func backbuttonTapped(_ sender: UIButton) {
-
+		navigationController?.popViewController(animated: true)
 	}
 
 	private func setupCardShadow() {
@@ -51,17 +55,17 @@ class ProfileViewController: UIViewController, Storyboarded {
 	private func setupFXView() {
 		visualFXView.layer.cornerRadius = visualFXView.frame.height / 2
 		visualFXView.clipsToBounds = true
-		visualFXView.effect = UIBlurEffect(style: .systemUltraThinMaterial)
 	}
 
 	private func updateViews() {
 		if let count = navigationController?.viewControllers.count, count > 1 {
 			visualFXView.isHidden = false
 		} else {
-//			visualFXView.isHidden = true
+			visualFXView.isHidden = true
 		}
 	}
 
+	// FIXME: FOR DEBUGGING
 	@IBAction func testButtonPressed(_ sender: UIButton) {
 		print("tested")
 	}

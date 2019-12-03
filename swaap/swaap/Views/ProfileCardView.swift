@@ -13,7 +13,6 @@ import ChevronAnimatable
 @IBDesignable
 class ProfileCardView: IBPreviewView {
 
-
 	@IBOutlet private var contentView: UIView!
 	@IBInspectable var imageCornerRadius: CGFloat = 12
 	@IBOutlet private weak var profileImageView: UIImageView!
@@ -22,7 +21,7 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var leftImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
 	// FIXME: - just for testing - remove
-	@IBOutlet weak var stackView: UIStackView!
+	@IBOutlet private weak var stackView: UIStackView!
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)

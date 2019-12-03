@@ -40,7 +40,9 @@ class SignUpViewController: UIViewController, AuthAccessor {
 				if let error = error {
 					let alertVC = UIAlertController(error: error)
 					self?.present(alertVC, animated: true)
+					return
 				}
+				self?.parent?.dismiss(animated: true)
 			}
 		})
 

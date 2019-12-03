@@ -52,26 +52,28 @@ class LogInViewController: UIViewController, AuthAccessor {
 	// MARK: - IBActions
 	@objc private func handleSignInWithAppleIDButtonTap(_ sender: ASAuthorizationAppleIDButton?) {
 		authManager?.signInWithApple(completion: { [weak self] error in
+			guard let self = self else { return }
 			if let error = error {
 				let alertVC = UIAlertController(error: error)
-				self?.present(alertVC, animated: true)
+				self.present(alertVC, animated: true)
 				return
 			}
 			DispatchQueue.main.async {
-				self?.navigationController?.dismiss(animated: true)
+				self.parent?.dismiss(animated: true)
 			}
 		})
 	}
 
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
 		authManager?.showWebAuth(completion: { [weak self] error in
+			guard let self = self else { return }
 			if let error = error {
 				let alertVC = UIAlertController(error: error)
-				self?.present(alertVC, animated: true)
+				self.present(alertVC, animated: true)
 				return
 			}
 			DispatchQueue.main.async {
-				self?.navigationController?.dismiss(animated: true)
+				self.parent?.dismiss(animated: true)
 			}
 		})
 	}
@@ -84,7 +86,7 @@ class LogInViewController: UIViewController, AuthAccessor {
 				return
 			}
 			DispatchQueue.main.async {
-				self?.navigationController?.dismiss(animated: true)
+				self?.parent?.dismiss(animated: true)
 			}
 		})
 	}
