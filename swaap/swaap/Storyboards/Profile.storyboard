@@ -51,15 +51,56 @@
                                 <rect key="frame" x="20" y="44" width="374" height="729"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8g-r6-4Ad">
+                                <rect key="frame" x="28" y="52" width="40" height="40"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JUL-tq-RVX">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zzd-hF-Nwt">
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="D4h-JI-19T">
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3e-MA-KKa">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" image="chevron.left" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="backbuttonTapped:" destination="j9t-B2-wS8" eventType="touchUpInside" id="Ece-y5-opg"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="G3e-MA-KKa" firstAttribute="top" secondItem="JUL-tq-RVX" secondAttribute="top" id="mLQ-4d-ih4"/>
+                                        <constraint firstItem="G3e-MA-KKa" firstAttribute="leading" secondItem="JUL-tq-RVX" secondAttribute="leading" id="nwT-kP-NLd"/>
+                                        <constraint firstAttribute="trailing" secondItem="G3e-MA-KKa" secondAttribute="trailing" id="q3f-0U-1Ff"/>
+                                        <constraint firstAttribute="bottom" secondItem="G3e-MA-KKa" secondAttribute="bottom" id="rZ3-Lj-UzU"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="e8g-r6-4Ad" secondAttribute="height" id="9ta-8A-wCd"/>
+                                    <constraint firstAttribute="width" constant="40" id="ukX-6M-ONV"/>
+                                </constraints>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="uVY-7s-0Rc" secondAttribute="trailing" constant="20" id="6Sl-1R-mkM"/>
                             <constraint firstItem="uVY-7s-0Rc" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" id="7Aj-MN-apA"/>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="uVY-7s-0Rc" secondAttribute="bottom" constant="40" id="7dD-mx-ibr"/>
+                            <constraint firstItem="e8g-r6-4Ad" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="B6B-uy-t7H"/>
                             <constraint firstItem="xjI-NE-xAX" firstAttribute="centerY" secondItem="UHq-o5-Toi" secondAttribute="centerY" id="Z2A-SZ-W2y"/>
                             <constraint firstItem="uVY-7s-0Rc" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="20" id="awe-CX-foi"/>
                             <constraint firstItem="xjI-NE-xAX" firstAttribute="centerX" secondItem="UHq-o5-Toi" secondAttribute="centerX" id="ewG-HL-C0F"/>
+                            <constraint firstItem="e8g-r6-4Ad" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" constant="8" id="uZ0-tE-AsH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
                     </view>
@@ -67,7 +108,9 @@
                     <navigationItem key="navigationItem" id="MUg-8U-P9S"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="G3e-MA-KKa" id="Usx-Bw-QZ7"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
+                        <outlet property="visualFXView" destination="e8g-r6-4Ad" id="Qwq-Xe-Hat"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bcr-xl-S0G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -77,5 +120,6 @@
     </scenes>
     <resources>
         <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="60"/>
+        <image name="chevron.left" catalog="system" width="48" height="64"/>
     </resources>
 </document>
