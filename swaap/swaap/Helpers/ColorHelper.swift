@@ -11,4 +11,14 @@ import UIKit
 extension UIColor {
 	static let swaapBackground = UIColor(named: "swaapBackground")!
 	static let swaapBackgroundTertiary = UIColor(named: "swaapBackgroundTertiary")!
+
+	// MARK: - Social Button Colors
+	static let socialButtonFacebookMain = UIColor(named: "socialButtonFacebookMain")!
+	static let socialButtonFacebookSecondary = UIColor(named: "socialButtonFacebookSecondary")!
+	static let socialButtonInstagramMain = UIColor(named: "socialButtonInstagramMain")!
+	static let socialButtonInstagramSecondary = UIColor(named: "socialButtonInstagramSecondary")!
+	static let socialButtonLinkedInMain = UIColor(named: "socialButtonLinkedInMain")!
+	static let socialButtonLinkedInSecondary = UIColor(named: "socialButtonLinkedInSecondary")!
+	static let socialButtonTwitterMain = UIColor(named: "socialButtonTwitterMain")!
+	static let socialButtonTwitterSecondary = UIColor(named: "socialButtonTwitterSecondary")!
 }
