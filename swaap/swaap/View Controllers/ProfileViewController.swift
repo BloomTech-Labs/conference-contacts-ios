@@ -11,6 +11,8 @@ import UIKit
 class ProfileViewController: UIViewController, Storyboarded {
 
 	@IBOutlet private weak var profileCardView: UIView!
+	@IBOutlet weak var visualFXView: UIVisualEffectView!
+	@IBOutlet weak var backButton: UIButton!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,7 @@ class ProfileViewController: UIViewController, Storyboarded {
 		profileCardView.layer.cornerCurve = .continuous
 
 		setupCardShadow()
+		setupFXView()
 		updateViews()
     }
 
@@ -34,6 +37,10 @@ class ProfileViewController: UIViewController, Storyboarded {
 		updateViews()
 	}
 
+	@IBAction func backbuttonTapped(_ sender: UIButton) {
+
+	}
+
 	private func setupCardShadow() {
 		profileCardView.layer.shadowPath = UIBezierPath(rect: profileCardView.bounds).cgPath
 		profileCardView.layer.shadowRadius = 14
@@ -41,8 +48,18 @@ class ProfileViewController: UIViewController, Storyboarded {
 		profileCardView.layer.shadowOpacity = 0.3
 	}
 
-	private func updateViews() {
+	private func setupFXView() {
+		visualFXView.layer.cornerRadius = visualFXView.frame.height / 2
+		visualFXView.clipsToBounds = true
+		visualFXView.effect = UIBlurEffect(style: .systemUltraThinMaterial)
+	}
 
+	private func updateViews() {
+		if let count = navigationController?.viewControllers.count, count > 1 {
+			visualFXView.isHidden = false
+		} else {
+//			visualFXView.isHidden = true
+		}
 	}
 
 	@IBAction func testButtonPressed(_ sender: UIButton) {

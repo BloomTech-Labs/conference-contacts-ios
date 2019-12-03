@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,7 +27,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="KOK-Ma-gRP">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320.00000000000011" height="320.00000000000011"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="KOK-Ma-gRP" secondAttribute="height" multiplier="1:1" id="hmL-Hp-jKW"/>
                     </constraints>
@@ -48,9 +47,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NX2-4T-Xk5">
-                    <rect key="frame" x="326.5" y="64" width="27.5" height="22"/>
+                    <rect key="frame" x="325" y="20" width="29" height="28"/>
                     <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" image="ellipsis" catalog="system">
+                    <state key="normal" image="pencil.circle" catalog="system">
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                     </state>
                 </button>
@@ -117,17 +116,16 @@
                 <constraint firstItem="f2w-0M-HYO" firstAttribute="leading" secondItem="KOK-Ma-gRP" secondAttribute="leading" constant="-80" id="9kr-EC-xf4"/>
                 <constraint firstItem="zVZ-0p-x4f" firstAttribute="centerX" secondItem="mIx-fE-GQb" secondAttribute="centerX" id="D5n-u2-wl8"/>
                 <constraint firstItem="zVZ-0p-x4f" firstAttribute="top" secondItem="HqP-mc-ziA" secondAttribute="bottom" constant="40" id="Du7-e6-K03"/>
-                <constraint firstItem="wru-5D-37G" firstAttribute="trailing" secondItem="NX2-4T-Xk5" secondAttribute="trailing" constant="20" id="EN1-Wv-lF2"/>
+                <constraint firstAttribute="trailing" secondItem="NX2-4T-Xk5" secondAttribute="trailing" constant="20" id="EN1-Wv-lF2"/>
                 <constraint firstItem="KOK-Ma-gRP" firstAttribute="top" secondItem="mIx-fE-GQb" secondAttribute="top" id="Ep7-BW-BBE"/>
                 <constraint firstItem="f2w-0M-HYO" firstAttribute="bottom" secondItem="KOK-Ma-gRP" secondAttribute="bottom" id="NEc-ng-mxR"/>
                 <constraint firstItem="cmC-BM-emx" firstAttribute="top" secondItem="zVZ-0p-x4f" secondAttribute="bottom" constant="8" id="OvL-hI-MBg"/>
                 <constraint firstItem="cmC-BM-emx" firstAttribute="centerX" secondItem="mIx-fE-GQb" secondAttribute="centerX" id="Wsm-Ws-EkB"/>
-                <constraint firstItem="NX2-4T-Xk5" firstAttribute="top" secondItem="wru-5D-37G" secondAttribute="top" constant="20" id="YQ0-oE-d41"/>
+                <constraint firstItem="NX2-4T-Xk5" firstAttribute="top" secondItem="mIx-fE-GQb" secondAttribute="top" constant="20" id="YQ0-oE-d41"/>
                 <constraint firstAttribute="leading" secondItem="KOK-Ma-gRP" secondAttribute="leading" id="awc-kW-wrf"/>
                 <constraint firstAttribute="bottom" secondItem="cmC-BM-emx" secondAttribute="bottom" constant="8" id="jtz-Gi-RAd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="wru-5D-37G"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="yLA-WI-VT9" appends="YES" id="cax-uc-OU4"/>
             </connections>
@@ -140,7 +138,7 @@
         </panGestureRecognizer>
     </objects>
     <resources>
-        <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="him" width="735" height="735"/>
+        <image name="pencil.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>
