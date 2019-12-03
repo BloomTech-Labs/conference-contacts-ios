@@ -13,7 +13,7 @@ protocol Storyboarded {
 }
 
 extension Storyboarded where Self: UIViewController {
-	static func instantiate(storyboardName name: String) -> Self {
+	static func instantiate(storyboardName name: String = "Main") -> Self {
         // this pulls out "MyApp.MyViewController"
         let fullName = NSStringFromClass(self)
 
@@ -24,6 +24,8 @@ extension Storyboarded where Self: UIViewController {
         let storyboard = UIStoryboard(name: name, bundle: Bundle.main)
 
         // instantiate a view controller with that identifier, and force cast as the type that was requested
-        return storyboard.instantiateViewController(withIdentifier: className) as! Self
+		guard let storyboardedVC = storyboard.instantiateViewController(withIdentifier: className) as? Self
+			else { fatalError("Storyboard \(name) has no view controller identified as \(className)") }
+		return storyboardedVC
     }
 }
