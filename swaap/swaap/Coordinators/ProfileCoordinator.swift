@@ -19,7 +19,7 @@ class ProfileCoordinator: Coordinator {
 
 	func start() {
 		guard let tempVC = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController() as? DummyViewController else { return }
-		tempVC.coordinator = self
+//		tempVC.coordinator = self
 //		let profileVC = ProfileViewController.instantiate(storyboardName: "Profile")
 //		navigationController.pushViewController(profileVC, animated: false)
 		navigationController.pushViewController(tempVC, animated: false)

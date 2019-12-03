@@ -69,5 +69,4 @@ class ProfileViewController: UIViewController, Storyboarded {
 	@IBAction func testButtonPressed(_ sender: UIButton) {
 		print("tested")
 	}
-
 }

@@ -21,6 +21,7 @@ class RootTabBarController: UITabBarController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		setupSecondTab()
 		credentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsChanged, object: nil, queue: nil) { [weak self] _ in
 			self?.runAuthCoordinator()
 		}
@@ -33,6 +34,23 @@ class RootTabBarController: UITabBarController {
 				self.runAuthCoordinator()
 			}
 		})
+	}
+
+	func setupSecondTab() {
+		let vc = UIViewController()
+		vc.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
+		let doneButton = UIButton(type: .system)
+		doneButton.setTitle("done", for: .normal)
+		doneButton.addTarget(self, action: #selector(testFunc), for: .touchUpInside)
+		vc.view.addSubview(doneButton)
+		doneButton.translatesAutoresizingMaskIntoConstraints = false
+		doneButton.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
+		doneButton.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
+		viewControllers?.append(vc)
+	}
+
+	@objc func testFunc() {
+		authManager.clearSession()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
