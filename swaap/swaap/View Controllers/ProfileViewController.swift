@@ -55,7 +55,6 @@ class ProfileViewController: UIViewController, Storyboarded {
 	private func setupFXView() {
 		visualFXView.layer.cornerRadius = visualFXView.frame.height / 2
 		visualFXView.clipsToBounds = true
-		visualFXView.effect = UIBlurEffect(style: .systemUltraThinMaterial)
 	}
 
 	private func updateViews() {

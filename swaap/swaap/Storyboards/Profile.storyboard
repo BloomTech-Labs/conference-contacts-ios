@@ -90,7 +90,7 @@
                                     <constraint firstAttribute="width" secondItem="e8g-r6-4Ad" secondAttribute="height" id="9ta-8A-wCd"/>
                                     <constraint firstAttribute="width" constant="40" id="ukX-6M-ONV"/>
                                 </constraints>
-                                <blurEffect style="regular"/>
+                                <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
