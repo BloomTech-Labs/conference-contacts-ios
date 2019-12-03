@@ -10,7 +10,15 @@ import UIKit
 
 class DummyViewController: UIViewController {
 
+	let authManager = AuthManager()
 	var coordinator: ProfileCoordinator?
+	var popRecognizer: InteractivePopRecognizer?
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		fixUINavigationBarHideAndUnhideWhenSwipingBackToPreviousUIViewControllerWhenPoppingTopViewControllerOnNavigationStack()
+	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -19,5 +27,16 @@ class DummyViewController: UIViewController {
 
 	@IBAction func buttonPressed(_ sender: UIButton) {
 		coordinator?.showThing()
+	}
+
+	#warning("Getting error in DummyVC in viewDidLoad. Wondering if I'm not instantiating it right")
+
+}
+
+extension DummyViewController {
+	func fixUINavigationBarHideAndUnhideWhenSwipingBackToPreviousUIViewControllerWhenPoppingTopViewControllerOnNavigationStack() {
+		guard let navigationController = self.navigationController else { return }
+		popRecognizer = InteractivePopRecognizer(controller: navigationController)
+		navigationController.interactivePopGestureRecognizer?.delegate = popRecognizer
 	}
 }
