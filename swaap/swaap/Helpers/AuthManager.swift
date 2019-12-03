@@ -168,6 +168,7 @@ class AuthManager: NSObject {
 			keychain.setString("false", forKey: .signInWithAppleOptionToggleKey)
 		}
 		_ = self.credentialsManager.store(credentials: credentials)
+		self.credentials = credentials
 	}
 }
 
