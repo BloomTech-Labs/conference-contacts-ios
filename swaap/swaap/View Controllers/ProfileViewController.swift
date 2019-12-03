@@ -13,6 +13,7 @@ class ProfileViewController: UIViewController, Storyboarded {
 	@IBOutlet private weak var profileCardView: UIView!
 	@IBOutlet weak var visualFXView: UIVisualEffectView!
 	@IBOutlet weak var backButton: UIButton!
+	var popRecognizer: InteractivePopRecognizer?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,5 +69,11 @@ class ProfileViewController: UIViewController, Storyboarded {
 
 	@IBAction func testButtonPressed(_ sender: UIButton) {
 		print("tested")
+	}
+
+	func fixUINavigationBarHideAndUnhideWhenSwipingBackToPreviousUIViewControllerWhenPoppingTopViewControllerOnNavigationStack() {
+		guard let navController = navigationController else { return }
+		popRecognizer = InteractivePopRecognizer(controller: navController)
+		navController.interactivePopGestureRecognizer?.delegate = popRecognizer
 	}
 }
