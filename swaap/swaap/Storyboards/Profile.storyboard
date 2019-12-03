@@ -54,7 +54,7 @@
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8g-r6-4Ad">
-                                <rect key="frame" x="28" y="52" width="40" height="40"/>
+                                <rect key="frame" x="28" y="96" width="40" height="40"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JUL-tq-RVX">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,10 +119,10 @@
             </objects>
             <point key="canvasLocation" x="1476.8115942028987" y="141.96428571428569"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Swipe Back Navigation Controller-->
         <scene sceneID="b2C-zT-j9B">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="urS-d0-w1z" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="urS-d0-w1z" customClass="SwipeBackNavigationController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ih8-Rv-qmG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
