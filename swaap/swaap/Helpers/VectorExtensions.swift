@@ -11,7 +11,7 @@ import CoreGraphics
 
 extension CGSize {
 	static func * (lhs: CGSize, rhs: CGFloat) -> CGSize {
-		return CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
+		CGSize(width: lhs.width * rhs, height: lhs.height * rhs)
 	}
 
 	var toPoint: CGPoint {
@@ -25,11 +25,11 @@ extension CGPoint {
 	}
 
 	func distance(to point: CGPoint) -> CGFloat {
-		return sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y))
+		sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y))
 	}
 
 	func distance(to point: CGPoint, isWithin value: CGFloat) -> Bool {
-		return (x - point.x) * (x - point.x) + (y - point.y) * (y - point.y) <= (value * value)
+		(x - point.x) * (x - point.x) + (y - point.y) * (y - point.y) <= (value * value)
 	}
 
 	/**
@@ -65,7 +65,7 @@ extension CGPoint {
 
 extension CGAffineTransform {
 	var offset: CGPoint {
-		return CGPoint(x: tx, y: ty)
+		CGPoint(x: tx, y: ty)
 	}
 }
 
@@ -75,7 +75,7 @@ extension CGVector {
 	}
 
 	static func * (lhs: CGVector, rhs: CGFloat) -> CGVector {
-		return CGVector(dx: lhs.dx * rhs, dy: lhs.dy * rhs)
+		CGVector(dx: lhs.dx * rhs, dy: lhs.dy * rhs)
 	}
 
 	var normalized: CGVector {

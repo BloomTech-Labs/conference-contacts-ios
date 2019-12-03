@@ -59,7 +59,7 @@ class LogInViewController: UIViewController, AuthAccessor {
 				return
 			}
 			DispatchQueue.main.async {
-				self.parent?.dismiss(animated: true, completion: nil)
+				self.parent?.dismiss(animated: true)
 			}
 		})
 	}
@@ -73,7 +73,7 @@ class LogInViewController: UIViewController, AuthAccessor {
 				return
 			}
 			DispatchQueue.main.async {
-				self.parent?.dismiss(animated: true, completion: nil)
+				self.parent?.dismiss(animated: true)
 			}
 		})
 	}
@@ -86,7 +86,7 @@ class LogInViewController: UIViewController, AuthAccessor {
 				return
 			}
 			DispatchQueue.main.async {
-				self?.parent?.dismiss(animated: true, completion: nil)
+				self?.parent?.dismiss(animated: true)
 			}
 		})
 	}
