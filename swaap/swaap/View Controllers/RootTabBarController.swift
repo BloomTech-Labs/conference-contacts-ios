@@ -17,7 +17,13 @@ class RootTabBarController: UITabBarController {
 	private var credentialObserver: NSObjectProtocol?
 
 	let contactsController = ContactsController()
-	var rootAuthVC: RootAuthViewController?
+	lazy var rootAuthVC: RootAuthViewController = {
+		let storyboard = UIStoryboard(name: "Login", bundle: nil)
+		let rootAuthVC = storyboard.instantiateViewController(identifier: "RootAuthViewController") { coder in
+			RootAuthViewController(coder: coder, authManager: self.authManager)
+		}
+		return rootAuthVC
+	}()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -61,22 +67,13 @@ class RootTabBarController: UITabBarController {
 	}
 
 	private func runAuthCoordinator() {
+		guard presentedViewController != rootAuthVC else { return }
 		if !authManager.credentialsCheckedFromLastSession {
 			authManager.credentialsLoading.wait()
 		}
 		// check if user is logged in, only run if logged out:
 		if authManager.credentials == nil {
 			// check to confirm that theres either no presented VC or if there is, it's not the auth screen (prevent multiple auth screen layers)
-			guard presentedViewController == nil ||
-				(presentedViewController != nil && presentedViewController != rootAuthVC)
-				else { return }
-
-			let storyboard = UIStoryboard(name: "Login", bundle: nil)
-
-			let rootAuthVC = storyboard.instantiateViewController(identifier: "RootAuthViewController") { coder in
-				RootAuthViewController(coder: coder, authManager: self.authManager)
-			}
-			self.rootAuthVC = rootAuthVC
 			rootAuthVC.modalPresentationStyle = .fullScreen
 			self.present(rootAuthVC, animated: true, completion: nil)
 		}
