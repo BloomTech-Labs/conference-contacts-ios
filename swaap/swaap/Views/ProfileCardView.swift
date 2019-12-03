@@ -13,7 +13,6 @@ import ChevronAnimatable
 @IBDesignable
 class ProfileCardView: IBPreviewView {
 
-
 	@IBOutlet private var contentView: UIView!
 	@IBInspectable var imageCornerRadius: CGFloat = 12
 	@IBOutlet private weak var profileImageView: UIImageView!
