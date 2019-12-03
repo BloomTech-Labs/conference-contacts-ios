@@ -66,6 +66,7 @@ class ProfileViewController: UIViewController, Storyboarded {
 		}
 	}
 
+	// FIXME: FOR DEBUGGING
 	@IBAction func testButtonPressed(_ sender: UIButton) {
 		print("tested")
 	}

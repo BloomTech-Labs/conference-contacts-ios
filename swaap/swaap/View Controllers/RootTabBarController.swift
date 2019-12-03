@@ -36,6 +36,7 @@ class RootTabBarController: UITabBarController {
 		})
 	}
 
+	// FIXME: FOR DEBUGGING
 	func setupSecondTab() {
 		let vc = UIViewController()
 		vc.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
@@ -49,6 +50,7 @@ class RootTabBarController: UITabBarController {
 		viewControllers?.append(vc)
 	}
 
+	// FIXME: FOR DEBUGGING
 	@objc func testFunc() {
 		authManager.clearSession()
 	}
