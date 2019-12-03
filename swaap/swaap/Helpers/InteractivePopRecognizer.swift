@@ -10,7 +10,7 @@ import UIKit
 
 class InteractivePopRecognizer: NSObject, UIGestureRecognizerDelegate {
 
-    var navigationController: UINavigationController
+    let navigationController: UINavigationController
 
     init(controller: UINavigationController) {
         self.navigationController = controller
