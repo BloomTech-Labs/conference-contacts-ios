@@ -94,7 +94,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         let alert = UIAlertController(title: "In order to use this feature, access to the camera is needed",
 									  message: "Please grant permission to use the Camera",
 									  preferredStyle: .alert )
-        alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel) { alert in
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel) { _ in
             if let appSettingsURL = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(appSettingsURL)
             }
@@ -104,11 +104,11 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 
 	// MARK: - Alert and Action Sheet
 	func presentInformationalAlertController(title: String?,
-													message: String?,
-													dismissActionCompletion: ((UIAlertAction) -> Void)? = nil, completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: dismissActionCompletion)
-        alertController.addAction(dismissAction)
+											 message: String?,
+											 dismissActionCompletion: ((UIAlertAction) -> Void)? = nil, completion: (() -> Void)? = nil) {
+		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: dismissActionCompletion)
+		alertController.addAction(dismissAction)
 		present(alertController, animated: true, completion: completion)
     }
 
