@@ -11,7 +11,8 @@ import UIKit
 class ProfileViewController: UIViewController, Storyboarded {
 
 	@IBOutlet private weak var profileCardView: UIView!
-	@IBOutlet private weak var visualFXView: UIVisualEffectView!
+	@IBOutlet private weak var backButtonVisualFXContainerView: UIVisualEffectView!
+	@IBOutlet private weak var editProfileButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var backButton: UIButton!
 
 	override func viewDidLoad() {
@@ -53,15 +54,17 @@ class ProfileViewController: UIViewController, Storyboarded {
 	}
 
 	private func setupFXView() {
-		visualFXView.layer.cornerRadius = visualFXView.frame.height / 2
-		visualFXView.clipsToBounds = true
+		backButtonVisualFXContainerView.layer.cornerRadius = backButtonVisualFXContainerView.frame.height / 2
+		backButtonVisualFXContainerView.clipsToBounds = true
+		editProfileButtonVisualFXContainerView.layer.cornerRadius = editProfileButtonVisualFXContainerView.frame.height / 2
+		editProfileButtonVisualFXContainerView.clipsToBounds = true
 	}
 
 	private func updateViews() {
 		if let count = navigationController?.viewControllers.count, count > 1 {
-			visualFXView.isHidden = false
+			backButtonVisualFXContainerView.isHidden = false
 		} else {
-			visualFXView.isHidden = true
+			backButtonVisualFXContainerView.isHidden = true
 		}
 	}
 
