@@ -35,7 +35,6 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         default:
             break
         }
-        presentImagePickerController()
     }
 
 	func requestCameraAccess() {
