@@ -12,9 +12,6 @@ import Photos
 class EditProfileViewController: UIViewController {
 
 	@IBOutlet private weak var scrollView: UIScrollView!
-	@IBOutlet private weak var saveAndCancelStackView: UIStackView!
-	@IBOutlet private weak var cancelButton: UIButton!
-	@IBOutlet private weak var saveButton: UIButton!
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var choosePhotoButton: UIButton!
 
@@ -22,6 +19,7 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(false, animated: false)
 		navigationController?.navigationBar.installBlurEffect()
+
 		setupUI()
     }
 
@@ -32,11 +30,12 @@ class EditProfileViewController: UIViewController {
 		profileImageView.layer.cornerCurve = .continuous
 	}
     
-	@IBAction func saveButtonTapped(_ sender: UIButton) {
+	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+
 	}
 
-	@IBAction func cancelButtonTapped(_ sender: UIButton) {
-
+	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+		dismiss(animated: true)
 	}
 
 	@IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
@@ -47,7 +46,7 @@ class EditProfileViewController: UIViewController {
 		picker.dismiss(animated: true)
 	}
 
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		picker.dismiss(animated: true)
 		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
 		profileImageView.image = image
