@@ -9,6 +9,10 @@
 import Foundation
 import NetworkHandler
 
+protocol ProfileAccessor: AnyObject {
+	var profileController: ProfileController? { get set }
+}
+
 class ProfileController {
 	let authManager: AuthManager
 
@@ -24,8 +28,11 @@ class ProfileController {
 		self.authManager = authManager
 	}
 
-	func createProfileOnServer() {
-		guard let idClaims = authManager.idClaims, let accessToken = authManager.credentials?.accessToken else { return }
+	func createProfileOnServer(completion: @escaping (Bool) -> Void) {
+		guard let idClaims = authManager.idClaims, let accessToken = authManager.credentials?.accessToken else {
+			completion(false)
+			return
+		}
 		var request = graphqlURL.request
 		request.addValue("application/json", forHTTPHeaderField: HTTPHeaderKeys.contentType.rawValue)
 		request.addValue(accessToken, forHTTPHeaderField: HTTPHeaderKeys.auth.rawValue)
@@ -40,18 +47,24 @@ class ProfileController {
 			request.httpBody = try JSONEncoder().encode(graphObject)
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
+			completion(false)
+			return
 		}
 
 		networkHandler.transferMahCodableDatas(with: request) { (result: Result<[String: [String: UserMutationResponse]], NetworkError>) in
 			do {
-				let success = try result.get()
-				print(success)
-			} catch NetworkError.otherError(let error) {
-				NSLog("Other error creating server profile: \(error)")
+				let responseDict = try result.get()
+				guard let userMutationResponse = responseDict["data"]?["createUser"] else {
+					completion(false)
+					return
+				}
+				completion(userMutationResponse.success)
 			} catch NetworkError.httpNon200StatusCode(let code, let data) {
 				NSLog("Error creating server profile with code: \(code): \(String(data: data!, encoding: .utf8)!)")
+				completion(false)
 			} catch {
 				NSLog("Error creating server profile: \(error)")
+				completion(false)
 			}
 		}
 	}

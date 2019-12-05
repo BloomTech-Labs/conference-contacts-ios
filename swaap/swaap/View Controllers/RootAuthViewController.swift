@@ -13,6 +13,7 @@ protocol RootAuthViewControllerDelegate: AnyObject {
 }
 
 class RootAuthViewController: UIViewController {
+	let profileController: ProfileController
 	let authManager: AuthManager
 
 	@IBOutlet private weak var scrollView: UIScrollView!
@@ -23,8 +24,9 @@ class RootAuthViewController: UIViewController {
 	let feedback = UIImpactFeedbackGenerator(style: .rigid)
 	weak var delegate: RootAuthViewControllerDelegate?
 
-	init?(coder: NSCoder, authManager: AuthManager) {
+	init?(coder: NSCoder, authManager: AuthManager, profileController: ProfileController) {
 		self.authManager = authManager
+		self.profileController = profileController
 		super.init(coder: coder)
 	}
 
@@ -40,12 +42,19 @@ class RootAuthViewController: UIViewController {
 		updateChevron()
 		feedback.prepare()
 
+		distributeControllers()
+	}
+
+	private func distributeControllers() {
 		children.forEach {
 			if let delegate = $0 as? RootAuthViewControllerDelegate {
 				self.delegate = delegate
 			}
 			if let authAccessor = $0 as? AuthAccessor {
 				authAccessor.authManager = authManager
+			}
+			if let profileAccess = $0 as? ProfileAccessor {
+				profileAccess.profileController = profileController
 			}
 		}
 	}
@@ -65,6 +74,13 @@ class RootAuthViewController: UIViewController {
 			chevron.pointHeight = normalizedCurrentValue
 		} else {
 			chevron.pointHeight = 1
+		}
+	}
+
+	override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+		super.dismiss(animated: flag, completion: completion)
+		profileController.createProfileOnServer { success in
+			print("created new backend profile: \(success)")
 		}
 	}
 

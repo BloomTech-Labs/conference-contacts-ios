@@ -8,11 +8,17 @@
 
 import UIKit
 
-class SwipeBackNavigationController: UINavigationController, AuthAccessor {
+class SwipeBackNavigationController: UINavigationController, AuthAccessor, ProfileAccessor {
 	var popRecognizer: InteractivePopRecognizer?
 	var authManager: AuthManager? {
 		didSet {
-			distributeAccessor()
+			distributeAuthAccessor()
+		}
+	}
+
+	var profileController: ProfileController? {
+		didSet {
+			distributeProfileAccessor()
 		}
 	}
 
@@ -26,10 +32,17 @@ class SwipeBackNavigationController: UINavigationController, AuthAccessor {
 		interactivePopGestureRecognizer?.delegate = popRecognizer
 	}
 
-	private func distributeAccessor() {
+	private func distributeAuthAccessor() {
 		guard let authManager = authManager else { return }
 		for case let authAccess as AuthAccessor in viewControllers {
 			authAccess.authManager = authManager
+		}
+	}
+
+	private func distributeProfileAccessor() {
+		guard let profileController = profileController else { return }
+		for case let profileAccess as ProfileAccessor in viewControllers {
+			profileAccess.profileController = profileController
 		}
 	}
 }
@@ -38,6 +51,9 @@ extension SwipeBackNavigationController: UINavigationControllerDelegate {
 	func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
 		if let authAccessor = viewController as? AuthAccessor {
 			authAccessor.authManager = authManager
+		}
+		if let profileAccess = viewController as? ProfileAccessor {
+			profileAccess.profileController = profileController
 		}
 	}
 }

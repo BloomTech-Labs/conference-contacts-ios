@@ -21,7 +21,7 @@ class RootTabBarController: UITabBarController {
 	lazy var rootAuthVC: RootAuthViewController = {
 		let storyboard = UIStoryboard(name: "Login", bundle: nil)
 		let rootAuthVC = storyboard.instantiateViewController(identifier: "RootAuthViewController") { coder in
-			RootAuthViewController(coder: coder, authManager: self.authManager)
+			RootAuthViewController(coder: coder, authManager: self.authManager, profileController: self.profileController)
 		}
 		return rootAuthVC
 	}()
