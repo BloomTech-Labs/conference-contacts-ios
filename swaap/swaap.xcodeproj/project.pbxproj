@@ -316,12 +316,12 @@
 			isa = PBXGroup;
 			children = (
 				3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */,
+				37F934372396EF3100ACBA23 /* SwipeBackNavigationController.swift */,
 				37A2F40A237CFEFE00C1EF3B /* RootAuthViewController.swift */,
 				37A2F41A237D23FF00C1EF3B /* LogInViewController.swift */,
 				33917DF323849A2400BC1501 /* SignUpViewController.swift */,
 				3797A56D23885E9C00CB8621 /* ProfileViewController.swift */,
 				33B24C592395B85C00B20DEA /* DummyViewController.swift */,
-				37F934372396EF3100ACBA23 /* SwipeBackNavigationController.swift */,
 				37F93449239736B000ACBA23 /* EditProfileViewController.swift */,
 				37F9344F2397399500ACBA23 /* EditProfileViewController+Camera.swift */,
 			);

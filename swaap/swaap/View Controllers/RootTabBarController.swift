@@ -25,6 +25,17 @@ class RootTabBarController: UITabBarController {
 		return rootAuthVC
 	}()
 
+	override var viewControllers: [UIViewController]? {
+		didSet {
+			updateViewControllers()
+		}
+	}
+
+	private func updateViewControllers() {
+		guard let vcs = viewControllers else { return }
+		vcs.forEach { ($0 as? AuthAccessor)?.authManager = authManager }
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupSecondTab()

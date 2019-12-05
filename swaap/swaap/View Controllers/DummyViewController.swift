@@ -9,9 +9,9 @@
 import UIKit
 
 // FIXME: FOR DEBUGGING
-class DummyViewController: UIViewController {
+class DummyViewController: UIViewController, AuthAccessor {
 
-	let authManager = AuthManager()
+	var authManager: AuthManager?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
