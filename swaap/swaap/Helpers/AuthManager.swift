@@ -62,7 +62,7 @@ class AuthManager: NSObject {
 
 	// MARK: - Auth Methods (The Guts)
 	func showWebAuth(completion: @escaping AuthCallbackHandler) {
-		Auth0.webAuth().scope("openid profile").audience("https://api.swaap.co/").start { result in
+		Auth0.webAuth().scope("openid profile email").audience("https://api.swaap.co/").start { result in
 			switch result {
 			case .success(let credentials):
 				self.storeCredentials(appleID: nil, credentials: credentials)
@@ -184,15 +184,27 @@ extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControl
 		NSLog("Authorization failed: \(error)")
 	}
 
+	enum SignInWithAppleError: Error {
+		case noAIDAuthCredential
+		case authCodeIssue(authCode: Data?)
+	}
 	func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-		guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-		guard let authCodeData = appleIDCredential.authorizationCode,
-			let authCode = String(data: authCodeData, encoding: .utf8) else {
-			NSLog("Problem with Auth Code: \(appleIDCredential.authorizationCode as Any)")
+		guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+			signInWithAppleCallbackHandler?(SignInWithAppleError.noAIDAuthCredential)
 			return
 		}
 
-		Auth0.authentication().tokenExchange(withAppleAuthorizationCode: authCode).start { result in
+		guard let authCodeData = appleIDCredential.authorizationCode,
+			let authCode = String(data: authCodeData, encoding: .utf8) else {
+				NSLog("Problem with Auth Code: \(appleIDCredential.authorizationCode as Any)")
+				signInWithAppleCallbackHandler?(SignInWithAppleError.authCodeIssue(authCode: appleIDCredential.authorizationCode))
+				return
+		}
+
+		Auth0.authentication().tokenExchange(withAppleAuthorizationCode: authCode,
+											 scope: "openid profile email",
+											 audience: "https://api.swaap.co/",
+											 fullName: appleIDCredential.fullName).start { result in
 			switch result {
 			case .success(let credentials):
 				print("Auth0 success: \(credentials)")
