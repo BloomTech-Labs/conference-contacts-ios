@@ -33,6 +33,12 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
+	var smallButton: Bool = false {
+		didSet {
+			mainColorBackgroundView.isHidden = smallButton
+		}
+	}
+
 	var socialPlatform: (socialPlatform: SocialPlatform, info: String) = (.twitter, "@marlonjames") {
 		didSet {
 			updateSocialPlatformType()
