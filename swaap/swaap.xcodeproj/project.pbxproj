@@ -54,6 +54,11 @@
 		37F934382396EF3100ACBA23 /* SwipeBackNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934372396EF3100ACBA23 /* SwipeBackNavigationController.swift */; };
 		37F9344A239736B000ACBA23 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F93449239736B000ACBA23 /* EditProfileViewController.swift */; };
 		37F934502397399500ACBA23 /* EditProfileViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9344F2397399500ACBA23 /* EditProfileViewController+Camera.swift */; };
+		37F9345423985FD000ACBA23 /* FloatingTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */; };
+		37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934552398716300ACBA23 /* FloatingTextFieldView.swift */; };
+		37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934572398941400ACBA23 /* InputTextFieldViewController.swift */; };
+		37F9345A2398C72500ACBA23 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */; };
+		37F9345C2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9345B2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +179,11 @@
 		37F934372396EF3100ACBA23 /* SwipeBackNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeBackNavigationController.swift; sourceTree = "<group>"; };
 		37F93449239736B000ACBA23 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		37F9344F2397399500ACBA23 /* EditProfileViewController+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditProfileViewController+Camera.swift"; sourceTree = "<group>"; };
+		37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FloatingTextFieldView.xib; sourceTree = "<group>"; };
+		37F934552398716300ACBA23 /* FloatingTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextFieldView.swift; sourceTree = "<group>"; };
+		37F934572398941400ACBA23 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldViewController.swift; sourceTree = "<group>"; };
+		37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
+		37F9345B2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSocialButtonSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +229,7 @@
 				375CBF242391EB6700C3D50A /* HapticFeedback.swift */,
 				3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */,
 				3797A56F2388637800CB8621 /* Storyboarded.swift */,
+				37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -312,6 +323,7 @@
 				37F934372396EF3100ACBA23 /* SwipeBackNavigationController.swift */,
 				37F93449239736B000ACBA23 /* EditProfileViewController.swift */,
 				37F9344F2397399500ACBA23 /* EditProfileViewController+Camera.swift */,
+				37F934572398941400ACBA23 /* InputTextFieldViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -351,6 +363,9 @@
 				37B3B713238F7EFE00FB9CFA /* SocialButton.xib */,
 				37B3B70D238F50D700FB9CFA /* SocialButton.swift */,
 				37A2F41C237D543B00C1EF3B /* ButtonHelper.swift */,
+				37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */,
+				37F934552398716300ACBA23 /* FloatingTextFieldView.swift */,
+				37F9345B2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -546,6 +561,7 @@
 				37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */,
 				37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
+				37F9345423985FD000ACBA23 /* FloatingTextFieldView.xib in Resources */,
 				37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */,
 				37A185AB237A3579002191B5 /* Main.storyboard in Resources */,
 				37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */,
@@ -640,12 +656,15 @@
 				33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
+				37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */,
 				3797A56E23885E9C00CB8621 /* ProfileViewController.swift in Sources */,
+				37F9345A2398C72500ACBA23 /* NavigationControllerExtension.swift in Sources */,
 				33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */,
 				37218B03238FA161008BFC24 /* FontHelper.swift in Sources */,
 				3797A57223887F1500CB8621 /* ProfileCardView.swift in Sources */,
 				37F934382396EF3100ACBA23 /* SwipeBackNavigationController.swift in Sources */,
 				37F934502397399500ACBA23 /* EditProfileViewController+Camera.swift in Sources */,
+				37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */,
 				33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */,
 				335A520B23910C5100FA5623 /* RangeExtensions.swift in Sources */,
 				3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */,
@@ -659,6 +678,7 @@
 				37A2F41D237D543B00C1EF3B /* ButtonHelper.swift in Sources */,
 				37B3B70E238F50D700FB9CFA /* SocialButton.swift in Sources */,
 				37F9344A239736B000ACBA23 /* EditProfileViewController.swift in Sources */,
+				37F9345C2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift in Sources */,
 				37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
