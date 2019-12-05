@@ -85,7 +85,7 @@
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HqP-mc-ziA">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HqP-mc-ziA">
                     <rect key="frame" x="112" y="783" width="150" height="35"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PDZ-A6-llf" customClass="SocialButton" customModule="swaap" customModuleProvider="target">
