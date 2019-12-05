@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Validation
 extension String {
     public var isEmail: Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
@@ -44,5 +45,26 @@ extension String {
 		let lcSelf = lowercased()
 
 		return (lcSelf.contains(alias) || lcSelf.contains(domain))
+	}
+}
+
+// MARK: - Base64 Coding
+extension String {
+	/// Meant to be used when the string is alread Base64 encoded data
+	var toBase64URL: String {
+		replacingOccurrences(of: "+", with: "-")
+		.replacingOccurrences(of: "/", with: "_")
+		.replacingOccurrences(of: "=", with: "")
+	}
+
+	/// Meant to be used when the string is Base64URL encoded data
+	var toBase64: String {
+		var base64 = replacingOccurrences(of: "-", with: "+")
+			.replacingOccurrences(of: "_", with: "/")
+		if !base64.count.isMultiple(of: 4) {
+			let padding = String(repeating: "=", count: 4 - base64.count % 4)
+			base64 += padding
+		}
+		return base64
 	}
 }

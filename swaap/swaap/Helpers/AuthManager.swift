@@ -169,6 +169,21 @@ class AuthManager: NSObject {
 		}
 		_ = self.credentialsManager.store(credentials: credentials)
 		self.credentials = credentials
+		decodeJWT()
+	}
+
+	// FIXME: Kinda using for debug, but will need for real at some point.
+	private func decodeJWT() {
+		guard let accessToken = credentials?.accessToken, let idToken = credentials?.idToken else { return }
+		do {
+			let decoder = JSONDecoder()
+			decoder.dateDecodingStrategy = .secondsSince1970
+			decoder.keyDecodingStrategy = .convertFromSnakeCase
+			let idClaims = try decoder.decode(Auth0IDClaims.self, fromJWT: idToken)
+			print(idClaims)
+		} catch {
+			print("failed: \(error)")
+		}
 	}
 }
 

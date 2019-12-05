@@ -21,6 +21,8 @@
 		33F0EA5823985556004D1236 /* ProfileDecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5723985556004D1236 /* ProfileDecodingError.swift */; };
 		33F0EA5A2398556A004D1236 /* ProfileFieldPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */; };
 		33F0EA5C23986832004D1236 /* ProfileUserGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5B23986832004D1236 /* ProfileUserGender.swift */; };
+		33F0EA61239872A0004D1236 /* Auth0Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA60239872A0004D1236 /* Auth0Claims.swift */; };
+		33F0EA6623988C98004D1236 /* JSONDecoder+JWTDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA6523988C98004D1236 /* JSONDecoder+JWTDecoding.swift */; };
 		33FEE0C923836AC3006BE880 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0C823836AC3006BE880 /* Auth0.plist */; };
 		33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0CE23837D8D006BE880 /* GradientView.swift */; };
 		33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0D123838ADD006BE880 /* ColorHelper.swift */; };
@@ -137,6 +139,8 @@
 		33F0EA5723985556004D1236 /* ProfileDecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDecodingError.swift; sourceTree = "<group>"; };
 		33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFieldPrivacy.swift; sourceTree = "<group>"; };
 		33F0EA5B23986832004D1236 /* ProfileUserGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserGender.swift; sourceTree = "<group>"; };
+		33F0EA60239872A0004D1236 /* Auth0Claims.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth0Claims.swift; sourceTree = "<group>"; };
+		33F0EA6523988C98004D1236 /* JSONDecoder+JWTDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+JWTDecoding.swift"; sourceTree = "<group>"; };
 		33FEE0C823836AC3006BE880 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		33FEE0CE23837D8D006BE880 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		33FEE0D123838ADD006BE880 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				3797A56123874DF000CB8621 /* AuthManager.swift */,
 				33FEE0D123838ADD006BE880 /* ColorHelper.swift */,
 				3797A55C238603A400CB8621 /* String+Extensions.swift */,
+				33F0EA6523988C98004D1236 /* JSONDecoder+JWTDecoding.swift */,
 				37218AFC238F8750008BFC24 /* ImageHelper.swift */,
 				37218B02238FA161008BFC24 /* FontHelper.swift */,
 				33C00787238FDDEC000D72A7 /* VectorExtensions.swift */,
@@ -376,6 +381,7 @@
 				33F0EA552398551B004D1236 /* ProfileFieldType.swift */,
 				33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */,
 				33F0EA5B23986832004D1236 /* ProfileUserGender.swift */,
+				33F0EA60239872A0004D1236 /* Auth0Claims.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -429,6 +435,8 @@
 			dependencies = (
 			);
 			name = swaap;
+			packageProductDependencies = (
+			);
 			productName = swaap;
 			productReference = 37A185A0237A3579002191B5 /* swaap.app */;
 			productType = "com.apple.product-type.application";
@@ -501,6 +509,8 @@
 				Base,
 			);
 			mainGroup = 37A18597237A3579002191B5;
+			packageReferences = (
+			);
 			productRefGroup = 37A185A1237A3579002191B5 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -659,6 +669,7 @@
 				33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
+				33F0EA61239872A0004D1236 /* Auth0Claims.swift in Sources */,
 				3797A56E23885E9C00CB8621 /* ProfileViewController.swift in Sources */,
 				33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */,
 				37218B03238FA161008BFC24 /* FontHelper.swift in Sources */,
@@ -684,6 +695,7 @@
 				37B3B70E238F50D700FB9CFA /* SocialButton.swift in Sources */,
 				37F9344A239736B000ACBA23 /* EditProfileViewController.swift in Sources */,
 				37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */,
+				33F0EA6623988C98004D1236 /* JSONDecoder+JWTDecoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
