@@ -59,6 +59,7 @@
 		37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934572398941400ACBA23 /* InputTextFieldViewController.swift */; };
 		37F9345A2398C72500ACBA23 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */; };
 		37F9345C2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9345B2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift */; };
+		37F93460239902CF00ACBA23 /* SmallSocialButtonSelectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F9345F239902CF00ACBA23 /* SmallSocialButtonSelectorView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +185,7 @@
 		37F934572398941400ACBA23 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldViewController.swift; sourceTree = "<group>"; };
 		37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		37F9345B2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSocialButtonSelectorView.swift; sourceTree = "<group>"; };
+		37F9345F239902CF00ACBA23 /* SmallSocialButtonSelectorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallSocialButtonSelectorView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,6 +368,7 @@
 				37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */,
 				37F934552398716300ACBA23 /* FloatingTextFieldView.swift */,
 				37F9345B2399004D00ACBA23 /* SmallSocialButtonSelectorView.swift */,
+				37F9345F239902CF00ACBA23 /* SmallSocialButtonSelectorView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3797A56A2388596900CB8621 /* ProfileCardView.xib in Resources */,
+				37F93460239902CF00ACBA23 /* SmallSocialButtonSelectorView.xib in Resources */,
 				37A185F2237A43D5002191B5 /* Profile.storyboard in Resources */,
 				33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */,
 				37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */,
