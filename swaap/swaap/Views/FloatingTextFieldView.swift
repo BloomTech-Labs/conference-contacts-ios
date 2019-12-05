@@ -15,8 +15,11 @@ class FloatingTextFieldView: IBPreviewView {
 	@IBOutlet weak var textField: UITextField!
 	@IBOutlet private weak var socialButton: SocialButton!
 	@IBOutlet private weak var separator: UIView!
+	@IBOutlet private weak var horizontalSeparator: UIView!
 	/// "@" symbol ("aapstert" means monkey tail in Afrikaans)
 	@IBOutlet private weak var aapstertSymbol: UILabel!
+	@IBOutlet private weak var cancelButton: ButtonHelper!
+	@IBOutlet private weak var saveButton: ButtonHelper!
 
 	var socialType: SocialButton.SocialPlatform = .email {
 		didSet {
@@ -52,25 +55,9 @@ class FloatingTextFieldView: IBPreviewView {
 
 		socialButton.smallButton = true
 		socialButton.socialPlatform = (socialType, "")
-
-		setupToolBar()
+		horizontalSeparator.backgroundColor = .systemGray5
 
 		self.backgroundColor = .clear
-
-	}
-
-	private func setupToolBar() {
-		let toolbar: UIToolbar = UIToolbar(frame: .zero)
-		let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-		flexSpace.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
-		let cancelButton = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(hideKeyboardAction))
-		let saveButton = UIBarButtonItem(image: UIImage(systemName: "checkmark.circle"), style: .done, target: self, action: #selector(hideKeyboardAction))
-		saveButton.tintColor = .gradientBackgroundColorBlueOne
-		cancelButton.tintColor = .gradientBackgroundColorBlueOne
-		toolbar.setItems([cancelButton, flexSpace, saveButton], animated: false)
-		toolbar.sizeToFit()
-		textField.inputAccessoryView = toolbar
-		toolbar.backgroundColor = .systemBackground
 	}
 
 	@objc func hideKeyboardAction() {
