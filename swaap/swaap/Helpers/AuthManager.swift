@@ -37,6 +37,9 @@ class AuthManager: NSObject {
 	}
 	private(set) var credentialsCheckedFromLastSession = false
 	let credentialsLoading = DispatchSemaphore(value: 0)
+	var idClaims: Auth0IDClaims? {
+		getIDClaims()
+	}
 
 	// MARK: - Lifecycle
 	override init() {
@@ -184,6 +187,19 @@ class AuthManager: NSObject {
 		} catch {
 			print("failed: \(error)")
 		}
+	}
+
+	private func getIDClaims() -> Auth0IDClaims? {
+		guard let idToken = credentials?.idToken else { return nil }
+		do {
+			let decoder = JSONDecoder()
+			decoder.dateDecodingStrategy = .secondsSince1970
+			decoder.keyDecodingStrategy = .convertFromSnakeCase
+			return try decoder.decode(Auth0IDClaims.self, fromJWT: idToken)
+		} catch {
+			print("failed getting ID Claims: \(error)")
+		}
+		return nil
 	}
 }
 

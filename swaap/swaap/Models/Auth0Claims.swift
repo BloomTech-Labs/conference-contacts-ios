@@ -12,6 +12,7 @@ struct Auth0IDClaims: Codable {
 	let nickname: String
 	let name: String
 	let email: String
+	let sub: String
 	// some auth methods provide a string "true/false" and others provide a true boolean. not worth fixing unless we actually need it
 //	let emailVerified: Bool
 	let picture: URL?
