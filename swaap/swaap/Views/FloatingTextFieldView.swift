@@ -12,7 +12,7 @@ import IBPreview
 class FloatingTextFieldView: IBPreviewView {
 	
 	@IBOutlet private var contentView: UIView!
-	@IBOutlet weak var textField: UITextField!
+	@IBOutlet private weak var textField: UITextField!
 	@IBOutlet private weak var socialButton: SocialButton!
 	@IBOutlet private weak var separator: UIView!
 	@IBOutlet private weak var horizontalSeparator: UIView!
@@ -93,5 +93,17 @@ class FloatingTextFieldView: IBPreviewView {
 				self.aapstertSymbol.isHidden = false
 			}
 		}
+	}
+
+	func setupFirstResponder() {
+		textField.becomeFirstResponder()
+	}
+
+	@IBAction func cancelTapped(_ sender: ButtonHelper) {
+
+	}
+
+	@IBAction func saveTapped(_ sender: ButtonHelper) {
+
 	}
 }

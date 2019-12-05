@@ -12,14 +12,13 @@ class InputTextFieldViewController: UIViewController {
 
 	@IBOutlet private weak var floatingTextFieldView: FloatingTextFieldView!
 	@IBOutlet private weak var floatingViewBottomAnchor: NSLayoutConstraint!
-	@IBOutlet private weak var socialButtonSelectorView: SmallSocialButtonSelectorView!
 
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-		floatingTextFieldView.textField.becomeFirstResponder()
+		floatingTextFieldView.setupFirstResponder()
     }
 
 	@objc func keyboardWillShow(notification: NSNotification) {

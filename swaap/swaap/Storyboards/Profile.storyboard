@@ -328,21 +328,11 @@
                                     <constraint firstAttribute="height" constant="119" placeholder="YES" id="y0u-Wr-Sxq"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwr-2J-liE" customClass="SmallSocialButtonSelectorView" customModule="swaap" customModuleProvider="target">
-                                <rect key="frame" x="294" y="-42" width="65" height="309"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="B5e-bT-gyj"/>
-                                    <constraint firstAttribute="height" constant="309" id="Hc0-pc-geX"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="BEE-EU-7ve" firstAttribute="top" secondItem="lwr-2J-liE" secondAttribute="bottom" constant="8" placeholder="YES" id="Ep0-cf-tc3"/>
                             <constraint firstItem="BEE-EU-7ve" firstAttribute="leading" secondItem="tiq-ad-gBI" secondAttribute="leading" id="Y9M-n5-26r"/>
-                            <constraint firstItem="tiq-ad-gBI" firstAttribute="trailing" secondItem="lwr-2J-liE" secondAttribute="trailing" constant="16" placeholder="YES" id="dyt-d2-5Td"/>
                             <constraint firstAttribute="bottom" secondItem="BEE-EU-7ve" secondAttribute="bottom" constant="418" id="s43-ye-CoV"/>
                             <constraint firstItem="BEE-EU-7ve" firstAttribute="trailing" secondItem="tiq-ad-gBI" secondAttribute="trailing" id="w4Y-as-csz"/>
                         </constraints>
@@ -352,7 +342,6 @@
                     <connections>
                         <outlet property="floatingTextFieldView" destination="BEE-EU-7ve" id="Idu-Hp-SQG"/>
                         <outlet property="floatingViewBottomAnchor" destination="s43-ye-CoV" id="UyT-nP-XGu"/>
-                        <outlet property="socialButtonSelectorView" destination="lwr-2J-liE" id="r6K-AI-ggU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ceD-vZ-zou" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
