@@ -12,6 +12,7 @@ class InputTextFieldViewController: UIViewController {
 
 	@IBOutlet private weak var floatingTextFieldView: FloatingTextFieldView!
 	@IBOutlet private weak var floatingViewBottomAnchor: NSLayoutConstraint!
+	@IBOutlet private weak var socialButtonSelectorView: SmallSocialButtonSelectorView!
 
 
 	override func viewDidLoad() {
