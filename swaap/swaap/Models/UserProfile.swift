@@ -19,3 +19,10 @@ struct UserProfile: Codable {
 	let jobtitle: String?
 	let bio: String?
 }
+
+struct CreateUser: Codable {
+	let sub: String
+	let name: String
+	let picture: URL?
+	let email: String
+}

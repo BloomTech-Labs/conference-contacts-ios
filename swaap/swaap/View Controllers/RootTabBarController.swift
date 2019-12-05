@@ -9,13 +9,14 @@
 import UIKit
 
 class RootTabBarController: UITabBarController {
-	let authManager = AuthManager()
+	let authManager: AuthManager
 
 	/// property observer (cannot present a view when its parent isn't part of the view hierarchy, so we need to watch
 	/// for when the parent is in the hierarchy
 	private var windowObserver: NSKeyValueObservation?
 	private var credentialObserver: NSObjectProtocol?
 
+	let profileController: ProfileController
 	let contactsController = ContactsController()
 	lazy var rootAuthVC: RootAuthViewController = {
 		let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -24,6 +25,18 @@ class RootTabBarController: UITabBarController {
 		}
 		return rootAuthVC
 	}()
+
+	@available (*, unavailable)
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		fatalError("nib name etc not supported")
+	}
+
+	required init?(coder: NSCoder) {
+		let authManager = AuthManager()
+		self.authManager = authManager
+		self.profileController = ProfileController(authManager: authManager)
+		super.init(coder: coder)
+	}
 
 	override var viewControllers: [UIViewController]? {
 		didSet {
