@@ -18,4 +18,8 @@ struct Auth0IDClaims: Codable {
 	let picture: URL?
 	let iat: Date
 	let exp: Date
+
+	var authID: String {
+		return String(sub.split(separator: "|")[1])
+	}
 }
