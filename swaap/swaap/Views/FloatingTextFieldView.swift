@@ -9,22 +9,23 @@
 import UIKit
 import IBPreview
 
-class FloatingTextFieldView: IBPreviewView {
+class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollectionViewDataSource {
 	
 	@IBOutlet private var contentView: UIView!
 	@IBOutlet private weak var textField: UITextField!
 	@IBOutlet private weak var socialButton: SocialButton!
+	@IBOutlet private weak var plusButton: UIButton!
 	@IBOutlet private weak var separator: UIView!
 	@IBOutlet private weak var horizontalSeparator: UIView!
 	/// "@" symbol ("aapstert" means monkey tail in Afrikaans)
 	@IBOutlet private weak var aapstertSymbol: UILabel!
 	@IBOutlet private weak var cancelButton: ButtonHelper!
 	@IBOutlet private weak var saveButton: ButtonHelper!
+	@IBOutlet private weak var collectionView: UICollectionView!
 
-	var socialType: SocialButton.SocialPlatform = .email {
+	var socialType: SocialButton.SocialPlatform? {
 		didSet {
-			socialButton.socialPlatform = (socialType, "")
-			shouldShowAtSymbol()
+			updateViews()
 		}
 	}
 
@@ -54,8 +55,18 @@ class FloatingTextFieldView: IBPreviewView {
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
 		socialButton.smallButton = true
-		socialButton.socialPlatform = (socialType, "")
+//		socialButton.socialPlatform = (socialType, "")
 		horizontalSeparator.backgroundColor = .systemGray5
+
+		aapstertSymbol.isHidden = true
+		collectionView.isHidden = true
+		socialButton.isHidden = true
+		saveButton.isEnabled = false
+		saveButton.alpha = 0.6
+
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		collectionView.register(SocialButtonCollectionViewCell.self, forCellWithReuseIdentifier: "SocialButtonCell")
 
 		self.backgroundColor = .clear
 	}
@@ -65,32 +76,67 @@ class FloatingTextFieldView: IBPreviewView {
 	}
 
 	private func shouldShowAtSymbol() {
+		guard let socialType = socialType else {
+			showHideAtSymbol(false)
+			return
+		}
+
+		switch socialType {
+		case .instagram, .twitter:
+			showHideAtSymbol(true)
+		default:
+			showHideAtSymbol(false)
+		}
+	}
+
+	private func formatTextField() {
+		guard let socialType = socialType else { return }
 		switch socialType {
 		case .email:
-			showHideAtSymbol(false)
+			textField.placeholder = "add email"
+			changeKeyboard(type: .emailAddress)
 		case .facebook:
-			showHideAtSymbol(true)
+			textField.placeholder = "add your Facebook username"
+			changeKeyboard(type: .default)
 		case .instagram:
-			showHideAtSymbol(true)
+			textField.placeholder = "add your Instagram username"
+			changeKeyboard(type: .default)
 		case .linkedIn:
-			showHideAtSymbol(false)
+			textField.placeholder = "add your LinkedIn username"
+			changeKeyboard(type: .default)
 		case .phone:
-			showHideAtSymbol(false)
+			textField.placeholder = "add a phone number"
+			changeKeyboard(type: .numberPad)
 		case .text:
-			showHideAtSymbol(false)
+			textField.placeholder = "add a phone number"
+			changeKeyboard(type: .numbersAndPunctuation)
 		case .twitter:
-			showHideAtSymbol(true)
+			textField.placeholder = "add your Twitter handle"
+			changeKeyboard(type: .twitter)
 		}
+	}
+
+	lazy var dummyTextField: UITextField = {
+		let dummyTextField = UITextField()
+		superview?.addSubview(dummyTextField)
+		dummyTextField.isHidden = true
+		return dummyTextField
+	}()
+
+	private func changeKeyboard(type: UIKeyboardType) {
+		dummyTextField.becomeFirstResponder()
+		textField.keyboardType = type
+		textField.becomeFirstResponder()
 	}
 
 	private func showHideAtSymbol(_ shouldShowSymbol: Bool) {
 		if shouldShowSymbol {
 			UIView.animate(withDuration: 0.3) {
-				self.aapstertSymbol.isHidden = true
-			}
-		} else {
-			UIView.animate(withDuration: 0.3) {
 				self.aapstertSymbol.isHidden = false
+			}
+		} else if !shouldShowSymbol {
+			UIView.animate(withDuration: 0.3) {
+				self.aapstertSymbol.isHidden = true
 			}
 		}
 	}
@@ -103,11 +149,77 @@ class FloatingTextFieldView: IBPreviewView {
 		textField.resignFirstResponder()
 	}
 
-	@IBAction func cancelTapped(_ sender: ButtonHelper) {
+	@IBAction func textFieldDidChange(_ sender: UITextField) {
+		if textField.text?.isEmpty == false {
+			saveButton.isEnabled = true
+			saveButton.alpha = 1
+		} else {
+			saveButton.isEnabled = false
+			saveButton.alpha = 0.6
+		}
+	}
 
+	@IBAction func cancelTapped(_ sender: ButtonHelper) {
+		fireFirstResponder()
 	}
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
 
+	}
+
+	@IBAction func addChangeSocialButton(_ sender: UIControl) {
+		shouldShowCollectionView(!collectionView.isVisible)
+	}
+
+	private func shouldShowCollectionView(_ show: Bool) {
+		UIView.animate(withDuration: 0.3) {
+			self.collectionView.isVisible = show
+			self.collectionView.superview?.layoutSubviews()
+		}
+		let image: UIImage?
+		if self.collectionView.isVisible {
+			image = UIImage(systemName: "minus.square.fill")
+		} else {
+			image = UIImage(systemName: "plus.app.fill")
+		}
+		plusButton.setImage(image, for: .normal)
+	}
+
+	// MARK: - CollectionView Methods
+
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
+
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return SocialButton.SocialPlatform.allCases.count
+	}
+
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialButtonCell",
+														for: indexPath) as? SocialButtonCollectionViewCell else { return UICollectionViewCell() }
+
+		cell.socialButtonType = SocialButton.SocialPlatform.allCases[indexPath.item]
+		cell.socialButton.addTarget(self, action: #selector(didSelectSocialButton(_:)), for: .touchUpInside)
+		return cell
+	}
+
+
+	@objc func didSelectSocialButton(_ sender: SocialButton) {
+		socialType = sender.socialPlatform.socialPlatform
+		shouldShowCollectionView(false)
+	}
+
+	private func updateViews() {
+		shouldShowAtSymbol()
+		formatTextField()
+		if let socialType = socialType {
+			socialButton.isVisible = true
+			socialButton.socialPlatform.socialPlatform = socialType
+		} else {
+			socialButton.isVisible = false
+		}
+		plusButton.isVisible = !socialButton.isVisible
+		plusButton.isEnabled = plusButton.isVisible
 	}
 }
