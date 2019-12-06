@@ -95,8 +95,12 @@ class FloatingTextFieldView: IBPreviewView {
 		}
 	}
 
-	func setupFirstResponder() {
+	func makeFirstResponder() {
 		textField.becomeFirstResponder()
+	}
+
+	func fireFirstResponder() {
+		textField.resignFirstResponder()
 	}
 
 	@IBAction func cancelTapped(_ sender: ButtonHelper) {
