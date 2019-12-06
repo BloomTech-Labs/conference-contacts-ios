@@ -17,6 +17,8 @@
 		33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C00787238FDDEC000D72A7 /* VectorExtensions.swift */; };
 		33CCBABA2398F21200A98C82 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBAB92398F21200A98C82 /* ProfileController.swift */; };
 		33CCBABC2398F3C200A98C82 /* GQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBABB2398F3C200A98C82 /* GQuery.swift */; };
+		33CCBAD92399B56C00A98C82 /* NetworkHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */; };
+		33CCBADA2399B56C00A98C82 /* NetworkHandler.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33F0EA4E23984D6A004D1236 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA4D23984D6A004D1236 /* UserProfile.swift */; };
 		33F0EA5423984FDB004D1236 /* ProfileNugget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5323984FDB004D1236 /* ProfileNugget.swift */; };
 		33F0EA562398551B004D1236 /* ProfileFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA552398551B004D1236 /* ProfileFieldType.swift */; };
@@ -48,7 +50,6 @@
 		37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185AE237A357C002191B5 /* LaunchScreen.storyboard */; };
 		37A185BB237A357C002191B5 /* swaapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185BA237A357C002191B5 /* swaapTests.swift */; };
 		37A185C6237A357C002191B5 /* swaapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185C5237A357C002191B5 /* swaapUITests.swift */; };
-		37A185E8237A40B8002191B5 /* NetworkHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E6237A40B8002191B5 /* NetworkHandler.framework */; };
 		37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */; };
 		37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */; };
 		37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */; };
@@ -67,6 +68,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		33CCBAC42399B40A00A98C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 335D7D27229F4ABA005D5A20;
+			remoteInfo = "NetworkHandler-iOS";
+		};
+		33CCBAC62399B40A00A98C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 335D7D30229F4ABB005D5A20;
+			remoteInfo = "NetworkHandlerTests-iOS";
+		};
+		33CCBAC82399B40A00A98C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33C92E992357F8350061B0F8;
+			remoteInfo = "NetworkHandler-MacOS";
+		};
+		33CCBACA2399B40A00A98C82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33C92EA12357F8350061B0F8;
+			remoteInfo = "NetworkHandler-MacOSTests";
+		};
 		33FEE0DB2384656A006BE880 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */;
@@ -118,6 +147,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				33CCBADA2399B56C00A98C82 /* NetworkHandler.framework in Embed Frameworks */,
 				33FEE0E02384657D006BE880 /* IBPreview.framework in Embed Frameworks */,
 				37A2F418237CFF5E00C1EF3B /* ChevronAnimatable.framework in Embed Frameworks */,
 			);
@@ -137,6 +167,7 @@
 		33C00787238FDDEC000D72A7 /* VectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorExtensions.swift; sourceTree = "<group>"; };
 		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		33CCBABB2398F3C200A98C82 /* GQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQuery.swift; sourceTree = "<group>"; };
+		33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NetworkHandler.xcodeproj; path = Carthage/Checkouts/NetworkHandler/NetworkHandler.xcodeproj; sourceTree = "<group>"; };
 		33F0EA4D23984D6A004D1236 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		33F0EA5323984FDB004D1236 /* ProfileNugget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNugget.swift; sourceTree = "<group>"; };
 		33F0EA552398551B004D1236 /* ProfileFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFieldType.swift; sourceTree = "<group>"; };
@@ -178,7 +209,6 @@
 		37A185DD237A3997002191B5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		37A185E1237A3B76002191B5 /* output.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = output.xcfilelist; sourceTree = "<group>"; };
 		37A185E3237A3BCF002191B5 /* input.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
-		37A185E6237A40B8002191B5 /* NetworkHandler.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkHandler.framework; path = Carthage/Build/iOS/NetworkHandler.framework; sourceTree = "<group>"; };
 		37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyAcknowledgements.framework; path = Carthage/Build/iOS/SwiftyAcknowledgements.framework; sourceTree = "<group>"; };
 		37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardOne.storyboard; sourceTree = "<group>"; };
 		37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardTwo.storyboard; sourceTree = "<group>"; };
@@ -204,8 +234,8 @@
 				33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
 				37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */,
-				37A185E8237A40B8002191B5 /* NetworkHandler.framework in Frameworks */,
 				33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */,
+				33CCBAD92399B56C00A98C82 /* NetworkHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +272,17 @@
 				3797A56F2388637800CB8621 /* Storyboarded.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		33CCBABE2399B40A00A98C82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */,
+				33CCBAC72399B40A00A98C82 /* NetworkHandlerTests-iOS.xctest */,
+				33CCBAC92399B40A00A98C82 /* NetworkHandler.framework */,
+				33CCBACB2399B40A00A98C82 /* NetworkHandler-MacOSTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		33FEE0D72384656A006BE880 /* Products */ = {
@@ -406,7 +447,7 @@
 				33917DF92384C3B000BC1501 /* Auth0.framework */,
 				37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */,
 				33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */,
-				37A185E6237A40B8002191B5 /* NetworkHandler.framework */,
+				33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */,
 				37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */,
 			);
 			name = Frameworks;
@@ -528,6 +569,10 @@
 					ProductGroup = 33FEE0D72384656A006BE880 /* Products */;
 					ProjectRef = 33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */;
 				},
+				{
+					ProductGroup = 33CCBABE2399B40A00A98C82 /* Products */;
+					ProjectRef = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -539,6 +584,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NetworkHandler.framework;
+			remoteRef = 33CCBAC42399B40A00A98C82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		33CCBAC72399B40A00A98C82 /* NetworkHandlerTests-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "NetworkHandlerTests-iOS.xctest";
+			remoteRef = 33CCBAC62399B40A00A98C82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		33CCBAC92399B40A00A98C82 /* NetworkHandler.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NetworkHandler.framework;
+			remoteRef = 33CCBAC82399B40A00A98C82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		33CCBACB2399B40A00A98C82 /* NetworkHandler-MacOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "NetworkHandler-MacOSTests.xctest";
+			remoteRef = 33CCBACA2399B40A00A98C82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		33FEE0DC2384656A006BE880 /* IBPreview.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -880,7 +953,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D6VB3396MT;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
