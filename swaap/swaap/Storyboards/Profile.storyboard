@@ -163,7 +163,7 @@
             </objects>
             <point key="canvasLocation" x="1159" y="142"/>
         </scene>
-        <!--Edit Profile View Controller-->
+        <!--Edit Profile-->
         <scene sceneID="3YY-f6-Jp1">
             <objects>
                 <viewController id="QhS-Jn-uwM" customClass="EditProfileViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
@@ -175,7 +175,7 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="702"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0hM-cf-eNF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="497.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="628.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cC-yU-gWy">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -189,6 +189,7 @@
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pqy-Vz-bUe">
                                                         <rect key="frame" x="27.333333333333343" y="0.0" width="320.33333333333326" height="320.66666666666669"/>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="pqy-Vz-bUe" secondAttribute="height" multiplier="1:1" id="OaT-Yw-bhM"/>
                                                         </constraints>
@@ -197,7 +198,7 @@
                                                         <rect key="frame" x="35.333333333333343" y="8" width="304.33333333333326" height="304.66666666666669"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                         <color key="tintColor" name="Swaap Background Color Burple"/>
-                                                        <state key="normal" image="camera" catalog="system">
+                                                        <state key="normal" image="camera.fill" catalog="system">
                                                             <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="medium"/>
                                                         </state>
@@ -225,43 +226,93 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3QS-WX-1LM">
-                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="104.66666666666669"/>
+                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="236.00000000000006"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-lc-wax">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="42.333333333333336"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-lc-wax">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Links" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3e-gB-N38">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYc-Qv-gnK">
-                                                                <rect key="frame" x="0.0" y="20.333333333333314" width="375" height="22"/>
-                                                                <state key="normal" title="Add Social Link" image="plus.circle.fill" catalog="system">
-                                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <segue destination="UwA-CL-fsQ" kind="presentation" modalPresentationStyle="overFullScreen" id="lC7-AH-W7a"/>
-                                                                </connections>
-                                                            </button>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGM-Ty-cAK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOCIAL LINKS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3e-gB-N38">
+                                                                        <rect key="frame" x="8" y="8" width="359" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="W3e-gB-N38" firstAttribute="leading" secondItem="lGM-Ty-cAK" secondAttribute="leading" constant="8" id="35M-2B-oV6"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="W3e-gB-N38" secondAttribute="bottom" constant="8" id="TRF-SP-Vwb"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="W3e-gB-N38" secondAttribute="trailing" constant="8" id="Xk4-c5-buw"/>
+                                                                    <constraint firstItem="W3e-gB-N38" firstAttribute="top" secondItem="lGM-Ty-cAK" secondAttribute="top" constant="8" id="mvN-tK-OrL"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N26-29-to7">
+                                                                <rect key="frame" x="0.0" y="58" width="375" height="50"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYc-Qv-gnK">
+                                                                        <rect key="frame" x="16" y="7.9999999999999432" width="351" height="34"/>
+                                                                        <color key="tintColor" name="Swaap Background Color Burple"/>
+                                                                        <state key="normal" title="Add Social Link" image="plus.circle.fill" catalog="system">
+                                                                            <color key="titleColor" name="Swaap Secondary Background Color Burple"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" modalPresentationStyle="overFullScreen" id="lC7-AH-W7a"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="oYc-Qv-gnK" firstAttribute="top" secondItem="N26-29-to7" secondAttribute="top" constant="8" id="BRG-Hw-urR"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="oYc-Qv-gnK" secondAttribute="trailing" constant="8" id="ayl-h0-Hec"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="oYc-Qv-gnK" secondAttribute="bottom" constant="8" id="gzW-Sk-9jh"/>
+                                                                    <constraint firstItem="oYc-Qv-gnK" firstAttribute="leading" secondItem="N26-29-to7" secondAttribute="leading" constant="16" id="tJw-u4-tMo"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vrl-bM-Uxu">
-                                                        <rect key="frame" x="0.0" y="62.333333333333314" width="375" height="42.333333333333343"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vrl-bM-Uxu">
+                                                        <rect key="frame" x="0.0" y="127.99999999999994" width="375" height="108"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2P9-Gf-Gt6">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQM-iv-Nwr">
-                                                                <rect key="frame" x="0.0" y="20.333333333333371" width="375" height="22"/>
-                                                                <state key="normal" title="Add Social Link" image="plus.circle.fill" catalog="system">
-                                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                            </button>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQV-I5-l6q">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DIRECT CONTACT MODES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2P9-Gf-Gt6">
+                                                                        <rect key="frame" x="8" y="8" width="359" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="2P9-Gf-Gt6" secondAttribute="bottom" constant="8" id="CHe-1m-4v6"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="2P9-Gf-Gt6" secondAttribute="trailing" constant="8" id="S59-GN-x3C"/>
+                                                                    <constraint firstItem="2P9-Gf-Gt6" firstAttribute="leading" secondItem="kQV-I5-l6q" secondAttribute="leading" constant="8" id="f48-gZ-SvM"/>
+                                                                    <constraint firstItem="2P9-Gf-Gt6" firstAttribute="top" secondItem="kQV-I5-l6q" secondAttribute="top" constant="8" id="hrk-yA-owW"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDP-Tv-7m0">
+                                                                <rect key="frame" x="0.0" y="58" width="375" height="50"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qQM-iv-Nwr">
+                                                                        <rect key="frame" x="16" y="8" width="351" height="34"/>
+                                                                        <color key="tintColor" name="Swaap Background Color Burple"/>
+                                                                        <state key="normal" title="Add Direct Contact" image="plus.circle.fill" catalog="system">
+                                                                            <color key="titleColor" name="Swaap Secondary Background Color Burple"/>
+                                                                        </state>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="qQM-iv-Nwr" secondAttribute="bottom" constant="8" id="FKa-pH-eni"/>
+                                                                    <constraint firstItem="qQM-iv-Nwr" firstAttribute="top" secondItem="hDP-Tv-7m0" secondAttribute="top" constant="8" id="Ww2-Ao-zb4"/>
+                                                                    <constraint firstItem="qQM-iv-Nwr" firstAttribute="leading" secondItem="hDP-Tv-7m0" secondAttribute="leading" constant="16" id="gJw-0Z-Mdf"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="qQM-iv-Nwr" secondAttribute="trailing" constant="8" id="wex-uY-rPD"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -291,27 +342,31 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3o5-nS-Hl2"/>
                     </view>
-                    <navigationItem key="navigationItem" id="I9s-o1-cWI">
+                    <navigationItem key="navigationItem" title="Edit Profile" id="I9s-o1-cWI">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="multiply" catalog="system" id="Sv7-xP-wZ5">
+                            <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="QhS-Jn-uwM" id="t6b-ya-ptF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="snU-lT-kDu">
+                            <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                             <connections>
                                 <action selector="saveButtonTapped:" destination="QhS-Jn-uwM" id="obg-o9-ogC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="Sv7-xP-wZ5" id="ARI-jh-RXa"/>
                         <outlet property="choosePhotoButton" destination="zpB-BT-vnW" id="pgY-hH-fTI"/>
                         <outlet property="profileImageView" destination="pqy-Vz-bUe" id="G2J-gC-tTb"/>
+                        <outlet property="saveButton" destination="snU-lT-kDu" id="v2m-BX-rBa"/>
                         <outlet property="scrollView" destination="l2P-KH-EKX" id="LSN-NH-C6f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-n7-5Bs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2572" y="142"/>
+            <point key="canvasLocation" x="2572" y="141.87192118226602"/>
         </scene>
         <!--Input Text Field View Controller-->
         <scene sceneID="ZJq-D7-hay">
@@ -397,13 +452,16 @@
     </scenes>
     <resources>
         <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="60"/>
-        <image name="camera" catalog="system" width="64" height="48"/>
+        <image name="camera.fill" catalog="system" width="64" height="48"/>
         <image name="chevron.left" catalog="system" width="48" height="64"/>
         <image name="multiply" catalog="system" width="64" height="54"/>
         <image name="pencil" catalog="system" width="64" height="56"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <namedColor name="Swaap Background Color Burple">
             <color red="0.23000000417232513" green="0.30000001192092896" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Swaap Secondary Background Color Burple">
+            <color red="0.62000000476837158" green="0.27000001072883606" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

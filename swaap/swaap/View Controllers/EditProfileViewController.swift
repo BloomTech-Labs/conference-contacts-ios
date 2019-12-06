@@ -11,6 +11,8 @@ import Photos
 
 class EditProfileViewController: UIViewController {
 
+	@IBOutlet private weak var cancelButton: UIBarButtonItem!
+	@IBOutlet private weak var saveButton: UIBarButtonItem!
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var choosePhotoButton: UIButton!
@@ -47,9 +49,9 @@ class EditProfileViewController: UIViewController {
 	}
 
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-		picker.dismiss(animated: true)
 		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
 		profileImageView.image = image
 		choosePhotoButton.setImage(nil, for: .normal)
+		picker.dismiss(animated: true)
 	}
 }
