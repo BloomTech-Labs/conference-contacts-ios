@@ -16,10 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evD-mI-al0">
-                                <rect key="frame" x="318" y="502" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evD-mI-al0">
+                                <rect key="frame" x="119.66666666666669" y="732" width="175" height="30"/>
+                                <state key="normal" title="Show Profile/Print Tokens"/>
                                 <connections>
                                     <action selector="buttonPressed:" destination="cbb-Ra-eaB" eventType="touchUpInside" id="5UI-L8-aVp"/>
                                     <segue destination="j9t-B2-wS8" kind="show" id="8en-5M-PBU"/>
@@ -27,6 +26,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wpC-Uo-Pdj" firstAttribute="bottom" secondItem="evD-mI-al0" secondAttribute="bottom" constant="100" id="EV1-RC-VbZ"/>
+                            <constraint firstItem="evD-mI-al0" firstAttribute="centerX" secondItem="Jxz-wk-fyn" secondAttribute="centerX" id="IHT-Aa-ov6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="wpC-Uo-Pdj"/>
                     </view>
                     <navigationItem key="navigationItem" id="6ld-lD-gdO"/>

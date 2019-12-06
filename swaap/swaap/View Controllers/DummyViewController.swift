@@ -27,6 +27,12 @@ class DummyViewController: UIViewController, AuthAccessor {
 	}
 
 	@IBAction func buttonPressed(_ sender: UIButton) {
+		if let id = authManager?.credentials?.idToken {
+			print("id: '\(id)'")
+		}
 
+		if let access = authManager?.credentials?.accessToken {
+			print("access: '\(access)'")
+		}
 	}
 }
