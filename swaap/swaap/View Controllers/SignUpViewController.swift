@@ -42,7 +42,8 @@ class SignUpViewController: UIViewController, AuthAccessor {
 					self?.present(alertVC, animated: true)
 					return
 				}
-				self?.parent?.dismiss(animated: true)
+				// FIXME: Probably don't dismiss unless we automatically log the user in
+//				self?.parent?.dismiss(animated: true)
 			}
 		})
 
