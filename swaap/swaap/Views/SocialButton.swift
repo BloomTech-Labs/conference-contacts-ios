@@ -168,35 +168,25 @@ class SocialButton: IBPreviewControl {
 
 	override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
 		animateDepress()
-		sendActions(for: .touchDown)
 		return true
 	}
 
 	override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-		let location = touch.location(in: self)
-		if bounds.contains(location) {
-			sendActions(for: .touchDragInside)
-			if !isDepressed { animateDepress() }
+		if isTracking {
+			animateDepress()
 		} else {
-			sendActions(for: .touchDragOutside)
-			if isDepressed { animateRelease() }
+			animateRelease()
 		}
 		return true
 	}
 
 	override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
 		animateRelease()
-		guard let touch = touch else { return }
-		let location = touch.location(in: self)
-		if bounds.contains(location) {
-			sendActions(for: .touchUpInside)
-		} else {
-			sendActions(for: .touchUpOutside)
-		}
+		super.endTracking(touch, with: event)
 	}
 
 	override func cancelTracking(with event: UIEvent?) {
 		animateRelease()
-		sendActions(for: .touchCancel)
+		super.cancelTracking(with: event)
 	}
 }
