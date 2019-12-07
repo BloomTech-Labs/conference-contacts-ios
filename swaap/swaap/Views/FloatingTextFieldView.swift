@@ -10,14 +10,14 @@ import UIKit
 import IBPreview
 
 class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollectionViewDataSource {
-	
+
+	// MARK: - Outlets & Properties
 	@IBOutlet private var contentView: UIView!
 	@IBOutlet private weak var textField: UITextField!
 	@IBOutlet private weak var socialButton: SocialButton!
 	@IBOutlet private weak var plusButton: UIButton!
 	@IBOutlet private weak var separator: UIView!
 	@IBOutlet private weak var horizontalSeparator: UIView!
-	/// "@" symbol ("aapstert" means monkey tail in Afrikaans)
 	@IBOutlet private weak var aapstertSymbol: UILabel!
 	@IBOutlet private weak var cancelButton: ButtonHelper!
 	@IBOutlet private weak var saveButton: ButtonHelper!
@@ -29,6 +29,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		}
 	}
 
+	// MARK: - Init
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		commonInit()
@@ -54,8 +55,6 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
-		socialButton.smallButton = true
-//		socialButton.socialPlatform = (socialType, "")
 		horizontalSeparator.backgroundColor = .systemGray5
 
 		aapstertSymbol.isHidden = true
@@ -63,6 +62,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		socialButton.isHidden = true
 		saveButton.isEnabled = false
 		saveButton.alpha = 0.6
+		socialButton.smallButton = true
 
 		collectionView.delegate = self
 		collectionView.dataSource = self
@@ -75,44 +75,32 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		textField.resignFirstResponder()
 	}
 
-	private func shouldShowAtSymbol() {
-		guard let socialType = socialType else {
-			showHideAtSymbol(false)
-			return
-		}
-
-		switch socialType {
-		case .instagram, .twitter:
-			showHideAtSymbol(true)
-		default:
-			showHideAtSymbol(false)
-		}
-	}
+	// MARK: - Textfield Formatting
 
 	private func formatTextField() {
 		guard let socialType = socialType else { return }
 		switch socialType {
 		case .email:
-			textField.placeholder = "add email"
-			changeKeyboard(type: .emailAddress)
+			textField.placeholder = "add an email address"
+			changeKeyboard(type: .emailAddress, dummyTextField: dummyTextField)
 		case .facebook:
 			textField.placeholder = "add your Facebook username"
-			changeKeyboard(type: .default)
+			changeKeyboard(type: .default, dummyTextField: dummyTextField)
 		case .instagram:
 			textField.placeholder = "add your Instagram username"
-			changeKeyboard(type: .default)
+			changeKeyboard(type: .default, dummyTextField: dummyTextField)
 		case .linkedIn:
 			textField.placeholder = "add your LinkedIn username"
-			changeKeyboard(type: .default)
+			changeKeyboard(type: .default, dummyTextField: dummyTextField)
 		case .phone:
 			textField.placeholder = "add a phone number"
-			changeKeyboard(type: .numberPad)
+			changeKeyboard(type: .numberPad, dummyTextField: dummyTextFieldWithNumPad)
 		case .text:
 			textField.placeholder = "add a phone number"
-			changeKeyboard(type: .numbersAndPunctuation)
+			changeKeyboard(type: .numberPad, dummyTextField: dummyTextFieldWithNumPad)
 		case .twitter:
 			textField.placeholder = "add your Twitter handle"
-			changeKeyboard(type: .twitter)
+			changeKeyboard(type: .twitter, dummyTextField: dummyTextField)
 		}
 	}
 
@@ -123,32 +111,22 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		return dummyTextField
 	}()
 
-	private func changeKeyboard(type: UIKeyboardType) {
+	lazy var dummyTextFieldWithNumPad: UITextField = {
+		let dummyTextField = UITextField()
+		superview?.addSubview(dummyTextField)
+		dummyTextField.keyboardType = .numberPad
+		dummyTextField.isHidden = true
+		return dummyTextField
+	}()
+
+	private func changeKeyboard(type: UIKeyboardType, dummyTextField: UITextField) {
 		dummyTextField.becomeFirstResponder()
 		textField.keyboardType = type
 		textField.becomeFirstResponder()
 	}
 
-	private func showHideAtSymbol(_ shouldShowSymbol: Bool) {
-		if shouldShowSymbol {
-			UIView.animate(withDuration: 0.3) {
-				self.aapstertSymbol.isHidden = false
-			}
-		} else if !shouldShowSymbol {
-			UIView.animate(withDuration: 0.3) {
-				self.aapstertSymbol.isHidden = true
-			}
-		}
-	}
 
-	func makeFirstResponder() {
-		textField.becomeFirstResponder()
-	}
-
-	func fireFirstResponder() {
-		textField.resignFirstResponder()
-	}
-
+	// MARK: - IBActions
 	@IBAction func textFieldDidChange(_ sender: UITextField) {
 		if textField.text?.isEmpty == false {
 			saveButton.isEnabled = true
@@ -171,6 +149,55 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		shouldShowCollectionView(!collectionView.isVisible)
 	}
 
+
+	// MARK: - Helper Methods
+	private func updateViews() {
+		shouldShowAtSymbol()
+		formatTextField()
+		if let socialType = socialType {
+			socialButton.isVisible = true
+			socialButton.socialPlatform.socialPlatform = socialType
+		} else {
+			socialButton.isVisible = false
+		}
+		plusButton.isVisible = !socialButton.isVisible
+		plusButton.isEnabled = plusButton.isVisible
+	}
+
+	func makeFirstResponder() {
+		textField.becomeFirstResponder()
+	}
+
+	func fireFirstResponder() {
+		textField.resignFirstResponder()
+	}
+
+	private func shouldShowAtSymbol() {
+		guard let socialType = socialType else {
+			showAtSymbol(false)
+			return
+		}
+
+		switch socialType {
+		case .instagram, .twitter:
+			showAtSymbol(true)
+		default:
+			showAtSymbol(false)
+		}
+	}
+
+	private func showAtSymbol(_ shouldShowSymbol: Bool) {
+		if shouldShowSymbol {
+			UIView.animate(withDuration: 0.3) {
+				self.aapstertSymbol.isVisible = true
+			}
+		} else {
+			UIView.animate(withDuration: 0.3) {
+				self.aapstertSymbol.isVisible = false
+			}
+		}
+	}
+
 	private func shouldShowCollectionView(_ show: Bool) {
 		UIView.animate(withDuration: 0.3) {
 			self.collectionView.isVisible = show
@@ -184,6 +211,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		}
 		plusButton.setImage(image, for: .normal)
 	}
+
 
 	// MARK: - CollectionView Methods
 
@@ -208,18 +236,5 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	@objc func didSelectSocialButton(_ sender: SocialButton) {
 		socialType = sender.socialPlatform.socialPlatform
 		shouldShowCollectionView(false)
-	}
-
-	private func updateViews() {
-		shouldShowAtSymbol()
-		formatTextField()
-		if let socialType = socialType {
-			socialButton.isVisible = true
-			socialButton.socialPlatform.socialPlatform = socialType
-		} else {
-			socialButton.isVisible = false
-		}
-		plusButton.isVisible = !socialButton.isVisible
-		plusButton.isEnabled = plusButton.isVisible
 	}
 }
