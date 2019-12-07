@@ -164,12 +164,30 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		plusButton.isEnabled = plusButton.isVisible
 	}
 
-	func makeFirstResponder() {
-		textField.becomeFirstResponder()
+	func makeFirstResponder(_ needsSocialTextField: Bool, _ placeholderText: String, labelText: String?) {
+		if needsSocialTextField {
+			textField.becomeFirstResponder()
+		} else {
+			hideAllSocialElements()
+			textField.placeholder = placeholderText
+			if let text = labelText {
+				textField.text = text
+			} else {
+				textField.text = ""
+			}
+			textField.becomeFirstResponder()
+		}
 	}
 
 	func fireFirstResponder() {
 		textField.resignFirstResponder()
+	}
+
+	private func hideAllSocialElements() {
+		showAtSymbol(false)
+		plusButton.isHidden = true
+		socialButton.isHidden = true
+		separator.isHidden = true
 	}
 
 	private func shouldShowAtSymbol() {

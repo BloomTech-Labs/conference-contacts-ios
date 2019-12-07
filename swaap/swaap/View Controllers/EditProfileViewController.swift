@@ -16,18 +16,18 @@ class EditProfileViewController: UIViewController {
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var choosePhotoButton: UIButton!
+	@IBOutlet private weak var nameLabel: UILabel!
+	@IBOutlet private weak var locationLabel: UILabel!
+	@IBOutlet private weak var industryLabel: UILabel!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(false, animated: false)
 		navigationController?.navigationBar.installBlurEffect()
-
 		setupUI()
     }
 
 	private func setupUI() {
-		profileImageView.layer.borderColor = UIColor.systemGray5.cgColor
-		profileImageView.layer.borderWidth = 1.5
 		profileImageView.layer.cornerRadius = 20
 		profileImageView.layer.cornerCurve = .continuous
 	}
@@ -53,5 +53,43 @@ class EditProfileViewController: UIViewController {
 		profileImageView.image = image
 		choosePhotoButton.setImage(nil, for: .normal)
 		picker.dismiss(animated: true)
+	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard let inputVC = segue.destination as? InputTextFieldViewController else { return }
+		switch segue.identifier {
+		case "AddSocialLink":
+			inputVC.needsSocialTextField = true
+		case "AddLocationSegue":
+			inputVC.needsSocialTextField = false
+			inputVC.placeholderStr = "name of city"
+			inputVC.labelText = passLabelText(from: locationLabel)
+		case "AddNameSegue":
+			inputVC.needsSocialTextField = false
+			inputVC.placeholderStr = "enter your name"
+			inputVC.labelText = passLabelText(from: nameLabel)
+		case "AddIndustrySegue":
+			inputVC.needsSocialTextField = false
+			inputVC.placeholderStr = "add what industry you're in"
+			inputVC.labelText = passLabelText(from: industryLabel)
+		default:
+			break
+		}
+	}
+
+	// MARK: - Helper Methods
+	private func passLabelText(from label: UILabel) -> String? {
+		if let text = label.text {
+			if labelHasDescriptionText(with: text) {
+				return nil
+			} else {
+				return text
+			}
+		}
+		return nil
+	}
+
+	private func labelHasDescriptionText(with text: String) -> Bool {
+		return text.contains("Tap to add")
 	}
 }
