@@ -9,6 +9,10 @@
 import UIKit
 import IBPreview
 
+protocol FloatingTextFieldViewDelegate: AnyObject {
+	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: SocialLink)
+}
+
 class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollectionViewDataSource {
 
 	// MARK: - Outlets & Properties
@@ -28,6 +32,8 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 			updateViews()
 		}
 	}
+
+	weak var  delegate: FloatingTextFieldViewDelegate?
 
 	// MARK: - Init
 	override init(frame: CGRect) {
@@ -142,7 +148,9 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	}
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
-
+		guard let text = textField.text else { return }
+		delegate?.didFinishEditing(self, socialLink: SocialLink(socialType: nil, value: text))
+		fireFirstResponder()
 	}
 
 	@IBAction func addChangeSocialButton(_ sender: UIControl) {

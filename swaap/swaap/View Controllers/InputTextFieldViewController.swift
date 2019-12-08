@@ -14,16 +14,28 @@ class InputTextFieldViewController: UIViewController {
 	@IBOutlet private weak var floatingViewBottomAnchor: NSLayoutConstraint!
 	@IBOutlet private var tapToDismissGesture: UITapGestureRecognizer!
 
-	var needsSocialTextField: Bool = false
+	let needsSocialTextField: Bool
 	var placeholderStr: String = "enter info"
 	var labelText: String?
+	let successfulCompletion: SocialLinkCompletion
+	typealias SocialLinkCompletion = (SocialLink) -> Void
 
+	init?(coder: NSCoder, needsSocialTextField: Bool = true, successfulCompletion: @escaping SocialLinkCompletion) {
+		self.needsSocialTextField = needsSocialTextField
+		self.successfulCompletion = successfulCompletion
+		super.init(coder: coder)
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("Init coder not implemented")
+	}
 	override func viewDidLoad() {
         super.viewDidLoad()
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 		floatingTextFieldView.makeFirstResponder(needsSocialTextField, placeholderStr, labelText: labelText)
+		floatingTextFieldView.delegate = self
 
 		tapToDismissGesture.delegate = self
 	}
@@ -48,5 +60,11 @@ class InputTextFieldViewController: UIViewController {
 extension InputTextFieldViewController: UIGestureRecognizerDelegate {
 	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
 		return touch.view == gestureRecognizer.view
+	}
+}
+
+extension InputTextFieldViewController: FloatingTextFieldViewDelegate {
+	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: SocialLink) {
+		successfulCompletion(socialLink)
 	}
 }

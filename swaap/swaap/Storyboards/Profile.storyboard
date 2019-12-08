@@ -166,7 +166,7 @@
         <!--Edit Profile-->
         <scene sceneID="3YY-f6-Jp1">
             <objects>
-                <viewController id="QhS-Jn-uwM" customClass="EditProfileViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" id="QhS-Jn-uwM" customClass="EditProfileViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sz1-Ie-CO1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,7 +328,7 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTl-hM-auX">
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                                         <connections>
-                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="AddNameSegue" modalPresentationStyle="overFullScreen" id="BjE-LC-ZcL"/>
+                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="AddNameSegue" destinationCreationSelector="nameTextFieldViewControllerWithCoder:" modalPresentationStyle="overFullScreen" id="BjE-LC-ZcL"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -391,7 +391,7 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fD8-Is-eJF">
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                                         <connections>
-                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="AddLocationSegue" modalPresentationStyle="overFullScreen" id="Imd-XC-H2W"/>
+                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="AddLocationSegue" destinationCreationSelector="locationTextFieldViewController:" modalPresentationStyle="overFullScreen" id="Imd-XC-H2W"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -716,6 +716,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BjE-LC-ZcL"/>
+        <segue reference="Imd-XC-H2W"/>
     </inferredMetricsTieBreakers>
 </document>

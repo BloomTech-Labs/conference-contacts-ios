@@ -9,6 +9,11 @@
 import UIKit
 import Photos
 
+struct SocialLink {
+	let socialType: SocialButton.SocialPlatform?
+	let value: String
+}
+
 class EditProfileViewController: UIViewController {
 
 	@IBOutlet private weak var cancelButton: UIBarButtonItem!
@@ -60,17 +65,9 @@ class EditProfileViewController: UIViewController {
 		switch segue.identifier {
 		case "AddSocialLink":
 			inputVC.needsSocialTextField = true
-		case "AddLocationSegue":
-			inputVC.needsSocialTextField = false
-			inputVC.placeholderStr = "name of city"
-			inputVC.labelText = passLabelText(from: locationLabel)
-		case "AddNameSegue":
-			inputVC.needsSocialTextField = false
-			inputVC.placeholderStr = "enter your name"
-			inputVC.labelText = passLabelText(from: nameLabel)
 		case "AddIndustrySegue":
 			inputVC.needsSocialTextField = false
-			inputVC.placeholderStr = "add what industry you're in"
+			inputVC.placeholderStr = "Add the industry you're in"
 			inputVC.labelText = passLabelText(from: industryLabel)
 		default:
 			break
@@ -91,5 +88,23 @@ class EditProfileViewController: UIViewController {
 
 	private func labelHasDescriptionText(with text: String) -> Bool {
 		return text.contains("Tap to add")
+	}
+
+	@IBSegueAction func nameTextFieldViewController(coder: NSCoder) -> UIViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
+			self.nameLabel.text = socialLink.value
+		}
+		inputVC?.placeholderStr = "Enter your full name"
+		inputVC?.labelText = passLabelText(from: nameLabel)
+		return inputVC
+	}
+	
+	@IBSegueAction func locationTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
+			self.locationLabel.text = socialLink.value
+		}
+		inputVC?.placeholderStr = "Name of city"
+		inputVC?.labelText = passLabelText(from: locationLabel)
+		return inputVC
 	}
 }
