@@ -4,7 +4,6 @@
 //
 //  Created by Marlon Raskin on 11/22/19.
 //  Copyright © 2019 swaap. All rights reserved.
-//swiftlint:disable force_cast
 
 import UIKit
 

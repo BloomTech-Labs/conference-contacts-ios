@@ -59,15 +59,6 @@ class ProfileCardView: IBPreviewView {
 		profileImageView.mask = imageMaskView
 
 		backgroundColor = .clear
-
-		// FIXME: - just for testing - remove
-		for platform in SocialButton.SocialPlatform.allCases {
-			let button = SocialButton()
-			button.socialPlatform = (platform, "Lorem Ipsum")
-			button.translatesAutoresizingMaskIntoConstraints = false
-			button.heightAnchor.constraint(equalToConstant: 35).isActive = true
-			stackView.addArrangedSubview(button)
-		}
 	}
 
 	private func setupImageView() {

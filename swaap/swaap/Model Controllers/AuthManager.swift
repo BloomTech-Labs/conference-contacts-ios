@@ -17,6 +17,9 @@ protocol AuthAccessor: AnyObject {
 
 extension NSNotification.Name {
 	static let swaapCredentialsChanged = NSNotification.Name("com.swaapapp.credentialsChanged")
+	static let swaapCredentialsPopulated = NSNotification.Name("com.swaapapp.credentialsPopulated")
+	static let swaapCredentialsDepopulated = NSNotification.Name("com.swaapapp.credentialsDepopulated")
+	static let swaapCredentialsRestored = NSNotification.Name("com.swaapapp.credentialsRestored")
 }
 
 class AuthManager: NSObject {
@@ -27,16 +30,35 @@ class AuthManager: NSObject {
 	let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 	let keychain = A0SimpleKeychain()
 
+	private var _credentials: Credentials?
 	private(set) var credentials: Credentials? {
-		didSet {
-			DispatchQueue.main.async {
-				// send notification that credentials changed
-				NotificationCenter.default.post(name: .swaapCredentialsChanged, object: nil)
+		get { _credentials }
+		set {
+			let oldValue = _credentials
+			_credentials = newValue
+			sendCredentialsNotification(oldValue: oldValue, newValue: newValue)
+		}
+	}
+
+	private func sendCredentialsNotification(oldValue: Credentials?, newValue: Credentials?) {
+		guard oldValue != newValue else { return }
+		let nc = NotificationCenter.default
+		DispatchQueue.main.async {
+			if oldValue == nil {
+				nc.post(name: .swaapCredentialsPopulated, object: nil)
+			} else if newValue == nil {
+				nc.post(name: .swaapCredentialsDepopulated, object: nil)
+			} else {
+				nc.post(name: .swaapCredentialsChanged, object: nil)
 			}
 		}
 	}
+	
 	private(set) var credentialsCheckedFromLastSession = false
 	let credentialsLoading = DispatchSemaphore(value: 0)
+	var idClaims: Auth0IDClaims? {
+		getIDClaims()
+	}
 
 	// MARK: - Lifecycle
 	override init() {
@@ -57,12 +79,13 @@ class AuthManager: NSObject {
 			}
 			self.credentials = credentials
 			print("restored saved credentials: \(credentials)")
+			NotificationCenter.default.post(name: .swaapCredentialsRestored, object: nil)
 		}
 	}
 
 	// MARK: - Auth Methods (The Guts)
 	func showWebAuth(completion: @escaping AuthCallbackHandler) {
-		Auth0.webAuth().scope("openid profile").audience("https://api.swaap.co/").start { result in
+		Auth0.webAuth().scope("openid profile email").audience("https://api.swaap.co/").start { result in
 			switch result {
 			case .success(let credentials):
 				self.storeCredentials(appleID: nil, credentials: credentials)
@@ -110,7 +133,6 @@ class AuthManager: NSObject {
 							return callback(nil, error)
 						}
 						callback(credentials, nil)
-						print("Credentials state is Authorized: \(credentials)")
 					}
 				default:
 					self.keychain.deleteEntry(forKey: .userIDKey)
@@ -125,7 +147,6 @@ class AuthManager: NSObject {
 					return callback(nil, error)
 				}
 				callback(credentials, nil)
-				print("Credentials state is Authorized: \(credentials)")
 			}
 		}
 	}
@@ -170,6 +191,19 @@ class AuthManager: NSObject {
 		_ = self.credentialsManager.store(credentials: credentials)
 		self.credentials = credentials
 	}
+
+	private func getIDClaims() -> Auth0IDClaims? {
+		guard let idToken = credentials?.idToken else { return nil }
+		do {
+			let decoder = JSONDecoder()
+			decoder.dateDecodingStrategy = .secondsSince1970
+			decoder.keyDecodingStrategy = .convertFromSnakeCase
+			return try decoder.decode(Auth0IDClaims.self, fromJWT: idToken)
+		} catch {
+			print("failed getting ID Claims: \(error)")
+		}
+		return nil
+	}
 }
 
 
@@ -184,15 +218,27 @@ extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControl
 		NSLog("Authorization failed: \(error)")
 	}
 
+	enum SignInWithAppleError: Error {
+		case noAIDAuthCredential
+		case authCodeIssue(authCode: Data?)
+	}
 	func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-		guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
-		guard let authCodeData = appleIDCredential.authorizationCode,
-			let authCode = String(data: authCodeData, encoding: .utf8) else {
-			NSLog("Problem with Auth Code: \(appleIDCredential.authorizationCode as Any)")
+		guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+			signInWithAppleCallbackHandler?(SignInWithAppleError.noAIDAuthCredential)
 			return
 		}
 
-		Auth0.authentication().tokenExchange(withAppleAuthorizationCode: authCode).start { result in
+		guard let authCodeData = appleIDCredential.authorizationCode,
+			let authCode = String(data: authCodeData, encoding: .utf8) else {
+				NSLog("Problem with Auth Code: \(appleIDCredential.authorizationCode as Any)")
+				signInWithAppleCallbackHandler?(SignInWithAppleError.authCodeIssue(authCode: appleIDCredential.authorizationCode))
+				return
+		}
+
+		Auth0.authentication().tokenExchange(withAppleAuthorizationCode: authCode,
+											 scope: "openid profile email",
+											 audience: "https://api.swaap.co/",
+											 fullName: appleIDCredential.fullName).start { result in
 			switch result {
 			case .success(let credentials):
 				print("Auth0 success: \(credentials)")

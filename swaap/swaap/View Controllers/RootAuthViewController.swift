@@ -13,6 +13,7 @@ protocol RootAuthViewControllerDelegate: AnyObject {
 }
 
 class RootAuthViewController: UIViewController {
+	let profileController: ProfileController
 	let authManager: AuthManager
 
 	@IBOutlet private weak var scrollView: UIScrollView!
@@ -23,8 +24,9 @@ class RootAuthViewController: UIViewController {
 	let feedback = UIImpactFeedbackGenerator(style: .rigid)
 	weak var delegate: RootAuthViewControllerDelegate?
 
-	init?(coder: NSCoder, authManager: AuthManager) {
+	init?(coder: NSCoder, authManager: AuthManager, profileController: ProfileController) {
 		self.authManager = authManager
+		self.profileController = profileController
 		super.init(coder: coder)
 	}
 
@@ -40,12 +42,24 @@ class RootAuthViewController: UIViewController {
 		updateChevron()
 		feedback.prepare()
 
+		setupDelegates()
+	}
+
+	@IBSegueAction func showLoginVC(_ coder: NSCoder) -> LogInViewController? {
+		let loginVC = LogInViewController(coder: coder, authManager: authManager, profileController: profileController)
+		return loginVC
+	}
+
+	
+	@IBSegueAction func showSignupVC(_ coder: NSCoder) -> SignUpViewController? {
+		let signupVC = SignUpViewController(coder: coder, authManager: authManager, profileController: profileController)
+		return signupVC
+	}
+	
+	private func setupDelegates() {
 		children.forEach {
 			if let delegate = $0 as? RootAuthViewControllerDelegate {
 				self.delegate = delegate
-			}
-			if let authAccessor = $0 as? AuthAccessor {
-				authAccessor.authManager = authManager
 			}
 		}
 	}
