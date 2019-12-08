@@ -37,6 +37,8 @@ class RootTabBarController: UITabBarController {
 		self.authManager = authManager
 		self.profileController = ProfileController(authManager: authManager)
 		super.init(coder: coder)
+
+		updateViewControllers()
 	}
 
 	override var viewControllers: [UIViewController]? {
@@ -48,11 +50,13 @@ class RootTabBarController: UITabBarController {
 	private func updateViewControllers() {
 		guard let vcs = viewControllers else { return }
 		vcs.forEach { ($0 as? AuthAccessor)?.authManager = authManager }
+
+		// FIXME: For debugging
+		vcs.forEach { ($0 as? SwipeBackNavigationController)?.profileController = profileController }
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		setupSecondTab()
 		populatedCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsPopulated, object: nil, queue: nil) { [weak self] _ in
 			self?.dismissAuthViewController()
 		}
@@ -68,25 +72,6 @@ class RootTabBarController: UITabBarController {
 				self.showAuthViewController()
 			}
 		})
-	}
-
-	// FIXME: FOR DEBUGGING
-	func setupSecondTab() {
-		let vc = UIViewController()
-		vc.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
-		let doneButton = UIButton(type: .system)
-		doneButton.setTitle("done", for: .normal)
-		doneButton.addTarget(self, action: #selector(testFunc), for: .touchUpInside)
-		vc.view.addSubview(doneButton)
-		doneButton.translatesAutoresizingMaskIntoConstraints = false
-		doneButton.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor).isActive = true
-		doneButton.centerYAnchor.constraint(equalTo: vc.view.centerYAnchor).isActive = true
-		viewControllers?.append(vc)
-	}
-
-	// FIXME: FOR DEBUGGING
-	@objc func testFunc() {
-		authManager.clearSession()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {

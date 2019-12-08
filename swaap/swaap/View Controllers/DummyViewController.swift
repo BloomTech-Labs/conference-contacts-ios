@@ -9,9 +9,10 @@
 import UIKit
 
 // FIXME: FOR DEBUGGING
-class DummyViewController: UIViewController, AuthAccessor {
+class DummyViewController: UIViewController, AuthAccessor, ProfileAccessor {
 
 	var authManager: AuthManager?
+	var profileController: ProfileController?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -19,6 +20,22 @@ class DummyViewController: UIViewController, AuthAccessor {
 		let selectedImage = UIImage(systemName: "person.crop.circle.fill")
 		let item = UITabBarItem(title: "Profile", image: image, selectedImage: selectedImage)
 		navigationController?.tabBarItem = item
+
+		let logoutButton = UIButton(type: .system)
+		logoutButton.setTitle("Logout", for: .normal)
+		view.addSubview(logoutButton)
+		logoutButton.translatesAutoresizingMaskIntoConstraints = false
+		logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		logoutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+
+		logoutButton.addTarget(self, action: #selector(logoutPressed(_:)), for: .touchUpInside)
+
+		_ = NotificationCenter.default.addObserver(forName: .userProfilePopulated, object: nil, queue: nil) { _ in
+			print("populated: \(self.profileController?.userProfile as Any)")
+		}
+		_ = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil) { _ in
+			print("changed: \(self.profileController?.userProfile as Any)")
+		}
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -34,5 +51,9 @@ class DummyViewController: UIViewController, AuthAccessor {
 		if let access = authManager?.credentials?.accessToken {
 			print("access: '\(access)'")
 		}
+	}
+
+	@objc func logoutPressed(_ sender: UIButton) {
+		authManager?.clearSession()
 	}
 }
