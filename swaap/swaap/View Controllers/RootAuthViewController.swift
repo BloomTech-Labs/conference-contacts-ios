@@ -77,13 +77,6 @@ class RootAuthViewController: UIViewController {
 		}
 	}
 
-	override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-		super.dismiss(animated: flag, completion: completion)
-		profileController.createProfileOnServer { success in
-			print("created new backend profile: \(success)")
-		}
-	}
-
 	@IBAction func chevronTapped(_ sender: UITapGestureRecognizer) {
 		if scrollView.contentOffset.y == 0 {
 			let loginRect = scrollView.convert(loginView.bounds, from: loginView)

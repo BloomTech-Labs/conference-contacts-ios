@@ -14,7 +14,8 @@ class RootTabBarController: UITabBarController {
 	/// property observer (cannot present a view when its parent isn't part of the view hierarchy, so we need to watch
 	/// for when the parent is in the hierarchy
 	private var windowObserver: NSKeyValueObservation?
-	private var credentialObserver: NSObjectProtocol?
+	private var populatedCredentialObserver: NSObjectProtocol?
+	private var depopulatedCredentialObserver: NSObjectProtocol?
 
 	let profileController: ProfileController
 	let contactsController = ContactsController()
@@ -52,8 +53,11 @@ class RootTabBarController: UITabBarController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupSecondTab()
-		credentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsChanged, object: nil, queue: nil) { [weak self] _ in
-			self?.runAuthCoordinator()
+		populatedCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsPopulated, object: nil, queue: nil) { [weak self] _ in
+			self?.dismissAuthViewController()
+		}
+		depopulatedCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil) { [weak self] _ in
+			self?.showAuthViewController()
 		}
 
 		// weird double optional BS
@@ -61,7 +65,7 @@ class RootTabBarController: UITabBarController {
 		guard let window = windowOpt else { return }
 		windowObserver = window.observe(\UIWindow.rootViewController, changeHandler: { window, _ in
 			if window.rootViewController === self {
-				self.runAuthCoordinator()
+				self.showAuthViewController()
 			}
 		})
 	}
@@ -87,10 +91,10 @@ class RootTabBarController: UITabBarController {
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		runAuthCoordinator()
+		showAuthViewController()
 	}
 
-	private func runAuthCoordinator() {
+	private func showAuthViewController() {
 		guard presentedViewController != rootAuthVC else { return }
 		if !authManager.credentialsCheckedFromLastSession {
 			authManager.credentialsLoading.wait()
@@ -100,6 +104,18 @@ class RootTabBarController: UITabBarController {
 			// check to confirm that theres either no presented VC or if there is, it's not the auth screen (prevent multiple auth screen layers)
 			rootAuthVC.modalPresentationStyle = .fullScreen
 			self.present(rootAuthVC, animated: true, completion: nil)
+		}
+	}
+
+	private func dismissAuthViewController() {
+		rootAuthVC.dismiss(animated: true)
+		profileController.fetchProfileFromServer { result in
+			do {
+				let user = try result.get()
+				print(user)
+			} catch {
+				NSLog("Error getting user: \(error)")
+			}
 		}
 	}
 }

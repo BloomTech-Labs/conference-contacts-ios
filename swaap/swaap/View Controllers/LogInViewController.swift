@@ -58,9 +58,6 @@ class LogInViewController: UIViewController, AuthAccessor {
 				self.present(alertVC, animated: true)
 				return
 			}
-			DispatchQueue.main.async {
-				self.parent?.dismiss(animated: true)
-			}
 		})
 	}
 
@@ -72,9 +69,6 @@ class LogInViewController: UIViewController, AuthAccessor {
 				self.present(alertVC, animated: true)
 				return
 			}
-			DispatchQueue.main.async {
-				self.parent?.dismiss(animated: true)
-			}
 		})
 	}
 
@@ -84,9 +78,6 @@ class LogInViewController: UIViewController, AuthAccessor {
 				let alertVC = UIAlertController(error: error)
 				self?.present(alertVC, animated: true)
 				return
-			}
-			DispatchQueue.main.async {
-				self?.parent?.dismiss(animated: true)
 			}
 		})
 	}
