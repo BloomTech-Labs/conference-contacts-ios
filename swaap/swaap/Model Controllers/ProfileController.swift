@@ -201,6 +201,7 @@ class ProfileController {
 	}
 
 	private func loadCachedProfile() {
+		// note - doesn't trigger populate notification on startup because it happens before the observer is initialized
 		guard fm.fileExists(atPath: profileCacheURL.path), let claims = authManager.idClaims else { return }
 		let data: Data
 		do {
