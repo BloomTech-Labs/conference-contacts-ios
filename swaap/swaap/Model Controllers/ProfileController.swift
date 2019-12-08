@@ -42,9 +42,9 @@ class ProfileController {
 	}
 
 	// MARK: - Networking
-	func createProfileOnServer(completion: @escaping (Bool) -> Void) {
+	func createProfileOnServer(completion: ((Bool) -> Void)? = nil) {
 		guard let (idClaims, cRequest) = networkCommon() else {
-			completion(false)
+			completion?(false)
 			return
 		}
 		var request = cRequest
@@ -58,7 +58,7 @@ class ProfileController {
 			request.httpBody = try JSONEncoder().encode(graphObject)
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
-			completion(false)
+			completion?(false)
 			return
 		}
 
@@ -67,16 +67,16 @@ class ProfileController {
 			do {
 				let responseDict = try result.get()
 				guard let userMutationResponse = responseDict["data"]?["createUser"] else {
-					completion(false)
+					completion?(false)
 					return
 				}
-				completion(userMutationResponse.success)
+				completion?(userMutationResponse.success)
 			} catch NetworkError.httpNon200StatusCode(let code, let data) {
 				NSLog("Error creating server profile with code: \(code): \(String(data: data!, encoding: .utf8)!)")
-				completion(false)
+				completion?(false)
 			} catch {
 				NSLog("Error creating server profile: \(error)")
-				completion(false)
+				completion?(false)
 			}
 		}
 	}
