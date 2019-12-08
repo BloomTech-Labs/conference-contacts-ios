@@ -12,7 +12,7 @@ import Auth0
 import SimpleKeychain
 import NetworkHandler
 
-class LogInViewController: UIViewController, AuthAccessor {
+class LogInViewController: UIViewController {
 
 	// MARK: - Outlets
 	@IBOutlet private weak var signupButton: UIButton!
@@ -23,9 +23,21 @@ class LogInViewController: UIViewController, AuthAccessor {
 	let appleAuthButton = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
 
 	// MARK: - Properties
-	var authManager: AuthManager?
+	let authManager: AuthManager
+	let profileController: ProfileController
 
 	// MARK: - Lifecycle
+	@available(*, unavailable)
+	required init?(coder: NSCoder) {
+		fatalError("init coder not implemented")
+	}
+
+	init?(coder: NSCoder, authManager: AuthManager, profileController: ProfileController) {
+		self.authManager = authManager
+		self.profileController = profileController
+		super.init(coder: coder)
+	}
+
 	override func viewDidLoad() {
         super.viewDidLoad()
 		configureAppleAuthButton()
@@ -51,47 +63,55 @@ class LogInViewController: UIViewController, AuthAccessor {
 
 	// MARK: - IBActions
 	@objc private func handleSignInWithAppleIDButtonTap(_ sender: ASAuthorizationAppleIDButton?) {
-		authManager?.signInWithApple(completion: { [weak self] error in
+		authManager.signInWithApple(completion: { [weak self] error in
 			guard let self = self else { return }
 			if let error = error {
-				let alertVC = UIAlertController(error: error)
-				self.present(alertVC, animated: true)
+				self.showErrorAlert(error)
 				return
 			}
-			DispatchQueue.main.async {
-				self.parent?.dismiss(animated: true)
-			}
+			self.initiateProfileFetch()
 		})
 	}
 
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
-		authManager?.showWebAuth(completion: { [weak self] error in
+		authManager.showWebAuth(completion: { [weak self] error in
 			guard let self = self else { return }
 			if let error = error {
-				let alertVC = UIAlertController(error: error)
-				self.present(alertVC, animated: true)
+				self.showErrorAlert(error)
 				return
 			}
-			DispatchQueue.main.async {
-				self.parent?.dismiss(animated: true)
-			}
+			self.initiateProfileFetch()
 		})
 	}
 
 	@IBAction func signInTapped(_ sender: UIButton) {
-		authManager?.showWebAuth(completion: { [weak self] error in
+		authManager.showWebAuth(completion: { [weak self] error in
+			guard let self = self else { return }
 			if let error = error {
-				let alertVC = UIAlertController(error: error)
-				self?.present(alertVC, animated: true)
+				self.showErrorAlert(error)
 				return
 			}
-			DispatchQueue.main.async {
-				self?.parent?.dismiss(animated: true)
-			}
+			self.initiateProfileFetch()
 		})
 	}
 
+	private func initiateProfileFetch() {
+		profileController.fetchProfileFromServer { result in
+			do {
+				let user = try result.get()
+				print(user)
+			} catch {
+				NSLog("Error getting user: \(error)")
+			}
+		}
+	}
+
+	private func showErrorAlert(_ error: Error) {
+		let alertVC = UIAlertController(error: error)
+		self.present(alertVC, animated: true)
+	}
+
 	@IBAction func logoutTapped(_ sender: ButtonHelper) {
-		authManager?.clearSession()
+		authManager.clearSession()
 	}
 }

@@ -128,7 +128,7 @@
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4A4-XF-O1y">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
                                                 <connections>
-                                                    <segue destination="2OZ-fg-nF6" kind="embed" id="And-FE-bTN"/>
+                                                    <segue destination="2OZ-fg-nF6" kind="embed" destinationCreationSelector="showLoginVC:" id="And-FE-bTN"/>
                                                 </connections>
                                             </containerView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lR-u9-dIK">
@@ -158,7 +158,7 @@
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Qv-eP-Gph">
                                                 <rect key="frame" x="0.0" y="765.66666666666652" width="375" height="663"/>
                                                 <connections>
-                                                    <segue destination="d72-bg-Hjq" kind="embed" id="JsJ-CJ-2jQ"/>
+                                                    <segue destination="d72-bg-Hjq" kind="embed" destinationCreationSelector="showSignupVC:" id="JsJ-CJ-2jQ"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>

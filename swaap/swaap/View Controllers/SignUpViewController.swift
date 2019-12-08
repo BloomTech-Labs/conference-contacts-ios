@@ -9,14 +9,27 @@
 import UIKit
 import Auth0
 
-class SignUpViewController: UIViewController, AuthAccessor {
+class SignUpViewController: UIViewController {
 	@IBOutlet private weak var emailForm: FormInputView!
 	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var passwordConfirmForm: FormInputView!
 	@IBOutlet private weak var signUpButton: ButtonHelper!
 	@IBOutlet private weak var passwordStrengthLabel: UILabel!
 
-	var authManager: AuthManager?
+	let authManager: AuthManager
+	let profileController: ProfileController
+
+	// MARK: - Lifecycle
+	@available(*, unavailable)
+	required init?(coder: NSCoder) {
+		fatalError("init coder not implemented")
+	}
+
+	init?(coder: NSCoder, authManager: AuthManager, profileController: ProfileController) {
+		self.authManager = authManager
+		self.profileController = profileController
+		super.init(coder: coder)
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,14 +48,18 @@ class SignUpViewController: UIViewController, AuthAccessor {
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
 		guard let (email, password) = checkFormValidity() else { return }
-		authManager?.signUp(with: email, password: password, completion: {  [weak self] error in
+		authManager.signUp(with: email, password: password, completion: {  [weak self] error in
+			self?.profileController.createProfileOnServer()
 			DispatchQueue.main.async {
 				if let error = error {
 					let alertVC = UIAlertController(error: error)
 					self?.present(alertVC, animated: true)
 					return
 				}
-				self?.parent?.dismiss(animated: true)
+
+				let alertVC = UIAlertController(title: "Signup Successful!", message: "You've created an account with the email address '\(email)'! Please sign in to continue.", preferredStyle: .alert)
+				alertVC.addAction(UIAlertAction(title: "Woohoo!", style: .default))
+				self?.present(alertVC, animated: true)
 			}
 		})
 
