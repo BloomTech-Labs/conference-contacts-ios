@@ -17,6 +17,8 @@ protocol AuthAccessor: AnyObject {
 
 extension NSNotification.Name {
 	static let swaapCredentialsChanged = NSNotification.Name("com.swaapapp.credentialsChanged")
+	static let swaapCredentialsPopulated = NSNotification.Name("com.swaapapp.credentialsPopulated")
+	static let swaapCredentialsDepopulated = NSNotification.Name("com.swaapapp.credentialsDepopulated")
 }
 
 class AuthManager: NSObject {
@@ -27,11 +29,25 @@ class AuthManager: NSObject {
 	let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 	let keychain = A0SimpleKeychain()
 
+	private var _credentials: Credentials?
 	private(set) var credentials: Credentials? {
-		didSet {
-			DispatchQueue.main.async {
-				// send notification that credentials changed
-				NotificationCenter.default.post(name: .swaapCredentialsChanged, object: nil)
+		get { _credentials }
+		set {
+			sendCredentialsNotification(oldValue: _credentials, newValue: newValue)
+			_credentials = newValue
+		}
+	}
+
+	private func sendCredentialsNotification(oldValue: Credentials?, newValue: Credentials?) {
+		guard oldValue != newValue else { return }
+		let nc = NotificationCenter.default
+		DispatchQueue.main.async {
+			if oldValue == nil {
+				nc.post(name: .swaapCredentialsPopulated, object: nil)
+			} else if newValue == nil {
+				nc.post(name: .swaapCredentialsDepopulated, object: nil)
+			} else {
+				nc.post(name: .swaapCredentialsChanged, object: nil)
 			}
 		}
 	}
@@ -172,21 +188,6 @@ class AuthManager: NSObject {
 		}
 		_ = self.credentialsManager.store(credentials: credentials)
 		self.credentials = credentials
-		decodeJWT()
-	}
-
-	// FIXME: Kinda using for debug, but will need for real at some point.
-	private func decodeJWT() {
-		guard let accessToken = credentials?.accessToken, let idToken = credentials?.idToken else { return }
-		do {
-			let decoder = JSONDecoder()
-			decoder.dateDecodingStrategy = .secondsSince1970
-			decoder.keyDecodingStrategy = .convertFromSnakeCase
-			let idClaims = try decoder.decode(Auth0IDClaims.self, fromJWT: idToken)
-			print(idClaims)
-		} catch {
-			print("failed: \(error)")
-		}
 	}
 
 	private func getIDClaims() -> Auth0IDClaims? {
