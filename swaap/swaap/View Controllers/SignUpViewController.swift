@@ -9,14 +9,27 @@
 import UIKit
 import Auth0
 
-class SignUpViewController: UIViewController, AuthAccessor {
+class SignUpViewController: UIViewController {
 	@IBOutlet private weak var emailForm: FormInputView!
 	@IBOutlet private weak var passwordForm: FormInputView!
 	@IBOutlet private weak var passwordConfirmForm: FormInputView!
 	@IBOutlet private weak var signUpButton: ButtonHelper!
 	@IBOutlet private weak var passwordStrengthLabel: UILabel!
 
-	var authManager: AuthManager?
+	let authManager: AuthManager
+	let profileController: ProfileController
+
+	// MARK: - Lifecycle
+	@available(*, unavailable)
+	required init?(coder: NSCoder) {
+		fatalError("init coder not implemented")
+	}
+
+	init?(coder: NSCoder, authManager: AuthManager, profileController: ProfileController) {
+		self.authManager = authManager
+		self.profileController = profileController
+		super.init(coder: coder)
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,7 +48,8 @@ class SignUpViewController: UIViewController, AuthAccessor {
 
 	@IBAction func signupTapped(_ sender: ButtonHelper) {
 		guard let (email, password) = checkFormValidity() else { return }
-		authManager?.signUp(with: email, password: password, completion: {  [weak self] error in
+		authManager.signUp(with: email, password: password, completion: {  [weak self] error in
+			self?.profileController.createProfileOnServer()
 			DispatchQueue.main.async {
 				if let error = error {
 					let alertVC = UIAlertController(error: error)

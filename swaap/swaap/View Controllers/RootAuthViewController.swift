@@ -42,19 +42,24 @@ class RootAuthViewController: UIViewController {
 		updateChevron()
 		feedback.prepare()
 
-		distributeControllers()
+		setupDelegates()
 	}
 
-	private func distributeControllers() {
+	@IBSegueAction func showLoginVC(_ coder: NSCoder) -> LogInViewController? {
+		let loginVC = LogInViewController(coder: coder, authManager: authManager, profileController: profileController)
+		return loginVC
+	}
+
+	
+	@IBSegueAction func showSignupVC(_ coder: NSCoder) -> SignUpViewController? {
+		let signupVC = SignUpViewController(coder: coder, authManager: authManager, profileController: profileController)
+		return signupVC
+	}
+	
+	private func setupDelegates() {
 		children.forEach {
 			if let delegate = $0 as? RootAuthViewControllerDelegate {
 				self.delegate = delegate
-			}
-			if let authAccessor = $0 as? AuthAccessor {
-				authAccessor.authManager = authManager
-			}
-			if let profileAccess = $0 as? ProfileAccessor {
-				profileAccess.profileController = profileController
 			}
 		}
 	}

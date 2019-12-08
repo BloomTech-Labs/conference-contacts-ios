@@ -95,27 +95,20 @@ class RootTabBarController: UITabBarController {
 	}
 
 	private func showAuthViewController() {
+		// check to confirm that theres either no presented VC or if there is, it's not the auth screen (prevent multiple auth screen layers)
 		guard presentedViewController != rootAuthVC else { return }
 		if !authManager.credentialsCheckedFromLastSession {
 			authManager.credentialsLoading.wait()
 		}
 		// check if user is logged in, only run if logged out:
 		if authManager.credentials == nil {
-			// check to confirm that theres either no presented VC or if there is, it's not the auth screen (prevent multiple auth screen layers)
 			rootAuthVC.modalPresentationStyle = .fullScreen
 			self.present(rootAuthVC, animated: true, completion: nil)
 		}
 	}
 
 	private func dismissAuthViewController() {
+		guard presentedViewController == rootAuthVC else { return }
 		rootAuthVC.dismiss(animated: true)
-		profileController.fetchProfileFromServer { result in
-			do {
-				let user = try result.get()
-				print(user)
-			} catch {
-				NSLog("Error getting user: \(error)")
-			}
-		}
 	}
 }
