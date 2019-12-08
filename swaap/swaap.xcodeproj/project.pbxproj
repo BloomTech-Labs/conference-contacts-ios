@@ -26,6 +26,7 @@
 		37218B03238FA161008BFC24 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218B02238FA161008BFC24 /* FontHelper.swift */; };
 		3750E8462395C180005BBDA5 /* InteractivePopRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */; };
 		3753DE30239AF3D800C90501 /* UIView+Visible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753DE2F239AF3D800C90501 /* UIView+Visible.swift */; };
+		3753DE36239C69B600C90501 /* BasicUserInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753DE35239C69B600C90501 /* BasicUserInfoView.xib */; };
 		375CBF292391EB6700C3D50A /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CBF242391EB6700C3D50A /* HapticFeedback.swift */; };
 		3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797A55C238603A400CB8621 /* String+Extensions.swift */; };
 		3797A56223874DF000CB8621 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797A56123874DF000CB8621 /* AuthManager.swift */; };
@@ -142,6 +143,7 @@
 		37218B02238FA161008BFC24 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 		3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractivePopRecognizer.swift; sourceTree = "<group>"; };
 		3753DE2F239AF3D800C90501 /* UIView+Visible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Visible.swift"; sourceTree = "<group>"; };
+		3753DE35239C69B600C90501 /* BasicUserInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicUserInfoView.xib; sourceTree = "<group>"; };
 		375CBF242391EB6700C3D50A /* HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		3797A55C238603A400CB8621 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		3797A56123874DF000CB8621 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */,
 				37F934552398716300ACBA23 /* FloatingTextFieldView.swift */,
 				37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */,
+				3753DE35239C69B600C90501 /* BasicUserInfoView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
 				37F9345423985FD000ACBA23 /* FloatingTextFieldView.xib in Resources */,
+				3753DE36239C69B600C90501 /* BasicUserInfoView.xib in Resources */,
 				37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */,
 				37A185AB237A3579002191B5 /* Main.storyboard in Resources */,
 				37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */,

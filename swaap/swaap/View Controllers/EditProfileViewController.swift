@@ -60,20 +60,6 @@ class EditProfileViewController: UIViewController {
 		picker.dismiss(animated: true)
 	}
 
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let inputVC = segue.destination as? InputTextFieldViewController else { return }
-		switch segue.identifier {
-		case "AddSocialLink":
-			inputVC.needsSocialTextField = true
-		case "AddIndustrySegue":
-			inputVC.needsSocialTextField = false
-			inputVC.placeholderStr = "Add the industry you're in"
-			inputVC.labelText = passLabelText(from: industryLabel)
-		default:
-			break
-		}
-	}
-
 	// MARK: - Helper Methods
 	private func passLabelText(from label: UILabel) -> String? {
 		if let text = label.text {
@@ -105,6 +91,22 @@ class EditProfileViewController: UIViewController {
 		}
 		inputVC?.placeholderStr = "Name of city"
 		inputVC?.labelText = passLabelText(from: locationLabel)
+		return inputVC
+	}
+
+	@IBSegueAction func industryTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
+			self.industryLabel.text = socialLink.value
+		}
+		inputVC?.placeholderStr = "Add the industry you're in"
+		inputVC?.labelText = passLabelText(from: industryLabel)
+		return inputVC
+	}
+
+	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in
+
+		}
 		return inputVC
 	}
 }
