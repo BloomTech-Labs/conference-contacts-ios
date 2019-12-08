@@ -51,6 +51,7 @@ class AuthManager: NSObject {
 			}
 		}
 	}
+	
 	private(set) var credentialsCheckedFromLastSession = false
 	let credentialsLoading = DispatchSemaphore(value: 0)
 	var idClaims: Auth0IDClaims? {
