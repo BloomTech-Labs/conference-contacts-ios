@@ -37,9 +37,14 @@ class ProfileController {
 		return networkHandler
 	}()
 
+	private var credentialObserver: NSObjectProtocol?
+
 	// MARK: - Lifecycle
 	init(authManager: AuthManager) {
 		self.authManager = authManager
+		credentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil, using: { _ in
+			self.userProfile = nil
+		})
 	}
 
 	// MARK: - Networking
