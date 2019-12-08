@@ -81,6 +81,53 @@ class ProfileController {
 		}
 	}
 
+	func fetchProfileFromServer(completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		let query = "{ user { id authId name picture birthdate gender industry jobtitle bio profile { id value type privacy preferredContact } } }"
+		let graphObject = GQuery(query: query)
+
+		do {
+			request.httpBody = try JSONEncoder().encode(graphObject)
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserProfileContainer, NetworkError>) in
+			do {
+				let userProfileContainer = try result.get()
+				let userProfile = userProfileContainer.userProfile
+				self.userProfile = userProfile
+				completion(.success(userProfile))
+			} catch NetworkError.dataCodingError(let error, let dataSource) {
+				print("")
+				NSLog("Error decoding current user: \(error)")
+				print("")
+				print(String(data: dataSource ?? Data(), encoding: .utf8) ?? "")
+				print("")
+			} catch {
+				// attempt user creation if fetching fails
+				// FIXME: only attempt creation if error code relating to user not existing ocurrs
+				self.createProfileOnServer { success in
+					if success {
+						self.fetchProfileFromServer(completion: completion)
+					} else {
+						completion(.failure(.otherError(error: error)))
+						print("")
+						NSLog("Error fetching current user: \(error)")
+					}
+				}
+			}
+		}
+	}
+
 	private func networkCommon() -> (Auth0IDClaims, NetworkRequest)? {
 		guard let idClaims = authManager.idClaims, let accessToken = authManager.credentials?.accessToken else { return nil }
 		var request = graphqlURL.request
