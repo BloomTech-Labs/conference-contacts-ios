@@ -25,6 +25,7 @@ class ProfileController {
 			_userProfile = newValue
 		}
 	}
+	private(set) var userProfileImageData: Data?
 
 	let baseURL = URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
 	var graphqlURL: URL {
@@ -112,18 +113,26 @@ class ProfileController {
 				print("")
 				print(String(data: dataSource ?? Data(), encoding: .utf8) ?? "")
 				print("")
+			} catch NetworkError.graphQLError(let graphQLError) {
+				// only attempt creation if error code relating to user not existing ocurrs
+				// I don't know if its guaranteed to be consistent that no user existing will always have an error like this
+				// but it's the best we got right now
+				if graphQLError.message.contains("'authId' of null") && graphQLError.extensions.code == "INTERNAL_SERVER_ERROR" {
+					self.createProfileOnServer { success in
+						if success {
+							self.fetchProfileFromServer(completion: completion)
+						} else {
+							completion(.failure(NetworkError.graphQLError(error: graphQLError)))
+							print("")
+							NSLog("Error fetching current user \(#line) \(#file): \(graphQLError)")
+						}
+					}
+				} else {
+					NSLog("Error fetching current user \(#line) \(#file): \(graphQLError)")
+				}
 			} catch {
 				// attempt user creation if fetching fails
-				// FIXME: only attempt creation if error code relating to user not existing ocurrs
-				self.createProfileOnServer { success in
-					if success {
-						self.fetchProfileFromServer(completion: completion)
-					} else {
-						completion(.failure(.otherError(error: error)))
-						print("")
-						NSLog("Error fetching current user: \(error)")
-					}
-				}
+				NSLog("Error fetching current user \(#line) \(#file): \(error)")
 			}
 		}
 	}
