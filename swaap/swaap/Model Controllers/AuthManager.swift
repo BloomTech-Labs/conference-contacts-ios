@@ -19,6 +19,7 @@ extension NSNotification.Name {
 	static let swaapCredentialsChanged = NSNotification.Name("com.swaapapp.credentialsChanged")
 	static let swaapCredentialsPopulated = NSNotification.Name("com.swaapapp.credentialsPopulated")
 	static let swaapCredentialsDepopulated = NSNotification.Name("com.swaapapp.credentialsDepopulated")
+	static let swaapCredentialsRestored = NSNotification.Name("com.swaapapp.credentialsRestored")
 }
 
 class AuthManager: NSObject {
@@ -78,6 +79,7 @@ class AuthManager: NSObject {
 			}
 			self.credentials = credentials
 			print("restored saved credentials: \(credentials)")
+			NotificationCenter.default.post(name: .swaapCredentialsRestored, object: nil)
 		}
 	}
 
@@ -131,7 +133,6 @@ class AuthManager: NSObject {
 							return callback(nil, error)
 						}
 						callback(credentials, nil)
-						print("Credentials state is Authorized: \(credentials)")
 					}
 				default:
 					self.keychain.deleteEntry(forKey: .userIDKey)
@@ -146,7 +147,6 @@ class AuthManager: NSObject {
 					return callback(nil, error)
 				}
 				callback(credentials, nil)
-				print("Credentials state is Authorized: \(credentials)")
 			}
 		}
 	}

@@ -9,7 +9,6 @@
 import UIKit
 
 class RootTabBarController: UITabBarController {
-	let authManager: AuthManager
 
 	/// property observer (cannot present a view when its parent isn't part of the view hierarchy, so we need to watch
 	/// for when the parent is in the hierarchy
@@ -17,6 +16,7 @@ class RootTabBarController: UITabBarController {
 	private var populatedCredentialObserver: NSObjectProtocol?
 	private var depopulatedCredentialObserver: NSObjectProtocol?
 
+	let authManager: AuthManager
 	let profileController: ProfileController
 	let contactsController = ContactsController()
 	lazy var rootAuthVC: RootAuthViewController = {

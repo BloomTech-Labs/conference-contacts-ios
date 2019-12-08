@@ -37,14 +37,36 @@ class ProfileController {
 		return networkHandler
 	}()
 
-	private var credentialObserver: NSObjectProtocol?
+	private var depopCredentialObserver: NSObjectProtocol?
+	private var restoredCredentialObserver: NSObjectProtocol?
 
 	// MARK: - Lifecycle
 	init(authManager: AuthManager) {
 		self.authManager = authManager
-		credentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil, using: { _ in
+		depopCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil, using: { _ in
 			self.userProfile = nil
 		})
+		// theoretically, this should run before the credentials are restored, (but it doesnt) and the following code should not be populated (but it is), so I'm not sure how to proceed
+//		restoredCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsRestored, object: nil, queue: nil, using: { _ in
+//			self.fetchProfileFromServer { (result: Result<UserProfile, NetworkError>) in
+//				do {
+//					let user = try result.get()
+//					print(user)
+//				} catch {
+//					NSLog("Error getting user: \(error)")
+//				}
+//			}
+//		})
+		if authManager.credentials != nil {
+			self.fetchProfileFromServer { (result: Result<UserProfile, NetworkError>) in
+				do {
+					let user = try result.get()
+					print(user)
+				} catch {
+					NSLog("Error getting user: \(error)")
+				}
+			}
+		}
 	}
 
 	// MARK: - Networking
@@ -114,15 +136,6 @@ class ProfileController {
 				let userProfile = userProfileContainer.userProfile
 				self.userProfile = userProfile
 				completion(.success(userProfile))
-
-				self.fetchImage(url: userProfile.pictureURL) { (result: Result<Data, NetworkError>) in
-					do {
-						self.userProfile?.photoData = try result.get()
-					} catch {
-						NSLog("Error loading initial image: \(error)")
-					}
-				}
-
 			} catch NetworkError.dataCodingError(let error, let dataSource) {
 				print("")
 				NSLog("Error decoding current user: \(error)")
@@ -164,6 +177,19 @@ class ProfileController {
 
 	func fetchImage(url: URL, completion: @escaping (Result<Data, NetworkError>) -> Void) {
 		networkHandler.transferMahDatas(with: url.request, usingCache: true, completion: completion)
+	}
+
+	/// By default, only updates if photo is nil. `force` will force it to download, even if there's already data.
+	/// - Parameter force: Bool determining if the update is forced or contextual.
+	func updateUserImage(_ force: Bool = false) {
+		guard let userProfile = userProfile, (force || userProfile.photoData == nil) else { return }
+		fetchImage(url: userProfile.pictureURL) { (result: Result<Data, NetworkError>) in
+			do {
+				self.userProfile?.photoData = try result.get()
+			} catch {
+				NSLog("Error loading user profile image: \(error)")
+			}
+		}
 	}
 
 	// MARK: - Local Storage
@@ -236,6 +262,7 @@ extension ProfileController {
 		} else {
 			nc.post(name: .userProfileChanged, object: nil)
 		}
+		updateUserImage()
 		saveProfileToCache()
 	}
 }
