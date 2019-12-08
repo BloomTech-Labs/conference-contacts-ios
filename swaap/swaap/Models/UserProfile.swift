@@ -50,6 +50,7 @@ struct UserProfile: Codable, Equatable {
 	var pictureURL: URL {
 		URL(string: pictureString ?? "") ?? URL(string: "https://placekitten.com/1000/1000")!
 	}
+	var photoData: Data?
 }
 
 struct CreateUser: Codable {
