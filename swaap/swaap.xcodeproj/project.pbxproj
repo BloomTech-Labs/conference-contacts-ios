@@ -259,7 +259,6 @@
 		3398EDB3237B35CC00D57DF8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3797A56123874DF000CB8621 /* AuthManager.swift */,
 				33FEE0D123838ADD006BE880 /* ColorHelper.swift */,
 				3797A55C238603A400CB8621 /* String+Extensions.swift */,
 				33F0EA6523988C98004D1236 /* JSONDecoder+JWTDecoding.swift */,
@@ -437,6 +436,7 @@
 			children = (
 				335E668C237B6BAA0099EEA1 /* ContactsController.swift */,
 				33CCBAB92398F21200A98C82 /* ProfileController.swift */,
+				3797A56123874DF000CB8621 /* AuthManager.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";

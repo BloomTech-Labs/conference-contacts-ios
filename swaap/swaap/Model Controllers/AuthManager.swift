@@ -33,8 +33,9 @@ class AuthManager: NSObject {
 	private(set) var credentials: Credentials? {
 		get { _credentials }
 		set {
-			sendCredentialsNotification(oldValue: _credentials, newValue: newValue)
+			let oldValue = _credentials
 			_credentials = newValue
+			sendCredentialsNotification(oldValue: oldValue, newValue: newValue)
 		}
 	}
 

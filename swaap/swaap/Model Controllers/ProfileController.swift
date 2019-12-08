@@ -21,11 +21,11 @@ class ProfileController {
 	var userProfile: UserProfile? {
 		get { _userProfile }
 		set {
-			checkUserProfileChanged(oldValue: _userProfile, newValue: newValue)
+			let oldValue = _userProfile
 			_userProfile = newValue
+			checkUserProfileChanged(oldValue: oldValue, newValue: newValue)
 		}
 	}
-	private(set) var userProfileImageData: Data?
 
 	let baseURL = URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
 	var graphqlURL: URL {
@@ -87,6 +87,8 @@ class ProfileController {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
 		}
+		// while networking, load from disk if same user
+		loadCachedProfile()
 
 		let query = "{ user { id authId name picture birthdate gender industry jobtitle bio profile { id value type privacy preferredContact } } }"
 		let graphObject = GQuery(query: query)
@@ -107,6 +109,15 @@ class ProfileController {
 				let userProfile = userProfileContainer.userProfile
 				self.userProfile = userProfile
 				completion(.success(userProfile))
+
+				self.fetchImage(url: userProfile.pictureURL) { (result: Result<Data, NetworkError>) in
+					do {
+						self.userProfile?.photoData = try result.get()
+					} catch {
+						NSLog("Error loading initial image: \(error)")
+					}
+				}
+
 			} catch NetworkError.dataCodingError(let error, let dataSource) {
 				print("")
 				NSLog("Error decoding current user: \(error)")
@@ -146,6 +157,10 @@ class ProfileController {
 		return (idClaims, request)
 	}
 
+	func fetchImage(url: URL, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+		networkHandler.transferMahDatas(with: url.request, usingCache: true, completion: completion)
+	}
+
 	// MARK: - Local Storage
 	private let fm = FileManager.default
 	private let profileCacheFilename = "profile.plist"
@@ -175,7 +190,10 @@ class ProfileController {
 	}
 
 	private func saveProfileToCache() {
-		guard let profile = userProfile else { return }
+		guard let profile = userProfile else {
+			deleteProfileCache()
+			return
+		}
 
 		let data: Data
 		do {
@@ -189,6 +207,14 @@ class ProfileController {
 			try data.write(to: profileCacheURL)
 		} catch {
 			NSLog("Error saving profile cache: \(error)")
+		}
+	}
+
+	private func deleteProfileCache() {
+		do {
+			try fm.removeItem(at: profileCacheURL)
+		} catch {
+			NSLog("Error deleting profile cache: \(error)")
 		}
 	}
 }
