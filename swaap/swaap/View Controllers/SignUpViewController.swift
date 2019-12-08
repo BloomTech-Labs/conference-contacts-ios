@@ -42,8 +42,10 @@ class SignUpViewController: UIViewController, AuthAccessor {
 					self?.present(alertVC, animated: true)
 					return
 				}
-				// FIXME: Probably don't dismiss unless we automatically log the user in
-//				self?.parent?.dismiss(animated: true)
+
+				let alertVC = UIAlertController(title: "Signup Successful!", message: "You've created an account with the email address '\(email)'! Please sign in to continue.", preferredStyle: .alert)
+				alertVC.addAction(UIAlertAction(title: "Woohoo!", style: .default))
+				self?.present(alertVC, animated: true)
 			}
 		})
 
