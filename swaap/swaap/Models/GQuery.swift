@@ -8,9 +8,15 @@
 
 import Foundation
 
-struct GQuery<T: Codable>: Codable {
+typealias GQuery = GQMutation<String>
+struct GQMutation<T: Codable>: Codable {
 	let query: String
 	let variables: [String: T]?
+
+	init(query: String, variables: [String: T]? = nil) {
+		self.query = query
+		self.variables = variables
+	}
 }
 
 struct UserMutationResponse: Codable {

@@ -30,7 +30,11 @@ class ProfileController {
 	var graphqlURL: URL {
 		baseURL.appendingPathComponent("graphql")
 	}
-	let networkHandler = NetworkHandler()
+	let networkHandler: NetworkHandler = {
+		let networkHandler = NetworkHandler()
+		networkHandler.graphQLErrorSupport = true
+		return networkHandler
+	}()
 
 	// MARK: - Lifecycle
 	init(authManager: AuthManager) {
@@ -46,9 +50,9 @@ class ProfileController {
 		var request = cRequest
 
 		let mutation = "mutation CreateUser($user: CreateUserInput!) { createUser(data: $user) { success code message } }"
-		let userInfo = ["user": CreateUser(sub: idClaims.sub, name: idClaims.name, picture: idClaims.picture, email: idClaims.email)]
+		let userInfo = ["user": CreateUser(name: idClaims.name, picture: idClaims.picture, email: idClaims.email)]
 
-		let graphObject = GQuery(query: mutation, variables: userInfo)
+		let graphObject = GQMutation(query: mutation, variables: userInfo)
 
 		do {
 			request.httpBody = try JSONEncoder().encode(graphObject)
@@ -58,7 +62,7 @@ class ProfileController {
 			return
 		}
 
-		request.expectedResponseCodes = [201]
+		request.expectedResponseCodes = 200 // getting incorrect code back from server - should be 201
 		networkHandler.transferMahCodableDatas(with: request) { (result: Result<[String: [String: UserMutationResponse]], NetworkError>) in
 			do {
 				let responseDict = try result.get()
