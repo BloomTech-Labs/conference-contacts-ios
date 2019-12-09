@@ -13,5 +13,16 @@ struct ProfileNugget: Codable {
 	let authID: String
 	let type: ProfileFieldType
 	let privacy: ProfileFieldPrivacy
-	let preferredContact: Bool
+	var preferredContact: Bool
+
+	var socialType: SocialButton.SocialPlatform {
+		switch type {
+		case .email:
+			return .email
+		case .phone:
+			return .phone
+		case .social:
+			return .instagram
+		}
+	}
 }
