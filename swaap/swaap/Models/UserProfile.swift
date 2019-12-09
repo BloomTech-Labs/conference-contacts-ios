@@ -35,6 +35,7 @@ struct UserProfile: Codable, Equatable {
 		case industry
 		case jobtitle
 		case bio
+		case profileNuggets = "profile"
 	}
 
 	let id: String
@@ -46,6 +47,7 @@ struct UserProfile: Codable, Equatable {
 	let industry: String?
 	let jobtitle: String?
 	let bio: String?
+	let profileNuggets: [ProfileNugget]
 
 	var pictureURL: URL {
 		URL(string: pictureString ?? "") ?? URL(string: "https://placekitten.com/1000/1000")!
