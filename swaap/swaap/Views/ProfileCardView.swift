@@ -20,6 +20,10 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var chevron: ChevronView!
 	@IBOutlet private weak var leftImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
+	@IBOutlet private weak var nameLabel: UILabel!
+	@IBOutlet private weak var jobTitleLabel: UILabel!
+	@IBOutlet private weak var locationLabel: UILabel!
+	@IBOutlet private weak var industryLabel: UILabel!
 	// FIXME: - just for testing - remove
 	@IBOutlet private weak var stackView: UIStackView!
 

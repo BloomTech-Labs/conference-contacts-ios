@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evD-mI-al0">
-                                <rect key="frame" x="119.66666666666669" y="732" width="175" height="30"/>
+                                <rect key="frame" x="100" y="648" width="175" height="30"/>
                                 <state key="normal" title="Show Profile/Print Tokens"/>
                                 <connections>
                                     <action selector="buttonPressed:" destination="cbb-Ra-eaB" eventType="touchUpInside" id="5UI-L8-aVp"/>
@@ -713,10 +713,10 @@
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <image name="signature" catalog="system" width="64" height="44"/>
         <namedColor name="Swaap Accent Color 1">
-            <color red="0.33002719283103943" green="0.64389270544052124" blue="0.8921654224395752" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Swaap Accent color 2">
-            <color red="0.040000000000000001" green="0.49000002741813659" blue="0.68000005483627324" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.039999999105930328" green="0.49000000953674316" blue="0.68000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
