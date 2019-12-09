@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ProfileNugget: Codable {
+struct ProfileNugget: Codable, Hashable {
+	let id: String
 	let value: String
-	let authID: String
 	let type: ProfileFieldType
 	let privacy: ProfileFieldPrivacy
 	var preferredContact: Bool
