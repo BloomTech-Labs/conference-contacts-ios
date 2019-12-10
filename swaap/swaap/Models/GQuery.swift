@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import NetworkHandler
 
 typealias GQuery = GQMutation<String>
 struct GQMutation<T: Codable>: Codable {
@@ -24,4 +25,23 @@ struct UserMutationResponse: Codable {
 	let success: Bool
 	let message: String
 	let user: UserProfile?
+}
+
+struct UserMutationResponseContainer: Decodable {
+	let response: UserMutationResponse
+
+	enum CodingKeys: String, CodingKey {
+		case data
+		case createUser
+		case updateUser
+	}
+
+	init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		let dataContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .data)
+		guard let key = dataContainer.allKeys.first else {
+			throw NetworkError.unspecifiedError(reason: "Error decoding response: \(dataContainer.codingPath) - \(dataContainer)")
+		}
+		response = try dataContainer.decode(UserMutationResponse.self, forKey: key)
+	}
 }

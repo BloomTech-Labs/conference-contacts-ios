@@ -90,15 +90,12 @@ class ProfileController {
 			return
 		}
 
-		request.expectedResponseCodes = 200 // getting incorrect code back from server - should be 201
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<[String: [String: UserMutationResponse]], NetworkError>) in
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserMutationResponseContainer, NetworkError>) in
 			do {
-				let responseDict = try result.get()
-				guard let userMutationResponse = responseDict["data"]?["createUser"] else {
-					completion?(false)
-					return
-				}
-				completion?(userMutationResponse.success)
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion?(response.success)
 			} catch NetworkError.httpNon200StatusCode(let code, let data) {
 				NSLog("Error creating server profile with code: \(code): \(String(data: data!, encoding: .utf8)!)")
 				completion?(false)
