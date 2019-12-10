@@ -31,7 +31,7 @@ struct UserProfile: Codable, Equatable {
 		case name
 		case pictureString = "picture"
 		case birthdate
-		case gender
+		case location
 		case industry
 		case jobtitle
 		case bio
@@ -43,7 +43,7 @@ struct UserProfile: Codable, Equatable {
 	let name: String
 	private let pictureString: String?
 	let birthdate: String?
-	let gender: ProfileUserGender?
+	let location: String
 	let industry: String?
 	let jobtitle: String?
 	let bio: String?
@@ -59,4 +59,40 @@ struct CreateUser: Codable {
 	let name: String
 	let picture: URL?
 	let email: String
+}
+
+struct UpdateUser: Codable {
+	let name: String?
+	let picture: URL?
+	let birthdate: String?
+	let location: String?
+	let industry: String?
+	let jobtitle: String?
+	let bio: String?
+
+	init(name: String? = nil,
+		 picture: URL? = nil,
+		 birthdate: String? = nil,
+		 location: String? = nil,
+		 industry: String? = nil,
+		 jobtitle: String? = nil,
+		 bio: String? = nil) {
+		self.name = name
+		self.picture = picture
+		self.birthdate = birthdate
+		self.location = location
+		self.industry = industry
+		self.jobtitle = jobtitle
+		self.bio = bio
+	}
+
+	init(userProfile: UserProfile) {
+		name = userProfile.name
+		picture = userProfile.pictureURL
+		birthdate = userProfile.birthdate
+		location = userProfile.location
+		industry = userProfile.industry
+		jobtitle = userProfile.jobtitle
+		bio = userProfile.bio
+	}
 }

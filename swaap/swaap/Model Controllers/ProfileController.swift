@@ -70,41 +70,40 @@ class ProfileController {
 	}
 
 	// MARK: - Networking
-	func createProfileOnServer(completion: ((Bool) -> Void)? = nil) {
+	// MARK: - Profile
+	func createProfileOnServer(completion: ((Result<GQLMutationResponse, NetworkError>) -> Void)? = nil) {
 		guard let (idClaims, cRequest) = networkCommon() else {
-			completion?(false)
+			completion?(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
 		}
 		var request = cRequest
 
 		let mutation = "mutation CreateUser($user: CreateUserInput!) { createUser(data: $user) { success code message } }"
-		let userInfo = ["user": CreateUser(name: idClaims.name, picture: idClaims.picture, email: idClaims.email)]
-
-		let graphObject = GQMutation(query: mutation, variables: userInfo)
-
+		let createUser = CreateUser(name: idClaims.name, picture: idClaims.picture, email: idClaims.email)
 		do {
-			request.httpBody = try JSONEncoder().encode(graphObject)
+			let userDict = try createUser.toDict()
+			let variables = ["user": userDict]
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
-			completion?(false)
+			completion?(.failure(.dataCodingError(specifically: error, sourceData: nil)))
 			return
 		}
 
-		request.expectedResponseCodes = 200 // getting incorrect code back from server - should be 201
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<[String: [String: UserMutationResponse]], NetworkError>) in
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
-				let responseDict = try result.get()
-				guard let userMutationResponse = responseDict["data"]?["createUser"] else {
-					completion?(false)
-					return
-				}
-				completion?(userMutationResponse.success)
-			} catch NetworkError.httpNon200StatusCode(let code, let data) {
-				NSLog("Error creating server profile with code: \(code): \(String(data: data!, encoding: .utf8)!)")
-				completion?(false)
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion?(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error creating server profile: \(error)")
+				completion?(.failure(error))
 			} catch {
 				NSLog("Error creating server profile: \(error)")
-				completion?(false)
+				completion?(.failure(NetworkError.otherError(error: error)))
 			}
 		}
 	}
@@ -121,7 +120,7 @@ class ProfileController {
 		let graphObject = GQuery(query: query)
 
 		do {
-			request.httpBody = try JSONEncoder().encode(graphObject)
+			request.httpBody = try graphObject.jsonData()
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
@@ -137,23 +136,26 @@ class ProfileController {
 				self.userProfile = userProfile
 				completion(.success(userProfile))
 			} catch NetworkError.dataCodingError(let error, let dataSource) {
-				print("")
 				NSLog("Error decoding current user: \(error)")
-				print("")
 				print(String(data: dataSource ?? Data(), encoding: .utf8) ?? "")
-				print("")
 			} catch NetworkError.graphQLError(let graphQLError) {
 				// only attempt creation if error code relating to user not existing ocurrs
 				// I don't know if its guaranteed to be consistent that no user existing will always have an error like this
 				// but it's the best we got right now
 				if graphQLError.message.contains("'authId' of null") && graphQLError.extensions.code == "INTERNAL_SERVER_ERROR" {
-					self.createProfileOnServer { success in
-						if success {
-							self.fetchProfileFromServer(completion: completion)
-						} else {
-							completion(.failure(NetworkError.graphQLError(error: graphQLError)))
-							print("")
-							NSLog("Error fetching current user \(#line) \(#file): \(graphQLError)")
+					self.createProfileOnServer { result in
+						do {
+							let response = try result.get()
+							if response.success {
+								self.fetchProfileFromServer(completion: completion)
+							} else {
+								completion(.failure(NetworkError.graphQLError(error: graphQLError)))
+								NSLog("Error fetching current user \(#line) \(#file): \(graphQLError)")
+							}
+						} catch let error as NetworkError {
+							completion(.failure(error))
+						} catch {
+							completion(.failure(NetworkError.otherError(error: error)))
 						}
 					}
 				} else {
@@ -162,8 +164,130 @@ class ProfileController {
 			} catch {
 				// attempt user creation if fetching fails
 				NSLog("Error fetching current user \(#line) \(#file): \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
 		}
+	}
+
+	func updateProfile(_ userProfile: UserProfile, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		let mutation = "mutation ($data: UpdateUserInput!) { updateUser(data:$data) { success code message } }"
+		let userInfo = UpdateUser(userProfile: userProfile)
+
+		do {
+			let updateDict = try userInfo.toDict()
+			let variables = ["data": updateDict]
+			let graphObject = GQMutation(query: mutation, variables: variables)
+			
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding user update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(error))
+			} catch {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	// MARK: - Nuggets
+	/// create or update a profile nugget on the backend contextually. if an id is present, updates. if not, creates.
+	func modifyProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		do {
+			let mutation: String
+			let variables: [String: Any]?
+			let nuggetInfo = MutateProfileNugget(nugget: nugget)
+			let nuggetData = try nuggetInfo.toDict()
+
+			if let id = nugget.id {
+				mutation = "mutation ($id: ID!, $data: UpdateProfileFieldInput!) { updateProfileField(id:$id,data:$data) { success code message } }"
+				variables = ["data": nuggetData, "id": id]
+			} else {
+				mutation = "mutation ($data: CreateProfileFieldInput!) { createProfileField(data:$data) { success code message } }"
+				variables = ["data": nuggetData]
+			}
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding user update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error updating profile nugget: \(error)")
+				completion(.failure(error))
+			} catch {
+				NSLog("Error updating profile nugget: \(error)")
+				completion(.failure(NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	func deleteProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		guard let id = nugget.id else {
+			completion(.failure(.unspecifiedError(reason: "Attempted to delete a nugget without an id: \(nugget)")))
+			return
+		}
+		let mutation = "mutation($id:ID!) { deleteProfileField(id: $id) { success code message } }"
+		do {
+			let query = GQuery(query: mutation, variables: ["id": id])
+
+			request.httpBody = try query.jsonData()
+		} catch {
+			NSLog("Failed encoding user update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(error))
+			} catch {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(NetworkError.otherError(error: error)))
+			}
+		}
+
 	}
 
 	private func networkCommon() -> (Auth0IDClaims, NetworkRequest)? {
