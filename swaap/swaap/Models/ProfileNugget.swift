@@ -15,17 +15,6 @@ struct ProfileNugget: Codable, Hashable {
 	let privacy: ProfileFieldPrivacy
 	var preferredContact: Bool
 
-	var socialType: SocialButton.SocialPlatform {
-		switch type {
-		case .email:
-			return .email
-		case .phone:
-			return .phone
-		case .social:
-			return .twitter
-		}
-	}
-
 	init(id: String? = nil, value: String, type: ProfileFieldType, privacy: ProfileFieldPrivacy = .connected, preferredContact: Bool = false) {
 		self.id = id
 		self.value = value

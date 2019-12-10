@@ -19,7 +19,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	var placeholderStr: String = "enter info"
 	var labelText: String?
 	// FIXME: - Update when backend provides all social platforms
-	var socialType: SocialButton.SocialPlatform?
+	var socialType: ProfileFieldType?
 	let successfulCompletion: SocialLinkCompletion
 	typealias SocialLinkCompletion = (SocialLink) -> Void
 

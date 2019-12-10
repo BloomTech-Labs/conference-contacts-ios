@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 struct SocialLink {
-	let socialType: SocialButton.SocialPlatform?
+	let socialType: ProfileFieldType?
 	let value: String
 }
 
@@ -146,12 +146,10 @@ class EditProfileViewController: UIViewController {
 		return inputVC
 	}
 
-	let hardcodedTemporarySocialType = ProfileFieldType.social
-
 	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in
-			let value = socialLink.value
-			let nugget = ProfileNugget(value: value, type: self.hardcodedTemporarySocialType)
+			guard let type = socialLink.socialType else { return }
+			let nugget = ProfileNugget(value: socialLink.value, type: type)
 			self.addSocialNugget(nugget: nugget)
 		}
 		inputVC?.autoCapitalizationType = .none
@@ -181,7 +179,8 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 
 	func editCellInvoked(on cellView: SocialLinkCellView) {
 		let inputVCCompletion = { (socialLink: SocialLink) in
-			let nugget = ProfileNugget(id: cellView.nugget.id, value: socialLink.value, type: self.hardcodedTemporarySocialType)
+			guard let type = socialLink.socialType else { return }
+			let nugget = ProfileNugget(id: cellView.nugget.id, value: socialLink.value, type: type)
 			cellView.nugget = nugget
 		}
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
