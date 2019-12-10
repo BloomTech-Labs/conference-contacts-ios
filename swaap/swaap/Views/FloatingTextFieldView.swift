@@ -86,7 +86,6 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	}
 
 	// MARK: - Textfield Formatting
-
 	private func formatTextField() {
 		guard let socialType = socialType else { return }
 		switch socialType {
@@ -254,7 +253,6 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		cell.socialButton.addTarget(self, action: #selector(didSelectSocialButton(_:)), for: .touchUpInside)
 		return cell
 	}
-
 
 	@objc func didSelectSocialButton(_ sender: SocialButton) {
 		socialType = sender.socialInfo.socialPlatform

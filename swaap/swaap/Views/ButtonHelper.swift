@@ -1,10 +1,9 @@
- //
+//
 //  ButtonHelper.swift
 //  swaap
 //
 //  Created by Marlon Raskin on 11/14/19.
 //  Copyright © 2019 swaap. All rights reserved.
-//
 
 import UIKit
 
