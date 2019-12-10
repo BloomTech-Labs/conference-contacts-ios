@@ -39,7 +39,7 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
-	var socialPlatform: (socialPlatform: SocialPlatform, info: String) = (.instagram, "@marlonjames") {
+	var socialInfo: (socialPlatform: SocialPlatform, info: String) = (.instagram, "@marlonjames") {
 		didSet {
 			updateSocialPlatformType()
 		}
@@ -98,8 +98,8 @@ class SocialButton: IBPreviewControl {
 	}
 
 	private func updateSocialPlatformType() {
-		let platform = socialPlatform.socialPlatform
-		let info = socialPlatform.info
+		let platform = socialInfo.socialPlatform
+		let info = socialInfo.info
 		switch platform {
 		case .phone:
 			mainColorBackgroundView.backgroundColor = .systemGreen

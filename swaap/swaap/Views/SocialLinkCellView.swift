@@ -74,7 +74,7 @@ class SocialLinkCellView: UIView {
 
 	private func updateViews() {
 		socialButton.smallButton = true
-		socialButton.socialPlatform.socialPlatform = nugget.socialType
+		socialButton.socialInfo.socialPlatform = nugget.socialType
 		valueLabel.text = nugget.value
 		starButton.tintColor = nugget.preferredContact ? .systemOrange : .systemGray3
 	}
