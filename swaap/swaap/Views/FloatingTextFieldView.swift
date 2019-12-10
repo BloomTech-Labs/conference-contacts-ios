@@ -77,6 +77,10 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		self.backgroundColor = .clear
 	}
 
+	override func becomeFirstResponder() -> Bool {
+		textField.becomeFirstResponder()
+	}
+
 	@objc func hideKeyboardAction() {
 		textField.resignFirstResponder()
 	}
@@ -88,25 +92,25 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		switch socialType {
 		case .email:
 			textField.placeholder = "add an email address"
-			changeKeyboard(type: .emailAddress, dummyTextField: dummyTextField)
+			changeKeyboard(type: .emailAddress)
 		case .facebook:
 			textField.placeholder = "add your Facebook username"
-			changeKeyboard(type: .default, dummyTextField: dummyTextField)
+			changeKeyboard(type: .default)
 		case .instagram:
 			textField.placeholder = "add your Instagram username"
-			changeKeyboard(type: .default, dummyTextField: dummyTextField)
+			changeKeyboard(type: .default)
 		case .linkedIn:
 			textField.placeholder = "add your LinkedIn username"
-			changeKeyboard(type: .default, dummyTextField: dummyTextField)
+			changeKeyboard(type: .default)
 		case .phone:
 			textField.placeholder = "add a phone number"
-			changeKeyboard(type: .numberPad, dummyTextField: dummyTextFieldWithNumPad)
+			changeKeyboard(type: .numberPad)
 		case .text:
 			textField.placeholder = "add a phone number"
-			changeKeyboard(type: .numberPad, dummyTextField: dummyTextFieldWithNumPad)
+			changeKeyboard(type: .numberPad)
 		case .twitter:
 			textField.placeholder = "add your Twitter handle"
-			changeKeyboard(type: .twitter, dummyTextField: dummyTextField)
+			changeKeyboard(type: .twitter)
 		}
 	}
 
@@ -117,15 +121,8 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		return dummyTextField
 	}()
 
-	lazy var dummyTextFieldWithNumPad: UITextField = {
-		let dummyTextField = UITextField()
-		superview?.addSubview(dummyTextField)
-		dummyTextField.keyboardType = .numberPad
-		dummyTextField.isHidden = true
-		return dummyTextField
-	}()
-
-	private func changeKeyboard(type: UIKeyboardType, dummyTextField: UITextField) {
+	private func changeKeyboard(type: UIKeyboardType) {
+		dummyTextField.keyboardType = type
 		dummyTextField.becomeFirstResponder()
 		textField.keyboardType = type
 		textField.becomeFirstResponder()
@@ -164,7 +161,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		formatTextField()
 		if let socialType = socialType {
 			socialButton.isVisible = true
-			socialButton.socialPlatform.socialPlatform = socialType
+			socialButton.socialInfo.socialPlatform = socialType
 		} else {
 			socialButton.isVisible = false
 		}
@@ -172,15 +169,18 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		plusButton.isEnabled = plusButton.isVisible
 	}
 
-	func makeFirstResponder(_ needsSocialTextField: Bool, _ placeholderText: String, labelText: String?, capitalizationType: UITextAutocapitalizationType) {
+	func makeFirstResponder(needsSocialTextField: Bool,
+							placeholderText: String,
+							labelText: String?,
+							capitalizationType: UITextAutocapitalizationType,
+							socialType: SocialButton.SocialPlatform?) {
 		textField.text = labelText
-		if needsSocialTextField {
-			textField.autocapitalizationType = capitalizationType
-			textField.becomeFirstResponder()
-		} else {
+		textField.autocapitalizationType = capitalizationType
+		textField.becomeFirstResponder()
+		self.socialType = socialType
+		if !needsSocialTextField {
 			hideAllSocialElements()
 			textField.placeholder = placeholderText
-			textField.becomeFirstResponder()
 		}
 	}
 
@@ -257,7 +257,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 
 	@objc func didSelectSocialButton(_ sender: SocialButton) {
-		socialType = sender.socialPlatform.socialPlatform
+		socialType = sender.socialInfo.socialPlatform
 		shouldShowCollectionView(false)
 	}
 }

@@ -22,7 +22,7 @@ struct ProfileNugget: Codable, Hashable {
 		case .phone:
 			return .phone
 		case .social:
-			return .instagram
+			return .twitter
 		}
 	}
 }

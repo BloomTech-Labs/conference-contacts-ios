@@ -18,6 +18,8 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	var autoCapitalizationType: UITextAutocapitalizationType = .sentences
 	var placeholderStr: String = "enter info"
 	var labelText: String?
+	// FIXME: - Update when backend provides all social platforms
+	var socialType: SocialButton.SocialPlatform?
 	let successfulCompletion: SocialLinkCompletion
 	typealias SocialLinkCompletion = (SocialLink) -> Void
 
@@ -30,15 +32,24 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	required init?(coder: NSCoder) {
 		fatalError("Init coder not implemented")
 	}
+
 	override func viewDidLoad() {
         super.viewDidLoad()
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-		floatingTextFieldView.makeFirstResponder(needsSocialTextField, placeholderStr, labelText: labelText, capitalizationType: autoCapitalizationType)
+		floatingTextFieldView.makeFirstResponder(needsSocialTextField: needsSocialTextField,
+												 placeholderText: placeholderStr,
+												 labelText: labelText,
+												 capitalizationType: autoCapitalizationType,
+												 socialType: socialType)
 		floatingTextFieldView.delegate = self
-
 		tapToDismissGesture.delegate = self
+	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		floatingTextFieldView.becomeFirstResponder()
 	}
 
 	@objc func keyboardWillShow(notification: NSNotification) {
