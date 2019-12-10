@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD21023A031C800074F28 /* Codable+ToDict.swift */; };
 		3345A34F2390C6B700859F29 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3345A34E2390C6B700859F29 /* VectorTests.swift */; };
 		335A520B23910C5100FA5623 /* RangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335A520A23910C5100FA5623 /* RangeExtensions.swift */; };
 		335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668C237B6BAA0099EEA1 /* ContactsController.swift */; };
@@ -157,6 +158,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		332FD21023A031C800074F28 /* Codable+ToDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+ToDict.swift"; sourceTree = "<group>"; };
 		3345A34E2390C6B700859F29 /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
 		335A520A23910C5100FA5623 /* RangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtensions.swift; sourceTree = "<group>"; };
 		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				375CBF242391EB6700C3D50A /* HapticFeedback.swift */,
 				3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */,
 				3797A56F2388637800CB8621 /* Storyboarded.swift */,
+				332FD21023A031C800074F28 /* Codable+ToDict.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
 				33F0EA61239872A0004D1236 /* Auth0Claims.swift in Sources */,
+				332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */,
 				3797A56E23885E9C00CB8621 /* ProfileViewController.swift in Sources */,
 				33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */,
 				37218B03238FA161008BFC24 /* FontHelper.swift in Sources */,

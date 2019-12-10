@@ -79,12 +79,13 @@ class ProfileController {
 		var request = cRequest
 
 		let mutation = "mutation CreateUser($user: CreateUserInput!) { createUser(data: $user) { success code message } }"
-		let userInfo = ["user": CreateUser(name: idClaims.name, picture: idClaims.picture, email: idClaims.email)]
-
-		let graphObject = GQMutation(query: mutation, variables: userInfo)
-
+		let createUser = CreateUser(name: idClaims.name, picture: idClaims.picture, email: idClaims.email)
 		do {
-			request.httpBody = try JSONEncoder().encode(graphObject)
+			let userDict = try createUser.toDict()
+			let variables = ["user": userDict]
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
 			completion?(.failure(.dataCodingError(specifically: error, sourceData: nil)))
@@ -119,7 +120,7 @@ class ProfileController {
 		let graphObject = GQuery(query: query)
 
 		do {
-			request.httpBody = try JSONEncoder().encode(graphObject)
+			request.httpBody = try graphObject.jsonData()
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
@@ -175,12 +176,14 @@ class ProfileController {
 		}
 
 		let mutation = "mutation ($data: UpdateUserInput!) { updateUser(data:$data) { success code message } }"
-		let userInfo = ["data": UpdateUser(userProfile: userProfile)]
-
-		let graphObject = GQMutation(query: mutation, variables: userInfo)
+		let userInfo = UpdateUser(userProfile: userProfile)
 
 		do {
-			request.httpBody = try JSONEncoder().encode(graphObject)
+			let updateDict = try userInfo.toDict()
+			let variables = ["data": updateDict]
+			let graphObject = GQMutation(query: mutation, variables: variables)
+			
+			request.httpBody = try graphObject.jsonData()
 		} catch {
 			NSLog("Failed encoding user update: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
@@ -211,19 +214,22 @@ class ProfileController {
 			return
 		}
 
-		let mutation: String
-		if let id = nugget.id {
-			fatalError("update not implemented yet")
-			// probably this mutation?
-			mutation = "mutation ($data: UpdateProfileFieldInput!) { updateProfileField(data:$data) { success code message } }"
-		} else {
-			mutation = "mutation ($data: CreateProfileFieldInput!) { createProfileField(data:$data) { success code message } }"
-		}
-		let nuggetInfo = ["data": MutateProfileNugget(nugget: nugget)]
-		let graphObject = GQMutation(query: mutation, variables: nuggetInfo)
-
 		do {
-			request.httpBody = try JSONEncoder().encode(graphObject)
+			let mutation: String
+			let variables: [String: Any]?
+			let nuggetInfo = MutateProfileNugget(nugget: nugget)
+			let nuggetData = try nuggetInfo.toDict()
+
+			if let id = nugget.id {
+				mutation = "mutation ($id: ID!, $data: UpdateProfileFieldInput!) { updateProfileField(id:$id,data:$data) { success code message } }"
+				variables = ["data": nuggetData, "id": id]
+			} else {
+				mutation = "mutation ($data: CreateProfileFieldInput!) { createProfileField(data:$data) { success code message } }"
+				variables = ["data": nuggetData]
+			}
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
 		} catch {
 			NSLog("Failed encoding user update: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
@@ -257,12 +263,10 @@ class ProfileController {
 			return
 		}
 		let mutation = "mutation($id:ID!) { deleteProfileField(id: $id) { success code message } }"
-		let userInfo = ["id": id]
-
-		let graphObject = GQMutation(query: mutation, variables: userInfo)
-
 		do {
-			request.httpBody = try JSONEncoder().encode(graphObject)
+			let query = GQuery(query: mutation, variables: ["id": id])
+
+			request.httpBody = try query.jsonData()
 		} catch {
 			NSLog("Failed encoding user update: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))

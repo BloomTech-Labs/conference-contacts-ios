@@ -9,17 +9,28 @@
 import Foundation
 import NetworkHandler
 
-typealias GQuery = GQMutation<String>
-struct GQMutation<T: Codable>: Codable {
+// MARK: - sending
+typealias GQuery = GQMutation
+struct GQMutation {
 	let query: String
-	let variables: [String: T]?
+	let variables: [String: Any]?
 
-	init(query: String, variables: [String: T]? = nil) {
+	init(query: String, variables: [String: Any]? = nil) {
 		self.query = query
 		self.variables = variables
 	}
+
+	func jsonData(_ prettyPrinted: Bool = false) throws -> Data {
+		var theDict: [String: Any] = ["query": query]
+		if let variables = variables {
+			theDict["variables"] = variables
+		}
+		let options = prettyPrinted ? JSONSerialization.WritingOptions.prettyPrinted : []
+		return try JSONSerialization.data(withJSONObject: theDict, options: options)
+	}
 }
 
+// MARK: - receiving
 struct GQLMutationResponse: Codable {
 	let code: Int
 	let success: Bool
