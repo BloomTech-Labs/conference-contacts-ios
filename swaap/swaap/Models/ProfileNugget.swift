@@ -25,10 +25,8 @@ struct ProfileNugget: Codable, Hashable {
 			return .twitter
 		}
 	}
-}
 
-extension ProfileNugget {
-	init(value: String, type: ProfileFieldType, privacy: ProfileFieldPrivacy = .connected, preferredContact: Bool = false) {
+	init(id: String? = nil, value: String, type: ProfileFieldType, privacy: ProfileFieldPrivacy = .connected, preferredContact: Bool = false) {
 		self.id = nil
 		self.value = value
 		self.type = type
@@ -36,6 +34,7 @@ extension ProfileNugget {
 		self.preferredContact = preferredContact
 	}
 }
+
 
 extension Array where Element == ProfileNugget {
 	var preferredContact: ProfileNugget? {

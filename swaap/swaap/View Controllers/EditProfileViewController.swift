@@ -181,7 +181,7 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 
 	func editCellInvoked(on cellView: SocialLinkCellView) {
 		let inputVCCompletion = { (socialLink: SocialLink) in
-			let nugget = ProfileNugget(value: socialLink.value, type: self.hardcodedTemporarySocialType)
+			let nugget = ProfileNugget(id: cellView.nugget.id, value: socialLink.value, type: self.hardcodedTemporarySocialType)
 			cellView.nugget = nugget
 		}
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
