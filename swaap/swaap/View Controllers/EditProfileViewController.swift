@@ -154,13 +154,23 @@ class EditProfileViewController: UIViewController {
 			let nugget = ProfileNugget(value: value, type: self.hardcodedTemporarySocialType)
 			self.addSocialNugget(nugget: nugget)
 		}
+		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
 }
 
 extension EditProfileViewController: SocialLinkCellViewDelegate {
 	func deleteButtonPressed(on cellView: SocialLinkCellView) {
-		guard socialLinkCellViews.count >= 2 else { return }
+		guard socialLinkCellViews.count >= 2 else {
+			let alert = UIAlertController(title: "At least one preferred mode of contact is needed",
+										  message: """
+			This is the contact button that shows on your profile card and it's how others will try and reach out to you first
+			""", preferredStyle: .alert)
+			let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(alertAction)
+			present(alert, animated: true, completion: nil)
+			return
+		}
 		removeNugget(nugget: cellView.nugget)
 	}
 
@@ -177,6 +187,7 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
 			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion)
 		}
+		inputVC.socialType = .twitter
 		inputVC.labelText = cellView.nugget.value
 		inputVC.modalPresentationStyle = .overFullScreen
 		present(inputVC, animated: true)

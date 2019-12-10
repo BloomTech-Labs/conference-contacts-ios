@@ -13,10 +13,10 @@ class SocialButtonCollectionViewCell: UICollectionViewCell {
 	let socialButton: SocialButton = SocialButton()
 	var socialButtonType: SocialButton.SocialPlatform {
 		get {
-			socialButton.socialPlatform.socialPlatform
+			socialButton.socialInfo.socialPlatform
 		}
 		set {
-			socialButton.socialPlatform.socialPlatform = newValue
+			socialButton.socialInfo.socialPlatform = newValue
 		}
 	}
 
