@@ -17,11 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evD-mI-al0">
-                                <rect key="frame" x="100" y="648" width="175" height="30"/>
+                                <rect key="frame" x="100" y="599" width="175" height="30"/>
                                 <state key="normal" title="Show Profile/Print Tokens"/>
                                 <connections>
                                     <action selector="buttonPressed:" destination="cbb-Ra-eaB" eventType="touchUpInside" id="5UI-L8-aVp"/>
-                                    <segue destination="j9t-B2-wS8" kind="show" id="8en-5M-PBU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -36,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVb-0w-niQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="449" y="142"/>
+            <point key="canvasLocation" x="482" y="-605"/>
         </scene>
         <!--Connect-->
         <scene sceneID="2C4-Bh-qqa">
@@ -266,6 +265,45 @@
                                 </constraints>
                                 <blurEffect style="systemUltraThinMaterial"/>
                             </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWn-LD-Q5h">
+                                <rect key="frame" x="28" y="639" width="40" height="40"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DLJ-Sr-Pgd">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9K-HF-Xq5">
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Ku0-1F-7Ka">
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S36-ia-cad">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" image="chevron.left" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="cbb-Ra-eaB" kind="show" id="rGK-aV-if0"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="S36-ia-cad" secondAttribute="trailing" id="3Vl-6S-K49"/>
+                                        <constraint firstItem="S36-ia-cad" firstAttribute="leading" secondItem="DLJ-Sr-Pgd" secondAttribute="leading" id="gaD-lZ-Umw"/>
+                                        <constraint firstItem="S36-ia-cad" firstAttribute="top" secondItem="DLJ-Sr-Pgd" secondAttribute="top" id="tdV-16-zKr"/>
+                                        <constraint firstAttribute="bottom" secondItem="S36-ia-cad" secondAttribute="bottom" id="uLj-Lt-zXt"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="OHg-ju-NhW"/>
+                                    <constraint firstAttribute="width" secondItem="BWn-LD-Q5h" secondAttribute="height" id="qba-ar-h2q"/>
+                                </constraints>
+                                <blurEffect style="systemUltraThinMaterial"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -274,6 +312,7 @@
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="uVY-7s-0Rc" secondAttribute="bottom" constant="40" id="7dD-mx-ibr"/>
                             <constraint firstItem="Emm-zV-NSj" firstAttribute="bottom" secondItem="2AK-bp-vhK" secondAttribute="bottom" id="AAX-ko-z2u"/>
                             <constraint firstItem="e8g-r6-4Ad" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="B6B-uy-t7H"/>
+                            <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="BWn-LD-Q5h" secondAttribute="bottom" constant="50" id="KZ0-eH-fe4"/>
                             <constraint firstItem="HPr-IH-wav" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" constant="8" id="Q8H-z6-JpE"/>
                             <constraint firstItem="uVY-7s-0Rc" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="20" id="awe-CX-foi"/>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="HPr-IH-wav" secondAttribute="trailing" constant="28" id="iM6-NL-2gK"/>
@@ -281,6 +320,7 @@
                             <constraint firstItem="e8g-r6-4Ad" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" constant="8" id="uZ0-tE-AsH"/>
                             <constraint firstItem="Emm-zV-NSj" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" id="wyF-cp-GWi"/>
                             <constraint firstItem="Emm-zV-NSj" firstAttribute="trailing" secondItem="2AK-bp-vhK" secondAttribute="trailing" id="yPu-I4-Sbz"/>
+                            <constraint firstItem="BWn-LD-Q5h" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="yzo-u6-aSL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
                     </view>
@@ -817,12 +857,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="cbb-Ra-eaB" kind="relationship" relationship="rootViewController" id="NnN-J7-BRh"/>
+                        <segue destination="j9t-B2-wS8" kind="relationship" relationship="rootViewController" id="r3J-jf-SV1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O8f-6b-egK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-262.31884057971018" y="141.96428571428569"/>
+            <point key="canvasLocation" x="380" y="142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="onI-MA-v49">
