@@ -60,3 +60,33 @@ struct CreateUser: Codable {
 	let picture: URL?
 	let email: String
 }
+
+struct UpdateUser: Codable {
+	let name: String?
+	let picture: URL?
+	let birthdate: String?
+	let gender: ProfileUserGender?
+	let industry: String?
+	let jobtitle: String?
+	let bio: String?
+
+	init(name: String? = nil, picture: URL? = nil, birthdate: String? = nil, gender: ProfileUserGender? = nil, industry: String? = nil, jobtitle: String? = nil, bio: String? = nil) {
+		self.name = name
+		self.picture = picture
+		self.birthdate = birthdate
+		self.gender = gender
+		self.industry = industry
+		self.jobtitle = jobtitle
+		self.bio = bio
+	}
+
+	init(userProfile: UserProfile) {
+		name = userProfile.name
+		picture = userProfile.pictureURL
+		birthdate = userProfile.birthdate
+		gender = userProfile.gender
+		industry = userProfile.industry
+		jobtitle = userProfile.jobtitle
+		bio = userProfile.bio
+	}
+}

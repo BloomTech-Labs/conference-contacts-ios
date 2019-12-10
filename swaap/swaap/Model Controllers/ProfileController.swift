@@ -159,6 +159,39 @@ class ProfileController {
 			} catch {
 				// attempt user creation if fetching fails
 				NSLog("Error fetching current user \(#line) \(#file): \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	func updateProfile(_ userProfile: UserProfile, completion: @escaping (Result<UserMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		let mutation = "mutation ($data: UpdateUserInput!) { updateUser(data:$data) { success code message } }"
+		let userInfo = ["data": UpdateUser(userProfile: userProfile)]
+
+		let graphObject = GQMutation(query: mutation, variables: userInfo)
+
+		do {
+			request.httpBody = try JSONEncoder().encode(graphObject)
+		} catch {
+			NSLog("Failed encoding user update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
 		}
 	}
