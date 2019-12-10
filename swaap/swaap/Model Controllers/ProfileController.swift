@@ -91,7 +91,7 @@ class ProfileController {
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
@@ -164,7 +164,7 @@ class ProfileController {
 		}
 	}
 
-	func updateProfile(_ userProfile: UserProfile, completion: @escaping (Result<UserMutationResponse, NetworkError>) -> Void) {
+	func updateProfile(_ userProfile: UserProfile, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var (_, request) = networkCommon() else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
@@ -184,7 +184,7 @@ class ProfileController {
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let responseContainer = try result.get()
 				let response = responseContainer.response

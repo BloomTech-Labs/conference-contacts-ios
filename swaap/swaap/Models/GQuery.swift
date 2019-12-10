@@ -20,15 +20,14 @@ struct GQMutation<T: Codable>: Codable {
 	}
 }
 
-struct UserMutationResponse: Codable {
+struct GQLMutationResponse: Codable {
 	let code: Int
 	let success: Bool
 	let message: String
-	let user: UserProfile?
 }
 
-struct UserMutationResponseContainer: Decodable {
-	let response: UserMutationResponse
+struct GQLMutationResponseContainer: Decodable {
+	let response: GQLMutationResponse
 
 	enum CodingKeys: String, CodingKey {
 		case data
@@ -42,6 +41,6 @@ struct UserMutationResponseContainer: Decodable {
 		guard let key = dataContainer.allKeys.first else {
 			throw NetworkError.unspecifiedError(reason: "Error decoding response: \(dataContainer.codingPath) - \(dataContainer)")
 		}
-		response = try dataContainer.decode(UserMutationResponse.self, forKey: key)
+		response = try dataContainer.decode(GQLMutationResponse.self, forKey: key)
 	}
 }
