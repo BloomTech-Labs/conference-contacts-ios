@@ -70,9 +70,9 @@ class ProfileController {
 	}
 
 	// MARK: - Networking
-	func createProfileOnServer(completion: ((Bool) -> Void)? = nil) {
+	func createProfileOnServer(completion: ((Result<GQLMutationResponse, NetworkError>) -> Void)? = nil) {
 		guard let (idClaims, cRequest) = networkCommon() else {
-			completion?(false)
+			completion?(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
 		}
 		var request = cRequest
@@ -86,7 +86,7 @@ class ProfileController {
 			request.httpBody = try JSONEncoder().encode(graphObject)
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
-			completion?(false)
+			completion?(.failure(.dataCodingError(specifically: error, sourceData: nil)))
 			return
 		}
 
@@ -95,13 +95,16 @@ class ProfileController {
 			do {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
-				completion?(response.success)
+				completion?(.success(response))
 			} catch NetworkError.httpNon200StatusCode(let code, let data) {
 				NSLog("Error creating server profile with code: \(code): \(String(data: data!, encoding: .utf8)!)")
-				completion?(false)
+				completion?(.failure(NetworkError.httpNon200StatusCode(code: code, data: data)))
+			} catch let error as NetworkError {
+				NSLog("Error creating server profile: \(error)")
+				completion?(.failure(error))
 			} catch {
 				NSLog("Error creating server profile: \(error)")
-				completion?(false)
+				completion?(.failure(NetworkError.otherError(error: error)))
 			}
 		}
 	}
@@ -134,23 +137,26 @@ class ProfileController {
 				self.userProfile = userProfile
 				completion(.success(userProfile))
 			} catch NetworkError.dataCodingError(let error, let dataSource) {
-				print("")
 				NSLog("Error decoding current user: \(error)")
-				print("")
 				print(String(data: dataSource ?? Data(), encoding: .utf8) ?? "")
-				print("")
 			} catch NetworkError.graphQLError(let graphQLError) {
 				// only attempt creation if error code relating to user not existing ocurrs
 				// I don't know if its guaranteed to be consistent that no user existing will always have an error like this
 				// but it's the best we got right now
 				if graphQLError.message.contains("'authId' of null") && graphQLError.extensions.code == "INTERNAL_SERVER_ERROR" {
-					self.createProfileOnServer { success in
-						if success {
-							self.fetchProfileFromServer(completion: completion)
-						} else {
-							completion(.failure(NetworkError.graphQLError(error: graphQLError)))
-							print("")
-							NSLog("Error fetching current user \(#line) \(#file): \(graphQLError)")
+					self.createProfileOnServer { result in
+						do {
+							let response = try result.get()
+							if response.success {
+								self.fetchProfileFromServer(completion: completion)
+							} else {
+								completion(.failure(NetworkError.graphQLError(error: graphQLError)))
+								NSLog("Error fetching current user \(#line) \(#file): \(graphQLError)")
+							}
+						} catch let error as NetworkError {
+							completion(.failure(error))
+						} catch {
+							completion(.failure(NetworkError.otherError(error: error)))
 						}
 					}
 				} else {
@@ -189,9 +195,12 @@ class ProfileController {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
 				completion(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(error))
 			} catch {
 				NSLog("Error updating server profile: \(error)")
-				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
 	}
