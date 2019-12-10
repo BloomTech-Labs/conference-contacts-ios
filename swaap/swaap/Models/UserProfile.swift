@@ -70,7 +70,13 @@ struct UpdateUser: Codable {
 	let jobtitle: String?
 	let bio: String?
 
-	init(name: String? = nil, picture: URL? = nil, birthdate: String? = nil, gender: ProfileUserGender? = nil, industry: String? = nil, jobtitle: String? = nil, bio: String? = nil) {
+	init(name: String? = nil,
+		 picture: URL? = nil,
+		 birthdate: String? = nil,
+		 gender: ProfileUserGender? = nil,
+		 industry: String? = nil,
+		 jobtitle: String? = nil,
+		 bio: String? = nil) {
 		self.name = name
 		self.picture = picture
 		self.birthdate = birthdate
