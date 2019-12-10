@@ -103,17 +103,13 @@ class EditProfileViewController: UIViewController {
 
 	private func passLabelText(from label: UILabel) -> String? {
 		if let text = label.text {
-			if labelHasDescriptionText(with: text) {
+			if text.contains("Tap to add") {
 				return nil
 			} else {
 				return text
 			}
 		}
 		return nil
-	}
-
-	private func labelHasDescriptionText(with text: String) -> Bool {
-		return text.contains("Tap to add")
 	}
 
 	@IBSegueAction func nameTextFieldViewController(coder: NSCoder) -> UIViewController? {
