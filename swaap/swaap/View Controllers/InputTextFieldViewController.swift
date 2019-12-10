@@ -8,13 +8,14 @@
 
 import UIKit
 
-class InputTextFieldViewController: UIViewController {
+class InputTextFieldViewController: UIViewController, Storyboarded {
 
 	@IBOutlet private weak var floatingTextFieldView: FloatingTextFieldView!
 	@IBOutlet private weak var floatingViewBottomAnchor: NSLayoutConstraint!
 	@IBOutlet private var tapToDismissGesture: UITapGestureRecognizer!
 
 	let needsSocialTextField: Bool
+	var autoCapitalizationType: UITextAutocapitalizationType = .sentences
 	var placeholderStr: String = "enter info"
 	var labelText: String?
 	let successfulCompletion: SocialLinkCompletion
@@ -34,7 +35,7 @@ class InputTextFieldViewController: UIViewController {
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-		floatingTextFieldView.makeFirstResponder(needsSocialTextField, placeholderStr, labelText: labelText)
+		floatingTextFieldView.makeFirstResponder(needsSocialTextField, placeholderStr, labelText: labelText, capitalizationType: autoCapitalizationType)
 		floatingTextFieldView.delegate = self
 
 		tapToDismissGesture.delegate = self

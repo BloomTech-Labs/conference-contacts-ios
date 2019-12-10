@@ -33,7 +33,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		}
 	}
 
-	weak var  delegate: FloatingTextFieldViewDelegate?
+	weak var delegate: FloatingTextFieldViewDelegate?
 
 	// MARK: - Init
 	override init(frame: CGRect) {
@@ -149,7 +149,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
 		guard let text = textField.text else { return }
-		delegate?.didFinishEditing(self, socialLink: SocialLink(socialType: nil, value: text))
+		delegate?.didFinishEditing(self, socialLink: SocialLink(socialType: socialType, value: text))
 		fireFirstResponder()
 	}
 
@@ -172,17 +172,14 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		plusButton.isEnabled = plusButton.isVisible
 	}
 
-	func makeFirstResponder(_ needsSocialTextField: Bool, _ placeholderText: String, labelText: String?) {
+	func makeFirstResponder(_ needsSocialTextField: Bool, _ placeholderText: String, labelText: String?, capitalizationType: UITextAutocapitalizationType) {
+		textField.text = labelText
 		if needsSocialTextField {
+			textField.autocapitalizationType = capitalizationType
 			textField.becomeFirstResponder()
 		} else {
 			hideAllSocialElements()
 			textField.placeholder = placeholderText
-			if let text = labelText {
-				textField.text = text
-			} else {
-				textField.text = ""
-			}
 			textField.becomeFirstResponder()
 		}
 	}
