@@ -246,6 +246,46 @@ class ProfileController {
 		}
 	}
 
+	func deleteProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		guard let id = nugget.id else {
+			completion(.failure(.unspecifiedError(reason: "Attempted to delete a nugget without an id: \(nugget)")))
+			return
+		}
+		let mutation = "mutation($id:ID!) { deleteProfileField(id: $id) { success code message } }"
+		let userInfo = ["id": id]
+
+		let graphObject = GQMutation(query: mutation, variables: userInfo)
+
+		do {
+			request.httpBody = try JSONEncoder().encode(graphObject)
+		} catch {
+			NSLog("Failed encoding user update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(error))
+			} catch {
+				NSLog("Error updating server profile: \(error)")
+				completion(.failure(NetworkError.otherError(error: error)))
+			}
+		}
+
+	}
+
 	private func networkCommon() -> (Auth0IDClaims, NetworkRequest)? {
 		guard let idClaims = authManager.idClaims, let accessToken = authManager.credentials?.accessToken else { return nil }
 		var request = graphqlURL.request
