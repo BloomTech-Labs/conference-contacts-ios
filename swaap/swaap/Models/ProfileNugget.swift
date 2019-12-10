@@ -27,7 +27,7 @@ struct ProfileNugget: Codable, Hashable {
 	}
 
 	init(id: String? = nil, value: String, type: ProfileFieldType, privacy: ProfileFieldPrivacy = .connected, preferredContact: Bool = false) {
-		self.id = nil
+		self.id = id
 		self.value = value
 		self.type = type
 		self.privacy = privacy
