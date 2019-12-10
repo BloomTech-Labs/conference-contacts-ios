@@ -59,7 +59,6 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	}
 
 	@objc func keyboardWillHide(notification: NSNotification) {
-
 		dismiss(animated: true)
 	}
 
