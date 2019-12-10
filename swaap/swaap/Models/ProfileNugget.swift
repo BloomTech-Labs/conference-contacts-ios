@@ -30,3 +30,19 @@ extension Array where Element == ProfileNugget {
 		first(where: { $0.preferredContact })
 	}
 }
+
+struct MutateProfileNugget: Codable, Hashable {
+	let value: String
+	let type: ProfileFieldType
+	let privacy: ProfileFieldPrivacy
+	let preferredContact: Bool
+}
+
+extension MutateProfileNugget {
+	init(nugget: ProfileNugget) {
+		value = nugget.value
+		type = nugget.type
+		privacy = nugget.privacy
+		preferredContact = nugget.preferredContact
+	}
+}
