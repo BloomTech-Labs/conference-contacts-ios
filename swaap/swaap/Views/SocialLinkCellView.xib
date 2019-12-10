@@ -59,12 +59,22 @@
                                 </button>
                             </subviews>
                         </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKi-fj-ehb">
+                            <rect key="frame" x="48" y="0.0" width="265" height="60"/>
+                            <connections>
+                                <action selector="editTapped:" destination="-1" eventType="touchUpInside" id="9DA-jS-q8k"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="3dl-Id-aKG" firstAttribute="leading" secondItem="aKi-fj-ehb" secondAttribute="trailing" constant="16" id="FjU-xR-WRi"/>
                         <constraint firstItem="9Ye-wK-7SG" firstAttribute="top" secondItem="oNs-Ia-DpV" secondAttribute="top" constant="8" id="Oyl-xn-gAG"/>
+                        <constraint firstItem="aKi-fj-ehb" firstAttribute="leading" secondItem="yO1-IM-2CW" secondAttribute="trailing" constant="16" id="d6i-0S-mUp"/>
+                        <constraint firstAttribute="bottom" secondItem="aKi-fj-ehb" secondAttribute="bottom" id="k1a-1y-5CD"/>
                         <constraint firstAttribute="bottom" secondItem="9Ye-wK-7SG" secondAttribute="bottom" constant="8" id="nyS-bG-ILm"/>
                         <constraint firstAttribute="trailing" secondItem="9Ye-wK-7SG" secondAttribute="trailing" constant="10" id="uEE-TG-tZl"/>
+                        <constraint firstItem="aKi-fj-ehb" firstAttribute="top" secondItem="oNs-Ia-DpV" secondAttribute="top" id="vNd-2r-ksf"/>
                         <constraint firstItem="9Ye-wK-7SG" firstAttribute="leading" secondItem="oNs-Ia-DpV" secondAttribute="leading" constant="10" id="yd3-G2-f8P"/>
                     </constraints>
                 </view>
@@ -77,7 +87,7 @@
                 <constraint firstItem="oNs-Ia-DpV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Mhy-Nd-eKf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="144" y="-108"/>
+            <point key="canvasLocation" x="142.75362318840581" y="-108.48214285714285"/>
         </view>
     </objects>
     <resources>

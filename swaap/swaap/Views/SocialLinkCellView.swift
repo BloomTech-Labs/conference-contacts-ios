@@ -9,6 +9,12 @@
 import UIKit
 import IBPreview
 
+protocol SocialLinkCellViewDelegate: AnyObject {
+	func deleteButtonPressed(on cellView: SocialLinkCellView)
+	func starButtonPressed(on cellView: SocialLinkCellView)
+	func editCellInvoked(on cellView: SocialLinkCellView)
+}
+
 class SocialLinkCellView: UIView {
 
 	@IBOutlet private weak var contentView: UIView!
@@ -17,6 +23,8 @@ class SocialLinkCellView: UIView {
 	@IBOutlet private weak var socialButton: SocialButton!
 	@IBOutlet private weak var valueLabel: UILabel!
 	@IBOutlet private weak var deleteButton: UIButton!
+
+	weak var delegate: SocialLinkCellViewDelegate?
 
 	var nugget: ProfileNugget {
 		didSet {
@@ -56,9 +64,8 @@ class SocialLinkCellView: UIView {
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
-		cellView.layer.cornerRadius = 20
+		cellView.layer.cornerRadius = 12
 		cellView.layer.cornerCurve = .continuous
-		starButton.tintColor = .systemGray5
 
 		self.backgroundColor = .clear
 
@@ -69,15 +76,19 @@ class SocialLinkCellView: UIView {
 		socialButton.smallButton = true
 		socialButton.socialPlatform.socialPlatform = nugget.socialType
 		valueLabel.text = nugget.value
-		starButton.tintColor = nugget.preferredContact ? .systemOrange : .systemGray5
+		starButton.tintColor = nugget.preferredContact ? .systemOrange : .systemGray3
 	}
 
 	@IBAction func starButtonTapped(_ sender: UIButton) {
-		nugget.preferredContact.toggle()
+		delegate?.starButtonPressed(on: self)
 	}
 
 	@IBAction func deleteButtonTapped(_ sender: UIButton) {
+		delegate?.deleteButtonPressed(on: self)
+	}
 
+	@IBAction func editTapped(_ sender: UIButton) {
+		delegate?.editCellInvoked(on: self)
 	}
 
 }
