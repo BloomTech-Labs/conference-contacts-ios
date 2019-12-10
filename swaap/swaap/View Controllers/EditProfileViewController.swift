@@ -146,7 +146,7 @@ class EditProfileViewController: UIViewController {
 		return inputVC
 	}
 
-	let hardcodedTemporarySocialType = ProfileFieldType.social
+	let hardcodedTemporarySocialType = ProfileFieldType.twitter
 
 	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in

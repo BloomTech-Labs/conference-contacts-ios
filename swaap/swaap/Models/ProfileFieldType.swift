@@ -8,37 +8,29 @@
 
 import Foundation
 
-enum ProfileFieldType: Codable, Hashable {
+enum ProfileFieldType: String, Codable, Hashable, CaseIterable {
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()
 		let rawValue = try container.decode(String.self)
 		let lcValue = rawValue.lowercased()
 
-		switch lcValue {
-		case "email":
-			self = .email
-		case "phone":
-			self = .phone
-		case "social":
-			self = .social
-		default:
+		guard let decoded = ProfileFieldType(rawValue: lcValue) else {
 			throw ProfileDecodingError.unknownValue(value: rawValue)
 		}
+		self = decoded
 	}
 
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.singleValueContainer()
-		switch self {
-		case .email:
-			try container.encode("EMAIL")
-		case .phone:
-			try container.encode("PHONE")
-		case .social:
-			try container.encode("SOCIAL")
-		}
+		try container.encode(rawValue.uppercased())
 	}
 
 	case email
 	case phone
-	case social
+	case sms
+	case instagram
+	case facebook
+	case linkedin
+	case twitter
 }
+

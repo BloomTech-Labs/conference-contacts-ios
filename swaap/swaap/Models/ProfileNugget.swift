@@ -21,7 +21,7 @@ struct ProfileNugget: Codable, Hashable {
 			return .email
 		case .phone:
 			return .phone
-		case .social:
+		default:
 			return .instagram
 		}
 	}
