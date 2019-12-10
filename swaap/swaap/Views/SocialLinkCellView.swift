@@ -76,7 +76,7 @@ class SocialLinkCellView: UIView {
 		socialButton.smallButton = true
 		socialButton.socialInfo.socialPlatform = nugget.type
 		valueLabel.text = nugget.value
-		starButton.tintColor = nugget.preferredContact ? .systemOrange : .systemGray3
+		starButton.tintColor = nugget.preferredContact ? .systemGreen : .systemGray3
 	}
 
 	@IBAction func starButtonTapped(_ sender: UIButton) {

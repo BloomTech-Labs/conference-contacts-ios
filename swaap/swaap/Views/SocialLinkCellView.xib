@@ -29,22 +29,22 @@
                             <rect key="frame" x="10" y="8" width="309" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO1-IM-2CW">
-                                    <rect key="frame" x="0.0" y="0.0" width="22" height="44"/>
-                                    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="star.fill" catalog="system"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="22.5" height="44"/>
+                                    <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" image="checkmark.seal.fill" catalog="system"/>
                                     <connections>
                                         <action selector="starButtonTapped:" destination="-1" eventType="touchUpInside" id="uBq-yq-nqe"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maB-Gf-TMZ" customClass="SocialButton" customModule="swaap" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="0.0" width="44" height="44"/>
+                                    <rect key="frame" x="30.5" y="0.0" width="44" height="44"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="maB-Gf-TMZ" secondAttribute="height" multiplier="1:1" id="Ykj-Ao-FRm"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vWe-Uo-buK">
-                                    <rect key="frame" x="82" y="0.0" width="199" height="44"/>
+                                    <rect key="frame" x="82.5" y="0.0" width="198.5" height="44"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -60,7 +60,7 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKi-fj-ehb">
-                            <rect key="frame" x="48" y="0.0" width="235" height="60"/>
+                            <rect key="frame" x="48.5" y="0.0" width="234.5" height="60"/>
                             <connections>
                                 <action selector="editTapped:" destination="-1" eventType="touchUpInside" id="9DA-jS-q8k"/>
                             </connections>
@@ -91,8 +91,8 @@
         </view>
     </objects>
     <resources>
+        <image name="checkmark.seal.fill" catalog="system" width="64" height="60"/>
         <image name="minus.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="star.fill" catalog="system" width="64" height="58"/>
         <namedColor name="socialButtonInstagramMain">
             <color red="0.8666666666666667" green="0.22745098039215686" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
