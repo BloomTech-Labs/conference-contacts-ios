@@ -25,7 +25,6 @@
 		33F0EA562398551B004D1236 /* ProfileFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA552398551B004D1236 /* ProfileFieldType.swift */; };
 		33F0EA5823985556004D1236 /* ProfileDecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5723985556004D1236 /* ProfileDecodingError.swift */; };
 		33F0EA5A2398556A004D1236 /* ProfileFieldPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */; };
-		33F0EA5C23986832004D1236 /* ProfileUserGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5B23986832004D1236 /* ProfileUserGender.swift */; };
 		33F0EA61239872A0004D1236 /* Auth0Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA60239872A0004D1236 /* Auth0Claims.swift */; };
 		33F0EA6623988C98004D1236 /* JSONDecoder+JWTDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA6523988C98004D1236 /* JSONDecoder+JWTDecoding.swift */; };
 		33FEE0C923836AC3006BE880 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0C823836AC3006BE880 /* Auth0.plist */; };
@@ -175,7 +174,6 @@
 		33F0EA552398551B004D1236 /* ProfileFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFieldType.swift; sourceTree = "<group>"; };
 		33F0EA5723985556004D1236 /* ProfileDecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDecodingError.swift; sourceTree = "<group>"; };
 		33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFieldPrivacy.swift; sourceTree = "<group>"; };
-		33F0EA5B23986832004D1236 /* ProfileUserGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserGender.swift; sourceTree = "<group>"; };
 		33F0EA60239872A0004D1236 /* Auth0Claims.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth0Claims.swift; sourceTree = "<group>"; };
 		33F0EA6523988C98004D1236 /* JSONDecoder+JWTDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+JWTDecoding.swift"; sourceTree = "<group>"; };
 		33FEE0C823836AC3006BE880 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
@@ -427,7 +425,6 @@
 				33F0EA5323984FDB004D1236 /* ProfileNugget.swift */,
 				33F0EA552398551B004D1236 /* ProfileFieldType.swift */,
 				33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */,
-				33F0EA5B23986832004D1236 /* ProfileUserGender.swift */,
 				33F0EA60239872A0004D1236 /* Auth0Claims.swift */,
 				33CCBABB2398F3C200A98C82 /* GQuery.swift */,
 			);
@@ -770,7 +767,6 @@
 				33F0EA562398551B004D1236 /* ProfileFieldType.swift in Sources */,
 				37A2F41B237D23FF00C1EF3B /* LogInViewController.swift in Sources */,
 				33F0EA5823985556004D1236 /* ProfileDecodingError.swift in Sources */,
-				33F0EA5C23986832004D1236 /* ProfileUserGender.swift in Sources */,
 				33FEE0E2238465A9006BE880 /* FormInputView.swift in Sources */,
 				33F0EA5423984FDB004D1236 /* ProfileNugget.swift in Sources */,
 				33B24C5A2395B85C00B20DEA /* DummyViewController.swift in Sources */,
