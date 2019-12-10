@@ -29,7 +29,7 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
-	var socialInfo: (socialPlatform: ProfileFieldType, info: String) = (.instagram, "@marlonjames") {
+	var socialInfo: (socialPlatform: ProfileFieldType, info: String) = (.twitter, "@swaapApp") {
 		didSet {
 			updateSocialPlatformType()
 		}
