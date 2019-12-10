@@ -71,7 +71,7 @@
 		37F9345423985FD000ACBA23 /* FloatingTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */; };
 		37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934552398716300ACBA23 /* FloatingTextFieldView.swift */; };
 		37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934572398941400ACBA23 /* InputTextFieldViewController.swift */; };
-		37F9345A2398C72500ACBA23 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */; };
+		37F9345A2398C72500ACBA23 /* NavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934592398C72500ACBA23 /* NavigationBarExtension.swift */; };
 		37F93466239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -238,7 +238,7 @@
 		37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FloatingTextFieldView.xib; sourceTree = "<group>"; };
 		37F934552398716300ACBA23 /* FloatingTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextFieldView.swift; sourceTree = "<group>"; };
 		37F934572398941400ACBA23 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldViewController.swift; sourceTree = "<group>"; };
-		37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
+		37F934592398C72500ACBA23 /* NavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarExtension.swift; sourceTree = "<group>"; };
 		37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -285,7 +285,7 @@
 				375CBF242391EB6700C3D50A /* HapticFeedback.swift */,
 				3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */,
 				3797A56F2388637800CB8621 /* Storyboarded.swift */,
-				37F934592398C72500ACBA23 /* NavigationControllerExtension.swift */,
+				37F934592398C72500ACBA23 /* NavigationBarExtension.swift */,
 				3753DE2F239AF3D800C90501 /* UIView+Visible.swift */,
 				332FD21023A031C800074F28 /* Codable+ToDict.swift */,
 			);
@@ -779,7 +779,7 @@
 				33F0EA61239872A0004D1236 /* Auth0Claims.swift in Sources */,
 				332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */,
 				3797A56E23885E9C00CB8621 /* ProfileViewController.swift in Sources */,
-				37F9345A2398C72500ACBA23 /* NavigationControllerExtension.swift in Sources */,
+				37F9345A2398C72500ACBA23 /* NavigationBarExtension.swift in Sources */,
 				33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */,
 				37218B03238FA161008BFC24 /* FontHelper.swift in Sources */,
 				3797A57223887F1500CB8621 /* ProfileCardView.swift in Sources */,
