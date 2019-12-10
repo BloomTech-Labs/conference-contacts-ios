@@ -27,7 +27,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	@IBOutlet private weak var saveButton: ButtonHelper!
 	@IBOutlet private weak var collectionView: UICollectionView!
 
-	var socialType: SocialButton.SocialPlatform? {
+	var socialType: ProfileFieldType? {
 		didSet {
 			updateViews()
 		}
@@ -99,13 +99,13 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		case .instagram:
 			textField.placeholder = "add your Instagram username"
 			changeKeyboard(type: .default)
-		case .linkedIn:
+		case .linkedin:
 			textField.placeholder = "add your LinkedIn username"
 			changeKeyboard(type: .default)
 		case .phone:
 			textField.placeholder = "add a phone number"
 			changeKeyboard(type: .numberPad)
-		case .text:
+		case .sms:
 			textField.placeholder = "add a phone number"
 			changeKeyboard(type: .numberPad)
 		case .twitter:
@@ -173,7 +173,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 							placeholderText: String,
 							labelText: String?,
 							capitalizationType: UITextAutocapitalizationType,
-							socialType: SocialButton.SocialPlatform?) {
+							socialType: ProfileFieldType?) {
 		textField.text = labelText
 		textField.autocapitalizationType = capitalizationType
 		textField.becomeFirstResponder()
@@ -243,14 +243,14 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return SocialButton.SocialPlatform.allCases.count
+		return ProfileFieldType.allCases.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialButtonCell",
 														for: indexPath) as? SocialButtonCollectionViewCell else { return UICollectionViewCell() }
 
-		cell.socialButtonType = SocialButton.SocialPlatform.allCases[indexPath.item]
+		cell.socialButtonType = ProfileFieldType.allCases[indexPath.item]
 		cell.socialButton.addTarget(self, action: #selector(didSelectSocialButton(_:)), for: .touchUpInside)
 		return cell
 	}

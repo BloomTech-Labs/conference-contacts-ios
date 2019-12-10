@@ -11,7 +11,7 @@ import UIKit
 class SocialButtonCollectionViewCell: UICollectionViewCell {
 
 	let socialButton: SocialButton = SocialButton()
-	var socialButtonType: SocialButton.SocialPlatform {
+	var socialButtonType: ProfileFieldType {
 		get {
 			socialButton.socialInfo.socialPlatform
 		}

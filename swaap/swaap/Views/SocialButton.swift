@@ -12,16 +12,6 @@ import IBPreview
 @IBDesignable
 class SocialButton: IBPreviewControl {
 
-	enum SocialPlatform: CaseIterable {
-		case phone
-		case email
-		case text
-		case twitter
-		case linkedIn
-		case instagram
-		case facebook
-	}
-
 	private var contentHeightAnchor: NSLayoutConstraint?
 
 	var height: CGFloat {
@@ -39,7 +29,7 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
-	var socialInfo: (socialPlatform: SocialPlatform, info: String) = (.instagram, "@marlonjames") {
+	var socialInfo: (socialPlatform: ProfileFieldType, info: String) = (.instagram, "@marlonjames") {
 		didSet {
 			updateSocialPlatformType()
 		}
@@ -111,7 +101,7 @@ class SocialButton: IBPreviewControl {
 			translucentView.backgroundColor = UIColor.systemTeal.withAlphaComponent(0.3)
 			iconView.image = .socialEmailIcon
 			iconView.tintColor = .systemTeal
-		case .text:
+		case .sms:
 			mainColorBackgroundView.backgroundColor = .systemBlue
 			translucentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
 			iconView.image = .socialTextIcon
@@ -120,7 +110,7 @@ class SocialButton: IBPreviewControl {
 			mainColorBackgroundView.backgroundColor = .socialButtonTwitterMain
 			translucentView.backgroundColor = .socialButtonTwitterSecondary
 			iconView.image = .socialTwitterIcon
-		case .linkedIn:
+		case .linkedin:
 			mainColorBackgroundView.backgroundColor = .socialButtonLinkedInMain
 			translucentView.backgroundColor = .socialButtonLinkedInSecondary
 			iconView.image = .socialLinkedinIcon
