@@ -70,6 +70,7 @@ class ProfileController {
 	}
 
 	// MARK: - Networking
+	// MARK: - Profile
 	func createProfileOnServer(completion: ((Result<GQLMutationResponse, NetworkError>) -> Void)? = nil) {
 		guard let (idClaims, cRequest) = networkCommon() else {
 			completion?(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
@@ -96,9 +97,6 @@ class ProfileController {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
 				completion?(.success(response))
-			} catch NetworkError.httpNon200StatusCode(let code, let data) {
-				NSLog("Error creating server profile with code: \(code): \(String(data: data!, encoding: .utf8)!)")
-				completion?(.failure(NetworkError.httpNon200StatusCode(code: code, data: data)))
 			} catch let error as NetworkError {
 				NSLog("Error creating server profile: \(error)")
 				completion?(.failure(error))
@@ -200,6 +198,49 @@ class ProfileController {
 				completion(.failure(error))
 			} catch {
 				NSLog("Error updating server profile: \(error)")
+				completion(.failure(NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	// MARK: - Nuggets
+	/// create or update a profile nugget on the backend contextually. if an id is present, updates. if not, creates.
+	func modifyProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		let mutation: String
+		if let id = nugget.id {
+			fatalError("update not implemented yet")
+			// probably this mutation?
+			mutation = "mutation ($data: UpdateProfileFieldInput!) { updateProfileField(data:$data) { success code message } }"
+		} else {
+			mutation = "mutation ($data: CreateProfileFieldInput!) { createProfileField(data:$data) { success code message } }"
+		}
+		let nuggetInfo = ["data": MutateProfileNugget(nugget: nugget)]
+		let graphObject = GQMutation(query: mutation, variables: nuggetInfo)
+
+		do {
+			request.httpBody = try JSONEncoder().encode(graphObject)
+		} catch {
+			NSLog("Failed encoding user update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error updating profile nugget: \(error)")
+				completion(.failure(error))
+			} catch {
+				NSLog("Error updating profile nugget: \(error)")
 				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
