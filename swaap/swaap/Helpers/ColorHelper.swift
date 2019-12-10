@@ -21,4 +21,10 @@ extension UIColor {
 	static let socialButtonLinkedInSecondary = UIColor(named: "socialButtonLinkedInSecondary")!
 	static let socialButtonTwitterMain = UIColor(named: "socialButtonTwitterMain")!
 	static let socialButtonTwitterSecondary = UIColor(named: "socialButtonTwitterSecondary")!
+
+	// MARK: - Gradient Background Colors
+	static let gradientBackgroundColorBlueOne = UIColor(named: "Swaap Background Color Burple")!
+	static let gradientBackgroundColorBlueTwo = UIColor(named: "Swaap Secondary Background Color Burple")!
+	static let gradientBackgroundColorRedOne = UIColor(named: "swaapBackground")!
+	static let gradientBackgroundColorRedTwo = UIColor(named: "swaapBackgroundSecondary")!
 }

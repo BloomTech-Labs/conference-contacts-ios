@@ -14,6 +14,12 @@ class ProfileViewController: UIViewController, Storyboarded {
 	@IBOutlet private weak var backButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var editProfileButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var backButton: UIButton!
+	@IBOutlet private weak var socialButtonsStackView: UIStackView!
+	@IBOutlet private weak var birthdayLabel: UILabel!
+	@IBOutlet private weak var bioLabel: UILabel!
+
+
+	// Recommended size for Social Buttons in stack view is w 250 / h 40
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +71,10 @@ class ProfileViewController: UIViewController, Storyboarded {
 			backButtonVisualFXContainerView.isHidden = false
 		} else {
 			backButtonVisualFXContainerView.isHidden = true
+		}
+
+		if socialButtonsStackView.arrangedSubviews.count < 1 {
+			socialButtonsStackView.isHidden = true
 		}
 	}
 
