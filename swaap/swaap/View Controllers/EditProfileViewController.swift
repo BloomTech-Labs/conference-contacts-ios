@@ -51,6 +51,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
         super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(false, animated: false)
 		navigationController?.navigationBar.installBlurEffect()
+		isModalInPresentation = true
 		setupUI()
     }
 
@@ -71,7 +72,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	private func populateFromUserProfile() {
 		guard let userProfile = profileController?.userProfile else { return }
-		userProfile.profileNuggets.forEach { addSocialNugget(nugget: $0) }
+		userProfile.profileNuggets.forEach { addSocialNugget(nugget: $0, checkForPreferred: false) }
+		assurePreferredContactExists()
 		nameLabel.text = userProfile.name
 		industryLabel.text = userProfile.industry
 		locationLabel.text = userProfile.location
@@ -202,11 +204,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	// MARK: - Helper Methods
-	func addSocialNugget(nugget: ProfileNugget) {
+	func addSocialNugget(nugget: ProfileNugget, checkForPreferred: Bool = true) {
 		let nuggetView = SocialLinkCellView(frame: .zero, nugget: nugget)
 		nuggetView.delegate = self
 		socialLinkCellViews.append(nuggetView)
-		assurePreferredContactExists()
+		if checkForPreferred {
+			assurePreferredContactExists()
+		}
 	}
 
 	func removeNugget(nugget: ProfileNugget) {

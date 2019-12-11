@@ -111,6 +111,7 @@ class ProfileCardView: IBPreviewView {
 		taglineLabel.isHidden = true
 		setupImageView()
 		profileImageView.mask = imageMaskView
+		profileImage = nil
 
 		backgroundColor = .clear
 	}
