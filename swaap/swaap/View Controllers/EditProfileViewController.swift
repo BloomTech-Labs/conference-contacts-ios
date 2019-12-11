@@ -10,8 +10,8 @@ import UIKit
 import Photos
 
 struct SocialLink {
-	let socialType: ProfileFieldType?
-	let value: String
+	var socialType: ProfileFieldType?
+	var value: String
 }
 
 class EditProfileViewController: UIViewController, ProfileAccessor {
