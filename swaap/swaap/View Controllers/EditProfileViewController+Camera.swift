@@ -125,7 +125,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-		photo = image.imageByScaling(toSize: CGSize(width: 512, height: 512), inPixels: true)
+		photo = image.imageByScaling(toSize: CGSize(width: 1536, height: 1536), inPixels: true)
 		picker.dismiss(animated: true)
 	}
 }

@@ -50,10 +50,12 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			updateViews()
 		}
 	}
+	private var newPhoto: UIImage?
 	var photo: UIImage? {
-		get { profileImageView.image }
+		get { newPhoto ?? profileImageView.image }
 		set {
-			profileImageView.image = newValue
+			newPhoto = newValue
+			profileImageView.image = newPhoto
 			updateViews()
 		}
 	}
@@ -65,6 +67,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		navigationController?.navigationBar.installBlurEffect()
 		isModalInPresentation = true
 		setupUI()
+		updateViews()
     }
 
 	private func setupUI() {
@@ -101,6 +104,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
 		}
+		updateViews()
 	}
 
 	// MARK: - Actions
@@ -120,10 +124,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.birthdate = birthdate
 		newProfile.profileNuggets = socialNuggets
 
-		let imageData = photo?.pngData()
 		let imageUpdate = ConcurrentOperation { [weak self] in
 			guard let self = self else { return }
-			if let imageData = imageData {
+			if let imageData = self.newPhoto?.jpegData(compressionQuality: 0.75) {
 				if imageData != self.profileController?.userProfile?.photoData {
 					let semaphore = DispatchSemaphore(value: 0)
 					self.profileController?.uploadImageData(imageData, completion: { (result: Result<URL, NetworkError>) in
