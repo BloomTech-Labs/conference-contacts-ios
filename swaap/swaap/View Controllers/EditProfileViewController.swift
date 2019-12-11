@@ -19,7 +19,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	// MARK: - Properties
 	var profileController: ProfileController? {
 		didSet {
-			//populateFromUserProfile()
+			populateFromUserProfile()
 		}
 	}
 

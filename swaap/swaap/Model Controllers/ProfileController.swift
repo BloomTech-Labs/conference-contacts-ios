@@ -59,10 +59,10 @@ class ProfileController {
 //		})
 		if authManager.credentials != nil {
 			self.fetchProfileFromServer { (result: Result<UserProfile, NetworkError>) in
-				do {
-					let user = try result.get()
-					print(user)
-				} catch {
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
 					NSLog("Error getting user: \(error)")
 				}
 			}

@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
+	var profilePopulatedObserver: NSObjectProtocol?
 
 	// Recommended size for Social Buttons in stack view is w 250 / h 40
 
@@ -32,6 +33,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		setupCardShadow()
 		setupFXView()
 		updateViews()
+		setupNotifications()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -55,9 +57,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	private func setupNotifications() {
-		profileChangedObserver = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: { _ in
-			self.updateViews()
-		})
+		let updateClosure = { (_: Notification) in
+			DispatchQueue.main.async {
+				self.updateViews()
+			}
+		}
+		profileChangedObserver = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: updateClosure)
+		profilePopulatedObserver = NotificationCenter.default.addObserver(forName: .userProfilePopulated, object: nil, queue: nil, using: updateClosure)
 	}
 
 	private func setupCardShadow() {
