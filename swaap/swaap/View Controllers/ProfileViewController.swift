@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, Storyboarded {
+class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
-	@IBOutlet private weak var profileCardView: UIView!
+	@IBOutlet private weak var profileCardView: ProfileCardView!
 	@IBOutlet private weak var backButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var editProfileButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var backButton: UIButton!
@@ -18,6 +18,8 @@ class ProfileViewController: UIViewController, Storyboarded {
 	@IBOutlet private weak var birthdayLabel: UILabel!
 	@IBOutlet private weak var bioLabel: UILabel!
 
+	var profileController: ProfileController?
+	var profileChangedObserver: NSObjectProtocol?
 
 	// Recommended size for Social Buttons in stack view is w 250 / h 40
 
@@ -52,6 +54,12 @@ class ProfileViewController: UIViewController, Storyboarded {
 		navigationController?.popViewController(animated: true)
 	}
 
+	private func setupNotifications() {
+		profileChangedObserver = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: { _ in
+			self.updateViews()
+		})
+	}
+
 	private func setupCardShadow() {
 		profileCardView.layer.shadowPath = UIBezierPath(rect: profileCardView.bounds).cgPath
 		profileCardView.layer.shadowRadius = 14
@@ -67,6 +75,7 @@ class ProfileViewController: UIViewController, Storyboarded {
 	}
 
 	private func updateViews() {
+		profileCardView.userProfile = profileController?.userProfile
 		if let count = navigationController?.viewControllers.count, count > 1 {
 			backButtonVisualFXContainerView.isHidden = false
 		} else {
@@ -76,10 +85,5 @@ class ProfileViewController: UIViewController, Storyboarded {
 		if socialButtonsStackView.arrangedSubviews.count < 1 {
 			socialButtonsStackView.isHidden = true
 		}
-	}
-
-	// FIXME: FOR DEBUGGING
-	@IBAction func testButtonPressed(_ sender: UIButton) {
-		print("tested")
 	}
 }
