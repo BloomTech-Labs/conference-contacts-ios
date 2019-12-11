@@ -50,7 +50,6 @@ class ProfileCardView: IBPreviewView {
 		set { industryLabel.text = newValue }
 	}
 
-//	 FIXME: - Make it work
 	var preferredContact: SocialLink? {
 		get { socialButton.socialInfo }
 		set {

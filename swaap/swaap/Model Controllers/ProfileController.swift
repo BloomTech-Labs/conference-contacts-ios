@@ -5,6 +5,7 @@
 //  Created by Michael Redig on 12/5/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
+//swiftlint:disable function_body_length
 
 import Foundation
 import NetworkHandler
@@ -322,7 +323,7 @@ class ProfileController {
 	lazy var cloudinary = CLDCloudinary(configuration: cloudinaryConfig)
 
 	func uploadImageData(_ data: Data, completion: @escaping (Result<URL, NetworkError>) -> Void) {
-		let request = cloudinary.createUploader().upload(data: data, uploadPreset: "zkbfj0cu") { (result, error) in
+		let request = cloudinary.createUploader().upload(data: data, uploadPreset: "zkbfj0cu") { result, error in
 			if let error = error {
 				NSLog("Error uploading image: \(error)")
 				completion(.failure(.otherError(error: error)))

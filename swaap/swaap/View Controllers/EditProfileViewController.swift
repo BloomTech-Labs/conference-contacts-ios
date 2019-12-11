@@ -5,6 +5,7 @@
 //  Created by Marlon Raskin on 12/3/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
+//swiftlint:disable function_body_length
 
 import UIKit
 import Photos
@@ -146,7 +147,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 				case .success:
 					break
 				case .failure(let error):
-					// FIXME: show error
 					print(error)
 				}
 				semaphore.signal()
@@ -162,7 +162,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 				case .success:
 					break
 				case .failure(let error):
-					// FIXME: show error
 					print(error)
 				}
 				semaphore.signal()
@@ -181,7 +180,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 					case .success:
 						break
 					case .failure(let error):
-						// FIXME: show error
 						print(error)
 					}
 					semaphore.signal()
@@ -202,7 +200,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 					case .success:
 						break
 					case .failure(let error):
-						// FIXME: show error
 						print(error)
 					}
 					semaphore.signal()
