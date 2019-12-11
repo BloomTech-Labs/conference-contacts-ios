@@ -34,17 +34,13 @@
 
 1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+1️⃣ [Trello Board](https://trello.com/b/Jh8cS46t/conference-contacts)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+1️⃣ [Product Canvas](https://www.notion.so/Release-1-0-Auth-User-Profile-7abf0ffafe804fc88e9af40ed335f17b)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+1️⃣ [UX Design files](https://www.figma.com/file/CkvwWMzxcI4lI4udHm8QiH/Labs18_Conference-Contacts%2C-Emily%2CTylerr?node-id=211%3A5)
 
-🚫 One to two paragraph statement about your product and what it does.
-
-Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. Ut aliquam purus sit amet luctus venenatis lectus magna fringilla. Orci dapibus ultrices in iaculis nunc sed augue. Euismod in pellentesque massa placerat duis ultricies. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Lectus quam id leo in vitae. Purus sit amet luctus venenatis lectus magna fringilla urna porttitor.
-
-Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
+Swaap is an app to help professional people make great contacts at events such as conferences, conventions, or trade shows. A lot of times it can be difficult to keep track of the people you've added to your network. Swaap makes it super easy to swap contact information with others and keep in touch. Easy QR code reader or NFC will automatically redirect you to that person's profile page where you are shown many different ways to connect with that person. Their profile will even let you know what the best way to get in touch with them.
 
 ![](header.png)
 
