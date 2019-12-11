@@ -14,8 +14,16 @@ struct SocialLink {
 	let value: String
 }
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, ProfileAccessor {
 
+	// MARK: - Properties
+	var profileController: ProfileController? {
+		didSet {
+			//populateFromUserProfile()
+		}
+	}
+
+	// MARK: Outlets
 	@IBOutlet private weak var cancelButton: UIBarButtonItem!
 	@IBOutlet private weak var saveButton: UIBarButtonItem!
 	@IBOutlet private weak var scrollView: UIScrollView!
@@ -36,6 +44,7 @@ class EditProfileViewController: UIViewController {
 		}
 	}
 
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(false, animated: false)

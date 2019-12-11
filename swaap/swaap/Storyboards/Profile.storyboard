@@ -209,7 +209,7 @@
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="medium"/>
                                             </state>
                                             <connections>
-                                                <segue destination="eQW-jS-uX2" kind="presentation" id="tbA-S3-O2C"/>
+                                                <segue destination="eQW-jS-uX2" kind="presentation" destinationCreationSelector="editButtonTappedSegue:" id="tbA-S3-O2C"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -800,7 +800,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-n7-5Bs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2572" y="141.87192118226602"/>
+            <point key="canvasLocation" x="2718" y="142"/>
         </scene>
         <!--Input Text Field View Controller-->
         <scene sceneID="ZJq-D7-hay">
@@ -844,7 +844,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3276.811594202899" y="141.96428571428569"/>
+            <point key="canvasLocation" x="3601" y="134"/>
         </scene>
         <!--Swipe Back Navigation Controller-->
         <scene sceneID="b2C-zT-j9B">
@@ -864,10 +864,10 @@
             </objects>
             <point key="canvasLocation" x="380" y="142"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Swipe Back Navigation Controller-->
         <scene sceneID="onI-MA-v49">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eQW-jS-uX2" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eQW-jS-uX2" customClass="SwipeBackNavigationController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="U9S-FU-Gyo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -881,7 +881,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfy-Ve-hUv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1879.7101449275365" y="141.96428571428569"/>
+            <point key="canvasLocation" x="2004" y="142"/>
         </scene>
     </scenes>
     <resources>

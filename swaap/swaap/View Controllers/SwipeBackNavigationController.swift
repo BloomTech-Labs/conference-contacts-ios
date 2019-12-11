@@ -22,6 +22,15 @@ class SwipeBackNavigationController: UINavigationController, AuthAccessor, Profi
 		}
 	}
 
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+
+	convenience init?(coder decoder: NSCoder, profileController: ProfileController?, authManager: AuthManager? = nil) {
+		self.init(coder: decoder)
+		self.profileController = profileController
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		delegate = self

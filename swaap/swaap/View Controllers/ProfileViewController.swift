@@ -86,4 +86,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			socialButtonsStackView.isHidden = true
 		}
 	}
+
+	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
+		return SwipeBackNavigationController(coder: coder, profileController: profileController)
+	}
+	
 }
