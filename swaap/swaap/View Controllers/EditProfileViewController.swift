@@ -14,8 +14,16 @@ struct SocialLink {
 	let value: String
 }
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, ProfileAccessor {
 
+	// MARK: - Properties
+	var profileController: ProfileController? {
+		didSet {
+			//populateFromUserProfile()
+		}
+	}
+
+	// MARK: Outlets
 	@IBOutlet private weak var cancelButton: UIBarButtonItem!
 	@IBOutlet private weak var saveButton: UIBarButtonItem!
 	@IBOutlet private weak var scrollView: UIScrollView!
@@ -36,6 +44,7 @@ class EditProfileViewController: UIViewController {
 		}
 	}
 
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(false, animated: false)
@@ -47,7 +56,23 @@ class EditProfileViewController: UIViewController {
 		profileImageView.layer.cornerRadius = 20
 		profileImageView.layer.cornerCurve = .continuous
 	}
-    
+
+	private func updateViews() {
+		UIView.animate(withDuration: 0.3) {
+			self.socialNuggetsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+			for nugget in self.socialLinkCellViews {
+				self.socialNuggetsStackView.addArrangedSubview(nugget)
+			}
+			self.socialNuggetsStackView.layoutSubviews()
+		}
+	}
+
+	private func populateFromUserProfile() {
+		guard let userProfile = profileController?.userProfile else { return }
+		userProfile.profileNuggets.forEach { addSocialNugget(nugget: $0) }
+	}
+
+	// MARK: - Actions
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
 
 	}
@@ -72,16 +97,6 @@ class EditProfileViewController: UIViewController {
 	}
 
 	// MARK: - Helper Methods
-	private func updateViews() {
-		UIView.animate(withDuration: 0.3) {
-			self.socialNuggetsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-			for nugget in self.socialLinkCellViews {
-				self.socialNuggetsStackView.addArrangedSubview(nugget)
-			}
-			self.socialNuggetsStackView.layoutSubviews()
-		}
-	}
-
 	func addSocialNugget(nugget: ProfileNugget) {
 		let nuggetView = SocialLinkCellView(frame: .zero, nugget: nugget)
 		nuggetView.delegate = self

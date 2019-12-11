@@ -101,4 +101,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBAction func backbuttonTapped(_ sender: UIButton) {
 		navigationController?.popViewController(animated: true)
 	}
+
+	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
+		return SwipeBackNavigationController(coder: coder, profileController: profileController)
+	}
+	
 }
