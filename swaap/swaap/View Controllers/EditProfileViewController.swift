@@ -10,6 +10,7 @@
 import UIKit
 import Photos
 import NetworkHandler
+import LoadinationIndicator
 
 struct SocialLink {
 	var socialType: ProfileFieldType?
@@ -124,6 +125,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.birthdate = birthdate
 		newProfile.profileNuggets = socialNuggets
 
+		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
+		panel.statusLabel.text = "Saving..."
+		panel.animation = .bounce2
+		panel.backgroundStyle = .fxBlur
+		self.view.addSubview(panel)
+		panel.beginAnimation()
+
 		let imageUpdate = ConcurrentOperation { [weak self] in
 			guard let self = self else { return }
 			if let imageData = self.newPhoto?.jpegData(compressionQuality: 0.75) {
@@ -226,7 +234,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
-		sender.isEnabled = false
+		saveButton.isEnabled = false
+		cancelButton.isEnabled = false
 	}
 
 	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {

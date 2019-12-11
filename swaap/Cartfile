@@ -3,6 +3,7 @@ github "calda/SwiftyAcknowledgements" #pull request project with swift 5
 
 github "mredig/NetworkHandler" "master"
 github "mredig/IBPreview"
+github "mredig/LoadinationIndicator"
 github "marlonjames71/ChevronAnimatable"
 github "auth0/Auth0.swift" ~> 1.18
 github "marmelroy/PhoneNumberKit" # Not implemented yet
