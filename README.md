@@ -90,9 +90,9 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 🚫 These are examples, make sure this matches your project's requirements
 
--   iOS 8.0+
--   Xcode 7.3
--   Cocoa Pods
+-   iOS 13.0+
+-   Xcode 11.0
+-   Carthage
 
 ## Contributing
 
