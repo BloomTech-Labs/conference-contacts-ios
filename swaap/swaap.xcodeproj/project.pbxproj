@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD21023A031C800074F28 /* Codable+ToDict.swift */; };
+		332FD22A23A0908C00074F28 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD22923A0908C00074F28 /* ConcurrentOperation.swift */; };
 		3345A34F2390C6B700859F29 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3345A34E2390C6B700859F29 /* VectorTests.swift */; };
 		335A520B23910C5100FA5623 /* RangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335A520A23910C5100FA5623 /* RangeExtensions.swift */; };
 		335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668C237B6BAA0099EEA1 /* ContactsController.swift */; };
@@ -166,6 +167,7 @@
 
 /* Begin PBXFileReference section */
 		332FD21023A031C800074F28 /* Codable+ToDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+ToDict.swift"; sourceTree = "<group>"; };
+		332FD22923A0908C00074F28 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		3345A34E2390C6B700859F29 /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
 		335A520A23910C5100FA5623 /* RangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtensions.swift; sourceTree = "<group>"; };
 		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
@@ -272,9 +274,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		332FD22023A0907500074F28 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				332FD22923A0908C00074F28 /* ConcurrentOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
 		3398EDB3237B35CC00D57DF8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				332FD22023A0907500074F28 /* Operations */,
 				33FEE0D123838ADD006BE880 /* ColorHelper.swift */,
 				3797A55C238603A400CB8621 /* String+Extensions.swift */,
 				33F0EA6523988C98004D1236 /* JSONDecoder+JWTDecoding.swift */,
@@ -807,6 +818,7 @@
 				37B3B70E238F50D700FB9CFA /* SocialButton.swift in Sources */,
 				33CCBABC2398F3C200A98C82 /* GQuery.swift in Sources */,
 				37F9344A239736B000ACBA23 /* EditProfileViewController.swift in Sources */,
+				332FD22A23A0908C00074F28 /* ConcurrentOperation.swift in Sources */,
 				37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */,
 				33F0EA6623988C98004D1236 /* JSONDecoder+JWTDecoding.swift in Sources */,
 			);
