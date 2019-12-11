@@ -56,7 +56,23 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		profileImageView.layer.cornerRadius = 20
 		profileImageView.layer.cornerCurve = .continuous
 	}
-    
+
+	private func updateViews() {
+		UIView.animate(withDuration: 0.3) {
+			self.socialNuggetsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+			for nugget in self.socialLinkCellViews {
+				self.socialNuggetsStackView.addArrangedSubview(nugget)
+			}
+			self.socialNuggetsStackView.layoutSubviews()
+		}
+	}
+
+	private func populateFromUserProfile() {
+		guard let userProfile = profileController?.userProfile else { return }
+		userProfile.profileNuggets.forEach { addSocialNugget(nugget: $0) }
+	}
+
+	// MARK: - Actions
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
 
 	}
@@ -81,16 +97,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	// MARK: - Helper Methods
-	private func updateViews() {
-		UIView.animate(withDuration: 0.3) {
-			self.socialNuggetsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-			for nugget in self.socialLinkCellViews {
-				self.socialNuggetsStackView.addArrangedSubview(nugget)
-			}
-			self.socialNuggetsStackView.layoutSubviews()
-		}
-	}
-
 	func addSocialNugget(nugget: ProfileNugget) {
 		let nuggetView = SocialLinkCellView(frame: .zero, nugget: nugget)
 		nuggetView.delegate = self
