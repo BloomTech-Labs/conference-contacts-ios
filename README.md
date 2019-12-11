@@ -4,13 +4,11 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# Title of project goes here
+# swaap
 
 1️⃣ You can find the deployed project at [Swaap on TestFlight](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1489988902/testflight?section=build&subsection=testers&id=58839d93-df6a-4175-9163-018050500150).
 
-## 4️⃣ Contributors
-
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add or delete these place-holders as needed
+## ２ Contributors
 
 |                                       [Marlon Raskin](https://github.com/marlonjames71)                                        |                                       [Michael Redig](https://github.com/mredig)                                        |                               
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | 
