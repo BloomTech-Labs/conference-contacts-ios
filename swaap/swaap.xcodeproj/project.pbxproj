@@ -15,6 +15,7 @@
 		33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33917DF323849A2400BC1501 /* SignUpViewController.swift */; };
 		33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33917DF92384C3B000BC1501 /* Auth0.framework */; };
 		3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */; };
+		3399F88123A0B69200A17D0D /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3399F88023A0B69200A17D0D /* RangeTests.swift */; };
 		33B24C5A2395B85C00B20DEA /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B24C592395B85C00B20DEA /* DummyViewController.swift */; };
 		33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C00787238FDDEC000D72A7 /* VectorExtensions.swift */; };
 		33CCBABA2398F21200A98C82 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBAB92398F21200A98C82 /* ProfileController.swift */; };
@@ -174,6 +175,7 @@
 		33917DF323849A2400BC1501 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		33917DF92384C3B000BC1501 /* Auth0.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Auth0.framework; path = Carthage/Build/iOS/Auth0.framework; sourceTree = "<group>"; };
 		3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
+		3399F88023A0B69200A17D0D /* RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
 		33B24C592395B85C00B20DEA /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		33C00787238FDDEC000D72A7 /* VectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorExtensions.swift; sourceTree = "<group>"; };
 		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			children = (
 				37A185BA237A357C002191B5 /* swaapTests.swift */,
 				3345A34E2390C6B700859F29 /* VectorTests.swift */,
+				3399F88023A0B69200A17D0D /* RangeTests.swift */,
 				37A185BC237A357C002191B5 /* Info.plist */,
 			);
 			path = swaapTests;
@@ -828,6 +831,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3399F88123A0B69200A17D0D /* RangeTests.swift in Sources */,
 				3345A34F2390C6B700859F29 /* VectorTests.swift in Sources */,
 				37A185BB237A357C002191B5 /* swaapTests.swift in Sources */,
 			);
