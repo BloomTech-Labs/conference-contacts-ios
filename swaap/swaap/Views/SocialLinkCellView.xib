@@ -92,6 +92,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="oNs-Ia-DpV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="AKx-fo-pnq"/>
                 <constraint firstAttribute="bottom" secondItem="oNs-Ia-DpV" secondAttribute="bottom" id="ARm-Ev-PI7"/>
@@ -99,8 +100,16 @@
                 <constraint firstItem="oNs-Ia-DpV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Mhy-Nd-eKf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="UJe-l3-xP9" appends="YES" id="NTd-mO-x6d"/>
+            </connections>
             <point key="canvasLocation" x="142.75362318840581" y="-117.85714285714285"/>
         </view>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="UJe-l3-xP9">
+            <connections>
+                <action selector="longPressTriggered:" destination="-1" id="wyJ-V7-tgu"/>
+            </connections>
+        </pongPressGestureRecognizer>
     </objects>
     <resources>
         <image name="checkmark.seal.fill" catalog="system" width="64" height="60"/>

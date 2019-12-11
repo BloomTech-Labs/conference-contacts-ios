@@ -382,4 +382,20 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 		inputVC.modalPresentationStyle = .overFullScreen
 		present(inputVC, animated: true)
 	}
+
+	func privacySelectionInvoked(on cellView: SocialLinkCellView) {
+		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: nil, preferredStyle: .actionSheet)
+		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
+			cellView.nugget.privacy = .private
+		}
+		let connectedAction = UIAlertAction(title: "Connected", style: .default) { _ in
+			cellView.nugget.privacy = .connected
+		}
+		let publicAction = UIAlertAction(title: "Public", style: .default) { _ in
+			cellView.nugget.privacy = .public
+		}
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
+		present(privacyAlert, animated: true)
+	}
 }

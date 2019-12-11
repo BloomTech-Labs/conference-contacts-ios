@@ -13,6 +13,7 @@ protocol SocialLinkCellViewDelegate: AnyObject {
 	func deleteButtonPressed(on cellView: SocialLinkCellView)
 	func starButtonPressed(on cellView: SocialLinkCellView)
 	func editCellInvoked(on cellView: SocialLinkCellView)
+	func privacySelectionInvoked(on cellView: SocialLinkCellView)
 }
 
 class SocialLinkCellView: UIView {
@@ -91,6 +92,10 @@ class SocialLinkCellView: UIView {
 
 	@IBAction func editTapped(_ sender: UIButton) {
 		delegate?.editCellInvoked(on: self)
+	}
+
+	@IBAction func longPressTriggered(_ sender: UILongPressGestureRecognizer) {
+		delegate?.privacySelectionInvoked(on: self)
 	}
 
 }
