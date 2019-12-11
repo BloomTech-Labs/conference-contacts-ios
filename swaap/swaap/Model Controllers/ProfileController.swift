@@ -18,14 +18,11 @@ protocol ProfileAccessor: AnyObject {
 class ProfileController {
 	let authManager: AuthManager
 
-	private var _userProfile: UserProfile?
-	/// Automatically sends `userProfileChanged`, `userProfilePopulated`, or `userProfileDepopulated` notifications when modified
+	/// Automatically sends `userProfileChanged` (all events), `userProfilePopulated` (when nil -> value),
+	/// `userProfileDepopulated` (value -> nil), or `userProfileModified` (value -> value) notifications when modified
 	var userProfile: UserProfile? {
-		get { _userProfile }
-		set {
-			let oldValue = _userProfile
-			_userProfile = newValue
-			checkUserProfileChanged(oldValue: oldValue, newValue: newValue)
+		didSet {
+			checkUserProfileChanged(oldValue: oldValue, newValue: userProfile)
 		}
 	}
 
@@ -369,7 +366,7 @@ class ProfileController {
 
 	private func saveProfileToCache() {
 		guard let profile = userProfile else {
-			deleteProfileCache()
+//			deleteProfileCache()
 			return
 		}
 
@@ -404,9 +401,12 @@ extension ProfileController {
 		let nc = NotificationCenter.default
 		if oldValue == nil {
 			nc.post(name: .userProfilePopulated, object: nil)
+			nc.post(name: .userProfileChanged, object: nil)
 		} else if newValue == nil {
 			nc.post(name: .userProfileDepopulated, object: nil)
+			nc.post(name: .userProfileChanged, object: nil)
 		} else {
+			nc.post(name: .userProfileModified, object: nil)
 			nc.post(name: .userProfileChanged, object: nil)
 		}
 		updateUserImage()
@@ -415,6 +415,7 @@ extension ProfileController {
 }
 
 extension NSNotification.Name {
+	static let userProfileModified = NSNotification.Name("com.swaap.userProfileChanged")
 	static let userProfileChanged = NSNotification.Name("com.swaap.userProfileChanged")
 	static let userProfilePopulated = NSNotification.Name("com.swaap.userProfilePopulated")
 	static let userProfileDepopulated = NSNotification.Name("com.swaap.userProfileDepopulated")

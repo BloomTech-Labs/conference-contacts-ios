@@ -30,13 +30,9 @@ class AuthManager: NSObject {
 	let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 	let keychain = A0SimpleKeychain()
 
-	private var _credentials: Credentials?
 	private(set) var credentials: Credentials? {
-		get { _credentials }
-		set {
-			let oldValue = _credentials
-			_credentials = newValue
-			sendCredentialsNotification(oldValue: oldValue, newValue: newValue)
+		didSet {
+			sendCredentialsNotification(oldValue: oldValue, newValue: credentials)
 		}
 	}
 
