@@ -12,7 +12,7 @@ struct ProfileNugget: Codable, Hashable {
 	let id: String?
 	let value: String
 	let type: ProfileFieldType
-	let privacy: ProfileFieldPrivacy
+	var privacy: ProfileFieldPrivacy
 	var preferredContact: Bool
 
 	init(id: String? = nil, value: String, type: ProfileFieldType, privacy: ProfileFieldPrivacy = .connected, preferredContact: Bool = false) {
