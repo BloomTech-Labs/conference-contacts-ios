@@ -5,10 +5,12 @@
 //  Created by Marlon Raskin on 12/3/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
+//swiftlint:disable function_body_length
 
 import UIKit
 import Photos
 import NetworkHandler
+import LoadinationIndicator
 
 struct SocialLink {
 	var socialType: ProfileFieldType?
@@ -49,6 +51,15 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			updateViews()
 		}
 	}
+	private var newPhoto: UIImage?
+	var photo: UIImage? {
+		get { newPhoto ?? profileImageView.image }
+		set {
+			newPhoto = newValue
+			profileImageView.image = newPhoto
+			updateViews()
+		}
+	}
 
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -57,6 +68,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		navigationController?.navigationBar.installBlurEffect()
 		isModalInPresentation = true
 		setupUI()
+		updateViews()
     }
 
 	private func setupUI() {
@@ -72,6 +84,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			}
 			self.socialNuggetsStackView.layoutSubviews()
 		}
+
+		if photo != nil {
+			choosePhotoButton.setImage(nil, for: .normal)
+		} else {
+			let image = UIImage(systemName: "camera.fill")
+			choosePhotoButton.setImage(image, for: .normal)
+		}
 	}
 
 	private func populateFromUserProfile() {
@@ -86,6 +105,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
 		}
+		updateViews()
 	}
 
 	// MARK: - Actions
@@ -103,8 +123,33 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.location = location
 		newProfile.bio = bio
 		newProfile.birthdate = birthdate
-
 		newProfile.profileNuggets = socialNuggets
+
+		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
+		panel.statusLabel.text = "Saving..."
+		panel.animation = .bounce2
+		panel.backgroundStyle = .fxBlur
+		self.view.addSubview(panel)
+		panel.beginAnimation()
+
+		let imageUpdate = ConcurrentOperation { [weak self] in
+			guard let self = self else { return }
+			if let imageData = self.newPhoto?.jpegData(compressionQuality: 0.75) {
+				if imageData != self.profileController?.userProfile?.photoData {
+					let semaphore = DispatchSemaphore(value: 0)
+					self.profileController?.uploadImageData(imageData, completion: { (result: Result<URL, NetworkError>) in
+						switch result {
+						case .success(let url):
+							newProfile.pictureURL = url
+						case .failure(let error):
+							NSLog("Error uploading image: \(error)")
+						}
+						semaphore.signal()
+					})
+					semaphore.wait()
+				}
+			}
+		}
 
 		let profileUpdate = ConcurrentOperation { [weak self] in
 			let semaphore = DispatchSemaphore(value: 0)
@@ -113,7 +158,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 				case .success:
 					break
 				case .failure(let error):
-					// FIXME: show error
 					print(error)
 				}
 				semaphore.signal()
@@ -129,7 +173,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 				case .success:
 					break
 				case .failure(let error):
-					// FIXME: show error
 					print(error)
 				}
 				semaphore.signal()
@@ -148,7 +191,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 					case .success:
 						break
 					case .failure(let error):
-						// FIXME: show error
 						print(error)
 					}
 					semaphore.signal()
@@ -169,7 +211,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 					case .success:
 						break
 					case .failure(let error):
-						// FIXME: show error
 						print(error)
 					}
 					semaphore.signal()
@@ -183,16 +224,18 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self?.dismiss(animated: true)
 		}
 
+		profileUpdate.addDependency(imageUpdate)
 		profileRefresh.addDependency(profileUpdate)
 		nuggetUpdates.forEach { profileRefresh.addDependency($0) }
 		nuggetDeletions.forEach { profileRefresh.addDependency($0) }
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations([profileUpdate, profileRefresh] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
+		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
-		sender.isEnabled = false
+		saveButton.isEnabled = false
+		cancelButton.isEnabled = false
 	}
 
 	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
@@ -201,17 +244,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	@IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
 		imageActionSheet()
-	}
-
-	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		picker.dismiss(animated: true)
-	}
-
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-		profileImageView.image = image
-		choosePhotoButton.setImage(nil, for: .normal)
-		picker.dismiss(animated: true)
 	}
 
 	// MARK: - Nugget Management

@@ -50,7 +50,6 @@ class ProfileCardView: IBPreviewView {
 		set { industryLabel.text = newValue }
 	}
 
-//	 FIXME: - Make it work
 	var preferredContact: SocialLink? {
 		get { socialButton.socialInfo }
 		set {
@@ -111,9 +110,10 @@ class ProfileCardView: IBPreviewView {
 		taglineLabel.isHidden = true
 		setupImageView()
 		profileImageView.mask = imageMaskView
-		profileImage = nil
 
 		backgroundColor = .clear
+
+		updateViews()
 	}
 
 	private func setupImageView() {
@@ -126,16 +126,17 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func updateViews() {
-		guard let userProfile = userProfile else { return }
-		if let imageData = userProfile.photoData {
+		if let imageData = userProfile?.photoData {
 			profileImage = UIImage(data: imageData)
+		} else {
+			profileImage = nil
 		}
-		name = userProfile.name
-		jobTitle = userProfile.jobtitle
-		location = userProfile.location
-		industry = userProfile.industry
+		name = userProfile?.name
+		jobTitle = userProfile?.jobtitle
+		location = userProfile?.location
+		industry = userProfile?.industry
 
-		guard let pContact = userProfile.profileNuggets.preferredContact else { return }
+		guard let pContact = userProfile?.profileNuggets.preferredContact else { return }
 		let socialLink = SocialLink(socialType: pContact.type, value: pContact.value)
 		preferredContact = socialLink
 	}

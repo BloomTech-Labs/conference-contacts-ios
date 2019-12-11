@@ -23,6 +23,7 @@ class SocialLinkCellView: UIView {
 	@IBOutlet private weak var socialButton: SocialButton!
 	@IBOutlet private weak var valueLabel: UILabel!
 	@IBOutlet private weak var deleteButton: UIButton!
+	@IBOutlet private weak var privacySettingLabel: UILabel!
 
 	weak var delegate: SocialLinkCellViewDelegate?
 
@@ -76,6 +77,7 @@ class SocialLinkCellView: UIView {
 		socialButton.smallButton = true
 		socialButton.socialInfo.socialType = nugget.type
 		valueLabel.text = nugget.value
+		privacySettingLabel.text = nugget.privacy.rawValue.capitalized
 		starButton.tintColor = nugget.preferredContact ? .systemGreen : .systemGray3
 	}
 

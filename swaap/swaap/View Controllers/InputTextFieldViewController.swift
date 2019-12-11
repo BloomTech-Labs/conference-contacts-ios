@@ -18,9 +18,9 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	var autoCapitalizationType: UITextAutocapitalizationType = .sentences
 	var placeholderStr: String = "enter info"
 	var labelText: String?
-	// FIXME: - Update when backend provides all social platforms
 	var socialType: ProfileFieldType?
 	let successfulCompletion: SocialLinkCompletion
+	
 	typealias SocialLinkCompletion = (SocialLink) -> Void
 
 	init?(coder: NSCoder, needsSocialTextField: Bool = true, successfulCompletion: @escaping SocialLinkCompletion) {
@@ -29,6 +29,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 		super.init(coder: coder)
 	}
 
+	@available(*, unavailable)
 	required init?(coder: NSCoder) {
 		fatalError("Init coder not implemented")
 	}
@@ -49,7 +50,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		floatingTextFieldView.becomeFirstResponder()
+		_ = floatingTextFieldView.becomeFirstResponder()
 	}
 
 	@objc func keyboardWillShow(notification: NSNotification) {
