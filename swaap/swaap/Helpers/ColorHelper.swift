@@ -11,6 +11,7 @@ import UIKit
 extension UIColor {
 	static let swaapBackground = UIColor(named: "swaapBackground")!
 	static let swaapBackgroundTertiary = UIColor(named: "swaapBackgroundTertiary")!
+	static let swaapAccentColorOne = UIColor(named: "Swaap Accent color 1")!
 
 	// MARK: - Social Button Colors
 	static let socialButtonFacebookMain = UIColor(named: "socialButtonFacebookMain")!
