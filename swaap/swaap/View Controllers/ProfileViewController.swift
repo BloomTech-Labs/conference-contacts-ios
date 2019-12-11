@@ -22,7 +22,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var profileChangedObserver: NSObjectProtocol?
 
 	// Recommended size for Social Buttons in stack view is w 250 / h 40
-
 	override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,8 +49,33 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		updateViews()
 	}
 
-	@IBAction func backbuttonTapped(_ sender: UIButton) {
-		navigationController?.popViewController(animated: true)
+	private func updateViews() {
+		profileCardView.userProfile = profileController?.userProfile
+		birthdayLabel.text = profileController?.userProfile?.birthdate
+		bioLabel.text = profileController?.userProfile?.bio
+		populateSocialButtons()
+
+		if let count = navigationController?.viewControllers.count, count > 1 {
+			backButtonVisualFXContainerView.isHidden = false
+		} else {
+			backButtonVisualFXContainerView.isHidden = true
+		}
+
+		if socialButtonsStackView.arrangedSubviews.count < 1 {
+			socialButtonsStackView.isHidden = true
+		}
+	}
+
+	private func populateSocialButtons() {
+		guard let profileNuggets = profileController?.userProfile?.profileNuggets else { return }
+		profileNuggets.forEach {
+			let socialButton = SocialButton()
+			socialButton.socialInfo = ($0.type, $0.value)
+			socialButton.translatesAutoresizingMaskIntoConstraints = false
+			socialButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+			socialButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+			socialButtonsStackView.addArrangedSubview(socialButton)
+		}
 	}
 
 	private func setupNotifications() {
@@ -74,16 +98,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		editProfileButtonVisualFXContainerView.clipsToBounds = true
 	}
 
-	private func updateViews() {
-		profileCardView.userProfile = profileController?.userProfile
-		if let count = navigationController?.viewControllers.count, count > 1 {
-			backButtonVisualFXContainerView.isHidden = false
-		} else {
-			backButtonVisualFXContainerView.isHidden = true
-		}
-
-		if socialButtonsStackView.arrangedSubviews.count < 1 {
-			socialButtonsStackView.isHidden = true
-		}
+	@IBAction func backbuttonTapped(_ sender: UIButton) {
+		navigationController?.popViewController(animated: true)
 	}
 }
