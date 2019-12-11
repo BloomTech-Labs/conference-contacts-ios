@@ -30,9 +30,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var choosePhotoButton: UIButton!
+
 	@IBOutlet private weak var nameLabel: UILabel!
 	@IBOutlet private weak var locationLabel: UILabel!
 	@IBOutlet private weak var industryLabel: UILabel!
+	@IBOutlet private weak var birthdateLabel: UILabel!
+	@IBOutlet private weak var bioLabel: UILabel!
+
 	@IBOutlet private weak var socialNuggetsStackView: UIStackView!
 
 	var socialNuggets: [ProfileNugget] {
@@ -77,6 +81,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		nameLabel.text = userProfile.name
 		industryLabel.text = userProfile.industry
 		locationLabel.text = userProfile.location
+		bioLabel.text = userProfile.bio
+		birthdateLabel.text = userProfile.birthdate
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
 		}
@@ -87,11 +93,16 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		//no image handling
 		guard let name = nameLabel.text,
 			let industry = industryLabel.text,
-			let location = locationLabel.text else { return }
+			let location = locationLabel.text,
+			let bio = bioLabel.text,
+			let birthdate = birthdateLabel.text
+		else { return }
 		guard var newProfile = profileController?.userProfile else { return }
 		newProfile.name = name
 		newProfile.industry = industry
 		newProfile.location = location
+		newProfile.bio = bio
+		newProfile.birthdate = birthdate
 
 		newProfile.profileNuggets = socialNuggets
 
@@ -203,7 +214,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		picker.dismiss(animated: true)
 	}
 
-	// MARK: - Helper Methods
+	// MARK: - Nugget Management
 	func addSocialNugget(nugget: ProfileNugget, checkForPreferred: Bool = true) {
 		let nuggetView = SocialLinkCellView(frame: .zero, nugget: nugget)
 		nuggetView.delegate = self
@@ -226,6 +237,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 	}
 
+	// MARK: - Segues
 	private func passLabelText(from label: UILabel) -> String? {
 		if let text = label.text {
 			if text.contains("Tap to add") {
@@ -267,6 +279,26 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		return inputVC
 	}
 
+	@IBSegueAction func birthdateTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
+			self.birthdateLabel.text = socialLink.value
+		}
+		inputVC?.placeholderStr = "MM/DD/YYYY"
+		inputVC?.labelText = passLabelText(from: birthdateLabel)
+		inputVC?.autoCapitalizationType = .none
+		return inputVC
+	}
+
+	@IBSegueAction func bioTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
+			self.bioLabel.text = socialLink.value
+		}
+		inputVC?.placeholderStr = "Add a short bio"
+		inputVC?.labelText = passLabelText(from: bioLabel)
+		inputVC?.autoCapitalizationType = .sentences
+		return inputVC
+	}
+
 	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in
 			guard let type = socialLink.socialType else { return }
@@ -276,8 +308,10 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
+
 }
 
+// MARK: - SocialLinkCellViewDelegate conformance
 extension EditProfileViewController: SocialLinkCellViewDelegate {
 	func deleteButtonPressed(on cellView: SocialLinkCellView) {
 		guard socialLinkCellViews.count >= 2 else {
@@ -301,13 +335,17 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 	func editCellInvoked(on cellView: SocialLinkCellView) {
 		let inputVCCompletion = { (socialLink: SocialLink) in
 			guard let type = socialLink.socialType else { return }
-			let nugget = ProfileNugget(id: cellView.nugget.id, value: socialLink.value, type: type, privacy: cellView.nugget.privacy, preferredContact: cellView.nugget.preferredContact)
+			let nugget = ProfileNugget(id: cellView.nugget.id,
+									   value: socialLink.value,
+									   type: type,
+									   privacy: cellView.nugget.privacy,
+									   preferredContact: cellView.nugget.preferredContact)
 			cellView.nugget = nugget
 		}
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
 			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion)
 		}
-		inputVC.socialType = .twitter
+		inputVC.socialType = cellView.nugget.type
 		inputVC.labelText = cellView.nugget.value
 		inputVC.modalPresentationStyle = .overFullScreen
 		present(inputVC, animated: true)
