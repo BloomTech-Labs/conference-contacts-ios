@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import NetworkHandler
 
 struct SocialLink {
 	var socialType: ProfileFieldType?
@@ -37,6 +38,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	var socialNuggets: [ProfileNugget] {
 		socialLinkCellViews.map { $0.nugget }
 	}
+	var deletedNuggets: [ProfileNugget] = []
 
 	var socialLinkCellViews: [SocialLinkCellView] = [] {
 		didSet {
@@ -70,11 +72,114 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	private func populateFromUserProfile() {
 		guard let userProfile = profileController?.userProfile else { return }
 		userProfile.profileNuggets.forEach { addSocialNugget(nugget: $0) }
+		nameLabel.text = userProfile.name
+		industryLabel.text = userProfile.industry
+		locationLabel.text = userProfile.location
+		if let imageData = userProfile.photoData {
+			profileImageView.image = UIImage(data: imageData)
+		}
 	}
 
 	// MARK: - Actions
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+		//no image handling
+		guard let name = nameLabel.text,
+			let industry = industryLabel.text,
+			let location = locationLabel.text else { return }
+		guard var newProfile = profileController?.userProfile else { return }
+		newProfile.name = name
+		newProfile.industry = industry
+		newProfile.location = location
 
+		newProfile.profileNuggets = socialNuggets
+
+		let profileUpdate = ConcurrentOperation { [weak self] in
+			let semaphore = DispatchSemaphore(value: 0)
+			self?.profileController?.updateProfile(newProfile, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					// FIXME: show error
+					print(error)
+				}
+				semaphore.signal()
+			})
+			semaphore.wait()
+			print("profile update finished")
+		}
+
+		let profileRefresh = ConcurrentOperation { [weak self] in
+			let semaphore = DispatchSemaphore(value: 0)
+			self?.profileController?.fetchProfileFromServer(completion: { (result: Result<UserProfile, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					// FIXME: show error
+					print(error)
+				}
+				semaphore.signal()
+			})
+			semaphore.wait()
+			print("profile refresh finished")
+		}
+
+		var nuggetUpdates = [ConcurrentOperation]()
+		for (index, nugget) in socialNuggets.enumerated() {
+			let nuggetUpdate = ConcurrentOperation { [weak self] in
+				guard let self = self else { return }
+				let semaphore = DispatchSemaphore(value: 0)
+				self.profileController?.modifyProfileNugget(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+					switch result {
+					case .success:
+						break
+					case .failure(let error):
+						// FIXME: show error
+						print(error)
+					}
+					semaphore.signal()
+				})
+				semaphore.wait()
+				print("nugget update \(index) update finished")
+			}
+			nuggetUpdates.append(nuggetUpdate)
+		}
+
+		var nuggetDeletions = [ConcurrentOperation]()
+		for nugget in deletedNuggets {
+			let nuggetUpdate = ConcurrentOperation { [weak self] in
+				guard let self = self else { return }
+				let semaphore = DispatchSemaphore(value: 0)
+				self.profileController?.deleteProfileNugget(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+					switch result {
+					case .success:
+						break
+					case .failure(let error):
+						// FIXME: show error
+						print(error)
+					}
+					semaphore.signal()
+				})
+				semaphore.wait()
+			}
+			nuggetDeletions.append(nuggetUpdate)
+		}
+
+		let dismissSelf = ConcurrentOperation { [weak self] in
+			self?.dismiss(animated: true)
+		}
+
+		profileRefresh.addDependency(profileUpdate)
+		nuggetUpdates.forEach { profileRefresh.addDependency($0) }
+		nuggetDeletions.forEach { profileRefresh.addDependency($0) }
+		dismissSelf.addDependency(profileRefresh)
+
+		let queue = OperationQueue()
+		queue.addOperations([profileUpdate, profileRefresh] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
+		OperationQueue.main.addOperation(dismissSelf)
+
+		sender.isEnabled = false
 	}
 
 	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
@@ -106,6 +211,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	func removeNugget(nugget: ProfileNugget) {
 		guard let index = socialLinkCellViews.firstIndex(where: { $0.nugget == nugget }) else { return }
+		deletedNuggets.append(socialNuggets[index])
 		socialLinkCellViews.remove(at: index)
 		assurePreferredContactExists()
 	}

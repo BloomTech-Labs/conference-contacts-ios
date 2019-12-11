@@ -287,7 +287,6 @@ class ProfileController {
 				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
-
 	}
 
 	private func networkCommon() -> (Auth0IDClaims, NetworkRequest)? {
