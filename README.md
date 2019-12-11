@@ -25,7 +25,7 @@
 
 ## Project Overview
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at [Swaap on TestFlight](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1489988902/testflight?section=build&subsection=testers&id=58839d93-df6a-4175-9163-018050500150).
 
 1️⃣ [Trello Board](https://trello.com/b/Jh8cS46t/conference-contacts)
 
