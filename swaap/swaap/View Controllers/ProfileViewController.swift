@@ -75,8 +75,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			let socialButton = SocialButton()
 			socialButton.socialInfo = SocialLink(socialType: $0.type, value: $0.value)
 			socialButton.translatesAutoresizingMaskIntoConstraints = false
-			socialButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-			socialButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+			socialButton.height = 50
+			socialButton.setContentHuggingPriority(.init(rawValue: 251), for: .vertical)
 			socialButtonsStackView.addArrangedSubview(socialButton)
 		}
 	}

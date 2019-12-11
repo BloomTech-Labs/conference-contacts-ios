@@ -75,6 +75,7 @@ class SocialButton: IBPreviewControl {
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		contentHeightAnchor = contentView.heightAnchor.constraint(equalToConstant: 35)
+		contentHeightAnchor?.priority = UILayoutPriority(750)
 		contentHeightAnchor?.isActive = true
 		handleLabel.font = .roundedFont(ofSize: handleLabel.font?.pointSize ?? 15.0, weight: .regular)
 

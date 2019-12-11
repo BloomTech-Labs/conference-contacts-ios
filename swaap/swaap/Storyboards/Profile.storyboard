@@ -83,9 +83,23 @@
                                                     <constraint firstAttribute="height" constant="20" id="fmU-Iz-cs3"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5M8-KJ-9Zb">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0r-cw-Iou">
                                                 <rect key="frame" x="0.0" y="150" width="375" height="50"/>
-                                            </stackView>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5M8-KJ-9Zb">
+                                                        <rect key="frame" x="37.666666666666657" y="0.0" width="300" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="300" id="WG6-fK-I0w"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="5M8-KJ-9Zb" firstAttribute="centerX" secondItem="k0r-cw-Iou" secondAttribute="centerX" id="H0t-vC-lqa"/>
+                                                    <constraint firstItem="5M8-KJ-9Zb" firstAttribute="top" secondItem="k0r-cw-Iou" secondAttribute="top" id="Uff-Qc-8j8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="5M8-KJ-9Zb" secondAttribute="bottom" id="VO9-1i-Y6S"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uCD-iQ-yce" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="200" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
