@@ -56,7 +56,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		birthdayLabel.text = profileController?.userProfile?.birthdate
 		bioLabel.text = profileController?.userProfile?.bio
 		populateSocialButtons()
-
 		if let count = navigationController?.viewControllers.count, count > 1 {
 			backButtonVisualFXContainerView.isHidden = false
 		} else {
@@ -70,9 +69,11 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	private func populateSocialButtons() {
 		guard let profileNuggets = profileController?.userProfile?.profileNuggets else { return }
+		socialButtonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 		profileNuggets.forEach {
+			guard !$0.preferredContact else { return }
 			let socialButton = SocialButton()
-			socialButton.socialInfo = ($0.type, $0.value)
+			socialButton.socialInfo = SocialLink(socialType: $0.type, value: $0.value)
 			socialButton.translatesAutoresizingMaskIntoConstraints = false
 			socialButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
 			socialButton.heightAnchor.constraint(equalToConstant: 50).isActive = true

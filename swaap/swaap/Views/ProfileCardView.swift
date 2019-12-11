@@ -50,11 +50,14 @@ class ProfileCardView: IBPreviewView {
 		set { industryLabel.text = newValue }
 	}
 
-	// FIXME: - Make it work
-	//	var preferredContact: SocialLink? {
-	//		get { socialButton.socialInfo.socialPlatform }
-	//		set { industryLabel.text = newValue }
-	//	}
+//	 FIXME: - Make it work
+	var preferredContact: SocialLink? {
+		get { socialButton.socialInfo }
+		set {
+			guard let newValue = newValue else { return }
+			socialButton.socialInfo = newValue
+		}
+	}
 
 
 	// MARK: - Outlets
@@ -131,7 +134,9 @@ class ProfileCardView: IBPreviewView {
 		location = userProfile.location
 		industry = userProfile.industry
 
-//		preferredContact
+		guard let pContact = userProfile.profileNuggets.preferredContact else { return }
+		let socialLink = SocialLink(socialType: pContact.type, value: pContact.value)
+		preferredContact = socialLink
 	}
 
 
