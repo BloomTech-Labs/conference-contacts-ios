@@ -316,8 +316,8 @@ class ProfileController {
 
 
 	// MARK: - Image
-	let cloudinaryConfig = CLDConfiguration(cloudName: "swaap", secure: true)
-	lazy var cloudinary = CLDCloudinary(configuration: cloudinaryConfig)
+	private let cloudinaryConfig = CLDConfiguration(cloudName: "swaap", secure: true)
+	private lazy var cloudinary = CLDCloudinary(configuration: cloudinaryConfig)
 
 	func uploadImageData(_ data: Data, completion: @escaping (Result<URL, NetworkError>) -> Void) {
 		let request = cloudinary.createUploader().upload(data: data, uploadPreset: "zkbfj0cu") { result, error in
@@ -366,7 +366,6 @@ class ProfileController {
 
 	private func saveProfileToCache() {
 		guard let profile = userProfile else {
-//			deleteProfileCache()
 			return
 		}
 

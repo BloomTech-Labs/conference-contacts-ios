@@ -21,7 +21,7 @@ class ConcurrentOperation: Operation {
     
     private var _state = State.isReady
     
-    private let stateQueue = DispatchQueue(label: "com.LambdaSchool.Astronomy.ConcurrentOperationStateQueue")
+    private let stateQueue = DispatchQueue(label: "com.swaap.concurrentStateQueue")
     var state: State {
         get {
             var result: State?
