@@ -6,7 +6,7 @@
 
 # Title of project goes here
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at [Swaap on TestFlight](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1489988902/testflight?section=build&subsection=testers&id=58839d93-df6a-4175-9163-018050500150).
 
 ## 4️⃣ Contributors
 
@@ -42,19 +42,16 @@
 
 🚫 One to two paragraph statement about your product and what it does.
 
-Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. Ut aliquam purus sit amet luctus venenatis lectus magna fringilla. Orci dapibus ultrices in iaculis nunc sed augue. Euismod in pellentesque massa placerat duis ultricies. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Lectus quam id leo in vitae. Purus sit amet luctus venenatis lectus magna fringilla urna porttitor.
-
-Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
+A lot of times it can be hard to make good contacts 
 
 ![](header.png)
 
 ### Features
 
--    Feature 1
--    Feature 2
--    Feature 3
--    Feature 4
--    Feature 5
+-    Connect to other users easily via NFC or QR code/reader
+-    Easily keep tabs on how well you are keeping in touch with your professional contacts
+-    Keep track of how you met your contacts and notes about them or how you met
+-    swaap acts as a hub for all the ways you can be contacted by the people in your network
 
 ### Authentication API here
 
@@ -87,8 +84,6 @@ When you do it your way you can go anywhere you choose. Let your heart take you 
 Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
 
 ## Requirements
-
-🚫 These are examples, make sure this matches your project's requirements
 
 -   iOS 13.0+
 -   Xcode 11.0
