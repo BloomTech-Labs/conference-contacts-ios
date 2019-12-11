@@ -12,6 +12,7 @@
                 <outlet property="cellView" destination="oNs-Ia-DpV" id="GeD-2l-igr"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="KyY-BZ-GBa"/>
                 <outlet property="deleteButton" destination="3dl-Id-aKG" id="zzy-1T-70N"/>
+                <outlet property="privacySettingLabel" destination="k4N-g8-b2x" id="MQ5-OX-jXs"/>
                 <outlet property="socialButton" destination="maB-Gf-TMZ" id="kyv-XV-3qD"/>
                 <outlet property="starButton" destination="yO1-IM-2CW" id="jZF-p0-AMf"/>
                 <outlet property="valueLabel" destination="vWe-Uo-buK" id="YWM-hV-EbO"/>
@@ -19,17 +20,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" interfaceStyle="dark" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNs-Ia-DpV">
-                    <rect key="frame" x="20" y="0.0" width="335" height="60"/>
+                    <rect key="frame" x="20" y="0.0" width="335" height="82"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Ye-wK-7SG">
-                            <rect key="frame" x="10" y="8" width="309" height="44"/>
+                            <rect key="frame" x="10" y="8" width="309" height="66"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO1-IM-2CW">
-                                    <rect key="frame" x="0.0" y="0.0" width="22.5" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="22.5" height="66"/>
                                     <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="checkmark.seal.fill" catalog="system"/>
                                     <connections>
@@ -37,20 +38,31 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maB-Gf-TMZ" customClass="SocialButton" customModule="swaap" customModuleProvider="target">
-                                    <rect key="frame" x="30.5" y="0.0" width="44" height="44"/>
+                                    <rect key="frame" x="30.5" y="0.0" width="66" height="66"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="maB-Gf-TMZ" secondAttribute="height" multiplier="1:1" id="Ykj-Ao-FRm"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vWe-Uo-buK">
-                                    <rect key="frame" x="82.5" y="0.0" width="198.5" height="44"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="TdN-IR-The">
+                                    <rect key="frame" x="104.5" y="0.0" width="176.5" height="66"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vWe-Uo-buK">
+                                            <rect key="frame" x="0.0" y="0.0" width="176.5" height="38.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4N-g8-b2x">
+                                            <rect key="frame" x="0.0" y="38.5" width="176.5" height="27.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dl-Id-aKG">
-                                    <rect key="frame" x="289" y="0.0" width="20" height="44"/>
+                                    <rect key="frame" x="289" y="0.0" width="20" height="66"/>
                                     <color key="tintColor" name="socialButtonInstagramMain"/>
                                     <state key="normal" image="minus.circle.fill" catalog="system"/>
                                     <connections>
@@ -60,7 +72,7 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKi-fj-ehb">
-                            <rect key="frame" x="48.5" y="0.0" width="234.5" height="60"/>
+                            <rect key="frame" x="48.5" y="0.0" width="234.5" height="82"/>
                             <connections>
                                 <action selector="editTapped:" destination="-1" eventType="touchUpInside" id="9DA-jS-q8k"/>
                             </connections>
@@ -87,7 +99,7 @@
                 <constraint firstItem="oNs-Ia-DpV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Mhy-Nd-eKf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="142.75362318840581" y="-108.48214285714285"/>
+            <point key="canvasLocation" x="142.75362318840581" y="-117.85714285714285"/>
         </view>
     </objects>
     <resources>
