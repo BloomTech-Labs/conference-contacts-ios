@@ -116,7 +116,7 @@ class ProfileController {
 		// while networking, load from disk if same user
 		loadCachedProfile()
 
-		let query = "{ user { id authId name picture birthdate gender industry jobtitle bio profile { id value type privacy preferredContact } } }"
+		let query = "{ user { id authId name picture birthdate location industry jobtitle bio profile { id value type privacy preferredContact } } }"
 		let graphObject = GQuery(query: query)
 
 		do {

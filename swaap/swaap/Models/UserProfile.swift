@@ -43,7 +43,7 @@ struct UserProfile: Codable, Equatable {
 	let name: String
 	private let pictureString: String?
 	let birthdate: String?
-	let location: String
+	let location: String?
 	let industry: String?
 	let jobtitle: String?
 	let bio: String?
