@@ -24,6 +24,7 @@ class SwipeBackNavigationController: UINavigationController, AuthAccessor, Profi
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		delegate = self
 		fixUINavigationBarHideAndUnhideWhenSwipingBackToPreviousUIViewControllerWhenPoppingTopViewControllerOnNavigationStack()
 	}
 
