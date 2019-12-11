@@ -46,11 +46,10 @@ Swaap is an app to help professional people make great contacts at events such a
 
 ### Features
 
--    Feature 1
--    Feature 2
--    Feature 3
--    Feature 4
--    Feature 5
+-    Connect to other users easily via NFC or QR code/reader
+-    Easily keep tabs on how well you are keeping in touch with your professional contacts
+-    Keep track of how you met your contacts and notes about them or how you met
+-    swaap acts as a hub for all the ways you can be contacted by the people in your network
 
 ### Authentication API here
 
@@ -86,9 +85,9 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 🚫 These are examples, make sure this matches your project's requirements
 
--   iOS 8.0+
--   Xcode 7.3
--   Cocoa Pods
+-   iOS 13.0+
+-   Xcode 11.0
+-   Carthage
 
 ## Contributing
 
