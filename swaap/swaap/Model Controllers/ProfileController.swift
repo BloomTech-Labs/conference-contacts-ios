@@ -8,6 +8,7 @@
 
 import Foundation
 import NetworkHandler
+import Cloudinary
 
 protocol ProfileAccessor: AnyObject {
 	var profileController: ProfileController? { get set }
@@ -313,6 +314,27 @@ class ProfileController {
 				NSLog("Error loading user profile image: \(error)")
 			}
 		}
+	}
+
+
+	// MARK: - Image
+	let cloudinaryConfig = CLDConfiguration(cloudName: "swaap", secure: true)
+	lazy var cloudinary = CLDCloudinary(configuration: cloudinaryConfig)
+
+	func uploadImageData(_ data: Data, completion: @escaping (Result<URL, NetworkError>) -> Void) {
+		let request = cloudinary.createUploader().upload(data: data, uploadPreset: "zkbfj0cu") { (result, error) in
+			if let error = error {
+				NSLog("Error uploading image: \(error)")
+				completion(.failure(.otherError(error: error)))
+				return
+			}
+			guard let urlStr = result?.secureUrl ?? result?.url, let url = URL(string: urlStr) else {
+				completion(.failure(.unspecifiedError(reason: "No url provided in result!: \(result.debugDescription)")))
+				return
+			}
+			completion(.success(url))
+		}
+		request.resume()
 	}
 
 	// MARK: - Local Storage

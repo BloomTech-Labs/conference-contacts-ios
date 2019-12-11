@@ -117,4 +117,15 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 		[libraryAction, cameraAction, cancelAction].forEach { photoOptionsController.addAction($0) }
 		present(photoOptionsController, animated: true, completion: nil)
 	}
+
+	// MARK: - Imagepicker handling
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.dismiss(animated: true)
+	}
+
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+		photo = image.imageByScaling(toSize: CGSize(width: 512, height: 512), inPixels: true)
+		picker.dismiss(animated: true)
+	}
 }

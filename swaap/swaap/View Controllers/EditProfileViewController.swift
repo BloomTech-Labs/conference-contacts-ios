@@ -49,6 +49,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			updateViews()
 		}
 	}
+	var photo: UIImage? {
+		get { profileImageView.image }
+		set {
+			profileImageView.image = newValue
+			updateViews()
+		}
+	}
 
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -71,6 +78,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 				self.socialNuggetsStackView.addArrangedSubview(nugget)
 			}
 			self.socialNuggetsStackView.layoutSubviews()
+		}
+
+		if photo != nil {
+			choosePhotoButton.setImage(nil, for: .normal)
+		} else {
+			let image = UIImage(systemName: "camera.fill")
+			choosePhotoButton.setImage(image, for: .normal)
 		}
 	}
 
@@ -103,8 +117,27 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.location = location
 		newProfile.bio = bio
 		newProfile.birthdate = birthdate
-
 		newProfile.profileNuggets = socialNuggets
+
+		let imageData = photo?.pngData()
+		let imageUpdate = ConcurrentOperation { [weak self] in
+			guard let self = self else { return }
+			if let imageData = imageData {
+				if imageData != self.profileController?.userProfile?.photoData {
+					let semaphore = DispatchSemaphore(value: 0)
+					self.profileController?.uploadImageData(imageData, completion: { (result: Result<URL, NetworkError>) in
+						switch result {
+						case .success(let url):
+							newProfile.pictureURL = url
+						case .failure(let error):
+							NSLog("Error uploading image: \(error)")
+						}
+						semaphore.signal()
+					})
+					semaphore.wait()
+				}
+			}
+		}
 
 		let profileUpdate = ConcurrentOperation { [weak self] in
 			let semaphore = DispatchSemaphore(value: 0)
@@ -183,13 +216,14 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self?.dismiss(animated: true)
 		}
 
+		profileUpdate.addDependency(imageUpdate)
 		profileRefresh.addDependency(profileUpdate)
 		nuggetUpdates.forEach { profileRefresh.addDependency($0) }
 		nuggetDeletions.forEach { profileRefresh.addDependency($0) }
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations([profileUpdate, profileRefresh] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
+		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
 		sender.isEnabled = false
@@ -201,17 +235,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	@IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
 		imageActionSheet()
-	}
-
-	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		picker.dismiss(animated: true)
-	}
-
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-		profileImageView.image = image
-		choosePhotoButton.setImage(nil, for: .normal)
-		picker.dismiss(animated: true)
 	}
 
 	// MARK: - Nugget Management
