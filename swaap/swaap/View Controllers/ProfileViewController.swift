@@ -61,9 +61,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			backButtonVisualFXContainerView.isHidden = true
 		}
 
-		if socialButtonsStackView.arrangedSubviews.count < 1 {
-			socialButtonsStackView.isHidden = true
-		}
+		socialButtonsStackView.isHidden = socialButtonsStackView.arrangedSubviews.isEmpty
 	}
 
 	private func populateSocialButtons() {
