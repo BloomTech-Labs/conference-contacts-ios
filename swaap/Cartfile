@@ -6,3 +6,5 @@ github "mredig/IBPreview"
 github "marlonjames71/ChevronAnimatable"
 github "auth0/Auth0.swift" ~> 1.18
 github "marmelroy/PhoneNumberKit" # Not implemented yet
+github "cloudinary/cloudinary_ios"
+github "Alamofire/Alamofire"

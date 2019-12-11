@@ -1,6 +1,8 @@
+github "Alamofire/Alamofire" "4.9.1"
 github "auth0/Auth0.swift" "1.19.3"
 github "auth0/SimpleKeychain" "0.9.0"
 github "calda/SwiftyAcknowledgements" "0.4"
+github "cloudinary/cloudinary_ios" "2.8.0"
 github "marlonjames71/ChevronAnimatable" "0.5.3"
 github "marmelroy/PhoneNumberKit" "3.1.0"
 github "mredig/IBPreview" "0.6.5"
