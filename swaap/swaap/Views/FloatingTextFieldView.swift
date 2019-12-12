@@ -10,7 +10,7 @@ import UIKit
 import IBPreview
 
 protocol FloatingTextFieldViewDelegate: AnyObject {
-	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: SocialLink)
+	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: ProfileInfoNugget)
 }
 
 class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -145,7 +145,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
 		guard let text = textField.text else { return }
-		delegate?.didFinishEditing(self, socialLink: SocialLink(socialType: socialType, value: text))
+		delegate?.didFinishEditing(self, socialLink: ProfileInfoNugget(type: socialType, value: text))
 		fireFirstResponder()
 	}
 
@@ -160,7 +160,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		formatTextField()
 		if let socialType = socialType {
 			socialButton.isVisible = true
-			socialButton.socialInfo.socialType = socialType
+			socialButton.infoNugget.type = socialType
 		} else {
 			socialButton.isVisible = false
 		}
@@ -249,13 +249,13 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialButtonCell",
 														for: indexPath) as? SocialButtonCollectionViewCell else { return UICollectionViewCell() }
 
-		cell.socialLink.socialType = ProfileFieldType.allCases[indexPath.item]
+		cell.socialLink.type = ProfileFieldType.allCases[indexPath.item]
 		cell.socialButton.addTarget(self, action: #selector(didSelectSocialButton(_:)), for: .touchUpInside)
 		return cell
 	}
 
 	@objc func didSelectSocialButton(_ sender: SocialButton) {
-		socialType = sender.socialInfo.socialType
+		socialType = sender.infoNugget.type
 		shouldShowCollectionView(false)
 	}
 }

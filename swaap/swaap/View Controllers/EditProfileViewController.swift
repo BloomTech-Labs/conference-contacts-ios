@@ -12,10 +12,6 @@ import Photos
 import NetworkHandler
 import LoadinationIndicator
 
-struct SocialLink {
-	var socialType: ProfileFieldType?
-	var value: String
-}
 
 class EditProfileViewController: UIViewController, ProfileAccessor {
 
@@ -42,10 +38,10 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	@IBOutlet private weak var socialNuggetsStackView: UIStackView!
 
-	var socialNuggets: [ProfileNugget] {
-		socialLinkCellViews.map { $0.nugget }
+	var socialNuggets: [ProfileContactMethod] {
+		socialLinkCellViews.map { $0.contactMethod }
 	}
-	var deletedNuggets: [ProfileNugget] = []
+	var deletedNuggets: [ProfileContactMethod] = []
 
 	var socialLinkCellViews: [SocialLinkCellView] = [] {
 		didSet {
@@ -97,8 +93,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	private func updateViews() {
 		UIView.animate(withDuration: 0.3) {
 			self.socialNuggetsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-			for nugget in self.socialLinkCellViews {
-				self.socialNuggetsStackView.addArrangedSubview(nugget)
+			for cellView in self.socialLinkCellViews {
+				self.socialNuggetsStackView.addArrangedSubview(cellView)
 			}
 			self.socialNuggetsStackView.layoutSubviews()
 		}
@@ -113,7 +109,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	private func populateFromUserProfile() {
 		guard let userProfile = profileController?.userProfile else { return }
-		userProfile.profileNuggets.forEach { addSocialNugget(nugget: $0, checkForPreferred: false) }
+		userProfile.profileContactMethods.forEach { addSocialNugget(nugget: $0, checkForPreferred: false) }
 		assurePreferredContactExists()
 		nameLabel.text = userProfile.name
 		industryLabel.text = userProfile.industry
@@ -141,7 +137,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.location = location
 		newProfile.bio = bio
 		newProfile.birthdate = birthdate
-		newProfile.profileNuggets = socialNuggets
+		newProfile.profileContactMethods = socialNuggets
 
 		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
 		panel.statusLabel.text = "Saving..."
@@ -204,7 +200,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			let nuggetUpdate = ConcurrentOperation { [weak self] in
 				guard let self = self else { return }
 				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.modifyProfileNugget(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+				self.profileController?.modifyProfileContactMethod(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
 					switch result {
 					case .success:
 						break
@@ -224,7 +220,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			let nuggetUpdate = ConcurrentOperation { [weak self] in
 				guard let self = self else { return }
 				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.deleteProfileNugget(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+				self.profileController?.deleteProfileContactMethod(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
 					switch result {
 					case .success:
 						break
@@ -265,8 +261,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	// MARK: - Nugget Management
-	func addSocialNugget(nugget: ProfileNugget, checkForPreferred: Bool = true) {
-		let nuggetView = SocialLinkCellView(frame: .zero, nugget: nugget)
+	func addSocialNugget(nugget: ProfileContactMethod, checkForPreferred: Bool = true) {
+		let nuggetView = SocialLinkCellView(frame: .zero, contactMethod: nugget)
 		nuggetView.delegate = self
 		socialLinkCellViews.append(nuggetView)
 		if checkForPreferred {
@@ -274,8 +270,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 	}
 
-	func removeNugget(nugget: ProfileNugget) {
-		guard let index = socialLinkCellViews.firstIndex(where: { $0.nugget == nugget }) else { return }
+	func removeNugget(nugget: ProfileContactMethod) {
+		guard let index = socialLinkCellViews.firstIndex(where: { $0.contactMethod == nugget }) else { return }
 		deletedNuggets.append(socialNuggets[index])
 		socialLinkCellViews.remove(at: index)
 		assurePreferredContactExists()
@@ -283,7 +279,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	private func assurePreferredContactExists() {
 		if socialNuggets.preferredContact == nil {
-			socialLinkCellViews.first?.nugget.preferredContact = true
+			socialLinkCellViews.first?.contactMethod.preferredContact = true
 		}
 	}
 
@@ -351,8 +347,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in
-			guard let type = socialLink.socialType else { return }
-			let nugget = ProfileNugget(value: socialLink.value, type: type)
+			guard let type = socialLink.type else { return }
+			let nugget = ProfileContactMethod(value: socialLink.value, type: type)
 			self.addSocialNugget(nugget: nugget)
 		}
 		inputVC?.autoCapitalizationType = .none
@@ -374,29 +370,29 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 			present(alert, animated: true, completion: nil)
 			return
 		}
-		removeNugget(nugget: cellView.nugget)
+		removeNugget(nugget: cellView.contactMethod)
 	}
 
 	func starButtonPressed(on cellView: SocialLinkCellView) {
-		socialLinkCellViews.forEach { $0.nugget.preferredContact = false }
-		cellView.nugget.preferredContact = true
+		socialLinkCellViews.forEach { $0.contactMethod.preferredContact = false }
+		cellView.contactMethod.preferredContact = true
 	}
 
 	func editCellInvoked(on cellView: SocialLinkCellView) {
-		let inputVCCompletion = { (socialLink: SocialLink) in
-			guard let type = socialLink.socialType else { return }
-			let nugget = ProfileNugget(id: cellView.nugget.id,
+		let inputVCCompletion = { (socialLink: ProfileInfoNugget) in
+			guard let type = socialLink.type else { return }
+			let nugget = ProfileContactMethod(id: cellView.contactMethod.id,
 									   value: socialLink.value,
 									   type: type,
-									   privacy: cellView.nugget.privacy,
-									   preferredContact: cellView.nugget.preferredContact)
-			cellView.nugget = nugget
+									   privacy: cellView.contactMethod.privacy,
+									   preferredContact: cellView.contactMethod.preferredContact)
+			cellView.contactMethod = nugget
 		}
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
 			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion)
 		}
-		inputVC.socialType = cellView.nugget.type
-		inputVC.labelText = cellView.nugget.value
+		inputVC.socialType = cellView.contactMethod.type
+		inputVC.labelText = cellView.contactMethod.value
 		inputVC.modalPresentationStyle = .overFullScreen
 		present(inputVC, animated: true)
 	}
@@ -404,13 +400,13 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 	func privacySelectionInvoked(on cellView: SocialLinkCellView) {
 		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: nil, preferredStyle: .actionSheet)
 		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
-			cellView.nugget.privacy = .private
+			cellView.contactMethod.privacy = .private
 		}
 		let connectedAction = UIAlertAction(title: "Connected", style: .default) { _ in
-			cellView.nugget.privacy = .connected
+			cellView.contactMethod.privacy = .connected
 		}
 		let publicAction = UIAlertAction(title: "Public", style: .default) { _ in
-			cellView.nugget.privacy = .public
+			cellView.contactMethod.privacy = .public
 		}
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }

@@ -21,7 +21,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	var socialType: ProfileFieldType?
 	let successfulCompletion: SocialLinkCompletion
 	
-	typealias SocialLinkCompletion = (SocialLink) -> Void
+	typealias SocialLinkCompletion = (ProfileInfoNugget) -> Void
 
 	init?(coder: NSCoder, needsSocialTextField: Bool = true, successfulCompletion: @escaping SocialLinkCompletion) {
 		self.needsSocialTextField = needsSocialTextField
@@ -76,7 +76,7 @@ extension InputTextFieldViewController: UIGestureRecognizerDelegate {
 }
 
 extension InputTextFieldViewController: FloatingTextFieldViewDelegate {
-	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: SocialLink) {
+	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: ProfileInfoNugget) {
 		successfulCompletion(socialLink)
 	}
 }

@@ -28,7 +28,7 @@
 		33E7BBFD23A19BC000D81C02 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7BBFC23A19BC000D81C02 /* QRViewController.swift */; };
 		33E7BC0923A19CBD00D81C02 /* HandyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7BC0823A19CBC00D81C02 /* HandyExtensions.swift */; };
 		33F0EA4E23984D6A004D1236 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA4D23984D6A004D1236 /* UserProfile.swift */; };
-		33F0EA5423984FDB004D1236 /* ProfileNugget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5323984FDB004D1236 /* ProfileNugget.swift */; };
+		33F0EA5423984FDB004D1236 /* ProfileContactMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */; };
 		33F0EA562398551B004D1236 /* ProfileFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA552398551B004D1236 /* ProfileFieldType.swift */; };
 		33F0EA5823985556004D1236 /* ProfileDecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5723985556004D1236 /* ProfileDecodingError.swift */; };
 		33F0EA5A2398556A004D1236 /* ProfileFieldPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */; };
@@ -194,7 +194,7 @@
 		33E7BBFC23A19BC000D81C02 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		33E7BC0823A19CBC00D81C02 /* HandyExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandyExtensions.swift; sourceTree = "<group>"; };
 		33F0EA4D23984D6A004D1236 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
-		33F0EA5323984FDB004D1236 /* ProfileNugget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNugget.swift; sourceTree = "<group>"; };
+		33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContactMethod.swift; sourceTree = "<group>"; };
 		33F0EA552398551B004D1236 /* ProfileFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFieldType.swift; sourceTree = "<group>"; };
 		33F0EA5723985556004D1236 /* ProfileDecodingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDecodingError.swift; sourceTree = "<group>"; };
 		33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFieldPrivacy.swift; sourceTree = "<group>"; };
@@ -481,7 +481,7 @@
 			children = (
 				33F0EA5723985556004D1236 /* ProfileDecodingError.swift */,
 				33F0EA4D23984D6A004D1236 /* UserProfile.swift */,
-				33F0EA5323984FDB004D1236 /* ProfileNugget.swift */,
+				33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */,
 				33F0EA552398551B004D1236 /* ProfileFieldType.swift */,
 				33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */,
 				33F0EA60239872A0004D1236 /* Auth0Claims.swift */,
@@ -839,7 +839,7 @@
 				37A2F41B237D23FF00C1EF3B /* LogInViewController.swift in Sources */,
 				33F0EA5823985556004D1236 /* ProfileDecodingError.swift in Sources */,
 				33FEE0E2238465A9006BE880 /* FormInputView.swift in Sources */,
-				33F0EA5423984FDB004D1236 /* ProfileNugget.swift in Sources */,
+				33F0EA5423984FDB004D1236 /* ProfileContactMethod.swift in Sources */,
 				33E7BC0923A19CBD00D81C02 /* HandyExtensions.swift in Sources */,
 				33B24C5A2395B85C00B20DEA /* DummyViewController.swift in Sources */,
 				3753DE30239AF3D800C90501 /* UIView+Visible.swift in Sources */,

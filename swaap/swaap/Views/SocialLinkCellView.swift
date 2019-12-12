@@ -28,15 +28,15 @@ class SocialLinkCellView: UIView {
 
 	weak var delegate: SocialLinkCellViewDelegate?
 
-	var nugget: ProfileNugget {
+	var contactMethod: ProfileContactMethod {
 		didSet {
 			updateViews()
 		}
 	}
 
 	init(frame: CGRect = CGRect(origin: .zero, size: CGSize(width: 375, height: 60)),
-		 nugget: ProfileNugget) {
-		self.nugget = nugget
+		 contactMethod: ProfileContactMethod) {
+		self.contactMethod = contactMethod
 		super.init(frame: frame)
 		commonInit()
 	}
@@ -76,10 +76,10 @@ class SocialLinkCellView: UIView {
 
 	private func updateViews() {
 		socialButton.smallButton = true
-		socialButton.socialInfo.socialType = nugget.type
-		valueLabel.text = nugget.value
-		privacySettingLabel.text = nugget.privacy.rawValue.capitalized
-		starButton.tintColor = nugget.preferredContact ? .systemGreen : .systemGray3
+		socialButton.infoNugget.type = contactMethod.type
+		valueLabel.text = contactMethod.value
+		privacySettingLabel.text = contactMethod.privacy.rawValue.capitalized
+		starButton.tintColor = contactMethod.preferredContact ? .systemGreen : .systemGray3
 	}
 
 	@IBAction func starButtonTapped(_ sender: UIButton) {

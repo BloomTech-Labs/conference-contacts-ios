@@ -206,8 +206,8 @@ class ProfileController {
 	}
 
 	// MARK: - Nuggets
-	/// create or update a profile nugget on the backend contextually. if an id is present, updates. if not, creates.
-	func modifyProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+	/// create or update a profile contactMethod on the backend contextually. if an id is present, updates. if not, creates.
+	func modifyProfileContactMethod(_ contactMethod: ProfileContactMethod, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var (_, request) = networkCommon() else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
@@ -216,15 +216,15 @@ class ProfileController {
 		do {
 			let mutation: String
 			let variables: [String: Any]?
-			let nuggetInfo = MutateProfileNugget(nugget: nugget)
-			let nuggetData = try nuggetInfo.toDict()
+			let contactMethodInfo = MutateProfileContactMethod(contactMethod: contactMethod)
+			let contactMethodData = try contactMethodInfo.toDict()
 
-			if let id = nugget.id {
+			if let id = contactMethod.id {
 				mutation = "mutation ($id: ID!, $data: UpdateProfileFieldInput!) { updateProfileField(id:$id,data:$data) { success code message } }"
-				variables = ["data": nuggetData, "id": id]
+				variables = ["data": contactMethodData, "id": id]
 			} else {
 				mutation = "mutation ($data: CreateProfileFieldInput!) { createProfileField(data:$data) { success code message } }"
-				variables = ["data": nuggetData]
+				variables = ["data": contactMethodData]
 			}
 			let graphObject = GQMutation(query: mutation, variables: variables)
 
@@ -242,23 +242,23 @@ class ProfileController {
 				let response = responseContainer.response
 				completion(.success(response))
 			} catch let error as NetworkError {
-				NSLog("Error updating profile nugget: \(error)")
+				NSLog("Error updating profile contact method: \(error)")
 				completion(.failure(error))
 			} catch {
-				NSLog("Error updating profile nugget: \(error)")
+				NSLog("Error updating profile contact method: \(error)")
 				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
 	}
 
-	func deleteProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+	func deleteProfileContactMethod(_ contactMethod: ProfileContactMethod, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var (_, request) = networkCommon() else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
 		}
 
-		guard let id = nugget.id else {
-			completion(.failure(.unspecifiedError(reason: "Attempted to delete a nugget without an id: \(nugget)")))
+		guard let id = contactMethod.id else {
+			completion(.failure(.unspecifiedError(reason: "Attempted to delete a contact method without an id: \(contactMethod)")))
 			return
 		}
 		let mutation = "mutation($id:ID!) { deleteProfileField(id: $id) { success code message } }"

@@ -29,7 +29,7 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
-	var socialInfo: SocialLink = SocialLink(socialType: .twitter, value: "@swaapApp") {
+	var infoNugget: ProfileInfoNugget = ProfileInfoNugget(type: .twitter, value: "@swaapApp") {
 		didSet {
 			updateSocialPlatformType()
 		}
@@ -89,8 +89,8 @@ class SocialButton: IBPreviewControl {
 	}
 
 	private func updateSocialPlatformType() {
-		let platform = socialInfo.socialType
-		let value = socialInfo.value
+		let platform = infoNugget.type
+		let value = infoNugget.value
 		switch platform {
 		case .phone:
 			mainColorBackgroundView.backgroundColor = .systemGreen
