@@ -38,6 +38,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var industryLabel: UILabel!
 	@IBOutlet private weak var birthdateLabel: UILabel!
 	@IBOutlet private weak var bioLabel: UILabel!
+	@IBOutlet private weak var contactModeDescLabel: UILabel!
 
 	@IBOutlet private weak var socialNuggetsStackView: UIStackView!
 
@@ -74,6 +75,23 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	private func setupUI() {
 		profileImageView.layer.cornerRadius = 20
 		profileImageView.layer.cornerCurve = .continuous
+		let rawString = """
+						The  lets others know the best way to reach you
+						Long press a contact method to select privacy options:
+						  • Private (no one can view)
+						  • Connected (only your connections can view)
+						  • Public (everyone can view)
+						"""
+		let string = NSMutableAttributedString(string: rawString, attributes: [.foregroundColor: UIColor.secondaryLabel])
+		let checkmarkSealImage = UIImage(systemName: "checkmark.seal.fill")!
+		let greenCheckmarkImage = checkmarkSealImage.withTintColor(.systemGreen)
+		let checkmarkAttachment = NSTextAttachment(image: greenCheckmarkImage)
+		let checkmarkString = NSAttributedString(attachment: checkmarkAttachment)
+		let style = NSMutableParagraphStyle()
+		style.lineHeightMultiple = 1.2
+		string.insert(checkmarkString, at: 4)
+		string.addAttribute(.paragraphStyle, value: style, range: NSRange(location: 0, length: string.length))
+		contactModeDescLabel.attributedText = string
 	}
 
 	private func updateViews() {

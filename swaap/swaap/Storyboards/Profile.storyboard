@@ -80,7 +80,7 @@
                                                 <rect key="frame" x="0.0" y="130" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtd-Cf-82f" userLabel="Birthday goes here" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="6.6666666666666572" width="315" height="17"/>
+                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -141,7 +141,7 @@
                                                 <rect key="frame" x="0.0" y="410" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-s3-0D2" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="6.6666666666666856" width="315" height="17"/>
+                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -202,7 +202,7 @@
                                                 <rect key="frame" x="0.0" y="690" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TVf-J9-35A" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="6.6666666666666288" width="315" height="17"/>
+                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -449,10 +449,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2P-KH-EKX">
-                                <rect key="frame" x="0.0" y="56" width="375" height="702"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="701.99999999999989"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0hM-cf-eNF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1138.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1302"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cC-yU-gWy" userLabel="Top Spacer">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -537,7 +537,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3QS-WX-1LM" userLabel="Contact Stack View">
-                                                <rect key="frame" x="0.0" y="392.66666666666674" width="375" height="746"/>
+                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="909.33333333333326"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jfC-Cn-fEj" userLabel="Personal StackView">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="410"/>
@@ -878,36 +878,73 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-lc-wax" userLabel="Social StackView">
-                                                        <rect key="frame" x="0.0" y="430" width="375" height="316"/>
+                                                        <rect key="frame" x="0.0" y="430" width="375" height="479.33333333333326"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGM-Ty-cAK" userLabel="title container">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="213.33333333333334"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOCIAL LINKS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3e-gB-N38">
-                                                                        <rect key="frame" x="8" y="8" width="359" height="34"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cmk-O4-T3x">
+                                                                        <rect key="frame" x="8" y="8" width="359" height="197.33333333333334"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="CONTACT METHODS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5O-y7-Pc7">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="359" height="18"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31V-iE-jq4">
+                                                                                <rect key="frame" x="0.0" y="26" width="359" height="171.33333333333334"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3e-gB-N38" userLabel="Desc Label">
+                                                                                        <rect key="frame" x="16" y="0.0" width="327" height="171.33333333333334"/>
+                                                                                        <attributedString key="attributedText">
+                                                                                            <fragment>
+                                                                                                <string key="content">The checkmark lets others know the best way to reach you
+
+Long pressing one of contact methods will bring up privacy options: 
+
+- Private (No one can view)
+- Connected (Only people you're connected with can view)
+- Public (Everyone can view)</string>
+                                                                                                <attributes>
+                                                                                                    <color key="NSColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                    <font key="NSFont" metaFont="label" size="12"/>
+                                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                                </attributes>
+                                                                                            </fragment>
+                                                                                        </attributedString>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="W3e-gB-N38" firstAttribute="leading" secondItem="31V-iE-jq4" secondAttribute="leading" constant="16" id="I5J-5G-uLu"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="W3e-gB-N38" secondAttribute="bottom" id="UGR-bC-wSk"/>
+                                                                                    <constraint firstItem="W3e-gB-N38" firstAttribute="top" secondItem="31V-iE-jq4" secondAttribute="top" id="uhF-bh-vM8"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="W3e-gB-N38" secondAttribute="trailing" constant="16" id="yTK-On-frE"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="W3e-gB-N38" firstAttribute="leading" secondItem="lGM-Ty-cAK" secondAttribute="leading" constant="8" id="35M-2B-oV6"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="W3e-gB-N38" secondAttribute="bottom" constant="8" id="TRF-SP-Vwb"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="W3e-gB-N38" secondAttribute="trailing" constant="8" id="Xk4-c5-buw"/>
-                                                                    <constraint firstItem="W3e-gB-N38" firstAttribute="top" secondItem="lGM-Ty-cAK" secondAttribute="top" constant="8" id="mvN-tK-OrL"/>
+                                                                    <constraint firstItem="cmk-O4-T3x" firstAttribute="top" secondItem="lGM-Ty-cAK" secondAttribute="top" constant="8" id="8vk-lQ-Uj5"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="cmk-O4-T3x" secondAttribute="bottom" constant="8" id="PTd-Rw-IdX"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="cmk-O4-T3x" secondAttribute="trailing" constant="8" id="Utj-pD-M51"/>
+                                                                    <constraint firstItem="cmk-O4-T3x" firstAttribute="leading" secondItem="lGM-Ty-cAK" secondAttribute="leading" constant="8" id="s4i-65-Htx"/>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ccE-SE-wh1">
-                                                                <rect key="frame" x="0.0" y="58" width="375" height="200"/>
+                                                                <rect key="frame" x="0.0" y="221.33333333333337" width="375" height="200"/>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N26-29-to7" userLabel="social link button container">
-                                                                <rect key="frame" x="0.0" y="266.00000000000011" width="375" height="50"/>
+                                                                <rect key="frame" x="0.0" y="429.33333333333337" width="375" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYc-Qv-gnK">
                                                                         <rect key="frame" x="16" y="8" width="351" height="34"/>
                                                                         <color key="tintColor" name="Swaap Accent color 2"/>
-                                                                        <state key="normal" title="  Add Social Link" image="plus.circle.fill" catalog="system">
+                                                                        <state key="normal" title="  Add Contact Method" image="plus.circle.fill" catalog="system">
                                                                             <color key="titleColor" name="Swaap Accent Color 1"/>
                                                                         </state>
                                                                         <connections>
@@ -1018,6 +1055,7 @@
                         <outlet property="birthdateLabel" destination="z6r-nX-tPI" id="PXE-G1-2Kz"/>
                         <outlet property="cancelButton" destination="Sv7-xP-wZ5" id="ARI-jh-RXa"/>
                         <outlet property="choosePhotoButton" destination="zpB-BT-vnW" id="pgY-hH-fTI"/>
+                        <outlet property="contactModeDescLabel" destination="W3e-gB-N38" id="PdS-wX-Gic"/>
                         <outlet property="industryLabel" destination="9Bi-Sv-KnG" id="T6e-Lh-zlT"/>
                         <outlet property="locationLabel" destination="1td-hF-r4P" id="dbD-B9-I7b"/>
                         <outlet property="nameLabel" destination="rTw-rk-KYp" id="3vb-6C-loY"/>
@@ -1029,7 +1067,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-n7-5Bs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2718" y="142"/>
+            <point key="canvasLocation" x="2717.5999999999999" y="141.87192118226602"/>
         </scene>
         <!--Input Text Field View Controller-->
         <scene sceneID="ZJq-D7-hay">
