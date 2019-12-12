@@ -9,14 +9,14 @@
 import UIKit
 import IBPreview
 
-protocol SocialLinkCellViewDelegate: AnyObject {
-	func deleteButtonPressed(on cellView: SocialLinkCellView)
-	func starButtonPressed(on cellView: SocialLinkCellView)
-	func editCellInvoked(on cellView: SocialLinkCellView)
-	func privacySelectionInvoked(on cellView: SocialLinkCellView)
+protocol ContactMethodCellViewDelegate: AnyObject {
+	func deleteButtonPressed(on cellView: ContactMethodCellView)
+	func starButtonPressed(on cellView: ContactMethodCellView)
+	func editCellInvoked(on cellView: ContactMethodCellView)
+	func privacySelectionInvoked(on cellView: ContactMethodCellView)
 }
 
-class SocialLinkCellView: UIView {
+class ContactMethodCellView: UIView {
 
 	@IBOutlet private weak var contentView: UIView!
 	@IBOutlet private weak var cellView: UIView!
@@ -26,7 +26,7 @@ class SocialLinkCellView: UIView {
 	@IBOutlet private weak var deleteButton: UIButton!
 	@IBOutlet private weak var privacySettingLabel: UILabel!
 
-	weak var delegate: SocialLinkCellViewDelegate?
+	weak var delegate: ContactMethodCellViewDelegate?
 
 	var contactMethod: ProfileContactMethod {
 		didSet {
@@ -55,7 +55,7 @@ class SocialLinkCellView: UIView {
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
-		let nib = UINib(nibName: "SocialLinkCellView", bundle: nil)
+		let nib = UINib(nibName: "ContactMethodCellView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 
 		contentView.translatesAutoresizingMaskIntoConstraints = false

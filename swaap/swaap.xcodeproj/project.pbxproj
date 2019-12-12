@@ -45,8 +45,8 @@
 		37218B03238FA161008BFC24 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218B02238FA161008BFC24 /* FontHelper.swift */; };
 		3750E8462395C180005BBDA5 /* InteractivePopRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */; };
 		3753DE30239AF3D800C90501 /* UIView+Visible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753DE2F239AF3D800C90501 /* UIView+Visible.swift */; };
-		3753DE36239C69B600C90501 /* SocialLinkCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753DE35239C69B600C90501 /* SocialLinkCellView.xib */; };
-		3753DE46239EBF3C00C90501 /* SocialLinkCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753DE45239EBF3C00C90501 /* SocialLinkCellView.swift */; };
+		3753DE36239C69B600C90501 /* ContactMethodCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753DE35239C69B600C90501 /* ContactMethodCellView.xib */; };
+		3753DE46239EBF3C00C90501 /* ContactMethodCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753DE45239EBF3C00C90501 /* ContactMethodCellView.swift */; };
 		375CBF292391EB6700C3D50A /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CBF242391EB6700C3D50A /* HapticFeedback.swift */; };
 		376F329C23A173EE001E6547 /* LabelPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F329B23A173EE001E6547 /* LabelPlaceholder.swift */; };
 		3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797A55C238603A400CB8621 /* String+Extensions.swift */; };
@@ -211,8 +211,8 @@
 		37218B02238FA161008BFC24 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 		3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractivePopRecognizer.swift; sourceTree = "<group>"; };
 		3753DE2F239AF3D800C90501 /* UIView+Visible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Visible.swift"; sourceTree = "<group>"; };
-		3753DE35239C69B600C90501 /* SocialLinkCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialLinkCellView.xib; sourceTree = "<group>"; };
-		3753DE45239EBF3C00C90501 /* SocialLinkCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkCellView.swift; sourceTree = "<group>"; };
+		3753DE35239C69B600C90501 /* ContactMethodCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactMethodCellView.xib; sourceTree = "<group>"; };
+		3753DE45239EBF3C00C90501 /* ContactMethodCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMethodCellView.swift; sourceTree = "<group>"; };
 		375CBF242391EB6700C3D50A /* HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		376F329B23A173EE001E6547 /* LabelPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPlaceholder.swift; sourceTree = "<group>"; };
 		3797A55C238603A400CB8621 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -469,8 +469,8 @@
 				37F9345323985FD000ACBA23 /* FloatingTextFieldView.xib */,
 				37F934552398716300ACBA23 /* FloatingTextFieldView.swift */,
 				37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */,
-				3753DE35239C69B600C90501 /* SocialLinkCellView.xib */,
-				3753DE45239EBF3C00C90501 /* SocialLinkCellView.swift */,
+				3753DE35239C69B600C90501 /* ContactMethodCellView.xib */,
+				3753DE45239EBF3C00C90501 /* ContactMethodCellView.swift */,
 				376F329B23A173EE001E6547 /* LabelPlaceholder.swift */,
 			);
 			path = Views;
@@ -716,7 +716,7 @@
 				37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
 				37F9345423985FD000ACBA23 /* FloatingTextFieldView.xib in Resources */,
-				3753DE36239C69B600C90501 /* SocialLinkCellView.xib in Resources */,
+				3753DE36239C69B600C90501 /* ContactMethodCellView.xib in Resources */,
 				37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */,
 				37A185AB237A3579002191B5 /* Main.storyboard in Resources */,
 				37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */,
@@ -828,7 +828,7 @@
 				37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */,
 				33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */,
 				335A520B23910C5100FA5623 /* RangeExtensions.swift in Sources */,
-				3753DE46239EBF3C00C90501 /* SocialLinkCellView.swift in Sources */,
+				3753DE46239EBF3C00C90501 /* ContactMethodCellView.swift in Sources */,
 				3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */,
 				37D1D72223A198EF00931BF8 /* AlertTint+UIAlertViewController.swift in Sources */,
 				3797A56223874DF000CB8621 /* AuthManager.swift in Sources */,

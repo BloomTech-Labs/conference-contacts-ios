@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SocialLinkCellView" customModule="swaap" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactMethodCellView" customModule="swaap" customModuleProvider="target">
             <connections>
                 <outlet property="cellView" destination="oNs-Ia-DpV" id="GeD-2l-igr"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="KyY-BZ-GBa"/>

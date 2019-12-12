@@ -43,7 +43,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 	var deletedNuggets: [ProfileContactMethod] = []
 
-	var socialLinkCellViews: [SocialLinkCellView] = [] {
+	var socialLinkCellViews: [ContactMethodCellView] = [] {
 		didSet {
 			updateViews()
 		}
@@ -109,7 +109,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	private func populateFromUserProfile() {
 		guard let userProfile = profileController?.userProfile else { return }
-		userProfile.profileContactMethods.forEach { addSocialNugget(nugget: $0, checkForPreferred: false) }
+		userProfile.profileContactMethods.forEach { addContactMethod(contactMethod: $0, checkForPreferred: false) }
 		assurePreferredContactExists()
 		nameLabel.text = userProfile.name
 		industryLabel.text = userProfile.industry
@@ -195,12 +195,12 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			print("profile refresh finished")
 		}
 
-		var nuggetUpdates = [ConcurrentOperation]()
-		for (index, nugget) in socialNuggets.enumerated() {
-			let nuggetUpdate = ConcurrentOperation { [weak self] in
+		var contactMethodUpdates = [ConcurrentOperation]()
+		for (index, contactMethod) in socialNuggets.enumerated() {
+			let contactMethodUpdate = ConcurrentOperation { [weak self] in
 				guard let self = self else { return }
 				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.modifyProfileContactMethod(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+				self.profileController?.modifyProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
 					switch result {
 					case .success:
 						break
@@ -210,17 +210,17 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 					semaphore.signal()
 				})
 				semaphore.wait()
-				print("nugget update \(index) update finished")
+				print("contact method update \(index) update finished")
 			}
-			nuggetUpdates.append(nuggetUpdate)
+			contactMethodUpdates.append(contactMethodUpdate)
 		}
 
-		var nuggetDeletions = [ConcurrentOperation]()
-		for nugget in deletedNuggets {
-			let nuggetUpdate = ConcurrentOperation { [weak self] in
+		var contactMethodDeletions = [ConcurrentOperation]()
+		for contactMethod in deletedNuggets {
+			let contactMethodUpdate = ConcurrentOperation { [weak self] in
 				guard let self = self else { return }
 				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.deleteProfileContactMethod(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+				self.profileController?.deleteProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
 					switch result {
 					case .success:
 						break
@@ -231,7 +231,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 				})
 				semaphore.wait()
 			}
-			nuggetDeletions.append(nuggetUpdate)
+			contactMethodDeletions.append(contactMethodUpdate)
 		}
 
 		let dismissSelf = ConcurrentOperation { [weak self] in
@@ -240,12 +240,12 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 		profileUpdate.addDependency(imageUpdate)
 		profileRefresh.addDependency(profileUpdate)
-		nuggetUpdates.forEach { profileRefresh.addDependency($0) }
-		nuggetDeletions.forEach { profileRefresh.addDependency($0) }
+		contactMethodUpdates.forEach { profileRefresh.addDependency($0) }
+		contactMethodDeletions.forEach { profileRefresh.addDependency($0) }
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
+		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + contactMethodDeletions + contactMethodUpdates, waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
 		saveButton.isEnabled = false
@@ -261,17 +261,17 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	// MARK: - Nugget Management
-	func addSocialNugget(nugget: ProfileContactMethod, checkForPreferred: Bool = true) {
-		let nuggetView = SocialLinkCellView(frame: .zero, contactMethod: nugget)
-		nuggetView.delegate = self
-		socialLinkCellViews.append(nuggetView)
+	func addContactMethod(contactMethod: ProfileContactMethod, checkForPreferred: Bool = true) {
+		let contactMethodView = ContactMethodCellView(frame: .zero, contactMethod: contactMethod)
+		contactMethodView.delegate = self
+		socialLinkCellViews.append(contactMethodView)
 		if checkForPreferred {
 			assurePreferredContactExists()
 		}
 	}
 
-	func removeNugget(nugget: ProfileContactMethod) {
-		guard let index = socialLinkCellViews.firstIndex(where: { $0.contactMethod == nugget }) else { return }
+	func removeContactMethod(contactMethod: ProfileContactMethod) {
+		guard let index = socialLinkCellViews.firstIndex(where: { $0.contactMethod == contactMethod }) else { return }
 		deletedNuggets.append(socialNuggets[index])
 		socialLinkCellViews.remove(at: index)
 		assurePreferredContactExists()
@@ -347,9 +347,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in
-			guard let type = socialLink.type else { return }
-			let nugget = ProfileContactMethod(value: socialLink.value, type: type)
-			self.addSocialNugget(nugget: nugget)
+			guard let contactMethod = socialLink.contactMethod else { return }
+			self.addContactMethod(contactMethod: contactMethod)
 		}
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
@@ -358,8 +357,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 }
 
 // MARK: - SocialLinkCellViewDelegate conformance
-extension EditProfileViewController: SocialLinkCellViewDelegate {
-	func deleteButtonPressed(on cellView: SocialLinkCellView) {
+extension EditProfileViewController: ContactMethodCellViewDelegate {
+	func deleteButtonPressed(on cellView: ContactMethodCellView) {
 		guard socialLinkCellViews.count >= 2 else {
 			let alert = UIAlertController(title: "At least one preferred mode of contact is needed",
 										  message: """
@@ -370,23 +369,23 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 			present(alert, animated: true, completion: nil)
 			return
 		}
-		removeNugget(nugget: cellView.contactMethod)
+		removeContactMethod(contactMethod: cellView.contactMethod)
 	}
 
-	func starButtonPressed(on cellView: SocialLinkCellView) {
+	func starButtonPressed(on cellView: ContactMethodCellView) {
 		socialLinkCellViews.forEach { $0.contactMethod.preferredContact = false }
 		cellView.contactMethod.preferredContact = true
 	}
 
-	func editCellInvoked(on cellView: SocialLinkCellView) {
+	func editCellInvoked(on cellView: ContactMethodCellView) {
 		let inputVCCompletion = { (socialLink: ProfileInfoNugget) in
 			guard let type = socialLink.type else { return }
-			let nugget = ProfileContactMethod(id: cellView.contactMethod.id,
+			let contactMethod = ProfileContactMethod(id: cellView.contactMethod.id,
 									   value: socialLink.value,
 									   type: type,
 									   privacy: cellView.contactMethod.privacy,
 									   preferredContact: cellView.contactMethod.preferredContact)
-			cellView.contactMethod = nugget
+			cellView.contactMethod = contactMethod
 		}
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
 			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion)
@@ -397,7 +396,7 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 		present(inputVC, animated: true)
 	}
 
-	func privacySelectionInvoked(on cellView: SocialLinkCellView) {
+	func privacySelectionInvoked(on cellView: ContactMethodCellView) {
 		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: nil, preferredStyle: .actionSheet)
 		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
 			cellView.contactMethod.privacy = .private
