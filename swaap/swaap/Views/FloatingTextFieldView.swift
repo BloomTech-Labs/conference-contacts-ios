@@ -10,7 +10,7 @@ import UIKit
 import IBPreview
 
 protocol FloatingTextFieldViewDelegate: AnyObject {
-	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: ProfileInfoNugget)
+	func didFinishEditing(_ view: FloatingTextFieldView, infoNugget: ProfileInfoNugget)
 }
 
 class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -145,7 +145,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
 		guard let text = textField.text else { return }
-		delegate?.didFinishEditing(self, socialLink: ProfileInfoNugget(type: socialType, value: text))
+		delegate?.didFinishEditing(self, infoNugget: ProfileInfoNugget(type: socialType, value: text))
 		fireFirstResponder()
 	}
 
@@ -249,7 +249,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialButtonCell",
 														for: indexPath) as? SocialButtonCollectionViewCell else { return UICollectionViewCell() }
 
-		cell.socialLink.type = ProfileFieldType.allCases[indexPath.item]
+		cell.infoNugget.type = ProfileFieldType.allCases[indexPath.item]
 		cell.socialButton.addTarget(self, action: #selector(didSelectSocialButton(_:)), for: .touchUpInside)
 		return cell
 	}

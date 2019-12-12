@@ -39,11 +39,11 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var contactMethodsStackView: UIStackView!
 
 	var contactMethods: [ProfileContactMethod] {
-		socialLinkCellViews.map { $0.contactMethod }
+		contactMethodCellViews.map { $0.contactMethod }
 	}
 	var deletedContactMethods: [ProfileContactMethod] = []
 
-	var socialLinkCellViews: [ContactMethodCellView] = [] {
+	var contactMethodCellViews: [ContactMethodCellView] = [] {
 		didSet {
 			updateViews()
 		}
@@ -93,7 +93,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	private func updateViews() {
 		UIView.animate(withDuration: 0.3) {
 			self.contactMethodsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-			for cellView in self.socialLinkCellViews {
+			for cellView in self.contactMethodCellViews {
 				self.contactMethodsStackView.addArrangedSubview(cellView)
 			}
 			self.contactMethodsStackView.layoutSubviews()
@@ -264,22 +264,22 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	func addContactMethod(contactMethod: ProfileContactMethod, checkForPreferred: Bool = true) {
 		let contactMethodView = ContactMethodCellView(frame: .zero, contactMethod: contactMethod)
 		contactMethodView.delegate = self
-		socialLinkCellViews.append(contactMethodView)
+		contactMethodCellViews.append(contactMethodView)
 		if checkForPreferred {
 			assurePreferredContactExists()
 		}
 	}
 
 	func removeContactMethod(contactMethod: ProfileContactMethod) {
-		guard let index = socialLinkCellViews.firstIndex(where: { $0.contactMethod == contactMethod }) else { return }
+		guard let index = contactMethodCellViews.firstIndex(where: { $0.contactMethod == contactMethod }) else { return }
 		deletedContactMethods.append(contactMethods[index])
-		socialLinkCellViews.remove(at: index)
+		contactMethodCellViews.remove(at: index)
 		assurePreferredContactExists()
 	}
 
 	private func assurePreferredContactExists() {
 		if contactMethods.preferredContact == nil {
-			socialLinkCellViews.first?.contactMethod.preferredContact = true
+			contactMethodCellViews.first?.contactMethod.preferredContact = true
 		}
 	}
 
@@ -296,8 +296,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func nameTextFieldViewController(coder: NSCoder) -> UIViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.nameLabel.text = socialLink.value
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+			self.nameLabel.text = infoNugget.value
 		}
 		inputVC?.placeholderStr = "Enter your full name"
 		inputVC?.labelText = passLabelText(from: nameLabel)
@@ -306,8 +306,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 	
 	@IBSegueAction func locationTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.locationLabel.text = socialLink.value
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+			self.locationLabel.text = infoNugget.value
 		}
 		inputVC?.placeholderStr = "Name of city"
 		inputVC?.labelText = passLabelText(from: locationLabel)
@@ -316,8 +316,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func industryTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.industryLabel.text = socialLink.value
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+			self.industryLabel.text = infoNugget.value
 		}
 		inputVC?.placeholderStr = "Add the industry you're in"
 		inputVC?.labelText = passLabelText(from: industryLabel)
@@ -326,8 +326,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func birthdateTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.birthdateLabel.text = socialLink.value
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+			self.birthdateLabel.text = infoNugget.value
 		}
 		inputVC?.placeholderStr = "MM/DD/YYYY"
 		inputVC?.labelText = passLabelText(from: birthdateLabel)
@@ -336,8 +336,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func bioTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.bioLabel.text = socialLink.value
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+			self.bioLabel.text = infoNugget.value
 		}
 		inputVC?.placeholderStr = "Add a short bio"
 		inputVC?.labelText = passLabelText(from: bioLabel)
@@ -345,9 +345,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		return inputVC
 	}
 
-	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in
-			guard let contactMethod = socialLink.contactMethod else { return }
+	@IBSegueAction func contactMethodTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { infoNugget in
+			guard let contactMethod = infoNugget.contactMethod else { return }
 			self.addContactMethod(contactMethod: contactMethod)
 		}
 		inputVC?.autoCapitalizationType = .none
@@ -356,10 +356,10 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 }
 
-// MARK: - SocialLinkCellViewDelegate conformance
+// MARK: - ContactMethodCellViewDelegate conformance
 extension EditProfileViewController: ContactMethodCellViewDelegate {
 	func deleteButtonPressed(on cellView: ContactMethodCellView) {
-		guard socialLinkCellViews.count >= 2 else {
+		guard contactMethodCellViews.count >= 2 else {
 			let alert = UIAlertController(title: "At least one preferred mode of contact is needed",
 										  message: """
 			This is the contact button that shows on your profile card and it's how others will try and reach out to you first
@@ -373,15 +373,15 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 	}
 
 	func starButtonPressed(on cellView: ContactMethodCellView) {
-		socialLinkCellViews.forEach { $0.contactMethod.preferredContact = false }
+		contactMethodCellViews.forEach { $0.contactMethod.preferredContact = false }
 		cellView.contactMethod.preferredContact = true
 	}
 
 	func editCellInvoked(on cellView: ContactMethodCellView) {
-		let inputVCCompletion = { (socialLink: ProfileInfoNugget) in
-			guard let type = socialLink.type else { return }
+		let inputVCCompletion = { (infoNugget: ProfileInfoNugget) in
+			guard let type = infoNugget.type else { return }
 			let contactMethod = ProfileContactMethod(id: cellView.contactMethod.id,
-									   value: socialLink.value,
+									   value: infoNugget.value,
 									   type: type,
 									   privacy: cellView.contactMethod.privacy,
 									   preferredContact: cellView.contactMethod.preferredContact)

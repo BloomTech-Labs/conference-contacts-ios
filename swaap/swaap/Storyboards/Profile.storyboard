@@ -80,7 +80,7 @@
                                                 <rect key="frame" x="0.0" y="130" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtd-Cf-82f" userLabel="Birthday goes here" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
+                                                        <rect key="frame" x="30" y="6.6666666666666572" width="315" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -141,7 +141,7 @@
                                                 <rect key="frame" x="0.0" y="410" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-s3-0D2" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
+                                                        <rect key="frame" x="30" y="6.6666666666666856" width="315" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -202,7 +202,7 @@
                                                 <rect key="frame" x="0.0" y="690" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TVf-J9-35A" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
+                                                        <rect key="frame" x="30" y="6.6666666666666288" width="315" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -948,7 +948,7 @@ Long pressing one of contact methods will bring up privacy options:
                                                                             <color key="titleColor" name="Swaap Accent Color 1"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="AddSocialLink" destinationCreationSelector="socialLinkTextFieldViewController:" modalPresentationStyle="overFullScreen" id="lC7-AH-W7a"/>
+                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="" destinationCreationSelector="contactMethodTextFieldViewController:" modalPresentationStyle="overFullScreen" id="lC7-AH-W7a"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -1175,6 +1175,6 @@ Long pressing one of contact methods will bring up privacy options:
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U4e-tT-P9r"/>
+        <segue reference="lC7-AH-W7a"/>
     </inferredMetricsTieBreakers>
 </document>

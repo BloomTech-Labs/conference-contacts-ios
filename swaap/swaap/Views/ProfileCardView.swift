@@ -137,8 +137,8 @@ class ProfileCardView: IBPreviewView {
 		industry = userProfile?.industry
 
 		guard let pContact = userProfile?.profileContactMethods.preferredContact else { return }
-		let socialLink = ProfileInfoNugget(type: pContact.type, value: pContact.value)
-		preferredContact = socialLink
+		let nuggetInfo = ProfileInfoNugget(type: pContact.type, value: pContact.value)
+		preferredContact = nuggetInfo
 	}
 
 

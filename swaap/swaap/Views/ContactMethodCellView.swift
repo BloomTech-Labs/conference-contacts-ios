@@ -1,5 +1,5 @@
 //
-//  SocialLinkCellView.swift
+//  ContactMethodCellView.swift
 //  swaap
 //
 //  Created by Marlon Raskin on 12/9/19.

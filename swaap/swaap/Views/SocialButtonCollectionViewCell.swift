@@ -11,7 +11,7 @@ import UIKit
 class SocialButtonCollectionViewCell: UICollectionViewCell {
 
 	let socialButton: SocialButton = SocialButton()
-	var socialLink: ProfileInfoNugget {
+	var infoNugget: ProfileInfoNugget {
 		get {
 			socialButton.infoNugget
 		}

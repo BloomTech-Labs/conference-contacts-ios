@@ -76,7 +76,7 @@ extension InputTextFieldViewController: UIGestureRecognizerDelegate {
 }
 
 extension InputTextFieldViewController: FloatingTextFieldViewDelegate {
-	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: ProfileInfoNugget) {
-		successfulCompletion(socialLink)
+	func didFinishEditing(_ view: FloatingTextFieldView, infoNugget: ProfileInfoNugget) {
+		successfulCompletion(infoNugget)
 	}
 }
