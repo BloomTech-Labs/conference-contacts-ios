@@ -1,5 +1,5 @@
 //
-//  SocialLinkCellView.swift
+//  ContactMethodCellView.swift
 //  swaap
 //
 //  Created by Marlon Raskin on 12/9/19.
@@ -9,14 +9,14 @@
 import UIKit
 import IBPreview
 
-protocol SocialLinkCellViewDelegate: AnyObject {
-	func deleteButtonPressed(on cellView: SocialLinkCellView)
-	func starButtonPressed(on cellView: SocialLinkCellView)
-	func editCellInvoked(on cellView: SocialLinkCellView)
-	func privacySelectionInvoked(on cellView: SocialLinkCellView)
+protocol ContactMethodCellViewDelegate: AnyObject {
+	func deleteButtonPressed(on cellView: ContactMethodCellView)
+	func starButtonPressed(on cellView: ContactMethodCellView)
+	func editCellInvoked(on cellView: ContactMethodCellView)
+	func privacySelectionInvoked(on cellView: ContactMethodCellView)
 }
 
-class SocialLinkCellView: UIView {
+class ContactMethodCellView: UIView {
 
 	@IBOutlet private weak var contentView: UIView!
 	@IBOutlet private weak var cellView: UIView!
@@ -26,17 +26,17 @@ class SocialLinkCellView: UIView {
 	@IBOutlet private weak var deleteButton: UIButton!
 	@IBOutlet private weak var privacySettingLabel: UILabel!
 
-	weak var delegate: SocialLinkCellViewDelegate?
+	weak var delegate: ContactMethodCellViewDelegate?
 
-	var nugget: ProfileNugget {
+	var contactMethod: ProfileContactMethod {
 		didSet {
 			updateViews()
 		}
 	}
 
 	init(frame: CGRect = CGRect(origin: .zero, size: CGSize(width: 375, height: 60)),
-		 nugget: ProfileNugget) {
-		self.nugget = nugget
+		 contactMethod: ProfileContactMethod) {
+		self.contactMethod = contactMethod
 		super.init(frame: frame)
 		commonInit()
 	}
@@ -55,7 +55,7 @@ class SocialLinkCellView: UIView {
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
-		let nib = UINib(nibName: "SocialLinkCellView", bundle: nil)
+		let nib = UINib(nibName: "ContactMethodCellView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 
 		contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,10 +76,10 @@ class SocialLinkCellView: UIView {
 
 	private func updateViews() {
 		socialButton.smallButton = true
-		socialButton.socialInfo.socialType = nugget.type
-		valueLabel.text = nugget.value
-		privacySettingLabel.text = nugget.privacy.rawValue.capitalized
-		starButton.tintColor = nugget.preferredContact ? .systemGreen : .systemGray3
+		socialButton.infoNugget.type = contactMethod.type
+		valueLabel.text = contactMethod.value
+		privacySettingLabel.text = contactMethod.privacy.rawValue.capitalized
+		starButton.tintColor = contactMethod.preferredContact ? .systemGreen : .systemGray3
 	}
 
 	@IBAction func starButtonTapped(_ sender: UIButton) {

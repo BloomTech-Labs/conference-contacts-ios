@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urS-d0-w1z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urS-d0-w1z">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -80,7 +80,7 @@
                                                 <rect key="frame" x="0.0" y="130" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtd-Cf-82f" userLabel="Birthday goes here" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
+                                                        <rect key="frame" x="30" y="6.6666666666666572" width="315" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -141,7 +141,7 @@
                                                 <rect key="frame" x="0.0" y="410" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-s3-0D2" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
+                                                        <rect key="frame" x="30" y="6.6666666666666856" width="315" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -202,7 +202,7 @@
                                                 <rect key="frame" x="0.0" y="690" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TVf-J9-35A" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
+                                                        <rect key="frame" x="30" y="6.6666666666666288" width="315" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -449,7 +449,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2P-KH-EKX">
-                                <rect key="frame" x="0.0" y="56" width="375" height="701.99999999999989"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="702"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0hM-cf-eNF">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1302"/>
@@ -948,7 +948,7 @@ Long pressing one of contact methods will bring up privacy options:
                                                                             <color key="titleColor" name="Swaap Accent Color 1"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="AddSocialLink" destinationCreationSelector="socialLinkTextFieldViewController:" modalPresentationStyle="overFullScreen" id="lC7-AH-W7a"/>
+                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" identifier="" destinationCreationSelector="contactMethodTextFieldViewController:" modalPresentationStyle="overFullScreen" id="lC7-AH-W7a"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -1055,6 +1055,7 @@ Long pressing one of contact methods will bring up privacy options:
                         <outlet property="birthdateLabel" destination="z6r-nX-tPI" id="PXE-G1-2Kz"/>
                         <outlet property="cancelButton" destination="Sv7-xP-wZ5" id="ARI-jh-RXa"/>
                         <outlet property="choosePhotoButton" destination="zpB-BT-vnW" id="pgY-hH-fTI"/>
+                        <outlet property="contactMethodsStackView" destination="ccE-SE-wh1" id="H3D-Uz-Dbp"/>
                         <outlet property="contactModeDescLabel" destination="W3e-gB-N38" id="PdS-wX-Gic"/>
                         <outlet property="industryLabel" destination="9Bi-Sv-KnG" id="T6e-Lh-zlT"/>
                         <outlet property="locationLabel" destination="1td-hF-r4P" id="dbD-B9-I7b"/>
@@ -1062,7 +1063,6 @@ Long pressing one of contact methods will bring up privacy options:
                         <outlet property="profileImageView" destination="pqy-Vz-bUe" id="G2J-gC-tTb"/>
                         <outlet property="saveButton" destination="snU-lT-kDu" id="v2m-BX-rBa"/>
                         <outlet property="scrollView" destination="l2P-KH-EKX" id="LSN-NH-C6f"/>
-                        <outlet property="socialNuggetsStackView" destination="ccE-SE-wh1" id="H3D-Uz-Dbp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-n7-5Bs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1175,6 +1175,6 @@ Long pressing one of contact methods will bring up privacy options:
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U4e-tT-P9r"/>
+        <segue reference="lC7-AH-W7a"/>
     </inferredMetricsTieBreakers>
 </document>

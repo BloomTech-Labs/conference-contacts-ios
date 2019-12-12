@@ -11,12 +11,12 @@ import UIKit
 class SocialButtonCollectionViewCell: UICollectionViewCell {
 
 	let socialButton: SocialButton = SocialButton()
-	var socialLink: SocialLink {
+	var infoNugget: ProfileInfoNugget {
 		get {
-			socialButton.socialInfo
+			socialButton.infoNugget
 		}
 		set {
-			socialButton.socialInfo = newValue
+			socialButton.infoNugget = newValue
 		}
 	}
 

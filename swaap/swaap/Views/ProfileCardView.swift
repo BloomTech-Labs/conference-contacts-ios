@@ -50,11 +50,11 @@ class ProfileCardView: IBPreviewView {
 		set { industryLabel.text = newValue }
 	}
 
-	var preferredContact: SocialLink? {
-		get { socialButton.socialInfo }
+	var preferredContact: ProfileInfoNugget? {
+		get { socialButton.infoNugget }
 		set {
 			guard let newValue = newValue else { return }
-			socialButton.socialInfo = newValue
+			socialButton.infoNugget = newValue
 		}
 	}
 
@@ -136,9 +136,9 @@ class ProfileCardView: IBPreviewView {
 		location = userProfile?.location
 		industry = userProfile?.industry
 
-		guard let pContact = userProfile?.profileNuggets.preferredContact else { return }
-		let socialLink = SocialLink(socialType: pContact.type, value: pContact.value)
-		preferredContact = socialLink
+		guard let pContact = userProfile?.profileContactMethods.preferredContact else { return }
+		let nuggetInfo = ProfileInfoNugget(type: pContact.type, value: pContact.value)
+		preferredContact = nuggetInfo
 	}
 
 

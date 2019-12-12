@@ -35,7 +35,7 @@ struct UserProfile: Codable, Equatable {
 		case industry
 		case jobtitle
 		case bio
-		case profileNuggets = "profile"
+		case profileContactMethods = "profile"
 	}
 
 	let id: String
@@ -47,7 +47,7 @@ struct UserProfile: Codable, Equatable {
 	var industry: String?
 	var jobtitle: String?
 	var bio: String?
-	var profileNuggets: [ProfileNugget]
+	var profileContactMethods: [ProfileContactMethod]
 
 	var pictureURL: URL {
 		get {
