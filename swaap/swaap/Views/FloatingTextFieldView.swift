@@ -33,6 +33,10 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		}
 	}
 
+	var enableSaveButtonClosure: EnableSaveButtonHandler?
+
+	typealias EnableSaveButtonHandler = (ProfileFieldType?, String) -> Bool
+
 	weak var delegate: FloatingTextFieldViewDelegate?
 
 	// MARK: - Init
@@ -78,10 +82,12 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	}
 
 	override func becomeFirstResponder() -> Bool {
-		textField.becomeFirstResponder()
+		shouldEnableSaveButton()
+		return textField.becomeFirstResponder()
 	}
 
 	@objc func hideKeyboardAction() {
+		shouldEnableSaveButton()
 		textField.resignFirstResponder()
 	}
 
@@ -130,13 +136,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	// MARK: - IBActions
 	@IBAction func textFieldDidChange(_ sender: UITextField) {
-		if textField.text?.isEmpty == false {
-			saveButton.isEnabled = true
-			saveButton.alpha = 1
-		} else {
-			saveButton.isEnabled = false
-			saveButton.alpha = 0.6
-		}
+		shouldEnableSaveButton()
 	}
 
 	@IBAction func cancelTapped(_ sender: ButtonHelper) {
@@ -156,6 +156,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	// MARK: - Helper Methods
 	private func updateViews() {
+		shouldEnableSaveButton()
 		shouldShowAtSymbol()
 		formatTextField()
 		if let socialType = socialType {
@@ -234,6 +235,11 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		plusButton.setImage(image, for: .normal)
 	}
 
+	private func shouldEnableSaveButton() {
+		saveButton.isEnabled = enableSaveButtonClosure?(socialType, textField.text ?? "") ?? true
+		saveButton.alpha = saveButton.isEnabled ? 1 : 0.6
+	}
+
 
 	// MARK: - CollectionView Methods
 
@@ -256,6 +262,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	@objc func didSelectSocialButton(_ sender: SocialButton) {
 		socialType = sender.infoNugget.type
+		shouldEnableSaveButton()
 		shouldShowCollectionView(false)
 	}
 }

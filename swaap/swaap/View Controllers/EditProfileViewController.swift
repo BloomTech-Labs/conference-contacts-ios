@@ -296,9 +296,11 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func nameTextFieldViewController(coder: NSCoder) -> UIViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
 			self.nameLabel.text = infoNugget.value
-		}
+		}, enableSaveButtonHandler: { _, value -> Bool in
+			!value.isEmpty
+		})
 		inputVC?.placeholderStr = "Enter your full name"
 		inputVC?.labelText = passLabelText(from: nameLabel)
 		inputVC?.autoCapitalizationType = .words
@@ -306,9 +308,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 	
 	@IBSegueAction func locationTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
 			self.locationLabel.text = infoNugget.value
-		}
+		})
 		inputVC?.placeholderStr = "Name of city"
 		inputVC?.labelText = passLabelText(from: locationLabel)
 		inputVC?.autoCapitalizationType = .words
@@ -316,9 +318,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func industryTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
 			self.industryLabel.text = infoNugget.value
-		}
+		})
 		inputVC?.placeholderStr = "Add the industry you're in"
 		inputVC?.labelText = passLabelText(from: industryLabel)
 		inputVC?.autoCapitalizationType = .words
@@ -326,9 +328,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func birthdateTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
 			self.birthdateLabel.text = infoNugget.value
-		}
+		})
 		inputVC?.placeholderStr = "MM/DD/YYYY"
 		inputVC?.labelText = passLabelText(from: birthdateLabel)
 		inputVC?.autoCapitalizationType = .none
@@ -336,20 +338,22 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func bioTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { infoNugget in
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
 			self.bioLabel.text = infoNugget.value
-		}
+		})
 		inputVC?.placeholderStr = "Add a short bio"
 		inputVC?.labelText = passLabelText(from: bioLabel)
 		inputVC?.autoCapitalizationType = .sentences
 		return inputVC
 	}
 
-	@IBSegueAction func contactMethodTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { infoNugget in
+	@IBSegueAction func createContactMethodTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: { infoNugget in
 			guard let contactMethod = infoNugget.contactMethod else { return }
 			self.addContactMethod(contactMethod: contactMethod)
-		}
+		}, enableSaveButtonHandler: { type, value in
+			type != nil && !value.isEmpty
+		})
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
@@ -388,7 +392,9 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 			cellView.contactMethod = contactMethod
 		}
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
-			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion)
+			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion, enableSaveButtonHandler: { type, value in
+				type != nil && !value.isEmpty
+			})
 		}
 		inputVC.socialType = cellView.contactMethod.type
 		inputVC.labelText = cellView.contactMethod.value

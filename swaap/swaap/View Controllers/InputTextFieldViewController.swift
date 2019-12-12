@@ -20,12 +20,18 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	var labelText: String?
 	var socialType: ProfileFieldType?
 	let successfulCompletion: ProfileInfoNuggetCompletion
+	// `floatingTextFieldView` needs to be initialized before we can pass this through
+	private let enableSaveButtonHandler: FloatingTextFieldView.EnableSaveButtonHandler
 	
 	typealias ProfileInfoNuggetCompletion = (ProfileInfoNugget) -> Void
 
-	init?(coder: NSCoder, needsSocialTextField: Bool = true, successfulCompletion: @escaping ProfileInfoNuggetCompletion) {
+	init?(coder: NSCoder,
+		  needsSocialTextField: Bool = true,
+		  successfulCompletion: @escaping ProfileInfoNuggetCompletion,
+		  enableSaveButtonHandler: @escaping FloatingTextFieldView.EnableSaveButtonHandler = { _, _ in true }) {
 		self.needsSocialTextField = needsSocialTextField
 		self.successfulCompletion = successfulCompletion
+		self.enableSaveButtonHandler = enableSaveButtonHandler
 		super.init(coder: coder)
 	}
 
@@ -46,6 +52,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 												 socialType: socialType)
 		floatingTextFieldView.delegate = self
 		tapToDismissGesture.delegate = self
+		floatingTextFieldView.enableSaveButtonClosure = enableSaveButtonHandler
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
