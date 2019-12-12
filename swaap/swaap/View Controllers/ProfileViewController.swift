@@ -17,6 +17,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var socialButtonsStackView: UIStackView!
 	@IBOutlet private weak var birthdayLabel: UILabel!
 	@IBOutlet private weak var bioLabel: UILabel!
+	@IBOutlet private weak var birthdayImageContainerView: UIView!
+	@IBOutlet private weak var bioImageViewContainer: UIView!
+	@IBOutlet private weak var contactModesImageViewContainer: UIView!
 
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
@@ -60,6 +63,10 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		} else {
 			backButtonVisualFXContainerView.isHidden = true
 		}
+
+		birthdayImageContainerView.isVisible = birthdayLabel.text?.isEmpty ?? true
+		bioImageViewContainer.isVisible = bioLabel.text?.isEmpty ?? true
+		contactModesImageViewContainer.isVisible = birthdayLabel.text?.isEmpty ?? true
 
 		socialButtonsStackView.isHidden = socialButtonsStackView.arrangedSubviews.isEmpty
 	}
