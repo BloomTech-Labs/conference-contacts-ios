@@ -52,7 +52,7 @@ class RootTabBarController: UITabBarController {
 		vcs.forEach { ($0 as? AuthAccessor)?.authManager = authManager }
 
 		// FIXME: For debugging
-		vcs.forEach { ($0 as? SwipeBackNavigationController)?.profileController = profileController }
+		vcs.forEach { ($0 as? ProfileAccessor)?.profileController = profileController }
 	}
 
 	override func viewDidLoad() {

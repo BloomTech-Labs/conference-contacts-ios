@@ -5,9 +5,11 @@
 //  Created by Michael Redig on 12/5/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
+//swiftlint:disable function_body_length
 
 import Foundation
 import NetworkHandler
+import Cloudinary
 
 protocol ProfileAccessor: AnyObject {
 	var profileController: ProfileController? { get set }
@@ -16,14 +18,11 @@ protocol ProfileAccessor: AnyObject {
 class ProfileController {
 	let authManager: AuthManager
 
-	private var _userProfile: UserProfile?
-	/// Automatically sends `userProfileChanged`, `userProfilePopulated`, or `userProfileDepopulated` notifications when modified
+	/// Automatically sends `userProfileChanged` (all events), `userProfilePopulated` (when nil -> value),
+	/// `userProfileDepopulated` (value -> nil), or `userProfileModified` (value -> value) notifications when modified
 	var userProfile: UserProfile? {
-		get { _userProfile }
-		set {
-			let oldValue = _userProfile
-			_userProfile = newValue
-			checkUserProfileChanged(oldValue: oldValue, newValue: newValue)
+		didSet {
+			checkUserProfileChanged(oldValue: oldValue, newValue: userProfile)
 		}
 	}
 
@@ -59,10 +58,10 @@ class ProfileController {
 //		})
 		if authManager.credentials != nil {
 			self.fetchProfileFromServer { (result: Result<UserProfile, NetworkError>) in
-				do {
-					let user = try result.get()
-					print(user)
-				} catch {
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
 					NSLog("Error getting user: \(error)")
 				}
 			}
@@ -116,7 +115,7 @@ class ProfileController {
 		// while networking, load from disk if same user
 		loadCachedProfile()
 
-		let query = "{ user { id authId name picture birthdate gender industry jobtitle bio profile { id value type privacy preferredContact } } }"
+		let query = "{ user { id authId name picture birthdate location industry jobtitle bio profile { id value type privacy preferredContact } } }"
 		let graphObject = GQuery(query: query)
 
 		do {
@@ -287,7 +286,6 @@ class ProfileController {
 				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
-
 	}
 
 	private func networkCommon() -> (Auth0IDClaims, NetworkRequest)? {
@@ -314,6 +312,27 @@ class ProfileController {
 				NSLog("Error loading user profile image: \(error)")
 			}
 		}
+	}
+
+
+	// MARK: - Image
+	private let cloudinaryConfig = CLDConfiguration(cloudName: "swaap", secure: true)
+	private lazy var cloudinary = CLDCloudinary(configuration: cloudinaryConfig)
+
+	func uploadImageData(_ data: Data, completion: @escaping (Result<URL, NetworkError>) -> Void) {
+		let request = cloudinary.createUploader().upload(data: data, uploadPreset: "zkbfj0cu") { result, error in
+			if let error = error {
+				NSLog("Error uploading image: \(error)")
+				completion(.failure(.otherError(error: error)))
+				return
+			}
+			guard let urlStr = result?.secureUrl ?? result?.url, let url = URL(string: urlStr) else {
+				completion(.failure(.unspecifiedError(reason: "No url provided in result!: \(result.debugDescription)")))
+				return
+			}
+			completion(.success(url))
+		}
+		request.resume()
 	}
 
 	// MARK: - Local Storage
@@ -347,7 +366,6 @@ class ProfileController {
 
 	private func saveProfileToCache() {
 		guard let profile = userProfile else {
-			deleteProfileCache()
 			return
 		}
 
@@ -382,9 +400,12 @@ extension ProfileController {
 		let nc = NotificationCenter.default
 		if oldValue == nil {
 			nc.post(name: .userProfilePopulated, object: nil)
+			nc.post(name: .userProfileChanged, object: nil)
 		} else if newValue == nil {
 			nc.post(name: .userProfileDepopulated, object: nil)
+			nc.post(name: .userProfileChanged, object: nil)
 		} else {
+			nc.post(name: .userProfileModified, object: nil)
 			nc.post(name: .userProfileChanged, object: nil)
 		}
 		updateUserImage()
@@ -393,6 +414,7 @@ extension ProfileController {
 }
 
 extension NSNotification.Name {
+	static let userProfileModified = NSNotification.Name("com.swaap.userProfileChanged")
 	static let userProfileChanged = NSNotification.Name("com.swaap.userProfileChanged")
 	static let userProfilePopulated = NSNotification.Name("com.swaap.userProfilePopulated")
 	static let userProfileDepopulated = NSNotification.Name("com.swaap.userProfileDepopulated")

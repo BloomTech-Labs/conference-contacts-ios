@@ -33,4 +33,3 @@ enum ProfileFieldType: String, Codable, Hashable, CaseIterable {
 	case linkedin
 	case twitter
 }
-

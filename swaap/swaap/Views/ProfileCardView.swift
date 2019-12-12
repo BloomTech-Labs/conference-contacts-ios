@@ -13,6 +13,53 @@ import ChevronAnimatable
 @IBDesignable
 class ProfileCardView: IBPreviewView {
 
+	// MARK: - User Info Properties
+	var userProfile: UserProfile? {
+		didSet {
+			updateViews()
+		}
+	}
+
+	var profileImage: UIImage? {
+		get { profileImageView.image }
+		set { profileImageView.image = newValue }
+	}
+
+	var name: String? {
+		get { nameLabel.text }
+		set { nameLabel.text = newValue }
+	}
+
+	var tagline: String? {
+		get { taglineLabel.text }
+		set { taglineLabel.text = newValue }
+	}
+
+	var jobTitle: String? {
+		get { jobTitleLabel.text }
+		set { jobTitleLabel.text = newValue }
+	}
+
+	var location: String? {
+		get { locationLabel.text }
+		set { locationLabel.text = newValue }
+	}
+
+	var industry: String? {
+		get { industryLabel.text }
+		set { industryLabel.text = newValue }
+	}
+
+	var preferredContact: SocialLink? {
+		get { socialButton.socialInfo }
+		set {
+			guard let newValue = newValue else { return }
+			socialButton.socialInfo = newValue
+		}
+	}
+
+
+	// MARK: - Outlets
 	@IBOutlet private var contentView: UIView!
 	@IBInspectable var imageCornerRadius: CGFloat = 12
 	@IBOutlet private weak var profileImageView: UIImageView!
@@ -22,11 +69,13 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var nameLabel: UILabel!
 	@IBOutlet private weak var jobTitleLabel: UILabel!
+	@IBOutlet private weak var taglineLabel: UILabel!
 	@IBOutlet private weak var locationLabel: UILabel!
 	@IBOutlet private weak var industryLabel: UILabel!
-	// FIXME: - just for testing - remove
-	@IBOutlet private weak var stackView: UIStackView!
+	@IBOutlet private weak var socialButton: SocialButton!
 
+
+	// MARK: - Lifecycle
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		commonInit()
@@ -58,11 +107,13 @@ class ProfileCardView: IBPreviewView {
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		contentView.layer.cornerCurve = .continuous
 		contentView.layer.cornerRadius = 20
-
+		taglineLabel.isHidden = true
 		setupImageView()
 		profileImageView.mask = imageMaskView
 
 		backgroundColor = .clear
+
+		updateViews()
 	}
 
 	private func setupImageView() {
@@ -73,6 +124,23 @@ class ProfileCardView: IBPreviewView {
 		imageMaskView.backgroundColor = .white
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
+
+	private func updateViews() {
+		if let imageData = userProfile?.photoData {
+			profileImage = UIImage(data: imageData)
+		} else {
+			profileImage = nil
+		}
+		name = userProfile?.name
+		jobTitle = userProfile?.jobtitle
+		location = userProfile?.location
+		industry = userProfile?.industry
+
+		guard let pContact = userProfile?.profileNuggets.preferredContact else { return }
+		let socialLink = SocialLink(socialType: pContact.type, value: pContact.value)
+		preferredContact = socialLink
+	}
+
 
 	// MARK: - Pan Gesture properties
 	private var slideOffset: CGFloat = 0
@@ -121,7 +189,7 @@ class ProfileCardView: IBPreviewView {
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
-			self.transform = .identity
+						self.transform = .identity
 		}, completion: nil)
 	}
 
@@ -132,7 +200,7 @@ class ProfileCardView: IBPreviewView {
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
-			self.transform.ty = self.maxTranslate
+						self.transform.ty = self.maxTranslate
 		}, completion: nil)
 	}
 }

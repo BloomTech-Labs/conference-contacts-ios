@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, Storyboarded {
+class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
-	@IBOutlet private weak var profileCardView: UIView!
+	@IBOutlet private weak var profileCardView: ProfileCardView!
 	@IBOutlet private weak var backButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var editProfileButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var backButton: UIButton!
@@ -18,9 +18,10 @@ class ProfileViewController: UIViewController, Storyboarded {
 	@IBOutlet private weak var birthdayLabel: UILabel!
 	@IBOutlet private weak var bioLabel: UILabel!
 
+	var profileController: ProfileController?
+	var profileChangedObserver: NSObjectProtocol?
 
 	// Recommended size for Social Buttons in stack view is w 250 / h 40
-
 	override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +31,7 @@ class ProfileViewController: UIViewController, Storyboarded {
 		setupCardShadow()
 		setupFXView()
 		updateViews()
+		setupNotifications()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -48,8 +50,41 @@ class ProfileViewController: UIViewController, Storyboarded {
 		updateViews()
 	}
 
-	@IBAction func backbuttonTapped(_ sender: UIButton) {
-		navigationController?.popViewController(animated: true)
+	private func updateViews() {
+		profileCardView.userProfile = profileController?.userProfile
+		birthdayLabel.text = profileController?.userProfile?.birthdate
+		bioLabel.text = profileController?.userProfile?.bio
+		populateSocialButtons()
+		if let count = navigationController?.viewControllers.count, count > 1 {
+			backButtonVisualFXContainerView.isHidden = false
+		} else {
+			backButtonVisualFXContainerView.isHidden = true
+		}
+
+		socialButtonsStackView.isHidden = socialButtonsStackView.arrangedSubviews.isEmpty
+	}
+
+	private func populateSocialButtons() {
+		guard let profileNuggets = profileController?.userProfile?.profileNuggets else { return }
+		socialButtonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+		profileNuggets.forEach {
+			guard !$0.preferredContact else { return }
+			let socialButton = SocialButton()
+			socialButton.socialInfo = SocialLink(socialType: $0.type, value: $0.value)
+			socialButton.translatesAutoresizingMaskIntoConstraints = false
+			socialButton.height = 50
+			socialButton.setContentHuggingPriority(.init(rawValue: 251), for: .vertical)
+			socialButtonsStackView.addArrangedSubview(socialButton)
+		}
+	}
+
+	private func setupNotifications() {
+		let updateClosure = { (_: Notification) in
+			DispatchQueue.main.async {
+				self.updateViews()
+			}
+		}
+		profileChangedObserver = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: updateClosure)
 	}
 
 	private func setupCardShadow() {
@@ -66,20 +101,12 @@ class ProfileViewController: UIViewController, Storyboarded {
 		editProfileButtonVisualFXContainerView.clipsToBounds = true
 	}
 
-	private func updateViews() {
-		if let count = navigationController?.viewControllers.count, count > 1 {
-			backButtonVisualFXContainerView.isHidden = false
-		} else {
-			backButtonVisualFXContainerView.isHidden = true
-		}
-
-		if socialButtonsStackView.arrangedSubviews.count < 1 {
-			socialButtonsStackView.isHidden = true
-		}
+	@IBAction func backbuttonTapped(_ sender: UIButton) {
+		navigationController?.popViewController(animated: true)
 	}
 
-	// FIXME: FOR DEBUGGING
-	@IBAction func testButtonPressed(_ sender: UIButton) {
-		print("tested")
+	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
+		return SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
+	
 }

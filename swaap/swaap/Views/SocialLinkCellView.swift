@@ -13,6 +13,7 @@ protocol SocialLinkCellViewDelegate: AnyObject {
 	func deleteButtonPressed(on cellView: SocialLinkCellView)
 	func starButtonPressed(on cellView: SocialLinkCellView)
 	func editCellInvoked(on cellView: SocialLinkCellView)
+	func privacySelectionInvoked(on cellView: SocialLinkCellView)
 }
 
 class SocialLinkCellView: UIView {
@@ -23,6 +24,7 @@ class SocialLinkCellView: UIView {
 	@IBOutlet private weak var socialButton: SocialButton!
 	@IBOutlet private weak var valueLabel: UILabel!
 	@IBOutlet private weak var deleteButton: UIButton!
+	@IBOutlet private weak var privacySettingLabel: UILabel!
 
 	weak var delegate: SocialLinkCellViewDelegate?
 
@@ -74,8 +76,9 @@ class SocialLinkCellView: UIView {
 
 	private func updateViews() {
 		socialButton.smallButton = true
-		socialButton.socialInfo.socialPlatform = nugget.type
+		socialButton.socialInfo.socialType = nugget.type
 		valueLabel.text = nugget.value
+		privacySettingLabel.text = nugget.privacy.rawValue.capitalized
 		starButton.tintColor = nugget.preferredContact ? .systemGreen : .systemGray3
 	}
 
@@ -89,6 +92,10 @@ class SocialLinkCellView: UIView {
 
 	@IBAction func editTapped(_ sender: UIButton) {
 		delegate?.editCellInvoked(on: self)
+	}
+
+	@IBAction func longPressTriggered(_ sender: UILongPressGestureRecognizer) {
+		delegate?.privacySelectionInvoked(on: self)
 	}
 
 }

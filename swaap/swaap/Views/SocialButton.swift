@@ -29,7 +29,7 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
-	var socialInfo: (socialPlatform: ProfileFieldType, info: String) = (.twitter, "@swaapApp") {
+	var socialInfo: SocialLink = SocialLink(socialType: .twitter, value: "@swaapApp") {
 		didSet {
 			updateSocialPlatformType()
 		}
@@ -75,6 +75,7 @@ class SocialButton: IBPreviewControl {
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		contentHeightAnchor = contentView.heightAnchor.constraint(equalToConstant: 35)
+		contentHeightAnchor?.priority = UILayoutPriority(750)
 		contentHeightAnchor?.isActive = true
 		handleLabel.font = .roundedFont(ofSize: handleLabel.font?.pointSize ?? 15.0, weight: .regular)
 
@@ -88,8 +89,8 @@ class SocialButton: IBPreviewControl {
 	}
 
 	private func updateSocialPlatformType() {
-		let platform = socialInfo.socialPlatform
-		let info = socialInfo.info
+		let platform = socialInfo.socialType
+		let value = socialInfo.value
 		switch platform {
 		case .phone:
 			mainColorBackgroundView.backgroundColor = .systemGreen
@@ -122,8 +123,10 @@ class SocialButton: IBPreviewControl {
 			mainColorBackgroundView.backgroundColor = .socialButtonFacebookMain
 			translucentView.backgroundColor = .socialButtonFacebookSecondary
 			iconView.image = .socialFacebookIcon
+		default:
+			break
 		}
-		handleLabel.text = info
+		handleLabel.text = value
 	}
 
 	// MARK: - Animation Properties

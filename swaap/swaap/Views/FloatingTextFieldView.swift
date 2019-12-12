@@ -160,7 +160,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		formatTextField()
 		if let socialType = socialType {
 			socialButton.isVisible = true
-			socialButton.socialInfo.socialPlatform = socialType
+			socialButton.socialInfo.socialType = socialType
 		} else {
 			socialButton.isVisible = false
 		}
@@ -249,13 +249,13 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialButtonCell",
 														for: indexPath) as? SocialButtonCollectionViewCell else { return UICollectionViewCell() }
 
-		cell.socialButtonType = ProfileFieldType.allCases[indexPath.item]
+		cell.socialLink.socialType = ProfileFieldType.allCases[indexPath.item]
 		cell.socialButton.addTarget(self, action: #selector(didSelectSocialButton(_:)), for: .touchUpInside)
 		return cell
 	}
 
 	@objc func didSelectSocialButton(_ sender: SocialButton) {
-		socialType = sender.socialInfo.socialPlatform
+		socialType = sender.socialInfo.socialType
 		shouldShowCollectionView(false)
 	}
 }
