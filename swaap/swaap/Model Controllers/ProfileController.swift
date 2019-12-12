@@ -205,7 +205,7 @@ class ProfileController {
 		}
 	}
 
-	// MARK: - Nuggets
+	// MARK: - ContactMethods
 	/// create or update a profile contactMethod on the backend contextually. if an id is present, updates. if not, creates.
 	func modifyProfileContactMethod(_ contactMethod: ProfileContactMethod, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var (_, request) = networkCommon() else {

@@ -36,12 +36,12 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var bioLabel: UILabel!
 	@IBOutlet private weak var contactModeDescLabel: UILabel!
 
-	@IBOutlet private weak var socialNuggetsStackView: UIStackView!
+	@IBOutlet private weak var contactMethodsStackView: UIStackView!
 
-	var socialNuggets: [ProfileContactMethod] {
+	var contactMethods: [ProfileContactMethod] {
 		socialLinkCellViews.map { $0.contactMethod }
 	}
-	var deletedNuggets: [ProfileContactMethod] = []
+	var deletedContactMethods: [ProfileContactMethod] = []
 
 	var socialLinkCellViews: [ContactMethodCellView] = [] {
 		didSet {
@@ -92,11 +92,11 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	private func updateViews() {
 		UIView.animate(withDuration: 0.3) {
-			self.socialNuggetsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+			self.contactMethodsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 			for cellView in self.socialLinkCellViews {
-				self.socialNuggetsStackView.addArrangedSubview(cellView)
+				self.contactMethodsStackView.addArrangedSubview(cellView)
 			}
-			self.socialNuggetsStackView.layoutSubviews()
+			self.contactMethodsStackView.layoutSubviews()
 		}
 
 		if photo != nil {
@@ -137,7 +137,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.location = location
 		newProfile.bio = bio
 		newProfile.birthdate = birthdate
-		newProfile.profileContactMethods = socialNuggets
+		newProfile.profileContactMethods = contactMethods
 
 		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
 		panel.statusLabel.text = "Saving..."
@@ -196,7 +196,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 
 		var contactMethodUpdates = [ConcurrentOperation]()
-		for (index, contactMethod) in socialNuggets.enumerated() {
+		for (index, contactMethod) in contactMethods.enumerated() {
 			let contactMethodUpdate = ConcurrentOperation { [weak self] in
 				guard let self = self else { return }
 				let semaphore = DispatchSemaphore(value: 0)
@@ -216,7 +216,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 
 		var contactMethodDeletions = [ConcurrentOperation]()
-		for contactMethod in deletedNuggets {
+		for contactMethod in deletedContactMethods {
 			let contactMethodUpdate = ConcurrentOperation { [weak self] in
 				guard let self = self else { return }
 				let semaphore = DispatchSemaphore(value: 0)
@@ -260,7 +260,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		imageActionSheet()
 	}
 
-	// MARK: - Nugget Management
+	// MARK: - Contact Method Management
 	func addContactMethod(contactMethod: ProfileContactMethod, checkForPreferred: Bool = true) {
 		let contactMethodView = ContactMethodCellView(frame: .zero, contactMethod: contactMethod)
 		contactMethodView.delegate = self
@@ -272,13 +272,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	func removeContactMethod(contactMethod: ProfileContactMethod) {
 		guard let index = socialLinkCellViews.firstIndex(where: { $0.contactMethod == contactMethod }) else { return }
-		deletedNuggets.append(socialNuggets[index])
+		deletedContactMethods.append(contactMethods[index])
 		socialLinkCellViews.remove(at: index)
 		assurePreferredContactExists()
 	}
 
 	private func assurePreferredContactExists() {
-		if socialNuggets.preferredContact == nil {
+		if contactMethods.preferredContact == nil {
 			socialLinkCellViews.first?.contactMethod.preferredContact = true
 		}
 	}

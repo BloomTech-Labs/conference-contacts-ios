@@ -72,9 +72,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	private func populateSocialButtons() {
-		guard let profileNuggets = profileController?.userProfile?.profileContactMethods else { return }
+		guard let profileContactMethods = profileController?.userProfile?.profileContactMethods else { return }
 		socialButtonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-		profileNuggets.forEach {
+		profileContactMethods.forEach {
 			guard !$0.preferredContact else { return }
 			let socialButton = SocialButton()
 			socialButton.infoNugget = ProfileInfoNugget(type: $0.type, value: $0.value)

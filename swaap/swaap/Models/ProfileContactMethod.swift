@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a single contact method for a user
 struct ProfileContactMethod: Codable, Hashable {
 	let id: String?
 	let value: String
@@ -28,6 +29,7 @@ struct ProfileContactMethod: Codable, Hashable {
 	}
 }
 
+/// Can represent either contact information or static user information like their name, industry, bio, etc.
 struct ProfileInfoNugget {
 	var type: ProfileFieldType?
 	var value: String

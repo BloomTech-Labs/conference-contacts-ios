@@ -19,11 +19,11 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	var placeholderStr: String = "enter info"
 	var labelText: String?
 	var socialType: ProfileFieldType?
-	let successfulCompletion: SocialLinkCompletion
+	let successfulCompletion: ProfileInfoNuggetCompletion
 	
-	typealias SocialLinkCompletion = (ProfileInfoNugget) -> Void
+	typealias ProfileInfoNuggetCompletion = (ProfileInfoNugget) -> Void
 
-	init?(coder: NSCoder, needsSocialTextField: Bool = true, successfulCompletion: @escaping SocialLinkCompletion) {
+	init?(coder: NSCoder, needsSocialTextField: Bool = true, successfulCompletion: @escaping ProfileInfoNuggetCompletion) {
 		self.needsSocialTextField = needsSocialTextField
 		self.successfulCompletion = successfulCompletion
 		super.init(coder: coder)

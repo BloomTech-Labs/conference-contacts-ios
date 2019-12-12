@@ -1055,6 +1055,7 @@ Long pressing one of contact methods will bring up privacy options:
                         <outlet property="birthdateLabel" destination="z6r-nX-tPI" id="PXE-G1-2Kz"/>
                         <outlet property="cancelButton" destination="Sv7-xP-wZ5" id="ARI-jh-RXa"/>
                         <outlet property="choosePhotoButton" destination="zpB-BT-vnW" id="pgY-hH-fTI"/>
+                        <outlet property="contactMethodsStackView" destination="ccE-SE-wh1" id="H3D-Uz-Dbp"/>
                         <outlet property="contactModeDescLabel" destination="W3e-gB-N38" id="PdS-wX-Gic"/>
                         <outlet property="industryLabel" destination="9Bi-Sv-KnG" id="T6e-Lh-zlT"/>
                         <outlet property="locationLabel" destination="1td-hF-r4P" id="dbD-B9-I7b"/>
@@ -1062,7 +1063,6 @@ Long pressing one of contact methods will bring up privacy options:
                         <outlet property="profileImageView" destination="pqy-Vz-bUe" id="G2J-gC-tTb"/>
                         <outlet property="saveButton" destination="snU-lT-kDu" id="v2m-BX-rBa"/>
                         <outlet property="scrollView" destination="l2P-KH-EKX" id="LSN-NH-C6f"/>
-                        <outlet property="socialNuggetsStackView" destination="ccE-SE-wh1" id="H3D-Uz-Dbp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-n7-5Bs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
