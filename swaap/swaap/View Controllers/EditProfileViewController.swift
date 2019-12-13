@@ -71,11 +71,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		profileImageView.layer.cornerRadius = 20
 		profileImageView.layer.cornerCurve = .continuous
 		let rawString = """
-						The  lets others know the best way to reach you
-						Long press a contact method to select privacy options:
-						  • Private (no one can view)
-						  • Connected (only your connections can view)
-						  • Public (everyone can view)
+						• The  lets others know the best way to reach you.
+						• Long press a contact method to select privacy options.
 						"""
 		let string = NSMutableAttributedString(string: rawString, attributes: [.foregroundColor: UIColor.secondaryLabel])
 		let checkmarkSealImage = UIImage(systemName: "checkmark.seal.fill")!
@@ -84,7 +81,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		let checkmarkString = NSAttributedString(attachment: checkmarkAttachment)
 		let style = NSMutableParagraphStyle()
 		style.lineHeightMultiple = 1.2
-		string.insert(checkmarkString, at: 4)
+		string.insert(checkmarkString, at: 6)
 		string.addAttribute(.paragraphStyle, value: style, range: NSRange(location: 0, length: string.length))
 		contactModeDescLabel.attributedText = string
 	}
@@ -402,7 +399,11 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 	}
 
 	func privacySelectionInvoked(on cellView: ContactMethodCellView) {
-		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: nil, preferredStyle: .actionSheet)
+		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: """
+			Private (no one can view)
+			Connected (only your connections can view)
+			Public (everyone can view)
+			""", preferredStyle: .actionSheet)
 		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
 			cellView.contactMethod.privacy = .private
 		}
