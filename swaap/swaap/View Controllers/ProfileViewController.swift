@@ -19,12 +19,12 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var bioLabel: UILabel!
 	@IBOutlet private weak var birthdayImageContainerView: UIView!
 	@IBOutlet private weak var bioImageViewContainer: UIView!
-	@IBOutlet private weak var contactModesImageViewContainer: UIView!
+	@IBOutlet private weak var contactModePreviewStackView: UIStackView!
+	@IBOutlet private weak var bottomFadeView: UIView!
 
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
-	// Recommended size for Social Buttons in stack view is w 250 / h 40
 	override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,9 +66,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 		birthdayImageContainerView.isVisible = birthdayLabel.text?.isEmpty ?? true
 		bioImageViewContainer.isVisible = bioLabel.text?.isEmpty ?? true
-		contactModesImageViewContainer.isVisible = birthdayLabel.text?.isEmpty ?? true
 
 		socialButtonsStackView.isHidden = socialButtonsStackView.arrangedSubviews.isEmpty
+		contactModePreviewStackView.isHidden = !socialButtonsStackView.arrangedSubviews.isEmpty
 	}
 
 	private func populateSocialButtons() {
