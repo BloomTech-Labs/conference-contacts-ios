@@ -80,7 +80,7 @@
                                                 <rect key="frame" x="0.0" y="130" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtd-Cf-82f" userLabel="Birthday goes here" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
+                                                        <rect key="frame" x="30" y="6" width="315" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -94,9 +94,10 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="4Oq-ib-Pjs"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Rtd-Cf-82f" secondAttribute="bottom" constant="6" id="LrZ-ux-2Uc"/>
                                                     <constraint firstItem="Rtd-Cf-82f" firstAttribute="leading" secondItem="hXs-BR-8av" secondAttribute="leading" constant="30" id="ReP-YA-CZ1"/>
+                                                    <constraint firstItem="Rtd-Cf-82f" firstAttribute="top" secondItem="hXs-BR-8av" secondAttribute="top" constant="6" id="Vcc-53-LLE"/>
                                                     <constraint firstAttribute="trailing" secondItem="Rtd-Cf-82f" secondAttribute="trailing" constant="30" id="hOb-D4-mRv"/>
-                                                    <constraint firstItem="Rtd-Cf-82f" firstAttribute="centerY" secondItem="hXs-BR-8av" secondAttribute="centerY" id="rgg-SQ-s0J"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULW-PO-gmt" userLabel="Birthday Illustration View">
@@ -145,15 +146,12 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-s3-0D2" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="6" width="315" height="38"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Let people know a bit about yourself!"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
                                                                 <color key="value" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="placeholderNumberOfLines">
-                                                                <integer key="value" value="0"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
@@ -221,9 +219,6 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Add more ways people can get in touch with you!"/>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
                                                                         <color key="value" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderNumberOfLines">
-                                                                        <integer key="value" value="0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
@@ -487,7 +482,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0hM-cf-eNF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1390"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1398"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cC-yU-gWy" userLabel="Top Spacer">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -572,10 +567,10 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3QS-WX-1LM" userLabel="Contact Stack View">
-                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="997.33333333333326"/>
+                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="1005.3333333333333"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jfC-Cn-fEj" userLabel="Personal StackView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="498"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWf-ev-cbw" userLabel="about you title">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -628,11 +623,14 @@
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to add your name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTw-rk-KYp">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTw-rk-KYp" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Tap to add your name"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
@@ -659,16 +657,16 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGO-qM-6v3" userLabel="job title section">
-                                                                <rect key="frame" x="0.0" y="125.99999999999994" width="375" height="80"/>
+                                                                <rect key="frame" x="0.0" y="125.99999999999994" width="375" height="88"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDZ-dL-wPr">
-                                                                        <rect key="frame" x="4" y="4" width="371" height="72"/>
+                                                                        <rect key="frame" x="4" y="4" width="371" height="80"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="qfe-a4-ur8">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="52" height="72"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="52" height="80"/>
                                                                                 <subviews>
                                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="briefcase" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="t6C-sk-gf7">
-                                                                                        <rect key="frame" x="0.0" y="1.3333333333333357" width="52" height="69.666666666666671"/>
+                                                                                        <rect key="frame" x="0.0" y="1.3333333333333357" width="52" height="77.666666666666671"/>
                                                                                         <color key="tintColor" name="Swaap Accent Color 1"/>
                                                                                     </imageView>
                                                                                 </subviews>
@@ -682,26 +680,29 @@
                                                                                 </constraints>
                                                                             </view>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="9vW-dl-kgw">
-                                                                                <rect key="frame" x="52" y="0.0" width="319" height="72"/>
+                                                                                <rect key="frame" x="52" y="0.0" width="319" height="80"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Job Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAz-is-coT">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="42"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to add your job title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-Jf-Pfi">
-                                                                                        <rect key="frame" x="0.0" y="48" width="319" height="24"/>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-Jf-Pfi" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="56" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Tap to add your job title"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
                                                                         </subviews>
                                                                     </stackView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWl-Zn-nwr">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                                                         <connections>
                                                                             <segue destination="UwA-CL-fsQ" kind="presentation" destinationCreationSelector="editJobTitleSegue:" modalPresentationStyle="overFullScreen" id="DxI-8z-64q"/>
                                                                         </connections>
@@ -721,7 +722,7 @@
                                                                 <viewLayoutGuide key="safeArea" id="5DV-Ao-TQc"/>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kxh-em-ijL" userLabel="location section">
-                                                                <rect key="frame" x="0.0" y="213.99999999999994" width="375" height="60"/>
+                                                                <rect key="frame" x="0.0" y="221.99999999999994" width="375" height="60"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-eN-Hko">
                                                                         <rect key="frame" x="4" y="4" width="371" height="52"/>
@@ -753,11 +754,14 @@
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to add your location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1td-hF-r4P">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1td-hF-r4P" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Tap to add your location"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
@@ -784,7 +788,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivn-fh-p2M" userLabel="industry section">
-                                                                <rect key="frame" x="0.0" y="281.99999999999994" width="375" height="60"/>
+                                                                <rect key="frame" x="0.0" y="289.99999999999994" width="375" height="60"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPx-pd-RSk">
                                                                         <rect key="frame" x="4" y="4" width="371" height="52"/>
@@ -816,11 +820,14 @@
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to add your industry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bi-Sv-KnG">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bi-Sv-KnG" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Tap to add your industry"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
@@ -847,7 +854,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1KA-Dh-BOR" userLabel="birthday section">
-                                                                <rect key="frame" x="0.0" y="349.99999999999994" width="375" height="60"/>
+                                                                <rect key="frame" x="0.0" y="357.99999999999994" width="375" height="60"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owS-Pg-Y4X">
                                                                         <rect key="frame" x="4" y="4" width="371" height="52"/>
@@ -879,11 +886,14 @@
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to add your birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6r-nX-tPI">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6r-nX-tPI" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Tap to add your birthday"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
@@ -910,7 +920,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwQ-sZ-yR1" userLabel="bio section">
-                                                                <rect key="frame" x="0.0" y="417.99999999999994" width="375" height="80"/>
+                                                                <rect key="frame" x="0.0" y="425.99999999999994" width="375" height="80"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYc-bZ-E09">
                                                                         <rect key="frame" x="4" y="4" width="371" height="72"/>
@@ -942,11 +952,14 @@
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to add a bio" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmO-1L-LNG">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmO-1L-LNG" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                                                         <rect key="frame" x="0.0" y="48" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Tap to add a bio"/>
+                                                                                        </userDefinedRuntimeAttributes>
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
@@ -975,7 +988,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-lc-wax" userLabel="Social StackView">
-                                                        <rect key="frame" x="0.0" y="518" width="375" height="479.33333333333326"/>
+                                                        <rect key="frame" x="0.0" y="526" width="375" height="479.33333333333326"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGM-Ty-cAK" userLabel="title container">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="213.33333333333334"/>

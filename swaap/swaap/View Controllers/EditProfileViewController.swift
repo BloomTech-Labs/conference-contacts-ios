@@ -278,17 +278,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 
 	// MARK: - Segues
-	private func passLabelText(from label: UILabel) -> String? {
-		if let text = label.text {
-			if text.contains("Tap to add") {
-				return nil
-			} else {
-				return text
-			}
-		}
-		return nil
-	}
-
 	@IBSegueAction func nameTextFieldViewController(coder: NSCoder) -> UIViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
 			self.nameLabel.text = infoNugget.value
@@ -296,7 +285,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			!value.isEmpty
 		})
 		inputVC?.placeholderStr = "Enter your full name"
-		inputVC?.labelText = passLabelText(from: nameLabel)
+		inputVC?.labelText = nameLabel.text
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
@@ -306,7 +295,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self.locationLabel.text = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Name of city"
-		inputVC?.labelText = passLabelText(from: locationLabel)
+		inputVC?.labelText = locationLabel.text
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
@@ -316,7 +305,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self.industryLabel.text = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Add the industry you're in"
-		inputVC?.labelText = passLabelText(from: industryLabel)
+		inputVC?.labelText = industryLabel.text
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
@@ -326,7 +315,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self.birthdateLabel.text = infoNugget.value
 		})
 		inputVC?.placeholderStr = "MM/DD/YYYY"
-		inputVC?.labelText = passLabelText(from: birthdateLabel)
+		inputVC?.labelText = birthdateLabel.text
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
@@ -336,7 +325,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self.bioLabel.text = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Add a short bio"
-		inputVC?.labelText = passLabelText(from: bioLabel)
+		inputVC?.labelText = bioLabel.text
 		inputVC?.autoCapitalizationType = .sentences
 		return inputVC
 	}
@@ -346,7 +335,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self.jobTitleLabel.text = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Add your job title"
-		inputVC?.labelText = passLabelText(from: jobTitleLabel)
+		inputVC?.labelText = jobTitleLabel.text
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
