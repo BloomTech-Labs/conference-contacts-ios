@@ -35,12 +35,6 @@ class LabelPlaceholder: UILabel {
 		set { placeholder.text = newValue }
 	}
 
-	@IBInspectable
-	var placeholderNumberOfLines: Int {
-		get { placeholder.numberOfLines }
-		set { placeholder.numberOfLines = newValue }
-	}
-
 	override var text: String? {
 		didSet {
 			updateViews()
@@ -69,10 +63,17 @@ class LabelPlaceholder: UILabel {
 		placeholder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		placeholder.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		placeholder.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+
+		passOnSettings()
 		updateViews()
 	}
 
 	private func updateViews() {
 		placeholder.isVisible = text?.isEmpty ?? true
+	}
+
+	private func passOnSettings() {
+		placeholder.font = font
+		placeholder.numberOfLines = numberOfLines
 	}
 }
