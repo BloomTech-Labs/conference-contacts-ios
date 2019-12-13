@@ -62,7 +62,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(false, animated: false)
-		navigationController?.navigationBar.installBlurEffect()
 		isModalInPresentation = true
 		setupUI()
 		updateViews()
