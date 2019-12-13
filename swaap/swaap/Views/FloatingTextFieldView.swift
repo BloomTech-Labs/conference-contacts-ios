@@ -78,6 +78,8 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		collectionView.dataSource = self
 		collectionView.register(SocialButtonCollectionViewCell.self, forCellWithReuseIdentifier: "SocialButtonCell")
 
+		textField.delegate = self
+
 		self.backgroundColor = .clear
 	}
 
@@ -140,13 +142,11 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	}
 
 	@IBAction func cancelTapped(_ sender: ButtonHelper) {
-		fireFirstResponder()
+		resignTextfieldFirstResponder()
 	}
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
-		guard let text = textField.text else { return }
-		delegate?.didFinishEditing(self, infoNugget: ProfileInfoNugget(type: socialType, value: text))
-		fireFirstResponder()
+		saveText()
 	}
 
 	@IBAction func addChangeSocialButton(_ sender: UIControl) {
@@ -184,7 +184,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		}
 	}
 
-	func fireFirstResponder() {
+	func resignTextfieldFirstResponder() {
 		textField.resignFirstResponder()
 	}
 
@@ -235,9 +235,16 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		plusButton.setImage(image, for: .normal)
 	}
 
-	private func shouldEnableSaveButton() {
+	@discardableResult private func shouldEnableSaveButton() -> Bool {
 		saveButton.isEnabled = enableSaveButtonClosure?(socialType, textField.text ?? "") ?? true
 		saveButton.alpha = saveButton.isEnabled ? 1 : 0.6
+		return saveButton.isEnabled
+	}
+
+	private func saveText() {
+		guard let text = textField.text else { return }
+		delegate?.didFinishEditing(self, infoNugget: ProfileInfoNugget(type: socialType, value: text))
+		resignTextfieldFirstResponder()
 	}
 
 
@@ -264,5 +271,16 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		socialType = sender.infoNugget.type
 		shouldEnableSaveButton()
 		shouldShowCollectionView(false)
+	}
+}
+
+extension FloatingTextFieldView: UITextFieldDelegate {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		if shouldEnableSaveButton() {
+			saveText()
+			return true
+		} else {
+			return false
+		}
 	}
 }
