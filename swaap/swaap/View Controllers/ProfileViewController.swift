@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var bioImageViewContainer: UIView!
 	@IBOutlet private weak var contactModePreviewStackView: UIStackView!
 	@IBOutlet private weak var bottomFadeView: UIView!
+	@IBOutlet private weak var bottomFadeviewBottomConstraint: NSLayoutConstraint!
 
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
@@ -30,11 +31,26 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
+		profileCardView.delegate = self
 
 		setupCardShadow()
 		setupFXView()
 		updateViews()
 		setupNotifications()
+
+		if #available(iOS 13, *) {
+			let appearance = tabBarController?.tabBar.standardAppearance.copy()
+			appearance?.backgroundImage = UIImage()
+			appearance?.shadowImage = UIImage()
+			appearance?.shadowColor = .clear
+			if let appearance = appearance {
+				tabBarController?.tabBar.standardAppearance = appearance
+			}
+		} else {
+			tabBarController?.tabBar.backgroundImage = UIImage()
+			tabBarController?.tabBar.shadowImage = UIImage()
+		}
+		updateFadeViewPosition()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -115,5 +131,15 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
 		return SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
-	
+}
+
+extension ProfileViewController: ProfileCardViewDelegate {
+	func updateFadeViewPosition() {
+		let currentProgress = max(profileCardView.currentSlidingProgress, 0)
+		bottomFadeviewBottomConstraint.constant = CGFloat(currentProgress * -120)
+	}
+
+	func positionDidChange(on view: ProfileCardView) {
+		updateFadeViewPosition()
+	}
 }

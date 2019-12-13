@@ -10,6 +10,10 @@ import UIKit
 import IBPreview
 import ChevronAnimatable
 
+protocol ProfileCardViewDelegate: AnyObject {
+	func positionDidChange(on view: ProfileCardView)
+}
+
 @IBDesignable
 class ProfileCardView: IBPreviewView {
 
@@ -57,6 +61,8 @@ class ProfileCardView: IBPreviewView {
 			socialButton.infoNugget = newValue
 		}
 	}
+
+	weak var delegate: ProfileCardViewDelegate?
 
 
 	// MARK: - Outlets
@@ -149,7 +155,7 @@ class ProfileCardView: IBPreviewView {
 	}
 	private let swipeVelocity: CGFloat = 550
 	/// 0 is when it's slid all the way down, 1.0 when it's slid all the way to its max sliding height
-	private var currentSlidingProgress: Double {
+	var currentSlidingProgress: Double {
 		let range = 0...abs(maxTranslate)
 		return range.normalizedIndex(-transform.ty)
 	}
@@ -180,27 +186,30 @@ class ProfileCardView: IBPreviewView {
 		} else {
 			layer.removeAllAnimations()
 		}
+		delegate?.positionDidChange(on: self)
 	}
 
 	private func animateToPrimaryPosition() {
-		UIView.animate(withDuration: 0.3,
+		UIView.animate(withDuration: 0.5,
 					   delay: 0.0,
 					   usingSpringWithDamping: 0.8,
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
 						self.transform = .identity
+						self.delegate?.positionDidChange(on: self)
 		}, completion: nil)
 	}
 
 	private func animateToTopPosition() {
-		UIView.animate(withDuration: 0.3,
+		UIView.animate(withDuration: 0.5,
 					   delay: 0.0,
 					   usingSpringWithDamping: 0.8,
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
 						self.transform.ty = self.maxTranslate
+						self.delegate?.positionDidChange(on: self)
 		}, completion: nil)
 	}
 }

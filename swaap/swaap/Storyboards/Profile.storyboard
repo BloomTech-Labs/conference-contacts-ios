@@ -46,7 +46,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emm-zV-NSj">
-                                <rect key="frame" x="0.0" y="44" width="375" height="685"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7dm-QL-DOB">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1032.6666666666667"/>
@@ -291,10 +291,10 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mJq-vT-FfX" customClass="GradientView" customModule="swaap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="659" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="609" width="375" height="120"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="NUX-Lw-XC5"/>
+                                    <constraint firstAttribute="height" constant="120" id="NUX-Lw-XC5"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="startColor">
@@ -434,7 +434,7 @@
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="uVY-7s-0Rc" secondAttribute="trailing" constant="20" id="6Sl-1R-mkM"/>
                             <constraint firstItem="uVY-7s-0Rc" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" id="7Aj-MN-apA"/>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="uVY-7s-0Rc" secondAttribute="bottom" constant="40" id="7dD-mx-ibr"/>
-                            <constraint firstItem="Emm-zV-NSj" firstAttribute="bottom" secondItem="2AK-bp-vhK" secondAttribute="bottom" id="AAX-ko-z2u"/>
+                            <constraint firstItem="Emm-zV-NSj" firstAttribute="bottom" secondItem="UHq-o5-Toi" secondAttribute="bottom" id="AAX-ko-z2u"/>
                             <constraint firstItem="e8g-r6-4Ad" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="B6B-uy-t7H"/>
                             <constraint firstAttribute="trailing" secondItem="mJq-vT-FfX" secondAttribute="trailing" id="GvS-Rs-CFe"/>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="BWn-LD-Q5h" secondAttribute="bottom" constant="50" id="KZ0-eH-fe4"/>
@@ -449,11 +449,6 @@
                             <constraint firstItem="BWn-LD-Q5h" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="yzo-u6-aSL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="uVY-7s-0Rc"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Connect" image="arrow.right.arrow.left.circle" catalog="system" id="UhS-VM-r7a">
                         <color key="badgeColor" name="Swaap Accent Color 1"/>
@@ -469,6 +464,7 @@
                         <outlet property="birthdayImageContainerView" destination="ULW-PO-gmt" id="XLq-xw-znd"/>
                         <outlet property="birthdayLabel" destination="Rtd-Cf-82f" id="w3D-lh-hhw"/>
                         <outlet property="bottomFadeView" destination="mJq-vT-FfX" id="w9E-Nn-82w"/>
+                        <outlet property="bottomFadeviewBottomConstraint" destination="1ze-mp-8ta" id="gNv-P1-5fK"/>
                         <outlet property="contactModePreviewStackView" destination="1vv-7w-fJ6" id="xAZ-ym-94O"/>
                         <outlet property="editProfileButtonVisualFXContainerView" destination="HPr-IH-wav" id="JJ6-u7-13f"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
