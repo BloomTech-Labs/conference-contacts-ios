@@ -27,7 +27,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var profileChangedObserver: NSObjectProtocol?
 
 	override func viewDidLoad() {
-        super.viewDidLoad()
+		super.viewDidLoad()
+
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
@@ -38,20 +39,15 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		updateViews()
 		setupNotifications()
 
-		if #available(iOS 13, *) {
-			let appearance = tabBarController?.tabBar.standardAppearance.copy()
-			appearance?.backgroundImage = UIImage()
-			appearance?.shadowImage = UIImage()
-			appearance?.shadowColor = .clear
-			if let appearance = appearance {
-				tabBarController?.tabBar.standardAppearance = appearance
-			}
-		} else {
-			tabBarController?.tabBar.backgroundImage = UIImage()
-			tabBarController?.tabBar.shadowImage = UIImage()
+		if let appearance = tabBarController?.tabBar.standardAppearance.copy() {
+			appearance.backgroundImage = UIImage()
+			appearance.shadowImage = UIImage()
+			appearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.5)
+			appearance.shadowColor = .clear
+			tabBarItem.standardAppearance = appearance
 		}
 		updateFadeViewPosition()
-    }
+	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
