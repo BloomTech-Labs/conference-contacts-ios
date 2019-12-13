@@ -80,7 +80,7 @@
                                                 <rect key="frame" x="0.0" y="130" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtd-Cf-82f" userLabel="Birthday goes here" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="5" width="315" height="20.333333333333332"/>
+                                                        <rect key="frame" x="30" y="15" width="315" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -487,7 +487,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0hM-cf-eNF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1302"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1390"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cC-yU-gWy" userLabel="Top Spacer">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -572,10 +572,10 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3QS-WX-1LM" userLabel="Contact Stack View">
-                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="909.33333333333326"/>
+                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="997.33333333333326"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jfC-Cn-fEj" userLabel="Personal StackView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="410"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="498"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWf-ev-cbw" userLabel="about you title">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -658,8 +658,70 @@
                                                                     <constraint firstAttribute="height" constant="60" id="r48-RE-sgH"/>
                                                                 </constraints>
                                                             </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGO-qM-6v3" userLabel="job title section">
+                                                                <rect key="frame" x="0.0" y="125.99999999999994" width="375" height="80"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDZ-dL-wPr">
+                                                                        <rect key="frame" x="4" y="4" width="371" height="72"/>
+                                                                        <subviews>
+                                                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="qfe-a4-ur8">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="52" height="72"/>
+                                                                                <subviews>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="briefcase" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="t6C-sk-gf7">
+                                                                                        <rect key="frame" x="0.0" y="1.3333333333333357" width="52" height="69.666666666666671"/>
+                                                                                        <color key="tintColor" name="Swaap Accent Color 1"/>
+                                                                                    </imageView>
+                                                                                </subviews>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="trailing" secondItem="t6C-sk-gf7" secondAttribute="trailing" id="EY2-7f-5ab"/>
+                                                                                    <constraint firstAttribute="width" constant="52" id="PBb-7i-9DH"/>
+                                                                                    <constraint firstItem="t6C-sk-gf7" firstAttribute="top" secondItem="qfe-a4-ur8" secondAttribute="top" id="S2I-5K-sgy"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="t6C-sk-gf7" secondAttribute="bottom" id="bAj-kg-tav"/>
+                                                                                    <constraint firstItem="t6C-sk-gf7" firstAttribute="leading" secondItem="qfe-a4-ur8" secondAttribute="leading" id="nk2-Ff-83d"/>
+                                                                                </constraints>
+                                                                            </view>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="9vW-dl-kgw">
+                                                                                <rect key="frame" x="52" y="0.0" width="319" height="72"/>
+                                                                                <subviews>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Job Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAz-is-coT">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="42"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Tap to add your job title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-Jf-Pfi">
+                                                                                        <rect key="frame" x="0.0" y="48" width="319" height="24"/>
+                                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                                        <nil key="textColor"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                </subviews>
+                                                                            </stackView>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWl-Zn-nwr">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                                                        <connections>
+                                                                            <segue destination="UwA-CL-fsQ" kind="presentation" destinationCreationSelector="editJobTitleSegue:" modalPresentationStyle="overFullScreen" id="DxI-8z-64q"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="TDZ-dL-wPr" secondAttribute="bottom" constant="4" id="NCF-qb-6zq"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="TDZ-dL-wPr" secondAttribute="trailing" id="VAQ-bY-3CK"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="iWl-Zn-nwr" secondAttribute="trailing" id="b0s-Ls-S5Y"/>
+                                                                    <constraint firstItem="iWl-Zn-nwr" firstAttribute="leading" secondItem="MGO-qM-6v3" secondAttribute="leading" id="cKS-nZ-ijo"/>
+                                                                    <constraint firstItem="TDZ-dL-wPr" firstAttribute="top" secondItem="MGO-qM-6v3" secondAttribute="top" constant="4" id="d7n-g6-t6n"/>
+                                                                    <constraint firstItem="TDZ-dL-wPr" firstAttribute="leading" secondItem="MGO-qM-6v3" secondAttribute="leading" constant="4" id="dWQ-H1-sa9"/>
+                                                                    <constraint firstItem="iWl-Zn-nwr" firstAttribute="top" secondItem="MGO-qM-6v3" secondAttribute="top" id="fgi-pE-NCh"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="iWl-Zn-nwr" secondAttribute="bottom" id="tqw-Ly-t50"/>
+                                                                </constraints>
+                                                                <viewLayoutGuide key="safeArea" id="5DV-Ao-TQc"/>
+                                                            </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kxh-em-ijL" userLabel="location section">
-                                                                <rect key="frame" x="0.0" y="125.99999999999994" width="375" height="60"/>
+                                                                <rect key="frame" x="0.0" y="213.99999999999994" width="375" height="60"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZZ-eN-Hko">
                                                                         <rect key="frame" x="4" y="4" width="371" height="52"/>
@@ -722,7 +784,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivn-fh-p2M" userLabel="industry section">
-                                                                <rect key="frame" x="0.0" y="193.99999999999994" width="375" height="60"/>
+                                                                <rect key="frame" x="0.0" y="281.99999999999994" width="375" height="60"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPx-pd-RSk">
                                                                         <rect key="frame" x="4" y="4" width="371" height="52"/>
@@ -785,7 +847,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1KA-Dh-BOR" userLabel="birthday section">
-                                                                <rect key="frame" x="0.0" y="261.99999999999994" width="375" height="60"/>
+                                                                <rect key="frame" x="0.0" y="349.99999999999994" width="375" height="60"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owS-Pg-Y4X">
                                                                         <rect key="frame" x="4" y="4" width="371" height="52"/>
@@ -848,7 +910,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwQ-sZ-yR1" userLabel="bio section">
-                                                                <rect key="frame" x="0.0" y="329.99999999999994" width="375" height="80"/>
+                                                                <rect key="frame" x="0.0" y="417.99999999999994" width="375" height="80"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XYc-bZ-E09">
                                                                         <rect key="frame" x="4" y="4" width="371" height="72"/>
@@ -913,7 +975,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-lc-wax" userLabel="Social StackView">
-                                                        <rect key="frame" x="0.0" y="430" width="375" height="479.33333333333326"/>
+                                                        <rect key="frame" x="0.0" y="518" width="375" height="479.33333333333326"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGM-Ty-cAK" userLabel="title container">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="213.33333333333334"/>
@@ -1093,6 +1155,7 @@ Long pressing one of contact methods will bring up privacy options:
                         <outlet property="contactMethodsStackView" destination="ccE-SE-wh1" id="H3D-Uz-Dbp"/>
                         <outlet property="contactModeDescLabel" destination="W3e-gB-N38" id="PdS-wX-Gic"/>
                         <outlet property="industryLabel" destination="9Bi-Sv-KnG" id="T6e-Lh-zlT"/>
+                        <outlet property="jobTitleLabel" destination="K5I-Jf-Pfi" id="5Vi-dl-GH3"/>
                         <outlet property="locationLabel" destination="1td-hF-r4P" id="dbD-B9-I7b"/>
                         <outlet property="nameLabel" destination="rTw-rk-KYp" id="3vb-6C-loY"/>
                         <outlet property="profileImageView" destination="pqy-Vz-bUe" id="G2J-gC-tTb"/>
@@ -1192,6 +1255,7 @@ Long pressing one of contact methods will bring up privacy options:
         <image name="Gift" width="1155" height="700"/>
         <image name="Notification" width="1152" height="700"/>
         <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="60"/>
+        <image name="briefcase" catalog="system" width="64" height="50"/>
         <image name="camera.fill" catalog="system" width="64" height="48"/>
         <image name="chevron.left" catalog="system" width="48" height="64"/>
         <image name="gift" catalog="system" width="64" height="60"/>
@@ -1216,6 +1280,6 @@ Long pressing one of contact methods will bring up privacy options:
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BjE-LC-ZcL"/>
+        <segue reference="DxI-8z-64q"/>
     </inferredMetricsTieBreakers>
 </document>

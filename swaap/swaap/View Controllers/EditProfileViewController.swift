@@ -34,6 +34,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var industryLabel: UILabel!
 	@IBOutlet private weak var birthdateLabel: UILabel!
 	@IBOutlet private weak var bioLabel: UILabel!
+	@IBOutlet private weak var jobTitleLabel: UILabel!
 	@IBOutlet private weak var contactModeDescLabel: UILabel!
 
 	@IBOutlet private weak var contactMethodsStackView: UIStackView!
@@ -111,6 +112,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		industryLabel.text = userProfile.industry
 		locationLabel.text = userProfile.location
 		bioLabel.text = userProfile.bio
+		jobTitleLabel.text = userProfile.jobtitle
 		birthdateLabel.text = userProfile.birthdate
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
@@ -121,18 +123,14 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	// MARK: - Actions
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
 		//no image handling
-		guard let name = nameLabel.text,
-			let industry = industryLabel.text,
-			let location = locationLabel.text,
-			let bio = bioLabel.text,
-			let birthdate = birthdateLabel.text
-		else { return }
+		guard let name = nameLabel.text else { return }
 		guard var newProfile = profileController?.userProfile else { return }
 		newProfile.name = name
-		newProfile.industry = industry
-		newProfile.location = location
-		newProfile.bio = bio
-		newProfile.birthdate = birthdate
+		newProfile.industry = industryLabel.text
+		newProfile.location = locationLabel.text
+		newProfile.bio = bioLabel.text
+		newProfile.birthdate = birthdateLabel.text
+		newProfile.jobtitle = jobTitleLabel.text
 		newProfile.profileContactMethods = contactMethods
 
 		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
@@ -342,6 +340,17 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		inputVC?.autoCapitalizationType = .sentences
 		return inputVC
 	}
+
+	@IBSegueAction func editJobTitleSegue(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.jobTitleLabel.text = infoNugget.value
+		})
+		inputVC?.placeholderStr = "Add your job title"
+		inputVC?.labelText = passLabelText(from: jobTitleLabel)
+		inputVC?.autoCapitalizationType = .none
+		return inputVC
+	}
+
 
 	@IBSegueAction func createContactMethodTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: { infoNugget in
