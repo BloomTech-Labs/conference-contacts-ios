@@ -35,6 +35,12 @@ class LabelPlaceholder: UILabel {
 		set { placeholder.text = newValue }
 	}
 
+	@IBInspectable
+	var placeholderNumberOfLines: Int {
+		get { placeholder.numberOfLines }
+		set { placeholder.numberOfLines = newValue }
+	}
+
 	override var text: String? {
 		didSet {
 			updateViews()
