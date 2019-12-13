@@ -11,6 +11,7 @@ import IBPreview
 
 protocol FloatingTextFieldViewDelegate: AnyObject {
 	func didFinishEditing(_ view: FloatingTextFieldView, infoNugget: ProfileInfoNugget)
+	func didCancelEditing(_ view: FloatingTextFieldView)
 }
 
 class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -90,7 +91,6 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	@objc func hideKeyboardAction() {
 		shouldEnableSaveButton()
-		textField.resignFirstResponder()
 	}
 
 	// MARK: - Textfield Formatting
@@ -142,7 +142,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	}
 
 	@IBAction func cancelTapped(_ sender: ButtonHelper) {
-		resignTextfieldFirstResponder()
+		delegate?.didCancelEditing(self)
 	}
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
@@ -182,10 +182,6 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 			hideAllSocialElements()
 			textField.placeholder = placeholderText
 		}
-	}
-
-	func resignTextfieldFirstResponder() {
-		textField.resignFirstResponder()
 	}
 
 	private func hideAllSocialElements() {
@@ -244,7 +240,6 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	private func saveText() {
 		guard let text = textField.text else { return }
 		delegate?.didFinishEditing(self, infoNugget: ProfileInfoNugget(type: socialType, value: text))
-		resignTextfieldFirstResponder()
 	}
 
 

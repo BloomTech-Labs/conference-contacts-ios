@@ -42,9 +42,8 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameWillChange), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameWillChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
 		floatingTextFieldView.makeFirstResponder(needsSocialTextField: needsSocialTextField,
 												 placeholderText: placeholderStr,
 												 labelText: labelText,
@@ -60,18 +59,18 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 		_ = floatingTextFieldView.becomeFirstResponder()
 	}
 
-	@objc func keyboardWillShow(notification: NSNotification) {
+	@objc func keyboardFrameWillChange(notification: NSNotification) {
 		if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-			floatingViewBottomAnchor.constant = keyboardRect.height
+			let duration: NSNumber = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber ?? 0.2
+
+			UIView.animate(withDuration: TimeInterval(truncating: duration)) {
+				self.floatingViewBottomAnchor.constant = keyboardRect.height
+				self.view.layoutSubviews()
+			}
 		}
 	}
 
-	@objc func keyboardWillHide(notification: NSNotification) {
-		dismiss(animated: true)
-	}
-
 	@IBAction func tapToDismiss(_ sender: UITapGestureRecognizer) {
-		floatingTextFieldView.fireFirstResponder()
 		dismiss(animated: true)
 	}
 }
@@ -84,6 +83,11 @@ extension InputTextFieldViewController: UIGestureRecognizerDelegate {
 
 extension InputTextFieldViewController: FloatingTextFieldViewDelegate {
 	func didFinishEditing(_ view: FloatingTextFieldView, infoNugget: ProfileInfoNugget) {
+		dismiss(animated: true)
 		successfulCompletion(infoNugget)
+	}
+
+	func didCancelEditing(_ view: FloatingTextFieldView) {
+		dismiss(animated: true)
 	}
 }

@@ -1113,7 +1113,7 @@ Long pressing one of contact methods will bring up privacy options:
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BEE-EU-7ve" customClass="FloatingTextFieldView" customModule="swaap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="275" width="375" height="119"/>
+                                <rect key="frame" x="0.0" y="693" width="375" height="119"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="119" placeholder="YES" id="y0u-Wr-Sxq"/>
@@ -1124,7 +1124,7 @@ Long pressing one of contact methods will bring up privacy options:
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="BEE-EU-7ve" firstAttribute="leading" secondItem="tiq-ad-gBI" secondAttribute="leading" id="Y9M-n5-26r"/>
-                            <constraint firstAttribute="bottom" secondItem="BEE-EU-7ve" secondAttribute="bottom" constant="418" id="s43-ye-CoV"/>
+                            <constraint firstAttribute="bottom" secondItem="BEE-EU-7ve" secondAttribute="bottom" id="s43-ye-CoV"/>
                             <constraint firstItem="BEE-EU-7ve" firstAttribute="trailing" secondItem="tiq-ad-gBI" secondAttribute="trailing" id="w4Y-as-csz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tiq-ad-gBI"/>
