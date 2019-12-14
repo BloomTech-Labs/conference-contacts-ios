@@ -17,4 +17,10 @@ extension UIFont {
 			return UIFont.systemFont(ofSize: fontSize)
 		}
 	}
+
+	static func rounded(from oldFont: UIFont) -> UIFont {
+		let design = UIFontDescriptor.SystemDesign.rounded
+		guard let descriptor = oldFont.fontDescriptor.withDesign(design) else { return oldFont }
+		return UIFont(descriptor: descriptor, size: oldFont.pointSize)
+	}
 }
