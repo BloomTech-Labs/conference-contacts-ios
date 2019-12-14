@@ -18,6 +18,7 @@ extension UIFont {
 		}
 	}
 
+	/// Returns a rounded font of all the same characteristics as the original if it exists. If not, simply returns the old font.
 	static func rounded(from oldFont: UIFont) -> UIFont {
 		let design = UIFontDescriptor.SystemDesign.rounded
 		guard let descriptor = oldFont.fontDescriptor.withDesign(design) else { return oldFont }

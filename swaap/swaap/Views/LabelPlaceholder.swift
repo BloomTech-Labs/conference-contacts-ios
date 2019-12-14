@@ -64,6 +64,8 @@ class LabelPlaceholder: UILabel {
 		placeholder.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		placeholder.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
+		font = UIFont.rounded(from: font)
+
 		passOnSettings()
 		updateViews()
 	}
