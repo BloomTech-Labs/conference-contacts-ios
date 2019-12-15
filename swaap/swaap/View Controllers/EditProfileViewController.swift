@@ -66,6 +66,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		isModalInPresentation = true
 		setupUI()
 		updateViews()
+		navigationController?.presentationController?.delegate = self
     }
 
 	private func setupUI() {
@@ -122,6 +123,20 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	// MARK: - Actions
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+		saveProfile()
+	}
+
+	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+		dismiss(animated: true)
+	}
+
+	@IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
+		imageActionSheet()
+	}
+
+
+	// MARK: - Helper Methods
+	private func saveProfile() {
 		//no image handling
 		guard let name = nameLabel.text else { return }
 		guard var newProfile = profileController?.userProfile else { return }
@@ -246,12 +261,20 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		cancelButton.isEnabled = false
 	}
 
-	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-		dismiss(animated: true)
-	}
+	private func dismissalActionSheet() {
+		let dismissActionSheet = UIAlertController(title: "What would you like to do?", message: nil, preferredStyle: .actionSheet)
+		let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+			self.saveProfile()
+		}
 
-	@IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
-		imageActionSheet()
+		let dontSaveAction = UIAlertAction(title: "Don't Save", style: .default) { _ in
+			self.dismiss(animated: true, completion: nil)
+		}
+
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+		[saveAction, dontSaveAction, cancelAction].forEach { dismissActionSheet.addAction($0) }
+		present(dismissActionSheet, animated: true, completion: nil)
 	}
 
 	// MARK: - Contact Method Management
@@ -397,11 +420,31 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 	}
 
 	func privacySelectionInvoked(on cellView: ContactMethodCellView) {
-		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: """
-			Private (no one can view)
-			Connected (only your connections can view)
-			Public (everyone can view)
-			""", preferredStyle: .actionSheet)
+		let privateStr = NSMutableAttributedString(string: "Private",
+												   attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
+		let connectedStr = NSMutableAttributedString(string: "Connected",
+													 attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
+		let publicStr = NSMutableAttributedString(string: "Public",
+												  attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
+		let privacyAlertString = """
+								 - no one can view
+								 - only your connections can view
+								 - everyone can view
+								"""
+		let privacyAlertStringAttr = NSMutableAttributedString(string: privacyAlertString)
+		privacyAlertStringAttr.addAttribute(.font,
+											value: UIFont.systemFont(ofSize: 15, weight: .regular),
+											range: NSRange(location: 0, length: privacyAlertStringAttr.length))
+		privacyAlertStringAttr.insert(privateStr, at: 0)
+		privacyAlertStringAttr.insert(connectedStr, at: 26)
+		privacyAlertStringAttr.insert(publicStr, at: 69)
+		let pStyle = NSMutableParagraphStyle()
+		pStyle.alignment = NSTextAlignment.left
+		privacyAlertStringAttr.addAttribute(.paragraphStyle, value: pStyle, range: NSRange(location: 0, length: privacyAlertStringAttr.length))
+
+		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: privacyAlertString, preferredStyle: .actionSheet)
+		privacyAlert.setValue(privacyAlertStringAttr, forKey: "attributedMessage")
+
 		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
 			cellView.contactMethod.privacy = .private
 		}
@@ -414,5 +457,11 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)
+	}
+}
+
+extension EditProfileViewController: UIAdaptivePresentationControllerDelegate {
+	func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+		self.dismissalActionSheet()
 	}
 }
