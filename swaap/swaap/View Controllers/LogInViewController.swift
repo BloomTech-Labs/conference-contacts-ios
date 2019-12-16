@@ -97,11 +97,12 @@ class LogInViewController: UIViewController {
 
 	private func initiateProfileFetch() {
 		profileController.fetchProfileFromServer { result in
-			do {
-				let user = try result.get()
-				print(user)
-			} catch {
+			switch result {
+			case .success:
+				break
+			case .failure(let error):
 				NSLog("Error getting user: \(error)")
+
 			}
 		}
 	}

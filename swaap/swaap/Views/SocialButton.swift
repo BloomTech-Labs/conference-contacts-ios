@@ -12,16 +12,6 @@ import IBPreview
 @IBDesignable
 class SocialButton: IBPreviewControl {
 
-	enum SocialPlatform: CaseIterable {
-		case phone
-		case email
-		case text
-		case twitter
-		case linkedIn
-		case instagram
-		case facebook
-	}
-
 	private var contentHeightAnchor: NSLayoutConstraint?
 
 	var height: CGFloat {
@@ -33,7 +23,13 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
-	var socialPlatform: (socialPlatform: SocialPlatform, info: String) = (.twitter, "@marlonjames") {
+	var smallButton: Bool = false {
+		didSet {
+			mainColorBackgroundView.isHidden = smallButton
+		}
+	}
+
+	var infoNugget: ProfileInfoNugget = ProfileInfoNugget(type: .twitter, value: "@swaapApp") {
 		didSet {
 			updateSocialPlatformType()
 		}
@@ -79,8 +75,9 @@ class SocialButton: IBPreviewControl {
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		contentHeightAnchor = contentView.heightAnchor.constraint(equalToConstant: 35)
+		contentHeightAnchor?.priority = UILayoutPriority(750)
 		contentHeightAnchor?.isActive = true
-		handleLabel.font = .roundedFont(ofSize: handleLabel.font?.pointSize ?? 15.0, weight: .regular)
+		handleLabel.font = .rounded(from: handleLabel.font)
 
 		updateSocialPlatformType()
 
@@ -92,8 +89,8 @@ class SocialButton: IBPreviewControl {
 	}
 
 	private func updateSocialPlatformType() {
-		let platform = socialPlatform.socialPlatform
-		let info = socialPlatform.info
+		let platform = infoNugget.type
+		let value = infoNugget.value
 		switch platform {
 		case .phone:
 			mainColorBackgroundView.backgroundColor = .systemGreen
@@ -105,7 +102,7 @@ class SocialButton: IBPreviewControl {
 			translucentView.backgroundColor = UIColor.systemTeal.withAlphaComponent(0.3)
 			iconView.image = .socialEmailIcon
 			iconView.tintColor = .systemTeal
-		case .text:
+		case .sms:
 			mainColorBackgroundView.backgroundColor = .systemBlue
 			translucentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)
 			iconView.image = .socialTextIcon
@@ -114,7 +111,7 @@ class SocialButton: IBPreviewControl {
 			mainColorBackgroundView.backgroundColor = .socialButtonTwitterMain
 			translucentView.backgroundColor = .socialButtonTwitterSecondary
 			iconView.image = .socialTwitterIcon
-		case .linkedIn:
+		case .linkedin:
 			mainColorBackgroundView.backgroundColor = .socialButtonLinkedInMain
 			translucentView.backgroundColor = .socialButtonLinkedInSecondary
 			iconView.image = .socialLinkedinIcon
@@ -126,8 +123,10 @@ class SocialButton: IBPreviewControl {
 			mainColorBackgroundView.backgroundColor = .socialButtonFacebookMain
 			translucentView.backgroundColor = .socialButtonFacebookSecondary
 			iconView.image = .socialFacebookIcon
+		default:
+			break
 		}
-		handleLabel.text = info
+		handleLabel.text = value
 	}
 
 	// MARK: - Animation Properties
@@ -162,35 +161,25 @@ class SocialButton: IBPreviewControl {
 
 	override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
 		animateDepress()
-		sendActions(for: .touchDown)
 		return true
 	}
 
 	override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-		let location = touch.location(in: self)
-		if bounds.contains(location) {
-			sendActions(for: .touchDragInside)
-			if !isDepressed { animateDepress() }
+		if isTracking {
+			animateDepress()
 		} else {
-			sendActions(for: .touchDragOutside)
-			if isDepressed { animateRelease() }
+			animateRelease()
 		}
 		return true
 	}
 
 	override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
 		animateRelease()
-		guard let touch = touch else { return }
-		let location = touch.location(in: self)
-		if bounds.contains(location) {
-			sendActions(for: .touchUpInside)
-		} else {
-			sendActions(for: .touchUpOutside)
-		}
+		super.endTracking(touch, with: event)
 	}
 
 	override func cancelTracking(with event: UIEvent?) {
 		animateRelease()
-		sendActions(for: .touchCancel)
+		super.cancelTracking(with: event)
 	}
 }

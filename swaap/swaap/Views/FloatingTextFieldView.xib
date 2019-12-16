@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FloatingTextFieldView" customModule="swaap" customModuleProvider="target">
+            <connections>
+                <outlet property="aapstertSymbol" destination="9U8-Pp-j8H" id="dFA-zl-ymq"/>
+                <outlet property="cancelButton" destination="Jmg-dN-gzt" id="4z7-SH-984"/>
+                <outlet property="collectionView" destination="dMi-qS-TgP" id="3Jh-iJ-USP"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="bhg-6p-1MZ"/>
+                <outlet property="horizontalSeparator" destination="nGY-zH-4YE" id="1xt-Wx-vXD"/>
+                <outlet property="plusButton" destination="s3q-Wc-5Ed" id="tWY-s3-X6K"/>
+                <outlet property="saveButton" destination="UiN-sA-3Sf" id="sNZ-dA-LPx"/>
+                <outlet property="separator" destination="ahy-qf-w66" id="NdS-4v-0dt"/>
+                <outlet property="socialButton" destination="pE3-aY-VHZ" id="r8T-wm-k2y"/>
+                <outlet property="textField" destination="B5d-PA-Iq7" id="M9B-ro-02O"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" interfaceStyle="dark" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="186"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQD-Dm-cOv">
+                    <rect key="frame" x="0.0" y="0.0" width="440" height="186"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hBD-yK-R9H">
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="186"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XGg-Vl-YEe">
+                                <rect key="frame" x="0.0" y="0.0" width="440" height="186"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QRH-5p-zrH">
+                                        <rect key="frame" x="0.0" y="0.0" width="440" height="126"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dMi-qS-TgP">
+                                                <rect key="frame" x="0.0" y="0.0" width="440" height="67"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" name="Swaap Background Color Burple"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64.5" id="FGk-b5-dxE"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="16" id="2Sg-pq-yZK">
+                                                    <size key="itemSize" width="44" height="44"/>
+                                                    <size key="estimatedItemSize" width="54" height="54"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="20" minY="8" maxX="20" maxY="2.5"/>
+                                                </collectionViewFlowLayout>
+                                            </collectionView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbg-b8-hqr">
+                                                <rect key="frame" x="0.0" y="67" width="440" height="59"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="gUF-In-uBE">
+                                                        <rect key="frame" x="20" y="8" width="400" height="51"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9U8-Pp-j8H">
+                                                                <rect key="frame" x="0.0" y="0.0" width="18" height="51"/>
+                                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
+                                                                <color key="textColor" name="Swaap Accent color 2"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose type →" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B5d-PA-Iq7">
+                                                                <rect key="frame" x="30" y="0.0" width="294" height="51"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" name="Swaap Accent Color 1"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="NSX-eL-6MJ"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="ahy-qf-w66" userLabel="Separator">
+                                                                <rect key="frame" x="336" y="0.0" width="1" height="51"/>
+                                                                <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="1" id="x7C-dL-DWN"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="HZI-Gh-nLd">
+                                                                <rect key="frame" x="349" y="0.0" width="51" height="51"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3q-Wc-5Ed">
+                                                                        <rect key="frame" x="8" y="8" width="35" height="35"/>
+                                                                        <color key="tintColor" name="Swaap Accent color 2"/>
+                                                                        <state key="normal" image="plus.app.fill" catalog="system">
+                                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
+                                                                        </state>
+                                                                        <connections>
+                                                                            <action selector="addChangeSocialButton:" destination="-1" eventType="touchUpInside" id="CJH-VY-OAl"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <view hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="pE3-aY-VHZ" customClass="SocialButton" customModule="swaap" customModuleProvider="target">
+                                                                        <rect key="frame" x="8" y="8" width="35" height="35"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="35" id="23m-Qr-lZM"/>
+                                                                            <constraint firstAttribute="width" secondItem="pE3-aY-VHZ" secondAttribute="height" multiplier="1:1" id="hj1-aT-Ggi"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <action selector="addChangeSocialButton:" destination="-1" eventType="touchUpInside" id="nTy-qw-pGa"/>
+                                                                        </connections>
+                                                                    </view>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="pE3-aY-VHZ" secondAttribute="trailing" constant="8" id="6c9-0H-XMI"/>
+                                                                    <constraint firstItem="s3q-Wc-5Ed" firstAttribute="top" secondItem="HZI-Gh-nLd" secondAttribute="top" constant="8" id="LqY-6P-8x9"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="s3q-Wc-5Ed" secondAttribute="bottom" constant="8" id="MhU-qV-q9O"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="s3q-Wc-5Ed" secondAttribute="trailing" constant="8" id="ebZ-Bp-eDx"/>
+                                                                    <constraint firstItem="s3q-Wc-5Ed" firstAttribute="leading" secondItem="HZI-Gh-nLd" secondAttribute="leading" constant="8" id="erg-Wv-WAg"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="pE3-aY-VHZ" secondAttribute="bottom" constant="8" id="gnz-UT-g6j"/>
+                                                                    <constraint firstItem="pE3-aY-VHZ" firstAttribute="top" secondItem="HZI-Gh-nLd" secondAttribute="top" constant="8" id="nuZ-fC-xmP"/>
+                                                                    <constraint firstItem="pE3-aY-VHZ" firstAttribute="leading" secondItem="HZI-Gh-nLd" secondAttribute="leading" constant="8" id="xKj-AY-8Df"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="gUF-In-uBE" secondAttribute="trailing" constant="20" id="9Mq-1f-i7P"/>
+                                                    <constraint firstItem="gUF-In-uBE" firstAttribute="top" secondItem="hbg-b8-hqr" secondAttribute="top" constant="8" id="Bdb-QZ-t9L"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gUF-In-uBE" secondAttribute="bottom" id="Das-cw-gse"/>
+                                                    <constraint firstItem="gUF-In-uBE" firstAttribute="leading" secondItem="hbg-b8-hqr" secondAttribute="leading" constant="20" id="ybO-Z0-TqB"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nGY-zH-4YE" userLabel="Horizontal Separator">
+                                        <rect key="frame" x="0.0" y="134" width="440" height="1"/>
+                                        <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="IHp-nz-drF"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i06-dI-p93">
+                                        <rect key="frame" x="0.0" y="143" width="440" height="43"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="xWc-e8-i0I">
+                                                <rect key="frame" x="20" y="0.0" width="400" height="35"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jmg-dN-gzt" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="185" height="35"/>
+                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="dfk-g8-N4G"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" name="socialButtonInstagramMain"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="cancelTapped:" destination="-1" eventType="touchUpInside" id="Db0-Ex-Oae"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiN-sA-3Sf" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="215" y="0.0" width="185" height="35"/>
+                                                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Save">
+                                                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="saveTapped:" destination="-1" eventType="touchUpInside" id="fjk-wM-4cq"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Jmg-dN-gzt" firstAttribute="height" secondItem="UiN-sA-3Sf" secondAttribute="height" id="cJM-Kk-YFo"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="xWc-e8-i0I" secondAttribute="bottom" constant="8" id="Frt-Ty-vIF"/>
+                                            <constraint firstAttribute="trailing" secondItem="xWc-e8-i0I" secondAttribute="trailing" constant="20" id="kY9-B0-K2m"/>
+                                            <constraint firstItem="xWc-e8-i0I" firstAttribute="top" secondItem="i06-dI-p93" secondAttribute="top" id="tOb-Uy-F9Y"/>
+                                            <constraint firstItem="xWc-e8-i0I" firstAttribute="leading" secondItem="i06-dI-p93" secondAttribute="leading" constant="20" id="tav-rn-2ZK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XGg-Vl-YEe" secondAttribute="trailing" id="3Uj-zc-CbJ"/>
+                            <constraint firstItem="XGg-Vl-YEe" firstAttribute="top" secondItem="hBD-yK-R9H" secondAttribute="top" id="3b6-u0-UFm"/>
+                            <constraint firstAttribute="bottom" secondItem="XGg-Vl-YEe" secondAttribute="bottom" id="IIu-uC-PIj"/>
+                            <constraint firstItem="XGg-Vl-YEe" firstAttribute="leading" secondItem="hBD-yK-R9H" secondAttribute="leading" id="Oki-HM-dC0"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="systemThickMaterial"/>
+                </visualEffectView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="KQD-Dm-cOv" secondAttribute="trailing" id="OgN-6B-zE9"/>
+                <constraint firstItem="KQD-Dm-cOv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V9b-hw-L5d"/>
+                <constraint firstAttribute="bottom" secondItem="KQD-Dm-cOv" secondAttribute="bottom" id="Wug-CB-9If"/>
+                <constraint firstItem="KQD-Dm-cOv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="o5F-Ed-4Ah"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="114.49275362318842" y="167.41071428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="plus.app.fill" catalog="system" width="64" height="56"/>
+        <namedColor name="Swaap Accent Color 1">
+            <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Swaap Accent color 2">
+            <color red="0.039999999105930328" green="0.49000000953674316" blue="0.68000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Swaap Background Color Burple">
+            <color red="0.23000000417232513" green="0.30000001192092896" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="socialButtonInstagramMain">
+            <color red="0.8666666666666667" green="0.22745098039215686" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

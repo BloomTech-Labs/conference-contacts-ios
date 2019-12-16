@@ -13,66 +13,55 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 
 	// MARK: - Auth Access
 	func requestPhotoLibraryAccess() {
-        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+		let authorizationStatus = PHPhotoLibrary.authorizationStatus()
 
-        switch authorizationStatus {
-        case .authorized:
+		switch authorizationStatus {
+		case .authorized:
 			presentImagePickerController()
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { status in
-                guard status == .authorized else {
-                    NSLog("User did not authorize access to the photo library")
-
-					self.presentInformationalAlertController(title: "Error", message: "In order to access the photo library, you must allow this application access to it.")
-                    return
-                }
-                self.presentImagePickerController()
-            }
-        case .denied:
-            presentInformationalAlertController(title: "Error", message: "In order to access the photo library, you must allow this application access to it.")
-        case .restricted:
-            presentInformationalAlertController(title: "Error", message: "Unable to access the photo library. Your device's restrictions do not allow access.")
-        default:
-            break
-        }
-        presentImagePickerController()
-    }
+		case .notDetermined:
+			PHPhotoLibrary.requestAuthorization { status in
+				guard status != .notDetermined else { return }
+				self.requestPhotoLibraryAccess()
+			}
+		case .denied:
+			alertPromptToAllowCameraAccessViaSettings()
+		case .restricted:
+			presentInformationalAlertController(title: "Error", message: "Unable to access the photo library. Your device's restrictions do not allow access.")
+		default:
+			break
+		}
+	}
 
 	func requestCameraAccess() {
-        let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
-        switch authStatus {
-        case .authorized:
-            presentCamera()
-        case .denied:
-            alertPromptToAllowCameraAccessViaSettings()
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                guard granted == true else {
-                    NSLog("User did not authorize access to the camera")
-					self.presentInformationalAlertController(title: "Error", message: "In order to use the camera, you must allow this application access to it.")
-                    return
-                }
-                self.presentCamera()
-            }
-        default:
-            break
-        }
-    }
+		let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
+		switch authStatus {
+		case .authorized:
+			presentCamera()
+		case .notDetermined:
+			AVCaptureDevice.requestAccess(for: .video) { _ in
+				self.requestCameraAccess()
+			}
+		case .denied:
+			alertPromptToAllowCameraAccessViaSettings()
+		default:
+			break
+		}
+	}
 
 	// MARK: - Picker Controllers
 	func presentImagePickerController() {
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+		guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
 			presentInformationalAlertController(title: "Error", message: "The photo library is unavailable")
-            return
-        }
+			return
+		}
 
-        DispatchQueue.main.async {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
+		DispatchQueue.main.async {
+			let imagePicker = UIImagePickerController()
+			imagePicker.delegate = self
+			imagePicker.sourceType = .photoLibrary
 			self.present(imagePicker, animated: true, completion: nil)
-        }
-    }
+		}
+	}
 
 	func presentCamera() {
 		guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
@@ -91,40 +80,52 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 
 	// MARK: - Camera Settings - Presents alert that takes the user to settings to allow camera access
 	func alertPromptToAllowCameraAccessViaSettings() {
-        let alert = UIAlertController(title: "In order to use this feature, access to the camera is needed",
+		let alert = UIAlertController(title: "In order to use this feature, access to the camera is needed",
 									  message: "Please grant permission to use the Camera",
 									  preferredStyle: .alert )
-        alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel) { _ in
-            if let appSettingsURL = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(appSettingsURL)
-            }
-        })
+		alert.addAction(UIAlertAction(title: "Open Settings", style: .cancel) { _ in
+			if let appSettingsURL = URL(string: UIApplication.openSettingsURLString) {
+				UIApplication.shared.open(appSettingsURL)
+			}
+		})
 		present(alert, animated: true, completion: nil)
-    }
+	}
 
 	// MARK: - Alert and Action Sheet
 	func presentInformationalAlertController(title: String?,
 											 message: String?,
-											 dismissActionCompletion: ((UIAlertAction) -> Void)? = nil, completion: (() -> Void)? = nil) {
+											 dismissActionCompletion: ((UIAlertAction) -> Void)? = nil,
+											 completion: (() -> Void)? = nil) {
 		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: dismissActionCompletion)
 		alertController.addAction(dismissAction)
 		present(alertController, animated: true, completion: completion)
-    }
+	}
 
 	func imageActionSheet() {
-        let photoOptionsController = UIAlertController(title: "Choose how you'd like to add a photo", message: nil, preferredStyle: .actionSheet)
+		let photoOptionsController = UIAlertController(title: "Choose how you'd like to add a photo", message: nil, preferredStyle: .actionSheet)
 
-        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { _ in
+		let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { _ in
 			self.requestPhotoLibraryAccess()
-        }
+		}
 
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+		let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
 			self.requestCameraAccess()
-        }
+		}
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        [libraryAction, cameraAction, cancelAction].forEach { photoOptionsController.addAction($0) }
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		[libraryAction, cameraAction, cancelAction].forEach { photoOptionsController.addAction($0) }
 		present(photoOptionsController, animated: true, completion: nil)
-    }
+	}
+
+	// MARK: - Imagepicker handling
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.dismiss(animated: true)
+	}
+
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+		guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+		photo = image.imageByScaling(toSize: CGSize(width: 1536, height: 1536), inPixels: true)
+		picker.dismiss(animated: true)
+	}
 }

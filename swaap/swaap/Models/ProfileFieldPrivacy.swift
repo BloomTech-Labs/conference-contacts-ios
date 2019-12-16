@@ -8,34 +8,21 @@
 
 import Foundation
 
-enum ProfileFieldPrivacy: Codable, Hashable {
+enum ProfileFieldPrivacy: String, Codable, Hashable {
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()
 		let rawValue = try container.decode(String.self)
 		let lcValue = rawValue.lowercased()
 
-		switch lcValue {
-		case "public":
-			self = .public
-		case "private":
-			self = .private
-		case "connected":
-			self = .connected
-		default:
+		guard let decoded = ProfileFieldPrivacy(rawValue: lcValue) else {
 			throw ProfileDecodingError.unknownValue(value: rawValue)
 		}
+		self = decoded
 	}
 
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.singleValueContainer()
-		switch self {
-		case .public:
-			try container.encode("PUBLIC")
-		case .private:
-			try container.encode("PRIVATE")
-		case .connected:
-			try container.encode("CONNECTED")
-		}
+		try container.encode(rawValue.uppercased())
 	}
 
 	case `public`

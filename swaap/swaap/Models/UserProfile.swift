@@ -35,24 +35,30 @@ struct UserProfile: Codable, Equatable {
 		case industry
 		case jobtitle
 		case bio
-		case profileNuggets = "profile"
+		case profileContactMethods = "profile"
 	}
 
 	let id: String
 	let authID: String
-	let name: String
-	private let pictureString: String?
-	let birthdate: String?
-	let location: String
-	let industry: String?
-	let jobtitle: String?
-	let bio: String?
-	let profileNuggets: [ProfileNugget]
+	var name: String
+	private var pictureString: String?
+	var birthdate: String?
+	var location: String?
+	var industry: String?
+	var jobtitle: String?
+	var bio: String?
+	var profileContactMethods: [ProfileContactMethod]
 
 	var pictureURL: URL {
-		URL(string: pictureString ?? "") ?? URL(string: "https://placekitten.com/1000/1000")!
+		get {
+			URL(string: pictureString ?? "") ?? URL(string: "https://placekitten.com/1000/1000")!
+		}
+		set {
+			pictureString = newValue.absoluteString
+		}
 	}
 	var photoData: Data?
+
 }
 
 struct CreateUser: Codable {
