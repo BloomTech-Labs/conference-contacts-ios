@@ -90,12 +90,13 @@ class ContactMethodCellView: UIView {
 		delegate?.deleteButtonPressed(on: self)
 	}
 
-	@IBAction func editTapped(_ sender: UIButton) {
+	@IBAction func cellButtonTapped(_ sender: UIButton) {
 		delegate?.editCellInvoked(on: self)
 	}
 
 	@IBAction func longPressTriggered(_ sender: UILongPressGestureRecognizer) {
-		delegate?.privacySelectionInvoked(on: self)
+		if sender.state == .began {
+			delegate?.privacySelectionInvoked(on: self)
+		}
 	}
-
 }

@@ -39,6 +39,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	@IBOutlet private weak var contactMethodsStackView: UIStackView!
 
+	let haptic = UIImpactFeedbackGenerator(style: .medium)
+
 	var contactMethods: [ProfileContactMethod] {
 		contactMethodCellViews.map { $0.contactMethod }
 	}
@@ -67,6 +69,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		setupUI()
 		updateViews()
 		navigationController?.presentationController?.delegate = self
+		haptic.prepare()
     }
 
 	private func setupUI() {
@@ -427,17 +430,17 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		let publicStr = NSMutableAttributedString(string: "Public",
 												  attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
 		let privacyAlertString = """
-								 - no one can view
-								 - only your connections can view
-								 - everyone can view
+								 - only visible to you
+								 - only visible to your connections
+								 - visible to anyone
 								"""
 		let privacyAlertStringAttr = NSMutableAttributedString(string: privacyAlertString)
 		privacyAlertStringAttr.addAttribute(.font,
 											value: UIFont.systemFont(ofSize: 15, weight: .regular),
 											range: NSRange(location: 0, length: privacyAlertStringAttr.length))
 		privacyAlertStringAttr.insert(privateStr, at: 0)
-		privacyAlertStringAttr.insert(connectedStr, at: 26)
-		privacyAlertStringAttr.insert(publicStr, at: 69)
+		privacyAlertStringAttr.insert(connectedStr, at: 30)
+		privacyAlertStringAttr.insert(publicStr, at: 75)
 		let pStyle = NSMutableParagraphStyle()
 		pStyle.alignment = NSTextAlignment.left
 		privacyAlertStringAttr.addAttribute(.paragraphStyle, value: pStyle, range: NSRange(location: 0, length: privacyAlertStringAttr.length))
@@ -457,6 +460,7 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)
+		haptic.impactOccurred()
 	}
 }
 
