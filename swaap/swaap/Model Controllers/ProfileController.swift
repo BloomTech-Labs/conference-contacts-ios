@@ -213,7 +213,7 @@ class ProfileController {
 			return
 		}
 
-		let mutation = "mutation CreateFields($data:[CreateProfileFieldInput]!) { createProfileFields(data: $data) { success message } }"
+		let mutation = "mutation CreateFields($data:[CreateProfileFieldInput]!) { createProfileFields(data: $data) { success code message } }"
 		do {
 			let contactMethodDicts = try contactMethods.map { try MutateProfileContactMethod(contactMethod: $0).toDict() }
 			let variables = ["data": contactMethodDicts]
