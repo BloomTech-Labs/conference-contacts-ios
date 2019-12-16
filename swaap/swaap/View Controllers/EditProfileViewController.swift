@@ -207,12 +207,31 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			print("profile refresh finished")
 		}
 
+		let createdMethods = contactMethods.filter { $0.id == nil }
+		let contactMethodCreations = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !createdMethods.isEmpty else { return }
+			let semaphore = DispatchSemaphore(value: 0)
+			profileController.createContactMethods(createdMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					print(error)
+				}
+				semaphore.signal()
+			}
+			semaphore.wait()
+
+		}
+
 		var contactMethodUpdates = [ConcurrentOperation]()
-		for (index, contactMethod) in contactMethods.enumerated() {
+		let updatedMethods = contactMethods.filter { $0.id != nil }
+		for (index, contactMethod) in updatedMethods.enumerated() {
 			let contactMethodUpdate = ConcurrentOperation { [weak self] in
-				guard let self = self else { return }
+				guard let profileController = self?.profileController else { return }
 				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.modifyProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+				profileController.modifyProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
 					switch result {
 					case .success:
 						break
@@ -251,13 +270,18 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 
 		profileUpdate.addDependency(imageUpdate)
+		profileRefresh.addDependency(contactMethodCreations)
 		profileRefresh.addDependency(profileUpdate)
 		contactMethodUpdates.forEach { profileRefresh.addDependency($0) }
 		contactMethodDeletions.forEach { profileRefresh.addDependency($0) }
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + contactMethodDeletions + contactMethodUpdates, waitUntilFinished: false)
+		queue.addOperations(
+			[profileUpdate, profileRefresh, imageUpdate, contactMethodCreations] +
+			contactMethodDeletions +
+			contactMethodUpdates,
+							waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
 		saveButton.isEnabled = false

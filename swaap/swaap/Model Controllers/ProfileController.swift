@@ -206,6 +206,43 @@ class ProfileController {
 	}
 
 	// MARK: - ContactMethods
+
+	func createContactMethods(_ contactMethods: [ProfileContactMethod], completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		let mutation = "mutation CreateFields($data:[CreateProfileFieldInput]!) { createProfileFields(data: $data) { success message } }"
+		do {
+			let contactMethodDicts = try contactMethods.map { try MutateProfileContactMethod(contactMethod: $0).toDict() }
+			let variables = ["data": contactMethodDicts]
+
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding contact methods update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch let error as NetworkError {
+				NSLog("Error creating profile contact method: \(error)")
+				completion(.failure(error))
+			} catch {
+				NSLog("Error creating profile contact method: \(error)")
+				completion(.failure(NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
 	/// create or update a profile contactMethod on the backend contextually. if an id is present, updates. if not, creates.
 	func modifyProfileContactMethod(_ contactMethod: ProfileContactMethod, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var (_, request) = networkCommon() else {
@@ -279,10 +316,10 @@ class ProfileController {
 				let response = responseContainer.response
 				completion(.success(response))
 			} catch let error as NetworkError {
-				NSLog("Error updating server profile: \(error)")
+				NSLog("Error deleting profile contact method: \(error)")
 				completion(.failure(error))
 			} catch {
-				NSLog("Error updating server profile: \(error)")
+				NSLog("Error deleting profile contact method: \(error)")
 				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
