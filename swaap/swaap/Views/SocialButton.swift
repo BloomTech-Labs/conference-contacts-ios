@@ -12,6 +12,7 @@ import IBPreview
 @IBDesignable
 class SocialButton: IBPreviewControl {
 
+	// MARK: - Properties & Outlets
 	private var contentHeightAnchor: NSLayoutConstraint?
 
 	var height: CGFloat {
@@ -43,6 +44,14 @@ class SocialButton: IBPreviewControl {
 			layer.cornerRadius = newValue
 		}
 	}
+
+	let twitterURL = URL(string: "https://twitter.com/")!
+	let facebookURL = URL(string: "https://facebook.com/")!
+	let instagramURL = URL(string: "https://instagram.com/")!
+	let linkedInURL = URL(string: "https://linkedin.com/in/")!
+	let emailURL = URL(string: "mailto:")!
+	let phoneURL = URL(string: "tel:")!
+	let smsURL = URL(string: "sms:")!
 
 	@IBOutlet private var contentView: UIView!
 	@IBOutlet private weak var mainColorBackgroundView: UIView!
@@ -127,6 +136,36 @@ class SocialButton: IBPreviewControl {
 			break
 		}
 		handleLabel.text = value
+	}
+
+	// MARK: - Helper Methods
+	func openLink(infoNugget: ProfileInfoNugget) {
+		guard let type = infoNugget.type else { return }
+		let value = infoNugget.value
+		let url: URL
+		switch type {
+		case .email:
+			url = emailURL.appendingPathComponent(value)
+		case .phone:
+			url = phoneURL.appendingPathComponent(value)
+		case .sms:
+			url = smsURL.appendingPathComponent(value)
+		case .facebook:
+			url = facebookURL.appendingPathComponent(value)
+		case .instagram:
+			url = instagramURL.appendingPathComponent(value)
+		case .linkedin:
+			url = linkedInURL.appendingPathComponent(value)
+		case .twitter:
+			url = twitterURL.appendingPathComponent(value)
+		}
+
+		let application = UIApplication.shared
+		if application.canOpenURL(url) {
+			application.open(url, options: [:], completionHandler: nil)
+		} else {
+			print("Cannot open link with url: \(url)")
+		}
 	}
 
 	// MARK: - Animation Properties

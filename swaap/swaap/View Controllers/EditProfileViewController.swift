@@ -306,7 +306,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	// MARK: - Contact Method Management
 	func addContactMethod(contactMethod: ProfileContactMethod, checkForPreferred: Bool = true) {
-		let contactMethodView = ContactMethodCellView(frame: .zero, contactMethod: contactMethod)
+		let contactMethodView = ContactMethodCellView(contactMethod: contactMethod, mode: .edit)
 		contactMethodView.delegate = self
 		contactMethodCellViews.append(contactMethodView)
 		if checkForPreferred {
