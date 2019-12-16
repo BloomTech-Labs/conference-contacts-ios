@@ -28,6 +28,13 @@ class ContactMethodCellView: UIView {
 
 	weak var delegate: ContactMethodCellViewDelegate?
 
+	let mode: Mode
+
+	enum Mode {
+		case edit
+		case display
+	}
+
 	var contactMethod: ProfileContactMethod {
 		didSet {
 			updateViews()
@@ -35,8 +42,10 @@ class ContactMethodCellView: UIView {
 	}
 
 	init(frame: CGRect = CGRect(origin: .zero, size: CGSize(width: 375, height: 60)),
-		 contactMethod: ProfileContactMethod) {
+		 contactMethod: ProfileContactMethod,
+		 mode: Mode) {
 		self.contactMethod = contactMethod
+		self.mode = mode
 		super.init(frame: frame)
 		commonInit()
 	}
@@ -91,12 +100,22 @@ class ContactMethodCellView: UIView {
 	}
 
 	@IBAction func cellButtonTapped(_ sender: UIButton) {
-		delegate?.editCellInvoked(on: self)
+		actOnTaP()
 	}
 
 	@IBAction func longPressTriggered(_ sender: UILongPressGestureRecognizer) {
 		if sender.state == .began {
 			delegate?.privacySelectionInvoked(on: self)
+		}
+	}
+
+	// MARK: - Helper Methods
+	func actOnTaP() {
+		switch mode {
+		case .edit:
+			delegate?.editCellInvoked(on: self)
+		case .display:
+			socialButton.openLink(infoNugget: contactMethod.infoNugget)
 		}
 	}
 }
