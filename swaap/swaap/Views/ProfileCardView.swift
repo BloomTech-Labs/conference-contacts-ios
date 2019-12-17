@@ -192,7 +192,7 @@ class ProfileCardView: IBPreviewView {
 		delegate?.positionDidChange(on: self)
 	}
 
-	private func animateToPrimaryPosition() {
+	func animateToPrimaryPosition() {
 		UIView.animate(withDuration: 0.5,
 					   delay: 0.0,
 					   usingSpringWithDamping: 0.8,

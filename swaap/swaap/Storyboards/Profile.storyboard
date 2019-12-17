@@ -275,7 +275,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="7dm-QL-DOB" secondAttribute="bottom" constant="60" id="fHv-GZ-a5z"/>
+                                    <constraint firstAttribute="bottom" secondItem="7dm-QL-DOB" secondAttribute="bottom" constant="50" id="fHv-GZ-a5z"/>
                                     <constraint firstAttribute="trailing" secondItem="7dm-QL-DOB" secondAttribute="trailing" id="mq6-BY-zSV"/>
                                     <constraint firstItem="7dm-QL-DOB" firstAttribute="width" secondItem="Emm-zV-NSj" secondAttribute="width" id="rKV-Zb-rdZ"/>
                                     <constraint firstItem="7dm-QL-DOB" firstAttribute="top" secondItem="Emm-zV-NSj" secondAttribute="top" id="tNA-9A-fpj"/>
@@ -461,6 +461,7 @@
                         <outlet property="contactModePreviewStackView" destination="1vv-7w-fJ6" id="xAZ-ym-94O"/>
                         <outlet property="editProfileButtonVisualFXContainerView" destination="HPr-IH-wav" id="JJ6-u7-13f"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
+                        <outlet property="scrollView" destination="Emm-zV-NSj" id="dCa-XL-gzp"/>
                         <outlet property="socialButtonsStackView" destination="5M8-KJ-9Zb" id="jTG-SD-nth"/>
                     </connections>
                 </viewController>
@@ -616,13 +617,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpd-cT-NuU">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTw-rk-KYp" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -681,13 +682,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="80"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Job Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAz-is-coT">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="74"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-Jf-Pfi" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="56" width="319" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="80" width="319" height="0.0"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -747,13 +748,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8y-Os-M9Z">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1td-hF-r4P" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -813,13 +814,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Industry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE2-xs-Y1D">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bi-Sv-KnG" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -879,13 +880,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Birthdate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qf5-Kr-woM">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6r-nX-tPI" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -945,13 +946,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="72"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufx-ID-ooN">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="42"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="66"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmO-1L-LNG" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="48" width="319" height="24"/>
+                                                                                        <rect key="frame" x="0.0" y="72" width="319" height="0.0"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>

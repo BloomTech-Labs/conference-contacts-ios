@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	@IBOutlet private weak var profileCardView: ProfileCardView!
+	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var backButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var editProfileButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var backButton: UIButton!
@@ -26,9 +27,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
+	let haptic = UIImpactFeedbackGenerator(style: .rigid)
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		scrollView.delegate = self
 
+		haptic.prepare()
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
@@ -63,6 +68,12 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		super.viewDidAppear(animated)
 		profileCardView.setNeedsUpdateConstraints()
 		updateViews()
+		tabBarController?.delegate = self
+	}
+
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		tabBarController?.delegate = nil
 	}
 
 	private func updateViews() {
@@ -134,5 +145,23 @@ extension ProfileViewController: ProfileCardViewDelegate {
 
 	func positionDidChange(on view: ProfileCardView) {
 		updateFadeViewPosition()
+	}
+}
+
+extension ProfileViewController: UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if scrollView.contentOffset.y <= -120 {
+			scrollView.isScrollEnabled = false
+			haptic.impactOccurred()
+			profileCardView.animateToPrimaryPosition()
+			scrollView.isScrollEnabled = true
+		}
+	}
+}
+
+extension ProfileViewController: UITabBarControllerDelegate {
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		guard viewController == self.navigationController else { return }
+		profileController?.fetchProfileFromServer(completion: { _ in })
 	}
 }
