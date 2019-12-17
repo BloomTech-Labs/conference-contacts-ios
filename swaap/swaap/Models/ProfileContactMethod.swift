@@ -56,6 +56,7 @@ extension Array where Element == ProfileContactMethod {
 }
 
 struct MutateProfileContactMethod: Codable, Hashable {
+	let id: String?
 	let value: String
 	let type: ProfileFieldType
 	let privacy: ProfileFieldPrivacy
@@ -64,6 +65,7 @@ struct MutateProfileContactMethod: Codable, Hashable {
 
 extension MutateProfileContactMethod {
 	init(contactMethod: ProfileContactMethod) {
+		id = contactMethod.id
 		value = contactMethod.value
 		type = contactMethod.type
 		privacy = contactMethod.privacy

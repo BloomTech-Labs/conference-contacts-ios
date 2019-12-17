@@ -207,57 +207,77 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			print("profile refresh finished")
 		}
 
-		var contactMethodUpdates = [ConcurrentOperation]()
-		for (index, contactMethod) in contactMethods.enumerated() {
-			let contactMethodUpdate = ConcurrentOperation { [weak self] in
-				guard let self = self else { return }
-				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.modifyProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-					switch result {
-					case .success:
-						break
-					case .failure(let error):
-						print(error)
-					}
-					semaphore.signal()
-				})
-				semaphore.wait()
-				print("contact method update \(index) update finished")
+		let createdMethods = contactMethods.filter { $0.id == nil }
+		let createContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !createdMethods.isEmpty else { return }
+			let semaphore = DispatchSemaphore(value: 0)
+			profileController.createContactMethods(createdMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					print(error)
+				}
+				semaphore.signal()
 			}
-			contactMethodUpdates.append(contactMethodUpdate)
+			semaphore.wait()
 		}
 
-		var contactMethodDeletions = [ConcurrentOperation]()
-		for contactMethod in deletedContactMethods {
-			let contactMethodUpdate = ConcurrentOperation { [weak self] in
-				guard let self = self else { return }
-				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.deleteProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-					switch result {
-					case .success:
-						break
-					case .failure(let error):
-						print(error)
-					}
-					semaphore.signal()
-				})
-				semaphore.wait()
+		let updatedMethods = contactMethods.filter { $0.id != nil }
+		let updateContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !updatedMethods.isEmpty else { return }
+			let semaphore = DispatchSemaphore(value: 0)
+			profileController.updateProfileContactMethods(updatedMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					print(error)
+				}
+				semaphore.signal()
 			}
-			contactMethodDeletions.append(contactMethodUpdate)
+			semaphore.wait()
 		}
+
+		let deletedContactMethods = self.deletedContactMethods
+		let deleteContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !deletedContactMethods.isEmpty else { return }
+			let semaphore = DispatchSemaphore(value: 0)
+			profileController.deleteProfileContactMethods(deletedContactMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					print(error)
+				}
+				semaphore.signal()
+			}
+			semaphore.wait()
+		}
+
 
 		let dismissSelf = ConcurrentOperation { [weak self] in
 			self?.dismiss(animated: true)
 		}
 
 		profileUpdate.addDependency(imageUpdate)
+		profileRefresh.addDependency(createContactMethods)
 		profileRefresh.addDependency(profileUpdate)
-		contactMethodUpdates.forEach { profileRefresh.addDependency($0) }
-		contactMethodDeletions.forEach { profileRefresh.addDependency($0) }
+		profileRefresh.addDependency(updateContactMethods)
+		profileRefresh.addDependency(deleteContactMethods)
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + contactMethodDeletions + contactMethodUpdates, waitUntilFinished: false)
+		queue.addOperations([profileUpdate,
+							 profileRefresh,
+							 imageUpdate,
+							 createContactMethods,
+							 updateContactMethods,
+							 deleteContactMethods],
+							waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
 		saveButton.isEnabled = false
