@@ -135,11 +135,11 @@ class SocialButton: IBPreviewControl {
 		default:
 			break
 		}
-		handleLabel.text = value
+		handleLabel.text = infoNugget.displayValue
 	}
 
 	// MARK: - Helper Methods
-	func openLink(infoNugget: ProfileInfoNugget) {
+	func openLink() {
 		guard let type = infoNugget.type else { return }
 		let value = infoNugget.value
 		let url: URL

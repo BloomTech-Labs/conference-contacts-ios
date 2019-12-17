@@ -88,12 +88,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		socialButtonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 		profileContactMethods.forEach {
 			guard !$0.preferredContact else { return }
-			let socialButton = SocialButton()
-			socialButton.infoNugget = ProfileInfoNugget(type: $0.type, value: $0.value)
-			socialButton.translatesAutoresizingMaskIntoConstraints = false
-			socialButton.height = 50
-			socialButton.setContentHuggingPriority(.init(rawValue: 251), for: .vertical)
-			socialButtonsStackView.addArrangedSubview(socialButton)
+			let contactMethodCell = ContactMethodCellView(contactMethod: $0, mode: .display)
+			contactMethodCell.contactMethod = $0
+			socialButtonsStackView.addArrangedSubview(contactMethodCell)
 		}
 	}
 
