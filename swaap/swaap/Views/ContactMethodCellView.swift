@@ -78,6 +78,17 @@ class ContactMethodCellView: UIView {
 		cellView.layer.cornerRadius = 12
 		cellView.layer.cornerCurve = .continuous
 
+		switch mode {
+		case .display:
+			starButton.isHidden = true
+			deleteButton.isHidden = true
+			privacySettingLabel.isHidden = true
+		case .edit:
+			starButton.isHidden = false
+			deleteButton.isHidden = false
+			privacySettingLabel.isHidden = false
+		}
+
 		self.backgroundColor = .clear
 
 		updateViews()
@@ -85,8 +96,8 @@ class ContactMethodCellView: UIView {
 
 	private func updateViews() {
 		socialButton.smallButton = true
-		socialButton.infoNugget.type = contactMethod.type
-		valueLabel.text = contactMethod.value
+		socialButton.infoNugget = contactMethod.infoNugget
+		valueLabel.text = contactMethod.infoNugget.displayValue
 		privacySettingLabel.text = contactMethod.privacy.rawValue.capitalized
 		starButton.tintColor = contactMethod.preferredContact ? .systemGreen : .systemGray3
 	}
@@ -115,7 +126,7 @@ class ContactMethodCellView: UIView {
 		case .edit:
 			delegate?.editCellInvoked(on: self)
 		case .display:
-			socialButton.openLink(infoNugget: contactMethod.infoNugget)
+			socialButton.openLink()
 		}
 	}
 }

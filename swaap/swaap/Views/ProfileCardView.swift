@@ -147,6 +147,9 @@ class ProfileCardView: IBPreviewView {
 		preferredContact = nuggetInfo
 	}
 
+	@IBAction func socialButtonTapped(_ sender: SocialButton) {
+		sender.openLink()
+	}
 
 	// MARK: - Pan Gesture properties
 	private var slideOffset: CGFloat = 0

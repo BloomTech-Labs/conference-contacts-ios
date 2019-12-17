@@ -38,6 +38,15 @@ struct ProfileInfoNugget {
 		guard let type = type else { return nil }
 		return ProfileContactMethod(value: value, type: type)
 	}
+
+	var displayValue: String {
+		switch type {
+		case .twitter, .instagram:
+			return "@\(value)"
+		default:
+			return value
+		}
+	}
 }
 
 extension Array where Element == ProfileContactMethod {
