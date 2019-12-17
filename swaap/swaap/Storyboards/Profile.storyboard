@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urS-d0-w1z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urS-d0-w1z">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,9 +35,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVb-0w-niQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="482" y="-605"/>
+            <point key="canvasLocation" x="2004" y="-612"/>
         </scene>
-        <!--Connect-->
+        <!--Profile View Controller-->
         <scene sceneID="2C4-Bh-qqa">
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" interfaceStyle="dark" id="j9t-B2-wS8" customClass="ProfileViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
@@ -443,9 +443,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Connect" image="arrow.right.arrow.left.circle" catalog="system" id="UhS-VM-r7a">
-                        <color key="badgeColor" name="Swaap Accent Color 1"/>
-                    </tabBarItem>
                     <navigationItem key="navigationItem" id="MUg-8U-P9S"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -467,7 +464,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bcr-xl-S0G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1157.5999999999999" y="141.87192118226602"/>
+            <point key="canvasLocation" x="1049" y="142"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="3YY-f6-Jp1">
@@ -617,13 +614,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpd-cT-NuU">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTw-rk-KYp" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
+                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -682,13 +679,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="80"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Job Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAz-is-coT">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="74"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="50"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-Jf-Pfi" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="80" width="319" height="0.0"/>
+                                                                                        <rect key="frame" x="0.0" y="56" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -748,13 +745,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8y-Os-M9Z">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1td-hF-r4P" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
+                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -814,13 +811,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Industry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE2-xs-Y1D">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bi-Sv-KnG" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
+                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -880,13 +877,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="52"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Birthdate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qf5-Kr-woM">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="22"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6r-nX-tPI" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="24" width="319" height="28"/>
+                                                                                        <rect key="frame" x="0.0" y="28" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -946,13 +943,13 @@
                                                                                 <rect key="frame" x="52" y="0.0" width="319" height="72"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufx-ID-ooN">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="66"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="42"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmO-1L-LNG" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="72" width="319" height="0.0"/>
+                                                                                        <rect key="frame" x="0.0" y="48" width="319" height="24"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1189,7 +1186,7 @@ Long pressing one of contact methods will bring up privacy options:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFI-n7-5Bs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2717.5999999999999" y="141.87192118226602"/>
+            <point key="canvasLocation" x="2786" y="142"/>
         </scene>
         <!--Input Text Field View Controller-->
         <scene sceneID="ZJq-D7-hay">
@@ -1234,25 +1231,127 @@ Long pressing one of contact methods will bring up privacy options:
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3601" y="134"/>
+            <point key="canvasLocation" x="3609" y="142"/>
         </scene>
         <!--Swipe Back Navigation Controller-->
         <scene sceneID="b2C-zT-j9B">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="urS-d0-w1z" customClass="SwipeBackNavigationController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ih8-Rv-qmG">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ih8-Rv-qmG">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="j9t-B2-wS8" kind="relationship" relationship="rootViewController" id="r3J-jf-SV1"/>
+                        <segue destination="DLK-vX-EpN" kind="relationship" relationship="rootViewController" id="A6z-PL-3P3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O8f-6b-egK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="142"/>
+            <point key="canvasLocation" x="-1183" y="142"/>
+        </scene>
+        <!--swaap-->
+        <scene sceneID="QOL-H2-G01">
+            <objects>
+                <viewController id="DLK-vX-EpN" customClass="ContactsViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v2t-w2-teG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ejB-9R-Qcc">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="rOD-ZW-pMR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hvA-bQ-S3U">
+                                            <rect key="frame" x="8" y="8" width="359" height="56"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w2D-a3-R5K">
+                                                    <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="w2D-a3-R5K" secondAttribute="height" id="gfc-cZ-Tra"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQN-TM-RVv">
+                                                    <rect key="frame" x="64" y="0.0" width="274.66666666666669" height="56"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I9m-I3-NjB">
+                                                    <rect key="frame" x="346.66666666666669" y="2" width="12.333333333333314" height="52.333333333333329"/>
+                                                    <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="hvA-bQ-S3U" secondAttribute="bottom" constant="8" id="CTm-TI-BAY"/>
+                                        <constraint firstItem="hvA-bQ-S3U" firstAttribute="leading" secondItem="rOD-ZW-pMR" secondAttribute="leading" constant="8" id="WfI-Z9-szX"/>
+                                        <constraint firstItem="hvA-bQ-S3U" firstAttribute="top" secondItem="rOD-ZW-pMR" secondAttribute="top" constant="8" id="erE-Rk-Nr8"/>
+                                        <constraint firstAttribute="trailing" secondItem="hvA-bQ-S3U" secondAttribute="trailing" constant="8" id="oe7-2Q-LPh"/>
+                                    </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="I8U-7D-Rei" appends="YES" id="gF2-XI-R5v"/>
+                                    </connections>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" textLabel="mP8-pO-dyT" style="IBUITableViewCellStyleDefault" id="fY5-0u-wgJ">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fY5-0u-wgJ" id="XNa-Wl-UJR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Contact's name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mP8-pO-dyT">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="j9t-B2-wS8" kind="show" destinationCreationSelector="showContactProfile:" id="DnX-Ny-7lW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ejB-9R-Qcc" secondAttribute="trailing" id="2rT-OH-Y3v"/>
+                            <constraint firstAttribute="bottom" secondItem="ejB-9R-Qcc" secondAttribute="bottom" id="Fgj-jO-5Lj"/>
+                            <constraint firstItem="ejB-9R-Qcc" firstAttribute="leading" secondItem="v2t-w2-teG" secondAttribute="leading" id="T7a-xQ-55j"/>
+                            <constraint firstItem="ejB-9R-Qcc" firstAttribute="top" secondItem="hUX-xd-BSa" secondAttribute="top" id="o2I-7M-j3c"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hUX-xd-BSa"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="person.3" catalog="system" id="UhS-VM-r7a">
+                        <color key="badgeColor" name="Swaap Accent Color 1"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" title="swaap" id="RY8-wf-To3"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="headerImageView" destination="w2D-a3-R5K" id="J0c-kt-cU6"/>
+                        <outlet property="headerLabel" destination="sQN-TM-RVv" id="Clu-vF-Alk"/>
+                        <outlet property="tableView" destination="ejB-9R-Qcc" id="Wob-Cx-x7u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1q3-6C-Xrb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="I8U-7D-Rei">
+                    <connections>
+                        <segue destination="j9t-B2-wS8" kind="show" destinationCreationSelector="showCurrentUserProfile:" id="O5N-b6-MxP"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-129" y="142"/>
         </scene>
         <!--Swipe Back Navigation Controller-->
         <scene sceneID="onI-MA-v49">
@@ -1278,15 +1377,16 @@ Long pressing one of contact methods will bring up privacy options:
         <image name="Browsing" width="1155" height="700"/>
         <image name="Gift" width="1155" height="700"/>
         <image name="Notification" width="1152" height="700"/>
-        <image name="arrow.right.arrow.left.circle" catalog="system" width="64" height="60"/>
         <image name="briefcase" catalog="system" width="64" height="50"/>
         <image name="camera.fill" catalog="system" width="64" height="48"/>
         <image name="chevron.left" catalog="system" width="48" height="64"/>
+        <image name="chevron.right" catalog="system" width="48" height="64"/>
         <image name="gift" catalog="system" width="64" height="60"/>
         <image name="globe" catalog="system" width="64" height="60"/>
         <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
         <image name="multiply" catalog="system" width="64" height="54"/>
         <image name="pencil" catalog="system" width="64" height="56"/>
+        <image name="person.3" catalog="system" width="72" height="35"/>
         <image name="person.crop.square" catalog="system" width="64" height="56"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <image name="signature" catalog="system" width="64" height="44"/>
@@ -1305,5 +1405,6 @@ Long pressing one of contact methods will bring up privacy options:
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DxI-8z-64q"/>
+        <segue reference="O5N-b6-MxP"/>
     </inferredMetricsTieBreakers>
 </document>
