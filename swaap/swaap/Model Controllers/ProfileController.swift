@@ -243,31 +243,26 @@ class ProfileController {
 		}
 	}
 
-	/// create or update a profile contactMethod on the backend contextually. if an id is present, updates. if not, creates.
-	func modifyProfileContactMethod(_ contactMethod: ProfileContactMethod, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+	func updateProfileContactMethods(_ contactMethods: [ProfileContactMethod], completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var (_, request) = networkCommon() else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
 		}
+		guard (contactMethods.allSatisfy { $0.id != nil }) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "A contact method without an id attempted update in: \(contactMethods)")))
+			return
+		}
 
+		let mutation = "mutation UpdateFields($data:[UpdateProfileFieldsInput]!) { updateProfileFields(data: $data) { success code message } }"
 		do {
-			let mutation: String
-			let variables: [String: Any]?
-			let contactMethodInfo = MutateProfileContactMethod(contactMethod: contactMethod)
-			let contactMethodData = try contactMethodInfo.toDict()
+			let contactMethodsDicts = try contactMethods.map { try MutateProfileContactMethod(contactMethod: $0).toDict() }
+			let variables = ["data": contactMethodsDicts]
 
-			if let id = contactMethod.id {
-				mutation = "mutation ($id: ID!, $data: UpdateProfileFieldInput!) { updateProfileField(id:$id,data:$data) { success code message } }"
-				variables = ["data": contactMethodData, "id": id]
-			} else {
-				mutation = "mutation ($data: CreateProfileFieldInput!) { createProfileField(data:$data) { success code message } }"
-				variables = ["data": contactMethodData]
-			}
 			let graphObject = GQMutation(query: mutation, variables: variables)
 
 			request.httpBody = try graphObject.jsonData()
 		} catch {
-			NSLog("Failed encoding user update: \(error)")
+			NSLog("Failed encoding contact methods update: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
 			return
 		}
@@ -278,12 +273,9 @@ class ProfileController {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
 				completion(.success(response))
-			} catch let error as NetworkError {
-				NSLog("Error updating profile contact method: \(error)")
-				completion(.failure(error))
 			} catch {
 				NSLog("Error updating profile contact method: \(error)")
-				completion(.failure(NetworkError.otherError(error: error)))
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
 		}
 	}

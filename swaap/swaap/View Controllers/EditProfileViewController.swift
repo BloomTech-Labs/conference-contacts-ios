@@ -208,7 +208,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 
 		let createdMethods = contactMethods.filter { $0.id == nil }
-		let contactMethodCreations = ConcurrentOperation { [weak self] in
+		let createContactMethods = ConcurrentOperation { [weak self] in
 			guard let profileController = self?.profileController else { return }
 			guard !createdMethods.isEmpty else { return }
 			let semaphore = DispatchSemaphore(value: 0)
@@ -222,28 +222,23 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 				semaphore.signal()
 			}
 			semaphore.wait()
-
 		}
 
-		var contactMethodUpdates = [ConcurrentOperation]()
 		let updatedMethods = contactMethods.filter { $0.id != nil }
-		for (index, contactMethod) in updatedMethods.enumerated() {
-			let contactMethodUpdate = ConcurrentOperation { [weak self] in
-				guard let profileController = self?.profileController else { return }
-				let semaphore = DispatchSemaphore(value: 0)
-				profileController.modifyProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-					switch result {
-					case .success:
-						break
-					case .failure(let error):
-						print(error)
-					}
-					semaphore.signal()
-				})
-				semaphore.wait()
-				print("contact method update \(index) update finished")
+		let updateContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !updatedMethods.isEmpty else { return }
+			let semaphore = DispatchSemaphore(value: 0)
+			profileController.updateProfileContactMethods(updatedMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					print(error)
+				}
+				semaphore.signal()
 			}
-			contactMethodUpdates.append(contactMethodUpdate)
+			semaphore.wait()
 		}
 
 		var contactMethodDeletions = [ConcurrentOperation]()
@@ -270,17 +265,16 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 
 		profileUpdate.addDependency(imageUpdate)
-		profileRefresh.addDependency(contactMethodCreations)
+		profileRefresh.addDependency(createContactMethods)
 		profileRefresh.addDependency(profileUpdate)
-		contactMethodUpdates.forEach { profileRefresh.addDependency($0) }
+		profileRefresh.addDependency(updateContactMethods)
 		contactMethodDeletions.forEach { profileRefresh.addDependency($0) }
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
 		queue.addOperations(
-			[profileUpdate, profileRefresh, imageUpdate, contactMethodCreations] +
-			contactMethodDeletions +
-			contactMethodUpdates,
+			[profileUpdate, profileRefresh, imageUpdate, createContactMethods, updateContactMethods] +
+			contactMethodDeletions,
 							waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
