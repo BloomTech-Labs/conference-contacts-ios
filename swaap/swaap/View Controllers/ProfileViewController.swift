@@ -29,6 +29,11 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	let haptic = UIImpactFeedbackGenerator(style: .rigid)
 
+	var userProfile: UserProfile? {
+		didSet { updateViews() }
+	}
+	var isCurrentUser = false
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		scrollView.delegate = self
@@ -77,9 +82,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	private func updateViews() {
-		profileCardView.userProfile = profileController?.userProfile
-		birthdayLabel.text = profileController?.userProfile?.birthdate
-		bioLabel.text = profileController?.userProfile?.bio
+		guard isViewLoaded else { return }
+		profileCardView.userProfile = userProfile
+		birthdayLabel.text = userProfile?.birthdate
+		bioLabel.text = userProfile?.bio
+
+		editProfileButtonVisualFXContainerView.isVisible = isCurrentUser
+
 		populateSocialButtons()
 		if let count = navigationController?.viewControllers.count, count > 1 {
 			backButtonVisualFXContainerView.isHidden = false
@@ -95,7 +104,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	private func populateSocialButtons() {
-		guard let profileContactMethods = profileController?.userProfile?.profileContactMethods else { return }
+		guard let profileContactMethods = userProfile?.profileContactMethods else { return }
 		socialButtonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 		profileContactMethods.forEach {
 			guard !$0.preferredContact else { return }
@@ -106,9 +115,11 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	private func setupNotifications() {
-		let updateClosure = { (_: Notification) in
+		guard isCurrentUser else { return }
+		let updateClosure = { [weak self] (_: Notification) in
 			DispatchQueue.main.async {
-				self.updateViews()
+				guard self?.isCurrentUser == true else { return }
+				self?.userProfile = self?.profileController?.userProfile
 			}
 		}
 		profileChangedObserver = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: updateClosure)

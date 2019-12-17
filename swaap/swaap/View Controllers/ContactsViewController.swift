@@ -52,7 +52,10 @@ class ContactsViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBSegueAction func showCurrentUserProfile(_ coder: NSCoder) -> ProfileViewController? {
-		return ProfileViewController(coder: coder)
+		let profileVC = ProfileViewController(coder: coder)
+		profileVC?.isCurrentUser = true
+		profileVC?.userProfile = profileController?.userProfile
+		return profileVC
 	}
 
 	@IBSegueAction func showContactProfile(_ coder: NSCoder) -> ProfileViewController? {
