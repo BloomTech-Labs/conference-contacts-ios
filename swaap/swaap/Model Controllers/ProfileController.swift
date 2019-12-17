@@ -280,19 +280,20 @@ class ProfileController {
 		}
 	}
 
-	func deleteProfileContactMethod(_ contactMethod: ProfileContactMethod, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+	func deleteProfileContactMethods(_ contactMethods: [ProfileContactMethod], completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var (_, request) = networkCommon() else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
 			return
 		}
 
-		guard let id = contactMethod.id else {
-			completion(.failure(.unspecifiedError(reason: "Attempted to delete a contact method without an id: \(contactMethod)")))
+		let ids = contactMethods.compactMap { $0.id }
+		guard !ids.isEmpty else {
+			completion(.failure(.unspecifiedError(reason: "No viable contact methods provided for deletion: \(contactMethods)")))
 			return
 		}
-		let mutation = "mutation($id:ID!) { deleteProfileField(id: $id) { success code message } }"
+		let mutation = "mutation($ids:[ID]!) { deleteProfileFields(ids: $ids) { success code message } }"
 		do {
-			let query = GQuery(query: mutation, variables: ["id": id])
+			let query = GQuery(query: mutation, variables: ["ids": ids])
 
 			request.httpBody = try query.jsonData()
 		} catch {

@@ -241,24 +241,23 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			semaphore.wait()
 		}
 
-		var contactMethodDeletions = [ConcurrentOperation]()
-		for contactMethod in deletedContactMethods {
-			let contactMethodUpdate = ConcurrentOperation { [weak self] in
-				guard let self = self else { return }
-				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.deleteProfileContactMethod(contactMethod, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-					switch result {
-					case .success:
-						break
-					case .failure(let error):
-						print(error)
-					}
-					semaphore.signal()
-				})
-				semaphore.wait()
+		let deletedContactMethods = self.deletedContactMethods
+		let deleteContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !deletedContactMethods.isEmpty else { return }
+			let semaphore = DispatchSemaphore(value: 0)
+			profileController.deleteProfileContactMethods(deletedContactMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					print(error)
+				}
+				semaphore.signal()
 			}
-			contactMethodDeletions.append(contactMethodUpdate)
+			semaphore.wait()
 		}
+
 
 		let dismissSelf = ConcurrentOperation { [weak self] in
 			self?.dismiss(animated: true)
@@ -268,13 +267,16 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		profileRefresh.addDependency(createContactMethods)
 		profileRefresh.addDependency(profileUpdate)
 		profileRefresh.addDependency(updateContactMethods)
-		contactMethodDeletions.forEach { profileRefresh.addDependency($0) }
+		profileRefresh.addDependency(deleteContactMethods)
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations(
-			[profileUpdate, profileRefresh, imageUpdate, createContactMethods, updateContactMethods] +
-			contactMethodDeletions,
+		queue.addOperations([profileUpdate,
+							 profileRefresh,
+							 imageUpdate,
+							 createContactMethods,
+							 updateContactMethods,
+							 deleteContactMethods],
 							waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
