@@ -41,7 +41,7 @@ struct UserProfile: Codable, Equatable {
 	}
 
 	let id: String
-	let authID: String
+	let authID: String?
 	var name: String
 	private var pictureString: String?
 	var birthdate: String?

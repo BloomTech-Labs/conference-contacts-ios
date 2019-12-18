@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ConnectionContact" representedClassName="ConnectionContact" syncable="YES" codeGenerationType="class">
+        <attribute name="authID" optional="YES" attributeType="String"/>
+        <attribute name="bio" optional="YES" attributeType="String"/>
+        <attribute name="birthdate" optional="YES" attributeType="String"/>
+        <attribute name="connectionStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="industry" optional="YES" attributeType="String"/>
+        <attribute name="jobTitle" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="pictureURL" optional="YES" attributeType="URI"/>
+        <attribute name="tagline" optional="YES" attributeType="String"/>
+        <relationship name="profileContactMethods" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ConnectionContactMethod"/>
+    </entity>
+    <entity name="ConnectionContactMethod" representedClassName="ConnectionContactMethod" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="preferredContact" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="ConnectionContact" positionX="-63" positionY="-18" width="128" height="28"/>
+        <element name="ConnectionContactMethod" positionX="-54" positionY="18" width="128" height="28"/>
+    </elements>
+</model>
