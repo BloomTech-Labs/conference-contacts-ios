@@ -68,4 +68,3 @@ extension CGPoint {
 		sqrt((pointB.x - x) * (pointB.x - x) + (pointB.y - y) * (pointB.y - y))
 	}
 }
-
