@@ -33,7 +33,7 @@ struct UserProfile: Codable, Equatable {
 		case birthdate
 		case location
 		case industry
-		case jobtitle
+		case jobTitle = "jobtitle"
 		case tagline
 		case bio
 		case profileContactMethods = "profile"
@@ -46,7 +46,7 @@ struct UserProfile: Codable, Equatable {
 	var birthdate: String?
 	var location: String?
 	var industry: String?
-	var jobtitle: String?
+	var jobTitle: String?
 	var tagline: String?
 	var bio: String?
 	var profileContactMethods: [ProfileContactMethod]
@@ -103,7 +103,7 @@ struct UpdateUser: Codable {
 		birthdate = userProfile.birthdate
 		location = userProfile.location
 		industry = userProfile.industry
-		jobtitle = userProfile.jobtitle
+		jobtitle = userProfile.jobTitle
 		tagline = userProfile.tagline
 		bio = userProfile.bio
 	}
