@@ -75,6 +75,8 @@
 		37B3B70E238F50D700FB9CFA /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B3B70D238F50D700FB9CFA /* SocialButton.swift */; };
 		37B3B714238F7EFE00FB9CFA /* SocialButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B3B713238F7EFE00FB9CFA /* SocialButton.xib */; };
 		37D1D72223A198EF00931BF8 /* AlertTint+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1D72123A198EF00931BF8 /* AlertTint+UIAlertViewController.swift */; };
+		37D1D75F23A956FA00931BF8 /* BasicInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D1D75E23A956F900931BF8 /* BasicInfoView.xib */; };
+		37D1D76123A9651800931BF8 /* BasicInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1D76023A9651800931BF8 /* BasicInfoView.swift */; };
 		37F934382396EF3100ACBA23 /* SwipeBackNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934372396EF3100ACBA23 /* SwipeBackNavigationController.swift */; };
 		37F9344A239736B000ACBA23 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F93449239736B000ACBA23 /* EditProfileViewController.swift */; };
 		37F934502397399500ACBA23 /* EditProfileViewController+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9344F2397399500ACBA23 /* EditProfileViewController+Camera.swift */; };
@@ -251,6 +253,8 @@
 		37B3B70D238F50D700FB9CFA /* SocialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		37B3B713238F7EFE00FB9CFA /* SocialButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialButton.xib; sourceTree = "<group>"; };
 		37D1D72123A198EF00931BF8 /* AlertTint+UIAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertTint+UIAlertViewController.swift"; sourceTree = "<group>"; };
+		37D1D75E23A956F900931BF8 /* BasicInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicInfoView.xib; sourceTree = "<group>"; };
+		37D1D76023A9651800931BF8 /* BasicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoView.swift; sourceTree = "<group>"; };
 		37F934372396EF3100ACBA23 /* SwipeBackNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeBackNavigationController.swift; sourceTree = "<group>"; };
 		37F93449239736B000ACBA23 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		37F9344F2397399500ACBA23 /* EditProfileViewController+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditProfileViewController+Camera.swift"; sourceTree = "<group>"; };
@@ -472,6 +476,8 @@
 				3753DE35239C69B600C90501 /* ContactMethodCellView.xib */,
 				3753DE45239EBF3C00C90501 /* ContactMethodCellView.swift */,
 				376F329B23A173EE001E6547 /* LabelPlaceholder.swift */,
+				37D1D75E23A956F900931BF8 /* BasicInfoView.xib */,
+				37D1D76023A9651800931BF8 /* BasicInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -712,6 +718,7 @@
 				3797A56A2388596900CB8621 /* ProfileCardView.xib in Resources */,
 				37A185F2237A43D5002191B5 /* Profile.storyboard in Resources */,
 				33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */,
+				37D1D75F23A956FA00931BF8 /* BasicInfoView.xib in Resources */,
 				37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */,
 				37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
@@ -814,6 +821,7 @@
 				33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
+				37D1D76123A9651800931BF8 /* BasicInfoView.swift in Sources */,
 				37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */,
 				3329A47D23A9546B007F10E2 /* ContactsViewController.swift in Sources */,
 				33F0EA61239872A0004D1236 /* Auth0Claims.swift in Sources */,

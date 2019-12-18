@@ -28,16 +28,23 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var choosePhotoButton: UIButton!
+	@IBOutlet private weak var contactMethodsDescLabel: UILabel!
 
-	@IBOutlet private weak var nameLabel: UILabel!
-	@IBOutlet private weak var locationLabel: UILabel!
-	@IBOutlet private weak var industryLabel: UILabel!
-	@IBOutlet private weak var birthdateLabel: UILabel!
-	@IBOutlet private weak var bioLabel: UILabel!
-	@IBOutlet private weak var jobTitleLabel: UILabel!
-	@IBOutlet private weak var contactModeDescLabel: UILabel!
+
+	@IBOutlet private weak var nameField: BasicInfoView!
+	@IBOutlet private weak var taglineField: BasicInfoView!
+	@IBOutlet private weak var jobTitleField: BasicInfoView!
+	@IBOutlet private weak var locationField: BasicInfoView!
+	@IBOutlet private weak var industryField: BasicInfoView!
+	@IBOutlet private weak var birthdayField: BasicInfoView!
+	@IBOutlet private weak var bioField: BasicInfoView!
 
 	@IBOutlet private weak var contactMethodsStackView: UIStackView!
+
+	@IBOutlet private weak var contactModeDescLabel: UILabel!
+	@IBOutlet private weak var onScreenAnchor: NSLayoutConstraint!
+	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
+	var buttonIsOnScreen: Bool = false
 
 	let haptic = UIImpactFeedbackGenerator(style: .medium)
 
@@ -70,6 +77,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		updateViews()
 		navigationController?.presentationController?.delegate = self
 		haptic.prepare()
+		scrollView.delegate = self
     }
 
 	private func setupUI() {
@@ -112,12 +120,13 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		guard let userProfile = profileController?.userProfile else { return }
 		userProfile.profileContactMethods.forEach { addContactMethod(contactMethod: $0, checkForPreferred: false) }
 		assurePreferredContactExists()
-		nameLabel.text = userProfile.name
-		industryLabel.text = userProfile.industry
-		locationLabel.text = userProfile.location
-		bioLabel.text = userProfile.bio
-		jobTitleLabel.text = userProfile.jobtitle
-		birthdateLabel.text = userProfile.birthdate
+		nameField.valueText = userProfile.name
+		taglineField.valueText = userProfile.tagline
+		jobTitleField.valueText = userProfile.jobtitle
+		locationField.valueText = userProfile.location
+		industryField.valueText = userProfile.industry
+		birthdayField.valueText = userProfile.birthdate
+		bioField.valueText = userProfile.bio
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
 		}
@@ -141,14 +150,15 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	// MARK: - Helper Methods
 	private func saveProfile() {
 		//no image handling
-		guard let name = nameLabel.text else { return }
+		guard let name = nameField.valueText else { return }
 		guard var newProfile = profileController?.userProfile else { return }
 		newProfile.name = name
-		newProfile.industry = industryLabel.text
-		newProfile.location = locationLabel.text
-		newProfile.bio = bioLabel.text
-		newProfile.birthdate = birthdateLabel.text
-		newProfile.jobtitle = jobTitleLabel.text
+		newProfile.tagline = taglineField.valueText
+		newProfile.jobtitle = jobTitleField.valueText
+		newProfile.location = locationField.valueText
+		newProfile.industry = industryField.valueText
+		newProfile.birthdate = birthdayField.valueText
+		newProfile.bio = bioField.valueText
 		newProfile.profileContactMethods = contactMethods
 
 		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
@@ -326,62 +336,72 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	// MARK: - Segues
 	@IBSegueAction func nameTextFieldViewController(coder: NSCoder) -> UIViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-			self.nameLabel.text = infoNugget.value
+			self.nameField.valueText = infoNugget.value
 		}, enableSaveButtonHandler: { _, value -> Bool in
 			!value.isEmpty
 		})
 		inputVC?.placeholderStr = "Enter your full name"
-		inputVC?.labelText = nameLabel.text
+		inputVC?.labelText = nameField.valueText
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
 	
+	@IBSegueAction func taglineTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.taglineField.valueText = infoNugget.value
+		})
+		inputVC?.placeholderStr = "Add your tagline"
+		inputVC?.labelText = taglineField.valueText
+		inputVC?.autoCapitalizationType = .sentences
+		return inputVC
+	}
+
 	@IBSegueAction func locationTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-			self.locationLabel.text = infoNugget.value
+			self.locationField.valueText = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Name of city"
-		inputVC?.labelText = locationLabel.text
+		inputVC?.labelText = locationField.valueText
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
 
 	@IBSegueAction func industryTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-			self.industryLabel.text = infoNugget.value
+			self.industryField.valueText = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Add the industry you're in"
-		inputVC?.labelText = industryLabel.text
+		inputVC?.labelText = industryField.valueText
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
 
 	@IBSegueAction func birthdateTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-			self.birthdateLabel.text = infoNugget.value
+			self.birthdayField.valueText = infoNugget.value
 		})
 		inputVC?.placeholderStr = "MM/DD/YYYY"
-		inputVC?.labelText = birthdateLabel.text
+		inputVC?.labelText = birthdayField.valueText
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
 
 	@IBSegueAction func bioTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-			self.bioLabel.text = infoNugget.value
+			self.bioField.valueText = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Add a short bio"
-		inputVC?.labelText = bioLabel.text
+		inputVC?.labelText = bioField.valueText
 		inputVC?.autoCapitalizationType = .sentences
 		return inputVC
 	}
 
 	@IBSegueAction func editJobTitleSegue(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-			self.jobTitleLabel.text = infoNugget.value
+			self.jobTitleField.valueText = infoNugget.value
 		})
 		inputVC?.placeholderStr = "Add your job title"
-		inputVC?.labelText = jobTitleLabel.text
+		inputVC?.labelText = jobTitleField.valueText
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
@@ -487,5 +507,40 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 extension EditProfileViewController: UIAdaptivePresentationControllerDelegate {
 	func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
 		self.dismissalActionSheet()
+	}
+}
+
+extension EditProfileViewController: UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let point = getLabelPoint()
+		if point.y < view.frame.maxY {
+			animateOn()
+		} else {
+			animateOff()
+		}
+	}
+
+	private func animateOn() {
+		guard !buttonIsOnScreen else { return }
+		buttonIsOnScreen = true
+		UIView.animate(withDuration: 0.5) {
+			self.offScreenAnchor.isActive = false
+			self.onScreenAnchor.isActive = true
+			self.view.layoutSubviews()
+		}
+	}
+
+	private func animateOff() {
+		guard buttonIsOnScreen else { return }
+		buttonIsOnScreen = false
+		UIView.animate(withDuration: 0.5) {
+			self.onScreenAnchor.isActive = false
+			self.offScreenAnchor.isActive = true
+			self.view.layoutSubviews()
+		}
+	}
+
+	func getLabelPoint() -> CGPoint {
+		view.convert(CGPoint.zero, from: contactModeDescLabel)
 	}
 }
