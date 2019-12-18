@@ -41,6 +41,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	@IBOutlet private weak var contactMethodsStackView: UIStackView!
 
+	@IBOutlet private weak var socialLinkButtonTopAnchor: NSLayoutConstraint!
+	@IBOutlet private weak var socialLinkButtonBottomAnchor: NSLayoutConstraint!
 	@IBOutlet private weak var contactModeDescLabel: UILabel!
 	@IBOutlet private weak var onScreenAnchor: NSLayoutConstraint!
 	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
@@ -78,6 +80,10 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		navigationController?.presentationController?.delegate = self
 		haptic.prepare()
 		scrollView.delegate = self
+		if UIScreen.main.bounds.height <= 667 {
+			socialLinkButtonTopAnchor.constant = 12
+			socialLinkButtonBottomAnchor.constant = 16
+		}
     }
 
 	private func setupUI() {

@@ -844,7 +844,7 @@ Long pressing one of contact methods will bring up privacy options:
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="0hM-cf-eNF" secondAttribute="bottom" constant="50" id="bIl-g3-kSH"/>
+                                    <constraint firstAttribute="bottom" secondItem="0hM-cf-eNF" secondAttribute="bottom" constant="60" id="bIl-g3-kSH"/>
                                     <constraint firstItem="0hM-cf-eNF" firstAttribute="height" secondItem="l2P-KH-EKX" secondAttribute="height" priority="250" id="iRH-Xd-66X"/>
                                     <constraint firstItem="0hM-cf-eNF" firstAttribute="top" secondItem="l2P-KH-EKX" secondAttribute="top" id="mu9-AG-7lC"/>
                                     <constraint firstItem="0hM-cf-eNF" firstAttribute="width" secondItem="l2P-KH-EKX" secondAttribute="width" id="pOC-rm-MIj"/>
@@ -943,6 +943,8 @@ Long pressing one of contact methods will bring up privacy options:
                         <outlet property="profileImageView" destination="pqy-Vz-bUe" id="G2J-gC-tTb"/>
                         <outlet property="saveButton" destination="snU-lT-kDu" id="v2m-BX-rBa"/>
                         <outlet property="scrollView" destination="l2P-KH-EKX" id="LSN-NH-C6f"/>
+                        <outlet property="socialLinkButtonBottomAnchor" destination="T8f-kh-OFg" id="OET-dR-8rq"/>
+                        <outlet property="socialLinkButtonTopAnchor" destination="POz-nr-cY2" id="te1-4V-ak9"/>
                         <outlet property="taglineField" destination="yij-CC-CEk" id="Wow-rO-dUP"/>
                     </connections>
                 </viewController>
