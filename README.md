@@ -3,7 +3,7 @@
 
 1️⃣ You can find the deployed project at [Swaap on TestFlight](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1489988902/testflight?section=build&subsection=testers&id=58839d93-df6a-4175-9163-018050500150).
 
-## 2 Contributors
+## 2 iOS Contributors
 
 |                                       [Marlon Raskin](https://github.com/marlonjames71)                                        |                                       [Michael Redig](https://github.com/mredig)                                        |                               
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | 
