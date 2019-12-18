@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3329A47D23A9546B007F10E2 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3329A47C23A9546B007F10E2 /* ContactsViewController.swift */; };
+		3329A48723A9F89D007F10E2 /* ProfileQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */; };
 		332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD21023A031C800074F28 /* Codable+ToDict.swift */; };
 		332FD22A23A0908C00074F28 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD22923A0908C00074F28 /* ConcurrentOperation.swift */; };
 		3345A34F2390C6B700859F29 /* VectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3345A34E2390C6B700859F29 /* VectorTests.swift */; };
@@ -177,6 +178,7 @@
 
 /* Begin PBXFileReference section */
 		3329A47C23A9546B007F10E2 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQRCode.swift; sourceTree = "<group>"; };
 		332FD21023A031C800074F28 /* Codable+ToDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+ToDict.swift"; sourceTree = "<group>"; };
 		332FD22923A0908C00074F28 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		3345A34E2390C6B700859F29 /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */,
 				33F0EA552398551B004D1236 /* ProfileFieldType.swift */,
 				33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */,
+				3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */,
 				33F0EA60239872A0004D1236 /* Auth0Claims.swift */,
 				33CCBABB2398F3C200A98C82 /* GQuery.swift */,
 			);
@@ -826,6 +829,7 @@
 				3329A47D23A9546B007F10E2 /* ContactsViewController.swift in Sources */,
 				33F0EA61239872A0004D1236 /* Auth0Claims.swift in Sources */,
 				332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */,
+				3329A48723A9F89D007F10E2 /* ProfileQRCode.swift in Sources */,
 				3797A56E23885E9C00CB8621 /* ProfileViewController.swift in Sources */,
 				33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */,
 				37218B03238FA161008BFC24 /* FontHelper.swift in Sources */,

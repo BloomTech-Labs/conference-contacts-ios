@@ -50,6 +50,7 @@ struct GQLMutationResponseContainer: Decodable {
 		case createProfileFields
 		case updateProfileFields
 		case deleteProfileFields
+		case createQRCode
 	}
 
 	init(from decoder: Decoder) throws {

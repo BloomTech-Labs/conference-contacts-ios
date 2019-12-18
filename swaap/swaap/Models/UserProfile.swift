@@ -37,6 +37,7 @@ struct UserProfile: Codable, Equatable {
 		case tagline
 		case bio
 		case profileContactMethods = "profile"
+		case qrCodes = "qrcodes"
 	}
 
 	let id: String
@@ -50,6 +51,7 @@ struct UserProfile: Codable, Equatable {
 	var tagline: String?
 	var bio: String?
 	var profileContactMethods: [ProfileContactMethod]
+	var qrCodes: [ProfileQRCode]
 
 	var pictureURL: URL {
 		get {
