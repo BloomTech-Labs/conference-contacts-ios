@@ -35,7 +35,7 @@
 
 Swaap is an app to help professional people make great contacts at events such as conferences, conventions, or trade shows. A lot of times it can be difficult to keep track of the people you've added to your network. Swaap makes it super easy to swap contact information with others and keep in touch. Easy QR code reader or NFC will automatically redirect you to that person's profile page where you are shown many different ways to connect with that person. Their profile will even let you know what the best way to get in touch with them.
 
-![](header.png)
+<img src="https://github.com/marlonjames71/imagesForswaap/blob/master/girlLightFrontOfCard.png" width="400"> <img src="https://github.com/marlonjames71/imagesForswaap/blob/master/guyDarkFronOfCard.png" width="400">
 
 ### Features
 
