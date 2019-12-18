@@ -30,10 +30,12 @@ class DummyViewController: UIViewController, AuthAccessor, ProfileAccessor {
 
 		logoutButton.addTarget(self, action: #selector(logoutPressed(_:)), for: .touchUpInside)
 
-		_ = NotificationCenter.default.addObserver(forName: .userProfilePopulated, object: nil, queue: nil) { _ in
+		_ = NotificationCenter.default.addObserver(forName: .userProfilePopulated, object: nil, queue: nil) { [weak self] _ in
+			guard let self = self else { return }
 			print("populated: \(self.profileController?.userProfile as Any)")
 		}
-		_ = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil) { _ in
+		_ = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil) { [weak self] _ in
+			guard let self = self else { return }
 			print("changed: \(self.profileController?.userProfile as Any)")
 		}
 	}
