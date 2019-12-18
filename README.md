@@ -44,39 +44,17 @@ Swaap is an app to help professional people make great contacts at events such a
 -    Keep track of how you met your contacts and notes about them or how you met
 -    swaap acts as a hub for all the ways you can be contacted by the people in your network
 
-### Authentication API here
+### Authentication API - Auth0
 
-🚫Replace text below with a description of the API
+Auth0 provides a universal authentication & authorization platform for web, mobile and legacy applications.
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Using Auth0, developers can connect any application written in any language or stack, and define the external identity providers, as well as integrations, that they want to use.
 
-### Payment API here
+### Cloudinary API
 
-🚫Replace text below with a description of the API
-
-This is the way you take out your frustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
+Securely upload & store as many images and videos as needed, at any scale, from any source. Use a powerful API for fast upload directly from users’ browsers or mobile apps. Rest easy with auto-backups, historical revisions, and flexible storage options.
 
 ## Requirements
-
-🚫 These are examples, make sure this matches your project's requirements
 
 -   iOS 13.0+
 -   Xcode 11.0
