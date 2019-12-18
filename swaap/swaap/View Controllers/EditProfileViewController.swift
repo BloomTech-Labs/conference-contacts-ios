@@ -128,7 +128,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		assurePreferredContactExists()
 		nameField.valueText = userProfile.name
 		taglineField.valueText = userProfile.tagline
-		jobTitleField.valueText = userProfile.jobtitle
+		jobTitleField.valueText = userProfile.jobTitle
 		locationField.valueText = userProfile.location
 		industryField.valueText = userProfile.industry
 		birthdayField.valueText = userProfile.birthdate
@@ -160,7 +160,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		guard var newProfile = profileController?.userProfile else { return }
 		newProfile.name = name
 		newProfile.tagline = taglineField.valueText
-		newProfile.jobtitle = jobTitleField.valueText
+		newProfile.jobTitle = jobTitleField.valueText
 		newProfile.location = locationField.valueText
 		newProfile.industry = industryField.valueText
 		newProfile.birthdate = birthdayField.valueText

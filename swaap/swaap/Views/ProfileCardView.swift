@@ -138,7 +138,7 @@ class ProfileCardView: IBPreviewView {
 			profileImage = nil
 		}
 		name = userProfile?.name
-		jobTitle = userProfile?.jobtitle
+		jobTitle = userProfile?.jobTitle
 		location = userProfile?.location
 		industry = userProfile?.industry
 

@@ -7,7 +7,12 @@
 //
 
 import Foundation
+import NetworkHandler
 
 class ContactsController {
-	
+	let profileController: ProfileController
+
+	init(profileController: ProfileController) {
+		self.profileController = profileController
+	}
 }

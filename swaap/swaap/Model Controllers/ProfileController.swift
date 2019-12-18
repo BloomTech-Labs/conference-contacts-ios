@@ -198,12 +198,41 @@ class ProfileController {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
 				completion(.success(response))
-			} catch let error as NetworkError {
-				NSLog("Error updating server profile: \(error)")
-				completion(.failure(error))
 			} catch {
-				NSLog("Error updating server profile: \(error)")
-				completion(.failure(NetworkError.otherError(error: error)))
+				NSLog("Error updating server profile \(#line) \(#file): \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	func createQRCode(labeled label: String, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var (_, request) = networkCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		let mutation = "mutation ($label: String!){ createQRCode(label: $label) { success code message } }"
+		let variables = ["label": label]
+
+		do {
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding qr code request: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch {
+				NSLog("Error creating qr code on server \(#line) \(#file): \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
 		}
 	}
@@ -347,6 +376,21 @@ class ProfileController {
 		}
 	}
 
+	private func checkUserQRCode() {
+		guard let userProfile = userProfile, userProfile.qrCodes.isEmpty else { return }
+
+		self.userProfile?.qrCodes.append(ProfileQRCode(id: "dummy", label: "dummy", scans: 0))
+
+		createQRCode(labeled: "Default") { [weak self] (result: Result<GQLMutationResponse, NetworkError>) in
+			switch result {
+			case .success:
+				self?.fetchProfileFromServer(completion: { _ in })
+			case .failure(let error):
+				NSLog("Error populating QR Code: \(error)")
+			}
+		}
+	}
+
 
 	// MARK: - Image
 	private let cloudinaryConfig = CLDConfiguration(cloudName: "swaap", secure: true)
@@ -442,6 +486,7 @@ extension ProfileController {
 			nc.post(name: .userProfileChanged, object: nil)
 		}
 		updateUserImage()
+		checkUserQRCode()
 		saveProfileToCache()
 	}
 }
