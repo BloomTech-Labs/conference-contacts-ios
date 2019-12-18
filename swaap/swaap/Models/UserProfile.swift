@@ -34,6 +34,7 @@ struct UserProfile: Codable, Equatable {
 		case location
 		case industry
 		case jobtitle
+		case tagline
 		case bio
 		case profileContactMethods = "profile"
 	}
@@ -46,6 +47,7 @@ struct UserProfile: Codable, Equatable {
 	var location: String?
 	var industry: String?
 	var jobtitle: String?
+	var tagline: String?
 	var bio: String?
 	var profileContactMethods: [ProfileContactMethod]
 
@@ -74,6 +76,7 @@ struct UpdateUser: Codable {
 	let location: String?
 	let industry: String?
 	let jobtitle: String?
+	let tagline: String?
 	let bio: String?
 
 	init(name: String? = nil,
@@ -82,6 +85,7 @@ struct UpdateUser: Codable {
 		 location: String? = nil,
 		 industry: String? = nil,
 		 jobtitle: String? = nil,
+		 tagline: String? = nil,
 		 bio: String? = nil) {
 		self.name = name
 		self.picture = picture
@@ -89,6 +93,7 @@ struct UpdateUser: Codable {
 		self.location = location
 		self.industry = industry
 		self.jobtitle = jobtitle
+		self.tagline = tagline
 		self.bio = bio
 	}
 
@@ -99,6 +104,7 @@ struct UpdateUser: Codable {
 		location = userProfile.location
 		industry = userProfile.industry
 		jobtitle = userProfile.jobtitle
+		tagline = userProfile.tagline
 		bio = userProfile.bio
 	}
 }
