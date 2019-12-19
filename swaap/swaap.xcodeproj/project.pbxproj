@@ -307,6 +307,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33094E8123AB22F500D5556B /* User Profile Model */ = {
+			isa = PBXGroup;
+			children = (
+				33F0EA4D23984D6A004D1236 /* UserProfile.swift */,
+				3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */,
+			);
+			path = "User Profile Model";
+			sourceTree = "<group>";
+		};
+		33094E8A23AB230E00D5556B /* Contact Method Model */ = {
+			isa = PBXGroup;
+			children = (
+				33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */,
+				33F0EA552398551B004D1236 /* ProfileFieldType.swift */,
+				33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */,
+			);
+			path = "Contact Method Model";
+			sourceTree = "<group>";
+		};
 		332FD22023A0907500074F28 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,11 +516,8 @@
 			isa = PBXGroup;
 			children = (
 				33F0EA5723985556004D1236 /* ProfileDecodingError.swift */,
-				33F0EA4D23984D6A004D1236 /* UserProfile.swift */,
-				33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */,
-				33F0EA552398551B004D1236 /* ProfileFieldType.swift */,
-				33F0EA592398556A004D1236 /* ProfileFieldPrivacy.swift */,
-				3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */,
+				33094E8123AB22F500D5556B /* User Profile Model */,
+				33094E8A23AB230E00D5556B /* Contact Method Model */,
 				33F0EA60239872A0004D1236 /* Auth0Claims.swift */,
 				33CCBABB2398F3C200A98C82 /* GQuery.swift */,
 				33094E6C23AA0AF100D5556B /* Contacts.xcdatamodeld */,

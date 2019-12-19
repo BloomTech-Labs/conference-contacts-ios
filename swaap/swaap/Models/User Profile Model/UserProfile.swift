@@ -23,7 +23,7 @@ struct UserProfileContainer: Decodable {
 	}
 }
 
-struct UserProfile: Codable, Equatable {
+struct UserProfile: Codable, Hashable {
 
 	enum CodingKeys: String, CodingKey {
 		case id

@@ -10,6 +10,7 @@ import Foundation
 import Auth0
 import SimpleKeychain
 import AuthenticationServices
+import NetworkHandler
 
 protocol AuthAccessor: AnyObject {
 	var authManager: AuthManager? { get set }
@@ -173,6 +174,15 @@ class AuthManager: NSObject {
 		Auth0.webAuth().clearSession(federated: false) { success in
 			print("Successful logout: \(success)")
 		}
+	}
+
+	func networkAuthRequestCommon(for url: URL) -> NetworkRequest? {
+		guard let accessToken = credentials?.accessToken else { return nil }
+		var request = url.request
+		request.addValue(.contentType(type: .json), forHTTPHeaderField: .commonKey(key: .contentType))
+		request.addValue(.other(value: accessToken), forHTTPHeaderField: .commonKey(key: .authorization))
+		request.httpMethod = .post
+		return request
 	}
 
 	// MARK: - Utilities
