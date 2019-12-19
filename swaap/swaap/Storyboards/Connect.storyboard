@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyQ-Ch-1Iw">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Connect-->
+        <scene sceneID="ljA-OQ-Xzb">
+            <objects>
+                <viewController interfaceStyle="dark" id="NyQ-Ch-1Iw" customClass="ConnectViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h4q-41-51i">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="swaaplogoblues" translatesAutoresizingMaskIntoConstraints="NO" id="DrC-9f-ieA">
+                                <rect key="frame" x="175" y="44" width="64" height="92"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="92" id="S9B-aj-QoX"/>
+                                    <constraint firstAttribute="width" constant="64" id="Xw7-Rf-YDG"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrn-9K-Vyk" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="87" y="278" width="240" height="340"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="NVj-2v-0yi"/>
+                                    <constraint firstAttribute="height" constant="340" id="Qc7-Hh-q6t"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="i2m-xl-HRo">
+                                <rect key="frame" x="81" y="731" width="252" height="22"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEu-nV-ICU">
+                                        <rect key="frame" x="0.0" y="0.0" width="97.5" height="22"/>
+                                        <color key="tintColor" name="Swaap Accent Color 1"/>
+                                        <state key="normal" title=" QR Code" image="qrcode" catalog="system">
+                                            <color key="titleColor" name="Swaap Accent Color 1"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8a-aa-u3M">
+                                        <rect key="frame" x="157.5" y="0.0" width="94.5" height="22"/>
+                                        <color key="tintColor" name="Swaap Accent Color 1"/>
+                                        <state key="normal" title=" Scan QR" image="camera.viewfinder" catalog="system">
+                                            <color key="titleColor" name="Swaap Accent Color 1"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="mrn-9K-Vyk" firstAttribute="centerY" secondItem="h4q-41-51i" secondAttribute="centerY" id="ChY-2Z-tVh"/>
+                            <constraint firstItem="i2m-xl-HRo" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="GzU-Xv-xHq"/>
+                            <constraint firstItem="DrC-9f-ieA" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="QK8-U2-pCG"/>
+                            <constraint firstItem="DrC-9f-ieA" firstAttribute="top" secondItem="E1g-Pw-U6G" secondAttribute="top" id="X2G-ol-gpT"/>
+                            <constraint firstItem="E1g-Pw-U6G" firstAttribute="bottom" secondItem="i2m-xl-HRo" secondAttribute="bottom" constant="60" id="dKl-SB-IaW"/>
+                            <constraint firstItem="mrn-9K-Vyk" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="wSR-Hr-OCu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="E1g-Pw-U6G"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Connect" image="dot.radiowaves.left.and.right" catalog="system" id="YUt-9R-8GV">
+                        <color key="badgeColor" name="Swaap Accent Color 1"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="smallProfileCard" destination="mrn-9K-Vyk" id="28b-c9-2Tw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wae-49-ueN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-242.0289855072464" y="154.6875"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera.viewfinder" catalog="system" width="64" height="56"/>
+        <image name="dot.radiowaves.left.and.right" catalog="system" width="64" height="44"/>
+        <image name="qrcode" catalog="system" width="64" height="56"/>
+        <image name="swaaplogoblues" width="233" height="333"/>
+        <namedColor name="Swaap Accent Color 1">
+            <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
