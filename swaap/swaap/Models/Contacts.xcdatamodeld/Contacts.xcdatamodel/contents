@@ -12,16 +12,17 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="pictureURL" optional="YES" attributeType="URI"/>
         <attribute name="tagline" optional="YES" attributeType="String"/>
-        <relationship name="profileContactMethods" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ConnectionContactMethod"/>
+        <relationship name="profileContactMethods" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ConnectionContactMethod" inverseName="contact" inverseEntity="ConnectionContactMethod"/>
     </entity>
     <entity name="ConnectionContactMethod" representedClassName="ConnectionContactMethod" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="preferredContact" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="String"/>
+        <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConnectionContact" inverseName="profileContactMethods" inverseEntity="ConnectionContact"/>
     </entity>
     <elements>
-        <element name="ConnectionContact" positionX="-63" positionY="-18" width="128" height="28"/>
-        <element name="ConnectionContactMethod" positionX="-54" positionY="18" width="128" height="28"/>
+        <element name="ConnectionContact" positionX="-126.6796875" positionY="-97.8046875" width="128" height="223"/>
+        <element name="ConnectionContactMethod" positionX="266.0859375" positionY="55.0703125" width="128" height="118"/>
     </elements>
 </model>
