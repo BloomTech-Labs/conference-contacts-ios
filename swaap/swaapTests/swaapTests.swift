@@ -9,6 +9,7 @@
 import XCTest
 @testable import swaap
 import Auth0
+import NetworkHandler
 
 class SwaapTests: XCTestCase {
 
@@ -41,6 +42,7 @@ class SwaapTests: XCTestCase {
 //		// Put teardown code here. This method is called after the invocation of each test method in the class.
 //	}
 
+	// FIXME: setup mocking
 	/// current uses live server data - requires the the constants file be updated before running
 	func testRetrieveArbitraryUser() {
 		let contactController = getContactController()
@@ -62,6 +64,7 @@ class SwaapTests: XCTestCase {
 		}
 	}
 
+	// FIXME: setup mocking
 	func testFetchQRCode() {
 		let contactController = getContactController()
 
@@ -83,6 +86,7 @@ class SwaapTests: XCTestCase {
 		}
 	}
 
+	// FIXME: setup mocking
 	func testRequestConnection() {
 		let contactController = getContactController()
 
@@ -93,6 +97,29 @@ class SwaapTests: XCTestCase {
 				XCTAssertEqual(201, response.code)
 			} catch {
 				XCTFail("Error testing qrcode fetch: \(error)")
+			}
+			waitForNetwork.fulfill()
+		}
+		waitForExpectations(timeout: 10) { error in
+			if let error = error {
+				XCTFail("Timed out waiting for an expectation: \(error)")
+			}
+		}
+	}
+
+	// FIXME: setup mocking
+	func testFetchAllConnections() {
+		let contactController = getContactController()
+
+		let waitForNetwork = expectation(description: "test")
+		contactController.fetchAllContacts { result in
+			do {
+				let response = try result.get()
+				print(response)
+				// FIXME: setup mocking
+				// this is where confirming good data would go (set up mocking!)
+			} catch {
+				XCTFail("Error testing all connection fetch: \(error)")
 			}
 			waitForNetwork.fulfill()
 		}

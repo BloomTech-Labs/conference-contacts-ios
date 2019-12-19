@@ -136,4 +136,29 @@ class ContactsController {
 			}
 		}
 	}
+
+	func fetchAllContacts(completion: @escaping (Result<ContactContainer, NetworkError>) -> Void) {
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+
+		let query = """
+				{ user { sentConnections { id receiver { id authId name picture birthdate location industry jobtitle\
+				 tagline bio profile { id value type privacy preferredContact } } status } receivedConnections \
+				{ id sender { id authId name picture birthdate location industry jobtitle tagline bio profile { \
+				id value type privacy preferredContact } } status } } }
+				"""
+		let graphObject = GQuery(query: query)
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+		networkHandler.transferMahCodableDatas(with: request, completion: completion)
+	}
 }
