@@ -31,7 +31,7 @@ class ContactsController {
 	// MARK: - Fetching
 	func fetchUser(with id: String, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
@@ -66,7 +66,7 @@ class ContactsController {
 
 	func fetchQRCode(with id: String, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
@@ -108,7 +108,7 @@ class ContactsController {
 
 	func requestConnection(toUserID userID: String, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 

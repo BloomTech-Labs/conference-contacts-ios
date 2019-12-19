@@ -73,7 +73,7 @@ class ProfileController {
 	func createProfileOnServer(completion: ((Result<GQLMutationResponse, NetworkError>) -> Void)? = nil) {
 		guard let idClaims = authManager.idClaims else { return }
 		guard let cRequest = networkAuthRequestCommon() else {
-			completion?(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion?(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 		var request = cRequest
@@ -110,7 +110,7 @@ class ProfileController {
 
 	func fetchProfileFromServer(completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
 		guard var request = networkAuthRequestCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 		// while networking, load from disk if same user
@@ -174,7 +174,7 @@ class ProfileController {
 
 	func updateProfile(_ userProfile: UserProfile, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = networkAuthRequestCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
@@ -208,7 +208,7 @@ class ProfileController {
 
 	func createQRCode(labeled label: String, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = networkAuthRequestCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
@@ -242,7 +242,7 @@ class ProfileController {
 
 	func createContactMethods(_ contactMethods: [ProfileContactMethod], completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = networkAuthRequestCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
@@ -278,7 +278,7 @@ class ProfileController {
 
 	func updateProfileContactMethods(_ contactMethods: [ProfileContactMethod], completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = networkAuthRequestCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 		guard (contactMethods.allSatisfy { $0.id != nil }) else {
@@ -315,7 +315,7 @@ class ProfileController {
 
 	func deleteProfileContactMethods(_ contactMethods: [ProfileContactMethod], completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = networkAuthRequestCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
