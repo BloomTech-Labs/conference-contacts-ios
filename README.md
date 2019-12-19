@@ -1,24 +1,15 @@
 
-# Swaap
+<img src="Screenshots/swaaplogoblue.svg" width="400">
 
-<img src="Screenshots/swaaplogoblue.pdf" width="400">
+## 9 Contributors
 
-
-## 2 iOS Contributors
-
-|                                       [Marlon Raskin](https://github.com/marlonjames71)                                        |                                       [Michael Redig](https://github.com/mredig)                                        |                               
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | 
-|                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UHUR873EV-d88881406d1d-512" width = "200" />](https://github.com/)                       |                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UHF67A9T9-a3fb05aba2cd-512" width = "200" />](https://github.com/)                       |                     
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/marlonjames71)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/mredig)             |      
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
+| [Marlon Raskin][MarlonLink]                       				                                           	| [Michael Redig][MichaelLink]                                                                                  | [Jonathan Picazzo][JonathanLink]                       				                                        | [Bobby Hall][BobbyLink]                                                                                  		| [Tyler Quinn][QuinnLink]                       				                                           		| [Emily Arias][EmilyLink]                                                                                  	| [Jarvise Billups][JarviseLink]                       				                                        	| [Tyler Nishida][TylerLink]                                                                                  	| [Zachary Peasley][ZackLink]                       				                                           	|	
+| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
+| [<img src="https://ca.slack-edge.com/T4JUEB3ME-UHUR873EV-d88881406d1d-512" width = "200" />][MarlonLink]	 	| [<img src="https://ca.slack-edge.com/T4JUEB3ME-UHF67A9T9-a3fb05aba2cd-512" width = "200" />][MichaelLink]	 	| [<img src="https://avatars0.githubusercontent.com/u/8473052?s=400&v=4" width = "200" />][JonathanLink]	 	| [<img src="https://avatars1.githubusercontent.com/u/29504858?s=400&v=4" width = "200" />][BobbyLink]	 		| [<img src="https://avatars3.githubusercontent.com/u/52711778?s=400&v=4" width = "200" />][QuinnLink]	 		| [<img src="https://ca.slack-edge.com/T4JUEB3ME-UGVBY5QK0-0322eb799fbf-512" width = "200" />][EmilyLink]	 	| [<img src="https://ca.slack-edge.com/T4JUEB3ME-UHV013MQF-3a9d77644b52-512" width = "200" />][JarviseLink]	 	| [<img src="https://avatars3.githubusercontent.com/u/49229588?s=400&v=4" width = "200" />][TylerLink]	 		| [<img src="https://ca.slack-edge.com/T4JUEB3ME-UJG8RLWKG-3766d295008c-512" width = "200" />][ZackLink]	 	|
+| [<img src="https://github.com/favicon.ico" width="15"> ][MarlonLink]	                     					| [<img src="https://github.com/favicon.ico" width="15"> ][MichaelLink]	                               			| [<img src="https://github.com/favicon.ico" width="15"> ][JonathanLink]	                     				| [<img src="https://github.com/favicon.ico" width="15"> ][BobbyLink]	                               			| [<img src="https://github.com/favicon.ico" width="15"> ][QuinnLink]	                     					| [<img src="https://github.com/favicon.ico" width="15"> ][EmilyLink]	                               			| [<img src="https://github.com/favicon.ico" width="15"> ][JarviseLink]	                     					| [<img src="https://github.com/favicon.ico" width="15"> ][TylerLink]	                               			| [<img src="https://github.com/favicon.ico" width="15"> ][ZackLink]	                     					|
 
 
-[![Swift Version][swift-image]][swift-url]
-[![Build Status][travis-image]][travis-url]
-[![License][license-image]][license-url]
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Swift Version][swift-image]][swift-url]	[![License][license-image]][license-url]	[![Carthage compatible](https://img.shields.io/badge/carthage-required-red)](https://github.com/Carthage/Carthage)
 
 ## Project Overview
 
@@ -67,12 +58,34 @@ Please go [here](Contributing.md)
 
 See [Backend Documentation](https://github.com/Lambda-School-Labs/conference-contacts-be/blob/staging/schema.md) for details on the backend of our project.
 
+See [Frontend Here](https://github.com/Lambda-School-Labs/conference-contacts-fe)
 
-[swift-image]: https://img.shields.io/badge/swift-3.0-orange.svg
+
+<!-- Names + GitHub -->
+[MarlonLink]: https://github.com/marlonjames71
+[MichaelLink]: https://github.com/mredig
+[JonathanLink]: https://github.com/macjabeth
+[BobbyLink]: https://github.com/bobbyhalljr
+[QuinnLink]: https://github.com/Bangstry
+[EmilyLink]: https://github.com/Ehuntwork
+[JarviseLink]: https://github.com/Fullmetal235
+[TylerLink]: https://github.com/tylernishida
+[ZackLink]: https://github.com/zpallday
+
+<!-- Photos -->
+[MarPhoto]: <img src="https://ca.slack-edge.com/T4JUEB3ME-UHUR873EV-d88881406d1d-512" width = "200" />
+[MarlonPhoto]: https://ca.slack-edge.com/T4JUEB3ME-UHUR873EV-d88881406d1d-512
+[MichaelPhoto]: https://ca.slack-edge.com/T4JUEB3ME-UHF67A9T9-a3fb05aba2cd-512
+[JonathanPhoto]: https://avatars0.githubusercontent.com/u/8473052?s=400&v=4
+[BobbyPhoto]: https://avatars1.githubusercontent.com/u/29504858?s=400&v=4
+[QuinnPhoto]: https://avatars3.githubusercontent.com/u/52711778?s=400&v=4
+[EmilyPhoto]: https://ca.slack-edge.com/T4JUEB3ME-UGVBY5QK0-0322eb799fbf-512
+[JarvisePhoto]: https://ca.slack-edge.com/T4JUEB3ME-UHV013MQF-3a9d77644b52-512
+[TylerPhoto]: https://avatars3.githubusercontent.com/u/49229588?s=400&v=4
+[ZackPhoto]: https://ca.slack-edge.com/T4JUEB3ME-UJG8RLWKG-3766d295008c-512
+
+<!-- Badges -->
+[swift-image]: https://img.shields.io/badge/swift-5.1-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[codebeat-image]: https://codebeat.co/badges/c19b47ea-2f9d-45df-8458-b2d952fe9dad
-[codebeat-url]: https://codebeat.co/projects/github-com-vsouza-awesomeios-com
