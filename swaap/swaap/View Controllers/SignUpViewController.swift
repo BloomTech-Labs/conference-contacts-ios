@@ -2,96 +2,171 @@
 //  SignUpViewController.swift
 //  swaap
 //
-//  Created by Marlon Raskin on 11/14/19.
+//  Created by Michael Redig on 11/19/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
 
 import UIKit
-
+import Auth0
 
 class SignUpViewController: UIViewController {
+	@IBOutlet private weak var emailForm: FormInputView!
+	@IBOutlet private weak var passwordForm: FormInputView!
+	@IBOutlet private weak var passwordConfirmForm: FormInputView!
+	@IBOutlet private weak var signUpButton: ButtonHelper!
+	@IBOutlet private weak var passwordStrengthLabel: UILabel!
 
+	let authManager: AuthManager
+	let profileController: ProfileController
 
-	@IBOutlet private weak var nameTextField: UITextField!
-	@IBOutlet private weak var nameLine: UIView!
-	@IBOutlet private weak var emailTextField: UITextField!
-	@IBOutlet private weak var emailLine: UIView!
-	@IBOutlet private weak var passwordTextField: UITextField!
-	@IBOutlet private weak var passwordLine: UIView!
-	@IBOutlet private weak var passwordButton: UIButton!
-	@IBOutlet private weak var signupButton: UIButton!
-	@IBOutlet private weak var mainStackView: UIStackView!
+	// MARK: - Lifecycle
+	@available(*, unavailable)
+	required init?(coder: NSCoder) {
+		fatalError("init coder not implemented")
+	}
+
+	init?(coder: NSCoder, authManager: AuthManager, profileController: ProfileController) {
+		self.authManager = authManager
+		self.profileController = profileController
+		super.init(coder: coder)
+	}
 
 	override func viewDidLoad() {
-        super.viewDidLoad()
-		[nameTextField, emailTextField, passwordTextField].forEach { $0?.delegate = self }
-		[nameLine, emailLine, passwordLine, passwordButton].forEach { $0?.alpha = 0 }
-		signupButton.layer.cornerRadius = 8
-		signupButton.layer.cornerCurve = .continuous
-		signupButton.backgroundColor = UIColor(red: 0.40, green: 0.45, blue: 0.88, alpha: 1.00)
-    }
-
-	@IBAction func signUpTapped(_ sender: UIButton) {
-		animateSignUpbutton()
+		super.viewDidLoad()
+		setupUI()
 	}
 
-	private func animateTextFieldLines(textField: UITextField, line: UIView) {
-		if textField.becomeFirstResponder() {
-			UIView.animate(withDuration: 0.3) {
-				line.isHidden = false
-			}
-		} else if textField.resignFirstResponder() {
-			UIView.animate(withDuration: 0.3) {
-				line.isHidden = true
-			}
-		}
+	private func setupUI() {
+		overrideUserInterfaceStyle = .light
+		emailForm.contentType = .emailAddress
+		emailForm.keyboardType = .emailAddress
+		passwordForm.contentType = .newPassword
+		passwordConfirmForm.contentType = .newPassword
+		updateSignUpButtonEnabled()
+		updatePasswordStrengthLabel()
 	}
 
-	private func animateSignUpbutton() {
-		if signupButton.isHighlighted {
-			UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 10.0, options: [.allowUserInteraction], animations: {
-				self.signupButton.transform = self.signupButton.isHighlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
-			}, completion: nil)
+	@IBAction func signupTapped(_ sender: ButtonHelper) {
+		guard let (email, password) = checkFormValidity() else { return }
+		authManager.signUp(with: email, password: password, completion: {  [weak self] error in
+			self?.profileController.createProfileOnServer()
+			DispatchQueue.main.async {
+				if let error = error {
+					let alertVC = UIAlertController(error: error)
+					self?.present(alertVC, animated: true)
+					return
+				}
+
+				let alertVC = UIAlertController(title: "Signup Successful!", message: "You've created an account with the email address '\(email)'! Please sign in to continue.", preferredStyle: .alert)
+				alertVC.addAction(UIAlertAction(title: "Woohoo!", style: .default))
+				self?.present(alertVC, animated: true)
+			}
+		})
+
+		[sender, emailForm, passwordForm, passwordConfirmForm].forEach { $0.resignFirstResponder() }
+	}
+
+	@IBAction func textFieldChanged(_ sender: FormInputView) {
+		updateSignUpButtonEnabled()
+	}
+
+	@IBAction func emailFormDidFinish(_ sender: FormInputView) {
+		sender.validationState = checkEmail() != nil ? .pass : .fail
+	}
+
+	@IBAction func passwordFormDidFinish(_ sender: FormInputView) {
+		sender.validationState = checkPasswordStrength() != nil ? .pass : .fail
+	}
+
+	@IBAction func textFieldDidBeginEditing(_ sender: FormInputView) {
+		sender.validationState = .hidden
+	}
+
+	@IBAction func passwordFieldDidChange(_ sender: FormInputView) {
+		updatePasswordStrengthLabel()
+	}
+
+	@IBAction func confirmPasswordFormDidFinish(_ sender: FormInputView) {
+		sender.validationState = (checkPasswordStrength() != nil && checkPasswordMatch()) ? .pass : .fail
+	}
+
+	// MARK: - Form Validation
+	private func updateSignUpButtonEnabled() {
+		signUpButton.isEnabled = checkFormValidity() != nil
+	}
+
+	private func updatePasswordStrengthLabel() {
+		let passwordStrengthText = """
+			Password requirements:
+			• minimum of 8 Characters
+			• at least 1 lowercase
+			• at least 1 uppercase
+			• at least 1 symbol
+			• at least 1 number
+			• no identifying portion of your email
+			""" as NSString
+		let font = UIFont.preferredFont(forTextStyle: .footnote)
+		let boldFont = UIFont.boldSystemFont(ofSize: font.pointSize)
+		let attrStr = NSMutableAttributedString(string: passwordStrengthText as String, attributes: [.font: font])
+		attrStr.addAttribute(.font, value: boldFont, range: passwordStrengthText.range(of: "Password requirements:"))
+		if let password = passwordForm.text {
+			let color: UIColor = .systemTeal
+			if password.hasAtLeastXCharacters(8) {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "minimum of 8 Characters"))
+			}
+
+			if password.hasALowercaseCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 lowercase"))
+			}
+
+			if password.hasAnUppercaseCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 uppercase"))
+			}
+
+			if password.hasANumericalCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 number"))
+			}
+
+			if password.hasASpecialCharacter {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "at least 1 symbol"))
+			}
+
+			if !password.hasPartOfEmailAddress(checkEmail()) {
+				attrStr.addAttribute(.foregroundColor, value: color, range: passwordStrengthText.range(of: "no identifying portion of your email"))
+			}
 		}
+
+		passwordStrengthLabel.attributedText = attrStr
+	}
+
+	private func checkEmail() -> String? {
+		(emailForm.text?.isEmail ?? false) ? emailForm.text : nil
+	}
+
+	private func checkPasswordStrength() -> String? {
+		guard let password = passwordForm.text,
+			password.hasAtLeastXCharacters(8),
+			password.hasALowercaseCharacter,
+			password.hasAnUppercaseCharacter,
+			password.hasANumericalCharacter,
+			password.hasASpecialCharacter,
+			!password.hasPartOfEmailAddress(checkEmail()) else { return nil }
+		return password
+	}
+
+	private func checkPasswordMatch() -> Bool {
+		passwordForm.text == passwordConfirmForm.text
+	}
+
+	private func checkFormValidity() -> (email: String, password: String)? {
+		guard let email = checkEmail(), let password = checkPasswordStrength(), checkPasswordMatch() else { return nil }
+		signUpButton.isEnabled = true
+		return (email, password)
 	}
 }
 
-extension SignUpViewController: UITextFieldDelegate {
-	func textFieldDidBeginEditing(_ textField: UITextField) {
-		if textField == nameTextField {
-			UIView.animate(withDuration: 0.5) {
-				self.nameLine.alpha = 1
-			}
-		} else if textField == emailTextField {
-			UIView.animate(withDuration: 0.5) {
-				self.emailLine.alpha = 1
-			}
-		} else {
-			UIView.animate(withDuration: 0.5) {
-				self.passwordLine.alpha = 1
-				self.passwordButton.alpha = 1
-			}
-		}
-	}
-
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		if textField == nameTextField {
-			UIView.animate(withDuration: 0.5) {
-				self.nameLine.alpha = 0
-			}
-		} else if textField == emailTextField {
-			UIView.animate(withDuration: 0.5) {
-				self.emailLine.alpha = 0
-			}
-		} else {
-			UIView.animate(withDuration: 0.5) {
-				self.passwordLine.alpha = 0
-				self.passwordButton.alpha = 0
-			}
-		}
-	}
-
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		textField.resignFirstResponder()
+extension SignUpViewController: RootAuthViewControllerDelegate {
+	func controllerWillScroll(_ controller: RootAuthViewController) {
+		[emailForm, passwordForm, passwordConfirmForm].forEach { _ = $0.resignFirstResponder() }
 	}
 }
