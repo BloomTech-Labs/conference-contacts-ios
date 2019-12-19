@@ -5,6 +5,7 @@
 //  Created by Michael Redig on 12/4/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
+//swiftlint:disable identifier_name
 
 import Foundation
 
@@ -36,8 +37,8 @@ struct UserProfile: Codable, Hashable {
 		case jobTitle = "jobtitle"
 		case tagline
 		case bio
-		case profileContactMethods = "profile"
-		case qrCodes = "qrcodes"
+		case _profileContactMethods = "profile"
+		case _qrCodes = "qrcodes"
 	}
 
 	let id: String
@@ -50,8 +51,16 @@ struct UserProfile: Codable, Hashable {
 	var jobTitle: String?
 	var tagline: String?
 	var bio: String?
-	var profileContactMethods: [ProfileContactMethod]
-	var qrCodes: [ProfileQRCode]
+	private var _profileContactMethods: [ProfileContactMethod]?
+	var profileContactMethods: [ProfileContactMethod] {
+		get { _profileContactMethods ?? [] }
+		set { _profileContactMethods = newValue }
+	}
+	private var _qrCodes: [ProfileQRCode]?
+	var qrCodes: [ProfileQRCode] {
+		get { _qrCodes ?? [] }
+		set { _qrCodes = newValue }
+	}
 
 	var pictureURL: URL {
 		get {

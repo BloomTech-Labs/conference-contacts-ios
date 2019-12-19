@@ -73,10 +73,11 @@ class ContactsController {
 		let query = """
 				query ($id: ID!) {
 					qrcode(id: $id) {
+						id
 						label
 						scans
 						user {
-							id authId name picture birthdate location industry jobtitle tagline bio profile { id value type privacy preferredContact } qrcodes { id label scans }
+							id authId name picture birthdate location industry jobtitle tagline bio profile { id value type privacy preferredContact }
 						}
 					}
 				}

@@ -80,6 +80,12 @@ class AuthManager: NSObject {
 		}
 	}
 
+	/// initializer used for testing
+	init(testCredentials: Credentials?) {
+		super.init()
+		self.credentials = testCredentials
+	}
+
 	// MARK: - Auth Methods (The Guts)
 	func showWebAuth(completion: @escaping AuthCallbackHandler) {
 		Auth0.webAuth().scope("openid profile email").audience("https://api.swaap.co/").start { result in
