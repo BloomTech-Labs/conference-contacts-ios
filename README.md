@@ -13,13 +13,13 @@
 
 ## Project Overview
 
-1️⃣ You can find the deployed project at [Swaap on TestFlight](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1489988902/testflight?section=build&subsection=testers&id=58839d93-df6a-4175-9163-018050500150).
+* You can find the deployed project at [Swaap on TestFlight](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1489988902/testflight?section=build&subsection=testers&id=58839d93-df6a-4175-9163-018050500150).
 
-1️⃣ [Trello Board](https://trello.com/b/Jh8cS46t/conference-contacts)
+* [Trello Board](https://trello.com/b/Jh8cS46t/conference-contacts)
 
-1️⃣ [Product Canvas](https://www.notion.so/Release-1-0-Auth-User-Profile-7abf0ffafe804fc88e9af40ed335f17b)
+* [Product Canvas](https://www.notion.so/Release-1-0-Auth-User-Profile-7abf0ffafe804fc88e9af40ed335f17b)
 
-1️⃣ [UX Design files](https://www.figma.com/file/CkvwWMzxcI4lI4udHm8QiH/Labs18_Conference-Contacts%2C-Emily%2CTylerr?node-id=211%3A5)
+* [UX Design files](https://www.figma.com/file/CkvwWMzxcI4lI4udHm8QiH/Labs18_Conference-Contacts%2C-Emily%2CTylerr?node-id=211%3A5)
 
 Swaap is an app to help professional people make great contacts at events such as conferences, conventions, or trade shows. A lot of times it can be difficult to keep track of the people you've added to your network. Swaap makes it super easy to swap contact information with others and keep in touch. Easy QR code reader or NFC will automatically redirect you to that person's profile page where you are shown many different ways to connect with that person. Their profile will even let you know what the best way to get in touch with them.
 
