@@ -105,4 +105,35 @@ class ContactsController {
 			}
 		}
 	}
+
+	func requestConnection(toUserID userID: String, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+			return
+		}
+
+		let query = "mutation ($id:ID!) { createConnection(userID: $id) { success code message } }"
+		let variables = ["id": userID]
+
+		let graphObject = GQuery(query: query, variables: variables)
+
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let container = try result.get()
+				completion(.success(container.response))
+			} catch {
+				NSLog("Error requesting connection to user: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
 }

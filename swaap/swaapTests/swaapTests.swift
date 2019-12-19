@@ -82,4 +82,24 @@ class SwaapTests: XCTestCase {
 			}
 		}
 	}
+
+	func testRequestConnection() {
+		let contactController = getContactController()
+
+		let waitForNetwork = expectation(description: "test")
+		contactController.requestConnection(toUserID: "ck4axnllp01ff0702q3emyj3f") { result in
+			do {
+				let response = try result.get()
+				XCTAssertEqual(201, response.code)
+			} catch {
+				XCTFail("Error testing qrcode fetch: \(error)")
+			}
+			waitForNetwork.fulfill()
+		}
+		waitForExpectations(timeout: 10) { error in
+			if let error = error {
+				XCTFail("Timed out waiting for an expectation: \(error)")
+			}
+		}
+	}
 }

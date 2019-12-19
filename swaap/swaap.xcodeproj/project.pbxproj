@@ -547,9 +547,9 @@
 		37A185DA237A37BB002191B5 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				335E668C237B6BAA0099EEA1 /* ContactsController.swift */,
-				33CCBAB92398F21200A98C82 /* ProfileController.swift */,
 				3797A56123874DF000CB8621 /* AuthManager.swift */,
+				33CCBAB92398F21200A98C82 /* ProfileController.swift */,
+				335E668C237B6BAA0099EEA1 /* ContactsController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
