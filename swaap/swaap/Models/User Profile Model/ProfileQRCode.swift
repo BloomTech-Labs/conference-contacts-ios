@@ -29,7 +29,7 @@ struct ProfileQRCode: Codable, Hashable {
 	let scans: Int
 	let user: UserProfile?
 
-	init(id: String, label: String, scans: Int, user: UserProfile?) {
+	init(id: String, label: String, scans: Int, user: UserProfile? = nil) {
 		self.id = id
 		self.label = label
 		self.scans = scans
