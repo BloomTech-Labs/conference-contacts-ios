@@ -114,8 +114,8 @@ class ProfileCardView: IBPreviewView {
 		contentView.layer.cornerCurve = .continuous
 		contentView.layer.cornerRadius = 20
 		taglineLabel.isHidden = true
-		setupImageView()
 		profileImageView.mask = imageMaskView
+		setupImageView()
 
 		backgroundColor = .clear
 
@@ -125,7 +125,7 @@ class ProfileCardView: IBPreviewView {
 	private func setupImageView() {
 		guard !isInterfaceBuilder else { return }
 		let size = profileImageView.bounds.size * 1.25
-		let position = (profileImageView.bounds.size * -0.25).toPoint
+		let position = CGPoint(x: 0, y: profileImageView.bounds.height * -0.25)
 		imageMaskView.frame = CGRect(origin: position, size: size)
 		imageMaskView.backgroundColor = .white
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
