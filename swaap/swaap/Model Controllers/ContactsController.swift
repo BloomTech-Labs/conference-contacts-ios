@@ -9,6 +9,7 @@
 import Foundation
 import NetworkHandler
 import CoreData
+import CoreLocation
 
 protocol ContactsAccessor: AnyObject {
 	var contactsController: ContactsController? { get set }
@@ -121,14 +122,17 @@ class ContactsController {
 		}
 	}
 
-	func requestConnection(toUserID userID: String, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+	func requestConnection(toUserID userID: String, currentLocation: CLLocation, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
+		let coords = currentLocation.coordinate
 
-		let query = "mutation ($id:ID!) { createConnection(userID: $id) { success code message } }"
-		let variables = ["id": userID]
+		let query = SwaapGQLQueries.createConnectionMutation
+		let variables = ["id": userID,
+						 "coords": ["latitude": coords.latitude,
+									"longitude": coords.longitude]] as [String : Any]
 
 		let graphObject = GQuery(query: query, variables: variables)
 
@@ -141,7 +145,7 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.response))
