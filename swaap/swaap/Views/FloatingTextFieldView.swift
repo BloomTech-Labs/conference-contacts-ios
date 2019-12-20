@@ -21,7 +21,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	@IBOutlet private weak var textField: UITextField!
 	@IBOutlet private weak var socialButton: SocialButton!
 	@IBOutlet private weak var plusButton: UIButton!
-	@IBOutlet private weak var separator: UIView!
+	@IBOutlet private weak var socialButtonContainer: UIStackView!
 	@IBOutlet private weak var horizontalSeparator: UIView!
 	@IBOutlet private weak var aapstertSymbol: UILabel!
 	@IBOutlet private weak var cancelButton: ButtonHelper!
@@ -188,7 +188,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		showAtSymbol(false)
 		plusButton.isHidden = true
 		socialButton.isHidden = true
-		separator.isHidden = true
+		socialButtonContainer.isHidden = true
 	}
 
 	private func shouldShowAtSymbol() {
