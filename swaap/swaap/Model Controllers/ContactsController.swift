@@ -69,7 +69,7 @@ class ContactsController {
 			return
 		}
 
-		request.expectedResponseCodes = [200]
+		request.expectedResponseCodes = 200
 		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserProfileContainer, NetworkError>) in
 			do {
 				let container = try result.get()
