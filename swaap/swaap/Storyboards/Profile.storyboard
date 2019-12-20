@@ -442,11 +442,6 @@
                             <constraint firstItem="BWn-LD-Q5h" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="yzo-u6-aSL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="uVY-7s-0Rc"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="MUg-8U-P9S"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -1035,7 +1030,7 @@ Long pressing one of contact methods will bring up privacy options:
         <!--Swipe Back Navigation Controller-->
         <scene sceneID="b2C-zT-j9B">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="urS-d0-w1z" customClass="SwipeBackNavigationController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" interfaceStyle="dark" id="urS-d0-w1z" customClass="SwipeBackNavigationController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ih8-Rv-qmG">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
@@ -1048,7 +1043,7 @@ Long pressing one of contact methods will bring up privacy options:
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O8f-6b-egK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1183" y="142"/>
+            <point key="canvasLocation" x="-639" y="142"/>
         </scene>
         <!--swaap-->
         <scene sceneID="QOL-H2-G01">
@@ -1132,7 +1127,7 @@ Long pressing one of contact methods will bring up privacy options:
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hUX-xd-BSa"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Contacts" image="person.3" catalog="system" id="UhS-VM-r7a">
+                    <tabBarItem key="tabBarItem" title="Contacts" image="person.2.square.stack" catalog="system" id="UhS-VM-r7a">
                         <color key="badgeColor" name="Swaap Accent Color 1"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="swaap" id="RY8-wf-To3"/>
@@ -1150,7 +1145,7 @@ Long pressing one of contact methods will bring up privacy options:
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-129" y="142"/>
+            <point key="canvasLocation" x="198" y="142"/>
         </scene>
         <!--Swipe Back Navigation Controller-->
         <scene sceneID="onI-MA-v49">
@@ -1185,7 +1180,7 @@ Long pressing one of contact methods will bring up privacy options:
         <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
         <image name="multiply" catalog="system" width="64" height="54"/>
         <image name="pencil" catalog="system" width="64" height="56"/>
-        <image name="person.3" catalog="system" width="72" height="35"/>
+        <image name="person.2.square.stack" catalog="system" width="56" height="64"/>
         <image name="person.crop.square" catalog="system" width="64" height="56"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <image name="quote.bubble" catalog="system" width="64" height="54"/>

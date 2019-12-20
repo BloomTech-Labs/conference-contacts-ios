@@ -48,8 +48,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
 	var buttonIsOnScreen: Bool = false
 
-	let haptic = UIImpactFeedbackGenerator(style: .medium)
-
 	var contactMethods: [ProfileContactMethod] {
 		contactMethodCellViews.map { $0.contactMethod }
 	}
@@ -78,7 +76,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		setupUI()
 		updateViews()
 		navigationController?.presentationController?.delegate = self
-		haptic.prepare()
 		scrollView.delegate = self
 		if UIScreen.main.bounds.height <= 667 {
 			socialLinkButtonTopAnchor.constant = 12
@@ -460,6 +457,10 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 	func starButtonPressed(on cellView: ContactMethodCellView) {
 		contactMethodCellViews.forEach { $0.contactMethod.preferredContact = false }
 		cellView.contactMethod.preferredContact = true
+		if cellView.contactMethod.privacy != .public {
+			showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
+			cellView.contactMethod.privacy = .public
+		}
 	}
 
 	func editCellInvoked(on cellView: ContactMethodCellView) {
@@ -510,9 +511,17 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		privacyAlert.setValue(privacyAlertStringAttr, forKey: "attributedMessage")
 
 		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
+			guard !cellView.contactMethod.preferredContact else {
+				self.showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
+				return
+			}
 			cellView.contactMethod.privacy = .private
 		}
 		let connectedAction = UIAlertAction(title: "Connected", style: .default) { _ in
+			guard !cellView.contactMethod.preferredContact else {
+				self.showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
+				return
+			}
 			cellView.contactMethod.privacy = .connected
 		}
 		let publicAction = UIAlertAction(title: "Public", style: .default) { _ in
@@ -521,7 +530,13 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)
-		haptic.impactOccurred()
+		HapticFeedback.produceMediumFeedback()
+	}
+
+	private func showAlert(titled title: String?, message: String?) {
+		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Okay", style: .default))
+		present(alert, animated: true)
 	}
 }
 
