@@ -27,6 +27,14 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
+	override var prefersStatusBarHidden: Bool {
+		profileCardView?.isAtTop ?? false
+	}
+
+	override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+		.slide
+	}
+
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
 	}
@@ -148,6 +156,12 @@ extension ProfileViewController: ProfileCardViewDelegate {
 	func updateFadeViewPosition() {
 		let currentProgress = max(profileCardView.currentSlidingProgress, 0)
 		bottomFadeviewBottomConstraint.constant = CGFloat(currentProgress * -120)
+	}
+
+	func profileCard(_ card: ProfileCardView, animationDidEndAtTop top: Bool) {
+		UIView.animate(withDuration: 0.3) {
+			self.setNeedsStatusBarAppearanceUpdate()
+		}
 	}
 
 	func positionDidChange(on view: ProfileCardView) {
