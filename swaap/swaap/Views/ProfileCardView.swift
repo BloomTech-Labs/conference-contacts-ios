@@ -100,11 +100,6 @@ class ProfileCardView: IBPreviewView {
 		commonInit()
 	}
 
-	override func updateConstraints() {
-		super.updateConstraints()
-		setupImageView()
-	}
-
 	private func commonInit() {
 		#if TARGET_INTERFACE_BUILDER
 		return
@@ -130,8 +125,11 @@ class ProfileCardView: IBPreviewView {
 		updateViews()
 	}
 
-	private func setupImageView() {
+	/// This should be private and should be inherently called by resizing the view, but it's not.
+	/// Call externally if needed for different size profilecardViews
+	func setupImageView() {
 		guard !isInterfaceBuilder else { return }
+		guard profileImageView != nil else { return }
 		let size = profileImageView.bounds.size * 1.25
 		let position = CGPoint(x: 0, y: profileImageView.bounds.height * -0.25)
 		imageMaskView.frame = CGRect(origin: position, size: size)

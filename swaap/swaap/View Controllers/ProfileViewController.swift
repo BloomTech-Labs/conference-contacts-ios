@@ -71,7 +71,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		profileCardView.setNeedsUpdateConstraints()
+		profileCardView.setupImageView()
 		updateViews()
 		tabBarController?.delegate = self
 	}

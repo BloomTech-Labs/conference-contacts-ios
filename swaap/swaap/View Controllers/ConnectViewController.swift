@@ -8,14 +8,34 @@
 
 import UIKit
 
-class ConnectViewController: UIViewController {
+class ConnectViewController: UIViewController, ProfileAccessor {
 
 	@IBOutlet private weak var smallProfileCard: ProfileCardView!
+	@IBOutlet private weak var qrCodeButton: UIButton!
+	@IBOutlet private weak var scanQRButton: UIButton!
 
 	var profileController: ProfileController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		smallProfileCard.isSmallProfileCard = true
+		qrCodeButton.layer.cornerRadius = qrCodeButton.frame.height / 2
+		scanQRButton.layer.cornerRadius = scanQRButton.frame.height / 2
+		setupProfileCard()
     }
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		smallProfileCard.setupImageView()
+	}
+
+	private func setupProfileCard() {
+		guard let profileController = profileController else { return }
+		smallProfileCard.name = profileController.userProfile?.name
+		if let data = profileController.userProfile?.photoData {
+			let profileImage = UIImage(data: data)
+			smallProfileCard.profileImage = profileImage
+		}
+		smallProfileCard.layoutSubviews()
+	}
 }
