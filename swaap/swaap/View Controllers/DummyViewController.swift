@@ -53,6 +53,14 @@ class DummyViewController: UIViewController, AuthAccessor, ProfileAccessor {
 		if let access = authManager?.credentials?.accessToken {
 			print("access: '\(access)'")
 		}
+
+		if let type = authManager?.credentials?.tokenType {
+			print("type: '\(type)'")
+		}
+
+		if let refresh = authManager?.credentials?.refreshToken {
+			print("refresh: '\(refresh)'")
+		}
 	}
 
 	@objc func logoutPressed(_ sender: UIButton) {
