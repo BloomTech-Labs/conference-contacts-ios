@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SocialLinkCellView" customModule="swaap" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactMethodCellView" customModule="swaap" customModuleProvider="target">
             <connections>
                 <outlet property="cellView" destination="oNs-Ia-DpV" id="GeD-2l-igr"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="KyY-BZ-GBa"/>
@@ -24,10 +24,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNs-Ia-DpV">
-                    <rect key="frame" x="20" y="0.0" width="335" height="82"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Ye-wK-7SG">
-                            <rect key="frame" x="10" y="8" width="309" height="66"/>
+                            <rect key="frame" x="10" y="8" width="349" height="66"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO1-IM-2CW">
                                     <rect key="frame" x="0.0" y="0.0" width="22.5" height="66"/>
@@ -45,16 +45,16 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="TdN-IR-The">
-                                    <rect key="frame" x="104.5" y="0.0" width="176.5" height="66"/>
+                                    <rect key="frame" x="104.5" y="0.0" width="216.5" height="66"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vWe-Uo-buK">
-                                            <rect key="frame" x="0.0" y="0.0" width="176.5" height="38.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vWe-Uo-buK">
+                                            <rect key="frame" x="0.0" y="0.0" width="216.5" height="38.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4N-g8-b2x">
-                                            <rect key="frame" x="0.0" y="38.5" width="176.5" height="27.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Private" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4N-g8-b2x">
+                                            <rect key="frame" x="0.0" y="38.5" width="216.5" height="27.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dl-Id-aKG">
-                                    <rect key="frame" x="289" y="0.0" width="20" height="66"/>
+                                    <rect key="frame" x="329" y="0.0" width="20" height="66"/>
                                     <color key="tintColor" name="socialButtonInstagramMain"/>
                                     <state key="normal" image="minus.circle.fill" catalog="system"/>
                                     <connections>
@@ -72,17 +72,17 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKi-fj-ehb">
-                            <rect key="frame" x="48.5" y="0.0" width="234.5" height="82"/>
+                            <rect key="frame" x="48.5" y="0.0" width="274.5" height="82"/>
                             <connections>
-                                <action selector="editTapped:" destination="-1" eventType="touchUpInside" id="9DA-jS-q8k"/>
+                                <action selector="cellButtonTapped:" destination="-1" eventType="touchUpInside" id="9DA-jS-q8k"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="3dl-Id-aKG" firstAttribute="leading" secondItem="aKi-fj-ehb" secondAttribute="trailing" constant="16" id="FjU-xR-WRi"/>
+                        <constraint firstItem="aKi-fj-ehb" firstAttribute="trailing" secondItem="TdN-IR-The" secondAttribute="trailing" constant="-8" id="1MG-xN-cdl"/>
                         <constraint firstItem="9Ye-wK-7SG" firstAttribute="top" secondItem="oNs-Ia-DpV" secondAttribute="top" constant="8" id="Oyl-xn-gAG"/>
-                        <constraint firstItem="aKi-fj-ehb" firstAttribute="leading" secondItem="yO1-IM-2CW" secondAttribute="trailing" constant="16" id="d6i-0S-mUp"/>
+                        <constraint firstItem="aKi-fj-ehb" firstAttribute="leading" secondItem="maB-Gf-TMZ" secondAttribute="leading" constant="8" id="gld-HG-Dz1"/>
                         <constraint firstAttribute="bottom" secondItem="aKi-fj-ehb" secondAttribute="bottom" id="k1a-1y-5CD"/>
                         <constraint firstAttribute="bottom" secondItem="9Ye-wK-7SG" secondAttribute="bottom" constant="8" id="nyS-bG-ILm"/>
                         <constraint firstAttribute="trailing" secondItem="9Ye-wK-7SG" secondAttribute="trailing" constant="16" id="uEE-TG-tZl"/>
@@ -94,9 +94,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="oNs-Ia-DpV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="AKx-fo-pnq"/>
+                <constraint firstItem="oNs-Ia-DpV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AKx-fo-pnq"/>
                 <constraint firstAttribute="bottom" secondItem="oNs-Ia-DpV" secondAttribute="bottom" id="ARm-Ev-PI7"/>
-                <constraint firstAttribute="trailing" secondItem="oNs-Ia-DpV" secondAttribute="trailing" constant="20" id="GSH-Ax-wSG"/>
+                <constraint firstAttribute="trailing" secondItem="oNs-Ia-DpV" secondAttribute="trailing" id="GSH-Ax-wSG"/>
                 <constraint firstItem="oNs-Ia-DpV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Mhy-Nd-eKf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

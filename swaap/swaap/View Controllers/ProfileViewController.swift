@@ -11,28 +11,53 @@ import UIKit
 class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	@IBOutlet private weak var profileCardView: ProfileCardView!
+	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var backButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var editProfileButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var backButton: UIButton!
 	@IBOutlet private weak var socialButtonsStackView: UIStackView!
 	@IBOutlet private weak var birthdayLabel: UILabel!
 	@IBOutlet private weak var bioLabel: UILabel!
+	@IBOutlet private weak var birthdayImageContainerView: UIView!
+	@IBOutlet private weak var bioImageViewContainer: UIView!
+	@IBOutlet private weak var contactModePreviewStackView: UIStackView!
+	@IBOutlet private weak var bottomFadeView: UIView!
+	@IBOutlet private weak var bottomFadeviewBottomConstraint: NSLayoutConstraint!
 
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
-	// Recommended size for Social Buttons in stack view is w 250 / h 40
+	let haptic = UIImpactFeedbackGenerator(style: .rigid)
+
+	var userProfile: UserProfile? {
+		didSet { updateViews() }
+	}
+	var isCurrentUser = false
+
 	override func viewDidLoad() {
-        super.viewDidLoad()
+		super.viewDidLoad()
+		scrollView.delegate = self
+
+		haptic.prepare()
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
+		profileCardView.delegate = self
 
 		setupCardShadow()
 		setupFXView()
 		updateViews()
 		setupNotifications()
-    }
+
+		if let appearance = tabBarController?.tabBar.standardAppearance.copy() {
+			appearance.backgroundImage = UIImage()
+			appearance.shadowImage = UIImage()
+			appearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.5)
+			appearance.shadowColor = .clear
+			tabBarItem.standardAppearance = appearance
+		}
+		updateFadeViewPosition()
+	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -48,12 +73,22 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		super.viewDidAppear(animated)
 		profileCardView.setNeedsUpdateConstraints()
 		updateViews()
+		tabBarController?.delegate = self
+	}
+
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		tabBarController?.delegate = nil
 	}
 
 	private func updateViews() {
-		profileCardView.userProfile = profileController?.userProfile
-		birthdayLabel.text = profileController?.userProfile?.birthdate
-		bioLabel.text = profileController?.userProfile?.bio
+		guard isViewLoaded else { return }
+		profileCardView.userProfile = userProfile
+		birthdayLabel.text = userProfile?.birthdate
+		bioLabel.text = userProfile?.bio
+
+		editProfileButtonVisualFXContainerView.isVisible = isCurrentUser
+
 		populateSocialButtons()
 		if let count = navigationController?.viewControllers.count, count > 1 {
 			backButtonVisualFXContainerView.isHidden = false
@@ -61,27 +96,30 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			backButtonVisualFXContainerView.isHidden = true
 		}
 
+		birthdayImageContainerView.isVisible = birthdayLabel.text?.isEmpty ?? true
+		bioImageViewContainer.isVisible = bioLabel.text?.isEmpty ?? true
+
 		socialButtonsStackView.isHidden = socialButtonsStackView.arrangedSubviews.isEmpty
+		contactModePreviewStackView.isHidden = !socialButtonsStackView.arrangedSubviews.isEmpty
 	}
 
 	private func populateSocialButtons() {
-		guard let profileNuggets = profileController?.userProfile?.profileNuggets else { return }
+		guard let profileContactMethods = userProfile?.profileContactMethods else { return }
 		socialButtonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-		profileNuggets.forEach {
+		profileContactMethods.forEach {
 			guard !$0.preferredContact else { return }
-			let socialButton = SocialButton()
-			socialButton.socialInfo = SocialLink(socialType: $0.type, value: $0.value)
-			socialButton.translatesAutoresizingMaskIntoConstraints = false
-			socialButton.height = 50
-			socialButton.setContentHuggingPriority(.init(rawValue: 251), for: .vertical)
-			socialButtonsStackView.addArrangedSubview(socialButton)
+			let contactMethodCell = ContactMethodCellView(contactMethod: $0, mode: .display)
+			contactMethodCell.contactMethod = $0
+			socialButtonsStackView.addArrangedSubview(contactMethodCell)
 		}
 	}
 
 	private func setupNotifications() {
-		let updateClosure = { (_: Notification) in
+		guard isCurrentUser else { return }
+		let updateClosure = { [weak self] (_: Notification) in
 			DispatchQueue.main.async {
-				self.updateViews()
+				guard self?.isCurrentUser == true else { return }
+				self?.userProfile = self?.profileController?.userProfile
 			}
 		}
 		profileChangedObserver = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: updateClosure)
@@ -108,5 +146,33 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
 		return SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
-	
+}
+
+extension ProfileViewController: ProfileCardViewDelegate {
+	func updateFadeViewPosition() {
+		let currentProgress = max(profileCardView.currentSlidingProgress, 0)
+		bottomFadeviewBottomConstraint.constant = CGFloat(currentProgress * -120)
+	}
+
+	func positionDidChange(on view: ProfileCardView) {
+		updateFadeViewPosition()
+	}
+}
+
+extension ProfileViewController: UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if scrollView.contentOffset.y <= -120 {
+			scrollView.isScrollEnabled = false
+			haptic.impactOccurred()
+			profileCardView.animateToPrimaryPosition()
+			scrollView.isScrollEnabled = true
+		}
+	}
+}
+
+extension ProfileViewController: UITabBarControllerDelegate {
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		guard viewController == self.navigationController else { return }
+		profileController?.fetchProfileFromServer(completion: { _ in })
+	}
 }

@@ -5,6 +5,7 @@
 //  Created by Michael Redig on 12/4/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
+//swiftlint:disable identifier_name
 
 import Foundation
 
@@ -23,7 +24,7 @@ struct UserProfileContainer: Decodable {
 	}
 }
 
-struct UserProfile: Codable, Equatable {
+struct UserProfile: Codable, Hashable {
 
 	enum CodingKeys: String, CodingKey {
 		case id
@@ -33,21 +34,33 @@ struct UserProfile: Codable, Equatable {
 		case birthdate
 		case location
 		case industry
-		case jobtitle
+		case jobTitle = "jobtitle"
+		case tagline
 		case bio
-		case profileNuggets = "profile"
+		case _profileContactMethods = "profile"
+		case _qrCodes = "qrcodes"
 	}
 
 	let id: String
-	let authID: String
+	let authID: String?
 	var name: String
 	private var pictureString: String?
 	var birthdate: String?
 	var location: String?
 	var industry: String?
-	var jobtitle: String?
+	var jobTitle: String?
+	var tagline: String?
 	var bio: String?
-	var profileNuggets: [ProfileNugget]
+	private var _profileContactMethods: [ProfileContactMethod]?
+	var profileContactMethods: [ProfileContactMethod] {
+		get { _profileContactMethods ?? [] }
+		set { _profileContactMethods = newValue }
+	}
+	private var _qrCodes: [ProfileQRCode]?
+	var qrCodes: [ProfileQRCode] {
+		get { _qrCodes ?? [] }
+		set { _qrCodes = newValue }
+	}
 
 	var pictureURL: URL {
 		get {
@@ -74,6 +87,7 @@ struct UpdateUser: Codable {
 	let location: String?
 	let industry: String?
 	let jobtitle: String?
+	let tagline: String?
 	let bio: String?
 
 	init(name: String? = nil,
@@ -82,6 +96,7 @@ struct UpdateUser: Codable {
 		 location: String? = nil,
 		 industry: String? = nil,
 		 jobtitle: String? = nil,
+		 tagline: String? = nil,
 		 bio: String? = nil) {
 		self.name = name
 		self.picture = picture
@@ -89,6 +104,7 @@ struct UpdateUser: Codable {
 		self.location = location
 		self.industry = industry
 		self.jobtitle = jobtitle
+		self.tagline = tagline
 		self.bio = bio
 	}
 
@@ -98,7 +114,8 @@ struct UpdateUser: Codable {
 		birthdate = userProfile.birthdate
 		location = userProfile.location
 		industry = userProfile.industry
-		jobtitle = userProfile.jobtitle
+		jobtitle = userProfile.jobTitle
+		tagline = userProfile.tagline
 		bio = userProfile.bio
 	}
 }

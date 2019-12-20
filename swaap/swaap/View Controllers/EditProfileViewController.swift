@@ -12,10 +12,6 @@ import Photos
 import NetworkHandler
 import LoadinationIndicator
 
-struct SocialLink {
-	var socialType: ProfileFieldType?
-	var value: String
-}
 
 class EditProfileViewController: UIViewController, ProfileAccessor {
 
@@ -32,21 +28,34 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var choosePhotoButton: UIButton!
+	@IBOutlet private weak var contactMethodsDescLabel: UILabel!
 
-	@IBOutlet private weak var nameLabel: UILabel!
-	@IBOutlet private weak var locationLabel: UILabel!
-	@IBOutlet private weak var industryLabel: UILabel!
-	@IBOutlet private weak var birthdateLabel: UILabel!
-	@IBOutlet private weak var bioLabel: UILabel!
 
-	@IBOutlet private weak var socialNuggetsStackView: UIStackView!
+	@IBOutlet private weak var nameField: BasicInfoView!
+	@IBOutlet private weak var taglineField: BasicInfoView!
+	@IBOutlet private weak var jobTitleField: BasicInfoView!
+	@IBOutlet private weak var locationField: BasicInfoView!
+	@IBOutlet private weak var industryField: BasicInfoView!
+	@IBOutlet private weak var birthdayField: BasicInfoView!
+	@IBOutlet private weak var bioField: BasicInfoView!
 
-	var socialNuggets: [ProfileNugget] {
-		socialLinkCellViews.map { $0.nugget }
+	@IBOutlet private weak var contactMethodsStackView: UIStackView!
+
+	@IBOutlet private weak var socialLinkButtonTopAnchor: NSLayoutConstraint!
+	@IBOutlet private weak var socialLinkButtonBottomAnchor: NSLayoutConstraint!
+	@IBOutlet private weak var contactModeDescLabel: UILabel!
+	@IBOutlet private weak var onScreenAnchor: NSLayoutConstraint!
+	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
+	var buttonIsOnScreen: Bool = false
+
+	let haptic = UIImpactFeedbackGenerator(style: .medium)
+
+	var contactMethods: [ProfileContactMethod] {
+		contactMethodCellViews.map { $0.contactMethod }
 	}
-	var deletedNuggets: [ProfileNugget] = []
+	var deletedContactMethods: [ProfileContactMethod] = []
 
-	var socialLinkCellViews: [SocialLinkCellView] = [] {
+	var contactMethodCellViews: [ContactMethodCellView] = [] {
 		didSet {
 			updateViews()
 		}
@@ -65,24 +74,44 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		navigationController?.setNavigationBarHidden(false, animated: false)
-		navigationController?.navigationBar.installBlurEffect()
 		isModalInPresentation = true
 		setupUI()
 		updateViews()
+		navigationController?.presentationController?.delegate = self
+		haptic.prepare()
+		scrollView.delegate = self
+		if UIScreen.main.bounds.height <= 667 {
+			socialLinkButtonTopAnchor.constant = 12
+			socialLinkButtonBottomAnchor.constant = 16
+		}
     }
 
 	private func setupUI() {
 		profileImageView.layer.cornerRadius = 20
 		profileImageView.layer.cornerCurve = .continuous
+		let rawString = """
+						• The  lets others know the best way to reach you.
+						• Long press a contact method to select privacy options.
+						"""
+		let string = NSMutableAttributedString(string: rawString, attributes: [.foregroundColor: UIColor.secondaryLabel])
+		let checkmarkSealImage = UIImage(systemName: "checkmark.seal.fill")!
+		let greenCheckmarkImage = checkmarkSealImage.withTintColor(.systemGreen)
+		let checkmarkAttachment = NSTextAttachment(image: greenCheckmarkImage)
+		let checkmarkString = NSAttributedString(attachment: checkmarkAttachment)
+		let style = NSMutableParagraphStyle()
+		style.lineHeightMultiple = 1.2
+		string.insert(checkmarkString, at: 6)
+		string.addAttribute(.paragraphStyle, value: style, range: NSRange(location: 0, length: string.length))
+		contactModeDescLabel.attributedText = string
 	}
 
 	private func updateViews() {
 		UIView.animate(withDuration: 0.3) {
-			self.socialNuggetsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-			for nugget in self.socialLinkCellViews {
-				self.socialNuggetsStackView.addArrangedSubview(nugget)
+			self.contactMethodsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+			for cellView in self.contactMethodCellViews {
+				self.contactMethodsStackView.addArrangedSubview(cellView)
 			}
-			self.socialNuggetsStackView.layoutSubviews()
+			self.contactMethodsStackView.layoutSubviews()
 		}
 
 		if photo != nil {
@@ -95,13 +124,15 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	private func populateFromUserProfile() {
 		guard let userProfile = profileController?.userProfile else { return }
-		userProfile.profileNuggets.forEach { addSocialNugget(nugget: $0, checkForPreferred: false) }
+		userProfile.profileContactMethods.forEach { addContactMethod(contactMethod: $0, checkForPreferred: false) }
 		assurePreferredContactExists()
-		nameLabel.text = userProfile.name
-		industryLabel.text = userProfile.industry
-		locationLabel.text = userProfile.location
-		bioLabel.text = userProfile.bio
-		birthdateLabel.text = userProfile.birthdate
+		nameField.valueText = userProfile.name
+		taglineField.valueText = userProfile.tagline
+		jobTitleField.valueText = userProfile.jobTitle
+		locationField.valueText = userProfile.location
+		industryField.valueText = userProfile.industry
+		birthdayField.valueText = userProfile.birthdate
+		bioField.valueText = userProfile.bio
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
 		}
@@ -110,20 +141,32 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	// MARK: - Actions
 	@IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+		saveProfile()
+	}
+
+	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+		dismiss(animated: true)
+	}
+
+	@IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
+		imageActionSheet()
+	}
+
+
+	// MARK: - Helper Methods
+	// MARK: Saving
+	private func saveProfile() {
 		//no image handling
-		guard let name = nameLabel.text,
-			let industry = industryLabel.text,
-			let location = locationLabel.text,
-			let bio = bioLabel.text,
-			let birthdate = birthdateLabel.text
-		else { return }
+		guard let name = nameField.valueText else { return }
 		guard var newProfile = profileController?.userProfile else { return }
 		newProfile.name = name
-		newProfile.industry = industry
-		newProfile.location = location
-		newProfile.bio = bio
-		newProfile.birthdate = birthdate
-		newProfile.profileNuggets = socialNuggets
+		newProfile.tagline = taglineField.valueText
+		newProfile.jobTitle = jobTitleField.valueText
+		newProfile.location = locationField.valueText
+		newProfile.industry = industryField.valueText
+		newProfile.birthdate = birthdayField.valueText
+		newProfile.bio = bioField.valueText
+		newProfile.profileContactMethods = contactMethods
 
 		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
 		panel.statusLabel.text = "Saving..."
@@ -151,21 +194,70 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			}
 		}
 
+		let profileUpdate = profileUpdateOperation(newProfile: newProfile)
+
+		let profileRefresh = profileRefreshOperation()
+
+		let createdMethods = contactMethods.filter { $0.id == nil }
+		let createContactMethods = createContactMethodsOperation(createdMethods: createdMethods)
+
+		let updatedMethods = contactMethods.filter { $0.id != nil }
+		let updateContactMethods = updateContactMethodsOperation(updatedMethods: updatedMethods)
+
+		let deletedContactMethods = self.deletedContactMethods
+		let deleteContactMethods = deleteContactMethodsOperation(deletedContactMethods: deletedContactMethods)
+
+
+		let dismissSelf = ConcurrentOperation { [weak self] in
+			self?.dismiss(animated: true)
+		}
+
+		profileUpdate.addDependency(imageUpdate)
+		profileRefresh.addDependency(createContactMethods)
+		profileRefresh.addDependency(profileUpdate)
+		profileRefresh.addDependency(updateContactMethods)
+		profileRefresh.addDependency(deleteContactMethods)
+		dismissSelf.addDependency(profileRefresh)
+
+		let queue = OperationQueue()
+		queue.addOperations([profileUpdate,
+							 profileRefresh,
+							 imageUpdate,
+							 createContactMethods,
+							 updateContactMethods,
+							 deleteContactMethods],
+							waitUntilFinished: false)
+		OperationQueue.main.addOperation(dismissSelf)
+
+		saveButton.isEnabled = false
+		cancelButton.isEnabled = false
+	}
+
+	// MARK: Saving Helpers
+	private func concurrentCompletion(with semaphore: DispatchSemaphore) -> (Result<GQLMutationResponse, NetworkError>) -> Void {
+		return { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
+			switch result {
+			case .success:
+				break
+			case .failure(let error):
+				print(error)
+			}
+			semaphore.signal()
+		}
+	}
+
+	private func profileUpdateOperation(newProfile: UserProfile) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
 		let profileUpdate = ConcurrentOperation { [weak self] in
-			let semaphore = DispatchSemaphore(value: 0)
-			self?.profileController?.updateProfile(newProfile, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-				switch result {
-				case .success:
-					break
-				case .failure(let error):
-					print(error)
-				}
-				semaphore.signal()
-			})
+			self?.profileController?.updateProfile(newProfile, completion: completion)
 			semaphore.wait()
 			print("profile update finished")
 		}
+		return profileUpdate
+	}
 
+	private func profileRefreshOperation() -> ConcurrentOperation {
 		let profileRefresh = ConcurrentOperation { [weak self] in
 			let semaphore = DispatchSemaphore(value: 0)
 			self?.profileController?.fetchProfileFromServer(completion: { (result: Result<UserProfile, NetworkError>) in
@@ -180,173 +272,179 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			semaphore.wait()
 			print("profile refresh finished")
 		}
-
-		var nuggetUpdates = [ConcurrentOperation]()
-		for (index, nugget) in socialNuggets.enumerated() {
-			let nuggetUpdate = ConcurrentOperation { [weak self] in
-				guard let self = self else { return }
-				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.modifyProfileNugget(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-					switch result {
-					case .success:
-						break
-					case .failure(let error):
-						print(error)
-					}
-					semaphore.signal()
-				})
-				semaphore.wait()
-				print("nugget update \(index) update finished")
-			}
-			nuggetUpdates.append(nuggetUpdate)
-		}
-
-		var nuggetDeletions = [ConcurrentOperation]()
-		for nugget in deletedNuggets {
-			let nuggetUpdate = ConcurrentOperation { [weak self] in
-				guard let self = self else { return }
-				let semaphore = DispatchSemaphore(value: 0)
-				self.profileController?.deleteProfileNugget(nugget, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-					switch result {
-					case .success:
-						break
-					case .failure(let error):
-						print(error)
-					}
-					semaphore.signal()
-				})
-				semaphore.wait()
-			}
-			nuggetDeletions.append(nuggetUpdate)
-		}
-
-		let dismissSelf = ConcurrentOperation { [weak self] in
-			self?.dismiss(animated: true)
-		}
-
-		profileUpdate.addDependency(imageUpdate)
-		profileRefresh.addDependency(profileUpdate)
-		nuggetUpdates.forEach { profileRefresh.addDependency($0) }
-		nuggetDeletions.forEach { profileRefresh.addDependency($0) }
-		dismissSelf.addDependency(profileRefresh)
-
-		let queue = OperationQueue()
-		queue.addOperations([profileUpdate, profileRefresh, imageUpdate] + nuggetDeletions + nuggetUpdates, waitUntilFinished: false)
-		OperationQueue.main.addOperation(dismissSelf)
-
-		saveButton.isEnabled = false
-		cancelButton.isEnabled = false
+		return profileRefresh
 	}
 
-	@IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-		dismiss(animated: true)
+	private func createContactMethodsOperation(createdMethods: [ProfileContactMethod]) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
+		let createContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !createdMethods.isEmpty else { return }
+			profileController.createContactMethods(createdMethods, completion: completion)
+			semaphore.wait()
+			print("created new contact method(s)")
+		}
+		return createContactMethods
 	}
 
-	@IBAction func choosePhotoButtonTapped(_ sender: UIButton) {
-		imageActionSheet()
+	private func updateContactMethodsOperation(updatedMethods: [ProfileContactMethod]) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
+		let updateContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !updatedMethods.isEmpty else { return }
+			profileController.updateProfileContactMethods(updatedMethods, completion: completion)
+			semaphore.wait()
+			print("updated contact method(s)")
+		}
+		return updateContactMethods
 	}
 
-	// MARK: - Nugget Management
-	func addSocialNugget(nugget: ProfileNugget, checkForPreferred: Bool = true) {
-		let nuggetView = SocialLinkCellView(frame: .zero, nugget: nugget)
-		nuggetView.delegate = self
-		socialLinkCellViews.append(nuggetView)
+	private func deleteContactMethodsOperation(deletedContactMethods: [ProfileContactMethod]) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
+		let deleteContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !deletedContactMethods.isEmpty else { return }
+			profileController.deleteProfileContactMethods(deletedContactMethods, completion: completion)
+			semaphore.wait()
+			print("deleted contact method(s)")
+		}
+		return deleteContactMethods
+	}
+
+	// MARK: Other
+	private func dismissalActionSheet() {
+		let dismissActionSheet = UIAlertController(title: "What would you like to do?", message: nil, preferredStyle: .actionSheet)
+		let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+			self.saveProfile()
+		}
+
+		let dontSaveAction = UIAlertAction(title: "Don't Save", style: .default) { _ in
+			self.dismiss(animated: true, completion: nil)
+		}
+
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+		[saveAction, dontSaveAction, cancelAction].forEach { dismissActionSheet.addAction($0) }
+		present(dismissActionSheet, animated: true, completion: nil)
+	}
+
+	// MARK: - Contact Method Management
+	func addContactMethod(contactMethod: ProfileContactMethod, checkForPreferred: Bool = true) {
+		let contactMethodView = ContactMethodCellView(contactMethod: contactMethod, mode: .edit)
+		contactMethodView.delegate = self
+		contactMethodCellViews.append(contactMethodView)
 		if checkForPreferred {
 			assurePreferredContactExists()
 		}
 	}
 
-	func removeNugget(nugget: ProfileNugget) {
-		guard let index = socialLinkCellViews.firstIndex(where: { $0.nugget == nugget }) else { return }
-		deletedNuggets.append(socialNuggets[index])
-		socialLinkCellViews.remove(at: index)
+	func removeContactMethod(contactMethod: ProfileContactMethod) {
+		guard let index = contactMethodCellViews.firstIndex(where: { $0.contactMethod == contactMethod }) else { return }
+		deletedContactMethods.append(contactMethods[index])
+		contactMethodCellViews.remove(at: index)
 		assurePreferredContactExists()
 	}
 
 	private func assurePreferredContactExists() {
-		if socialNuggets.preferredContact == nil {
-			socialLinkCellViews.first?.nugget.preferredContact = true
+		if contactMethods.preferredContact == nil {
+			contactMethodCellViews.first?.contactMethod.preferredContact = true
 		}
 	}
 
 	// MARK: - Segues
-	private func passLabelText(from label: UILabel) -> String? {
-		if let text = label.text {
-			if text.contains("Tap to add") {
-				return nil
-			} else {
-				return text
-			}
-		}
-		return nil
-	}
-
 	@IBSegueAction func nameTextFieldViewController(coder: NSCoder) -> UIViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.nameLabel.text = socialLink.value
-		}
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.nameField.valueText = infoNugget.value
+		}, enableSaveButtonHandler: { _, value -> Bool in
+			!value.isEmpty
+		})
 		inputVC?.placeholderStr = "Enter your full name"
-		inputVC?.labelText = passLabelText(from: nameLabel)
+		inputVC?.labelText = nameField.valueText
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
 	
+	@IBSegueAction func taglineTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.taglineField.valueText = infoNugget.value
+		})
+		inputVC?.placeholderStr = "Add your tagline"
+		inputVC?.labelText = taglineField.valueText
+		inputVC?.autoCapitalizationType = .sentences
+		return inputVC
+	}
+
 	@IBSegueAction func locationTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.locationLabel.text = socialLink.value
-		}
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.locationField.valueText = infoNugget.value
+		})
 		inputVC?.placeholderStr = "Name of city"
-		inputVC?.labelText = passLabelText(from: locationLabel)
+		inputVC?.labelText = locationField.valueText
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
 
 	@IBSegueAction func industryTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.industryLabel.text = socialLink.value
-		}
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.industryField.valueText = infoNugget.value
+		})
 		inputVC?.placeholderStr = "Add the industry you're in"
-		inputVC?.labelText = passLabelText(from: industryLabel)
+		inputVC?.labelText = industryField.valueText
 		inputVC?.autoCapitalizationType = .words
 		return inputVC
 	}
 
 	@IBSegueAction func birthdateTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.birthdateLabel.text = socialLink.value
-		}
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.birthdayField.valueText = infoNugget.value
+		})
 		inputVC?.placeholderStr = "MM/DD/YYYY"
-		inputVC?.labelText = passLabelText(from: birthdateLabel)
+		inputVC?.labelText = birthdayField.valueText
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
 
 	@IBSegueAction func bioTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false) { socialLink in
-			self.bioLabel.text = socialLink.value
-		}
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.bioField.valueText = infoNugget.value
+		})
 		inputVC?.placeholderStr = "Add a short bio"
-		inputVC?.labelText = passLabelText(from: bioLabel)
+		inputVC?.labelText = bioField.valueText
 		inputVC?.autoCapitalizationType = .sentences
 		return inputVC
 	}
 
-	@IBSegueAction func socialLinkTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true) { socialLink in
-			guard let type = socialLink.socialType else { return }
-			let nugget = ProfileNugget(value: socialLink.value, type: type)
-			self.addSocialNugget(nugget: nugget)
-		}
+	@IBSegueAction func editJobTitleSegue(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+			self.jobTitleField.valueText = infoNugget.value
+		})
+		inputVC?.placeholderStr = "Add your job title"
+		inputVC?.labelText = jobTitleField.valueText
+		inputVC?.autoCapitalizationType = .none
+		return inputVC
+	}
+
+
+	@IBSegueAction func createContactMethodTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: { infoNugget in
+			guard let contactMethod = infoNugget.contactMethod else { return }
+			self.addContactMethod(contactMethod: contactMethod)
+		}, enableSaveButtonHandler: { type, value in
+			type != nil && !value.isEmpty
+		})
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
 	}
 
 }
 
-// MARK: - SocialLinkCellViewDelegate conformance
-extension EditProfileViewController: SocialLinkCellViewDelegate {
-	func deleteButtonPressed(on cellView: SocialLinkCellView) {
-		guard socialLinkCellViews.count >= 2 else {
+// MARK: - ContactMethodCellViewDelegate conformance
+extension EditProfileViewController: ContactMethodCellViewDelegate {
+	func deleteButtonPressed(on cellView: ContactMethodCellView) {
+		guard contactMethodCellViews.count >= 2 else {
 			let alert = UIAlertController(title: "At least one preferred mode of contact is needed",
 										  message: """
 			This is the contact button that shows on your profile card and it's how others will try and reach out to you first
@@ -356,46 +454,114 @@ extension EditProfileViewController: SocialLinkCellViewDelegate {
 			present(alert, animated: true, completion: nil)
 			return
 		}
-		removeNugget(nugget: cellView.nugget)
+		removeContactMethod(contactMethod: cellView.contactMethod)
 	}
 
-	func starButtonPressed(on cellView: SocialLinkCellView) {
-		socialLinkCellViews.forEach { $0.nugget.preferredContact = false }
-		cellView.nugget.preferredContact = true
+	func starButtonPressed(on cellView: ContactMethodCellView) {
+		contactMethodCellViews.forEach { $0.contactMethod.preferredContact = false }
+		cellView.contactMethod.preferredContact = true
 	}
 
-	func editCellInvoked(on cellView: SocialLinkCellView) {
-		let inputVCCompletion = { (socialLink: SocialLink) in
-			guard let type = socialLink.socialType else { return }
-			let nugget = ProfileNugget(id: cellView.nugget.id,
-									   value: socialLink.value,
+	func editCellInvoked(on cellView: ContactMethodCellView) {
+		let inputVCCompletion = { (infoNugget: ProfileInfoNugget) in
+			guard let type = infoNugget.type else { return }
+			let contactMethod = ProfileContactMethod(id: cellView.contactMethod.id,
+									   value: infoNugget.value,
 									   type: type,
-									   privacy: cellView.nugget.privacy,
-									   preferredContact: cellView.nugget.preferredContact)
-			cellView.nugget = nugget
+									   privacy: cellView.contactMethod.privacy,
+									   preferredContact: cellView.contactMethod.preferredContact)
+			cellView.contactMethod = contactMethod
 		}
 		let inputVC = InputTextFieldViewController.instantiate(storyboardName: "Profile") { coder -> UIViewController? in
-			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion)
+			InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: inputVCCompletion, enableSaveButtonHandler: { type, value in
+				type != nil && !value.isEmpty
+			})
 		}
-		inputVC.socialType = cellView.nugget.type
-		inputVC.labelText = cellView.nugget.value
+		inputVC.socialType = cellView.contactMethod.type
+		inputVC.labelText = cellView.contactMethod.value
 		inputVC.modalPresentationStyle = .overFullScreen
 		present(inputVC, animated: true)
 	}
 
-	func privacySelectionInvoked(on cellView: SocialLinkCellView) {
-		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: nil, preferredStyle: .actionSheet)
+	func privacySelectionInvoked(on cellView: ContactMethodCellView) {
+		let privateStr = NSMutableAttributedString(string: "Private",
+												   attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
+		let connectedStr = NSMutableAttributedString(string: "Connected",
+													 attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
+		let publicStr = NSMutableAttributedString(string: "Public",
+												  attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
+		let privacyAlertString = """
+								 - only visible to you
+								 - only visible to your connections
+								 - visible to anyone
+								"""
+		let privacyAlertStringAttr = NSMutableAttributedString(string: privacyAlertString)
+		privacyAlertStringAttr.addAttribute(.font,
+											value: UIFont.systemFont(ofSize: 15, weight: .regular),
+											range: NSRange(location: 0, length: privacyAlertStringAttr.length))
+		privacyAlertStringAttr.insert(privateStr, at: 0)
+		privacyAlertStringAttr.insert(connectedStr, at: 30)
+		privacyAlertStringAttr.insert(publicStr, at: 75)
+		let pStyle = NSMutableParagraphStyle()
+		pStyle.alignment = NSTextAlignment.left
+		privacyAlertStringAttr.addAttribute(.paragraphStyle, value: pStyle, range: NSRange(location: 0, length: privacyAlertStringAttr.length))
+
+		let privacyAlert = UIAlertController(title: "Select Privacy Option", message: privacyAlertString, preferredStyle: .actionSheet)
+		privacyAlert.setValue(privacyAlertStringAttr, forKey: "attributedMessage")
+
 		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
-			cellView.nugget.privacy = .private
+			cellView.contactMethod.privacy = .private
 		}
 		let connectedAction = UIAlertAction(title: "Connected", style: .default) { _ in
-			cellView.nugget.privacy = .connected
+			cellView.contactMethod.privacy = .connected
 		}
 		let publicAction = UIAlertAction(title: "Public", style: .default) { _ in
-			cellView.nugget.privacy = .public
+			cellView.contactMethod.privacy = .public
 		}
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)
+		haptic.impactOccurred()
+	}
+}
+
+extension EditProfileViewController: UIAdaptivePresentationControllerDelegate {
+	func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+		self.dismissalActionSheet()
+	}
+}
+
+extension EditProfileViewController: UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let point = getLabelPoint()
+		if point.y < view.frame.maxY {
+			animateOn()
+		} else {
+			animateOff()
+		}
+	}
+
+	private func animateOn() {
+		guard !buttonIsOnScreen else { return }
+		buttonIsOnScreen = true
+		UIView.animate(withDuration: 0.5) {
+			self.offScreenAnchor.isActive = false
+			self.onScreenAnchor.isActive = true
+			self.view.layoutSubviews()
+		}
+	}
+
+	private func animateOff() {
+		guard buttonIsOnScreen else { return }
+		buttonIsOnScreen = false
+		UIView.animate(withDuration: 0.5) {
+			self.onScreenAnchor.isActive = false
+			self.offScreenAnchor.isActive = true
+			self.view.layoutSubviews()
+		}
+	}
+
+	func getLabelPoint() -> CGPoint {
+		view.convert(CGPoint.zero, from: contactModeDescLabel)
 	}
 }

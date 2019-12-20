@@ -10,6 +10,10 @@ import UIKit
 import IBPreview
 import ChevronAnimatable
 
+protocol ProfileCardViewDelegate: AnyObject {
+	func positionDidChange(on view: ProfileCardView)
+}
+
 @IBDesignable
 class ProfileCardView: IBPreviewView {
 
@@ -50,13 +54,15 @@ class ProfileCardView: IBPreviewView {
 		set { industryLabel.text = newValue }
 	}
 
-	var preferredContact: SocialLink? {
-		get { socialButton.socialInfo }
+	var preferredContact: ProfileInfoNugget? {
+		get { socialButton.infoNugget }
 		set {
 			guard let newValue = newValue else { return }
-			socialButton.socialInfo = newValue
+			socialButton.infoNugget = newValue
 		}
 	}
+
+	weak var delegate: ProfileCardViewDelegate?
 
 
 	// MARK: - Outlets
@@ -132,15 +138,18 @@ class ProfileCardView: IBPreviewView {
 			profileImage = nil
 		}
 		name = userProfile?.name
-		jobTitle = userProfile?.jobtitle
+		jobTitle = userProfile?.jobTitle
 		location = userProfile?.location
 		industry = userProfile?.industry
 
-		guard let pContact = userProfile?.profileNuggets.preferredContact else { return }
-		let socialLink = SocialLink(socialType: pContact.type, value: pContact.value)
-		preferredContact = socialLink
+		guard let pContact = userProfile?.profileContactMethods.preferredContact else { return }
+		let nuggetInfo = ProfileInfoNugget(type: pContact.type, value: pContact.value)
+		preferredContact = nuggetInfo
 	}
 
+	@IBAction func socialButtonTapped(_ sender: SocialButton) {
+		sender.openLink()
+	}
 
 	// MARK: - Pan Gesture properties
 	private var slideOffset: CGFloat = 0
@@ -149,7 +158,7 @@ class ProfileCardView: IBPreviewView {
 	}
 	private let swipeVelocity: CGFloat = 550
 	/// 0 is when it's slid all the way down, 1.0 when it's slid all the way to its max sliding height
-	private var currentSlidingProgress: Double {
+	var currentSlidingProgress: Double {
 		let range = 0...abs(maxTranslate)
 		return range.normalizedIndex(-transform.ty)
 	}
@@ -180,27 +189,30 @@ class ProfileCardView: IBPreviewView {
 		} else {
 			layer.removeAllAnimations()
 		}
+		delegate?.positionDidChange(on: self)
 	}
 
-	private func animateToPrimaryPosition() {
-		UIView.animate(withDuration: 0.3,
+	func animateToPrimaryPosition() {
+		UIView.animate(withDuration: 0.5,
 					   delay: 0.0,
 					   usingSpringWithDamping: 0.8,
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
 						self.transform = .identity
+						self.delegate?.positionDidChange(on: self)
 		}, completion: nil)
 	}
 
 	private func animateToTopPosition() {
-		UIView.animate(withDuration: 0.3,
+		UIView.animate(withDuration: 0.5,
 					   delay: 0.0,
 					   usingSpringWithDamping: 0.8,
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
 						self.transform.ty = self.maxTranslate
+						self.delegate?.positionDidChange(on: self)
 		}, completion: nil)
 	}
 }

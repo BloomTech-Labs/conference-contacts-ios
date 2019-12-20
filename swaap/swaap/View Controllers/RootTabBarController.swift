@@ -18,7 +18,7 @@ class RootTabBarController: UITabBarController {
 
 	let authManager: AuthManager
 	let profileController: ProfileController
-	let contactsController = ContactsController()
+	let contactsController: ContactsController
 	lazy var rootAuthVC: RootAuthViewController = {
 		let storyboard = UIStoryboard(name: "Login", bundle: nil)
 		let rootAuthVC = storyboard.instantiateViewController(identifier: "RootAuthViewController") { coder in
@@ -35,7 +35,9 @@ class RootTabBarController: UITabBarController {
 	required init?(coder: NSCoder) {
 		let authManager = AuthManager()
 		self.authManager = authManager
-		self.profileController = ProfileController(authManager: authManager)
+		let profileController = ProfileController(authManager: authManager)
+		self.profileController = profileController
+		self.contactsController = ContactsController(profileController: profileController)
 		super.init(coder: coder)
 
 		updateViewControllers()
@@ -53,6 +55,7 @@ class RootTabBarController: UITabBarController {
 
 		// FIXME: For debugging
 		vcs.forEach { ($0 as? ProfileAccessor)?.profileController = profileController }
+		vcs.forEach { ($0 as? ContactsAccessor)?.contactsController = contactsController }
 	}
 
 	override func viewDidLoad() {

@@ -10,7 +10,8 @@ import UIKit
 import IBPreview
 
 protocol FloatingTextFieldViewDelegate: AnyObject {
-	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: SocialLink)
+	func didFinishEditing(_ view: FloatingTextFieldView, infoNugget: ProfileInfoNugget)
+	func didCancelEditing(_ view: FloatingTextFieldView)
 }
 
 class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -32,6 +33,10 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 			updateViews()
 		}
 	}
+
+	var enableSaveButtonClosure: EnableSaveButtonHandler?
+
+	typealias EnableSaveButtonHandler = (ProfileFieldType?, String) -> Bool
 
 	weak var delegate: FloatingTextFieldViewDelegate?
 
@@ -74,15 +79,18 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		collectionView.dataSource = self
 		collectionView.register(SocialButtonCollectionViewCell.self, forCellWithReuseIdentifier: "SocialButtonCell")
 
+		textField.delegate = self
+
 		self.backgroundColor = .clear
 	}
 
 	override func becomeFirstResponder() -> Bool {
-		textField.becomeFirstResponder()
+		shouldEnableSaveButton()
+		return textField.becomeFirstResponder()
 	}
 
 	@objc func hideKeyboardAction() {
-		textField.resignFirstResponder()
+		shouldEnableSaveButton()
 	}
 
 	// MARK: - Textfield Formatting
@@ -130,23 +138,15 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	// MARK: - IBActions
 	@IBAction func textFieldDidChange(_ sender: UITextField) {
-		if textField.text?.isEmpty == false {
-			saveButton.isEnabled = true
-			saveButton.alpha = 1
-		} else {
-			saveButton.isEnabled = false
-			saveButton.alpha = 0.6
-		}
+		shouldEnableSaveButton()
 	}
 
 	@IBAction func cancelTapped(_ sender: ButtonHelper) {
-		fireFirstResponder()
+		delegate?.didCancelEditing(self)
 	}
 
 	@IBAction func saveTapped(_ sender: ButtonHelper) {
-		guard let text = textField.text else { return }
-		delegate?.didFinishEditing(self, socialLink: SocialLink(socialType: socialType, value: text))
-		fireFirstResponder()
+		saveText()
 	}
 
 	@IBAction func addChangeSocialButton(_ sender: UIControl) {
@@ -156,11 +156,12 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	// MARK: - Helper Methods
 	private func updateViews() {
+		shouldEnableSaveButton()
 		shouldShowAtSymbol()
 		formatTextField()
 		if let socialType = socialType {
 			socialButton.isVisible = true
-			socialButton.socialInfo.socialType = socialType
+			socialButton.infoNugget.type = socialType
 		} else {
 			socialButton.isVisible = false
 		}
@@ -181,10 +182,6 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 			hideAllSocialElements()
 			textField.placeholder = placeholderText
 		}
-	}
-
-	func fireFirstResponder() {
-		textField.resignFirstResponder()
 	}
 
 	private func hideAllSocialElements() {
@@ -234,6 +231,17 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		plusButton.setImage(image, for: .normal)
 	}
 
+	@discardableResult private func shouldEnableSaveButton() -> Bool {
+		saveButton.isEnabled = enableSaveButtonClosure?(socialType, textField.text ?? "") ?? true
+		saveButton.alpha = saveButton.isEnabled ? 1 : 0.6
+		return saveButton.isEnabled
+	}
+
+	private func saveText() {
+		guard let text = textField.text else { return }
+		delegate?.didFinishEditing(self, infoNugget: ProfileInfoNugget(type: socialType, value: text))
+	}
+
 
 	// MARK: - CollectionView Methods
 
@@ -249,13 +257,25 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialButtonCell",
 														for: indexPath) as? SocialButtonCollectionViewCell else { return UICollectionViewCell() }
 
-		cell.socialLink.socialType = ProfileFieldType.allCases[indexPath.item]
+		cell.infoNugget.type = ProfileFieldType.allCases[indexPath.item]
 		cell.socialButton.addTarget(self, action: #selector(didSelectSocialButton(_:)), for: .touchUpInside)
 		return cell
 	}
 
 	@objc func didSelectSocialButton(_ sender: SocialButton) {
-		socialType = sender.socialInfo.socialType
+		socialType = sender.infoNugget.type
+		shouldEnableSaveButton()
 		shouldShowCollectionView(false)
+	}
+}
+
+extension FloatingTextFieldView: UITextFieldDelegate {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		if shouldEnableSaveButton() {
+			saveText()
+			return true
+		} else {
+			return false
+		}
 	}
 }
