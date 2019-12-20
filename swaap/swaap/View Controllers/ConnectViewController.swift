@@ -32,6 +32,5 @@ class ConnectViewController: UIViewController, ProfileAccessor {
 	private func setupProfileCard() {
 		guard let profileController = profileController else { return }
 		smallProfileCard.userProfile = profileController.userProfile
-		smallProfileCard.name = profileController.userProfile?.name
 	}
 }
