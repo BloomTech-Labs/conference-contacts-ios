@@ -44,6 +44,7 @@
 		33CCBADA2399B56C00A98C82 /* NetworkHandler.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33E7BBFD23A19BC000D81C02 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7BBFC23A19BC000D81C02 /* QRViewController.swift */; };
 		33E7BC0923A19CBD00D81C02 /* HandyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7BC0823A19CBC00D81C02 /* HandyExtensions.swift */; };
+		33E8C7C323AC6025005E1E2C /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E8C7C223AC6025005E1E2C /* LocationHandler.swift */; };
 		33F0EA4E23984D6A004D1236 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA4D23984D6A004D1236 /* UserProfile.swift */; };
 		33F0EA562398551B004D1236 /* ProfileFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA552398551B004D1236 /* ProfileFieldType.swift */; };
 		33F0EA5823985556004D1236 /* ProfileDecodingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5723985556004D1236 /* ProfileDecodingError.swift */; };
@@ -219,6 +220,7 @@
 		33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NetworkHandler.xcodeproj; path = Carthage/Checkouts/NetworkHandler/NetworkHandler.xcodeproj; sourceTree = "<group>"; };
 		33E7BBFC23A19BC000D81C02 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		33E7BC0823A19CBC00D81C02 /* HandyExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandyExtensions.swift; sourceTree = "<group>"; };
+		33E8C7C223AC6025005E1E2C /* LocationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		33F0EA4D23984D6A004D1236 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContactMethod.swift; sourceTree = "<group>"; };
 		33F0EA552398551B004D1236 /* ProfileFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFieldType.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				332FD21023A031C800074F28 /* Codable+ToDict.swift */,
 				37D1D72123A198EF00931BF8 /* AlertTint+UIAlertViewController.swift */,
 				33094E7B23AA13B700D5556B /* CoreDataStack.swift */,
+				33E8C7C223AC6025005E1E2C /* LocationHandler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
 				37D1D76123A9651800931BF8 /* BasicInfoView.swift in Sources */,
+				33E8C7C323AC6025005E1E2C /* LocationHandler.swift in Sources */,
 				37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */,
 				3329A47D23A9546B007F10E2 /* ContactsViewController.swift in Sources */,
 				33094E7A23AA0D9B00D5556B /* ConnectionContactMethod+Convenience.swift in Sources */,
