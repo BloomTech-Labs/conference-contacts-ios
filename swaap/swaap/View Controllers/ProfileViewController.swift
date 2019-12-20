@@ -27,8 +27,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
-	let haptic = UIImpactFeedbackGenerator(style: .rigid)
-
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
 	}
@@ -37,8 +35,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		scrollView.delegate = self
-
-		haptic.prepare()
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
@@ -163,7 +159,7 @@ extension ProfileViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		if scrollView.contentOffset.y <= -120 {
 			scrollView.isScrollEnabled = false
-			haptic.impactOccurred()
+			HapticFeedback.produceRigidFeedback()
 			profileCardView.animateToPrimaryPosition()
 			scrollView.isScrollEnabled = true
 		}

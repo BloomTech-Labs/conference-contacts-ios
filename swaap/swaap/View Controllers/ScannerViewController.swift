@@ -100,7 +100,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		if let metaDataObject = metadataObjects.first {
 			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
 			guard let stringValue = readableObject.stringValue else { return }
-			AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+			HapticFeedback.produceHeavyFeedback()
 			title = "Found"
 			found(code: stringValue)
 		}

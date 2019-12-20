@@ -8,41 +8,42 @@
 
 import UIKit
 
-enum HapticFeedback {
-	static let lightFeedback = UIImpactFeedbackGenerator(style: .light)
-	static let mediumFeedback = UIImpactFeedbackGenerator(style: .medium)
-	static let heavyFeedback = UIImpactFeedbackGenerator(style: .heavy)
-	static let softFeedback = UIImpactFeedbackGenerator(style: .soft)
-	static let feedback = UISelectionFeedbackGenerator()
+class HapticFeedback {
 
+	static let shared = HapticFeedback()
+
+	private let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+	private let mediumFeedback = UIImpactFeedbackGenerator(style: .medium)
+	private let heavyFeedback = UIImpactFeedbackGenerator(style: .heavy)
+	private let softFeedback = UIImpactFeedbackGenerator(style: .soft)
+	private let rigidFeedback = UIImpactFeedbackGenerator(style: .rigid)
+	private let selectionFeedback = UISelectionFeedbackGenerator()
+
+	private init() {
+		[lightFeedback, mediumFeedback, heavyFeedback, softFeedback, rigidFeedback, selectionFeedback].forEach { $0.prepare() }
+	}
 
 	static func produceLightFeedback() {
-		if true {
-			lightFeedback.impactOccurred()
-		}
+		shared.lightFeedback.impactOccurred()
 	}
 
 	static func produceMediumFeedback() {
-		if true {
-			mediumFeedback.impactOccurred()
-		}
+		shared.mediumFeedback.impactOccurred()
 	}
 
 	static func produceHeavyFeedback() {
-		if true {
-			heavyFeedback.impactOccurred()
-		}
+		shared.heavyFeedback.impactOccurred()
 	}
 
 	static func produceSoftFeedback() {
-		if true {
-			softFeedback.impactOccurred()
-		}
+		shared.softFeedback.impactOccurred()
+	}
+
+	static func produceRigidFeedback() {
+		shared.rigidFeedback.impactOccurred()
 	}
 
 	static func produceSelectionFeedback() {
-		if true {
-			feedback.selectionChanged()
-		}
+		shared.selectionFeedback.selectionChanged()
 	}
 }
