@@ -10,23 +10,55 @@ import UIKit
 
 class ConnectViewController: UIViewController, ProfileAccessor {
 
+	@IBOutlet private weak var connectLabel: UILabel!
+	@IBOutlet private weak var swaapLogo: UIImageView!
 	@IBOutlet private weak var smallProfileCard: ProfileCardView!
+	@IBOutlet private weak var buttonContainer: UIView!
 	@IBOutlet private weak var qrCodeButton: UIButton!
 	@IBOutlet private weak var scanQRButton: UIButton!
+	@IBOutlet private weak var swipeUpLabelBottomConstraint: NSLayoutConstraint!
+	@IBOutlet private weak var buttonContainerBottomConstraint: NSLayoutConstraint!
+	@IBOutlet private weak var instructionsLabel: UILabel!
 
 	var profileController: ProfileController?
+
+	override var prefersStatusBarHidden: Bool {
+		true
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		smallProfileCard.isSmallProfileCard = true
-		qrCodeButton.layer.cornerRadius = qrCodeButton.frame.height / 2
-		scanQRButton.layer.cornerRadius = scanQRButton.frame.height / 2
+		setupUI()
 		setupProfileCard()
+
     }
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		smallProfileCard.setupImageView()
+	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard let qrVC = segue.destination as? QRViewController else { return }
+		qrVC.profileController = profileController
+	}
+
+	private func setupUI() {
+		[connectLabel, instructionsLabel].forEach { $0?.font = UIFont.rounded(from: $0?.font ?? UIFont()) }
+		qrCodeButton.layer.cornerRadius = qrCodeButton.frame.height / 2
+		scanQRButton.layer.cornerRadius = scanQRButton.frame.height / 2
+		buttonContainer.layer.cornerRadius = buttonContainer.frame.height / 2
+		buttonContainer.layer.cornerCurve = .continuous
+
+		if UIScreen.main.bounds.height <= 667 {
+			swipeUpLabelBottomConstraint.constant = 40
+			buttonContainerBottomConstraint.constant = 30
+		}
+
+		swaapLogo.translatesAutoresizingMaskIntoConstraints = false
+		swaapLogo.centerYAnchor.constraint(equalTo: smallProfileCard.centerYAnchor).isActive = true
+		swaapLogo.centerXAnchor.constraint(equalTo: smallProfileCard.centerXAnchor).isActive = true
 	}
 
 	private func setupProfileCard() {
