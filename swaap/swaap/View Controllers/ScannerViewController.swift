@@ -18,6 +18,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 	var session: AVCaptureSession!
 	var previewLayer: AVCaptureVideoPreviewLayer!
 
+	@IBOutlet private weak var onScreenAnchor: NSLayoutConstraint!
+	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
+	var requestSentViewIsOnScreen: Bool = false
+
 	// MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,6 +112,26 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
 	private func found(code: String) {
 		// Do something with metaData stringValue here
+	}
+
+	private func animateOn() {
+		guard !requestSentViewIsOnScreen else { return }
+		requestSentViewIsOnScreen = true
+		UIView.animate(withDuration: 0.3, delay: 0.0, animations: {
+			self.offScreenAnchor.isActive = false
+			self.onScreenAnchor.isActive = true
+			self.view.layoutSubviews()
+		})
+	}
+
+	private func animateOff() {
+		guard requestSentViewIsOnScreen else { return }
+		requestSentViewIsOnScreen = false
+		UIView.animate(withDuration: 0.3, delay: 0.0, animations: {
+			self.onScreenAnchor.isActive = false
+			self.offScreenAnchor.isActive = true
+			self.view.layoutSubviews()
+		})
 	}
 
 	// MARK: - System Overrides

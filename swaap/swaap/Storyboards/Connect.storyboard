@@ -156,7 +156,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXn-Wo-YFQ">
-                                <rect key="frame" x="0.0" y="618" width="375" height="140"/>
+                                <rect key="frame" x="0.0" y="758" width="375" height="140"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b97-Pi-GNI">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
@@ -168,7 +168,7 @@
                                                     <rect key="frame" x="20" y="20" width="335" height="70"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="xyB-bs-K7h">
-                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="70.000000000000114" height="70.000000000000114"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="xyB-bs-K7h" secondAttribute="height" multiplier="1:1" id="73r-gU-nCV"/>
                                                                 <constraint firstAttribute="height" constant="70" id="fCw-Rb-R0U"/>
@@ -219,11 +219,17 @@
                             <constraint firstItem="mDs-qP-beZ" firstAttribute="bottom" secondItem="HKi-g2-9cE" secondAttribute="bottom" id="Pvq-AY-NJP"/>
                             <constraint firstAttribute="trailing" secondItem="mDs-qP-beZ" secondAttribute="trailing" id="YsE-Tj-zfH"/>
                             <constraint firstItem="FXn-Wo-YFQ" firstAttribute="bottom" secondItem="HKi-g2-9cE" secondAttribute="bottom" id="Z9o-Ul-9f0"/>
+                            <constraint firstItem="FXn-Wo-YFQ" firstAttribute="top" secondItem="HKi-g2-9cE" secondAttribute="bottom" id="ZQh-vZ-qJ4"/>
                             <constraint firstItem="mDs-qP-beZ" firstAttribute="top" secondItem="HKi-g2-9cE" secondAttribute="top" id="nFH-0o-A8N"/>
                             <constraint firstItem="mDs-qP-beZ" firstAttribute="leading" secondItem="HKi-g2-9cE" secondAttribute="leading" id="pYS-ee-tTV"/>
                             <constraint firstItem="FXn-Wo-YFQ" firstAttribute="leading" secondItem="HKi-g2-9cE" secondAttribute="leading" id="zUt-kp-d5k"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rrz-R5-UgA"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Z9o-Ul-9f0"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Looking for QR Code..." id="QPp-Ua-KMO">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="nk1-4Z-Fdr">
@@ -235,6 +241,8 @@
                     <connections>
                         <outlet property="cameraView" destination="mDs-qP-beZ" id="4tm-pq-Gyj"/>
                         <outlet property="nameOfReceiver" destination="68m-Yc-x9p" id="rU9-WN-wEP"/>
+                        <outlet property="offScreenAnchor" destination="ZQh-vZ-qJ4" id="dT7-Dh-Art"/>
+                        <outlet property="onScreenAnchor" destination="Z9o-Ul-9f0" id="ljL-hu-fJu"/>
                         <outlet property="profileImageView" destination="xyB-bs-K7h" id="7SO-xQ-0YM"/>
                     </connections>
                 </viewController>
