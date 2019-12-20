@@ -32,8 +32,6 @@ class ContactsController {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
 
-		updateContactCache()
-
 		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil, using: { [weak self] _ in
 			self?.clearCache()
 		})
@@ -179,7 +177,7 @@ class ContactsController {
 		networkHandler.transferMahCodableDatas(with: request, completion: completion)
 	}
 
-	func updateContactCache(completion: @escaping () -> Void = { } ) {
+	func updateContactCache(completion: @escaping () -> Void = {} ) {
 		fetchAllContacts { [weak self] result in
 			guard let self = self else {
 				completion()
