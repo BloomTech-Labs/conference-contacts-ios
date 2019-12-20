@@ -55,6 +55,7 @@ class RootTabBarController: UITabBarController {
 
 		// FIXME: For debugging
 		vcs.forEach { ($0 as? ProfileAccessor)?.profileController = profileController }
+		vcs.forEach { ($0 as? ContactsAccessor)?.contactsController = contactsController }
 	}
 
 	override func viewDidLoad() {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwipeBackNavigationController: UINavigationController, AuthAccessor, ProfileAccessor {
+class SwipeBackNavigationController: UINavigationController, AuthAccessor, ProfileAccessor, ContactsAccessor {
 	var popRecognizer: InteractivePopRecognizer?
 	var authManager: AuthManager? {
 		didSet {
@@ -19,6 +19,12 @@ class SwipeBackNavigationController: UINavigationController, AuthAccessor, Profi
 	var profileController: ProfileController? {
 		didSet {
 			distributeProfileAccessor()
+		}
+	}
+
+	var contactsController: ContactsController? {
+		didSet {
+			distributeContactsAccessor()
 		}
 	}
 
@@ -55,6 +61,13 @@ class SwipeBackNavigationController: UINavigationController, AuthAccessor, Profi
 			profileAccess.profileController = profileController
 		}
 	}
+
+	private func distributeContactsAccessor() {
+		guard let contactsController = contactsController else { return }
+		for case let contactsAccess as ContactsAccessor in viewControllers {
+			contactsAccess.contactsController = contactsController
+		}
+	}
 }
 
 extension SwipeBackNavigationController: UINavigationControllerDelegate {
@@ -64,6 +77,9 @@ extension SwipeBackNavigationController: UINavigationControllerDelegate {
 		}
 		if let profileAccess = viewController as? ProfileAccessor {
 			profileAccess.profileController = profileController
+		}
+		if let contactsAccess = viewController as? ContactsAccessor {
+			contactsAccess.contactsController = contactsController
 		}
 	}
 }

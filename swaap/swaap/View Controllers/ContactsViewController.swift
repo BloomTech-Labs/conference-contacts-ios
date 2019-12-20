@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class ContactsViewController: UIViewController, ProfileAccessor {
+class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccessor {
 
+	var contactsController: ContactsController?
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
@@ -44,6 +45,11 @@ class ContactsViewController: UIViewController, ProfileAccessor {
 
 		updateHeader()
 		setupNotifications()
+
+		contactsController?.updateContactCache()
+
+		tableView.refreshControl = UIRefreshControl()
+		tableView.refreshControl?.addTarget(self, action: #selector(refreshCache), for: .valueChanged)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +65,15 @@ class ContactsViewController: UIViewController, ProfileAccessor {
 			return
 		}
 		headerImageView.image = image
+	}
+
+	@objc func refreshCache() {
+		tableView.refreshControl?.beginRefreshing()
+		contactsController?.updateContactCache(completion: { [weak self] in
+			DispatchQueue.main.async {
+				self?.tableView.refreshControl?.endRefreshing()
+			}
+		})
 	}
 
 	private func setupNotifications() {

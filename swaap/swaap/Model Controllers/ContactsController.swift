@@ -8,6 +8,11 @@
 
 import Foundation
 import NetworkHandler
+import CoreData
+
+protocol ContactsAccessor: AnyObject {
+	var contactsController: ContactsController? { get set }
+}
 
 class ContactsController {
 	let profileController: ProfileController
@@ -26,6 +31,18 @@ class ContactsController {
 	init(profileController: ProfileController) {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
+
+		updateContactCache()
+
+		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil, using: { [weak self] _ in
+			self?.clearCache()
+		})
+
+		let cacheUpdateClosure: (Notification) -> Void = { [weak self] _ in
+			self?.updateContactCache()
+		}
+		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsPopulated, object: nil, queue: nil, using: cacheUpdateClosure)
+		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsChanged, object: nil, queue: nil, using: cacheUpdateClosure)
 	}
 
 	// MARK: - Fetching
@@ -160,5 +177,84 @@ class ContactsController {
 
 		request.expectedResponseCodes = [200]
 		networkHandler.transferMahCodableDatas(with: request, completion: completion)
+	}
+
+	func updateContactCache(completion: @escaping () -> Void = { } ) {
+		fetchAllContacts { [weak self] result in
+			guard let self = self else {
+				completion()
+				return
+			}
+			do {
+				let container = try result.get()
+				let connections = container.connections
+				let context = CoreDataStack.shared.container.newBackgroundContext()
+				context.performAndWait {
+					var allCached = Set(self.allCachedContacts(onContext: context))
+
+					for contact in connections {
+						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
+							allCached.remove(cachedConnection)
+							cachedConnection.updateFromProfile(contact)
+						} else {
+							_ = ConnectionContact(connectionProfile: contact, context: context)
+						}
+					}
+
+					allCached.forEach { context.delete($0) }
+				}
+				try CoreDataStack.shared.save(context: context)
+			} catch {
+				NSLog("Cache not updated: \(error)")
+			}
+			completion()
+		}
+	}
+
+	private func allCachedContacts(onContext context: NSManagedObjectContext) -> [ConnectionContact] {
+		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
+		var allConnections: [ConnectionContact] = []
+		context.performAndWait {
+			do {
+				allConnections = try context.fetch(fetchRequest)
+			} catch {
+				NSLog("error fetching from cache: \(error)")
+			}
+		}
+		return allConnections
+
+	}
+
+	private func getContactFromCache(forID id: String, onContext context: NSManagedObjectContext) -> ConnectionContact? {
+		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "id == %@", id as NSString)
+		var result: ConnectionContact?
+		context.performAndWait {
+			do {
+				result = try context.fetch(fetchRequest).first
+			} catch {
+				NSLog("error fetching from cache: \(error)")
+			}
+		}
+		return result
+	}
+
+	// MARK: - Utility
+	func clearCache(completion: ((Error?) -> Void)? = nil) {
+
+		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
+
+		let context = CoreDataStack.shared.container.newBackgroundContext()
+		context.perform {
+			do {
+				let allCacheItems = try context.fetch(fetchRequest)
+				allCacheItems.forEach { context.delete($0) }
+				try CoreDataStack.shared.save(context: context)
+				completion?(nil)
+			} catch {
+				NSLog("Error clearing database: \(error)")
+				completion?(error)
+			}
+		}
 	}
 }

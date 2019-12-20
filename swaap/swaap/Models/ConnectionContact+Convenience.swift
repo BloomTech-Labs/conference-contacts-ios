@@ -54,6 +54,26 @@ extension ConnectionContact {
 				  connectionMethods: connectionMethods,
 				  context: context)
 	}
+
+	func updateFromProfile(_ userProfile: UserProfile) {
+		guard userProfile.id == id else { return }
+		authID = userProfile.authID
+		name = userProfile.name
+		pictureURL = userProfile.pictureURL
+		birthdate = userProfile.birthdate
+		location = userProfile.location
+		industry = userProfile.industry
+		jobTitle = userProfile.jobTitle
+		tagline = userProfile.tagline
+		bio = userProfile.bio
+
+		if let existingContactMethods = profileContactMethods {
+			removeFromProfileContactMethods(existingContactMethods)
+		}
+		guard let context = managedObjectContext else { return }
+		let newContactMethods = userProfile.profileContactMethods.map { ConnectionContactMethod(profileContactMethod: $0, context: context) }
+		addToProfileContactMethods(NSOrderedSet(array: newContactMethods))
+	}
 }
 
 func == (lhs: ConnectionContact, rhs: UserProfile) -> Bool {

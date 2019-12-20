@@ -24,9 +24,13 @@ struct ContactContainer: Decodable {
 		case receivedConnections
 	}
 
+	/// All CONNECTED status connections
 	let connections: [UserProfile]
+	/// All connections user initiated, pending, connected, blocked
 	let sentConnections: [UserProfile]
+	/// All connections user received, pending, connected, blocked
 	let receivedConnections: [UserProfile]
+	/// All pending connections, sent or received
 	let pendingConnections: [UserProfile]
 
 	init(from decoder: Decoder) throws {

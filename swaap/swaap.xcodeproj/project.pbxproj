@@ -214,7 +214,7 @@
 		3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoadinationIndicator.framework; path = Carthage/Build/iOS/LoadinationIndicator.framework; sourceTree = "<group>"; };
 		33B24C592395B85C00B20DEA /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		33C00787238FDDEC000D72A7 /* VectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorExtensions.swift; sourceTree = "<group>"; };
-		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		33CCBABB2398F3C200A98C82 /* GQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQuery.swift; sourceTree = "<group>"; };
 		33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NetworkHandler.xcodeproj; path = Carthage/Checkouts/NetworkHandler/NetworkHandler.xcodeproj; sourceTree = "<group>"; };
 		33E7BBFC23A19BC000D81C02 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
