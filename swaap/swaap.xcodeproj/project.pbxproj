@@ -1119,7 +1119,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = D6VB3396MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1146,7 +1146,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = D6VB3396MT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
