@@ -154,6 +154,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 
 	// MARK: - Helper Methods
+	// MARK: Saving
 	private func saveProfile() {
 		//no image handling
 		guard let name = nameField.valueText else { return }
@@ -193,86 +194,18 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			}
 		}
 
-		let profileUpdate = ConcurrentOperation { [weak self] in
-			let semaphore = DispatchSemaphore(value: 0)
-			self?.profileController?.updateProfile(newProfile, completion: { (result: Result<GQLMutationResponse, NetworkError>) in
-				switch result {
-				case .success:
-					break
-				case .failure(let error):
-					print(error)
-				}
-				semaphore.signal()
-			})
-			semaphore.wait()
-			print("profile update finished")
-		}
+		let profileUpdate = profileUpdateOperation(newProfile: newProfile)
 
-		let profileRefresh = ConcurrentOperation { [weak self] in
-			let semaphore = DispatchSemaphore(value: 0)
-			self?.profileController?.fetchProfileFromServer(completion: { (result: Result<UserProfile, NetworkError>) in
-				switch result {
-				case .success:
-					break
-				case .failure(let error):
-					print(error)
-				}
-				semaphore.signal()
-			})
-			semaphore.wait()
-			print("profile refresh finished")
-		}
+		let profileRefresh = profileRefreshOperation()
 
 		let createdMethods = contactMethods.filter { $0.id == nil }
-		let createContactMethods = ConcurrentOperation { [weak self] in
-			guard let profileController = self?.profileController else { return }
-			guard !createdMethods.isEmpty else { return }
-			let semaphore = DispatchSemaphore(value: 0)
-			profileController.createContactMethods(createdMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
-				switch result {
-				case .success:
-					break
-				case .failure(let error):
-					print(error)
-				}
-				semaphore.signal()
-			}
-			semaphore.wait()
-		}
+		let createContactMethods = createContactMethodsOperation(createdMethods: createdMethods)
 
 		let updatedMethods = contactMethods.filter { $0.id != nil }
-		let updateContactMethods = ConcurrentOperation { [weak self] in
-			guard let profileController = self?.profileController else { return }
-			guard !updatedMethods.isEmpty else { return }
-			let semaphore = DispatchSemaphore(value: 0)
-			profileController.updateProfileContactMethods(updatedMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
-				switch result {
-				case .success:
-					break
-				case .failure(let error):
-					print(error)
-				}
-				semaphore.signal()
-			}
-			semaphore.wait()
-		}
+		let updateContactMethods = updateContactMethodsOperation(updatedMethods: updatedMethods)
 
 		let deletedContactMethods = self.deletedContactMethods
-		let deleteContactMethods = ConcurrentOperation { [weak self] in
-			guard let profileController = self?.profileController else { return }
-			guard !deletedContactMethods.isEmpty else { return }
-			let semaphore = DispatchSemaphore(value: 0)
-			profileController.deleteProfileContactMethods(deletedContactMethods) { (result: Result<GQLMutationResponse, NetworkError>) in
-				switch result {
-				case .success:
-					break
-				case .failure(let error):
-					print(error)
-				}
-				semaphore.signal()
-			}
-			semaphore.wait()
-		}
+		let deleteContactMethods = deleteContactMethodsOperation(deletedContactMethods: deletedContactMethods)
 
 
 		let dismissSelf = ConcurrentOperation { [weak self] in
@@ -300,6 +233,88 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		cancelButton.isEnabled = false
 	}
 
+	// MARK: Saving Helpers
+	private func concurrentCompletion(with semaphore: DispatchSemaphore) -> (Result<GQLMutationResponse, NetworkError>) -> Void {
+		return { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
+			switch result {
+			case .success:
+				break
+			case .failure(let error):
+				print(error)
+			}
+			semaphore.signal()
+		}
+	}
+
+	private func profileUpdateOperation(newProfile: UserProfile) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
+		let profileUpdate = ConcurrentOperation { [weak self] in
+			self?.profileController?.updateProfile(newProfile, completion: completion)
+			semaphore.wait()
+			print("profile update finished")
+		}
+		return profileUpdate
+	}
+
+	private func profileRefreshOperation() -> ConcurrentOperation {
+		let profileRefresh = ConcurrentOperation { [weak self] in
+			let semaphore = DispatchSemaphore(value: 0)
+			self?.profileController?.fetchProfileFromServer(completion: { (result: Result<UserProfile, NetworkError>) in
+				switch result {
+				case .success:
+					break
+				case .failure(let error):
+					print(error)
+				}
+				semaphore.signal()
+			})
+			semaphore.wait()
+			print("profile refresh finished")
+		}
+		return profileRefresh
+	}
+
+	private func createContactMethodsOperation(createdMethods: [ProfileContactMethod]) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
+		let createContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !createdMethods.isEmpty else { return }
+			profileController.createContactMethods(createdMethods, completion: completion)
+			semaphore.wait()
+			print("created new contact method(s)")
+		}
+		return createContactMethods
+	}
+
+	private func updateContactMethodsOperation(updatedMethods: [ProfileContactMethod]) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
+		let updateContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !updatedMethods.isEmpty else { return }
+			profileController.updateProfileContactMethods(updatedMethods, completion: completion)
+			semaphore.wait()
+			print("updated contact method(s)")
+		}
+		return updateContactMethods
+	}
+
+	private func deleteContactMethodsOperation(deletedContactMethods: [ProfileContactMethod]) -> ConcurrentOperation {
+		let semaphore = DispatchSemaphore(value: 0)
+		let completion = concurrentCompletion(with: semaphore)
+		let deleteContactMethods = ConcurrentOperation { [weak self] in
+			guard let profileController = self?.profileController else { return }
+			guard !deletedContactMethods.isEmpty else { return }
+			profileController.deleteProfileContactMethods(deletedContactMethods, completion: completion)
+			semaphore.wait()
+			print("deleted contact method(s)")
+		}
+		return deleteContactMethods
+	}
+
+	// MARK: Other
 	private func dismissalActionSheet() {
 		let dismissActionSheet = UIAlertController(title: "What would you like to do?", message: nil, preferredStyle: .actionSheet)
 		let saveAction = UIAlertAction(title: "Save", style: .default) { _ in

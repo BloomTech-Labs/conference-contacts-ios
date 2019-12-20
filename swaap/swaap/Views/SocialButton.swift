@@ -99,7 +99,6 @@ class SocialButton: IBPreviewControl {
 
 	private func updateSocialPlatformType() {
 		let platform = infoNugget.type
-		let value = infoNugget.value
 		switch platform {
 		case .phone:
 			mainColorBackgroundView.backgroundColor = .systemGreen
