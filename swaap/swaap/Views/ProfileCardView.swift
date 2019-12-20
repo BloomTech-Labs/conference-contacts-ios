@@ -12,7 +12,7 @@ import ChevronAnimatable
 
 protocol ProfileCardViewDelegate: AnyObject {
 	func positionDidChange(on view: ProfileCardView)
-	func profileCard(_ card: ProfileCardView)
+	func profileCardDidFinishAnimation(_ card: ProfileCardView)
 }
 
 @IBDesignable
@@ -179,7 +179,7 @@ class ProfileCardView: IBPreviewView {
 
 	var isAtTop: Bool = false {
 		didSet {
-			delegate?.profileCard(self)
+			delegate?.profileCardDidFinishAnimation(self)
 		}
 	}
 

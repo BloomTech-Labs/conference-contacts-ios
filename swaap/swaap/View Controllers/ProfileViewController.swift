@@ -158,7 +158,7 @@ extension ProfileViewController: ProfileCardViewDelegate {
 		bottomFadeviewBottomConstraint.constant = CGFloat(currentProgress * -120)
 	}
 
-	func profileCard(_ card: ProfileCardView) {
+	func profileCardDidFinishAnimation(_ card: ProfileCardView) {
 		UIView.animate(withDuration: 0.3) {
 			self.setNeedsStatusBarAppearanceUpdate()
 		}
