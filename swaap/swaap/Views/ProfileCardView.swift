@@ -62,6 +62,12 @@ class ProfileCardView: IBPreviewView {
 		}
 	}
 
+	var isSmallProfileCard: Bool? {
+		didSet {
+			setupSmallVersion()
+		}
+	}
+
 	weak var delegate: ProfileCardViewDelegate?
 
 
@@ -77,7 +83,9 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var jobTitleLabel: UILabel!
 	@IBOutlet private weak var taglineLabel: UILabel!
 	@IBOutlet private weak var locationLabel: UILabel!
+	@IBOutlet private weak var locationHeaderLabel: UILabel!
 	@IBOutlet private weak var industryLabel: UILabel!
+	@IBOutlet private weak var industryHeaderlabel: UILabel!
 	@IBOutlet private weak var socialButton: SocialButton!
 
 
@@ -90,11 +98,6 @@ class ProfileCardView: IBPreviewView {
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		commonInit()
-	}
-
-	override func updateConstraints() {
-		super.updateConstraints()
-		setupImageView()
 	}
 
 	private func commonInit() {
@@ -122,13 +125,29 @@ class ProfileCardView: IBPreviewView {
 		updateViews()
 	}
 
-	private func setupImageView() {
+	/// This should be private and should be inherently called by resizing the view, but it's not.
+	/// Call externally if needed for different size profilecardViews
+	func setupImageView() {
 		guard !isInterfaceBuilder else { return }
+		guard profileImageView != nil else { return }
 		let size = profileImageView.bounds.size * 1.25
 		let position = CGPoint(x: 0, y: profileImageView.bounds.height * -0.25)
 		imageMaskView.frame = CGRect(origin: position, size: size)
 		imageMaskView.backgroundColor = .white
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
+	}
+
+	private func setupSmallVersion() {
+		guard let isSmallVersion = isSmallProfileCard else { return }
+		if isSmallVersion {
+			[socialButton,
+			 jobTitleLabel,
+			 locationLabel,
+			 locationHeaderLabel,
+			 taglineLabel,
+			 industryLabel,
+			 industryHeaderlabel].forEach { $0.isHidden = true }
+		}
 	}
 
 	private func updateViews() {

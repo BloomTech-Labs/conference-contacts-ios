@@ -48,8 +48,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
 	var buttonIsOnScreen: Bool = false
 
-	let haptic = UIImpactFeedbackGenerator(style: .medium)
-
 	var contactMethods: [ProfileContactMethod] {
 		contactMethodCellViews.map { $0.contactMethod }
 	}
@@ -78,7 +76,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		setupUI()
 		updateViews()
 		navigationController?.presentationController?.delegate = self
-		haptic.prepare()
 		scrollView.delegate = self
 		if UIScreen.main.bounds.height <= 667 {
 			socialLinkButtonTopAnchor.constant = 12
@@ -533,7 +530,7 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)
-		haptic.impactOccurred()
+		HapticFeedback.produceMediumFeedback()
 	}
 
 	private func showAlert(titled title: String?, message: String?) {
