@@ -13,7 +13,7 @@ import XCTest
 class QueryTests: XCTestCase {
 
 	func testQueryGeneration() {
-		let query = SwaapGQLQueries.fetchUserProfileQuery
+		let query = SwaapGQLQueries.userProfileFetchQuery
 
 		print(query)
 		XCTAssert(!query.contains("\n"))

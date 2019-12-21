@@ -11,36 +11,99 @@ import Foundation
 
 enum SwaapGQLQueries {
 
-	static let createConnectionMutation = "mutation ($id:ID!, $coords: CoordinatesInput!) { createConnection(userID: $id, senderCoords: $coords) { success code message } }"
+	// MARK: - ProfileController Queries
+	static let userProfileFetchQuery = """
+		query {
+			user {
+				id
+				authId
+				name
+				picture
+				birthdate
+				location
+				industry
+				jobtitle
+				tagline
+				bio
+				profile {
+					id
+					value
+					type
+					privacy
+					preferredContact
+				}
+				qrcodes {
+					id
+					label
+					scans
+				}
+			}
+		}
+		""".singleLine
 
-	static let fetchUserProfileQuery = """
-										query {
-											user {
-												id
-												authId
-												name
-												picture
-												birthdate
-												location
-												industry
-												jobtitle
-												tagline
-												bio
-												profile {
-													id
-													value
-													type
-													privacy
-													preferredContact
-												}
-												qrcodes {
-													id
-													label
-													scans
-												}
-											}
-										}
-										""".singleLine
+	static let userProfileCreateMutation = """
+		mutation CreateUser($user: CreateUserInput!) {
+			createUser(data: $user) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	static let userProfileUpdateMutation = """
+		mutation ($data: UpdateUserInput!) {
+			updateUser(data:$data) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	static let userProfileCreateQRCodeMutation = """
+		mutation ($label: String!) {
+			createQRCode(label: $label) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	static let userProfileContactMethodsCreateMutation = """
+		mutation CreateFields($data:[CreateProfileFieldInput]!) {
+			createProfileFields(data: $data) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	static let userProfileContactMethodsUpdateMutation = """
+		mutation UpdateFields($data:[UpdateProfileFieldsInput]!) {
+			updateProfileFields(data: $data) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	static let userProfileContactMethodsDeleteMutation = """
+		mutation($ids:[ID]!) {
+			deleteProfileFields(ids: $ids) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	// MARK: - ContactsController Queries
+	static let connectionCreateMutation = "mutation ($id:ID!, $coords: CoordinatesInput!) { createConnection(userID: $id, senderCoords: $coords) { success code message } }"
+
 
 	
 

@@ -129,7 +129,7 @@ class ContactsController {
 		}
 		let coords = currentLocation.coordinate
 
-		let query = SwaapGQLQueries.createConnectionMutation
+		let query = SwaapGQLQueries.connectionCreateMutation
 		let variables = ["id": userID,
 						 "coords": ["latitude": coords.latitude,
 									"longitude": coords.longitude]] as [String : Any]

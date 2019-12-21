@@ -116,7 +116,7 @@ class SwaapTests: XCTestCase {
 			let failReturn: (Data?, Int, Error?) = (nil, 500, NetworkError.unspecifiedError(reason: "bad input"))
 			guard let inputData = inputData else { return failReturn }
 			let json = (try? JSONSerialization.jsonObject(with: inputData)) as? [String: Any] ?? [:]
-			guard (json["query"] as? String) == SwaapGQLQueries.createConnectionMutation else { return failReturn }
+			guard (json["query"] as? String) == SwaapGQLQueries.connectionCreateMutation else { return failReturn }
 			guard let variables = json["variables"] as? [String: Any] else { return failReturn }
 			guard (variables["id"] as? String) == heUserID else { return failReturn }
 			guard let coords = variables["coords"] as? [String: NSNumber] else { return failReturn }
