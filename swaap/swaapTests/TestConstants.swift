@@ -18,5 +18,7 @@ let testTokenType = "Bearer"
 // MARK: - create connection
 let createConnectionResponse = ##"{"data":{"createConnection":{"success":true,"code":201,"message":"Connection created successfully!"}}}"##.data(using: .utf8)!
 
+let qrCodeQueryResponse = ##"{"data":{"qrcode":{"id":"ck4el1osu00cj0786xjugz4ig","label":"Default","scans":0,"user":{"id":"ck4eik11p00550786r8wxoxcw","authId":"5dd621e3dca5dc0f1d7240d3","name":"He Humasdf","picture":"https://placekitten.com/1000/1000","birthdate":null,"location":null,"industry":null,"jobtitle":null,"tagline":null,"bio":null,"profile":[{"id":"ck4f9biir000y07973paxd9a6","value":"asdffdsa","type":"INSTAGRAM","privacy":"CONNECTED","preferredContact":true}]}}}}"##.data(using: .utf8)!
+
 let heUserID = "ck4eik11p00550786r8wxoxcw"
 let heQRCodeID = "ck4el1osu00cj0786xjugz4ig"

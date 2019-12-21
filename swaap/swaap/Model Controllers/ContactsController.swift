@@ -76,7 +76,7 @@ class ContactsController {
 		}
 	}
 
-	func fetchQRCode(with id: String, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) {
+	func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
@@ -96,7 +96,7 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.qrCode))

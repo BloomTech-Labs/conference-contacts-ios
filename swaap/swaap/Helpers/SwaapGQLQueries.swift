@@ -117,7 +117,6 @@ enum SwaapGQLQueries {
 		}
 		""".singleLine
 
-
 	static let connectionFetchAllContactsQuery = """
 		{
 			user {
