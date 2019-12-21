@@ -15,23 +15,7 @@ enum SwaapGQLQueries {
 	static let userProfileFetchQuery = """
 		query {
 			user {
-				id
-				authId
-				name
-				picture
-				birthdate
-				location
-				industry
-				jobtitle
-				tagline
-				bio
-				profile {
-					id
-					value
-					type
-					privacy
-					preferredContact
-				}
+				\(SwaapGQLQueries.commonUserFields)
 				qrcodes {
 					id
 					label
@@ -102,11 +86,87 @@ enum SwaapGQLQueries {
 		""".singleLine
 
 	// MARK: - ContactsController Queries
-	static let connectionCreateMutation = "mutation ($id:ID!, $coords: CoordinatesInput!) { createConnection(userID: $id, senderCoords: $coords) { success code message } }"
+	static let connectionCreateMutation = """
+		mutation ($id:ID!, $coords: CoordinatesInput!) {
+			createConnection(userID: $id, senderCoords: $coords) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	static let connectionFetchSingleUserQuery = """
+		query ($id:ID!) {
+			user(id: $id) {
+		\(SwaapGQLQueries.commonUserFields)
+			}
+		}
+		""".singleLine
+
+	static let connectionFetchQRCodeQuery = """
+		query ($id: ID!) {
+			qrcode(id: $id) {
+				id
+				label
+				scans
+				user {
+		\(SwaapGQLQueries.commonUserFields)
+				}
+			}
+		}
+		""".singleLine
 
 
-	
+	static let connectionFetchAllContactsQuery = """
+		{
+			user {
+				sentConnections {
+					id
+					receiver {
+		\(SwaapGQLQueries.commonUserFields)
+					}
+					senderLat
+					senderLon
+					receiverLat
+					receiverLon
+					status
+				}
+				receivedConnections {
+					id
+					sender {
+		\(SwaapGQLQueries.commonUserFields)
+					}
+					senderLat
+					senderLon
+					receiverLat
+					receiverLon
+					status
+				}
+			}
+		}
+		""".singleLine
 
+	// MARK: - Common
+	private static let commonUserFields = """
+		id
+		authId
+		name
+		picture
+		birthdate
+		location
+		industry
+		jobtitle
+		tagline
+		bio
+		profile {
+			id
+			value
+			type
+			privacy
+			preferredContact
+		}
+		"""
 }
 
 fileprivate extension String {

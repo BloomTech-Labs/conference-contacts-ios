@@ -51,11 +51,7 @@ class ContactsController {
 			return
 		}
 
-		let query = """
-				query ($id: ID!) { user(id: $id) { id authId name picture birthdate location industry \
-				jobtitle tagline bio profile { id value type privacy preferredContact } qrcodes { id \
-				label scans } } }
-				"""
+		let query = SwaapGQLQueries.connectionFetchSingleUserQuery
 		let variables = ["id": id]
 
 		let graphObject = GQuery(query: query, variables: variables)
@@ -86,18 +82,7 @@ class ContactsController {
 			return
 		}
 
-		let query = """
-				query ($id: ID!) {
-					qrcode(id: $id) {
-						id
-						label
-						scans
-						user {
-							id authId name picture birthdate location industry jobtitle tagline bio profile { id value type privacy preferredContact }
-						}
-					}
-				}
-				"""
+		let query = SwaapGQLQueries.connectionFetchQRCodeQuery
 		let variables = ["id": id]
 
 		let graphObject = GQuery(query: query, variables: variables)
@@ -162,12 +147,7 @@ class ContactsController {
 			return
 		}
 
-		let query = """
-				{ user { sentConnections { id receiver { id authId name picture birthdate location industry jobtitle\
-				 tagline bio profile { id value type privacy preferredContact } } status } receivedConnections \
-				{ id sender { id authId name picture birthdate location industry jobtitle tagline bio profile { \
-				id value type privacy preferredContact } } status } } }
-				"""
+		let query = SwaapGQLQueries.connectionFetchAllContactsQuery
 		let graphObject = GQuery(query: query)
 		do {
 			request.httpBody = try graphObject.jsonData()
