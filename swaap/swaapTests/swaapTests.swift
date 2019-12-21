@@ -67,6 +67,45 @@ class SwaapTests: XCTestCase {
 //		// Put teardown code here. This method is called after the invocation of each test method in the class.
 //	}
 
+	// MARK: - Profile Controller tests
+	func testFetchCurrentUser() {
+		let profileController = getProfileController()
+
+		let failReturn = mockingFailReturn
+
+		let mockingSession = NetworkMockingSession { request -> (Data?, Int, Error?) in
+			guard let inputData = request.httpBody else { return failReturn }
+			guard let auth = request.value(forHTTPHeaderField: "Authorization"),
+				auth == neAccessToken else { return failReturn }
+			let json = (try? JSONSerialization.jsonObject(with: inputData)) as? [String: Any] ?? [:]
+			guard (json["query"] as? String) == SwaapGQLQueries.userProfileFetchQuery else { return failReturn }
+
+			return (currentUserQueryResponse, 200, nil)
+		}
+
+		let waitForNetwork = expectation(description: "test")
+		profileController.fetchProfileFromServer(session: mockingSession) { result in
+			do {
+				let user = try result.get()
+				XCTAssertEqual(neUserID, user.id)
+				XCTAssertEqual("Ne Num", user.name)
+				XCTAssertEqual("5/6/1445", user.birthdate)
+				XCTAssertEqual("Chivalry", user.industry)
+				XCTAssertEqual("Not a knight of ni", user.tagline)
+				XCTAssertEqual("ck4et6f11003f07464wd7lxjt", user.profileContactMethods.first?.id)
+			} catch {
+				XCTFail("Error testing current user fetch: \(error)")
+			}
+			waitForNetwork.fulfill()
+		}
+		waitForExpectations(timeout: 10) { error in
+			if let error = error {
+				XCTFail("Timed out waiting for an expectation: \(error)")
+			}
+		}
+	}
+
+	// MARK: - Contacts Controller tests
 	func testRetrieveArbitraryUser() {
 		let contactController = getContactController()
 
@@ -161,7 +200,7 @@ class SwaapTests: XCTestCase {
 				let response = try result.get()
 				XCTAssertEqual(201, response.code)
 			} catch {
-				XCTFail("Error testing qrcode fetch: \(error)")
+				XCTFail("Error testing connection request: \(error)")
 			}
 			waitForNetwork.fulfill()
 		}
