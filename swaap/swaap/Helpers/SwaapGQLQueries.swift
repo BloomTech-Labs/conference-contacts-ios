@@ -5,8 +5,7 @@
 //  Created by Michael Redig on 12/20/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
-//swiftlint:disable line_length
-
+//
 import Foundation
 
 enum SwaapGQLQueries {

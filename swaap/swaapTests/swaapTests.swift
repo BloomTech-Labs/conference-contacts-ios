@@ -5,7 +5,7 @@
 //  Created by Marlon Raskin on 11/11/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
-//swiftlint:disable force_try
+//swiftlint:disable force_try large_tuple
 
 import XCTest
 @testable import swaap
@@ -33,9 +33,7 @@ class SwaapTests: XCTestCase {
 		DispatchQueue.global().async {
 			while locationHandler.lastLocation == nil {
 				sleep(1)
-				print(locationHandler.lastLocation)
 			}
-			print(locationHandler.lastLocation)
 			waitForLocation.fulfill()
 		}
 

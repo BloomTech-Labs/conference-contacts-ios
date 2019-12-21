@@ -107,7 +107,10 @@ class ContactsController {
 		}
 	}
 
-	func requestConnection(toUserID userID: String, currentLocation: CLLocation, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+	func requestConnection(toUserID userID: String,
+						   currentLocation: CLLocation,
+						   session: NetworkLoader = URLSession.shared,
+						   completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
@@ -117,7 +120,7 @@ class ContactsController {
 		let query = SwaapGQLQueries.connectionCreateMutation
 		let variables = ["id": userID,
 						 "coords": ["latitude": coords.latitude,
-									"longitude": coords.longitude]] as [String : Any]
+									"longitude": coords.longitude]] as [String: Any]
 
 		let graphObject = GQuery(query: query, variables: variables)
 
@@ -161,7 +164,7 @@ class ContactsController {
 		networkHandler.transferMahCodableDatas(with: request, session: session, completion: completion)
 	}
 
-	func updateContactCache(completion: @escaping () -> Void = {} ) {
+	func updateContactCache(completion: @escaping () -> Void = {}) {
 		fetchAllContacts { [weak self] result in
 			guard let self = self else {
 				completion()
