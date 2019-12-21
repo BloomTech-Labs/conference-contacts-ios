@@ -16,9 +16,9 @@ import CoreLocation
 class SwaapTests: XCTestCase {
 
 	func getCreds() -> Credentials {
-		Credentials(accessToken: testAccessToken,
+		Credentials(accessToken: neAccessToken,
 					tokenType: testTokenType,
-					idToken: testIDToken,
+					idToken: neIDToken,
 					refreshToken: nil,
 					expiresIn: Date(timeIntervalSinceNow: 60 * 60 * 24),
 					scope: "openid profile email")
@@ -74,6 +74,17 @@ class SwaapTests: XCTestCase {
 	func testRetrieveArbitraryUser() {
 		let contactController = getContactController()
 
+		let failReturn = mockingFailReturn
+		let mockingSession = NetworkMockingSession { request -> (Data?, Int, Error?) in
+			guard let inputData = request.httpBody else { return failReturn }
+			guard let auth = request.value(forHTTPHeaderField: "Authorization"),
+				auth == neAccessToken else { return failReturn }
+			let json = (try? JSONSerialization.jsonObject(with: inputData)) as? [String: Any] ?? [:]
+			guard (json["query"] as? String) == SwaapGQLQueries.connectionFetchQRCodeQuery else { return failReturn }
+			guard let variables = json["variables"] as? [String: Any] else { return failReturn }
+
+		}
+
 		let waitForNetwork = expectation(description: "test")
 		contactController.fetchUser(with: heUserID) { result in
 			do {
@@ -98,7 +109,7 @@ class SwaapTests: XCTestCase {
 		let mockingSession = NetworkMockingSession { request -> (Data?, Int, Error?) in
 			guard let inputData = request.httpBody else { return failReturn }
 			guard let auth = request.value(forHTTPHeaderField: "Authorization"),
-				auth == testAccessToken else { return failReturn }
+				auth == neAccessToken else { return failReturn }
 			let json = (try? JSONSerialization.jsonObject(with: inputData)) as? [String: Any] ?? [:]
 			guard (json["query"] as? String) == SwaapGQLQueries.connectionFetchQRCodeQuery else { return failReturn }
 			guard let variables = json["variables"] as? [String: Any] else { return failReturn }
@@ -132,7 +143,7 @@ class SwaapTests: XCTestCase {
 		let mockingData = NetworkMockingSession { request -> (Data?, Int, Error?) in
 			guard let inputData = request.httpBody else { return failReturn }
 			guard let auth = request.value(forHTTPHeaderField: "Authorization"),
-				auth == testAccessToken else { return failReturn }
+				auth == neAccessToken else { return failReturn }
 			let json = (try? JSONSerialization.jsonObject(with: inputData)) as? [String: Any] ?? [:]
 			guard (json["query"] as? String) == SwaapGQLQueries.connectionCreateMutation else { return failReturn }
 			guard let variables = json["variables"] as? [String: Any] else { return failReturn }
