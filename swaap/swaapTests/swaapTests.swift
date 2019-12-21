@@ -69,8 +69,6 @@ class SwaapTests: XCTestCase {
 //		// Put teardown code here. This method is called after the invocation of each test method in the class.
 //	}
 
-	// FIXME: setup mocking
-	/// current uses live server data - requires the the constants file be updated before running
 	func testRetrieveArbitraryUser() {
 		let contactController = getContactController()
 
@@ -80,16 +78,18 @@ class SwaapTests: XCTestCase {
 			guard let auth = request.value(forHTTPHeaderField: "Authorization"),
 				auth == neAccessToken else { return failReturn }
 			let json = (try? JSONSerialization.jsonObject(with: inputData)) as? [String: Any] ?? [:]
-			guard (json["query"] as? String) == SwaapGQLQueries.connectionFetchQRCodeQuery else { return failReturn }
+			guard (json["query"] as? String) == SwaapGQLQueries.connectionFetchSingleUserQuery else { return failReturn }
 			guard let variables = json["variables"] as? [String: Any] else { return failReturn }
 
+			guard (variables["id"] as? String) == geUserID else { return failReturn }
+			return (arbitraryUserQueryResponse, 200, nil)
 		}
 
 		let waitForNetwork = expectation(description: "test")
-		contactController.fetchUser(with: heUserID) { result in
+		contactController.fetchUser(with: geUserID, session: mockingSession) { result in
 			do {
 				let user = try result.get()
-				XCTAssertEqual(heUserID, user.id)
+				XCTAssertEqual(geUserID, user.id)
 			} catch {
 				XCTFail("Error testing single user fetch: \(error)")
 			}

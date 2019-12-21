@@ -45,7 +45,7 @@ class ContactsController {
 	}
 
 	// MARK: - Fetching
-	func fetchUser(with id: String, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
+	func fetchUser(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
@@ -65,7 +65,7 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserProfileContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<UserProfileContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.userProfile))

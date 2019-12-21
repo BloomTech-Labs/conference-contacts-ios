@@ -20,6 +20,8 @@ let createConnectionResponse = ##"{"data":{"createConnection":{"success":true,"c
 
 let qrCodeQueryResponse = ##"{"data":{"qrcode":{"id":"ck4el1osu00cj0786xjugz4ig","label":"Default","scans":0,"user":{"id":"ck4eik11p00550786r8wxoxcw","authId":"5dd621e3dca5dc0f1d7240d3","name":"He Humasdf","picture":"https://placekitten.com/1000/1000","birthdate":null,"location":null,"industry":null,"jobtitle":null,"tagline":null,"bio":null,"profile":[{"id":"ck4f9biir000y07973paxd9a6","value":"asdffdsa","type":"INSTAGRAM","privacy":"CONNECTED","preferredContact":true}]}}}}"##.data(using: .utf8)!
 
+let arbitraryUserQueryResponse = ##"{"data":{"user":{"id":"ck4f11dt200080774s2l6yrva","authId":"5deca3a3ff9c9c0cc1ef7677","name":"ge@go.gum","tagline":null,"picture":"https://s.gravatar.com/avatar/85af7052866fde94b3a9bc90701b7f46?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fge.png","location":null,"birthdate":null,"industry":null,"jobtitle":null,"bio":null,"profile":[{"id":"ck4f11dwl000e07741ur39wn3","value":"gegogum","type":"TWITTER","privacy":"PUBLIC","preferredContact":true}]}}}"##.data(using: .utf8)!
+
 let heUserID = "ck4eik11p00550786r8wxoxcw"
 let heQRCodeID = "ck4el1osu00cj0786xjugz4ig"
 let geUserID = "ck4f11dt200080774s2l6yrva"
