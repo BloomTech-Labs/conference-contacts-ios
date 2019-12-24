@@ -11,8 +11,10 @@
                 <outlet property="chevron" destination="cmC-BM-emx" id="rqm-Of-U7o"/>
                 <outlet property="contentView" destination="mIx-fE-GQb" id="5wF-48-m93"/>
                 <outlet property="imageMaskView" destination="f2w-0M-HYO" id="YEd-fK-LIh"/>
+                <outlet property="industryHeaderlabel" destination="kpi-4l-h7M" id="QEP-Jk-9cp"/>
                 <outlet property="industryLabel" destination="Fov-Pg-CVC" id="JIQ-Hu-DvH"/>
                 <outlet property="jobTitleLabel" destination="Mfa-c8-Yjs" id="tSK-e8-Jip"/>
+                <outlet property="locationHeaderLabel" destination="xUh-5E-n08" id="Xfa-bW-g58"/>
                 <outlet property="locationLabel" destination="jj7-Ka-bu8" id="QUS-BP-ZiV"/>
                 <outlet property="nameLabel" destination="AnS-M8-LcD" id="xBq-72-2hU"/>
                 <outlet property="profileImageView" destination="KOK-Ma-gRP" id="wFg-2d-XF8"/>
@@ -30,7 +32,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="KOK-Ma-gRP">
-                    <rect key="frame" x="54" y="0.0" width="320.00000000000011" height="320.00000000000011"/>
+                    <rect key="frame" x="54" y="0.0" width="320" height="320"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="KOK-Ma-gRP" secondAttribute="height" multiplier="1:1" id="hmL-Hp-jKW"/>
                     </constraints>

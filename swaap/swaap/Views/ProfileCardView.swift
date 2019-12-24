@@ -12,6 +12,7 @@ import ChevronAnimatable
 
 protocol ProfileCardViewDelegate: AnyObject {
 	func positionDidChange(on view: ProfileCardView)
+	func profileCardDidFinishAnimation(_ card: ProfileCardView)
 }
 
 @IBDesignable
@@ -62,6 +63,12 @@ class ProfileCardView: IBPreviewView {
 		}
 	}
 
+	var isSmallProfileCard: Bool? {
+		didSet {
+			setupSmallVersion()
+		}
+	}
+
 	weak var delegate: ProfileCardViewDelegate?
 
 
@@ -77,7 +84,9 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var jobTitleLabel: UILabel!
 	@IBOutlet private weak var taglineLabel: UILabel!
 	@IBOutlet private weak var locationLabel: UILabel!
+	@IBOutlet private weak var locationHeaderLabel: UILabel!
 	@IBOutlet private weak var industryLabel: UILabel!
+	@IBOutlet private weak var industryHeaderlabel: UILabel!
 	@IBOutlet private weak var socialButton: SocialButton!
 
 
@@ -90,11 +99,6 @@ class ProfileCardView: IBPreviewView {
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		commonInit()
-	}
-
-	override func updateConstraints() {
-		super.updateConstraints()
-		setupImageView()
 	}
 
 	private func commonInit() {
@@ -122,13 +126,29 @@ class ProfileCardView: IBPreviewView {
 		updateViews()
 	}
 
-	private func setupImageView() {
+	/// This should be private and should be inherently called by resizing the view, but it's not.
+	/// Call externally if needed for different size profilecardViews
+	func setupImageView() {
 		guard !isInterfaceBuilder else { return }
+		guard profileImageView != nil else { return }
 		let size = profileImageView.bounds.size * 1.25
 		let position = CGPoint(x: 0, y: profileImageView.bounds.height * -0.25)
 		imageMaskView.frame = CGRect(origin: position, size: size)
 		imageMaskView.backgroundColor = .white
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
+	}
+
+	private func setupSmallVersion() {
+		guard let isSmallVersion = isSmallProfileCard else { return }
+		if isSmallVersion {
+			[socialButton,
+			 jobTitleLabel,
+			 locationLabel,
+			 locationHeaderLabel,
+			 taglineLabel,
+			 industryLabel,
+			 industryHeaderlabel].forEach { $0.isHidden = true }
+		}
 	}
 
 	private func updateViews() {
@@ -156,6 +176,13 @@ class ProfileCardView: IBPreviewView {
 	private var maxTranslate: CGFloat {
 		-0.9 * bounds.height
 	}
+
+	var isAtTop: Bool = false {
+		didSet {
+			delegate?.profileCardDidFinishAnimation(self)
+		}
+	}
+
 	private let swipeVelocity: CGFloat = 550
 	/// 0 is when it's slid all the way down, 1.0 when it's slid all the way to its max sliding height
 	var currentSlidingProgress: Double {
@@ -201,7 +228,10 @@ class ProfileCardView: IBPreviewView {
 					   animations: {
 						self.transform = .identity
 						self.delegate?.positionDidChange(on: self)
-		}, completion: nil)
+		}, completion: { finished in
+			guard finished else { return }
+			self.isAtTop = false
+		})
 	}
 
 	private func animateToTopPosition() {
@@ -213,6 +243,9 @@ class ProfileCardView: IBPreviewView {
 					   animations: {
 						self.transform.ty = self.maxTranslate
 						self.delegate?.positionDidChange(on: self)
-		}, completion: nil)
+		}, completion: { finished in
+			guard finished else { return }
+			self.isAtTop = true
+		})
 	}
 }

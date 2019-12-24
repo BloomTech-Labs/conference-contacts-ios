@@ -21,7 +21,6 @@ class RootAuthViewController: UIViewController {
 	@IBOutlet private weak var loginView: UIView!
 	@IBOutlet private weak var chevron: ChevronView!
 
-	let feedback = UIImpactFeedbackGenerator(style: .rigid)
 	weak var delegate: RootAuthViewControllerDelegate?
 
 	init?(coder: NSCoder, authManager: AuthManager, profileController: ProfileController) {
@@ -40,8 +39,6 @@ class RootAuthViewController: UIViewController {
 		scrollView.isPagingEnabled = true
 		scrollView.delegate = self
 		updateChevron()
-		feedback.prepare()
-
 		setupDelegates()
 	}
 

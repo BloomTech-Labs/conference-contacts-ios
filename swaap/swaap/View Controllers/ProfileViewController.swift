@@ -27,7 +27,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
-	let haptic = UIImpactFeedbackGenerator(style: .rigid)
+	override var prefersStatusBarHidden: Bool {
+		profileCardView?.isAtTop ?? false
+	}
+
+	override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+		.slide
+	}
 
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
@@ -37,8 +43,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		scrollView.delegate = self
-
-		haptic.prepare()
 
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
@@ -71,7 +75,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		profileCardView.setNeedsUpdateConstraints()
+		profileCardView.setupImageView()
 		updateViews()
 		tabBarController?.delegate = self
 	}
@@ -154,6 +158,12 @@ extension ProfileViewController: ProfileCardViewDelegate {
 		bottomFadeviewBottomConstraint.constant = CGFloat(currentProgress * -120)
 	}
 
+	func profileCardDidFinishAnimation(_ card: ProfileCardView) {
+		UIView.animate(withDuration: 0.3) {
+			self.setNeedsStatusBarAppearanceUpdate()
+		}
+	}
+
 	func positionDidChange(on view: ProfileCardView) {
 		updateFadeViewPosition()
 	}
@@ -163,7 +173,7 @@ extension ProfileViewController: UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		if scrollView.contentOffset.y <= -120 {
 			scrollView.isScrollEnabled = false
-			haptic.impactOccurred()
+			HapticFeedback.produceRigidFeedback()
 			profileCardView.animateToPrimaryPosition()
 			scrollView.isScrollEnabled = true
 		}
