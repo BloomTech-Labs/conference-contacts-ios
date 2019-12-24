@@ -301,6 +301,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
                                 <rect key="frame" x="20" y="44" width="335" height="645"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" identifier="ProfileVC.ProfileCard"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPr-IH-wav">
                                 <rect key="frame" x="307" y="52" width="40" height="40"/>
@@ -319,6 +320,7 @@
                                         </visualEffectView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWn-rC-PlL">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="EditButton"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" image="pencil" catalog="system">
@@ -359,6 +361,7 @@
                                         </visualEffectView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3e-MA-KKa">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="ProfileBackButton"/>
                                             <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" image="chevron.left" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" weight="medium"/>
@@ -590,6 +593,7 @@
                                                                 <rect key="frame" x="0.0" y="58" width="375" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <color key="tintColor" name="Swaap Accent Color 1"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.NameField"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" placeholder="YES" id="7Bs-2S-iF0"/>
@@ -607,6 +611,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yij-CC-CEk" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="125.99999999999994" width="375" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.TaglineField"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" placeholder="YES" id="G4A-dF-e7j"/>
@@ -624,6 +629,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHK-cO-nG2" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="193.99999999999994" width="375" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.JobTitleField"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" placeholder="YES" id="qeR-1e-ZNJ"/>
@@ -641,6 +647,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2d-l3-Sbb" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="261.99999999999994" width="375" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.LocationField"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" placeholder="YES" id="W9A-IV-JV7"/>
@@ -658,6 +665,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-h2-zSh" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="329.99999999999994" width="375" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.IndustryField"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" placeholder="YES" id="rVo-Yc-qbf"/>
@@ -675,6 +683,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fxh-Wl-bya" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="397.99999999999994" width="375" height="60"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.BirthdayField"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" placeholder="YES" id="TNN-LO-1Up"/>
@@ -692,6 +701,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wS3-sD-IZ7" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="465.99999999999994" width="375" height="60.000000000000057"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.BioField"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="60" placeholder="YES" id="PS5-NU-x5l"/>
@@ -858,6 +868,7 @@ Long pressing one of contact methods will bring up privacy options:
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYc-Qv-gnK">
                                                     <rect key="frame" x="20" y="16" width="335" height="40"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="EditVC.AddContactMethodButton"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="zc6-6G-GjN"/>
                                                     </constraints>
@@ -881,6 +892,7 @@ Long pressing one of contact methods will bring up privacy options:
                                     </visualEffectView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="SocialLinkButtonContainer"/>
                                 <constraints>
                                     <constraint firstItem="hhU-bO-5GY" firstAttribute="top" secondItem="N26-29-to7" secondAttribute="top" id="bIo-mQ-ho4"/>
                                     <constraint firstAttribute="bottom" secondItem="hhU-bO-5GY" secondAttribute="bottom" id="ib9-af-vS8"/>
@@ -1071,6 +1083,7 @@ Long pressing one of contact methods will bring up privacy options:
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQN-TM-RVv">
                                                     <rect key="frame" x="64" y="0.0" width="274.66666666666669" height="56"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="ProfileHeaderLabel"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1082,7 +1095,8 @@ Long pressing one of contact methods will bring up privacy options:
                                             </subviews>
                                         </stackView>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="UserProfileCell"/>
                                     <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="hvA-bQ-S3U" secondAttribute="bottom" constant="8" id="CTm-TI-BAY"/>
