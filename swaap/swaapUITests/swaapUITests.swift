@@ -104,8 +104,6 @@ class SwaapUITests: XCTestCase {
 		navigateToEditProfileVC()
 		showFloatingTextFieldViaSocialContactMethodButton()
 		let saveButton = app.buttons.element(matching: .button, identifier: "FloatingTextField.SaveButton")
-		// Adding sleep here because there's a split second where the save button is enabled before if realizes it shouldn't be
-		sleep(1)
 		XCTAssertFalse(saveButton.isEnabled)
 	}
 
@@ -113,8 +111,6 @@ class SwaapUITests: XCTestCase {
 		navigateToEditProfileVC()
 		showFloatingTextFieldViaSocialContactMethodButton()
 		let saveButton = app.buttons.element(matching: .button, identifier: "FloatingTextField.SaveButton")
-		// Adding sleep here because there's a split second where the save button is enabled before if realizes it shouldn't be
-		sleep(1)
 		XCTAssertFalse(saveButton.isEnabled)
 		let floatingTextField = app.textFields.element
 		floatingTextField.typeText("I'm testing you!")
