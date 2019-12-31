@@ -35,6 +35,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs the camera to use this feature</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is required to record where you meet your contacts and will be required to be able to proceed using the app.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs access to your Photo Library to use this feature</string>
 	<key>NSPhotoLibraryUsageDescription</key>

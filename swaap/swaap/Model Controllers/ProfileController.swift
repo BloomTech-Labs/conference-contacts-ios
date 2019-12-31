@@ -145,7 +145,7 @@ class ProfileController {
 				// only attempt creation if error code relating to user not existing ocurrs
 				// I don't know if its guaranteed to be consistent that no user existing will always have an error like this
 				// but it's the best we got right now
-				if graphQLError.message.contains("'authId' of null") && graphQLError.extensions.code == "INTERNAL_SERVER_ERROR" {
+				if graphQLError.message.contains("Invalid token") && graphQLError.extensions.code == "UNAUTHENTICATED" {
 					self.createProfileOnServer { result in
 						do {
 							let response = try result.get()
