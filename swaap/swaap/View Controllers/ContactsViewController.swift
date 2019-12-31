@@ -68,11 +68,12 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	@objc func refreshCache() {
-		tableView.refreshControl?.beginRefreshing()
-		contactsController?.updateContactCache(completion: { [weak self] in
-			DispatchQueue.main.async {
-				self?.tableView.refreshControl?.endRefreshing()
-			}
+		profileController?.fetchProfileFromServer(completion: { [weak self] _ in
+			self?.contactsController?.updateContactCache(completion: {
+				DispatchQueue.main.async {
+					self?.tableView.refreshControl?.endRefreshing()
+				}
+			})
 		})
 	}
 
