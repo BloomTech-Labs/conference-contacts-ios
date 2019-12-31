@@ -19,6 +19,8 @@ extension UIImage {
 	static let socialPhoneIcon = UIImage(systemName: "phone.fill.arrow.up.right")!
 	static let socialEmailIcon = UIImage(systemName: "paperplane.fill")!
 	static let socialTextIcon = UIImage(systemName: "message.fill")!
+
+	static let swaapLogoIconOnly = UIImage(named: "swaapLogoIconOnly")!
 }
 
 
