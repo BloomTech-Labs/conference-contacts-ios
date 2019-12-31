@@ -42,6 +42,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+		view.accessibilityIdentifier = "InputTextFieldVC"
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameWillChange), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameWillChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
 		floatingTextFieldView.makeFirstResponder(needsSocialTextField: needsSocialTextField,

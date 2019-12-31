@@ -232,7 +232,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 	}
 
 	@discardableResult private func shouldEnableSaveButton() -> Bool {
-		saveButton.isEnabled = enableSaveButtonClosure?(socialType, textField.text ?? "") ?? true
+		saveButton.isEnabled = enableSaveButtonClosure?(socialType, textField.text ?? "") ?? false
 		saveButton.alpha = saveButton.isEnabled ? 1 : 0.6
 		return saveButton.isEnabled
 	}
