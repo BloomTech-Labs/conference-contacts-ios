@@ -24,6 +24,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEu-nV-ICU">
                                                 <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.QRDisplayButton"/>
                                                 <color key="tintColor" name="Swaap Accent Color 1"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                                 <state key="normal" image="qrcode" catalog="system">
@@ -44,6 +45,7 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8a-aa-u3M">
                                                 <rect key="frame" x="83.333333333333343" y="0.0" width="74.333333333333343" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.QRScannerbutton"/>
                                                 <color key="tintColor" name="Swaap Accent Color 1"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                                 <state key="normal" image="camera.viewfinder" catalog="system">
@@ -67,6 +69,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe up to initiate exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSo-gh-Xq4">
                                 <rect key="frame" x="76.000000000000014" y="505.66666666666669" width="223.33333333333337" height="20.333333333333314"/>
+                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.InstructionsLabel"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -87,6 +90,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrn-9K-Vyk" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
                                 <rect key="frame" x="67.666666666666686" y="125.66666666666669" width="240" height="340"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.SmallProfileCard">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="NVj-2v-0yi"/>
                                     <constraint firstAttribute="height" constant="340" id="Qc7-Hh-q6t"/>
@@ -142,17 +148,27 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="viewfinder" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kY9-6V-ykd">
                                         <rect key="frame" x="40" y="233.66666666666666" width="295" height="291.33333333333337"/>
                                         <color key="tintColor" name="Swaap Background Color Burple"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="ScannerVC.ViewFinderImageView"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="kY9-6V-ykd" secondAttribute="height" multiplier="1:1" id="bm2-U4-Pb2"/>
                                         </constraints>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ya-xr-dU3">
+                                        <rect key="frame" x="289" y="578" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="button:" destination="6Xu-An-qFw" eventType="touchUpInside" id="tux-TC-lnT"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="kY9-6V-ykd" firstAttribute="centerY" secondItem="mDs-qP-beZ" secondAttribute="centerY" id="2PH-B7-QPu"/>
                                     <constraint firstItem="kY9-6V-ykd" firstAttribute="leading" secondItem="mDs-qP-beZ" secondAttribute="leading" constant="40" id="S2e-da-qRs"/>
+                                    <constraint firstAttribute="bottom" secondItem="9Ya-xr-dU3" secondAttribute="bottom" constant="150" id="rkE-5O-ujs"/>
                                     <constraint firstAttribute="trailing" secondItem="kY9-6V-ykd" secondAttribute="trailing" constant="40" id="shh-dg-4Oo"/>
+                                    <constraint firstAttribute="trailing" secondItem="9Ya-xr-dU3" secondAttribute="trailing" constant="40" id="y6y-1F-qXQ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXn-Wo-YFQ">
@@ -168,7 +184,7 @@
                                                     <rect key="frame" x="20" y="20" width="335" height="70"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="xyB-bs-K7h">
-                                                            <rect key="frame" x="0.0" y="0.0" width="70.000000000000114" height="70.000000000000114"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="xyB-bs-K7h" secondAttribute="height" multiplier="1:1" id="73r-gU-nCV"/>
                                                                 <constraint firstAttribute="height" constant="70" id="fCw-Rb-R0U"/>
@@ -205,6 +221,7 @@
                                     </visualEffectView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="ScannerVC.NewRequestContainer"/>
                                 <constraints>
                                     <constraint firstItem="b97-Pi-GNI" firstAttribute="top" secondItem="FXn-Wo-YFQ" secondAttribute="top" id="Ci9-qN-pLr"/>
                                     <constraint firstItem="b97-Pi-GNI" firstAttribute="leading" secondItem="FXn-Wo-YFQ" secondAttribute="leading" id="FYy-0f-wae"/>
@@ -268,6 +285,7 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7D7-BL-Dvg">
                                 <rect key="frame" x="67.666666666666686" y="259" width="240" height="240"/>
+                                <accessibility key="accessibilityConfiguration" identifier="QRVC.QRImageView"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7D7-BL-Dvg" secondAttribute="height" multiplier="1:1" id="RmW-gM-qHz"/>
                                     <constraint firstAttribute="width" constant="240" id="lLO-rW-y0J"/>

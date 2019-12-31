@@ -12,6 +12,7 @@ import ChevronAnimatable
 
 protocol ProfileCardViewDelegate: AnyObject {
 	func positionDidChange(on view: ProfileCardView)
+	func profileCardDidFinishAnimation(_ card: ProfileCardView)
 }
 
 @IBDesignable
@@ -175,6 +176,13 @@ class ProfileCardView: IBPreviewView {
 	private var maxTranslate: CGFloat {
 		-0.9 * bounds.height
 	}
+
+	var isAtTop: Bool = false {
+		didSet {
+			delegate?.profileCardDidFinishAnimation(self)
+		}
+	}
+
 	private let swipeVelocity: CGFloat = 550
 	/// 0 is when it's slid all the way down, 1.0 when it's slid all the way to its max sliding height
 	var currentSlidingProgress: Double {
@@ -220,7 +228,10 @@ class ProfileCardView: IBPreviewView {
 					   animations: {
 						self.transform = .identity
 						self.delegate?.positionDidChange(on: self)
-		}, completion: nil)
+		}, completion: { finished in
+			guard finished else { return }
+			self.isAtTop = false
+		})
 	}
 
 	private func animateToTopPosition() {
@@ -232,6 +243,9 @@ class ProfileCardView: IBPreviewView {
 					   animations: {
 						self.transform.ty = self.maxTranslate
 						self.delegate?.positionDidChange(on: self)
-		}, completion: nil)
+		}, completion: { finished in
+			guard finished else { return }
+			self.isAtTop = true
+		})
 	}
 }

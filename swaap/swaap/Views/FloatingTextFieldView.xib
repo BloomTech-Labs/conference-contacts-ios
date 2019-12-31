@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,11 +61,12 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9U8-Pp-j8H">
                                                                 <rect key="frame" x="0.0" y="0.0" width="18" height="51"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.@"/>
                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
                                                                 <color key="textColor" name="Swaap Accent color 2"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose type →" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B5d-PA-Iq7">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose type →" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="B5d-PA-Iq7">
                                                                 <rect key="frame" x="30" y="0.0" width="294" height="51"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" name="Swaap Accent Color 1"/>
@@ -81,6 +82,7 @@
                                                                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="ahy-qf-w66" userLabel="Separator">
                                                                         <rect key="frame" x="0.0" y="0.0" width="1" height="51"/>
                                                                         <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.Separator"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="1" id="x7C-dL-DWN"/>
                                                                         </constraints>
@@ -90,6 +92,7 @@
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3q-Wc-5Ed">
                                                                                 <rect key="frame" x="8" y="8" width="35" height="35"/>
+                                                                                <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.PlusButton"/>
                                                                                 <color key="tintColor" name="Swaap Accent color 2"/>
                                                                                 <state key="normal" image="plus.app.fill" catalog="system">
                                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
@@ -101,6 +104,7 @@
                                                                             <view hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="pE3-aY-VHZ" customClass="SocialButton" customModule="swaap" customModuleProvider="target">
                                                                                 <rect key="frame" x="8" y="8" width="35" height="35"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                                <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.SocialButton"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="35" id="23m-Qr-lZM"/>
                                                                                     <constraint firstAttribute="width" secondItem="pE3-aY-VHZ" secondAttribute="height" multiplier="1:1" id="hj1-aT-Ggi"/>
@@ -163,9 +167,10 @@
                                                             <action selector="cancelTapped:" destination="-1" eventType="touchUpInside" id="Db0-Ex-Oae"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiN-sA-3Sf" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiN-sA-3Sf" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="215" y="0.0" width="185" height="35"/>
                                                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.SaveButton"/>
                                                         <state key="normal" title="Save">
                                                             <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>
