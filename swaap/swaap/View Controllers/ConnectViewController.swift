@@ -51,6 +51,11 @@ class ConnectViewController: UIViewController, ProfileAccessor {
 		buttonContainer.layer.cornerRadius = buttonContainer.frame.height / 2
 		buttonContainer.layer.cornerCurve = .continuous
 
+		smallProfileCard.layer.shadowPath = UIBezierPath(rect: smallProfileCard.bounds).cgPath
+		smallProfileCard.layer.shadowRadius = 14
+		smallProfileCard.layer.shadowOffset = .zero
+		smallProfileCard.layer.shadowOpacity = 0.3
+
 		if UIScreen.main.bounds.height <= 667 {
 			swipeUpLabelBottomConstraint.constant = 40
 			buttonContainerBottomConstraint.constant = 30
