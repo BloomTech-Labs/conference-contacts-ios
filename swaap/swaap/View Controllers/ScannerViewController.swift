@@ -96,14 +96,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		dismiss(animated: true)
 	}
 
-	// FIXME: - Remove for staging & Master
-	@IBAction func button(_ sender: UIButton) {
-		if !requestSentViewIsOnScreen {
-			animateOn()
-		} else {
-			animateOff()
-		}
-	}
 
 	// MARK: - Alerts
     func failed() {

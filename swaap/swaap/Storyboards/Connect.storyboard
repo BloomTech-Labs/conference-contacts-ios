@@ -144,20 +144,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDs-qP-beZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ya-xr-dU3">
-                                        <rect key="frame" x="289" y="578" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="button:" destination="6Xu-An-qFw" eventType="touchUpInside" id="tux-TC-lnT"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="9Ya-xr-dU3" secondAttribute="bottom" constant="150" id="rkE-5O-ujs"/>
-                                    <constraint firstAttribute="trailing" secondItem="9Ya-xr-dU3" secondAttribute="trailing" constant="40" id="y6y-1F-qXQ"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXn-Wo-YFQ">
                                 <rect key="frame" x="0.0" y="758" width="375" height="140"/>
