@@ -17,6 +17,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
 	var session: AVCaptureSession!
 	var previewLayer: AVCaptureVideoPreviewLayer!
+	let detectedObjectOverlayView = UIView()
+	let detectedShapeLayer = CAShapeLayer()
+
+	var oldOutputStringValue = ""
 
 	@IBOutlet private weak var onScreenAnchor: NSLayoutConstraint!
 	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
@@ -33,7 +37,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         cameraView.layer.insertSublayer(previewLayer, at: 0)
-
+		view.addSubview(detectedObjectOverlayView)
+		detectedObjectOverlayView.backgroundColor = .clear
+		detectedObjectOverlayView.frame = cameraView.frame
+		detectedObjectOverlayView.layer.addSublayer(detectedShapeLayer)
         session.startRunning()
     }
 
@@ -56,31 +63,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
 	}
 
-	// MARK: - IBActions
-	@IBAction func cancelTapped(_ sender: UIBarButtonItem) {
-		dismiss(animated: true)
-	}
-
-	// FIXME: - Remove for staging & Master
-	@IBAction func button(_ sender: UIButton) {
-		if !requestSentViewIsOnScreen {
-			animateOn()
-		} else {
-			animateOff()
-		}
-	}
-
-	// MARK: - Alerts
-    func failed() {
-		let alertVC = UIAlertController(title: "Scanning not supported",
-								   message: "Your device does not support scanning a code from an item. Please use a device with a camera.",
-								   preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alertVC, animated: true)
-        session = nil
-    }
-
-	// MARK: - Delegate & Helper Methods
 	private func setupVideoCaptureAndSession() {
 		guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
 		let videoInput: AVCaptureDeviceInput
@@ -109,14 +91,66 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		}
 	}
 
+	// MARK: - IBActions
+	@IBAction func cancelTapped(_ sender: UIBarButtonItem) {
+		dismiss(animated: true)
+	}
+
+
+	// MARK: - Alerts
+    func failed() {
+		let alertVC = UIAlertController(title: "Scanning not supported",
+								   message: "Your device does not support scanning a code from an item. Please use a device with a camera.",
+								   preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertVC, animated: true)
+        session = nil
+    }
+
+	// MARK: - Delegate & Helper Methods
 	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
 		if let metaDataObject = metadataObjects.first {
 			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
+			detectedShapeLayer.fillColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.5).cgColor
+			detectedShapeLayer.strokeColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.7).cgColor
+			detectedShapeLayer.lineWidth = 5
+			detectedShapeLayer.lineJoin = .round
+			let path = createPath(with: readableObject.corners)
+			detectedShapeLayer.path = path
 			guard let stringValue = readableObject.stringValue else { return }
-			HapticFeedback.produceHeavyFeedback()
+			triggerHapticFeedback(stringValue)
 			title = "Found"
 			found(code: stringValue)
+			animateOn()
+		} else {
+			title = "Looking for QR Code..."
+			oldOutputStringValue = ""
+			detectedShapeLayer.path = nil
+			animateOff()
 		}
+	}
+
+	private func createPath(with points: [CGPoint]?) -> CGMutablePath {
+		let path = CGMutablePath()
+
+		if let points = points {
+			for (index, point) in points.enumerated() {
+				let convertedPoint = previewLayer.layerPointConverted(fromCaptureDevicePoint: point)
+				if index == 0 {
+					path.move(to: convertedPoint)
+				} else {
+					path.addLine(to: convertedPoint)
+				}
+			}
+			path.closeSubpath()
+		}
+		return path
+	}
+
+	private func triggerHapticFeedback(_ stringValue: String) {
+		guard stringValue != oldOutputStringValue else { return }
+		HapticFeedback.produceHeavyFeedback()
+		oldOutputStringValue = stringValue
 	}
 
 	private func found(code: String) {
