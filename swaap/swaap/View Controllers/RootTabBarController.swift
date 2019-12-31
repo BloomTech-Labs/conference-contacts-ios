@@ -52,8 +52,6 @@ class RootTabBarController: UITabBarController {
 	private func updateViewControllers() {
 		guard let vcs = viewControllers else { return }
 		vcs.forEach { ($0 as? AuthAccessor)?.authManager = authManager }
-
-		// FIXME: For debugging
 		vcs.forEach { ($0 as? ProfileAccessor)?.profileController = profileController }
 		vcs.forEach { ($0 as? ContactsAccessor)?.contactsController = contactsController }
 	}

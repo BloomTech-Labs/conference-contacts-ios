@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyQ-Ch-1Iw">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Connect-->
+        <scene sceneID="ljA-OQ-Xzb">
+            <objects>
+                <viewController interfaceStyle="dark" id="NyQ-Ch-1Iw" customClass="ConnectViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h4q-41-51i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyo-IV-NvO">
+                                <rect key="frame" x="98.666666666666671" y="616" width="177.66666666666663" height="60"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JbV-V8-i76" userLabel="Button StackView">
+                                        <rect key="frame" x="10" y="5" width="157.66666666666666" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEu-nV-ICU">
+                                                <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.QRDisplayButton"/>
+                                                <color key="tintColor" name="Swaap Accent Color 1"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                                <state key="normal" image="qrcode" catalog="system">
+                                                    <color key="titleColor" name="Swaap Accent Color 1"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="large" weight="light"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="BaM-Hi-uyt" kind="presentation" id="uXA-w4-wGu"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tMO-en-pvj" userLabel="Separator Line">
+                                                <rect key="frame" x="78.333333333333329" y="0.0" width="1" height="50"/>
+                                                <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="AGN-lP-kAH"/>
+                                                    <constraint firstAttribute="width" constant="1" id="nuC-4t-Ija"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8a-aa-u3M">
+                                                <rect key="frame" x="83.333333333333343" y="0.0" width="74.333333333333343" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.QRScannerbutton"/>
+                                                <color key="tintColor" name="Swaap Accent Color 1"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                                <state key="normal" image="camera.viewfinder" catalog="system">
+                                                    <color key="titleColor" name="Swaap Accent Color 1"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="large" weight="light"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="nzm-G0-LYH" kind="presentation" id="GW2-tt-uxh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="JbV-V8-i76" firstAttribute="leading" secondItem="cyo-IV-NvO" secondAttribute="leading" constant="10" id="IGl-9A-Dqv"/>
+                                    <constraint firstAttribute="trailing" secondItem="JbV-V8-i76" secondAttribute="trailing" constant="10" id="UVv-De-Tqk"/>
+                                    <constraint firstAttribute="bottom" secondItem="JbV-V8-i76" secondAttribute="bottom" constant="5" id="qe3-x7-R8w"/>
+                                    <constraint firstItem="JbV-V8-i76" firstAttribute="top" secondItem="cyo-IV-NvO" secondAttribute="top" constant="5" id="xP1-9A-Rn2"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe up to initiate exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSo-gh-Xq4">
+                                <rect key="frame" x="76.000000000000014" y="505.66666666666669" width="223.33333333333337" height="20.333333333333314"/>
+                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.InstructionsLabel"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="swaaplogoblues" translatesAutoresizingMaskIntoConstraints="NO" id="DrC-9f-ieA">
+                                <rect key="frame" x="112.66666666666669" y="279" width="150" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Nwh-o8-iac"/>
+                                    <constraint firstAttribute="height" constant="180" id="bGz-07-Pli"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPK-Tu-yae">
+                                <rect key="frame" x="125.33333333333334" y="60" width="124.33333333333334" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrn-9K-Vyk" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="67.666666666666686" y="125.66666666666669" width="240" height="340"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <accessibility key="accessibilityConfiguration" identifier="ConnectVC.SmallProfileCard">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="NVj-2v-0yi"/>
+                                    <constraint firstAttribute="height" constant="340" id="Qc7-Hh-q6t"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zPK-Tu-yae" firstAttribute="top" secondItem="E1g-Pw-U6G" secondAttribute="top" constant="16" id="0jy-Ji-5de"/>
+                            <constraint firstItem="DrC-9f-ieA" firstAttribute="top" secondItem="E1g-Pw-U6G" secondAttribute="top" constant="235" placeholder="YES" id="45p-FI-hKY"/>
+                            <constraint firstItem="DrC-9f-ieA" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="4Jg-a2-XfX"/>
+                            <constraint firstItem="cyo-IV-NvO" firstAttribute="top" secondItem="pSo-gh-Xq4" secondAttribute="bottom" constant="90" id="DLo-J9-3jl"/>
+                            <constraint firstItem="zPK-Tu-yae" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="HS3-XK-8eP"/>
+                            <constraint firstItem="cyo-IV-NvO" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="IDR-T9-HSv"/>
+                            <constraint firstItem="E1g-Pw-U6G" firstAttribute="bottom" secondItem="cyo-IV-NvO" secondAttribute="bottom" constant="53" id="RxG-M6-hhy"/>
+                            <constraint firstItem="pSo-gh-Xq4" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="cme-nU-8b2"/>
+                            <constraint firstItem="pSo-gh-Xq4" firstAttribute="top" secondItem="mrn-9K-Vyk" secondAttribute="bottom" constant="40" id="gKu-rr-tmx"/>
+                            <constraint firstItem="mrn-9K-Vyk" firstAttribute="centerX" secondItem="h4q-41-51i" secondAttribute="centerX" id="wSR-Hr-OCu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="E1g-Pw-U6G"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Connect" image="dot.radiowaves.left.and.right" catalog="system" id="YUt-9R-8GV">
+                        <color key="badgeColor" name="Swaap Accent Color 1"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="buttonContainer" destination="cyo-IV-NvO" id="oAH-cK-eyY"/>
+                        <outlet property="buttonContainerBottomConstraint" destination="RxG-M6-hhy" id="NiZ-BQ-Nu3"/>
+                        <outlet property="connectLabel" destination="zPK-Tu-yae" id="fe7-3G-CBr"/>
+                        <outlet property="instructionsLabel" destination="pSo-gh-Xq4" id="n7E-np-yrK"/>
+                        <outlet property="qrCodeButton" destination="rEu-nV-ICU" id="LaQ-3n-MxC"/>
+                        <outlet property="scanQRButton" destination="E8a-aa-u3M" id="YNy-k2-VN1"/>
+                        <outlet property="smallProfileCard" destination="mrn-9K-Vyk" id="28b-c9-2Tw"/>
+                        <outlet property="swaapLogo" destination="DrC-9f-ieA" id="rzl-3z-XFS"/>
+                        <outlet property="swipeUpLabelBottomConstraint" destination="DLo-J9-3jl" id="UTY-yL-LyA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wae-49-ueN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-242.0289855072464" y="154.6875"/>
+        </scene>
+        <!--Looking for QR Code...-->
+        <scene sceneID="tpG-aE-irc">
+            <objects>
+                <viewController id="6Xu-An-qFw" customClass="ScannerViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HKi-g2-9cE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDs-qP-beZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXn-Wo-YFQ">
+                                <rect key="frame" x="0.0" y="758" width="375" height="140"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b97-Pi-GNI">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WGh-oL-kAN">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="zgl-Jk-R1E">
+                                                    <rect key="frame" x="20" y="20" width="335" height="70"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="him" translatesAutoresizingMaskIntoConstraints="NO" id="xyB-bs-K7h">
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="xyB-bs-K7h" secondAttribute="height" multiplier="1:1" id="73r-gU-nCV"/>
+                                                                <constraint firstAttribute="height" constant="70" id="fCw-Rb-R0U"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="9Lp-fj-sKe">
+                                                            <rect key="frame" x="84" y="8.6666666666666288" width="251" height="53"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request sent to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4q-Kg-504">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="18"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of who was sent a request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="68m-Yc-x9p">
+                                                                    <rect key="frame" x="0.0" y="29" width="251" height="24"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="zgl-Jk-R1E" secondAttribute="trailing" constant="20" id="EA5-WR-SfC"/>
+                                                <constraint firstItem="zgl-Jk-R1E" firstAttribute="leading" secondItem="WGh-oL-kAN" secondAttribute="leading" constant="20" id="PCV-Td-Sai"/>
+                                                <constraint firstAttribute="bottom" secondItem="zgl-Jk-R1E" secondAttribute="bottom" constant="50" id="uIh-Pr-ug0"/>
+                                                <constraint firstItem="zgl-Jk-R1E" firstAttribute="top" secondItem="WGh-oL-kAN" secondAttribute="top" constant="20" id="yPf-tf-Qrr"/>
+                                            </constraints>
+                                        </view>
+                                        <blurEffect style="regular"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="ScannerVC.NewRequestContainer"/>
+                                <constraints>
+                                    <constraint firstItem="b97-Pi-GNI" firstAttribute="top" secondItem="FXn-Wo-YFQ" secondAttribute="top" id="Ci9-qN-pLr"/>
+                                    <constraint firstItem="b97-Pi-GNI" firstAttribute="leading" secondItem="FXn-Wo-YFQ" secondAttribute="leading" id="FYy-0f-wae"/>
+                                    <constraint firstAttribute="bottom" secondItem="b97-Pi-GNI" secondAttribute="bottom" id="lCp-jh-8a6"/>
+                                    <constraint firstAttribute="trailing" secondItem="b97-Pi-GNI" secondAttribute="trailing" id="ubF-Ku-71e"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="FXn-Wo-YFQ" firstAttribute="trailing" secondItem="HKi-g2-9cE" secondAttribute="trailing" id="NLh-w4-Uhp"/>
+                            <constraint firstItem="mDs-qP-beZ" firstAttribute="bottom" secondItem="HKi-g2-9cE" secondAttribute="bottom" id="Pvq-AY-NJP"/>
+                            <constraint firstAttribute="trailing" secondItem="mDs-qP-beZ" secondAttribute="trailing" id="YsE-Tj-zfH"/>
+                            <constraint firstItem="FXn-Wo-YFQ" firstAttribute="bottom" secondItem="HKi-g2-9cE" secondAttribute="bottom" id="Z9o-Ul-9f0"/>
+                            <constraint firstItem="FXn-Wo-YFQ" firstAttribute="top" secondItem="HKi-g2-9cE" secondAttribute="bottom" id="ZQh-vZ-qJ4"/>
+                            <constraint firstItem="mDs-qP-beZ" firstAttribute="top" secondItem="HKi-g2-9cE" secondAttribute="top" id="nFH-0o-A8N"/>
+                            <constraint firstItem="mDs-qP-beZ" firstAttribute="leading" secondItem="HKi-g2-9cE" secondAttribute="leading" id="pYS-ee-tTV"/>
+                            <constraint firstItem="FXn-Wo-YFQ" firstAttribute="leading" secondItem="HKi-g2-9cE" secondAttribute="leading" id="zUt-kp-d5k"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Rrz-R5-UgA"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Z9o-Ul-9f0"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Looking for QR Code..." id="QPp-Ua-KMO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="nk1-4Z-Fdr">
+                            <connections>
+                                <action selector="cancelTapped:" destination="6Xu-An-qFw" id="Eii-5q-084"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cameraView" destination="mDs-qP-beZ" id="4tm-pq-Gyj"/>
+                        <outlet property="nameOfReceiver" destination="68m-Yc-x9p" id="rU9-WN-wEP"/>
+                        <outlet property="offScreenAnchor" destination="ZQh-vZ-qJ4" id="dT7-Dh-Art"/>
+                        <outlet property="onScreenAnchor" destination="Z9o-Ul-9f0" id="ljL-hu-fJu"/>
+                        <outlet property="profileImageView" destination="xyB-bs-K7h" id="7SO-xQ-0YM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nJi-lm-BQU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1353.6231884057972" y="561.83035714285711"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="yxI-M4-SN8">
+            <objects>
+                <viewController id="BaM-Hi-uyt" customClass="QRViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cgi-jh-UfU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="chevron.compact.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Afz-eK-ifu">
+                                <rect key="frame" x="162.66666666666666" y="27" width="50" height="21"/>
+                                <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="cgF-uO-DwT"/>
+                                    <constraint firstAttribute="height" constant="35" id="ynj-Jk-ibd"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7D7-BL-Dvg">
+                                <rect key="frame" x="67.666666666666686" y="259" width="240" height="240"/>
+                                <accessibility key="accessibilityConfiguration" identifier="QRVC.QRImageView"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7D7-BL-Dvg" secondAttribute="height" multiplier="1:1" id="RmW-gM-qHz"/>
+                                    <constraint firstAttribute="width" constant="240" id="lLO-rW-y0J"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="centerX" secondItem="cgi-jh-UfU" secondAttribute="centerX" id="K8p-rN-T34"/>
+                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="centerY" secondItem="cgi-jh-UfU" secondAttribute="centerY" id="Tvj-T9-OBy"/>
+                            <constraint firstItem="Afz-eK-ifu" firstAttribute="centerX" secondItem="cgi-jh-UfU" secondAttribute="centerX" id="aMf-iu-b0Q"/>
+                            <constraint firstItem="Afz-eK-ifu" firstAttribute="top" secondItem="oYF-fr-cMY" secondAttribute="top" constant="20" id="kLA-IL-edd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oYF-fr-cMY"/>
+                    </view>
+                    <connections>
+                        <outlet property="qrImageView" destination="7D7-BL-Dvg" id="Pw7-dp-WUt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m22-3r-njp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="587" y="-195"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IB4-Tw-Dff">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nzm-G0-LYH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LbC-9q-hIb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="Swaap Accent Color 1"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6Xu-An-qFw" kind="relationship" relationship="rootViewController" id="Dea-CD-GU9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YwU-fX-xNI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="586.95652173913049" y="561.83035714285711"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera.viewfinder" catalog="system" width="64" height="56"/>
+        <image name="chevron.compact.down" catalog="system" width="64" height="20"/>
+        <image name="dot.radiowaves.left.and.right" catalog="system" width="64" height="44"/>
+        <image name="him" width="735" height="735"/>
+        <image name="qrcode" catalog="system" width="64" height="56"/>
+        <image name="swaaplogoblues" width="233" height="333"/>
+        <namedColor name="Swaap Accent Color 1">
+            <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

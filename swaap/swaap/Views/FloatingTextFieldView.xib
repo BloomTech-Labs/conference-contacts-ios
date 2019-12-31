@@ -16,8 +16,8 @@
                 <outlet property="horizontalSeparator" destination="nGY-zH-4YE" id="1xt-Wx-vXD"/>
                 <outlet property="plusButton" destination="s3q-Wc-5Ed" id="tWY-s3-X6K"/>
                 <outlet property="saveButton" destination="UiN-sA-3Sf" id="sNZ-dA-LPx"/>
-                <outlet property="separator" destination="ahy-qf-w66" id="NdS-4v-0dt"/>
                 <outlet property="socialButton" destination="pE3-aY-VHZ" id="r8T-wm-k2y"/>
+                <outlet property="socialButtonContainer" destination="s8X-A4-FdP" id="ldI-nN-xUL"/>
                 <outlet property="textField" destination="B5d-PA-Iq7" id="M9B-ro-02O"/>
             </connections>
         </placeholder>
@@ -61,11 +61,12 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9U8-Pp-j8H">
                                                                 <rect key="frame" x="0.0" y="0.0" width="18" height="51"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.@"/>
                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
                                                                 <color key="textColor" name="Swaap Accent color 2"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose type →" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B5d-PA-Iq7">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="choose type →" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="B5d-PA-Iq7">
                                                                 <rect key="frame" x="30" y="0.0" width="294" height="51"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" name="Swaap Accent Color 1"/>
@@ -75,50 +76,58 @@
                                                                     <action selector="textFieldDidChange:" destination="-1" eventType="editingChanged" id="NSX-eL-6MJ"/>
                                                                 </connections>
                                                             </textField>
-                                                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="ahy-qf-w66" userLabel="Separator">
-                                                                <rect key="frame" x="336" y="0.0" width="1" height="51"/>
-                                                                <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="1" id="x7C-dL-DWN"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="HZI-Gh-nLd">
-                                                                <rect key="frame" x="349" y="0.0" width="51" height="51"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="s8X-A4-FdP">
+                                                                <rect key="frame" x="336" y="0.0" width="64" height="51"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3q-Wc-5Ed">
-                                                                        <rect key="frame" x="8" y="8" width="35" height="35"/>
-                                                                        <color key="tintColor" name="Swaap Accent color 2"/>
-                                                                        <state key="normal" image="plus.app.fill" catalog="system">
-                                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
-                                                                        </state>
-                                                                        <connections>
-                                                                            <action selector="addChangeSocialButton:" destination="-1" eventType="touchUpInside" id="CJH-VY-OAl"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                    <view hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="pE3-aY-VHZ" customClass="SocialButton" customModule="swaap" customModuleProvider="target">
-                                                                        <rect key="frame" x="8" y="8" width="35" height="35"/>
-                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="ahy-qf-w66" userLabel="Separator">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="51"/>
+                                                                        <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.Separator"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="35" id="23m-Qr-lZM"/>
-                                                                            <constraint firstAttribute="width" secondItem="pE3-aY-VHZ" secondAttribute="height" multiplier="1:1" id="hj1-aT-Ggi"/>
+                                                                            <constraint firstAttribute="width" constant="1" id="x7C-dL-DWN"/>
                                                                         </constraints>
-                                                                        <connections>
-                                                                            <action selector="addChangeSocialButton:" destination="-1" eventType="touchUpInside" id="nTy-qw-pGa"/>
-                                                                        </connections>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="HZI-Gh-nLd">
+                                                                        <rect key="frame" x="13" y="0.0" width="51" height="51"/>
+                                                                        <subviews>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3q-Wc-5Ed">
+                                                                                <rect key="frame" x="8" y="8" width="35" height="35"/>
+                                                                                <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.PlusButton"/>
+                                                                                <color key="tintColor" name="Swaap Accent color 2"/>
+                                                                                <state key="normal" image="plus.app.fill" catalog="system">
+                                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="addChangeSocialButton:" destination="-1" eventType="touchUpInside" id="CJH-VY-OAl"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <view hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="pE3-aY-VHZ" customClass="SocialButton" customModule="swaap" customModuleProvider="target">
+                                                                                <rect key="frame" x="8" y="8" width="35" height="35"/>
+                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                                <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.SocialButton"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="35" id="23m-Qr-lZM"/>
+                                                                                    <constraint firstAttribute="width" secondItem="pE3-aY-VHZ" secondAttribute="height" multiplier="1:1" id="hj1-aT-Ggi"/>
+                                                                                </constraints>
+                                                                                <connections>
+                                                                                    <action selector="addChangeSocialButton:" destination="-1" eventType="touchUpInside" id="nTy-qw-pGa"/>
+                                                                                </connections>
+                                                                            </view>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="pE3-aY-VHZ" secondAttribute="trailing" constant="8" id="6c9-0H-XMI"/>
+                                                                            <constraint firstItem="s3q-Wc-5Ed" firstAttribute="top" secondItem="HZI-Gh-nLd" secondAttribute="top" constant="8" id="LqY-6P-8x9"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="s3q-Wc-5Ed" secondAttribute="bottom" constant="8" id="MhU-qV-q9O"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="s3q-Wc-5Ed" secondAttribute="trailing" constant="8" id="ebZ-Bp-eDx"/>
+                                                                            <constraint firstItem="s3q-Wc-5Ed" firstAttribute="leading" secondItem="HZI-Gh-nLd" secondAttribute="leading" constant="8" id="erg-Wv-WAg"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="pE3-aY-VHZ" secondAttribute="bottom" constant="8" id="gnz-UT-g6j"/>
+                                                                            <constraint firstItem="pE3-aY-VHZ" firstAttribute="top" secondItem="HZI-Gh-nLd" secondAttribute="top" constant="8" id="nuZ-fC-xmP"/>
+                                                                            <constraint firstItem="pE3-aY-VHZ" firstAttribute="leading" secondItem="HZI-Gh-nLd" secondAttribute="leading" constant="8" id="xKj-AY-8Df"/>
+                                                                        </constraints>
                                                                     </view>
                                                                 </subviews>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="pE3-aY-VHZ" secondAttribute="trailing" constant="8" id="6c9-0H-XMI"/>
-                                                                    <constraint firstItem="s3q-Wc-5Ed" firstAttribute="top" secondItem="HZI-Gh-nLd" secondAttribute="top" constant="8" id="LqY-6P-8x9"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="s3q-Wc-5Ed" secondAttribute="bottom" constant="8" id="MhU-qV-q9O"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="s3q-Wc-5Ed" secondAttribute="trailing" constant="8" id="ebZ-Bp-eDx"/>
-                                                                    <constraint firstItem="s3q-Wc-5Ed" firstAttribute="leading" secondItem="HZI-Gh-nLd" secondAttribute="leading" constant="8" id="erg-Wv-WAg"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="pE3-aY-VHZ" secondAttribute="bottom" constant="8" id="gnz-UT-g6j"/>
-                                                                    <constraint firstItem="pE3-aY-VHZ" firstAttribute="top" secondItem="HZI-Gh-nLd" secondAttribute="top" constant="8" id="nuZ-fC-xmP"/>
-                                                                    <constraint firstItem="pE3-aY-VHZ" firstAttribute="leading" secondItem="HZI-Gh-nLd" secondAttribute="leading" constant="8" id="xKj-AY-8Df"/>
-                                                                </constraints>
-                                                            </view>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -158,9 +167,10 @@
                                                             <action selector="cancelTapped:" destination="-1" eventType="touchUpInside" id="Db0-Ex-Oae"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiN-sA-3Sf" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiN-sA-3Sf" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="215" y="0.0" width="185" height="35"/>
                                                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="FloatingTextField.SaveButton"/>
                                                         <state key="normal" title="Save">
                                                             <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </state>

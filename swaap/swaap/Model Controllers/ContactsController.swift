@@ -9,6 +9,7 @@
 import Foundation
 import NetworkHandler
 import CoreData
+import CoreLocation
 
 protocol ContactsAccessor: AnyObject {
 	var contactsController: ContactsController? { get set }
@@ -32,8 +33,6 @@ class ContactsController {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
 
-		updateContactCache()
-
 		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil, using: { [weak self] _ in
 			self?.clearCache()
 		})
@@ -46,17 +45,13 @@ class ContactsController {
 	}
 
 	// MARK: - Fetching
-	func fetchUser(with id: String, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
+	func fetchUser(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
-		let query = """
-				query ($id: ID!) { user(id: $id) { id authId name picture birthdate location industry \
-				jobtitle tagline bio profile { id value type privacy preferredContact } qrcodes { id \
-				label scans } } }
-				"""
+		let query = SwaapGQLQueries.connectionFetchSingleUserQuery
 		let variables = ["id": id]
 
 		let graphObject = GQuery(query: query, variables: variables)
@@ -70,7 +65,7 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserProfileContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<UserProfileContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.userProfile))
@@ -81,24 +76,13 @@ class ContactsController {
 		}
 	}
 
-	func fetchQRCode(with id: String, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) {
+	func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
-		let query = """
-				query ($id: ID!) {
-					qrcode(id: $id) {
-						id
-						label
-						scans
-						user {
-							id authId name picture birthdate location industry jobtitle tagline bio profile { id value type privacy preferredContact }
-						}
-					}
-				}
-				"""
+		let query = SwaapGQLQueries.connectionFetchQRCodeQuery
 		let variables = ["id": id]
 
 		let graphObject = GQuery(query: query, variables: variables)
@@ -112,7 +96,7 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.qrCode))
@@ -123,14 +107,20 @@ class ContactsController {
 		}
 	}
 
-	func requestConnection(toUserID userID: String, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+	func requestConnection(toUserID userID: String,
+						   currentLocation: CLLocation,
+						   session: NetworkLoader = URLSession.shared,
+						   completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
+		let coords = currentLocation.coordinate
 
-		let query = "mutation ($id:ID!) { createConnection(userID: $id) { success code message } }"
-		let variables = ["id": userID]
+		let query = SwaapGQLQueries.connectionCreateMutation
+		let variables = ["id": userID,
+						 "coords": ["latitude": coords.latitude,
+									"longitude": coords.longitude]] as [String: Any]
 
 		let graphObject = GQuery(query: query, variables: variables)
 
@@ -143,7 +133,7 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.response))
@@ -154,18 +144,13 @@ class ContactsController {
 		}
 	}
 
-	func fetchAllContacts(completion: @escaping (Result<ContactContainer, NetworkError>) -> Void) {
+	func fetchAllContacts(session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ContactContainer, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
-		let query = """
-				{ user { sentConnections { id receiver { id authId name picture birthdate location industry jobtitle\
-				 tagline bio profile { id value type privacy preferredContact } } status } receivedConnections \
-				{ id sender { id authId name picture birthdate location industry jobtitle tagline bio profile { \
-				id value type privacy preferredContact } } status } } }
-				"""
+		let query = SwaapGQLQueries.connectionFetchAllContactsQuery
 		let graphObject = GQuery(query: query)
 		do {
 			request.httpBody = try graphObject.jsonData()
@@ -176,10 +161,10 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request, completion: completion)
+		networkHandler.transferMahCodableDatas(with: request, session: session, completion: completion)
 	}
 
-	func updateContactCache(completion: @escaping () -> Void = { } ) {
+	func updateContactCache(completion: @escaping () -> Void = {}) {
 		fetchAllContacts { [weak self] result in
 			guard let self = self else {
 				completion()
