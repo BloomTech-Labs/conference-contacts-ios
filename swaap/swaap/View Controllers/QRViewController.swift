@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreLocation
+import QRettyCode
 
 class QRViewController: UIViewController, ProfileAccessor {
+	lazy var qrGen = QRettyCodeImageGenerator(data: "https://swaap.co/".data(using: .utf8), correctionLevel: .H, size: 212, style: .dots)
+
 	var profileController: ProfileController? {
 		didSet {
 			updateViews()
@@ -28,21 +31,22 @@ class QRViewController: UIViewController, ProfileAccessor {
 			.absoluteString
 			.data(using: .utf8)
 
-		let filter = CIFilter(name: "CIQRCodeGenerator")
-		filter?.setValue(data, forKey: "inputMessage")
-		filter?.setValue("H", forKey: "inputCorrectionLevel")
+		// variable properties
+		qrGen.data = data
+		qrGen.size = qrImageView.bounds.maxX
 
-		guard let image = filter?.outputImage?.convertedToCGImage else { return }
+		// static properties
+		qrGen.renderEffects = true
+		qrGen.gradientStyle = .linear
+		qrGen.gradientBackgroundVisible = false
+		qrGen.gradientStartColor = .gradientBackgroundColorBlueTwo
+		qrGen.gradientEndColor = .gradientBackgroundColorBlueOne
+		qrGen.gradientStartPoint = .zero
+		qrGen.gradientEndPoint = CGPoint(x: 1, y: 1)
+		qrGen.iconImage = .swaapLogoIconOnly
+		qrGen.iconImageScale = 0.7
 
-		UIGraphicsBeginImageContext(image.size * 20)
-		guard let context = UIGraphicsGetCurrentContext() else { return }
-		context.interpolationQuality = .none
-		context.draw(image, in: CGRect(origin: .zero, size: image.size * 20))
-
-		guard let cgimage = context.makeImage() else { return }
-		let finalImage = UIImage(cgImage: cgimage)
-
-		qrImageView.image = finalImage
+		qrImageView.image = qrGen.image
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
