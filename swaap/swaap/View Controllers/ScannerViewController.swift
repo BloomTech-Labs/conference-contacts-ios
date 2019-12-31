@@ -38,9 +38,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer.videoGravity = .resizeAspectFill
         cameraView.layer.insertSublayer(previewLayer, at: 0)
 		view.addSubview(detectedObjectOverlayView)
-//		view.bringSubviewToFront(detectedObjectOverlayView)
 		detectedObjectOverlayView.backgroundColor = .clear
-//		detectedObjectOverlayView.translatesAutoresizingMaskIntoConstraints = false
 		detectedObjectOverlayView.frame = cameraView.frame
 		detectedObjectOverlayView.layer.addSublayer(detectedShapeLayer)
         session.startRunning()
@@ -121,42 +119,36 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
 		if let metaDataObject = metadataObjects.first {
 			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
-
-			detectedShapeLayer.fillColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.3).cgColor
+			detectedShapeLayer.fillColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.5).cgColor
+			detectedShapeLayer.strokeColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.7).cgColor
+			detectedShapeLayer.lineWidth = 5
 			detectedShapeLayer.lineJoin = .round
-//			let path = createPath(with: [CGPoint.zero, CGPoint(x: 200, y: 0), CGPoint(x: 200, y: 200), CGPoint(x: 0, y: 200)])
 			let path = createPath(with: readableObject.corners)
-			print(readableObject.corners)
 			detectedShapeLayer.path = path
 			guard let stringValue = readableObject.stringValue else { return }
 			triggerHapticFeedback(stringValue)
 			title = "Found"
 			found(code: stringValue)
-//			session.stopRunning()
+			animateOn()
 		} else {
 			title = "Looking for QR Code..."
 			oldOutputStringValue = ""
 			detectedShapeLayer.path = nil
+			animateOff()
 		}
 	}
 
 	private func createPath(with points: [CGPoint]?) -> CGMutablePath {
 		let path = CGMutablePath()
 
-		let screenSize = cameraView.bounds.maxXY.valuesSwapped
-
-		if var points = points {
-			guard !points.isEmpty else { return path }
-			var firstPoint = points.removeFirst() * screenSize
-			firstPoint = firstPoint.valuesSwapped
-			firstPoint.x = cameraView.bounds.maxX - firstPoint.x
-			path.move(to: firstPoint)
-
-			for point in points {
-				var scaledPoint = point * screenSize
-				scaledPoint = scaledPoint.valuesSwapped
-				scaledPoint.x = cameraView.bounds.maxX - scaledPoint.x
-				path.addLine(to: scaledPoint)
+		if let points = points {
+			for (index, point) in points.enumerated() {
+				let convertedPoint = previewLayer.layerPointConverted(fromCaptureDevicePoint: point)
+				if index == 0 {
+					path.move(to: convertedPoint)
+				} else {
+					path.addLine(to: convertedPoint)
+				}
 			}
 			path.closeSubpath()
 		}

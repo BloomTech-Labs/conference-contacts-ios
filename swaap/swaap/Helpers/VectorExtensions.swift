@@ -28,10 +28,6 @@ extension CGPoint {
 		CGPoint(x: lhs.x * rhs.x, y: lhs.y * rhs.y)
 	}
 
-	var valuesSwapped: CGPoint {
-		CGPoint(x: y, y: x)
-	}
-
 	func distance(to point: CGPoint) -> CGFloat {
 		sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y))
 	}
