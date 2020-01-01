@@ -259,20 +259,29 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7D7-BL-Dvg">
-                                <rect key="frame" x="67.666666666666686" y="259" width="240" height="240"/>
+                                <rect key="frame" x="64" y="255.66666666666663" width="247" height="247"/>
                                 <accessibility key="accessibilityConfiguration" identifier="QRVC.QRImageView"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7D7-BL-Dvg" secondAttribute="height" multiplier="1:1" id="RmW-gM-qHz"/>
-                                    <constraint firstAttribute="width" constant="240" id="lLO-rW-y0J"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Once your new connection has their swaap app open to the camera, show them this QR code!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tep-kJ-WHZ">
+                                <rect key="frame" x="60" y="140.66666666666666" width="255" height="81.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="centerX" secondItem="cgi-jh-UfU" secondAttribute="centerX" id="K8p-rN-T34"/>
+                            <constraint firstItem="tep-kJ-WHZ" firstAttribute="leading" secondItem="oYF-fr-cMY" secondAttribute="leading" constant="60" id="L7C-gF-KNh"/>
                             <constraint firstItem="7D7-BL-Dvg" firstAttribute="centerY" secondItem="cgi-jh-UfU" secondAttribute="centerY" id="Tvj-T9-OBy"/>
+                            <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="7D7-BL-Dvg" secondAttribute="trailing" constant="64" id="XfA-vd-keZ"/>
                             <constraint firstItem="Afz-eK-ifu" firstAttribute="centerX" secondItem="cgi-jh-UfU" secondAttribute="centerX" id="aMf-iu-b0Q"/>
+                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="top" secondItem="tep-kJ-WHZ" secondAttribute="bottom" constant="33.666666666666629" id="aTx-YL-Hiy"/>
+                            <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="tep-kJ-WHZ" secondAttribute="trailing" constant="60" id="jOK-BD-kL7"/>
                             <constraint firstItem="Afz-eK-ifu" firstAttribute="top" secondItem="oYF-fr-cMY" secondAttribute="top" constant="20" id="kLA-IL-edd"/>
+                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="leading" secondItem="oYF-fr-cMY" secondAttribute="leading" constant="64" id="r0g-jA-DIq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oYF-fr-cMY"/>
                     </view>
