@@ -19,8 +19,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 	var previewLayer: AVCaptureVideoPreviewLayer!
 	let detectedObjectOverlayView = UIView()
 	let detectedShapeLayer = CAShapeLayer()
+	let lookingForString = "Looking for QR code..."
+	let foundString = "Found"
 
-	var oldOutputStringValue = ""
+	var foundQRCodeData = ""
 
 	@IBOutlet private weak var onScreenAnchor: NSLayoutConstraint!
 	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
@@ -29,6 +31,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 	// MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+		title = lookingForString
+
 		session = AVCaptureSession()
 
 		setupVideoCaptureAndSession()
@@ -42,6 +46,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		detectedObjectOverlayView.frame = cameraView.frame
 		detectedObjectOverlayView.layer.addSublayer(detectedShapeLayer)
         session.startRunning()
+
+		dismissRequestNotification(false, forced: true)
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -108,34 +114,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
 
 	// MARK: - Delegate & Helper Methods
-	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-		if let metaDataObject = metadataObjects.first {
-			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
-			foundQRCode(readableObject: readableObject)
-		} else {
-			title = "Looking for QR Code..."
-			oldOutputStringValue = ""
-			detectedShapeLayer.path = nil
-			animateOff()
-		}
-	}
-
-	private func foundQRCode(readableObject: AVMetadataMachineReadableCodeObject) {
-		detectedShapeLayer.fillColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.5).cgColor
-		detectedShapeLayer.strokeColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.7).cgColor
-		detectedShapeLayer.lineWidth = 5
-		detectedShapeLayer.lineJoin = .round
-		let path = createPath(with: readableObject.corners)
-		detectedShapeLayer.path = path
-		guard let stringValue = readableObject.stringValue else { return }
-		triggerHapticFeedback(stringValue)
-		title = "Found"
-		found(code: stringValue)
-		animateOn()
-	}
-
-	
-
 	private func createPath(with points: [CGPoint]?) -> CGMutablePath {
 		let path = CGMutablePath()
 
@@ -153,17 +131,45 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		return path
 	}
 
-	private func triggerHapticFeedback(_ stringValue: String) {
-		guard stringValue != oldOutputStringValue else { return }
+	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+		if let metaDataObject = metadataObjects.first {
+			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
+			foundQRCode(readableObject: readableObject)
+		} else {
+			hideQROverlay()
+		}
+	}
+
+	private func foundQRCode(readableObject: AVMetadataMachineReadableCodeObject) {
+		detectedShapeLayer.fillColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.5).cgColor
+		detectedShapeLayer.strokeColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.7).cgColor
+		detectedShapeLayer.lineWidth = 5
+		detectedShapeLayer.lineJoin = .round
+		let path = createPath(with: readableObject.corners)
+		detectedShapeLayer.path = path
+		guard let stringValue = readableObject.stringValue else { return }
+		found(code: stringValue)
+	}
+
+	private func hideQROverlay() {
+		detectedShapeLayer.path = nil
+	}
+
+	private func triggerHapticFeedback(_ code: String) {
+		guard code != foundQRCodeData else { return }
 		HapticFeedback.produceHeavyFeedback()
-		oldOutputStringValue = stringValue
 	}
 
 	private func found(code: String) {
 		// Do something with metaData stringValue here
+		triggerHapticFeedback(code)
+		foundQRCodeData = code
+		animateRequestNotificationOn()
+		title = foundString
+
 	}
 
-	private func animateOn() {
+	private func animateRequestNotificationOn() {
 		guard !requestSentViewIsOnScreen else { return }
 		requestSentViewIsOnScreen = true
 		UIView.animate(withDuration: 0.3, delay: 0.0, animations: {
@@ -173,10 +179,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		})
 	}
 
-	private func animateOff() {
-		guard requestSentViewIsOnScreen else { return }
+	private func dismissRequestNotification(_ animated: Bool, forced: Bool = false) {
+		guard requestSentViewIsOnScreen || forced else { return }
+		foundQRCodeData = ""
+		title = lookingForString
 		requestSentViewIsOnScreen = false
-		UIView.animate(withDuration: 0.3, delay: 0.0, animations: {
+		let duration: TimeInterval = animated ? 0.3 : 0.0
+		UIView.animate(withDuration: duration, delay: 0.0, animations: {
 			self.onScreenAnchor.isActive = false
 			self.offScreenAnchor.isActive = true
 			self.view.layoutSubviews()

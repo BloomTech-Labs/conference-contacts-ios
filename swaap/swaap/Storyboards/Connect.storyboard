@@ -147,7 +147,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXn-Wo-YFQ">
-                                <rect key="frame" x="0.0" y="758" width="375" height="140"/>
+                                <rect key="frame" x="0.0" y="618" width="375" height="140"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b97-Pi-GNI">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
@@ -166,7 +166,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="9Lp-fj-sKe">
-                                                            <rect key="frame" x="84" y="8.6666666666666288" width="251" height="53"/>
+                                                            <rect key="frame" x="84" y="8.6666666666666288" width="197" height="53"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request sent to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4q-Kg-504">
                                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="18"/>
@@ -174,14 +174,22 @@
                                                                     <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of who was sent a request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="68m-Yc-x9p">
-                                                                    <rect key="frame" x="0.0" y="29" width="251" height="24"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Connection Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="68m-Yc-x9p">
+                                                                    <rect key="frame" x="0.0" y="29" width="156.66666666666666" height="24"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5IP-bh-6Kt">
+                                                            <rect key="frame" x="295" y="15" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="nwY-TH-a8Y"/>
+                                                                <constraint firstAttribute="height" constant="40" id="suh-6g-zgO"/>
+                                                            </constraints>
+                                                            <state key="normal" image="arrow.down.to.line" catalog="system"/>
+                                                        </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -219,7 +227,7 @@
                         <viewLayoutGuide key="safeArea" id="Rrz-R5-UgA"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Z9o-Ul-9f0"/>
+                                <exclude reference="ZQh-vZ-qJ4"/>
                             </mask>
                         </variation>
                     </view>
@@ -314,6 +322,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.down.to.line" catalog="system" width="64" height="64"/>
         <image name="camera.viewfinder" catalog="system" width="64" height="56"/>
         <image name="chevron.compact.down" catalog="system" width="64" height="20"/>
         <image name="dot.radiowaves.left.and.right" catalog="system" width="64" height="44"/>
