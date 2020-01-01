@@ -9,8 +9,13 @@
 import UIKit
 import AVFoundation
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScannerViewController: UIViewController {
+	// MARK: - System Overrides
+	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+		return .portrait
+	}
 
+	// MARK: - Properties and Outlets
 	@IBOutlet private weak var cameraView: UIView!
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var nameOfReceiver: UILabel!
@@ -113,7 +118,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         session = nil
     }
 
-	// MARK: - Delegate & Helper Methods
+	// MARK: - QR Handling
 	private func createPath(with points: [CGPoint]?) -> CGMutablePath {
 		let path = CGMutablePath()
 
@@ -129,15 +134,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 			path.closeSubpath()
 		}
 		return path
-	}
-
-	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-		if let metaDataObject = metadataObjects.first {
-			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
-			foundQRCode(readableObject: readableObject)
-		} else {
-			hideQROverlay()
-		}
 	}
 
 	private func foundQRCode(readableObject: AVMetadataMachineReadableCodeObject) {
@@ -166,7 +162,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 		foundQRCodeData = code
 		animateRequestNotificationOn()
 		title = foundString
-
 	}
 
 	private func animateRequestNotificationOn() {
@@ -191,9 +186,16 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 			self.view.layoutSubviews()
 		})
 	}
+}
 
-	// MARK: - System Overrides
-	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-		return .portrait
+// MARK: - QR meta data delegate
+extension ScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
+	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+		if let metaDataObject = metadataObjects.first {
+			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
+			foundQRCode(readableObject: readableObject)
+		} else {
+			hideQROverlay()
+		}
 	}
 }
