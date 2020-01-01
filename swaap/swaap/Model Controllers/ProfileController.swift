@@ -10,6 +10,7 @@
 import Foundation
 import NetworkHandler
 import Cloudinary
+import CoreLocation
 
 protocol ProfileAccessor: AnyObject {
 	var profileController: ProfileController? { get set }
@@ -17,6 +18,11 @@ protocol ProfileAccessor: AnyObject {
 
 class ProfileController {
 	let authManager: AuthManager
+	lazy var locationManager: LocationHandler = {
+		let handler = LocationHandler()
+		handler.delegate = self
+		return handler
+	}()
 
 	/// Automatically sends `userProfileChanged` (all events), `userProfilePopulated` (when nil -> value),
 	/// `userProfileDepopulated` (value -> nil), or `userProfileModified` (value -> value) notifications when modified
@@ -471,6 +477,12 @@ class ProfileController {
 		} catch {
 			NSLog("Error deleting profile cache: \(error)")
 		}
+	}
+}
+
+extension ProfileController: LocationHandlerDelegate {
+	func locationRequester(_ locationRequester: LocationHandler, didUpdateLocation location: CLLocation) {
+		print(location)
 	}
 }
 

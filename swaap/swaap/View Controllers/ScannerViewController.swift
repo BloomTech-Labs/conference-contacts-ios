@@ -70,6 +70,8 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
         session.startRunning()
 
 		dismissRequestNotification(false, forced: true)
+
+		profileController?.locationManager.requestAuth()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +79,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 		if session.isRunning == false {
 			session.startRunning()
 		}
+		profileController?.locationManager.startTrackingLocation()
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
@@ -84,6 +87,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 		if session.isRunning == true {
 			session.stopRunning()
 		}
+		profileController?.locationManager.stopTrackingLocation()
 	}
 
 	private func setupUI() {
@@ -189,29 +193,45 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 
 		let newConnectionQRId = url.lastPathComponent
 		fetchAndRequestNewConnection(newConnectionQRId: newConnectionQRId)
-
-		// request qr code query
-		// get user info from query
-			// see if user is already in connections
-		// display user info in ui
-		// send a connection request
-
-//		animateRequestNotificationOn()
-
 	}
 
 	private func fetchAndRequestNewConnection(newConnectionQRId: String) {
+		// if a network request isnt already in progress...
 		if networkRequest == nil {
+			// fetch the qr code info
 			networkRequest = contactsController?.fetchQRCode(with: newConnectionQRId, completion: { [weak self] (result: Result<ProfileQRCode, NetworkError>) in
 				guard let self = self else { return }
 				switch result {
 				case .success(let qrCode):
 					guard let user = qrCode.user else { return }
 					self.fetchConnectionImage(user)
+					// take the result and on the main thread, update ui if appropriate.
 					DispatchQueue.main.async {
 						let state = self.getStateForID(user.id)
-						self.animateRequestNotificationOn(for: state)
-						self.notificationNameLabel.text = qrCode.user?.name
+						if state == .unconnected {
+							// if a new connection can be requested, do so, but that goes back to a background thread
+							guard let currentLocation = self.profileController?.locationManager.lastLocation else {
+								self.dismissRequestNotification(true, forced: true)
+								return
+							}
+							self.contactsController?.requestConnection(toUserID: user.id,
+																	   currentLocation: currentLocation,
+																	   completion: { (result: Result<GQLMutationResponse, NetworkError>) in
+								switch result {
+								case .success:
+									// update ui on main thread stating that a connection has been requested on your behalf
+									DispatchQueue.main.async {
+										self.animateRequestNotificationOn(for: state)
+										self.notificationNameLabel.text = qrCode.user?.name
+									}
+								case .failure(let error):
+									NSLog("Error requesting connection: \(error)")
+								}
+							})
+						} else {
+							self.animateRequestNotificationOn(for: state)
+							self.notificationNameLabel.text = qrCode.user?.name
+						}
 					}
 				case .failure(let error):
 					NSLog("Error loading qr code from server: \(error)")
