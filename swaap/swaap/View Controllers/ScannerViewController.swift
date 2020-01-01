@@ -111,17 +111,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
 		if let metaDataObject = metadataObjects.first {
 			guard let readableObject = metaDataObject as? AVMetadataMachineReadableCodeObject else { return }
-			detectedShapeLayer.fillColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.5).cgColor
-			detectedShapeLayer.strokeColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.7).cgColor
-			detectedShapeLayer.lineWidth = 5
-			detectedShapeLayer.lineJoin = .round
-			let path = createPath(with: readableObject.corners)
-			detectedShapeLayer.path = path
-			guard let stringValue = readableObject.stringValue else { return }
-			triggerHapticFeedback(stringValue)
-			title = "Found"
-			found(code: stringValue)
-			animateOn()
+			foundQRCode(readableObject: readableObject)
 		} else {
 			title = "Looking for QR Code..."
 			oldOutputStringValue = ""
@@ -129,6 +119,22 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 			animateOff()
 		}
 	}
+
+	private func foundQRCode(readableObject: AVMetadataMachineReadableCodeObject) {
+		detectedShapeLayer.fillColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.5).cgColor
+		detectedShapeLayer.strokeColor = UIColor.gradientBackgroundColorBlueOne.withAlphaComponent(0.7).cgColor
+		detectedShapeLayer.lineWidth = 5
+		detectedShapeLayer.lineJoin = .round
+		let path = createPath(with: readableObject.corners)
+		detectedShapeLayer.path = path
+		guard let stringValue = readableObject.stringValue else { return }
+		triggerHapticFeedback(stringValue)
+		title = "Found"
+		found(code: stringValue)
+		animateOn()
+	}
+
+	
 
 	private func createPath(with points: [CGPoint]?) -> CGMutablePath {
 		let path = CGMutablePath()
