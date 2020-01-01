@@ -21,10 +21,12 @@ class QRViewController: UIViewController, ProfileAccessor {
 
 	@IBOutlet private weak var qrImageView: UIImageView!
 
-	var locationManager = LocationHandler()
+	var locationManager: LocationHandler? {
+		profileController?.locationManager
+	}
 
 	private func updateViews() {
-		guard let id = profileController?.userProfile?.id else { return }
+		guard let id = profileController?.userProfile?.qrCodes.first?.id else { return }
 		guard isViewLoaded else { return }
 		let data = URL(string: "https://swaap.co/qrLink/")!
 			.appendingPathComponent(id)
@@ -52,23 +54,16 @@ class QRViewController: UIViewController, ProfileAccessor {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		updateViews()
-		locationManager.startTrackingLocation()
+		locationManager?.startTrackingLocation()
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
-		locationManager.stopTrackingLocation()
+		locationManager?.stopTrackingLocation()
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		locationManager.requestAuth()
-		locationManager.delegate = self
-	}
-}
-
-extension QRViewController: LocationHandlerDelegate {
-	func locationRequester(_ locationRequester: LocationHandler, didUpdateLocation location: CLLocation) {
-		print(location)
+		locationManager?.requestAuth()
 	}
 }
