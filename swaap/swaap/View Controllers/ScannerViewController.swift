@@ -119,7 +119,7 @@ class ScannerViewController: UIViewController {
     }
 
 	// MARK: - QR Handling
-	private func createPath(with points: [CGPoint]?) -> CGMutablePath {
+	private func createPath(with points: [CGPoint]?) -> CGPath {
 		let path = CGMutablePath()
 
 		if let points = points {
@@ -142,9 +142,8 @@ class ScannerViewController: UIViewController {
 		detectedShapeLayer.lineWidth = 5
 		detectedShapeLayer.lineJoin = .round
 		let path = createPath(with: readableObject.corners)
-		detectedShapeLayer.path = path
 		guard let stringValue = readableObject.stringValue else { return }
-		found(code: stringValue)
+		found(code: stringValue, path: path)
 	}
 
 	private func hideQROverlay() {
@@ -156,11 +155,13 @@ class ScannerViewController: UIViewController {
 		HapticFeedback.produceHeavyFeedback()
 	}
 
-	private func found(code: String) {
+	private func found(code: String, path: CGPath) {
 		// Do something with metaData stringValue here
 		triggerHapticFeedback(code)
 		foundQRCodeData = code
 		animateRequestNotificationOn()
+		detectedShapeLayer.path = path
+
 		title = foundString
 	}
 
