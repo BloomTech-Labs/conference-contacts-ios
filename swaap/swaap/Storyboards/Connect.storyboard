@@ -169,7 +169,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="9Lp-fj-sKe">
                                                             <rect key="frame" x="84" y="8.6666666666666288" width="197" height="53"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request sent to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4q-Kg-504">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request sent to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z4q-Kg-504">
                                                                     <rect key="frame" x="0.0" y="0.0" width="112" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -244,10 +244,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cameraView" destination="mDs-qP-beZ" id="4tm-pq-Gyj"/>
-                        <outlet property="nameOfReceiver" destination="68m-Yc-x9p" id="rU9-WN-wEP"/>
+                        <outlet property="notificationNameLabel" destination="68m-Yc-x9p" id="rU9-WN-wEP"/>
+                        <outlet property="notificationProfileImageView" destination="xyB-bs-K7h" id="7SO-xQ-0YM"/>
+                        <outlet property="notificationTitle" destination="z4q-Kg-504" id="4WK-K3-OLo"/>
                         <outlet property="offScreenAnchor" destination="ZQh-vZ-qJ4" id="dT7-Dh-Art"/>
                         <outlet property="onScreenAnchor" destination="Z9o-Ul-9f0" id="ljL-hu-fJu"/>
-                        <outlet property="profileImageView" destination="xyB-bs-K7h" id="7SO-xQ-0YM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJi-lm-BQU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

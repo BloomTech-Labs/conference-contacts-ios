@@ -11,6 +11,11 @@ import AVFoundation
 import NetworkHandler
 
 class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor {
+	private enum ConnectionState {
+		case yourself
+		case alreadyConnected
+		case unconnected
+	}
 
 	// MARK: - System Overrides
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -19,8 +24,9 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 
 	// MARK: - Properties and Outlets
 	@IBOutlet private weak var cameraView: UIView!
-	@IBOutlet private weak var profileImageView: UIImageView!
-	@IBOutlet private weak var nameOfReceiver: UILabel!
+	@IBOutlet private weak var notificationProfileImageView: UIImageView!
+	@IBOutlet private weak var notificationNameLabel: UILabel!
+	@IBOutlet private weak var notificationTitle: UILabel!
 
 	var contactsController: ContactsController?
 	var profileController: ProfileController?
@@ -47,7 +53,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
     override func viewDidLoad() {
         super.viewDidLoad()
 		title = lookingForString
-		defaultConnectionImage = profileImageView.image
+		defaultConnectionImage = notificationProfileImageView.image
 
 		session = AVCaptureSession()
 
@@ -81,8 +87,8 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 	}
 
 	private func setupUI() {
-		profileImageView.clipsToBounds = true
-		profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+		notificationProfileImageView.clipsToBounds = true
+		notificationProfileImageView.layer.cornerRadius = notificationProfileImageView.frame.height / 2
 	}
 
 	private func setupVideoCaptureAndSession() {
@@ -182,22 +188,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 		title = foundString
 
 		let newConnectionQRId = url.lastPathComponent
-		if networkRequest == nil {
-			networkRequest = contactsController?.fetchQRCode(with: newConnectionQRId, completion: { [weak self] (result: Result<ProfileQRCode, NetworkError>) in
-				print(result)
-				switch result {
-				case .success(let qrCode):
-					self?.fetchConnectionImage(qrCode.user)
-					DispatchQueue.main.async {
-						self?.animateRequestNotificationOn()
-						self?.nameOfReceiver.text = qrCode.user?.name
-					}
-				case .failure(let error):
-					NSLog("Error loading qr code from server: \(error)")
-					self?.dismissRequestNotification(true, forced: true)
-				}
-			})
-		}
+		fetchAndRequestNewConnection(newConnectionQRId: newConnectionQRId)
 
 		// request qr code query
 		// get user info from query
@@ -209,6 +200,39 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 
 	}
 
+	private func fetchAndRequestNewConnection(newConnectionQRId: String) {
+		if networkRequest == nil {
+			networkRequest = contactsController?.fetchQRCode(with: newConnectionQRId, completion: { [weak self] (result: Result<ProfileQRCode, NetworkError>) in
+				guard let self = self else { return }
+				switch result {
+				case .success(let qrCode):
+					guard let user = qrCode.user else { return }
+					self.fetchConnectionImage(user)
+					DispatchQueue.main.async {
+						let state = self.getStateForID(user.id)
+						self.animateRequestNotificationOn(for: state)
+						self.notificationNameLabel.text = qrCode.user?.name
+					}
+				case .failure(let error):
+					NSLog("Error loading qr code from server: \(error)")
+					self.dismissRequestNotification(true, forced: true)
+				}
+			})
+		}
+	}
+
+	private func getStateForID(_ userID: String) -> ConnectionState {
+		if profileController?.userProfile?.id == userID {
+			return .yourself
+		}
+
+		if contactsController?.allContacts.contains(where: { $0.id == userID }) == true {
+			return .alreadyConnected
+		}
+
+		return .unconnected
+	}
+
 	private func fetchConnectionImage(_ userProfile: UserProfile?) {
 		guard let userProfile = userProfile else { return }
 		imageRequest?.cancel()
@@ -216,7 +240,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 			do {
 				let imageData = try imageResult.get()
 				DispatchQueue.main.async {
-					self?.profileImageView.image = UIImage(data: imageData)
+					self?.notificationProfileImageView.image = UIImage(data: imageData)
 				}
 			} catch {
 				NSLog("Failed getting image for user: \(userProfile.id) \(userProfile.name)")
@@ -224,9 +248,19 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 		})
 	}
 
-	private func animateRequestNotificationOn() {
+	private func animateRequestNotificationOn(for state: ConnectionState) {
 		guard !requestSentViewIsOnScreen else { return }
 		requestSentViewIsOnScreen = true
+
+		switch state {
+		case .yourself:
+			notificationTitle.text = "Look inward to connect with yourself."
+		case .alreadyConnected:
+			notificationTitle.text = "You're already connected with"
+		case .unconnected:
+			notificationTitle.text = "Request sent to"
+		}
+
 		UIView.animate(withDuration: 0.3, delay: 0.0, animations: {
 			self.offScreenAnchor.isActive = false
 			self.onScreenAnchor.isActive = true
@@ -249,7 +283,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 			self.offScreenAnchor.isActive = true
 			self.view.layoutSubviews()
 		}) { _ in
-			self.profileImageView.image = self.defaultConnectionImage
+			self.notificationProfileImageView.image = self.defaultConnectionImage
 		}
 	}
 }

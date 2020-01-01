@@ -29,6 +29,10 @@ class ContactsController {
 		profileController.graphqlURL
 	}
 
+	var allContacts: [ConnectionContact] {
+		allCachedContacts(onContext: .mainContext)
+	}
+
 	init(profileController: ProfileController) {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
