@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConnectViewController: UIViewController, ProfileAccessor {
+class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor {
 
 	@IBOutlet private weak var connectLabel: UILabel!
 	@IBOutlet private weak var swaapLogo: UIImageView!
@@ -21,6 +21,7 @@ class ConnectViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var instructionsLabel: UILabel!
 
 	var profileController: ProfileController?
+	var contactsController: ContactsController?
 
 	override var prefersStatusBarHidden: Bool {
 		true
@@ -40,8 +41,14 @@ class ConnectViewController: UIViewController, ProfileAccessor {
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let qrVC = segue.destination as? QRViewController else { return }
-		qrVC.profileController = profileController
+		if let qrVC = segue.destination as? QRViewController {
+			qrVC.profileController = profileController
+		}
+
+		if let swipebackVC = segue.destination as? SwipeBackNavigationController {
+			swipebackVC.contactsController = contactsController
+			swipebackVC.profileController = profileController
+		}
 	}
 
 	private func setupUI() {

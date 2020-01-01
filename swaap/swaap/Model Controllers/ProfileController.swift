@@ -10,6 +10,7 @@
 import Foundation
 import NetworkHandler
 import Cloudinary
+import CoreLocation
 
 protocol ProfileAccessor: AnyObject {
 	var profileController: ProfileController? { get set }
@@ -17,6 +18,11 @@ protocol ProfileAccessor: AnyObject {
 
 class ProfileController {
 	let authManager: AuthManager
+	lazy var locationManager: LocationHandler = {
+		let handler = LocationHandler()
+		handler.delegate = self
+		return handler
+	}()
 
 	/// Automatically sends `userProfileChanged` (all events), `userProfilePopulated` (when nil -> value),
 	/// `userProfileDepopulated` (value -> nil), or `userProfileModified` (value -> value) notifications when modified
@@ -363,8 +369,8 @@ class ProfileController {
 		return authManager.networkAuthRequestCommon(for: graphqlURL)
 	}
 
-	func fetchImage(url: URL, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-		networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
+	@discardableResult func fetchImage(url: URL, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask? {
+		return networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
 	}
 
 	/// By default, only updates if photo is nil. `force` will force it to download, even if there's already data.
@@ -471,6 +477,12 @@ class ProfileController {
 		} catch {
 			NSLog("Error deleting profile cache: \(error)")
 		}
+	}
+}
+
+extension ProfileController: LocationHandlerDelegate {
+	func locationRequester(_ locationRequester: LocationHandler, didUpdateLocation location: CLLocation) {
+		print(location)
 	}
 }
 

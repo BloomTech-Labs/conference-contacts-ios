@@ -117,6 +117,7 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 	private func contactCell(on tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
 		let contact = fetchedResultsController.object(at: indexPath)
+		// FIXME: this is where it needs to be determined if the contact is pending and update the cell to match
 		cell.textLabel?.text = contact.name
 		return cell
 	}

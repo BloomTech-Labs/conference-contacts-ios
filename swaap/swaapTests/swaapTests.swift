@@ -211,7 +211,7 @@ class SwaapTests: XCTestCase {
 		}
 	}
 
-	// FIXME: setup mocking
+	// FIXME: setup mocking - i think this fails because the jwt is too old (mocking would fix)
 	func testFetchAllConnections() {
 		let contactController = getContactController()
 

@@ -29,6 +29,10 @@ class ContactsController {
 		profileController.graphqlURL
 	}
 
+	var allContacts: [ConnectionContact] {
+		allCachedContacts(onContext: .mainContext)
+	}
+
 	init(profileController: ProfileController) {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
@@ -76,10 +80,10 @@ class ContactsController {
 		}
 	}
 
-	func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) {
+	@discardableResult func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) -> URLSessionDataTask? {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
-			return
+			return nil
 		}
 
 		let query = SwaapGQLQueries.connectionFetchQRCodeQuery
@@ -92,11 +96,11 @@ class ContactsController {
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
-			return
+			return nil
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
+		return networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.qrCode))
@@ -173,16 +177,37 @@ class ContactsController {
 			do {
 				let container = try result.get()
 				let connections = container.connections
+				let pendingSent = container.pendingSentConnections
+				let pendingReceived = container.pendingReceivedConnections
 				let context = CoreDataStack.shared.container.newBackgroundContext()
 				context.performAndWait {
+					// tracking changes - once all contacts have been updated, any remaining in this set have been deleted as connections
 					var allCached = Set(self.allCachedContacts(onContext: context))
 
 					for contact in connections {
 						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
 							allCached.remove(cachedConnection)
-							cachedConnection.updateFromProfile(contact)
+							cachedConnection.updateFromProfile(contact, connectionStatus: .connected)
 						} else {
-							_ = ConnectionContact(connectionProfile: contact, context: context)
+							_ = ConnectionContact(connectionProfile: contact, connectionStatus: .connected, context: context)
+						}
+					}
+
+					for contact in pendingSent {
+						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
+							allCached.remove(cachedConnection)
+							cachedConnection.updateFromProfile(contact, connectionStatus: .pendingSent)
+						} else {
+							_ = ConnectionContact(connectionProfile: contact, connectionStatus: .pendingSent, context: context)
+						}
+					}
+
+					for contact in pendingReceived {
+						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
+							allCached.remove(cachedConnection)
+							cachedConnection.updateFromProfile(contact, connectionStatus: .pendingReceived)
+						} else {
+							_ = ConnectionContact(connectionProfile: contact, connectionStatus: .pendingReceived, context: context)
 						}
 					}
 

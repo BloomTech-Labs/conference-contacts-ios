@@ -31,7 +31,8 @@ struct ContactContainer: Decodable {
 	/// All connections user received, pending, connected, blocked
 	let receivedConnections: [UserProfile]
 	/// All pending connections, sent or received
-	let pendingConnections: [UserProfile]
+	let pendingReceivedConnections: [UserProfile]
+	let pendingSentConnections: [UserProfile]
 
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -45,6 +46,7 @@ struct ContactContainer: Decodable {
 		self.sentConnections = sentConnections.compactMap { $0.sender }
 		self.receivedConnections = receivedConnections.compactMap { $0.receiver }
 		self.connections = connections.compactMap { $0.sender ?? $0.receiver }
-		self.pendingConnections = pendingConnections.compactMap { $0.sender ?? $0.receiver }
+		self.pendingReceivedConnections = pendingConnections.compactMap { $0.sender }
+		self.pendingSentConnections = pendingConnections.compactMap { $0.receiver }
 	}
 }
