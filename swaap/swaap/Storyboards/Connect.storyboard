@@ -236,7 +236,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Looking for QR Code..." id="QPp-Ua-KMO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="nk1-4Z-Fdr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="nk1-4Z-Fdr">
                             <connections>
                                 <action selector="cancelTapped:" destination="6Xu-An-qFw" id="Eii-5q-084"/>
                             </connections>

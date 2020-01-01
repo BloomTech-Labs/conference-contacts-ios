@@ -224,6 +224,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 										self.animateRequestNotificationOn(for: state)
 										self.notificationNameLabel.text = qrCode.user?.name
 									}
+									self.contactsController?.updateContactCache()
 								case .failure(let error):
 									NSLog("Error requesting connection: \(error)")
 								}
