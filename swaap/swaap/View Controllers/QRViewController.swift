@@ -24,7 +24,7 @@ class QRViewController: UIViewController, ProfileAccessor {
 	var locationManager = LocationHandler()
 
 	private func updateViews() {
-		guard let id = profileController?.userProfile?.id else { return }
+		guard let id = profileController?.userProfile?.qrCodes.first?.id else { return }
 		guard isViewLoaded else { return }
 		let data = URL(string: "https://swaap.co/qrLink/")!
 			.appendingPathComponent(id)

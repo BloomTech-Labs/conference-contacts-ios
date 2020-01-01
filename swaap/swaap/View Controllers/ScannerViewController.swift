@@ -8,8 +8,10 @@
 
 import UIKit
 import AVFoundation
+import NetworkHandler
 
-class ScannerViewController: UIViewController {
+class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor {
+
 	// MARK: - System Overrides
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .portrait
@@ -20,14 +22,22 @@ class ScannerViewController: UIViewController {
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var nameOfReceiver: UILabel!
 
+	var contactsController: ContactsController?
+	var profileController: ProfileController?
+	var networkRequest: URLSessionDataTask?
+	var imageRequest: URLSessionDataTask?
+
 	var session: AVCaptureSession!
 	var previewLayer: AVCaptureVideoPreviewLayer!
 	let detectedObjectOverlayView = UIView()
 	let detectedShapeLayer = CAShapeLayer()
-	let lookingForString = "Looking for QR code..."
-	let foundString = "Found"
 
 	var foundQRCodeData = ""
+
+	// static values
+	let lookingForString = "Looking for QR code..."
+	let foundString = "Found"
+	var defaultConnectionImage: UIImage?
 
 	@IBOutlet private weak var onScreenAnchor: NSLayoutConstraint!
 	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
@@ -37,6 +47,7 @@ class ScannerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		title = lookingForString
+		defaultConnectionImage = profileImageView.image
 
 		session = AVCaptureSession()
 
@@ -107,6 +118,9 @@ class ScannerViewController: UIViewController {
 		dismiss(animated: true)
 	}
 
+	@IBAction func dismissButtonPressed(_ sender: UIButton) {
+		dismissRequestNotification(true)
+	}
 
 	// MARK: - Alerts
     func failed() {
@@ -151,18 +165,63 @@ class ScannerViewController: UIViewController {
 	}
 
 	private func triggerHapticFeedback(_ code: String) {
-		guard code != foundQRCodeData else { return }
+		guard foundQRCodeData.isEmpty else { return }
 		HapticFeedback.produceHeavyFeedback()
 	}
 
 	private func found(code: String, path: CGPath) {
 		// Do something with metaData stringValue here
+		guard foundQRCodeData.isEmpty || code == foundQRCodeData else { return }
+		guard let url = URL(string: code),
+			url.host == "swaap.co",
+			url.pathComponents.count == 3,
+			url.pathComponents[1] == "qrLink" else { return }
 		triggerHapticFeedback(code)
 		foundQRCodeData = code
-		animateRequestNotificationOn()
 		detectedShapeLayer.path = path
-
 		title = foundString
+
+		let newConnectionQRId = url.lastPathComponent
+		if networkRequest == nil {
+			networkRequest = contactsController?.fetchQRCode(with: newConnectionQRId, completion: { [weak self] (result: Result<ProfileQRCode, NetworkError>) in
+				print(result)
+				switch result {
+				case .success(let qrCode):
+					self?.fetchConnectionImage(qrCode.user)
+					DispatchQueue.main.async {
+						self?.animateRequestNotificationOn()
+						self?.nameOfReceiver.text = qrCode.user?.name
+					}
+				case .failure(let error):
+					NSLog("Error loading qr code from server: \(error)")
+					self?.dismissRequestNotification(true, forced: true)
+				}
+			})
+		}
+
+		// request qr code query
+		// get user info from query
+			// see if user is already in connections
+		// display user info in ui
+		// send a connection request
+
+//		animateRequestNotificationOn()
+
+	}
+
+	private func fetchConnectionImage(_ userProfile: UserProfile?) {
+		guard let userProfile = userProfile else { return }
+		imageRequest?.cancel()
+		imageRequest = profileController?.fetchImage(url: userProfile.pictureURL, completion: { [weak self] imageResult in
+			do {
+				let imageData = try imageResult.get()
+				DispatchQueue.main.async {
+					self?.profileImageView.image = UIImage(data: imageData)
+				}
+			} catch {
+				NSLog("Failed getting image for user: \(userProfile.id) \(userProfile.name)")
+			}
+		})
 	}
 
 	private func animateRequestNotificationOn() {
@@ -178,14 +237,20 @@ class ScannerViewController: UIViewController {
 	private func dismissRequestNotification(_ animated: Bool, forced: Bool = false) {
 		guard requestSentViewIsOnScreen || forced else { return }
 		foundQRCodeData = ""
+		networkRequest?.cancel()
+		networkRequest = nil
+		imageRequest?.cancel()
+		imageRequest = nil
 		title = lookingForString
 		requestSentViewIsOnScreen = false
 		let duration: TimeInterval = animated ? 0.3 : 0.0
-		UIView.animate(withDuration: duration, delay: 0.0, animations: {
+		UIView.animate(withDuration: duration, animations: {
 			self.onScreenAnchor.isActive = false
 			self.offScreenAnchor.isActive = true
 			self.view.layoutSubviews()
-		})
+		}) { _ in
+			self.profileImageView.image = self.defaultConnectionImage
+		}
 	}
 }
 
