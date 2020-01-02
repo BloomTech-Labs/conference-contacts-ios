@@ -18,6 +18,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	lazy var fetchedResultsController: NSFetchedResultsController<ConnectionContact> = {
 		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
 		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+		fetchRequest.predicate = NSPredicate(format: "connectionStatus == %i", ContactPendingStatus.connected.rawValue)
 
 		let moc = CoreDataStack.shared.mainContext
 		let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
