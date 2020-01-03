@@ -18,11 +18,7 @@ protocol ProfileAccessor: AnyObject {
 
 class ProfileController {
 	let authManager: AuthManager
-	lazy var locationManager: LocationHandler = {
-		let handler = LocationHandler()
-		handler.delegate = self
-		return handler
-	}()
+	let locationManager = LocationHandler()
 
 	/// Automatically sends `userProfileChanged` (all events), `userProfilePopulated` (when nil -> value),
 	/// `userProfileDepopulated` (value -> nil), or `userProfileModified` (value -> value) notifications when modified
@@ -72,6 +68,10 @@ class ProfileController {
 				}
 			}
 		}
+
+		locationManager.delegate = self
+		locationManager.requestAuth()
+		locationManager.singleLocationRequest()
 	}
 
 	// MARK: - Networking

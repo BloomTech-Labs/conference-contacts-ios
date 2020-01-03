@@ -44,6 +44,16 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 		tableView.allowsSelection = false
 		(navigationController?.tabBarController as? RootTabBarController)?.pendingContactsDelegate = self
     }
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		profileController?.locationManager.startTrackingLocation()
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		profileController?.locationManager.stopTrackingLocation()
+	}
 }
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
@@ -60,7 +70,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
 		cell.profileController = profileController
 		let pendingContact = fetchedResultsController.object(at: indexPath)
 		cell.connectionContact = pendingContact
-
+		cell.delegate = self
 
 		switch indexPath.section {
 		case 0:
@@ -139,5 +149,36 @@ extension NotificationViewController: PendingContactsUpdateDelegate {
 		let requestCount = contactsController?.pendingIncomingRequests.count ?? 0
 		navigationController?.tabBarItem.badgeColor = .gradientBackgroundColorBlueOne
 		navigationController?.tabBarItem.badgeValue = requestCount > 0 ? "\(requestCount)" : nil
+	}
+}
+
+extension NotificationViewController: PendingContactTableViewCellDelegate {
+	func pendingContactRequestAccepted(on cell: PendingContactTableViewCell, contact: ConnectionContact) {
+		cell.enableButtons(false)
+		guard let id = contact.connectionID else { return }
+		guard let location = profileController?.locationManager.lastLocation else { return }
+		contactsController?.acceptConnection(toConnectionID: id, currentLocation: location, completion: { result in
+			switch result {
+			case .success:
+				self.contactsController?.updateContactCache()
+			case .failure(let error):
+				NSLog("Error accepting contact request: \(error)")
+				DispatchQueue.main.async { cell.enableButtons() }
+			}
+		})
+	}
+
+	func pendingContactRequestCancelled(on cell: PendingContactTableViewCell, contact: ConnectionContact) {
+		cell.enableButtons(false)
+		guard let id = contact.connectionID else { return }
+		contactsController?.deleteConnection(toConnectionID: id, completion: { result in
+			switch result {
+			case .success:
+				self.contactsController?.updateContactCache()
+			case .failure(let error):
+				NSLog("Error cancelling/deleting contact request: \(error)")
+				DispatchQueue.main.async { cell.enableButtons() }
+			}
+		})
 	}
 }

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol PendingContactTableViewCellDelegate: AnyObject {
+	func pendingContactRequestAccepted(on cell: PendingContactTableViewCell, contact: ConnectionContact)
+	func pendingContactRequestCancelled(on cell: PendingContactTableViewCell, contact: ConnectionContact)
+}
+
 class PendingContactTableViewCell: UITableViewCell {
 
 	@IBOutlet private weak var boujee: UIImageView!
@@ -27,6 +32,8 @@ class PendingContactTableViewCell: UITableViewCell {
 			updateViews()
 		}
 	}
+
+	weak var delegate: PendingContactTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,4 +71,20 @@ class PendingContactTableViewCell: UITableViewCell {
 			}
 		})
 	}
+
+	func enableButtons(_ enabled: Bool = true) {
+		[acceptButton, cancelButton].forEach { $0?.isEnabled = enabled }
+	}
+
+	// MARK: - IBActions
+	@IBAction func acceptButtonTapped(_ sender: UIButton) {
+		guard let contact = connectionContact else { return }
+		delegate?.pendingContactRequestAccepted(on: self, contact: contact)
+	}
+
+	@IBAction func cancelButtonTapped(_ sender: UIButton) {
+		guard let contact = connectionContact else { return }
+		delegate?.pendingContactRequestCancelled(on: self, contact: contact)
+	}
+
 }
