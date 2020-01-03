@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,13 +20,70 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="856"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PendingCell" id="eHZ-Lu-Dd0">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PendingCell" rowHeight="64" id="eHZ-Lu-Dd0" customClass="PendingContactTableViewCell" customModule="swaap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eHZ-Lu-Dd0" id="BNv-id-zfx">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="38q-FT-hnu">
+                                                    <rect key="frame" x="20" y="8" width="374" height="48"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hxl-pf-Ygf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="48"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="45" id="ZKo-a0-ieK"/>
+                                                                <constraint firstAttribute="width" secondItem="Hxl-pf-Ygf" secondAttribute="height" multiplier="1:1" id="vAi-C3-3gS"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xkp-9T-R1k">
+                                                            <rect key="frame" x="53" y="0.0" width="209" height="48"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="c83-pC-dLO">
+                                                            <rect key="frame" x="270" y="0.0" width="104" height="48"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdW-lH-75S">
+                                                                    <rect key="frame" x="0.0" y="10" width="65" height="28"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="65" id="vSJ-w4-AqS"/>
+                                                                    </constraints>
+                                                                    <inset key="contentEdgeInsets" minX="8" minY="5" maxX="8" maxY="5"/>
+                                                                    <state key="normal" title="Accept">
+                                                                        <color key="titleColor" name="Swaap Accent Color 1"/>
+                                                                    </state>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NL4-tY-eFX">
+                                                                    <rect key="frame" x="81" y="12.5" width="23" height="23.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="23" id="Qid-XI-660"/>
+                                                                    </constraints>
+                                                                    <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <state key="normal" image="xmark.circle" catalog="system">
+                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                                                    </state>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="38q-FT-hnu" firstAttribute="top" secondItem="BNv-id-zfx" secondAttribute="top" constant="8" id="Jhv-ey-MxO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="38q-FT-hnu" secondAttribute="trailing" id="giD-SQ-2SW"/>
+                                                <constraint firstAttribute="bottom" secondItem="38q-FT-hnu" secondAttribute="bottom" constant="8" id="gyL-gh-C63"/>
+                                                <constraint firstItem="38q-FT-hnu" firstAttribute="leading" secondItem="BNv-id-zfx" secondAttribute="leadingMargin" id="r8S-oh-sFY"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="jdW-lH-75S" id="3zF-nW-diw"/>
+                                            <outlet property="boujee" destination="Hxl-pf-Ygf" id="Ly8-QM-i49"/>
+                                            <outlet property="cancelButton" destination="NL4-tY-eFX" id="MBk-LK-IXh"/>
+                                            <outlet property="nameLabel" destination="Xkp-9T-R1k" id="SDa-g8-7pN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -71,5 +129,9 @@
     </scenes>
     <resources>
         <image name="bell" catalog="system" width="64" height="62"/>
+        <image name="xmark.circle" catalog="system" width="64" height="60"/>
+        <namedColor name="Swaap Accent Color 1">
+            <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

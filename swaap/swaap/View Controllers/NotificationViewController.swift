@@ -19,7 +19,7 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 
 	lazy var fetchedResultsController: NSFetchedResultsController<ConnectionContact> = {
 		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "connectionStatus", ascending: true)]
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "connectionStatus", ascending: false)]
 		fetchRequest.predicate = NSPredicate(format: "connectionStatus != %i", ContactPendingStatus.connected.rawValue)
 
 		let moc = CoreDataStack.shared.mainContext
@@ -42,6 +42,7 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 		tableView.dataSource = self
 		tableView.separatorStyle = .none
 		tableView.allowsSelection = false
+		(navigationController?.tabBarController as? RootTabBarController)?.pendingContactsDelegate = self
     }
 }
 
@@ -54,9 +55,20 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "PendingCell", for: indexPath)
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "PendingCell",
+													   for: indexPath) as? PendingContactTableViewCell else { return UITableViewCell() }
+		cell.profileController = profileController
 		let pendingContact = fetchedResultsController.object(at: indexPath)
-		cell.textLabel?.text = pendingContact.name
+		cell.connectionContact = pendingContact
+
+
+		switch indexPath.section {
+		case 0:
+			cell.isIncoming = true
+		default:
+			cell.isIncoming = false
+		}
+
 		return cell
 	}
 

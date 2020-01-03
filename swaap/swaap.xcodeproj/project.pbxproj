@@ -96,6 +96,7 @@
 		37A8B3A123ABFBFE0019F17B /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B3A023ABFBFE0019F17B /* ConnectViewController.swift */; };
 		37A8B3AB23AC0D2D0019F17B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B3AA23AC0D2D0019F17B /* ScannerViewController.swift */; };
 		37B3958C23BEAAC1001BEE01 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B3958B23BEAAC1001BEE01 /* NotificationViewController.swift */; };
+		37B3959123BEED29001BEE01 /* PendingContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B3959023BEED29001BEE01 /* PendingContactTableViewCell.swift */; };
 		37B3B70E238F50D700FB9CFA /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B3B70D238F50D700FB9CFA /* SocialButton.swift */; };
 		37B3B714238F7EFE00FB9CFA /* SocialButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B3B713238F7EFE00FB9CFA /* SocialButton.xib */; };
 		37D1D72223A198EF00931BF8 /* AlertTint+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1D72123A198EF00931BF8 /* AlertTint+UIAlertViewController.swift */; };
@@ -291,6 +292,7 @@
 		37A8B3A023ABFBFE0019F17B /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		37A8B3AA23AC0D2D0019F17B /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		37B3958B23BEAAC1001BEE01 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		37B3959023BEED29001BEE01 /* PendingContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingContactTableViewCell.swift; sourceTree = "<group>"; };
 		37B3B70D238F50D700FB9CFA /* SocialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		37B3B713238F7EFE00FB9CFA /* SocialButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialButton.xib; sourceTree = "<group>"; };
 		37D1D72123A198EF00931BF8 /* AlertTint+UIAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertTint+UIAlertViewController.swift"; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				376F329B23A173EE001E6547 /* LabelPlaceholder.swift */,
 				37D1D75E23A956F900931BF8 /* BasicInfoView.xib */,
 				37D1D76023A9651800931BF8 /* BasicInfoView.swift */,
+				37B3959023BEED29001BEE01 /* PendingContactTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -964,6 +967,7 @@
 				332FD22A23A0908C00074F28 /* ConcurrentOperation.swift in Sources */,
 				37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */,
 				33F0EA6623988C98004D1236 /* JSONDecoder+JWTDecoding.swift in Sources */,
+				37B3959123BEED29001BEE01 /* PendingContactTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
