@@ -258,6 +258,76 @@ class ContactsController {
 		}
 	}
 
+	func acceptConnection(toConnectionID connectionID: String,
+						   currentLocation: CLLocation,
+						   session: NetworkLoader = URLSession.shared,
+						   completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+		let coords = currentLocation.coordinate
+
+		let query = SwaapGQLQueries.connectionAcceptMutation
+		let variables = ["id": connectionID,
+						 "coords": ["latitude": coords.latitude,
+									"longitude": coords.longitude]] as [String: Any]
+
+		let graphObject = GQuery(query: query, variables: variables)
+
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let container = try result.get()
+				completion(.success(container.response))
+			} catch {
+				NSLog("Error accepting connection to user: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	func deleteConnection(toConnectionID connectionID: String,
+						  session: NetworkLoader = URLSession.shared,
+						  completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+
+		let query = SwaapGQLQueries.connectionDeleteMutation
+		let variables = ["id": connectionID] as [String: Any]
+		let graphObject = GQuery(query: query, variables: variables)
+
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let container = try result.get()
+				completion(.success(container.response))
+			} catch {
+				NSLog("Error deleting connection to user: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
 
 	// MARK: - Utility
 	func clearCache(completion: ((Error?) -> Void)? = nil) {
