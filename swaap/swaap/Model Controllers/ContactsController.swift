@@ -184,32 +184,20 @@ class ContactsController {
 					// tracking changes - once all contacts have been updated, any remaining in this set have been deleted as connections
 					var allCached = Set(self.allCachedContacts(onContext: context))
 
-					for contact in connections {
-						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
-							allCached.remove(cachedConnection)
-							cachedConnection.updateFromProfile(contact, connectionStatus: .connected)
-						} else {
-							_ = ConnectionContact(connectionProfile: contact, connectionStatus: .connected, context: context)
+					let updateContactClosure: ([UserProfile], ContactPendingStatus) -> Void = { contacts, status in
+						for contact in contacts {
+							if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
+								allCached.remove(cachedConnection)
+								cachedConnection.updateFromProfile(contact, connectionStatus: status)
+							} else {
+								_ = ConnectionContact(connectionProfile: contact, connectionStatus: status, context: context)
+							}
 						}
 					}
 
-					for contact in pendingSent {
-						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
-							allCached.remove(cachedConnection)
-							cachedConnection.updateFromProfile(contact, connectionStatus: .pendingSent)
-						} else {
-							_ = ConnectionContact(connectionProfile: contact, connectionStatus: .pendingSent, context: context)
-						}
-					}
-
-					for contact in pendingReceived {
-						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
-							allCached.remove(cachedConnection)
-							cachedConnection.updateFromProfile(contact, connectionStatus: .pendingReceived)
-						} else {
-							_ = ConnectionContact(connectionProfile: contact, connectionStatus: .pendingReceived, context: context)
-						}
-					}
+					updateContactClosure(connections, .connected)
+					updateContactClosure(pendingSent, .pendingSent)
+					updateContactClosure(pendingReceived, .pendingReceived)
 
 					allCached.forEach { context.delete($0) }
 				}
