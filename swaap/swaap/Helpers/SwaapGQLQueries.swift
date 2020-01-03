@@ -95,6 +95,26 @@ enum SwaapGQLQueries {
 		}
 		""".singleLine
 
+	static let connectionAcceptMutation = """
+		mutation ($id:ID!, $coords: CoordinatesInput!) {
+			acceptConnection(id: $id, receiverCoords: $coords) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
+	static let connectionDeleteMutation = """
+		mutation ($id:ID!) {
+			deleteConnection(id: $id) {
+				success
+				code
+				message
+			}
+		}
+		""".singleLine
+
 	static let connectionFetchSingleUserQuery = """
 		query ($id:ID!) {
 			user(id: $id) {
