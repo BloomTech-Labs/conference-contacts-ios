@@ -84,7 +84,7 @@
 		37A185BB237A357C002191B5 /* swaapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185BA237A357C002191B5 /* swaapTests.swift */; };
 		37A185C6237A357C002191B5 /* swaapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A185C5237A357C002191B5 /* swaapUITests.swift */; };
 		37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */; };
-		37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */; };
+		37A185EE237A43BF002191B5 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185ED237A43BF002191B5 /* Notifications.storyboard */; };
 		37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */; };
 		37A185F2237A43D5002191B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185F1237A43D5002191B5 /* Profile.storyboard */; };
 		37A2F40B237CFEFE00C1EF3B /* RootAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F40A237CFEFE00C1EF3B /* RootAuthViewController.swift */; };
@@ -95,6 +95,7 @@
 		37A2F41D237D543B00C1EF3B /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F41C237D543B00C1EF3B /* ButtonHelper.swift */; };
 		37A8B3A123ABFBFE0019F17B /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B3A023ABFBFE0019F17B /* ConnectViewController.swift */; };
 		37A8B3AB23AC0D2D0019F17B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B3AA23AC0D2D0019F17B /* ScannerViewController.swift */; };
+		37B3958C23BEAAC1001BEE01 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B3958B23BEAAC1001BEE01 /* NotificationViewController.swift */; };
 		37B3B70E238F50D700FB9CFA /* SocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B3B70D238F50D700FB9CFA /* SocialButton.swift */; };
 		37B3B714238F7EFE00FB9CFA /* SocialButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B3B713238F7EFE00FB9CFA /* SocialButton.xib */; };
 		37D1D72223A198EF00931BF8 /* AlertTint+UIAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D1D72123A198EF00931BF8 /* AlertTint+UIAlertViewController.swift */; };
@@ -278,7 +279,7 @@
 		37A185E1237A3B76002191B5 /* output.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = output.xcfilelist; sourceTree = "<group>"; };
 		37A185E3237A3BCF002191B5 /* input.xcfilelist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcfilelist; path = input.xcfilelist; sourceTree = "<group>"; };
 		37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyAcknowledgements.framework; path = Carthage/Build/iOS/SwiftyAcknowledgements.framework; sourceTree = "<group>"; };
-		37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardOne.storyboard; sourceTree = "<group>"; };
+		37A185ED237A43BF002191B5 /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardTwo.storyboard; sourceTree = "<group>"; };
 		37A185F1237A43D5002191B5 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		37A2F40A237CFEFE00C1EF3B /* RootAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootAuthViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +290,7 @@
 		37A2F41E237DDDF000C1EF3B /* swaap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swaap.entitlements; sourceTree = "<group>"; };
 		37A8B3A023ABFBFE0019F17B /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		37A8B3AA23AC0D2D0019F17B /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		37B3958B23BEAAC1001BEE01 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		37B3B70D238F50D700FB9CFA /* SocialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButton.swift; sourceTree = "<group>"; };
 		37B3B713238F7EFE00FB9CFA /* SocialButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialButton.xib; sourceTree = "<group>"; };
 		37D1D72123A198EF00931BF8 /* AlertTint+UIAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertTint+UIAlertViewController.swift"; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				33E7BBFC23A19BC000D81C02 /* QRViewController.swift */,
 				37A8B3A023ABFBFE0019F17B /* ConnectViewController.swift */,
 				37A8B3AA23AC0D2D0019F17B /* ScannerViewController.swift */,
+				37B3958B23BEAAC1001BEE01 /* NotificationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -523,7 +526,7 @@
 			children = (
 				37A185AE237A357C002191B5 /* LaunchScreen.storyboard */,
 				37A185A9237A3579002191B5 /* Main.storyboard */,
-				37A185ED237A43BF002191B5 /* StoryboardOne.storyboard */,
+				37A185ED237A43BF002191B5 /* Notifications.storyboard */,
 				37A185EF237A43CE002191B5 /* StoryboardTwo.storyboard */,
 				37A185F1237A43D5002191B5 /* Profile.storyboard */,
 				37A2F40C237CFF0C00C1EF3B /* Login.storyboard */,
@@ -813,7 +816,7 @@
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
 				37F9345423985FD000ACBA23 /* FloatingTextFieldView.xib in Resources */,
 				3753DE36239C69B600C90501 /* ContactMethodCellView.xib in Resources */,
-				37A185EE237A43BF002191B5 /* StoryboardOne.storyboard in Resources */,
+				37A185EE237A43BF002191B5 /* Notifications.storyboard in Resources */,
 				37A185AB237A3579002191B5 /* Main.storyboard in Resources */,
 				37A185F0237A43CE002191B5 /* StoryboardTwo.storyboard in Resources */,
 				37B3B714238F7EFE00FB9CFA /* SocialButton.xib in Resources */,
@@ -951,6 +954,7 @@
 				33E7BC0923A19CBD00D81C02 /* HandyExtensions.swift in Sources */,
 				33B24C5A2395B85C00B20DEA /* DummyViewController.swift in Sources */,
 				3753DE30239AF3D800C90501 /* UIView+Visible.swift in Sources */,
+				37B3958C23BEAAC1001BEE01 /* NotificationViewController.swift in Sources */,
 				3797A5702388637800CB8621 /* Storyboarded.swift in Sources */,
 				37A2F41D237D543B00C1EF3B /* ButtonHelper.swift in Sources */,
 				33E7BBFD23A19BC000D81C02 /* QRViewController.swift in Sources */,
