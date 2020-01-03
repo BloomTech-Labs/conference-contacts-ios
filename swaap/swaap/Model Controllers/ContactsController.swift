@@ -16,6 +16,7 @@ protocol ContactsAccessor: AnyObject {
 }
 
 class ContactsController {
+	// MARK: - Properties
 	let profileController: ProfileController
 	let authManager: AuthManager
 
@@ -41,6 +42,7 @@ class ContactsController {
 		allCachedContacts(onContext: .mainContext, status: .pendingSent)
 	}
 
+	// MARK: - Lifecycle
 	init(profileController: ProfileController) {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
@@ -56,7 +58,8 @@ class ContactsController {
 		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsChanged, object: nil, queue: nil, using: cacheUpdateClosure)
 	}
 
-	// MARK: - Fetching
+	// MARK: - Contacts
+	// MARK: networking
 	func fetchUser(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
@@ -88,74 +91,6 @@ class ContactsController {
 		}
 	}
 
-	@discardableResult func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) -> URLSessionDataTask? {
-		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
-			return nil
-		}
-
-		let query = SwaapGQLQueries.connectionFetchQRCodeQuery
-		let variables = ["id": id]
-
-		let graphObject = GQuery(query: query, variables: variables)
-
-		do {
-			request.httpBody = try graphObject.jsonData()
-		} catch {
-			NSLog("Failed encoding graph object: \(error)")
-			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
-			return nil
-		}
-
-		request.expectedResponseCodes = [200]
-		return networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
-			do {
-				let container = try result.get()
-				completion(.success(container.qrCode))
-			} catch {
-				NSLog("Error fetching requested user: \(error)")
-				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
-			}
-		}
-	}
-
-	func requestConnection(toUserID userID: String,
-						   currentLocation: CLLocation,
-						   session: NetworkLoader = URLSession.shared,
-						   completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
-		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
-			return
-		}
-		let coords = currentLocation.coordinate
-
-		let query = SwaapGQLQueries.connectionCreateMutation
-		let variables = ["id": userID,
-						 "coords": ["latitude": coords.latitude,
-									"longitude": coords.longitude]] as [String: Any]
-
-		let graphObject = GQuery(query: query, variables: variables)
-
-		do {
-			request.httpBody = try graphObject.jsonData()
-		} catch {
-			NSLog("Failed encoding graph object: \(error)")
-			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
-			return
-		}
-
-		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
-			do {
-				let container = try result.get()
-				completion(.success(container.response))
-			} catch {
-				NSLog("Error requesting connection to user: \(error)")
-				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
-			}
-		}
-	}
-
 	func fetchAllContacts(session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ContactContainer, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
@@ -176,6 +111,7 @@ class ContactsController {
 		networkHandler.transferMahCodableDatas(with: request, session: session, completion: completion)
 	}
 
+	// MARK: CoreData
 	func updateContactCache(completion: @escaping () -> Void = {}) {
 		fetchAllContacts { [weak self] result in
 			guard let self = self else {
@@ -250,6 +186,77 @@ class ContactsController {
 		}
 		return result
 	}
+
+	// MARK: - QR Code
+	@discardableResult func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) -> URLSessionDataTask? {
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return nil
+		}
+
+		let query = SwaapGQLQueries.connectionFetchQRCodeQuery
+		let variables = ["id": id]
+
+		let graphObject = GQuery(query: query, variables: variables)
+
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return nil
+		}
+
+		request.expectedResponseCodes = [200]
+		return networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
+			do {
+				let container = try result.get()
+				completion(.success(container.qrCode))
+			} catch {
+				NSLog("Error fetching requested user: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	// MARK: - Connections (between users)
+	func requestConnection(toUserID userID: String,
+						   currentLocation: CLLocation,
+						   session: NetworkLoader = URLSession.shared,
+						   completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+		let coords = currentLocation.coordinate
+
+		let query = SwaapGQLQueries.connectionCreateMutation
+		let variables = ["id": userID,
+						 "coords": ["latitude": coords.latitude,
+									"longitude": coords.longitude]] as [String: Any]
+
+		let graphObject = GQuery(query: query, variables: variables)
+
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let container = try result.get()
+				completion(.success(container.response))
+			} catch {
+				NSLog("Error requesting connection to user: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
 
 	// MARK: - Utility
 	func clearCache(completion: ((Error?) -> Void)? = nil) {
