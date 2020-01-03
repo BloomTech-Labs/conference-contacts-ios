@@ -137,6 +137,7 @@ extension NotificationViewController: NSFetchedResultsControllerDelegate {
 extension NotificationViewController: PendingContactsUpdateDelegate {
 	func pendingContactsDidRefresh() {
 		let requestCount = contactsController?.pendingIncomingRequests.count ?? 0
+		navigationController?.tabBarItem.badgeColor = .gradientBackgroundColorBlueOne
 		navigationController?.tabBarItem.badgeValue = requestCount > 0 ? "\(requestCount)" : nil
 	}
 }
