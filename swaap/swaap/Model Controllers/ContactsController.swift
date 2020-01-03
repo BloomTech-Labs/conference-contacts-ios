@@ -33,6 +33,14 @@ class ContactsController {
 		allCachedContacts(onContext: .mainContext)
 	}
 
+	var pendingIncomingRequests: [ConnectionContact] {
+		allCachedContacts(onContext: .mainContext, status: .pendingReceived)
+	}
+
+	var pendingOutgoingRequests: [ConnectionContact] {
+		allCachedContacts(onContext: .mainContext, status: .pendingSent)
+	}
+
 	init(profileController: ProfileController) {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
@@ -205,12 +213,18 @@ class ContactsController {
 			} catch {
 				NSLog("Cache not updated: \(error)")
 			}
+			DispatchQueue.main.async {
+				NotificationCenter.default.post(name: .contactsCacheUpdated, object: nil)
+			}
 			completion()
 		}
 	}
 
-	private func allCachedContacts(onContext context: NSManagedObjectContext) -> [ConnectionContact] {
+	private func allCachedContacts(onContext context: NSManagedObjectContext, status: ContactPendingStatus? = nil) -> [ConnectionContact] {
 		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
+		if let status = status {
+			fetchRequest.predicate = NSPredicate(format: "connectionStatus == %i", status.rawValue)
+		}
 		var allConnections: [ConnectionContact] = []
 		context.performAndWait {
 			do {
@@ -255,4 +269,8 @@ class ContactsController {
 			}
 		}
 	}
+}
+
+extension NSNotification.Name {
+	static let contactsCacheUpdated = NSNotification.Name("com.swaap.contactsCacheUpdated")
 }
