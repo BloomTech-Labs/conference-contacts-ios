@@ -33,6 +33,7 @@ extension ConnectionContact {
 							 authID: String?,
 							 name: String,
 							 connectionStatus: Int16,
+							 connectionID: String,
 							 pictureURL: URL,
 							 birthdate: String?,
 							 location: String?,
@@ -47,6 +48,7 @@ extension ConnectionContact {
 		self.authID = authID
 		self.name = name
 		self.connectionStatus = connectionStatus
+		self.connectionID = connectionID
 		self.pictureURL = pictureURL
 		self.birthdate = birthdate
 		self.location = location
@@ -58,12 +60,13 @@ extension ConnectionContact {
 		addToProfileContactMethods(profileConnectionMethods)
 	}
 
-	convenience init(connectionProfile: UserProfile, connectionStatus: ContactPendingStatus, context: NSManagedObjectContext) {
+	convenience init(connectionProfile: UserProfile, connectionStatus: ContactPendingStatus, connectionID: String, context: NSManagedObjectContext) {
 		let connectionMethods = connectionProfile.profileContactMethods.map { ConnectionContactMethod(profileContactMethod: $0, context: context) }
 		self.init(id: connectionProfile.id,
 				  authID: connectionProfile.authID,
 				  name: connectionProfile.name,
 				  connectionStatus: connectionStatus.rawValue,
+				  connectionID: connectionID,
 				  pictureURL: connectionProfile.pictureURL,
 				  birthdate: connectionProfile.birthdate,
 				  location: connectionProfile.location,
@@ -75,7 +78,7 @@ extension ConnectionContact {
 				  context: context)
 	}
 
-	func updateFromProfile(_ userProfile: UserProfile, connectionStatus: ContactPendingStatus) {
+	func updateFromProfile(_ userProfile: UserProfile, connectionStatus: ContactPendingStatus, connectionID: String) {
 		guard userProfile.id == id else { return }
 		authID = userProfile.authID
 		name = userProfile.name
@@ -87,6 +90,7 @@ extension ConnectionContact {
 		tagline = userProfile.tagline
 		bio = userProfile.bio
 		self.connectionStatus = connectionStatus.rawValue
+		self.connectionID = connectionID
 
 		if let existingContactMethods = profileContactMethods {
 			removeFromProfileContactMethods(existingContactMethods)

@@ -128,13 +128,14 @@ class ContactsController {
 					// tracking changes - once all contacts have been updated, any remaining in this set have been deleted as connections
 					var allCached = Set(self.allCachedContacts(onContext: context))
 
-					let updateContactClosure: ([UserProfile], ContactPendingStatus) -> Void = { contacts, status in
+					let updateContactClosure: ([Contact], ContactPendingStatus) -> Void = { contacts, status in
 						for contact in contacts {
-							if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
+							let userConnection = contact.connectedUser
+							if let cachedConnection = self.getContactFromCache(forID: userConnection.id, onContext: context) {
 								allCached.remove(cachedConnection)
-								cachedConnection.updateFromProfile(contact, connectionStatus: status)
+								cachedConnection.updateFromProfile(userConnection, connectionStatus: status, connectionID: contact.id)
 							} else {
-								_ = ConnectionContact(connectionProfile: contact, connectionStatus: status, context: context)
+								_ = ConnectionContact(connectionProfile: userConnection, connectionStatus: status, connectionID: contact.id, context: context)
 							}
 						}
 					}

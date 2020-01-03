@@ -212,6 +212,7 @@
 		332FD22923A0908C00074F28 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		3345A34E2390C6B700859F29 /* VectorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTests.swift; sourceTree = "<group>"; };
 		335A520A23910C5100FA5623 /* RangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtensions.swift; sourceTree = "<group>"; };
+		335E563223BF0C74008FE6A6 /* Contacts 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Contacts 2.xcdatamodel"; sourceTree = "<group>"; };
 		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
 		3377AF8C23AB442E0083EC52 /* ContactConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactConnectionStatus.swift; sourceTree = "<group>"; };
 		3377AF8F23AB45290083EC52 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -1333,9 +1334,10 @@
 		33094E6C23AA0AF100D5556B /* Contacts.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				335E563223BF0C74008FE6A6 /* Contacts 2.xcdatamodel */,
 				33094E6D23AA0AF100D5556B /* Contacts.xcdatamodel */,
 			);
-			currentVersion = 33094E6D23AA0AF100D5556B /* Contacts.xcdatamodel */;
+			currentVersion = 335E563223BF0C74008FE6A6 /* Contacts 2.xcdatamodel */;
 			path = Contacts.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
