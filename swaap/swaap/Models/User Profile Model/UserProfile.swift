@@ -74,6 +74,24 @@ struct UserProfile: Codable, Hashable {
 
 }
 
+extension UserProfile {
+	init?(from connectionContact: ConnectionContact) {
+		guard let id = connectionContact.id,
+			let name = connectionContact.name,
+			let pictureURL = connectionContact.pictureURL else { return nil }
+		self.id = id
+		self.authID = connectionContact.authID
+		self.bio = connectionContact.bio
+		self.birthdate = connectionContact.birthdate
+		self.industry = connectionContact.industry
+		self.jobTitle = connectionContact.jobTitle
+		self.tagline = connectionContact.tagline
+		self.name = name
+		self.profileContactMethods = connectionContact.profileContactMethods?.compactMap { ($0 as? ConnectionContactMethod)?.profileContactMethod } ?? []
+		self.pictureURL = pictureURL
+	}
+}
+
 struct CreateUser: Codable {
 	let name: String
 	let picture: URL?

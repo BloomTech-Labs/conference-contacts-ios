@@ -72,12 +72,8 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
 		cell.connectionContact = pendingContact
 		cell.delegate = self
 
-		switch indexPath.section {
-		case 0:
-			cell.isIncoming = true
-		default:
-			cell.isIncoming = false
-		}
+		let status = ContactPendingStatus(with: pendingContact.connectionStatus)
+		cell.isIncoming = status == .pendingReceived
 
 		return cell
 	}
@@ -154,7 +150,7 @@ extension NotificationViewController: PendingContactsUpdateDelegate {
 
 extension NotificationViewController: PendingContactTableViewCellDelegate {
 	func pendingContactRequestAccepted(on cell: PendingContactTableViewCell, contact: ConnectionContact) {
-		cell.enableButtons(false)
+//		cell.enableButtons(false)
 		guard let id = contact.connectionID else { return }
 		guard let location = profileController?.locationManager.lastLocation else { return }
 		contactsController?.acceptConnection(toConnectionID: id, currentLocation: location, completion: { result in
@@ -169,7 +165,7 @@ extension NotificationViewController: PendingContactTableViewCellDelegate {
 	}
 
 	func pendingContactRequestCancelled(on cell: PendingContactTableViewCell, contact: ConnectionContact) {
-		cell.enableButtons(false)
+//		cell.enableButtons(false)
 		guard let id = contact.connectionID else { return }
 		contactsController?.deleteConnection(toConnectionID: id, completion: { result in
 			switch result {

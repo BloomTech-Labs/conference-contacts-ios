@@ -15,7 +15,7 @@ protocol PendingContactTableViewCellDelegate: AnyObject {
 
 class PendingContactTableViewCell: UITableViewCell {
 
-	@IBOutlet private weak var boujee: UIImageView!
+	@IBOutlet private weak var contactImageView: UIImageView!
 	@IBOutlet private weak var nameLabel: UILabel!
 	@IBOutlet private weak var acceptButton: UIButton!
 	@IBOutlet private weak var cancelButton: UIButton!
@@ -46,12 +46,12 @@ class PendingContactTableViewCell: UITableViewCell {
 		acceptButton.layer.cornerRadius = acceptButton.frame.height / 2
 		acceptButton.layer.cornerCurve = .continuous
 
-		boujee.contentMode = .scaleAspectFill
+		contactImageView.contentMode = .scaleAspectFill
 	}
 
 	override func updateConstraints() {
 		super.updateConstraints()
-		boujee.layer.cornerRadius = boujee.frame.width / 2
+		contactImageView.layer.cornerRadius = contactImageView.frame.width / 2
 	}
 
 	private func updateViews() {
@@ -64,7 +64,7 @@ class PendingContactTableViewCell: UITableViewCell {
 			do {
 				let imageData = try result.get()
 				DispatchQueue.main.async {
-					self?.boujee?.image = UIImage(data: imageData)
+					self?.contactImageView?.image = UIImage(data: imageData)
 				}
 			} catch {
 				NSLog("Error fetching image data: \(error)")
@@ -86,5 +86,4 @@ class PendingContactTableViewCell: UITableViewCell {
 		guard let contact = connectionContact else { return }
 		delegate?.pendingContactRequestCancelled(on: self, contact: contact)
 	}
-
 }

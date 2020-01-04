@@ -29,6 +29,10 @@ enum ContactPendingStatus: Int16 {
 }
 
 extension ConnectionContact {
+	var contactProfile: UserProfile? {
+		UserProfile(from: self)
+	}
+
 	private convenience init(id: String,
 							 authID: String?,
 							 name: String,

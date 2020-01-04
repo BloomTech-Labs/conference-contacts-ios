@@ -20,7 +20,8 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 
 	lazy var fetchedResultsController: NSFetchedResultsController<ConnectionContact> = {
 		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+		let nameDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+		fetchRequest.sortDescriptors = [nameDescriptor]
 		fetchRequest.predicate = self.connectedStatusPredicate
 
 		let moc = CoreDataStack.shared.mainContext
@@ -37,6 +38,14 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		return fetchedResultsController
 	}()
 
+	lazy var refreshControl: UIRefreshControl = {
+		let refreshCtrl = UIRefreshControl()
+		refreshCtrl.addTarget(self, action: #selector(refreshCache), for: .valueChanged)
+		refreshCtrl.attributedTitle = NSAttributedString(string: " ")
+		refreshCtrl.tintColor = .swaapAccentColorOne
+		return refreshCtrl
+	}()
+
 	@IBOutlet private weak var tableView: UITableView!
 
 	@IBOutlet private weak var headerImageView: UIImageView!
@@ -46,7 +55,9 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.sectionIndexColor = .swaapAccentColorOne
 		tableView.tableFooterView = UIView()
+		tableView.refreshControl = refreshControl
 
 		updateHeader()
 		setupNotifications()
@@ -55,8 +66,6 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 
 		configureSearch()
 
-		tableView.refreshControl = UIRefreshControl()
-		tableView.refreshControl?.addTarget(self, action: #selector(refreshCache), for: .valueChanged)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -85,10 +94,15 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	@objc func refreshCache() {
+		refreshControl.beginRefreshing()
+		self.refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
 		profileController?.fetchProfileFromServer(completion: { [weak self] _ in
 			self?.contactsController?.updateContactCache(completion: {
 				DispatchQueue.main.async {
-					self?.tableView.refreshControl?.endRefreshing()
+					self?.tableView.refreshControl?.attributedTitle = NSAttributedString(string: " ")
+					self?.tableView.reloadData()
+					self?.refreshControl.endRefreshing()
+					self?.tableView.alwaysBounceVertical = true
 				}
 			})
 		})
@@ -132,7 +146,12 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	@IBSegueAction func showContactProfile(_ coder: NSCoder) -> ProfileViewController? {
-		return ProfileViewController(coder: coder)
+		guard let indexPath = tableView.indexPathForSelectedRow else { return ProfileViewController(coder: coder) }
+		let contact = fetchedResultsController.object(at: indexPath)
+		let profileVC = ProfileViewController(coder: coder)
+		profileVC?.isCurrentUser = false
+		profileVC?.userProfile = contact.contactProfile
+		return profileVC
 	}
 }
 
@@ -158,7 +177,7 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		guard let letter = fetchedResultsController.sections?[section].name.first else { return "" }
-		return String(letter)
+		return String(letter).capitalized
 	}
 
 	private func contactCell(on tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
@@ -166,6 +185,11 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 		let contact = fetchedResultsController.object(at: indexPath)
 		cell.textLabel?.text = contact.name
 		return cell
+	}
+
+	func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+		let result = fetchedResultsController.section(forSectionIndexTitle: title, at: index)
+		return result
 	}
 }
 
@@ -218,7 +242,8 @@ extension ContactsViewController: NSFetchedResultsControllerDelegate {
 	}
 
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
-		return nil
+		guard let sectionLetter = sectionName.first else { return nil }
+		return String(sectionLetter).capitalized
 	}
 }
 
