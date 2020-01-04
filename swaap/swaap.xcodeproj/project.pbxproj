@@ -37,7 +37,6 @@
 		3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88E23A0CAD900A17D0D /* Alamofire.framework */; };
 		3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */; };
 		33A4BAA123BB29880000E4E1 /* QRettyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A4BA9823BB29880000E4E1 /* QRettyCode.framework */; };
-		33A4BAA323BB298F0000E4E1 /* SwiftyBinaryFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A4BAA223BB298E0000E4E1 /* SwiftyBinaryFormatter.framework */; };
 		33B24C5A2395B85C00B20DEA /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B24C592395B85C00B20DEA /* DummyViewController.swift */; };
 		33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C00787238FDDEC000D72A7 /* VectorExtensions.swift */; };
 		33CCBABA2398F21200A98C82 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBAB92398F21200A98C82 /* ProfileController.swift */; };
@@ -313,7 +312,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33A4BAA323BB298F0000E4E1 /* SwiftyBinaryFormatter.framework in Frameworks */,
 				33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */,
 				3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
@@ -1173,8 +1171,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1189,7 +1187,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lambdalabs.swaap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = swaapDistribution;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

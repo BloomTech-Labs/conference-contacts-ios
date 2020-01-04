@@ -45,11 +45,10 @@ struct ContactContainer: Decodable {
 		let sentConnections = try userContainer.decode([Contact].self, forKey: .sentConnections)
 		let receivedConnections = try userContainer.decode([Contact].self, forKey: .receivedConnections)
 		let allConnections = sentConnections + receivedConnections
-		let connections = allConnections.filter { $0.status == .connected }
 		let pendingConnections = allConnections.filter { $0.status == .pending }
+		self.connections = allConnections.filter { $0.status == .connected }
 		self.sentConnections = sentConnections.compactMap { $0.sender }
 		self.receivedConnections = receivedConnections.compactMap { $0.receiver }
-		self.connections = connections
 		self.pendingReceivedConnections = pendingConnections.compactMap { $0.sender != nil ? $0 : nil }
 		self.pendingSentConnections = pendingConnections.compactMap { $0.receiver != nil ? $0 : nil }
 	}
