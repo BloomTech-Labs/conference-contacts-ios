@@ -19,3 +19,9 @@ extension UIView {
 		}
 	}
 }
+
+extension String {
+	var isNotEmpty: Bool {
+		!isEmpty
+	}
+}
