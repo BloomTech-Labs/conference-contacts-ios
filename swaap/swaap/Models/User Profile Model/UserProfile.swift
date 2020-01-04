@@ -86,6 +86,7 @@ extension UserProfile {
 		self.industry = connectionContact.industry
 		self.jobTitle = connectionContact.jobTitle
 		self.tagline = connectionContact.tagline
+		self.location = connectionContact.location
 		self.name = name
 		self.profileContactMethods = connectionContact.profileContactMethods?.compactMap { ($0 as? ConnectionContactMethod)?.profileContactMethod } ?? []
 		self.pictureURL = pictureURL
