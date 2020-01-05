@@ -21,6 +21,8 @@
 		33094E9323AB359A00D5556B /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */; platformFilter = ios; };
 		33094E9423AB359F00D5556B /* IBPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; platformFilter = ios; };
 		33094E9523AB35A500D5556B /* ChevronAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; platformFilter = ios; };
+		3326AEC923C1892400DA9636 /* ConnectionContact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AEC723C1892400DA9636 /* ConnectionContact+CoreDataClass.swift */; };
+		3326AECA23C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */; };
 		3329A47D23A9546B007F10E2 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3329A47C23A9546B007F10E2 /* ContactsViewController.swift */; };
 		332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD21023A031C800074F28 /* Codable+ToDict.swift */; };
 		332FD22A23A0908C00074F28 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD22923A0908C00074F28 /* ConcurrentOperation.swift */; };
@@ -205,6 +207,9 @@
 		33094E7923AA0D9B00D5556B /* ConnectionContactMethod+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ConnectionContactMethod+Convenience.swift"; sourceTree = "<group>"; };
 		33094E7B23AA13B700D5556B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		33094E8D23AB327200D5556B /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
+		3326AEBE23C188D400DA9636 /* Contacts 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Contacts 3.xcdatamodel"; sourceTree = "<group>"; };
+		3326AEC723C1892400DA9636 /* ConnectionContact+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionContact+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionContact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3329A47C23A9546B007F10E2 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQRCode.swift; sourceTree = "<group>"; };
 		332FD21023A031C800074F28 /* Codable+ToDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+ToDict.swift"; sourceTree = "<group>"; };
@@ -581,6 +586,8 @@
 				33F0EA60239872A0004D1236 /* Auth0Claims.swift */,
 				33CCBABB2398F3C200A98C82 /* GQuery.swift */,
 				33094E6C23AA0AF100D5556B /* Contacts.xcdatamodeld */,
+				3326AEC723C1892400DA9636 /* ConnectionContact+CoreDataClass.swift */,
+				3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */,
 				33094E7723AA0D8100D5556B /* ConnectionContact+Convenience.swift */,
 				33094E7923AA0D9B00D5556B /* ConnectionContactMethod+Convenience.swift */,
 			);
@@ -916,6 +923,7 @@
 				33F0EA5A2398556A004D1236 /* ProfileFieldPrivacy.swift in Sources */,
 				33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
+				3326AEC923C1892400DA9636 /* ConnectionContact+CoreDataClass.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
 				37D1D76123A9651800931BF8 /* BasicInfoView.swift in Sources */,
 				33E8C7C323AC6025005E1E2C /* LocationHandler.swift in Sources */,
@@ -946,6 +954,7 @@
 				3797A56223874DF000CB8621 /* AuthManager.swift in Sources */,
 				33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */,
 				33F0EA4E23984D6A004D1236 /* UserProfile.swift in Sources */,
+				3326AECA23C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift in Sources */,
 				3750E8462395C180005BBDA5 /* InteractivePopRecognizer.swift in Sources */,
 				33F0EA562398551B004D1236 /* ProfileFieldType.swift in Sources */,
 				33094E8B23AB316800D5556B /* ProfileContactMethod.swift in Sources */,
@@ -1332,10 +1341,11 @@
 		33094E6C23AA0AF100D5556B /* Contacts.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3326AEBE23C188D400DA9636 /* Contacts 3.xcdatamodel */,
 				335E563223BF0C74008FE6A6 /* Contacts 2.xcdatamodel */,
 				33094E6D23AA0AF100D5556B /* Contacts.xcdatamodel */,
 			);
-			currentVersion = 335E563223BF0C74008FE6A6 /* Contacts 2.xcdatamodel */;
+			currentVersion = 3326AEBE23C188D400DA9636 /* Contacts 3.xcdatamodel */;
 			path = Contacts.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

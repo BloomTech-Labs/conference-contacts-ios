@@ -27,7 +27,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		let moc = CoreDataStack.shared.mainContext
 		let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
 																  managedObjectContext: moc,
-																  sectionNameKeyPath: nil,
+																  sectionNameKeyPath: "section",
 																  cacheName: nil)
 		fetchedResultsController.delegate = self
 		do {
@@ -157,7 +157,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 
 extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
-		fetchedResultsController.sections?.count ?? 1
+		fetchedResultsController.sections?.count ?? 0
 	}
 
 	func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -176,8 +176,7 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		guard let letter = fetchedResultsController.sections?[section].name.first else { return "" }
-		return String(letter).capitalized
+		return fetchedResultsController.sections?[section].name
 	}
 
 	private func contactCell(on tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
