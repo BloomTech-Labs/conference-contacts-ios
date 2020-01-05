@@ -40,6 +40,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 	var isCurrentUser = false
 
+	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		scrollView.delegate = self
@@ -143,6 +144,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		editProfileButtonVisualFXContainerView.clipsToBounds = true
 	}
 
+	// MARK: - Actions
 	@IBAction func backbuttonTapped(_ sender: UIButton) {
 		navigationController?.popViewController(animated: true)
 	}

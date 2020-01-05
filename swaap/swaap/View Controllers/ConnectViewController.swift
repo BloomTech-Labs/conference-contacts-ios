@@ -31,8 +31,13 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
         super.viewDidLoad()
 		smallProfileCard.isSmallProfileCard = true
 		setupUI()
-		setupProfileCard()
+		updateProfileCard()
 
+		_ = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: { [weak self] _ in
+			DispatchQueue.main.async {
+				self?.updateProfileCard()
+			}
+		})
     }
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -73,7 +78,7 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 		swaapLogo.centerXAnchor.constraint(equalTo: smallProfileCard.centerXAnchor).isActive = true
 	}
 
-	private func setupProfileCard() {
+	private func updateProfileCard() {
 		guard let profileController = profileController else { return }
 		smallProfileCard.userProfile = profileController.userProfile
 	}
