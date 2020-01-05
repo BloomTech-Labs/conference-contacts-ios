@@ -106,6 +106,19 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 		socialButtonsStackView.isHidden = socialButtonsStackView.arrangedSubviews.isEmpty
 		contactModePreviewStackView.isHidden = !socialButtonsStackView.arrangedSubviews.isEmpty
+
+		if !isCurrentUser, userProfile?.photoData == nil, let imageURL = userProfile?.pictureURL {
+			profileController?.fetchImage(url: imageURL, completion: { [weak self] result in
+				do {
+					let imageData = try result.get()
+					DispatchQueue.main.async {
+						self?.userProfile?.photoData = imageData
+					}
+				} catch {
+					NSLog("Error updating contact image: \(error)")
+				}
+			})
+		}
 	}
 
 	private func populateSocialButtons() {
