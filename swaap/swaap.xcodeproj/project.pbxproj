@@ -23,6 +23,7 @@
 		33094E9523AB35A500D5556B /* ChevronAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; platformFilter = ios; };
 		3326AEC923C1892400DA9636 /* ConnectionContact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AEC723C1892400DA9636 /* ConnectionContact+CoreDataClass.swift */; };
 		3326AECA23C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */; };
+		3326AECE23C1B6EB00DA9636 /* ImageUpdateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AECD23C1B6EB00DA9636 /* ImageUpdateOperation.swift */; };
 		3329A47D23A9546B007F10E2 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3329A47C23A9546B007F10E2 /* ContactsViewController.swift */; };
 		332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD21023A031C800074F28 /* Codable+ToDict.swift */; };
 		332FD22A23A0908C00074F28 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332FD22923A0908C00074F28 /* ConcurrentOperation.swift */; };
@@ -210,6 +211,7 @@
 		3326AEBE23C188D400DA9636 /* Contacts 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Contacts 3.xcdatamodel"; sourceTree = "<group>"; };
 		3326AEC723C1892400DA9636 /* ConnectionContact+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionContact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionContact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3326AECD23C1B6EB00DA9636 /* ImageUpdateOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUpdateOperation.swift; sourceTree = "<group>"; };
 		3329A47C23A9546B007F10E2 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileQRCode.swift; sourceTree = "<group>"; };
 		332FD21023A031C800074F28 /* Codable+ToDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Codable+ToDict.swift"; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				332FD22923A0908C00074F28 /* ConcurrentOperation.swift */,
+				3326AECD23C1B6EB00DA9636 /* ImageUpdateOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				3326AECA23C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift in Sources */,
 				3750E8462395C180005BBDA5 /* InteractivePopRecognizer.swift in Sources */,
 				33F0EA562398551B004D1236 /* ProfileFieldType.swift in Sources */,
+				3326AECE23C1B6EB00DA9636 /* ImageUpdateOperation.swift in Sources */,
 				33094E8B23AB316800D5556B /* ProfileContactMethod.swift in Sources */,
 				33094E8C23AB31BB00D5556B /* ProfileQRCode.swift in Sources */,
 				37A2F41B237D23FF00C1EF3B /* LogInViewController.swift in Sources */,
@@ -1155,7 +1159,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1182,7 +1186,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
