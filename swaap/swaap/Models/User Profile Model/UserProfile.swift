@@ -91,6 +91,20 @@ extension UserProfile {
 		self.profileContactMethods = connectionContact.profileContactMethods?.compactMap { ($0 as? ConnectionContactMethod)?.profileContactMethod } ?? []
 		self.pictureURL = pictureURL
 	}
+
+	static let zombie: UserProfile = UserProfile(id: "zombieID",
+												 authID: nil,
+												 name: "Zombie Connection",
+												 pictureString: nil,
+												 birthdate: nil,
+												 location: nil,
+												 industry: nil,
+												 jobTitle: nil,
+												 tagline: nil,
+												 bio: nil,
+												 _profileContactMethods: nil,
+												 _qrCodes: nil,
+												 photoData: nil)
 }
 
 struct CreateUser: Codable {
