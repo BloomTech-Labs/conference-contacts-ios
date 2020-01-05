@@ -15,7 +15,8 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 	var contactsController: ContactsController?
 
 	@IBOutlet private weak var tableView: UITableView!
-	
+	@IBOutlet private weak var notificationLabel: UILabel!
+
 	/// '"push" notification timer - just refreshses frequently to give the appearance that there are push notifications to notifiy you when you get a request
 	var pushNotificationTimer: Timer?
 
@@ -54,6 +55,7 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 		pushNotificationTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: { [weak self] _ in
 			self?.contactsController?.updateContactCache()
 		})
+		showHideNotificationLabel()
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
@@ -65,6 +67,16 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 }
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
+	fileprivate func showHideNotificationLabel() {
+		guard let pendingIncoming = contactsController?.pendingIncomingRequests,
+			let pendingOutgoing = contactsController?.pendingOutgoingRequests else { return }
+
+		if pendingIncoming.isEmpty && pendingOutgoing.isEmpty {
+			notificationLabel.isHidden = false
+		} else {
+			notificationLabel.isHidden = true
+		}
+	}
 	func numberOfSections(in tableView: UITableView) -> Int {
 		fetchedResultsController.sections?.count ?? 0
 	}
