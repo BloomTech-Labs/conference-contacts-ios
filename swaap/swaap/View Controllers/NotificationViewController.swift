@@ -15,6 +15,9 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 	var contactsController: ContactsController?
 
 	@IBOutlet private weak var tableView: UITableView!
+	
+	/// '"push" notification timer - just refreshses frequently to give the appearance that there are push notifications to notifiy you when you get a request
+	var pushNotificationTimer: Timer?
 
 
 	lazy var fetchedResultsController: NSFetchedResultsController<ConnectionContact> = {
@@ -48,11 +51,16 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		profileController?.locationManager.startTrackingLocation()
+		pushNotificationTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: { [weak self] _ in
+			self?.contactsController?.updateContactCache()
+		})
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		profileController?.locationManager.stopTrackingLocation()
+		pushNotificationTimer?.invalidate()
+		pushNotificationTimer = nil
 	}
 }
 

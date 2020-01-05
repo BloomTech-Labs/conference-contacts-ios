@@ -15,7 +15,7 @@ struct Contact: Codable, Hashable {
 	let status: ContactConnectionStatus
 	var connectedUser: UserProfile {
 		// there has to be one or the other...
-		sender ?? receiver!
+		sender ?? receiver ?? .zombie
 	}
 }
 
