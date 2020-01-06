@@ -49,6 +49,11 @@ class PendingContactTableViewCell: UITableViewCell {
 		contactImageView.contentMode = .scaleAspectFill
 	}
 
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		enableButtons()
+	}
+
 	override func updateConstraints() {
 		super.updateConstraints()
 		contactImageView.layer.cornerRadius = contactImageView.frame.width / 2
