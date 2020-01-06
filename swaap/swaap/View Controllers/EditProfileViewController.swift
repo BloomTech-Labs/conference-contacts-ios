@@ -172,26 +172,14 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		self.view.addSubview(panel)
 		panel.beginAnimation()
 
-		let imageUpdate = ConcurrentOperation { [weak self] in
-			guard let self = self else { return }
-			if let imageData = self.newPhoto?.jpegData(compressionQuality: 0.75) {
-				if imageData != self.profileController?.userProfile?.photoData {
-					let semaphore = DispatchSemaphore(value: 0)
-					self.profileController?.uploadImageData(imageData, completion: { (result: Result<URL, NetworkError>) in
-						switch result {
-						case .success(let url):
-							newProfile.pictureURL = url
-						case .failure(let error):
-							NSLog("Error uploading image: \(error)")
-						}
-						semaphore.signal()
-					})
-					semaphore.wait()
-				}
+		var imageUpdate: ImageUpdateOperation?
+		if let imageData = self.newPhoto?.jpegData(compressionQuality: 0.75) {
+			if imageData != profileController?.userProfile?.photoData {
+				imageUpdate = ImageUpdateOperation(profileController: profileController, imageData: imageData)
 			}
 		}
 
-		let profileUpdate = profileUpdateOperation(newProfile: newProfile)
+		let profileUpdate = profileUpdateOperation(newProfile: newProfile, imageUpdateOperation: imageUpdate)
 
 		let profileRefresh = profileRefreshOperation()
 
@@ -209,7 +197,16 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self?.dismiss(animated: true)
 		}
 
-		profileUpdate.addDependency(imageUpdate)
+		var operationList = [profileUpdate,
+							 profileRefresh,
+							 createContactMethods,
+							 updateContactMethods,
+							 deleteContactMethods]
+
+		if let imageUpdate = imageUpdate {
+			profileUpdate.addDependency(imageUpdate)
+			operationList.insert(imageUpdate, at: 0)
+		}
 		profileRefresh.addDependency(createContactMethods)
 		profileRefresh.addDependency(profileUpdate)
 		profileRefresh.addDependency(updateContactMethods)
@@ -217,12 +214,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations([profileUpdate,
-							 profileRefresh,
-							 imageUpdate,
-							 createContactMethods,
-							 updateContactMethods,
-							 deleteContactMethods],
+		queue.addOperations(operationList,
 							waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
@@ -243,10 +235,14 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 	}
 
-	private func profileUpdateOperation(newProfile: UserProfile) -> ConcurrentOperation {
+	private func profileUpdateOperation(newProfile: UserProfile, imageUpdateOperation: ImageUpdateOperation?) -> ConcurrentOperation {
 		let semaphore = DispatchSemaphore(value: 0)
 		let completion = concurrentCompletion(with: semaphore)
 		let profileUpdate = ConcurrentOperation { [weak self] in
+			var newProfile = newProfile
+			if let imageOp = imageUpdateOperation, let imageURL = imageOp.updatedImageURL {
+				newProfile.pictureURL = imageURL
+			}
 			self?.profileController?.updateProfile(newProfile, completion: completion)
 			semaphore.wait()
 			print("profile update finished")

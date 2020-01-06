@@ -45,6 +45,13 @@ class BasicInfoView: IBPreviewControl {
 		set { valueLabel?.placeholderText = newValue }
 	}
 
+	@IBInspectable
+	var headerTextFontSize: CGFloat = 13 {
+		didSet {
+			headerLabel.font = UIFont.systemFont(ofSize: headerTextFontSize)
+		}
+	}
+
 	var customSubview: UIView? {
 		didSet {
 			updateCustomView(oldView: oldValue)
