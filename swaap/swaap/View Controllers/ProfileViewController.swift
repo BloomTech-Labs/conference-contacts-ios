@@ -10,19 +10,24 @@ import UIKit
 
 class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
+	@IBOutlet private weak var noInfoDescLabel: UILabel!
 	@IBOutlet private weak var profileCardView: ProfileCardView!
 	@IBOutlet private weak var scrollView: UIScrollView!
 	@IBOutlet private weak var backButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var editProfileButtonVisualFXContainerView: UIVisualEffectView!
 	@IBOutlet private weak var backButton: UIButton!
 	@IBOutlet private weak var socialButtonsStackView: UIStackView!
+	@IBOutlet private weak var birthdayHeaderContainer: UIView!
 	@IBOutlet private weak var birthdayLabel: UILabel!
+	@IBOutlet private weak var bioHeaderContainer: UIView!
 	@IBOutlet private weak var bioLabel: UILabel!
 	@IBOutlet private weak var locationViewContainer: UIView!
 	@IBOutlet private weak var locationView: BasicInfoView!
 	@IBOutlet private weak var birthdayImageContainerView: UIView!
 	@IBOutlet private weak var bioImageViewContainer: UIView!
-	@IBOutlet private weak var contactModePreviewStackView: UIStackView!
+	@IBOutlet private weak var modesOfContactHeaderContainer: UIView!
+	@IBOutlet private weak var modesOfContactPreviewStackView: UIStackView!
+	@IBOutlet private weak var modesOfContactImageViewContainer: UIView!
 	@IBOutlet private weak var bottomFadeView: UIView!
 	@IBOutlet private weak var bottomFadeviewBottomConstraint: NSLayoutConstraint!
 
@@ -53,11 +58,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		updateViews()
 		setupNotifications()
 
-		if UIScreen.main.bounds.height <= 667 {
-			locationViewContainer.isHidden = false
-		} else {
-			locationViewContainer.isHidden = true
-		}
+		locationViewContainer.isVisible = UIScreen.main.bounds.height <= 667
 
 		if let appearance = tabBarController?.tabBar.standardAppearance.copy() {
 			appearance.backgroundImage = UIImage()
@@ -66,6 +67,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			appearance.shadowColor = .clear
 			tabBarItem.standardAppearance = appearance
 		}
+		noInfoDescLabel.isHidden = true
 		updateFadeViewPosition()
 	}
 
@@ -94,6 +96,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	private func configureProfileCard() {
 		profileCardView.layer.cornerRadius = 20
 		profileCardView.layer.cornerCurve = .continuous
+		profileCardView.isSmallProfileCard = false
 		profileCardView.delegate = self
 	}
 
@@ -116,11 +119,12 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			backButtonVisualFXContainerView.isHidden = true
 		}
 
-		birthdayImageContainerView.isVisible = birthdayLabel.text?.isEmpty ?? true
-		bioImageViewContainer.isVisible = bioLabel.text?.isEmpty ?? true
+		birthdayImageContainerView.isVisible = shouldShowIllustration(infoValueType: .string(birthdayLabel?.text))
+		bioImageViewContainer.isVisible = shouldShowIllustration(infoValueType: .string(bioLabel?.text))
 
-		socialButtonsStackView.isHidden = socialButtonsStackView.arrangedSubviews.isEmpty
-		contactModePreviewStackView.isHidden = !socialButtonsStackView.arrangedSubviews.isEmpty
+		let hasSocialButtons = !socialButtonsStackView.arrangedSubviews.isEmpty
+		socialButtonsStackView.isVisible = hasSocialButtons
+		modesOfContactPreviewStackView.isHidden = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
 
 		if !isCurrentUser, userProfile?.photoData == nil, let imageURL = userProfile?.pictureURL {
 			profileController?.fetchImage(url: imageURL, completion: { [weak self] result in
@@ -133,6 +137,36 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 					NSLog("Error updating contact image: \(error)")
 				}
 			})
+		}
+	}
+
+	enum InfoValueType {
+		case string(String?)
+		case hasContents(Bool)
+	}
+
+	private func shouldShowIllustration(infoValueType: InfoValueType) -> Bool {
+		guard isCurrentUser else { return false }
+		switch infoValueType {
+		case .string(let labelText):
+			return labelText?.isEmpty ?? true
+		case .hasContents(let hasContents):
+			return hasContents
+		}
+	}
+
+	private func shouldShowNoInfoLabel() {
+		guard isCurrentUser == false else { return }
+		let name = userProfile?.name ?? "This user"
+		noInfoDescLabel.text = "\(name) hasn't added any info yet."
+		if birthdayLabel.text == nil &&
+			bioLabel.text == nil &&
+			modesOfContactPreviewStackView.arrangedSubviews.isEmpty {
+			noInfoDescLabel.isHidden = false
+		} else if birthdayLabel.text != nil ||
+			bioLabel.text != nil ||
+			!modesOfContactPreviewStackView.arrangedSubviews.isEmpty {
+			noInfoDescLabel.isHidden = true
 		}
 	}
 
