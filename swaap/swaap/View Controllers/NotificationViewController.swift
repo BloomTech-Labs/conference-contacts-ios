@@ -40,14 +40,14 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 		return fetchedResultsController
 	}()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
 		tableView.separatorStyle = .none
 		tableView.allowsSelection = false
 		(navigationController?.tabBarController as? RootTabBarController)?.pendingContactsDelegate = self
-    }
+	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
