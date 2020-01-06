@@ -126,6 +126,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		socialButtonsStackView.isVisible = hasSocialButtons
 		modesOfContactPreviewStackView.isHidden = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
 
+		// the current user image is loaded through the profile controller and shown when populated after a notification comes through, but
+		// that doesn't happen for a user's contacts, so this is set to run when showing a connection's profile
 		if !isCurrentUser, userProfile?.photoData == nil, let imageURL = userProfile?.pictureURL {
 			profileController?.fetchImage(url: imageURL, completion: { [weak self] result in
 				do {

@@ -35,10 +35,10 @@ class PendingContactTableViewCell: UITableViewCell {
 
 	weak var delegate: PendingContactTableViewCellDelegate?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        configureCellUI()
-    }
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		configureCellUI()
+	}
 
 	private func configureCellUI() {
 		acceptButton.layer.borderWidth = 1.5
@@ -47,6 +47,11 @@ class PendingContactTableViewCell: UITableViewCell {
 		acceptButton.layer.cornerCurve = .continuous
 
 		contactImageView.contentMode = .scaleAspectFill
+	}
+
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		enableButtons()
 	}
 
 	override func updateConstraints() {
