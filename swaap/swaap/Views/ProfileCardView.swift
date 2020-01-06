@@ -102,17 +102,11 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func commonInit() {
-		#if TARGET_INTERFACE_BUILDER
-		return
-		#endif
+		guard !isInterfaceBuilder else { return }
 		let nib = UINib(nibName: "ProfileCardView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 
-		if UIScreen.main.bounds.height <= 667 {
-			locationStackView.isHidden = true
-		} else {
-			locationStackView.isHidden = false
-		}
+		locationStackView.isVisible = UIScreen.main.bounds.height > 667
 
 		contentView.translatesAutoresizingMaskIntoConstraints = false
 		addSubview(contentView)
@@ -150,7 +144,7 @@ class ProfileCardView: IBPreviewView {
 			[socialButton,
 			 jobTitleLabel,
 			 locationStackView,
-			 taglineLabel,
+			 taglineContainer,
 			 industryStackView].forEach { $0.isHidden = true }
 		}
 	}
@@ -176,41 +170,18 @@ class ProfileCardView: IBPreviewView {
 	}
 
 	private func hideUnhideElements() {
-		if jobTitle != nil {
-			jobTitleLabel.isHidden = false
-		} else {
-			jobTitleLabel.isHidden = true
+		guard isSmallProfileCard == false else { return }
+		jobTitleLabel.isVisible = jobTitle?.isNotEmpty ?? false
+		industryStackView.isVisible = industry?.isNotEmpty ?? false
+		taglineContainer.isVisible = tagline?.isNotEmpty ?? false
+		locationStackView.isVisible = (location?.isNotEmpty ?? false) && (UIScreen.main.bounds.height > 667)
+
+		lackOfInfoDescLabel.isVisible = [locationStackView, taglineContainer, industryStackView, jobTitleLabel].reduce(true) {
+			($1?.isHidden ?? true) && $0
 		}
 
-		if industry != nil {
-			industryStackView.isHidden = false
-		} else {
-			industryStackView.isHidden = true
-		}
-
-		if tagline != nil {
-			taglineContainer.isHidden = false
-		} else {
-			taglineContainer.isHidden = true
-		}
-
-		if location != nil {
-			if UIScreen.main.bounds.height > 667 {
-				locationStackView.isHidden = false
-			}
-		} else {
-			locationStackView.isHidden = true
-		}
-
-		[locationStackView, taglineContainer, industryStackView, jobTitleLabel].forEach {
-			if $0?.isHidden == true {
-				lackOfInfoDescLabel.isHidden = false
-				let name = userProfile?.name ?? "This user"
-				lackOfInfoDescLabel.text = "\(name) hasn't added any info yet."
-			} else {
-				lackOfInfoDescLabel.isHidden = true
-			}
-		}
+		let name = userProfile?.name ?? "This user"
+		lackOfInfoDescLabel.text = "\(name) hasn't added any info yet."
 	}
 
 	@IBAction func socialButtonTapped(_ sender: SocialButton) {
