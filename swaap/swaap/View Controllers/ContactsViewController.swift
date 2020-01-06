@@ -94,7 +94,6 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	@objc func refreshCache() {
-		refreshControl.beginRefreshing()
 		self.refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
 		profileController?.fetchProfileFromServer(completion: { [weak self] _ in
 			self?.contactsController?.updateContactCache(completion: {
@@ -102,7 +101,6 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 					self?.tableView.refreshControl?.attributedTitle = NSAttributedString(string: " ")
 					self?.tableView.reloadData()
 					self?.refreshControl.endRefreshing()
-					self?.tableView.alwaysBounceVertical = true
 				}
 			})
 		})
