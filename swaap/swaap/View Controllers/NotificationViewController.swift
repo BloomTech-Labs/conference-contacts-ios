@@ -51,11 +51,11 @@ class NotificationViewController: UIViewController, ProfileAccessor, ContactsAcc
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		showHideNotificationLabel()
 		profileController?.locationManager.startTrackingLocation()
 		pushNotificationTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: { [weak self] _ in
 			self?.contactsController?.updateContactCache()
 		})
-		showHideNotificationLabel()
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
@@ -71,11 +71,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
 		guard let pendingIncoming = contactsController?.pendingIncomingRequests,
 			let pendingOutgoing = contactsController?.pendingOutgoingRequests else { return }
 
-		if pendingIncoming.isEmpty && pendingOutgoing.isEmpty {
-			notificationLabel.isHidden = false
-		} else {
-			notificationLabel.isHidden = true
-		}
+		notificationLabel.isVisible = pendingIncoming.isEmpty && pendingOutgoing.isEmpty
 	}
 	func numberOfSections(in tableView: UITableView) -> Int {
 		fetchedResultsController.sections?.count ?? 0
@@ -165,6 +161,7 @@ extension NotificationViewController: PendingContactsUpdateDelegate {
 		let requestCount = contactsController?.pendingIncomingRequests.count ?? 0
 		navigationController?.tabBarItem.badgeColor = .gradientBackgroundColorBlueOne
 		navigationController?.tabBarItem.badgeValue = requestCount > 0 ? "\(requestCount)" : nil
+		showHideNotificationLabel()
 	}
 }
 
