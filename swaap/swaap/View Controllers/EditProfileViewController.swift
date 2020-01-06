@@ -48,8 +48,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var offScreenAnchor: NSLayoutConstraint!
 	var buttonIsOnScreen: Bool = false
 
-	let haptic = UIImpactFeedbackGenerator(style: .medium)
-
 	var contactMethods: [ProfileContactMethod] {
 		contactMethodCellViews.map { $0.contactMethod }
 	}
@@ -78,7 +76,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		setupUI()
 		updateViews()
 		navigationController?.presentationController?.delegate = self
-		haptic.prepare()
 		scrollView.delegate = self
 		if UIScreen.main.bounds.height <= 667 {
 			socialLinkButtonTopAnchor.constant = 12
@@ -175,26 +172,14 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		self.view.addSubview(panel)
 		panel.beginAnimation()
 
-		let imageUpdate = ConcurrentOperation { [weak self] in
-			guard let self = self else { return }
-			if let imageData = self.newPhoto?.jpegData(compressionQuality: 0.75) {
-				if imageData != self.profileController?.userProfile?.photoData {
-					let semaphore = DispatchSemaphore(value: 0)
-					self.profileController?.uploadImageData(imageData, completion: { (result: Result<URL, NetworkError>) in
-						switch result {
-						case .success(let url):
-							newProfile.pictureURL = url
-						case .failure(let error):
-							NSLog("Error uploading image: \(error)")
-						}
-						semaphore.signal()
-					})
-					semaphore.wait()
-				}
+		var imageUpdate: ImageUpdateOperation?
+		if let imageData = self.newPhoto?.jpegData(compressionQuality: 0.75) {
+			if imageData != profileController?.userProfile?.photoData {
+				imageUpdate = ImageUpdateOperation(profileController: profileController, imageData: imageData)
 			}
 		}
 
-		let profileUpdate = profileUpdateOperation(newProfile: newProfile)
+		let profileUpdate = profileUpdateOperation(newProfile: newProfile, imageUpdateOperation: imageUpdate)
 
 		let profileRefresh = profileRefreshOperation()
 
@@ -212,7 +197,16 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self?.dismiss(animated: true)
 		}
 
-		profileUpdate.addDependency(imageUpdate)
+		var operationList = [profileUpdate,
+							 profileRefresh,
+							 createContactMethods,
+							 updateContactMethods,
+							 deleteContactMethods]
+
+		if let imageUpdate = imageUpdate {
+			profileUpdate.addDependency(imageUpdate)
+			operationList.insert(imageUpdate, at: 0)
+		}
 		profileRefresh.addDependency(createContactMethods)
 		profileRefresh.addDependency(profileUpdate)
 		profileRefresh.addDependency(updateContactMethods)
@@ -220,12 +214,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		dismissSelf.addDependency(profileRefresh)
 
 		let queue = OperationQueue()
-		queue.addOperations([profileUpdate,
-							 profileRefresh,
-							 imageUpdate,
-							 createContactMethods,
-							 updateContactMethods,
-							 deleteContactMethods],
+		queue.addOperations(operationList,
 							waitUntilFinished: false)
 		OperationQueue.main.addOperation(dismissSelf)
 
@@ -246,10 +235,14 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 	}
 
-	private func profileUpdateOperation(newProfile: UserProfile) -> ConcurrentOperation {
+	private func profileUpdateOperation(newProfile: UserProfile, imageUpdateOperation: ImageUpdateOperation?) -> ConcurrentOperation {
 		let semaphore = DispatchSemaphore(value: 0)
 		let completion = concurrentCompletion(with: semaphore)
 		let profileUpdate = ConcurrentOperation { [weak self] in
+			var newProfile = newProfile
+			if let imageOp = imageUpdateOperation, let imageURL = imageOp.updatedImageURL {
+				newProfile.pictureURL = imageURL
+			}
 			self?.profileController?.updateProfile(newProfile, completion: completion)
 			semaphore.wait()
 			print("profile update finished")
@@ -460,6 +453,10 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 	func starButtonPressed(on cellView: ContactMethodCellView) {
 		contactMethodCellViews.forEach { $0.contactMethod.preferredContact = false }
 		cellView.contactMethod.preferredContact = true
+		if cellView.contactMethod.privacy != .public {
+			showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
+			cellView.contactMethod.privacy = .public
+		}
 	}
 
 	func editCellInvoked(on cellView: ContactMethodCellView) {
@@ -510,9 +507,17 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		privacyAlert.setValue(privacyAlertStringAttr, forKey: "attributedMessage")
 
 		let privateAction = UIAlertAction(title: "Private", style: .default) { _ in
+			guard !cellView.contactMethod.preferredContact else {
+				self.showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
+				return
+			}
 			cellView.contactMethod.privacy = .private
 		}
 		let connectedAction = UIAlertAction(title: "Connected", style: .default) { _ in
+			guard !cellView.contactMethod.preferredContact else {
+				self.showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
+				return
+			}
 			cellView.contactMethod.privacy = .connected
 		}
 		let publicAction = UIAlertAction(title: "Public", style: .default) { _ in
@@ -521,7 +526,13 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)
-		haptic.impactOccurred()
+		HapticFeedback.produceMediumFeedback()
+	}
+
+	private func showAlert(titled title: String?, message: String?) {
+		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Okay", style: .default))
+		present(alert, animated: true)
 	}
 }
 

@@ -13,6 +13,10 @@ struct Contact: Codable, Hashable {
 	let sender: UserProfile?
 	let receiver: UserProfile?
 	let status: ContactConnectionStatus
+	var connectedUser: UserProfile {
+		// there has to be one or the other...
+		sender ?? receiver ?? .zombie
+	}
 }
 
 
@@ -25,13 +29,14 @@ struct ContactContainer: Decodable {
 	}
 
 	/// All CONNECTED status connections
-	let connections: [UserProfile]
+	let connections: [Contact]
 	/// All connections user initiated, pending, connected, blocked
 	let sentConnections: [UserProfile]
 	/// All connections user received, pending, connected, blocked
 	let receivedConnections: [UserProfile]
 	/// All pending connections, sent or received
-	let pendingConnections: [UserProfile]
+	let pendingReceivedConnections: [Contact]
+	let pendingSentConnections: [Contact]
 
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -40,11 +45,11 @@ struct ContactContainer: Decodable {
 		let sentConnections = try userContainer.decode([Contact].self, forKey: .sentConnections)
 		let receivedConnections = try userContainer.decode([Contact].self, forKey: .receivedConnections)
 		let allConnections = sentConnections + receivedConnections
-		let connections = allConnections.filter { $0.status == .connected }
 		let pendingConnections = allConnections.filter { $0.status == .pending }
+		self.connections = allConnections.filter { $0.status == .connected }
 		self.sentConnections = sentConnections.compactMap { $0.sender }
 		self.receivedConnections = receivedConnections.compactMap { $0.receiver }
-		self.connections = connections.compactMap { $0.sender ?? $0.receiver }
-		self.pendingConnections = pendingConnections.compactMap { $0.sender ?? $0.receiver }
+		self.pendingReceivedConnections = pendingConnections.compactMap { $0.sender != nil ? $0 : nil }
+		self.pendingSentConnections = pendingConnections.compactMap { $0.receiver != nil ? $0 : nil }
 	}
 }

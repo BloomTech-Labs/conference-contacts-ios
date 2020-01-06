@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PendingContactsUpdateDelegate: AnyObject {
+	func pendingContactsDidRefresh()
+}
+
 class RootTabBarController: UITabBarController {
 
 	/// property observer (cannot present a view when its parent isn't part of the view hierarchy, so we need to watch
@@ -26,6 +30,8 @@ class RootTabBarController: UITabBarController {
 		}
 		return rootAuthVC
 	}()
+
+	weak var pendingContactsDelegate: PendingContactsUpdateDelegate?
 
 	@available (*, unavailable)
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -52,14 +58,16 @@ class RootTabBarController: UITabBarController {
 	private func updateViewControllers() {
 		guard let vcs = viewControllers else { return }
 		vcs.forEach { ($0 as? AuthAccessor)?.authManager = authManager }
-
-		// FIXME: For debugging
 		vcs.forEach { ($0 as? ProfileAccessor)?.profileController = profileController }
 		vcs.forEach { ($0 as? ContactsAccessor)?.contactsController = contactsController }
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		_ = NotificationCenter.default.addObserver(forName: .contactsCacheUpdated, object: nil, queue: nil, using: { [weak self] _ in
+			self?.pendingContactsDelegate?.pendingContactsDidRefresh()
+		})
 		populatedCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsPopulated, object: nil, queue: nil) { [weak self] _ in
 			self?.dismissAuthViewController()
 		}

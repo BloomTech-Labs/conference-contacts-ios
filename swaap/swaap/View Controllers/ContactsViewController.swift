@@ -15,14 +15,19 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
 
+	private let searchController = UISearchController(searchResultsController: nil)
+	private let connectedStatusPredicate = NSPredicate(format: "connectionStatus == %i", ContactPendingStatus.connected.rawValue)
+
 	lazy var fetchedResultsController: NSFetchedResultsController<ConnectionContact> = {
 		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
-		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+		let nameDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+		fetchRequest.sortDescriptors = [nameDescriptor]
+		fetchRequest.predicate = self.connectedStatusPredicate
 
 		let moc = CoreDataStack.shared.mainContext
 		let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
 																  managedObjectContext: moc,
-																  sectionNameKeyPath: nil,
+																  sectionNameKeyPath: "section",
 																  cacheName: nil)
 		fetchedResultsController.delegate = self
 		do {
@@ -31,6 +36,14 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 			print("error performing initial fetch for frc: \(error)")
 		}
 		return fetchedResultsController
+	}()
+
+	lazy var refreshControl: UIRefreshControl = {
+		let refreshCtrl = UIRefreshControl()
+		refreshCtrl.addTarget(self, action: #selector(refreshCache), for: .valueChanged)
+		refreshCtrl.attributedTitle = NSAttributedString(string: " ")
+		refreshCtrl.tintColor = .swaapAccentColorOne
+		return refreshCtrl
 	}()
 
 	@IBOutlet private weak var tableView: UITableView!
@@ -42,20 +55,33 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.sectionIndexColor = .swaapAccentColorOne
+		tableView.tableFooterView = UIView()
+		tableView.refreshControl = refreshControl
 
 		updateHeader()
 		setupNotifications()
 
 		contactsController?.updateContactCache()
 
-		tableView.refreshControl = UIRefreshControl()
-		tableView.refreshControl?.addTarget(self, action: #selector(refreshCache), for: .valueChanged)
+		configureSearch()
+
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.setNavigationBarHidden(false, animated: true)
 	}
+
+    private func configureSearch() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+		searchController.searchBar.tintColor = .swaapAccentColorOne
+		searchController.searchBar.placeholder = "Search contacts"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        searchController.searchBar.delegate = self
+    }
 
 	private func updateHeader() {
 		headerImageView.layer.cornerRadius = headerImageView.frame.height / 2
@@ -68,11 +94,15 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	@objc func refreshCache() {
-		tableView.refreshControl?.beginRefreshing()
-		contactsController?.updateContactCache(completion: { [weak self] in
-			DispatchQueue.main.async {
-				self?.tableView.refreshControl?.endRefreshing()
-			}
+		self.refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
+		profileController?.fetchProfileFromServer(completion: { [weak self] _ in
+			self?.contactsController?.updateContactCache(completion: {
+				DispatchQueue.main.async {
+					self?.tableView.refreshControl?.attributedTitle = NSAttributedString(string: " ")
+					self?.tableView.reloadData()
+					self?.refreshControl.endRefreshing()
+				}
+			})
 		})
 	}
 
@@ -85,6 +115,27 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		profileChangedObserver = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: updateClosure)
 	}
 
+	func searchFetchedResults(for searchText: String) {
+		defer {
+			do {
+				try fetchedResultsController.performFetch()
+				tableView.reloadData()
+			} catch {
+				print(error)
+			}
+		}
+
+		guard searchText.isNotEmpty else {
+			fetchedResultsController.fetchRequest.predicate = connectedStatusPredicate
+			return
+		}
+
+		let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+		let predicate = NSPredicate(format: "name contains[cd] %@", trimmedText)
+		let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [connectedStatusPredicate, predicate])
+		fetchedResultsController.fetchRequest.predicate = combinedPredicate
+	}
+
 	@IBSegueAction func showCurrentUserProfile(_ coder: NSCoder) -> ProfileViewController? {
 		let profileVC = ProfileViewController(coder: coder)
 		profileVC?.isCurrentUser = true
@@ -93,13 +144,22 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	@IBSegueAction func showContactProfile(_ coder: NSCoder) -> ProfileViewController? {
-		return ProfileViewController(coder: coder)
+		guard let indexPath = tableView.indexPathForSelectedRow else { return ProfileViewController(coder: coder) }
+		let contact = fetchedResultsController.object(at: indexPath)
+		let profileVC = ProfileViewController(coder: coder)
+		profileVC?.isCurrentUser = false
+		profileVC?.userProfile = contact.contactProfile
+		return profileVC
 	}
 }
 
 extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		fetchedResultsController.sections?.count ?? 0
+	}
+
+	func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+		fetchedResultsController.sectionIndexTitles
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,11 +173,20 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 		}
 	}
 
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return fetchedResultsController.sections?[section].name
+	}
+
 	private func contactCell(on tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
 		let contact = fetchedResultsController.object(at: indexPath)
 		cell.textLabel?.text = contact.name
 		return cell
+	}
+
+	func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+		let result = fetchedResultsController.section(forSectionIndexTitle: title, at: index)
+		return result
 	}
 }
 
@@ -170,6 +239,14 @@ extension ContactsViewController: NSFetchedResultsControllerDelegate {
 	}
 
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
-		return nil
+		guard let sectionLetter = sectionName.first else { return nil }
+		return String(sectionLetter).capitalized
+	}
+}
+
+extension ContactsViewController: UISearchBarDelegate, UISearchResultsUpdating {
+	func updateSearchResults(for searchController: UISearchController) {
+		let searchText = searchController.searchBar.text ?? ""
+		searchFetchedResults(for: searchText)
 	}
 }

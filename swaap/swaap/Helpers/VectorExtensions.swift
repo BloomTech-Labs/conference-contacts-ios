@@ -24,6 +24,10 @@ extension CGPoint {
 		CGPoint(x: lhs.x + rhs.dx, y: lhs.y + rhs.dy)
 	}
 
+	static func * (lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+		CGPoint(x: lhs.x * rhs.x, y: lhs.y * rhs.y)
+	}
+
 	func distance(to point: CGPoint) -> CGFloat {
 		sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y))
 	}
@@ -86,5 +90,11 @@ extension CGVector {
 
 	var inverted: CGVector {
 		CGVector(dx: -dx, dy: -dy)
+	}
+}
+
+extension CGRect {
+	var maxXY: CGPoint {
+		CGPoint(x: maxX, y: maxY)
 	}
 }
