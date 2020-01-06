@@ -18,6 +18,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var socialButtonsStackView: UIStackView!
 	@IBOutlet private weak var birthdayLabel: UILabel!
 	@IBOutlet private weak var bioLabel: UILabel!
+	@IBOutlet private weak var locationViewContainer: UIView!
+	@IBOutlet private weak var locationView: BasicInfoView!
 	@IBOutlet private weak var birthdayImageContainerView: UIView!
 	@IBOutlet private weak var bioImageViewContainer: UIView!
 	@IBOutlet private weak var contactModePreviewStackView: UIStackView!
@@ -45,14 +47,17 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		super.viewDidLoad()
 		scrollView.delegate = self
 
-		profileCardView.layer.cornerRadius = 20
-		profileCardView.layer.cornerCurve = .continuous
-		profileCardView.delegate = self
-
+		configureProfileCard()
 		setupCardShadow()
 		setupFXView()
 		updateViews()
 		setupNotifications()
+
+		if UIScreen.main.bounds.height <= 667 {
+			locationViewContainer.isHidden = false
+		} else {
+			locationViewContainer.isHidden = true
+		}
 
 		if let appearance = tabBarController?.tabBar.standardAppearance.copy() {
 			appearance.backgroundImage = UIImage()
@@ -86,11 +91,21 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		tabBarController?.delegate = nil
 	}
 
+	private func configureProfileCard() {
+		profileCardView.layer.cornerRadius = 20
+		profileCardView.layer.cornerCurve = .continuous
+		profileCardView.delegate = self
+	}
+
 	private func updateViews() {
 		guard isViewLoaded else { return }
 		profileCardView.userProfile = userProfile
 		birthdayLabel.text = userProfile?.birthdate
 		bioLabel.text = userProfile?.bio
+
+		locationView.valueText = userProfile?.location
+		locationView.customSubview = nil
+
 
 		editProfileButtonVisualFXContainerView.isVisible = isCurrentUser
 

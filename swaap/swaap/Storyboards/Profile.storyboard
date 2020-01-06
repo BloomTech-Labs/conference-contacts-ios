@@ -49,7 +49,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7dm-QL-DOB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1032.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1160.6666666666667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jKR-Nf-fxg" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -58,11 +58,34 @@
                                                     <constraint firstAttribute="height" constant="100" id="DsC-xm-q6i"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYo-bM-3Qw">
+                                                <rect key="frame" x="0.0" y="100" width="375" height="128"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrP-3A-tXd" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="22" y="20" width="323" height="88"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="headerText" value="Location"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Location Info"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="headerTextFontSize">
+                                                                <real key="value" value="13"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="UrP-3A-tXd" secondAttribute="bottom" constant="20" symbolic="YES" id="C3t-EP-9LH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UrP-3A-tXd" secondAttribute="trailing" constant="30" id="HXF-pt-mNr"/>
+                                                    <constraint firstItem="UrP-3A-tXd" firstAttribute="leading" secondItem="BYo-bM-3Qw" secondAttribute="leading" constant="22" id="pW4-ki-ekQ"/>
+                                                    <constraint firstItem="UrP-3A-tXd" firstAttribute="top" secondItem="BYo-bM-3Qw" secondAttribute="top" constant="20" symbolic="YES" id="zAp-aE-V88"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cek-yS-tXY" userLabel="BIRTHDAY HEADER">
-                                                <rect key="frame" x="0.0" y="100" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="228" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BIRTHDAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qt-dR-56h">
-                                                        <rect key="frame" x="30" y="7.3333333333333419" width="337" height="15.666666666666664"/>
+                                                        <rect key="frame" x="30" y="7.3333333333333135" width="337" height="15.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -77,7 +100,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXs-BR-8av" userLabel="BirthdayLabel Container">
-                                                <rect key="frame" x="0.0" y="130" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="258" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtd-Cf-82f" userLabel="Birthday goes here" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="6" width="315" height="18"/>
@@ -101,7 +124,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULW-PO-gmt" userLabel="Birthday Illustration View">
-                                                <rect key="frame" x="0.0" y="160" width="375" height="200"/>
+                                                <rect key="frame" x="0.0" y="288" width="375" height="200"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gift" translatesAutoresizingMaskIntoConstraints="NO" id="IRl-8Q-uHm">
                                                         <rect key="frame" x="20" y="20" width="335" height="160"/>
@@ -117,17 +140,17 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Wto-1C-b5e" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="360" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="488" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="IAi-KA-VeL"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="hnW-yB-GZB" userLabel="BIO HEADER">
-                                                <rect key="frame" x="0.0" y="380" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="508" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="BIO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FeF-Ci-RXo">
-                                                        <rect key="frame" x="30" y="7.3333333333333135" width="337" height="15.666666666666664"/>
+                                                        <rect key="frame" x="30" y="7.3333333333333703" width="337" height="15.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -142,7 +165,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="VXU-mU-vw0" userLabel="Bio Label Container">
-                                                <rect key="frame" x="0.0" y="410" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="538" width="375" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ1-s3-0D2" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="6" width="315" height="38"/>
@@ -165,7 +188,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nPG-kz-aqn" userLabel="Bio Illustration Container">
-                                                <rect key="frame" x="0.0" y="460" width="375" height="200"/>
+                                                <rect key="frame" x="0.0" y="588" width="375" height="200"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Browsing" translatesAutoresizingMaskIntoConstraints="NO" id="ISy-gp-OoL">
                                                         <rect key="frame" x="20" y="20" width="335" height="160"/>
@@ -181,14 +204,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="uCD-iQ-yce" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="660" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="788" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="DzE-eX-NUx"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FX6-cO-zr2" userLabel="MODES OF CONTACT CONTAINER">
-                                                <rect key="frame" x="0.0" y="680" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="808" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MODES OF CONTACT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-bX-lig">
                                                         <rect key="frame" x="30" y="7.3333333333333703" width="337" height="15.666666666666664"/>
@@ -206,7 +229,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1vv-7w-fJ6">
-                                                <rect key="frame" x="0.0" y="710" width="375" height="252.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="838" width="375" height="252.66666666666674"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="RdD-qC-Rsm" userLabel="Modes Of Contact Label">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="52.666666666666664"/>
@@ -250,14 +273,14 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1O1-L0-Q9A" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="962.66666666666663" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="1090.6666666666667" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="fmU-Iz-cs3"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0r-cw-Iou">
-                                                <rect key="frame" x="0.0" y="982.66666666666674" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="1110.6666666666667" width="375" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5M8-KJ-9Zb">
                                                         <rect key="frame" x="30" y="0.0" width="315" height="50"/>
@@ -460,6 +483,8 @@
                         <outlet property="bottomFadeviewBottomConstraint" destination="1ze-mp-8ta" id="gNv-P1-5fK"/>
                         <outlet property="contactModePreviewStackView" destination="1vv-7w-fJ6" id="xAZ-ym-94O"/>
                         <outlet property="editProfileButtonVisualFXContainerView" destination="HPr-IH-wav" id="JJ6-u7-13f"/>
+                        <outlet property="locationView" destination="UrP-3A-tXd" id="GnF-fj-6Bl"/>
+                        <outlet property="locationViewContainer" destination="BYo-bM-3Qw" id="J2j-P5-3t3"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
                         <outlet property="scrollView" destination="Emm-zV-NSj" id="dCa-XL-gzp"/>
                         <outlet property="socialButtonsStackView" destination="5M8-KJ-9Zb" id="jTG-SD-nth"/>

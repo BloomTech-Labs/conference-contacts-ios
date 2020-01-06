@@ -65,7 +65,7 @@ class ProfileCardView: IBPreviewView {
 
 	var isSmallProfileCard: Bool? {
 		didSet {
-			setupSmallVersion()
+			setupSmallCardVersion()
 		}
 	}
 
@@ -78,16 +78,16 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var imageMaskView: UIView!
 	@IBOutlet private weak var chevron: ChevronView!
-	@IBOutlet private weak var leftImageOffsetConstraint: NSLayoutConstraint!
-	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var nameLabel: UILabel!
 	@IBOutlet private weak var jobTitleLabel: UILabel!
+	@IBOutlet private weak var taglineContainer: UIView!
 	@IBOutlet private weak var taglineLabel: UILabel!
 	@IBOutlet private weak var locationLabel: UILabel!
-	@IBOutlet private weak var locationHeaderLabel: UILabel!
 	@IBOutlet private weak var industryLabel: UILabel!
-	@IBOutlet private weak var industryHeaderlabel: UILabel!
 	@IBOutlet private weak var socialButton: SocialButton!
+	@IBOutlet private weak var locationStackView: UIStackView!
+	@IBOutlet private weak var industryStackView: UIStackView!
+	@IBOutlet private weak var lackOfInfoDescLabel: UILabel!
 
 
 	// MARK: - Lifecycle
@@ -108,6 +108,12 @@ class ProfileCardView: IBPreviewView {
 		let nib = UINib(nibName: "ProfileCardView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 
+		if UIScreen.main.bounds.height <= 667 {
+			locationStackView.isHidden = true
+		} else {
+			locationStackView.isHidden = false
+		}
+
 		contentView.translatesAutoresizingMaskIntoConstraints = false
 		addSubview(contentView)
 		contentView.layer.masksToBounds = true
@@ -117,7 +123,7 @@ class ProfileCardView: IBPreviewView {
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		contentView.layer.cornerCurve = .continuous
 		contentView.layer.cornerRadius = 20
-		taglineLabel.isHidden = true
+
 		profileImageView.mask = imageMaskView
 		setupImageView()
 
@@ -138,16 +144,14 @@ class ProfileCardView: IBPreviewView {
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
 	}
 
-	private func setupSmallVersion() {
+	private func setupSmallCardVersion() {
 		guard let isSmallVersion = isSmallProfileCard else { return }
 		if isSmallVersion {
 			[socialButton,
 			 jobTitleLabel,
-			 locationLabel,
-			 locationHeaderLabel,
+			 locationStackView,
 			 taglineLabel,
-			 industryLabel,
-			 industryHeaderlabel].forEach { $0.isHidden = true }
+			 industryStackView].forEach { $0.isHidden = true }
 		}
 	}
 
@@ -161,10 +165,52 @@ class ProfileCardView: IBPreviewView {
 		jobTitle = userProfile?.jobTitle
 		location = userProfile?.location
 		industry = userProfile?.industry
+		tagline = userProfile?.tagline
+
+		lackOfInfoDescLabel.isHidden = true
+		hideUnhideElements()
 
 		guard let pContact = userProfile?.profileContactMethods.preferredContact else { return }
 		let nuggetInfo = ProfileInfoNugget(type: pContact.type, value: pContact.value)
 		preferredContact = nuggetInfo
+	}
+
+	private func hideUnhideElements() {
+		if jobTitle != nil {
+			jobTitleLabel.isHidden = false
+		} else {
+			jobTitleLabel.isHidden = true
+		}
+
+		if industry != nil {
+			industryStackView.isHidden = false
+		} else {
+			industryStackView.isHidden = true
+		}
+
+		if tagline != nil {
+			taglineContainer.isHidden = false
+		} else {
+			taglineContainer.isHidden = true
+		}
+
+		if location != nil {
+			if UIScreen.main.bounds.height > 667 {
+				locationStackView.isHidden = false
+			}
+		} else {
+			locationStackView.isHidden = true
+		}
+
+		[locationStackView, taglineContainer, industryStackView, jobTitleLabel].forEach {
+			if $0?.isHidden == true {
+				lackOfInfoDescLabel.isHidden = false
+				let name = userProfile?.name ?? "This user"
+				lackOfInfoDescLabel.text = "\(name) hasn't added any info yet."
+			} else {
+				lackOfInfoDescLabel.isHidden = true
+			}
+		}
 	}
 
 	@IBAction func socialButtonTapped(_ sender: SocialButton) {
