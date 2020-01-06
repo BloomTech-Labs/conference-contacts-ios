@@ -22,6 +22,7 @@
                     <connections>
                         <segue destination="AhV-GT-mFq" kind="relationship" relationship="viewControllers" id="MpM-fg-dV5"/>
                         <segue destination="vf7-X8-G9f" kind="relationship" relationship="viewControllers" id="Sy0-oA-w0m"/>
+                        <segue destination="qxz-Mc-9ma" kind="relationship" relationship="viewControllers" id="OKi-zD-IxL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="322-5G-Dyf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -32,7 +33,7 @@
         <scene sceneID="rdh-Cd-LEg">
             <objects>
                 <viewControllerPlaceholder storyboardName="Profile" id="AhV-GT-mFq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Contacts" image="person.2.square.stack.fill" selectedImage="person.2.square.stack.fill" id="zeE-RI-v5Y">
+                    <tabBarItem key="tabBarItem" title="Contacts" id="zeE-RI-v5Y">
                         <color key="badgeColor" name="Swaap Accent color 2"/>
                     </tabBarItem>
                 </viewControllerPlaceholder>
@@ -40,20 +41,28 @@
             </objects>
             <point key="canvasLocation" x="-255" y="556"/>
         </scene>
+        <!--Notifications-->
+        <scene sceneID="Zm8-Fj-mkw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Notifications" id="qxz-Mc-9ma" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="t8S-Xw-cg6"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gcG-CK-rS7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="487" y="556"/>
+        </scene>
         <!--Connect-->
         <scene sceneID="fN3-D3-PQa">
             <objects>
                 <viewControllerPlaceholder storyboardName="Connect" id="vf7-X8-G9f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Connect" image="dot.radiowaves.left.and.right" selectedImage="dot.radiowaves.left.and.right" id="WcS-1n-rOp"/>
+                    <tabBarItem key="tabBarItem" title="Connect" id="WcS-1n-rOp"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1k-3c-SK5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="495" y="557"/>
+            <point key="canvasLocation" x="133" y="556"/>
         </scene>
     </scenes>
     <resources>
-        <image name="dot.radiowaves.left.and.right" width="16" height="16"/>
-        <image name="person.2.square.stack.fill" width="16" height="16"/>
         <namedColor name="Swaap Accent Color 1">
             <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

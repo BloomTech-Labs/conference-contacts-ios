@@ -16,6 +16,7 @@ protocol ContactsAccessor: AnyObject {
 }
 
 class ContactsController {
+	// MARK: - Properties
 	let profileController: ProfileController
 	let authManager: AuthManager
 
@@ -29,6 +30,19 @@ class ContactsController {
 		profileController.graphqlURL
 	}
 
+	var allContacts: [ConnectionContact] {
+		allCachedContacts(onContext: .mainContext)
+	}
+
+	var pendingIncomingRequests: [ConnectionContact] {
+		allCachedContacts(onContext: .mainContext, status: .pendingReceived)
+	}
+
+	var pendingOutgoingRequests: [ConnectionContact] {
+		allCachedContacts(onContext: .mainContext, status: .pendingSent)
+	}
+
+	// MARK: - Lifecycle
 	init(profileController: ProfileController) {
 		self.profileController = profileController
 		self.authManager = profileController.authManager
@@ -44,7 +58,8 @@ class ContactsController {
 		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsChanged, object: nil, queue: nil, using: cacheUpdateClosure)
 	}
 
-	// MARK: - Fetching
+	// MARK: - Contacts
+	// MARK: networking
 	func fetchUser(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
@@ -76,10 +91,108 @@ class ContactsController {
 		}
 	}
 
-	func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) {
+	func fetchAllContacts(session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ContactContainer, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
+		}
+
+		let query = SwaapGQLQueries.connectionFetchAllContactsQuery
+		let graphObject = GQuery(query: query)
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+		networkHandler.transferMahCodableDatas(with: request, session: session, completion: completion)
+	}
+
+	// MARK: CoreData
+	func updateContactCache(completion: @escaping () -> Void = {}) {
+		fetchAllContacts { [weak self] result in
+			guard let self = self else {
+				completion()
+				return
+			}
+			do {
+				let container = try result.get()
+				let connections = container.connections
+				let pendingSent = container.pendingSentConnections
+				let pendingReceived = container.pendingReceivedConnections
+				let context = CoreDataStack.shared.container.newBackgroundContext()
+				context.performAndWait {
+					// tracking changes - once all contacts have been updated, any remaining in this set have been deleted as connections
+					var allCached = Set(self.allCachedContacts(onContext: context))
+
+					let updateContactClosure: ([Contact], ContactPendingStatus) -> Void = { contacts, status in
+						for contact in contacts {
+							let userConnection = contact.connectedUser
+							if let cachedConnection = self.getContactFromCache(forID: userConnection.id, onContext: context) {
+								allCached.remove(cachedConnection)
+								cachedConnection.updateFromProfile(userConnection, connectionStatus: status, connectionID: contact.id)
+							} else {
+								_ = ConnectionContact(connectionProfile: userConnection, connectionStatus: status, connectionID: contact.id, context: context)
+							}
+						}
+					}
+
+					updateContactClosure(connections, .connected)
+					updateContactClosure(pendingSent, .pendingSent)
+					updateContactClosure(pendingReceived, .pendingReceived)
+
+					allCached.forEach { context.delete($0) }
+				}
+				try CoreDataStack.shared.save(context: context)
+			} catch {
+				NSLog("Cache not updated: \(error)")
+			}
+			DispatchQueue.main.async {
+				NotificationCenter.default.post(name: .contactsCacheUpdated, object: nil)
+			}
+			completion()
+		}
+	}
+
+	private func allCachedContacts(onContext context: NSManagedObjectContext, status: ContactPendingStatus? = nil) -> [ConnectionContact] {
+		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
+		if let status = status {
+			fetchRequest.predicate = NSPredicate(format: "connectionStatus == %i", status.rawValue)
+		}
+		var allConnections: [ConnectionContact] = []
+		context.performAndWait {
+			do {
+				allConnections = try context.fetch(fetchRequest)
+			} catch {
+				NSLog("error fetching from cache: \(error)")
+			}
+		}
+		return allConnections
+
+	}
+
+	private func getContactFromCache(forID id: String, onContext context: NSManagedObjectContext) -> ConnectionContact? {
+		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
+		fetchRequest.predicate = NSPredicate(format: "id == %@", id as NSString)
+		var result: ConnectionContact?
+		context.performAndWait {
+			do {
+				result = try context.fetch(fetchRequest).first
+			} catch {
+				NSLog("error fetching from cache: \(error)")
+			}
+		}
+		return result
+	}
+
+	// MARK: - QR Code
+	@discardableResult func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) -> URLSessionDataTask? {
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return nil
 		}
 
 		let query = SwaapGQLQueries.connectionFetchQRCodeQuery
@@ -92,11 +205,11 @@ class ContactsController {
 		} catch {
 			NSLog("Failed encoding graph object: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
-			return
+			return nil
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
+		return networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<ProfileQRCodeContainer, NetworkError>) in
 			do {
 				let container = try result.get()
 				completion(.success(container.qrCode))
@@ -107,6 +220,7 @@ class ContactsController {
 		}
 	}
 
+	// MARK: - Connections (between users)
 	func requestConnection(toUserID userID: String,
 						   currentLocation: CLLocation,
 						   session: NetworkLoader = URLSession.shared,
@@ -144,14 +258,23 @@ class ContactsController {
 		}
 	}
 
-	func fetchAllContacts(session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ContactContainer, NetworkError>) -> Void) {
+	func acceptConnection(toConnectionID connectionID: String,
+						   currentLocation: CLLocation,
+						   session: NetworkLoader = URLSession.shared,
+						   completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
+		let coords = currentLocation.coordinate
 
-		let query = SwaapGQLQueries.connectionFetchAllContactsQuery
-		let graphObject = GQuery(query: query)
+		let query = SwaapGQLQueries.connectionAcceptMutation
+		let variables = ["id": connectionID,
+						 "coords": ["latitude": coords.latitude,
+									"longitude": coords.longitude]] as [String: Any]
+
+		let graphObject = GQuery(query: query, variables: variables)
+
 		do {
 			request.httpBody = try graphObject.jsonData()
 		} catch {
@@ -161,68 +284,50 @@ class ContactsController {
 		}
 
 		request.expectedResponseCodes = [200]
-		networkHandler.transferMahCodableDatas(with: request, session: session, completion: completion)
-	}
-
-	func updateContactCache(completion: @escaping () -> Void = {}) {
-		fetchAllContacts { [weak self] result in
-			guard let self = self else {
-				completion()
-				return
-			}
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let container = try result.get()
-				let connections = container.connections
-				let context = CoreDataStack.shared.container.newBackgroundContext()
-				context.performAndWait {
-					var allCached = Set(self.allCachedContacts(onContext: context))
-
-					for contact in connections {
-						if let cachedConnection = self.getContactFromCache(forID: contact.id, onContext: context) {
-							allCached.remove(cachedConnection)
-							cachedConnection.updateFromProfile(contact)
-						} else {
-							_ = ConnectionContact(connectionProfile: contact, context: context)
-						}
-					}
-
-					allCached.forEach { context.delete($0) }
-				}
-				try CoreDataStack.shared.save(context: context)
+				completion(.success(container.response))
 			} catch {
-				NSLog("Cache not updated: \(error)")
+				NSLog("Error accepting connection to user: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
-			completion()
 		}
 	}
 
-	private func allCachedContacts(onContext context: NSManagedObjectContext) -> [ConnectionContact] {
-		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
-		var allConnections: [ConnectionContact] = []
-		context.performAndWait {
+	func deleteConnection(toConnectionID connectionID: String,
+						  session: NetworkLoader = URLSession.shared,
+						  completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+
+		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+
+		let query = SwaapGQLQueries.connectionDeleteMutation
+		let variables = ["id": connectionID] as [String: Any]
+		let graphObject = GQuery(query: query, variables: variables)
+
+		do {
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding graph object: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = [200]
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
-				allConnections = try context.fetch(fetchRequest)
+				let container = try result.get()
+				completion(.success(container.response))
 			} catch {
-				NSLog("error fetching from cache: \(error)")
+				NSLog("Error deleting connection to user: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
 		}
-		return allConnections
-
 	}
 
-	private func getContactFromCache(forID id: String, onContext context: NSManagedObjectContext) -> ConnectionContact? {
-		let fetchRequest: NSFetchRequest<ConnectionContact> = ConnectionContact.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "id == %@", id as NSString)
-		var result: ConnectionContact?
-		context.performAndWait {
-			do {
-				result = try context.fetch(fetchRequest).first
-			} catch {
-				NSLog("error fetching from cache: \(error)")
-			}
-		}
-		return result
-	}
 
 	// MARK: - Utility
 	func clearCache(completion: ((Error?) -> Void)? = nil) {
@@ -242,4 +347,8 @@ class ContactsController {
 			}
 		}
 	}
+}
+
+extension NSNotification.Name {
+	static let contactsCacheUpdated = NSNotification.Name("com.swaap.contactsCacheUpdated")
 }

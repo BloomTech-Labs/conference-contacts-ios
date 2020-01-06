@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConnectViewController: UIViewController, ProfileAccessor {
+class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor {
 
 	@IBOutlet private weak var connectLabel: UILabel!
 	@IBOutlet private weak var swaapLogo: UIImageView!
@@ -21,6 +21,10 @@ class ConnectViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var instructionsLabel: UILabel!
 
 	var profileController: ProfileController?
+	var contactsController: ContactsController?
+
+	/// '"push" notification timer - just refreshses frequently to give the appearance that there are push notifications to notifiy you when you get a request
+	var pushNotificationTimer: Timer?
 
 	override var prefersStatusBarHidden: Bool {
 		true
@@ -30,18 +34,39 @@ class ConnectViewController: UIViewController, ProfileAccessor {
         super.viewDidLoad()
 		smallProfileCard.isSmallProfileCard = true
 		setupUI()
-		setupProfileCard()
+		updateProfileCard()
+
+		_ = NotificationCenter.default.addObserver(forName: .userProfileChanged, object: nil, queue: nil, using: { [weak self] _ in
+			DispatchQueue.main.async {
+				self?.updateProfileCard()
+			}
+		})
 
     }
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		smallProfileCard.setupImageView()
+		pushNotificationTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: { [weak self] _ in
+			self?.contactsController?.updateContactCache()
+		})
+	}
+
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		pushNotificationTimer?.invalidate()
+		pushNotificationTimer = nil
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let qrVC = segue.destination as? QRViewController else { return }
-		qrVC.profileController = profileController
+		if let qrVC = segue.destination as? QRViewController {
+			qrVC.profileController = profileController
+		}
+
+		if let swipebackVC = segue.destination as? SwipeBackNavigationController {
+			swipebackVC.contactsController = contactsController
+			swipebackVC.profileController = profileController
+		}
 	}
 
 	private func setupUI() {
@@ -66,7 +91,7 @@ class ConnectViewController: UIViewController, ProfileAccessor {
 		swaapLogo.centerXAnchor.constraint(equalTo: smallProfileCard.centerXAnchor).isActive = true
 	}
 
-	private func setupProfileCard() {
+	private func updateProfileCard() {
 		guard let profileController = profileController else { return }
 		smallProfileCard.userProfile = profileController.userProfile
 	}
