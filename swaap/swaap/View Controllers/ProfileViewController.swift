@@ -18,8 +18,10 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var backButton: UIButton!
 	@IBOutlet private weak var socialButtonsStackView: UIStackView!
 	@IBOutlet private weak var birthdayHeaderContainer: UIView!
+	@IBOutlet private weak var birthdayLabelContainer: UIView!
 	@IBOutlet private weak var birthdayLabel: UILabel!
 	@IBOutlet private weak var bioHeaderContainer: UIView!
+	@IBOutlet private weak var bioLabelContainer: UIView!
 	@IBOutlet private weak var bioLabel: UILabel!
 	@IBOutlet private weak var locationViewContainer: UIView!
 	@IBOutlet private weak var locationView: BasicInfoView!
@@ -109,7 +111,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil
 
-
 		editProfileButtonVisualFXContainerView.isVisible = isCurrentUser
 
 		populateSocialButtons()
@@ -120,11 +121,19 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		}
 
 		birthdayImageContainerView.isVisible = shouldShowIllustration(infoValueType: .string(birthdayLabel?.text))
+		[birthdayHeaderContainer, birthdayLabelContainer].forEach {
+			$0?.isVisible = shouldShowLabelInfo(infoValueType: .string(birthdayLabel?.text))
+		}
+
 		bioImageViewContainer.isVisible = shouldShowIllustration(infoValueType: .string(bioLabel?.text))
+		[bioHeaderContainer, bioLabelContainer].forEach {
+			$0?.isVisible = shouldShowLabelInfo(infoValueType: .string(bioLabel?.text))
+		}
 
 		let hasSocialButtons = !socialButtonsStackView.arrangedSubviews.isEmpty
 		socialButtonsStackView.isVisible = hasSocialButtons
-		modesOfContactPreviewStackView.isHidden = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
+		modesOfContactPreviewStackView.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
+		modesOfContactHeaderContainer.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
 
 		// the current user image is loaded through the profile controller and shown when populated after a notification comes through, but
 		// that doesn't happen for a user's contacts, so this is set to run when showing a connection's profile
@@ -152,6 +161,16 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		switch infoValueType {
 		case .string(let labelText):
 			return labelText?.isEmpty ?? true
+		case .hasContents(let hasContents):
+			return !hasContents
+		}
+	}
+
+	private func shouldShowLabelInfo(infoValueType: InfoValueType) -> Bool {
+		guard !isCurrentUser else { return true }
+		switch infoValueType {
+		case .string(let labelText):
+			return labelText?.isNotEmpty ?? false
 		case .hasContents(let hasContents):
 			return hasContents
 		}
