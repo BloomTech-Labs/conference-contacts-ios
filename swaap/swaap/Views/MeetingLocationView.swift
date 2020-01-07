@@ -18,6 +18,12 @@ class MeetingLocationView: IBPreviewControl {
 	@IBOutlet private weak var headerLabel: UILabel!
 	@IBOutlet private weak var locationLabel: UILabel!
 	@IBOutlet private weak var mapView: MKMapView!
+	@IBOutlet private weak var locationButton: UIButton!
+	@IBOutlet private weak var panButton: UIButton!
+	@IBOutlet private weak var buttonsContainer: UIView!
+
+	let panImage = UIImage(systemName: "hand.draw.fill")
+	let noPanImage = UIImage(systemName: "hand.draw")
 
 	var header: String {
 		get { headerLabel.text ?? "" }
@@ -35,6 +41,8 @@ class MeetingLocationView: IBPreviewControl {
 			locationLabel.text = locationName
 		}
 	}
+
+	var isScrollingEnabled: Bool = false
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -59,8 +67,11 @@ class MeetingLocationView: IBPreviewControl {
 		contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
+		mapView.isScrollEnabled = isScrollingEnabled
+		buttonsContainer.clipsToBounds = true
+		buttonsContainer.layer.cornerRadius = buttonsContainer.frame.width / 2
+
 		self.backgroundColor = .clear
-		//		location = CLLocation(latitude: 21.282778, longitude: -157.829444)
 		configureMapView()
 	}
 
@@ -94,6 +105,24 @@ class MeetingLocationView: IBPreviewControl {
 			}
 		}
 	}
+
+	@IBAction func toggleMapViewPan(_ sender: UIButton) {
+		mapView.isScrollEnabled = !isScrollingEnabled
+		isScrollingEnabled.toggle()
+		if isScrollingEnabled {
+			panButton.setImage(panImage, for: .normal)
+		} else {
+			panButton.setImage(noPanImage, for: .normal)
+		}
+	}
+
+	@IBAction func locateOriginalLocation(_ sender: UIButton) {
+		centerMapOnLocation()
+	}
+}
+
+extension MeetingLocationView: MKMapViewDelegate, UIScrollViewDelegate {
+
 }
 
 extension CLLocation {
