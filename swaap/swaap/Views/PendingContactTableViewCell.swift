@@ -52,6 +52,7 @@ class PendingContactTableViewCell: UITableViewCell {
 	override func prepareForReuse() {
 		super.prepareForReuse()
 		enableButtons()
+		contactImageView.image = nil
 	}
 
 	override func updateConstraints() {
