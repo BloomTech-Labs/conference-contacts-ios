@@ -155,7 +155,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	@IBAction func moreOptionsButtonTapped(_ sender: UIBarButtonItem) {
-		let image = UIImage(systemName: "arrow.uturn.left`")
+		let image = UIImage(systemName: "arrow.uturn.left")
 		let optionController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		let logoutSelection = UIAlertAction(title: "Logout", style: .default) { _ in

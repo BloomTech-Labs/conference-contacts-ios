@@ -190,7 +190,9 @@
                                                                 <constraint firstAttribute="height" constant="40" id="suh-6g-zgO"/>
                                                             </constraints>
                                                             <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <state key="normal" image="xmark.circle.fill" catalog="system"/>
+                                                            <state key="normal" image="xmark.circle.fill" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="dismissButtonPressed:" destination="6Xu-An-qFw" eventType="touchUpInside" id="H1p-dd-DOq"/>
                                                             </connections>
