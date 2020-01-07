@@ -21,7 +21,6 @@ struct Contact: Codable, Hashable {
 	let senderLon: Float?
 	let receiverLat: Float?
 	let receiverLon: Float?
-	let location: String?
 }
 
 
