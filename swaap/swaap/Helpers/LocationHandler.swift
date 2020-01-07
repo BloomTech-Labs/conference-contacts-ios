@@ -63,3 +63,22 @@ extension LocationHandler: CLLocationManagerDelegate {
 		print("Location request failed with error: \(error)")
 	}
 }
+
+extension CLLocationCoordinate2D {
+    func midPoint(from location: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+		let toRad = Double.pi / 180
+		let toDeg = 180 / Double.pi
+
+		let lon1 = longitude * toRad
+		let lon2 = location.longitude * toRad
+		let lat1 = latitude * toRad
+		let lat2 = location.latitude * toRad
+        let dLon = lon2 - lon1
+        let xVal = cos(lat2) * cos(dLon)
+        let yVal = cos(lat2) * sin(dLon)
+        let lat3 = atan2( sin(lat1) + sin(lat2), sqrt((cos(lat1) + xVal) * (cos(lat1) + xVal) + yVal * yVal))
+        let lon3 = lon1 + atan2(yVal, cos(lat1) + xVal)
+
+		return CLLocationCoordinate2D(latitude: lat3 * toDeg, longitude: lon3 * toDeg)
+    }
+}

@@ -30,6 +30,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var modesOfContactHeaderContainer: UIView!
 	@IBOutlet private weak var modesOfContactPreviewStackView: UIStackView!
 	@IBOutlet private weak var modesOfContactImageViewContainer: UIView!
+	@IBOutlet private weak var locationMapViewContainer: UIView!
+	@IBOutlet private weak var locationmapView: MeetingLocationView!
 	@IBOutlet private weak var bottomFadeView: UIView!
 	@IBOutlet private weak var bottomFadeviewBottomConstraint: NSLayoutConstraint!
 
@@ -47,6 +49,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
 	}
+
+	var meetingCoordinate: MeetingCoordinate? {
+		didSet {
+			updateViews()
+		}
+	}
+
 	var isCurrentUser = false
 	var contentsAreEmpty = false
 
@@ -135,6 +144,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		socialButtonsStackView.isVisible = hasSocialButtons
 		modesOfContactPreviewStackView.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
 		modesOfContactHeaderContainer.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
+
+		locationMapViewContainer.isHidden = meetingCoordinate == nil
+		locationmapView.location = meetingCoordinate
 
 		shouldShowNoInfoLabel()
 
