@@ -131,11 +131,27 @@ class ContactsController {
 					let updateContactClosure: ([Contact], ContactPendingStatus) -> Void = { contacts, status in
 						for contact in contacts {
 							let userConnection = contact.connectedUser
+							let meetingCoordinate: MeetingCoordinate?
+							if let senderLat = contact.senderLat, let senderLong = contact.senderLon,
+								let receiverLat = contact.receiverLat, let receiverLong = contact.receiverLon {
+								// Coordinates
+								let senderCoord = CLLocationCoordinate2D(latitude: Double(senderLat), longitude: Double(senderLong))
+								let receiverCoord = CLLocationCoordinate2D(latitude: Double(receiverLat), longitude: Double(receiverLong))
+								let midPoint = senderCoord.midPoint(from: receiverCoord)
+								// Distance
+								let senderLocation = CLLocation(latitude: senderCoord.latitude, longitude: senderCoord.longitude)
+								let midPointLocation = CLLocation(latitude: midPoint.latitude, longitude: midPoint.longitude)
+								let distance = senderLocation.distance(from: midPointLocation)
+								// Result
+								meetingCoordinate = MeetingCoordinate(coordinate: midPoint, dist: distance)
+							} else {
+								meetingCoordinate = nil
+							}
 							if let cachedConnection = self.getContactFromCache(forID: userConnection.id, onContext: context) {
 								allCached.remove(cachedConnection)
-								cachedConnection.updateFromProfile(userConnection, connectionStatus: status, connectionID: contact.id)
+								cachedConnection.updateFromProfile(userConnection, connectionStatus: status, connectionID: contact.id, meetingCoordinate: meetingCoordinate)
 							} else {
-								_ = ConnectionContact(connectionProfile: userConnection, connectionStatus: status, connectionID: contact.id, context: context)
+								_ = ConnectionContact(connectionProfile: userConnection, connectionStatus: status, connectionID: contact.id, meetingCoordinate: meetingCoordinate, context: context)
 							}
 						}
 					}

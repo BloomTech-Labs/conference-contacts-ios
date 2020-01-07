@@ -45,8 +45,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHm-Lv-sar">
-                                <rect key="frame" x="50" y="393" width="275" height="26.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHm-Lv-sar">
+                                <rect key="frame" x="50" y="406" width="275" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -214,6 +214,32 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="DzE-eX-NUx"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9JY-pb-gIG">
+                                                <rect key="frame" x="67" y="515.66666666666674" width="240" height="128"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWY-gT-ljC" customClass="MeetingLocationView" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="-0.66666666666674246" width="240" height="128"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="MapView"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="iWY-gT-ljC" secondAttribute="bottom" constant="8" id="6PY-Zy-QT1"/>
+                                                    <constraint firstItem="iWY-gT-ljC" firstAttribute="leading" secondItem="9JY-pb-gIG" secondAttribute="leading" constant="30" id="GMu-8X-P3J"/>
+                                                    <constraint firstItem="iWY-gT-ljC" firstAttribute="top" secondItem="9JY-pb-gIG" secondAttribute="top" constant="8" id="jgW-Id-VTR"/>
+                                                    <constraint firstAttribute="trailing" secondItem="iWY-gT-ljC" secondAttribute="trailing" constant="30" id="spO-p0-hyI"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="pAR-Wf-Azl" userLabel="Spacer View">
+                                                <rect key="frame" x="0.0" y="569.66666666666674" width="375" height="20"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="o6A-Rw-XTe"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FX6-cO-zr2" userLabel="MODES OF CONTACT CONTAINER">
@@ -477,11 +503,6 @@
                             <constraint firstItem="BWn-LD-Q5h" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="yzo-u6-aSL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="uVY-7s-0Rc"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="MUg-8U-P9S"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -492,14 +513,18 @@
                         <outlet property="bioHeaderContainer" destination="hnW-yB-GZB" id="vNb-jb-lPV"/>
                         <outlet property="bioImageViewContainer" destination="nPG-kz-aqn" id="RWg-KX-kU1"/>
                         <outlet property="bioLabel" destination="cQ1-s3-0D2" id="mAk-1h-jKi"/>
+                        <outlet property="bioLabelContainer" destination="VXU-mU-vw0" id="IVl-3C-9b6"/>
                         <outlet property="birthdayHeaderContainer" destination="cek-yS-tXY" id="dDy-Dg-lIU"/>
                         <outlet property="birthdayImageContainerView" destination="ULW-PO-gmt" id="XLq-xw-znd"/>
                         <outlet property="birthdayLabel" destination="Rtd-Cf-82f" id="w3D-lh-hhw"/>
+                        <outlet property="birthdayLabelContainer" destination="hXs-BR-8av" id="dRQ-HC-W8j"/>
                         <outlet property="bottomFadeView" destination="mJq-vT-FfX" id="w9E-Nn-82w"/>
                         <outlet property="bottomFadeviewBottomConstraint" destination="1ze-mp-8ta" id="gNv-P1-5fK"/>
                         <outlet property="editProfileButtonVisualFXContainerView" destination="HPr-IH-wav" id="JJ6-u7-13f"/>
+                        <outlet property="locationMapViewContainer" destination="9JY-pb-gIG" id="iLE-5B-Uun"/>
                         <outlet property="locationView" destination="UrP-3A-tXd" id="GnF-fj-6Bl"/>
                         <outlet property="locationViewContainer" destination="BYo-bM-3Qw" id="J2j-P5-3t3"/>
+                        <outlet property="locationmapView" destination="iWY-gT-ljC" id="irH-Ik-fxv"/>
                         <outlet property="modesOfContactHeaderContainer" destination="FX6-cO-zr2" id="wJs-X4-gRg"/>
                         <outlet property="modesOfContactImageViewContainer" destination="kxb-bX-n7D" id="It2-pL-gHH"/>
                         <outlet property="modesOfContactPreviewStackView" destination="1vv-7w-fJ6" id="xAZ-ym-94O"/>
@@ -1109,10 +1134,10 @@ Long pressing one of contact methods will bring up privacy options:
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="scrollableAxes" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ejB-9R-Qcc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="scrollableAxes" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ejB-9R-Qcc">
                                 <rect key="frame" x="0.0" y="20" width="375" height="792"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="sectionIndexColor" name="Swaap Accent Color 1"/>
-                                <color key="sectionIndexTrackingBackgroundColor" name="Swaap Background Color Burple"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="rOD-ZW-pMR">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1155,7 +1180,7 @@ Long pressing one of contact methods will bring up privacy options:
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" textLabel="mP8-pO-dyT" style="IBUITableViewCellStyleDefault" id="fY5-0u-wgJ">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="127.33333206176758" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fY5-0u-wgJ" id="XNa-Wl-UJR">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="43.666667938232422"/>
@@ -1255,9 +1280,6 @@ Long pressing one of contact methods will bring up privacy options:
         </namedColor>
         <namedColor name="Swaap Accent color 2">
             <color red="0.039999999105930328" green="0.49000000953674316" blue="0.68000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Swaap Background Color Burple">
-            <color red="0.22745098039215686" green="0.29803921568627451" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeetingLocationView" customModule="swaap" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="v3n-rq-R5C"/>
+                <outlet property="headerLabel" destination="Lsm-6f-oV4" id="rFR-Yf-zSz"/>
+                <outlet property="locationLabel" destination="iwL-u8-Gnf" id="Cyd-nJ-aDM"/>
+                <outlet property="mapView" destination="kkD-Pu-UVU" id="5Zy-Og-Pan"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" interfaceStyle="dark" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="317" height="315"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="6Ls-hM-FNG">
+                    <rect key="frame" x="0.0" y="0.0" width="317" height="315"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TF7-aR-eA2">
+                            <rect key="frame" x="0.0" y="0.0" width="317" height="44.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WHERE YOU MET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsm-6f-oV4">
+                                    <rect key="frame" x="0.0" y="0.0" width="317" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwL-u8-Gnf">
+                                    <rect key="frame" x="0.0" y="24" width="317" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kkD-Pu-UVU">
+                            <rect key="frame" x="0.0" y="60.5" width="317" height="254.5"/>
+                            <color key="tintColor" name="Swaap Accent Color 1"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="ELK-AQ-VCY"/>
+                                <constraint firstAttribute="width" secondItem="kkD-Pu-UVU" secondAttribute="height" multiplier="1:1" id="HtC-CP-4Cm"/>
+                            </constraints>
+                        </mapView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="6Ls-hM-FNG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="015-RD-cWJ"/>
+                <constraint firstAttribute="trailing" secondItem="6Ls-hM-FNG" secondAttribute="trailing" id="B0Q-1w-Gzi"/>
+                <constraint firstAttribute="bottom" secondItem="6Ls-hM-FNG" secondAttribute="bottom" id="Pwg-A8-nct"/>
+                <constraint firstItem="6Ls-hM-FNG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WK4-9S-DLt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="67.391304347826093" y="-41.183035714285715"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Swaap Accent Color 1">
+            <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
