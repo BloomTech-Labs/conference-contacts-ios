@@ -45,7 +45,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHm-Lv-sar">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHm-Lv-sar">
                                 <rect key="frame" x="50" y="393" width="275" height="26.333333333333314"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -477,6 +477,11 @@
                             <constraint firstItem="BWn-LD-Q5h" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="yzo-u6-aSL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2AK-bp-vhK"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="uVY-7s-0Rc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="MUg-8U-P9S"/>
                     <nil key="simulatedTopBarMetrics"/>

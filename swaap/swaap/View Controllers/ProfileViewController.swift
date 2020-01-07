@@ -48,6 +48,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		didSet { updateViews() }
 	}
 	var isCurrentUser = false
+	var contentsAreEmpty = false
 
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -69,7 +70,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			appearance.shadowColor = .clear
 			tabBarItem.standardAppearance = appearance
 		}
-		noInfoDescLabel.isHidden = true
+
 		updateFadeViewPosition()
 	}
 
@@ -135,6 +136,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		modesOfContactPreviewStackView.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
 		modesOfContactHeaderContainer.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
 
+		shouldShowNoInfoLabel()
+
 		// the current user image is loaded through the profile controller and shown when populated after a notification comes through, but
 		// that doesn't happen for a user's contacts, so this is set to run when showing a connection's profile
 		if !isCurrentUser, userProfile?.photoData == nil, let imageURL = userProfile?.pictureURL {
@@ -177,18 +180,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	private func shouldShowNoInfoLabel() {
-		guard isCurrentUser == false else { return }
+		guard !isCurrentUser else { return }
 		let name = userProfile?.name ?? "This user"
 		noInfoDescLabel.text = "\(name) hasn't added any info yet."
-		if birthdayLabel.text == nil &&
-			bioLabel.text == nil &&
-			modesOfContactPreviewStackView.arrangedSubviews.isEmpty {
-			noInfoDescLabel.isHidden = false
-		} else if birthdayLabel.text != nil ||
-			bioLabel.text != nil ||
-			!modesOfContactPreviewStackView.arrangedSubviews.isEmpty {
-			noInfoDescLabel.isHidden = true
+		contentsAreEmpty = [birthdayLabelContainer, bioLabelContainer, modesOfContactHeaderContainer].reduce(true) {
+			($1?.isHidden ?? true) && $0
 		}
+		noInfoDescLabel.isVisible = contentsAreEmpty
 	}
 
 	private func populateSocialButtons() {
