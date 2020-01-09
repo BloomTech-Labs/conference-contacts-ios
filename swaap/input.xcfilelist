@@ -1,5 +1,5 @@
 $(SRCROOT)/Carthage/Build/iOS/SwiftyAcknowledgements.framework
-#$(SRCROOT)/Carthage/Build/iOS/NetworkHandler.framework
+$(SRCROOT)/Carthage/Build/iOS/NetworkHandler.framework
 $(SRCROOT)/Carthage/Build/iOS/Auth0.framework
 $(SRCROOT)/Carthage/Build/iOS/SimpleKeychain.framework
 $(SRCROOT)/Carthage/Build/iOS/Cloudinary.framework
@@ -8,3 +8,4 @@ $(SRCROOT)/Carthage/Build/iOS/LoadinationIndicator.framework
 $(SRCROOT)/Carthage/Build/iOS/QRettyCode.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftyBinaryFormatter.framework
 $(SRCROOT)/Carthage/Build/iOS/TouchVisualizer.framework
+$(SRCROOT)/Carthage/Build/iOS/ChevronAnimatable.framework
