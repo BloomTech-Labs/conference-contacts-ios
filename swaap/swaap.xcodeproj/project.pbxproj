@@ -17,10 +17,10 @@
 		33094E8F23AB358B00D5556B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88E23A0CAD900A17D0D /* Alamofire.framework */; platformFilter = ios; };
 		33094E9023AB358D00D5556B /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88A23A0C94F00A17D0D /* Cloudinary.framework */; platformFilter = ios; };
 		33094E9123AB358F00D5556B /* LoadinationIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */; platformFilter = ios; };
-		33094E9223AB359500D5556B /* NetworkHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */; platformFilter = ios; };
 		33094E9323AB359A00D5556B /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */; platformFilter = ios; };
 		33094E9423AB359F00D5556B /* IBPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; platformFilter = ios; };
-		33094E9523AB35A500D5556B /* ChevronAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; platformFilter = ios; };
+		330A720723C7C6E40097B48B /* NetworkHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330A720623C7C6E40097B48B /* NetworkHandler.framework */; };
+		330A720923C7C7520097B48B /* ChevronAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 330A720823C7C7520097B48B /* ChevronAnimatable.framework */; };
 		3326AEC923C1892400DA9636 /* ConnectionContact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AEC723C1892400DA9636 /* ConnectionContact+CoreDataClass.swift */; };
 		3326AECA23C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */; };
 		3326AECE23C1B6EB00DA9636 /* ImageUpdateOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326AECD23C1B6EB00DA9636 /* ImageUpdateOperation.swift */; };
@@ -32,8 +32,10 @@
 		335E668D237B6BAA0099EEA1 /* ContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E668C237B6BAA0099EEA1 /* ContactsController.swift */; };
 		3377AF8D23AB442E0083EC52 /* ContactConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3377AF8C23AB442E0083EC52 /* ContactConnectionStatus.swift */; };
 		3377AF9023AB45290083EC52 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3377AF8F23AB45290083EC52 /* Contact.swift */; };
+		33848F8423C7A06D00803D71 /* ReleaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33848F8323C7A06D00803D71 /* ReleaseState.swift */; };
 		33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33917DF323849A2400BC1501 /* SignUpViewController.swift */; };
 		33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33917DF92384C3B000BC1501 /* Auth0.framework */; };
+		3398329123C5272100F19546 /* TouchVisualizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3398328823C5272100F19546 /* TouchVisualizer.framework */; };
 		3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */; };
 		3399F88123A0B69200A17D0D /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3399F88023A0B69200A17D0D /* RangeTests.swift */; };
 		3399F88B23A0C94F00A17D0D /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88A23A0C94F00A17D0D /* Cloudinary.framework */; };
@@ -43,8 +45,6 @@
 		33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C00787238FDDEC000D72A7 /* VectorExtensions.swift */; };
 		33CCBABA2398F21200A98C82 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBAB92398F21200A98C82 /* ProfileController.swift */; };
 		33CCBABC2398F3C200A98C82 /* GQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBABB2398F3C200A98C82 /* GQuery.swift */; };
-		33CCBAD92399B56C00A98C82 /* NetworkHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */; };
-		33CCBADA2399B56C00A98C82 /* NetworkHandler.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33E7BBFD23A19BC000D81C02 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7BBFC23A19BC000D81C02 /* QRViewController.swift */; };
 		33E7BC0923A19CBD00D81C02 /* HandyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7BC0823A19CBC00D81C02 /* HandyExtensions.swift */; };
 		33E8C7C323AC6025005E1E2C /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E8C7C223AC6025005E1E2C /* LocationHandler.swift */; };
@@ -94,8 +94,6 @@
 		37A185F2237A43D5002191B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A185F1237A43D5002191B5 /* Profile.storyboard */; };
 		37A2F40B237CFEFE00C1EF3B /* RootAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F40A237CFEFE00C1EF3B /* RootAuthViewController.swift */; };
 		37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37A2F40C237CFF0C00C1EF3B /* Login.storyboard */; };
-		37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; };
-		37A2F418237CFF5E00C1EF3B /* ChevronAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37A2F41B237D23FF00C1EF3B /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F41A237D23FF00C1EF3B /* LogInViewController.swift */; };
 		37A2F41D237D543B00C1EF3B /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2F41C237D543B00C1EF3B /* ButtonHelper.swift */; };
 		37A8B3A123ABFBFE0019F17B /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B3A023ABFBFE0019F17B /* ConnectViewController.swift */; };
@@ -117,34 +115,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		33CCBAC42399B40A00A98C82 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 335D7D27229F4ABA005D5A20;
-			remoteInfo = "NetworkHandler-iOS";
-		};
-		33CCBAC62399B40A00A98C82 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 335D7D30229F4ABB005D5A20;
-			remoteInfo = "NetworkHandlerTests-iOS";
-		};
-		33CCBAC82399B40A00A98C82 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 33C92E992357F8350061B0F8;
-			remoteInfo = "NetworkHandler-MacOS";
-		};
-		33CCBACA2399B40A00A98C82 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 33C92EA12357F8350061B0F8;
-			remoteInfo = "NetworkHandler-MacOSTests";
-		};
 		33FEE0DB2384656A006BE880 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */;
@@ -173,20 +143,6 @@
 			remoteGlobalIDString = 37A1859F237A3579002191B5;
 			remoteInfo = swaap;
 		};
-		37A2F413237CFF5400C1EF3B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 37A2F3AC237BAB6800C1EF3B;
-			remoteInfo = ChevronAnimatable;
-		};
-		37A2F415237CFF5400C1EF3B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 37A2F3B5237BAB6800C1EF3B;
-			remoteInfo = ChevronAnimatableTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -196,9 +152,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				33CCBADA2399B56C00A98C82 /* NetworkHandler.framework in Embed Frameworks */,
 				33FEE0E02384657D006BE880 /* IBPreview.framework in Embed Frameworks */,
-				37A2F418237CFF5E00C1EF3B /* ChevronAnimatable.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +165,8 @@
 		33094E7923AA0D9B00D5556B /* ConnectionContactMethod+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ConnectionContactMethod+Convenience.swift"; sourceTree = "<group>"; };
 		33094E7B23AA13B700D5556B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		33094E8D23AB327200D5556B /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
+		330A720623C7C6E40097B48B /* NetworkHandler.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkHandler.framework; path = Carthage/Build/iOS/NetworkHandler.framework; sourceTree = "<group>"; };
+		330A720823C7C7520097B48B /* ChevronAnimatable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChevronAnimatable.framework; path = Carthage/Build/iOS/ChevronAnimatable.framework; sourceTree = "<group>"; };
 		3326AEBE23C188D400DA9636 /* Contacts 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Contacts 3.xcdatamodel"; sourceTree = "<group>"; };
 		3326AEC723C1892400DA9636 /* ConnectionContact+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionContact+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConnectionContact+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -225,8 +181,10 @@
 		335E668C237B6BAA0099EEA1 /* ContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsController.swift; sourceTree = "<group>"; };
 		3377AF8C23AB442E0083EC52 /* ContactConnectionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactConnectionStatus.swift; sourceTree = "<group>"; };
 		3377AF8F23AB45290083EC52 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		33848F8323C7A06D00803D71 /* ReleaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseState.swift; sourceTree = "<group>"; };
 		33917DF323849A2400BC1501 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		33917DF92384C3B000BC1501 /* Auth0.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Auth0.framework; path = Carthage/Build/iOS/Auth0.framework; sourceTree = "<group>"; };
+		3398328823C5272100F19546 /* TouchVisualizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchVisualizer.framework; path = Carthage/Build/iOS/TouchVisualizer.framework; sourceTree = "<group>"; };
 		3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		3399F88023A0B69200A17D0D /* RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
 		3399F88A23A0C94F00A17D0D /* Cloudinary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cloudinary.framework; path = Carthage/Build/iOS/Cloudinary.framework; sourceTree = "<group>"; };
@@ -237,7 +195,6 @@
 		33C00787238FDDEC000D72A7 /* VectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorExtensions.swift; sourceTree = "<group>"; };
 		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		33CCBABB2398F3C200A98C82 /* GQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQuery.swift; sourceTree = "<group>"; };
-		33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NetworkHandler.xcodeproj; path = Carthage/Checkouts/NetworkHandler/NetworkHandler.xcodeproj; sourceTree = "<group>"; };
 		33E7BBFC23A19BC000D81C02 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		33E7BC0823A19CBC00D81C02 /* HandyExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandyExtensions.swift; sourceTree = "<group>"; };
 		33E8C7C223AC6025005E1E2C /* LocationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
@@ -299,7 +256,6 @@
 		37A185F1237A43D5002191B5 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		37A2F40A237CFEFE00C1EF3B /* RootAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootAuthViewController.swift; sourceTree = "<group>"; };
 		37A2F40C237CFF0C00C1EF3B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChevronAnimatable.xcodeproj; path = Carthage/Checkouts/ChevronAnimatable/ChevronAnimatable.xcodeproj; sourceTree = "<group>"; };
 		37A2F41A237D23FF00C1EF3B /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		37A2F41C237D543B00C1EF3B /* ButtonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
 		37A2F41E237DDDF000C1EF3B /* swaap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = swaap.entitlements; sourceTree = "<group>"; };
@@ -329,12 +285,13 @@
 				33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */,
 				3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
-				37A2F417237CFF5E00C1EF3B /* ChevronAnimatable.framework in Frameworks */,
+				330A720723C7C6E40097B48B /* NetworkHandler.framework in Frameworks */,
+				3398329123C5272100F19546 /* TouchVisualizer.framework in Frameworks */,
 				33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */,
 				33A4BAA123BB29880000E4E1 /* QRettyCode.framework in Frameworks */,
 				3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */,
+				330A720923C7C7520097B48B /* ChevronAnimatable.framework in Frameworks */,
 				3399F88B23A0C94F00A17D0D /* Cloudinary.framework in Frameworks */,
-				33CCBAD92399B56C00A98C82 /* NetworkHandler.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,9 +301,7 @@
 			files = (
 				33094E8F23AB358B00D5556B /* Alamofire.framework in Frameworks */,
 				33094E9023AB358D00D5556B /* Cloudinary.framework in Frameworks */,
-				33094E9223AB359500D5556B /* NetworkHandler.framework in Frameworks */,
 				33094E9123AB358F00D5556B /* LoadinationIndicator.framework in Frameworks */,
-				33094E9523AB35A500D5556B /* ChevronAnimatable.framework in Frameworks */,
 				33094E9323AB359A00D5556B /* SwiftyAcknowledgements.framework in Frameworks */,
 				33094E9423AB359F00D5556B /* IBPreview.framework in Frameworks */,
 			);
@@ -420,19 +375,9 @@
 				33094E7B23AA13B700D5556B /* CoreDataStack.swift */,
 				33E8C7C223AC6025005E1E2C /* LocationHandler.swift */,
 				33E8C7DF23AD884D005E1E2C /* SwaapGQLQueries.swift */,
+				33848F8323C7A06D00803D71 /* ReleaseState.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		33CCBABE2399B40A00A98C82 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */,
-				33CCBAC72399B40A00A98C82 /* NetworkHandlerTests-iOS.xctest */,
-				33CCBAC92399B40A00A98C82 /* NetworkHandler.framework */,
-				33CCBACB2399B40A00A98C82 /* NetworkHandler-MacOSTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		33FEE0D72384656A006BE880 /* Products */ = {
@@ -620,27 +565,19 @@
 		37A185E5237A4087002191B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				330A720823C7C7520097B48B /* ChevronAnimatable.framework */,
+				3398328823C5272100F19546 /* TouchVisualizer.framework */,
 				33A4BAA223BB298E0000E4E1 /* SwiftyBinaryFormatter.framework */,
 				33A4BA9823BB29880000E4E1 /* QRettyCode.framework */,
 				3399F88E23A0CAD900A17D0D /* Alamofire.framework */,
 				3399F88A23A0C94F00A17D0D /* Cloudinary.framework */,
 				33917DF92384C3B000BC1501 /* Auth0.framework */,
-				37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */,
 				3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */,
+				330A720623C7C6E40097B48B /* NetworkHandler.framework */,
 				33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */,
-				33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */,
 				37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		37A2F40F237CFF5400C1EF3B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */,
-				37A2F416237CFF5400C1EF3B /* ChevronAnimatableTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -743,16 +680,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 37A2F40F237CFF5400C1EF3B /* Products */;
-					ProjectRef = 37A2F40E237CFF5400C1EF3B /* ChevronAnimatable.xcodeproj */;
-				},
-				{
 					ProductGroup = 33FEE0D72384656A006BE880 /* Products */;
 					ProjectRef = 33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */;
-				},
-				{
-					ProductGroup = 33CCBABE2399B40A00A98C82 /* Products */;
-					ProjectRef = 33CCBABD2399B40A00A98C82 /* NetworkHandler.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -765,34 +694,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		33CCBAC52399B40A00A98C82 /* NetworkHandler.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NetworkHandler.framework;
-			remoteRef = 33CCBAC42399B40A00A98C82 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		33CCBAC72399B40A00A98C82 /* NetworkHandlerTests-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "NetworkHandlerTests-iOS.xctest";
-			remoteRef = 33CCBAC62399B40A00A98C82 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		33CCBAC92399B40A00A98C82 /* NetworkHandler.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NetworkHandler.framework;
-			remoteRef = 33CCBAC82399B40A00A98C82 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		33CCBACB2399B40A00A98C82 /* NetworkHandler-MacOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "NetworkHandler-MacOSTests.xctest";
-			remoteRef = 33CCBACA2399B40A00A98C82 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		33FEE0DC2384656A006BE880 /* IBPreview.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -805,20 +706,6 @@
 			fileType = wrapper.cfbundle;
 			path = IBPreviewTests.xctest;
 			remoteRef = 33FEE0DD2384656A006BE880 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		37A2F414237CFF5400C1EF3B /* ChevronAnimatable.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ChevronAnimatable.framework;
-			remoteRef = 37A2F413237CFF5400C1EF3B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		37A2F416237CFF5400C1EF3B /* ChevronAnimatableTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ChevronAnimatableTests.xctest;
-			remoteRef = 37A2F415237CFF5400C1EF3B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -965,6 +852,7 @@
 				3377AF8D23AB442E0083EC52 /* ContactConnectionStatus.swift in Sources */,
 				33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */,
 				335A520B23910C5100FA5623 /* RangeExtensions.swift in Sources */,
+				33848F8423C7A06D00803D71 /* ReleaseState.swift in Sources */,
 				3753DE46239EBF3C00C90501 /* ContactMethodCellView.swift in Sources */,
 				3797A55D238603A400CB8621 /* String+Extensions.swift in Sources */,
 				37D1D72223A198EF00931BF8 /* AlertTint+UIAlertViewController.swift in Sources */,

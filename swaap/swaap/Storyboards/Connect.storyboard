@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyQ-Ch-1Iw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyQ-Ch-1Iw">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -287,6 +287,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Staging Environment)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OW-zh-r36">
+                                <rect key="frame" x="102" y="510.66666666666674" width="171" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -295,6 +301,8 @@
                             <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="7D7-BL-Dvg" secondAttribute="trailing" constant="64" id="XfA-vd-keZ"/>
                             <constraint firstItem="Afz-eK-ifu" firstAttribute="centerX" secondItem="cgi-jh-UfU" secondAttribute="centerX" id="aMf-iu-b0Q"/>
                             <constraint firstItem="7D7-BL-Dvg" firstAttribute="top" secondItem="tep-kJ-WHZ" secondAttribute="bottom" constant="33.666666666666629" id="aTx-YL-Hiy"/>
+                            <constraint firstItem="8OW-zh-r36" firstAttribute="top" secondItem="7D7-BL-Dvg" secondAttribute="bottom" constant="8" id="ecd-xQ-MAn"/>
+                            <constraint firstItem="8OW-zh-r36" firstAttribute="centerX" secondItem="7D7-BL-Dvg" secondAttribute="centerX" id="gQr-mL-TcG"/>
                             <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="tep-kJ-WHZ" secondAttribute="trailing" constant="60" id="jOK-BD-kL7"/>
                             <constraint firstItem="Afz-eK-ifu" firstAttribute="top" secondItem="oYF-fr-cMY" secondAttribute="top" constant="20" id="kLA-IL-edd"/>
                             <constraint firstItem="7D7-BL-Dvg" firstAttribute="leading" secondItem="oYF-fr-cMY" secondAttribute="leading" constant="64" id="r0g-jA-DIq"/>
@@ -303,6 +311,7 @@
                     </view>
                     <connections>
                         <outlet property="qrImageView" destination="7D7-BL-Dvg" id="Pw7-dp-WUt"/>
+                        <outlet property="stagingIndicatorLabel" destination="8OW-zh-r36" id="avs-K6-bFJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m22-3r-njp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

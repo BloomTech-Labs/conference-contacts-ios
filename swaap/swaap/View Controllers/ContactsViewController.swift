@@ -168,9 +168,35 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 			[logoutAction, cancelLogoutAction].forEach { logoutController.addAction($0) }
 			self.present(logoutController, animated: true)
 		}
+		let aboutAction = UIAlertAction(title: "About", style: .default) { _ in
+			self.showAbout()
+		}
+		let tokenAction = UIAlertAction(title: "JWT", style: .default) { [weak self] _ in
+			guard let accessToken = self?.authManager?.credentials?.accessToken else { return }
+			let activityController = UIActivityViewController(activityItems: [accessToken], applicationActivities: nil)
+			self?.present(activityController, animated: true)
+		}
+
 		logoutSelection.setValue(image, forKey: "image")
-		[logoutSelection, cancelAction].forEach { optionController.addAction($0) }
+
+		// only show JWT option while debugging or in testflight
+		if ReleaseState.current != .appStore {
+			optionController.addAction(tokenAction)
+		}
+		[aboutAction, logoutSelection, cancelAction].forEach { optionController.addAction($0) }
 		present(optionController, animated: true)
+	}
+
+	private func showAbout() {
+		let message = """
+		swaap was developed by students at Lambda School.
+
+		Current environment: \(ReleaseState.current == .appStore ? "Production" : "Staging")
+		"""
+		let aboutController = UIAlertController(title: "About swaap", message: message, preferredStyle: .actionSheet)
+		let finishAction = UIAlertAction(title: "Neat!", style: .cancel, handler: nil)
+		aboutController.addAction(finishAction)
+		present(aboutController, animated: true)
 	}
 }
 
