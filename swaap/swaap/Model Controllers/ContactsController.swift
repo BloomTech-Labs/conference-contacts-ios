@@ -5,6 +5,7 @@
 //  Created by Michael Redig on 11/12/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
+//swiftlint:disable function_body_length
 
 import Foundation
 import NetworkHandler
@@ -151,7 +152,11 @@ class ContactsController {
 								allCached.remove(cachedConnection)
 								cachedConnection.updateFromProfile(userConnection, connectionStatus: status, connectionID: contact.id, meetingCoordinate: meetingCoordinate)
 							} else {
-								_ = ConnectionContact(connectionProfile: userConnection, connectionStatus: status, connectionID: contact.id, meetingCoordinate: meetingCoordinate, context: context)
+								_ = ConnectionContact(connectionProfile: userConnection,
+													  connectionStatus: status,
+													  connectionID: contact.id,
+													  meetingCoordinate: meetingCoordinate,
+													  context: context)
 							}
 						}
 					}
@@ -205,7 +210,9 @@ class ContactsController {
 	}
 
 	// MARK: - QR Code
-	@discardableResult func fetchQRCode(with id: String, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) -> URLSessionDataTask? {
+	@discardableResult func fetchQRCode(with id: String,
+										session: NetworkLoader = URLSession.shared,
+										completion: @escaping (Result<ProfileQRCode, NetworkError>) -> Void) -> URLSessionDataTask? {
 		guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
 			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return nil

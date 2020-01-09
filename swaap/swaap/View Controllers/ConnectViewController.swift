@@ -41,7 +41,6 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 				self?.updateProfileCard()
 			}
 		})
-
     }
 
 	override func viewDidAppear(_ animated: Bool) {

@@ -18,9 +18,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 	}
 
 	// MARK: - System Overrides
-	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-		return .portrait
-	}
+	override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
 
 	// MARK: - Properties and Outlets
 	@IBOutlet private weak var cameraView: UIView!
@@ -181,9 +179,10 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 
 	private func found(code: String, path: CGPath) {
 		// Do something with metaData stringValue here
+		guard let hostValue = profileController?.liveSiteBaseURL.host else { return }
 		guard foundQRCodeData.isEmpty || code == foundQRCodeData else { return }
 		guard let url = URL(string: code),
-			url.host == "swaap.co",
+			(url.host == hostValue),
 			url.pathComponents.count == 3,
 			url.pathComponents[1] == "qrLink" else { return }
 		triggerHapticFeedback(code)

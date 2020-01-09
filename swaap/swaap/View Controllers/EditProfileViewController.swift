@@ -224,7 +224,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	// MARK: Saving Helpers
 	private func concurrentCompletion(with semaphore: DispatchSemaphore) -> (Result<GQLMutationResponse, NetworkError>) -> Void {
-		return { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
+		let closure = { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
 			switch result {
 			case .success:
 				break
@@ -233,6 +233,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			}
 			semaphore.signal()
 		}
+		return closure
 	}
 
 	private func profileUpdateOperation(newProfile: UserProfile, imageUpdateOperation: ImageUpdateOperation?) -> ConcurrentOperation {
@@ -481,6 +482,9 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 	}
 
 	func privacySelectionInvoked(on cellView: ContactMethodCellView) {
+		let eyeImage = UIImage(systemName: "eye")
+		let eyeSlash = UIImage(systemName: "eye.slash")
+		let connectedImage = UIImage(systemName: "checkmark")
 		let privateStr = NSMutableAttributedString(string: "Private",
 												   attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
 		let connectedStr = NSMutableAttributedString(string: "Connected",
@@ -513,6 +517,8 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 			}
 			cellView.contactMethod.privacy = .private
 		}
+		privateAction.setValue(eyeSlash, forKey: "image")
+
 		let connectedAction = UIAlertAction(title: "Connected", style: .default) { _ in
 			guard !cellView.contactMethod.preferredContact else {
 				self.showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
@@ -520,9 +526,13 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 			}
 			cellView.contactMethod.privacy = .connected
 		}
+		connectedAction.setValue(connectedImage, forKey: "image")
+
 		let publicAction = UIAlertAction(title: "Public", style: .default) { _ in
 			cellView.contactMethod.privacy = .public
 		}
+		publicAction.setValue(eyeImage, forKey: "image")
+
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
 		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)

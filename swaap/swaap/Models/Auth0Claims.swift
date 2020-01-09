@@ -20,6 +20,6 @@ struct Auth0IDClaims: Codable {
 	let exp: Date
 
 	var authID: String {
-		return String(sub.split(separator: "|")[1])
+		String(sub.split(separator: "|")[1])
 	}
 }

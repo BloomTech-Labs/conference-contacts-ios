@@ -57,7 +57,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	var isCurrentUser = false
-	var contentsAreEmpty = false
 
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -195,9 +194,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		guard !isCurrentUser else { return }
 		let name = userProfile?.name ?? "This user"
 		noInfoDescLabel.text = "\(name) hasn't added any info yet."
-		contentsAreEmpty = [birthdayLabelContainer, bioLabelContainer, modesOfContactHeaderContainer].reduce(true) {
-			($1?.isHidden ?? true) && $0
-		}
+		let contentsAreEmpty = [birthdayLabelContainer, bioLabelContainer, modesOfContactHeaderContainer].allSatisfy({ $0?.isVisible == false })
 		noInfoDescLabel.isVisible = contentsAreEmpty
 	}
 
@@ -243,7 +240,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	}
 
 	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
-		return SwipeBackNavigationController(coder: coder, profileController: profileController)
+		SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
 }
 

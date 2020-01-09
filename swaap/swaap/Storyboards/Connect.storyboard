@@ -189,7 +189,10 @@
                                                                 <constraint firstAttribute="width" constant="40" id="nwY-TH-a8Y"/>
                                                                 <constraint firstAttribute="height" constant="40" id="suh-6g-zgO"/>
                                                             </constraints>
-                                                            <state key="normal" image="arrow.down.to.line" catalog="system"/>
+                                                            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" image="xmark.circle.fill" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="dismissButtonPressed:" destination="6Xu-An-qFw" eventType="touchUpInside" id="H1p-dd-DOq"/>
                                                             </connections>
@@ -284,6 +287,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Staging Environment)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OW-zh-r36">
+                                <rect key="frame" x="102" y="510.66666666666674" width="171" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -292,6 +301,8 @@
                             <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="7D7-BL-Dvg" secondAttribute="trailing" constant="64" id="XfA-vd-keZ"/>
                             <constraint firstItem="Afz-eK-ifu" firstAttribute="centerX" secondItem="cgi-jh-UfU" secondAttribute="centerX" id="aMf-iu-b0Q"/>
                             <constraint firstItem="7D7-BL-Dvg" firstAttribute="top" secondItem="tep-kJ-WHZ" secondAttribute="bottom" constant="33.666666666666629" id="aTx-YL-Hiy"/>
+                            <constraint firstItem="8OW-zh-r36" firstAttribute="top" secondItem="7D7-BL-Dvg" secondAttribute="bottom" constant="8" id="ecd-xQ-MAn"/>
+                            <constraint firstItem="8OW-zh-r36" firstAttribute="centerX" secondItem="7D7-BL-Dvg" secondAttribute="centerX" id="gQr-mL-TcG"/>
                             <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="tep-kJ-WHZ" secondAttribute="trailing" constant="60" id="jOK-BD-kL7"/>
                             <constraint firstItem="Afz-eK-ifu" firstAttribute="top" secondItem="oYF-fr-cMY" secondAttribute="top" constant="20" id="kLA-IL-edd"/>
                             <constraint firstItem="7D7-BL-Dvg" firstAttribute="leading" secondItem="oYF-fr-cMY" secondAttribute="leading" constant="64" id="r0g-jA-DIq"/>
@@ -300,6 +311,7 @@
                     </view>
                     <connections>
                         <outlet property="qrImageView" destination="7D7-BL-Dvg" id="Pw7-dp-WUt"/>
+                        <outlet property="stagingIndicatorLabel" destination="8OW-zh-r36" id="avs-K6-bFJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m22-3r-njp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -327,13 +339,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.down.to.line" catalog="system" width="64" height="64"/>
         <image name="camera.viewfinder" catalog="system" width="64" height="56"/>
         <image name="chevron.compact.down" catalog="system" width="64" height="20"/>
         <image name="dot.radiowaves.left.and.right" catalog="system" width="64" height="44"/>
         <image name="photo" catalog="system" width="64" height="46"/>
         <image name="qrcode" catalog="system" width="64" height="56"/>
         <image name="swaaplogoblues" width="233" height="333"/>
+        <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
         <namedColor name="Swaap Accent Color 1">
             <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

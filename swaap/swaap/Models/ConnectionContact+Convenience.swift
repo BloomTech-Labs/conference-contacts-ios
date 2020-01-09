@@ -87,7 +87,11 @@ extension ConnectionContact {
 		addToProfileContactMethods(profileConnectionMethods)
 	}
 
-	convenience init(connectionProfile: UserProfile, connectionStatus: ContactPendingStatus, connectionID: String, meetingCoordinate: MeetingCoordinate?, context: NSManagedObjectContext) {
+	convenience init(connectionProfile: UserProfile,
+					 connectionStatus: ContactPendingStatus,
+					 connectionID: String,
+					 meetingCoordinate: MeetingCoordinate?,
+					 context: NSManagedObjectContext) {
 		let connectionMethods = connectionProfile.profileContactMethods.map { ConnectionContactMethod(profileContactMethod: $0, context: context) }
 		self.init(id: connectionProfile.id,
 				  authID: connectionProfile.authID,

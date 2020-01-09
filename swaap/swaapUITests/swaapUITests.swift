@@ -239,6 +239,6 @@ class SwaapUITests: XCTestCase {
 
 extension XCUIApplication {
 	var isDisplayingInputTextFieldVC: Bool {
-		return otherElements["InputTextFieldVC"].exists
+		otherElements["InputTextFieldVC"].exists
 	}
 }

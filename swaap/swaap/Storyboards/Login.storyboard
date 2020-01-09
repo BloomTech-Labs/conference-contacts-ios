@@ -81,27 +81,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ruc-4M-Vhw">
                                 <rect key="frame" x="0.0" y="99" width="375" height="144"/>
                                 <subviews>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfs-uI-dTQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kap-bx-hrH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-oC-Rk4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="135" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="p8C-MD-kYp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="135" height="16"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    </view>
-                                                    <vibrancyEffect>
-                                                        <blurEffect style="regular"/>
-                                                    </vibrancyEffect>
-                                                </visualEffectView>
-                                            </subviews>
-                                        </view>
-                                        <blurEffect style="systemUltraThinMaterialDark"/>
-                                    </visualEffectView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swaapLogoBlack-whiteThickOutline" translatesAutoresizingMaskIntoConstraints="NO" id="rwi-BD-U8O">
                                         <rect key="frame" x="46" y="20" width="283" height="104"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,19 +93,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="rwi-BD-U8O" firstAttribute="centerY" secondItem="Ruc-4M-Vhw" secondAttribute="centerY" id="2iy-8W-jJc"/>
-                                    <constraint firstItem="Nfs-uI-dTQ" firstAttribute="top" secondItem="Ruc-4M-Vhw" secondAttribute="top" id="GUx-49-2gE"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nfs-uI-dTQ" secondAttribute="trailing" id="KON-Xz-ch1"/>
                                     <constraint firstItem="rwi-BD-U8O" firstAttribute="centerX" secondItem="Ruc-4M-Vhw" secondAttribute="centerX" id="NW1-Rg-b8H"/>
                                     <constraint firstItem="rwi-BD-U8O" firstAttribute="top" secondItem="Ruc-4M-Vhw" secondAttribute="top" constant="20" id="bjC-7J-9V6"/>
-                                    <constraint firstItem="Nfs-uI-dTQ" firstAttribute="leading" secondItem="Ruc-4M-Vhw" secondAttribute="leading" id="iWp-hv-jtP"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nfs-uI-dTQ" secondAttribute="bottom" id="sa3-ib-5aW"/>
                                     <constraint firstAttribute="bottom" secondItem="rwi-BD-U8O" secondAttribute="bottom" constant="20" id="yYp-Wj-6cW"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="Nfs-uI-dTQ"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -263,27 +233,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keG-63-fdh">
                                 <rect key="frame" x="0.0" y="52" width="375" height="144"/>
                                 <subviews>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zvo-GW-qjs">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iuO-Ew-Xag">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zU8-Gy-Ege">
-                                                    <rect key="frame" x="0.0" y="0.0" width="135" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="PlE-k6-gpx">
-                                                        <rect key="frame" x="0.0" y="0.0" width="135" height="16"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    </view>
-                                                    <vibrancyEffect>
-                                                        <blurEffect style="regular"/>
-                                                    </vibrancyEffect>
-                                                </visualEffectView>
-                                            </subviews>
-                                        </view>
-                                        <blurEffect style="systemUltraThinMaterialDark"/>
-                                    </visualEffectView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swaapLogoBlack-whiteThickOutline" translatesAutoresizingMaskIntoConstraints="NO" id="iLW-hh-a1w">
                                         <rect key="frame" x="46" y="20" width="283" height="104"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -295,21 +244,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="zvo-GW-qjs" secondAttribute="bottom" id="2Wd-mA-m7q"/>
                                     <constraint firstAttribute="bottom" secondItem="iLW-hh-a1w" secondAttribute="bottom" constant="20" id="D6D-if-Ndb"/>
-                                    <constraint firstAttribute="trailing" secondItem="zvo-GW-qjs" secondAttribute="trailing" id="Wle-Ix-fYH"/>
                                     <constraint firstItem="iLW-hh-a1w" firstAttribute="centerX" secondItem="keG-63-fdh" secondAttribute="centerX" id="ZAA-L1-FBi"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iLW-hh-a1w" secondAttribute="trailing" id="atb-vl-S2n"/>
                                     <constraint firstItem="iLW-hh-a1w" firstAttribute="top" secondItem="keG-63-fdh" secondAttribute="top" constant="20" id="hoo-tB-KVe"/>
-                                    <constraint firstItem="zvo-GW-qjs" firstAttribute="top" secondItem="keG-63-fdh" secondAttribute="top" id="hzA-F7-4Do"/>
-                                    <constraint firstItem="zvo-GW-qjs" firstAttribute="leading" secondItem="keG-63-fdh" secondAttribute="leading" id="n1N-l7-du8"/>
                                     <constraint firstItem="iLW-hh-a1w" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="keG-63-fdh" secondAttribute="leading" id="v3y-kP-H8h"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="zvo-GW-qjs"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="mTU-Io-Cfy">
                                 <rect key="frame" x="46" y="204" width="283" height="419"/>
@@ -402,7 +342,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="43c-MI-7DL"/>
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Log Up">
+                                                <state key="normal" title="Sign Up">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <state key="disabled">

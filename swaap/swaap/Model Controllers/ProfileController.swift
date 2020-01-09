@@ -28,10 +28,24 @@ class ProfileController {
 		}
 	}
 
-	let baseURL = URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
+	/// Uses staging backend with debugging and testflight, but use production when a live app store release
+	let apiBaseURL: URL = {
+		if ReleaseState.current == .appStore {
+			return URL(string: "https://lambda-labs-swaap.herokuapp.com/")!
+		} else {
+			return URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
+		}
+	}()
 	var graphqlURL: URL {
-		baseURL.appendingPathComponent("graphql")
+		apiBaseURL.appendingPathComponent("graphql")
 	}
+	let liveSiteBaseURL: URL = {
+		if ReleaseState.current == .appStore {
+			return URL(string: "https://swaap.co/")!
+		} else {
+			return URL(string: "https://staging.swaap.co/")!
+		}
+	}()
 	let networkHandler: NetworkHandler = {
 		let networkHandler = NetworkHandler()
 		networkHandler.graphQLErrorSupport = true
@@ -365,12 +379,12 @@ class ProfileController {
 		}
 	}
 
-	private func networkAuthRequestCommon() -> NetworkRequest? {
-		return authManager.networkAuthRequestCommon(for: graphqlURL)
-	}
+	private func networkAuthRequestCommon() -> NetworkRequest? { authManager.networkAuthRequestCommon(for: graphqlURL) }
 
-	@discardableResult func fetchImage(url: URL, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask? {
-		return networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
+	@discardableResult func fetchImage(url: URL,
+									   session: NetworkLoader = URLSession.shared,
+									   completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask? {
+		networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
 	}
 
 	/// By default, only updates if photo is nil. `force` will force it to download, even if there's already data.

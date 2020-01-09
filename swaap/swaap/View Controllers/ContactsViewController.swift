@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccessor {
+class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccessor, AuthAccessor {
 
+	var authManager: AuthManager?
 	var contactsController: ContactsController?
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
@@ -84,6 +85,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
     }
 
 	private func updateHeader() {
+		guard isViewLoaded else { return }
 		headerImageView.layer.cornerRadius = headerImageView.frame.height / 2
 		headerLabel.text = profileController?.userProfile?.name ?? "" + " (you!)"
 		guard let imageData = profileController?.userProfile?.photoData, let image = UIImage(data: imageData) else {
@@ -152,6 +154,69 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		profileVC?.meetingCoordinate = contact.meetingCoordinate
 		return profileVC
 	}
+
+	@IBAction func moreOptionsButtonTapped(_ sender: UIBarButtonItem) {
+		let image = UIImage(systemName: "arrow.uturn.left")
+		let optionController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		let logoutSelection = UIAlertAction(title: "Logout", style: .default) { _ in
+			let logoutController = UIAlertController(title: "Are you sure you want to logout?", message: nil, preferredStyle: .actionSheet)
+			let cancelLogoutAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+			let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { _ in
+				self.authManager?.clearSession()
+			}
+			logoutAction.setValue(image, forKey: "image")
+			[logoutAction, cancelLogoutAction].forEach { logoutController.addAction($0) }
+			self.present(logoutController, animated: true)
+		}
+		let aboutAction = UIAlertAction(title: "About", style: .default) { _ in
+			self.showAbout()
+		}
+		let tokenAction = UIAlertAction(title: "JWT (for debug)", style: .default) { [weak self] _ in
+			guard let accessToken = self?.authManager?.credentials?.accessToken else { return }
+			let activityController = UIActivityViewController(activityItems: [accessToken], applicationActivities: nil)
+			self?.present(activityController, animated: true)
+		}
+
+		logoutSelection.setValue(image, forKey: "image")
+
+		// only show JWT option while debugging or in testflight
+		if ReleaseState.current != .appStore {
+			optionController.addAction(tokenAction)
+		}
+		[aboutAction, logoutSelection, cancelAction].forEach { optionController.addAction($0) }
+		present(optionController, animated: true)
+	}
+
+	private func showAbout() {
+		let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
+		let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
+		let message = """
+		swaap was developed as a Labs project by students at Lambda School.
+
+		iOS Developers:
+		Michael Redig
+		Marlon Raskin
+
+		Web Developers:
+		Jonathan Picazzo
+		Bobby Hall
+		Tyler Quinn
+		Jarvise Billups
+		Zachary Peasley
+
+		UX Designers:
+		Tyler Nishida
+		Emily Arias
+
+		Current environment: \(ReleaseState.current == .appStore ? "Production" : "Staging")
+		App version: \(appVersion) (\(buildVersion))
+		"""
+		let aboutController = UIAlertController(title: "About swaap", message: message, preferredStyle: .actionSheet)
+		let finishAction = UIAlertAction(title: "Neat!", style: .cancel, handler: nil)
+		aboutController.addAction(finishAction)
+		present(aboutController, animated: true)
+	}
 }
 
 extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -190,7 +255,7 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return fetchedResultsController.sections?[section].name
+		fetchedResultsController.sections?[section].name
 	}
 
 	private func contactCell(on tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {

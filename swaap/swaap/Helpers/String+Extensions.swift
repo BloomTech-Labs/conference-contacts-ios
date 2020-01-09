@@ -15,21 +15,13 @@ extension String {
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
 
-	func hasAtLeastXCharacters(_ number: Int) -> Bool {
-		return count >= number
-	}
+	func hasAtLeastXCharacters(_ number: Int) -> Bool { count >= number }
 
-	var hasALowercaseCharacter: Bool {
-		return rangeOfCharacter(from: .lowercaseLetters) != nil
-	}
+	var hasALowercaseCharacter: Bool { rangeOfCharacter(from: .lowercaseLetters) != nil }
 
-	var hasAnUppercaseCharacter: Bool {
-		return rangeOfCharacter(from: .uppercaseLetters) != nil
-	}
+	var hasAnUppercaseCharacter: Bool { rangeOfCharacter(from: .uppercaseLetters) != nil }
 
-	var hasANumericalCharacter: Bool {
-		return rangeOfCharacter(from: .decimalDigits) != nil
-	}
+	var hasANumericalCharacter: Bool { rangeOfCharacter(from: .decimalDigits) != nil }
 
 	var hasASpecialCharacter: Bool {
 		let specialSet = CharacterSet(charactersIn: ##".!@#$%^&*()-=+~?[]{};/\`"##)
