@@ -85,6 +85,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
     }
 
 	private func updateHeader() {
+		guard isViewLoaded else { return }
 		headerImageView.layer.cornerRadius = headerImageView.frame.height / 2
 		headerLabel.text = profileController?.userProfile?.name ?? "" + " (you!)"
 		guard let imageData = profileController?.userProfile?.photoData, let image = UIImage(data: imageData) else {
