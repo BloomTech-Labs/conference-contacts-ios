@@ -1,7 +1,7 @@
 #github "mathiasnagler/SwiftyAcknowledgements" #original project - outdated
 github "calda/SwiftyAcknowledgements" #pull request project with swift 5
 
-github "mredig/NetworkHandler" "master"
+github "mredig/NetworkHandler" == 0.9.4
 github "mredig/IBPreview"
 github "mredig/LoadinationIndicator"
 github "marlonjames71/ChevronAnimatable"

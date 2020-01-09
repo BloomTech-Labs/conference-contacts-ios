@@ -28,7 +28,13 @@ class ProfileController {
 		}
 	}
 
-	let baseURL = URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
+	let baseURL: URL = {
+		if ReleaseState.current == .appStore {
+			return URL(string: "https://lambda-labs-swaap.herokuapp.com/")!
+		} else {
+			return URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
+		}
+	}()
 	var graphqlURL: URL {
 		baseURL.appendingPathComponent("graphql")
 	}
