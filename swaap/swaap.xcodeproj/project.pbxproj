@@ -72,6 +72,7 @@
 		3753DE30239AF3D800C90501 /* StraightLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753DE2F239AF3D800C90501 /* StraightLogic.swift */; };
 		3753DE36239C69B600C90501 /* ContactMethodCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753DE35239C69B600C90501 /* ContactMethodCellView.xib */; };
 		3753DE46239EBF3C00C90501 /* ContactMethodCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753DE45239EBF3C00C90501 /* ContactMethodCellView.swift */; };
+		3754E13423C7D9D9006E7834 /* MapAnnotationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754E13323C7D9D9006E7834 /* MapAnnotationData.swift */; };
 		375CBF292391EB6700C3D50A /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375CBF242391EB6700C3D50A /* HapticFeedback.swift */; };
 		375E915423ABE9570038437E /* Connect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375E915323ABE9570038437E /* Connect.storyboard */; };
 		376F329C23A173EE001E6547 /* LabelPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F329B23A173EE001E6547 /* LabelPlaceholder.swift */; };
@@ -223,6 +224,7 @@
 		3753DE2F239AF3D800C90501 /* StraightLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraightLogic.swift; sourceTree = "<group>"; };
 		3753DE35239C69B600C90501 /* ContactMethodCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactMethodCellView.xib; sourceTree = "<group>"; };
 		3753DE45239EBF3C00C90501 /* ContactMethodCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMethodCellView.swift; sourceTree = "<group>"; };
+		3754E13323C7D9D9006E7834 /* MapAnnotationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationData.swift; sourceTree = "<group>"; };
 		375CBF242391EB6700C3D50A /* HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		375E915323ABE9570038437E /* Connect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connect.storyboard; sourceTree = "<group>"; };
 		376F329B23A173EE001E6547 /* LabelPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPlaceholder.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				3326AEC823C1892400DA9636 /* ConnectionContact+CoreDataProperties.swift */,
 				33094E7723AA0D8100D5556B /* ConnectionContact+Convenience.swift */,
 				33094E7923AA0D9B00D5556B /* ConnectionContactMethod+Convenience.swift */,
+				3754E13323C7D9D9006E7834 /* MapAnnotationData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				37A8B3A123ABFBFE0019F17B /* ConnectViewController.swift in Sources */,
 				33F0EA5A2398556A004D1236 /* ProfileFieldPrivacy.swift in Sources */,
 				33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */,
+				3754E13423C7D9D9006E7834 /* MapAnnotationData.swift in Sources */,
 				3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */,
 				3326AEC923C1892400DA9636 /* ConnectionContact+CoreDataClass.swift in Sources */,
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
