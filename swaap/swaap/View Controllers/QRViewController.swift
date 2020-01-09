@@ -20,9 +20,12 @@ class QRViewController: UIViewController, ProfileAccessor {
 	}()
 
 	lazy var qrGen = QRettyCodeImageGenerator(data: QRViewController
-		.baseURL
-		.absoluteString
-		.data(using: .utf8), correctionLevel: .H, size: 212, style: .dots)
+												.baseURL
+												.absoluteString
+												.data(using: .utf8),
+											  correctionLevel: .H,
+											  size: 212,
+											  style: .dots)
 
 	var profileController: ProfileController? {
 		didSet {
