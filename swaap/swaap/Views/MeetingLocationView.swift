@@ -89,6 +89,7 @@ class MeetingLocationView: IBPreviewControl {
 												  longitudinalMeters: displayDistance)
 		mapView.setRegion(coordinateRegion, animated: true)
 		reverseGeocodeForCityname()
+		configureAnnotation()
 	}
 
 	func reverseGeocodeForCityname() {
@@ -104,6 +105,14 @@ class MeetingLocationView: IBPreviewControl {
 				}
 			}
 		}
+	}
+
+	private func configureAnnotation() {
+		guard let location = location,
+			let locationName = locationName else { return }
+		let coords = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+		let annotation = MapAnnotationData(title: locationName, subtitle: nil, coordinate: coords)
+		mapView.addAnnotation(annotation)
 	}
 
 	@IBAction func toggleMapViewPan(_ sender: UIButton) {
