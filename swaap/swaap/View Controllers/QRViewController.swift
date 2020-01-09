@@ -11,16 +11,9 @@ import CoreLocation
 import QRettyCode
 
 class QRViewController: UIViewController, ProfileAccessor {
-	private static let baseURL: URL = {
-		if ReleaseState.current == .appStore {
-			return URL(string: "https://swaap.co/")!
-		} else {
-			return URL(string: "https://staging.swaap.co/")!
-		}
-	}()
-
-	lazy var qrGen = QRettyCodeImageGenerator(data: QRViewController
-												.baseURL
+	lazy var qrGen = QRettyCodeImageGenerator(data: self
+												.profileController?
+												.liveSiteBaseURL
 												.absoluteString
 												.data(using: .utf8),
 											  correctionLevel: .H,
@@ -49,7 +42,8 @@ class QRViewController: UIViewController, ProfileAccessor {
 		} else {
 			stagingIndicatorLabel.isVisible = true
 		}
-		let data = QRViewController.baseURL
+		let data = profileController?
+			.liveSiteBaseURL
 			.appendingPathComponent("qrLink")
 			.appendingPathComponent(id)
 			.absoluteString

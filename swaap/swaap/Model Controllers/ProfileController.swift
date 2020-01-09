@@ -29,7 +29,7 @@ class ProfileController {
 	}
 
 	/// Uses staging backend with debugging and testflight, but use production when a live app store release
-	let baseURL: URL = {
+	let apiBaseURL: URL = {
 		if ReleaseState.current == .appStore {
 			return URL(string: "https://lambda-labs-swaap.herokuapp.com/")!
 		} else {
@@ -37,8 +37,15 @@ class ProfileController {
 		}
 	}()
 	var graphqlURL: URL {
-		baseURL.appendingPathComponent("graphql")
+		apiBaseURL.appendingPathComponent("graphql")
 	}
+	let liveSiteBaseURL: URL = {
+		if ReleaseState.current == .appStore {
+			return URL(string: "https://swaap.co/")!
+		} else {
+			return URL(string: "https://staging.swaap.co/")!
+		}
+	}()
 	let networkHandler: NetworkHandler = {
 		let networkHandler = NetworkHandler()
 		networkHandler.graphQLErrorSupport = true

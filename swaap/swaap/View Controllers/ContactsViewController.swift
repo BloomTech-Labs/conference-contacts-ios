@@ -85,6 +85,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
     }
 
 	private func updateHeader() {
+		guard isViewLoaded else { return }
 		headerImageView.layer.cornerRadius = headerImageView.frame.height / 2
 		headerLabel.text = profileController?.userProfile?.name ?? "" + " (you!)"
 		guard let imageData = profileController?.userProfile?.photoData, let image = UIImage(data: imageData) else {
@@ -188,10 +189,28 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 	}
 
 	private func showAbout() {
+		let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
+		let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
 		let message = """
-		swaap was developed by students at Lambda School.
+		swaap was developed as a Labs project by students at Lambda School.
+
+		iOS Developers:
+		Michael Redig
+		Marlon Raskin
+
+		Web Developers:
+		Jonathan Picazzo
+		Bobby Hall
+		Tyler Quinn
+		Jarvise Billups
+		Zachary Peasley
+
+		UX Designers:
+		Tyler Nishida
+		Emily Arias
 
 		Current environment: \(ReleaseState.current == .appStore ? "Production" : "Staging")
+		App version: \(appVersion) (\(buildVersion))
 		"""
 		let aboutController = UIAlertController(title: "About swaap", message: message, preferredStyle: .actionSheet)
 		let finishAction = UIAlertAction(title: "Neat!", style: .cancel, handler: nil)
