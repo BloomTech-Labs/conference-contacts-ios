@@ -176,9 +176,9 @@ class ProfileCardView: IBPreviewView {
 		taglineContainer.isVisible = tagline?.isNotEmpty ?? false
 		locationStackView.isVisible = (location?.isNotEmpty ?? false) && (UIScreen.main.bounds.height > 667)
 
-		lackOfInfoDescLabel.isVisible = [locationStackView, taglineContainer, industryStackView, jobTitleLabel].reduce(true) {
-			($1?.isHidden ?? true) && $0
-		}
+		lackOfInfoDescLabel.isVisible = [locationStackView, taglineContainer, industryStackView, jobTitleLabel].allSatisfy({
+			$0?.isVisible == false
+		})
 
 		let name = userProfile?.name ?? "This user"
 		lackOfInfoDescLabel.text = "\(name) hasn't added any info yet."
