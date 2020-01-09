@@ -172,7 +172,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		let aboutAction = UIAlertAction(title: "About", style: .default) { _ in
 			self.showAbout()
 		}
-		let tokenAction = UIAlertAction(title: "JWT", style: .default) { [weak self] _ in
+		let tokenAction = UIAlertAction(title: "JWT (for debug)", style: .default) { [weak self] _ in
 			guard let accessToken = self?.authManager?.credentials?.accessToken else { return }
 			let activityController = UIActivityViewController(activityItems: [accessToken], applicationActivities: nil)
 			self?.present(activityController, animated: true)
