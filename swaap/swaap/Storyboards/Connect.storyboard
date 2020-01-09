@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyQ-Ch-1Iw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NyQ-Ch-1Iw">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -189,7 +189,10 @@
                                                                 <constraint firstAttribute="width" constant="40" id="nwY-TH-a8Y"/>
                                                                 <constraint firstAttribute="height" constant="40" id="suh-6g-zgO"/>
                                                             </constraints>
-                                                            <state key="normal" image="arrow.down.to.line" catalog="system"/>
+                                                            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" image="xmark.circle.fill" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="dismissButtonPressed:" destination="6Xu-An-qFw" eventType="touchUpInside" id="H1p-dd-DOq"/>
                                                             </connections>
@@ -327,13 +330,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.down.to.line" catalog="system" width="64" height="64"/>
         <image name="camera.viewfinder" catalog="system" width="64" height="56"/>
         <image name="chevron.compact.down" catalog="system" width="64" height="20"/>
         <image name="dot.radiowaves.left.and.right" catalog="system" width="64" height="44"/>
         <image name="photo" catalog="system" width="64" height="46"/>
         <image name="qrcode" catalog="system" width="64" height="56"/>
         <image name="swaaplogoblues" width="233" height="333"/>
+        <image name="xmark.circle.fill" catalog="system" width="64" height="60"/>
         <namedColor name="Swaap Accent Color 1">
             <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

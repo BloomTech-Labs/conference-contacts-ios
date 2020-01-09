@@ -40,7 +40,6 @@
 		3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88E23A0CAD900A17D0D /* Alamofire.framework */; };
 		3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */; };
 		33A4BAA123BB29880000E4E1 /* QRettyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A4BA9823BB29880000E4E1 /* QRettyCode.framework */; };
-		33B24C5A2395B85C00B20DEA /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B24C592395B85C00B20DEA /* DummyViewController.swift */; };
 		33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C00787238FDDEC000D72A7 /* VectorExtensions.swift */; };
 		33CCBABA2398F21200A98C82 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBAB92398F21200A98C82 /* ProfileController.swift */; };
 		33CCBABC2398F3C200A98C82 /* GQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBABB2398F3C200A98C82 /* GQuery.swift */; };
@@ -234,7 +233,6 @@
 		3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoadinationIndicator.framework; path = Carthage/Build/iOS/LoadinationIndicator.framework; sourceTree = "<group>"; };
 		33A4BA9823BB29880000E4E1 /* QRettyCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QRettyCode.framework; path = Carthage/Build/iOS/QRettyCode.framework; sourceTree = "<group>"; };
 		33A4BAA223BB298E0000E4E1 /* SwiftyBinaryFormatter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBinaryFormatter.framework; path = Carthage/Build/iOS/SwiftyBinaryFormatter.framework; sourceTree = "<group>"; };
-		33B24C592395B85C00B20DEA /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		33C00787238FDDEC000D72A7 /* VectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorExtensions.swift; sourceTree = "<group>"; };
 		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		33CCBABB2398F3C200A98C82 /* GQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQuery.swift; sourceTree = "<group>"; };
@@ -525,7 +523,6 @@
 				33917DF323849A2400BC1501 /* SignUpViewController.swift */,
 				3329A47C23A9546B007F10E2 /* ContactsViewController.swift */,
 				3797A56D23885E9C00CB8621 /* ProfileViewController.swift */,
-				33B24C592395B85C00B20DEA /* DummyViewController.swift */,
 				37F93449239736B000ACBA23 /* EditProfileViewController.swift */,
 				37F9344F2397399500ACBA23 /* EditProfileViewController+Camera.swift */,
 				37F934572398941400ACBA23 /* InputTextFieldViewController.swift */,
@@ -980,7 +977,6 @@
 				33F0EA5823985556004D1236 /* ProfileDecodingError.swift in Sources */,
 				33FEE0E2238465A9006BE880 /* FormInputView.swift in Sources */,
 				33E7BC0923A19CBD00D81C02 /* HandyExtensions.swift in Sources */,
-				33B24C5A2395B85C00B20DEA /* DummyViewController.swift in Sources */,
 				3753DE30239AF3D800C90501 /* StraightLogic.swift in Sources */,
 				37B3958C23BEAAC1001BEE01 /* NotificationViewController.swift in Sources */,
 				3797A5702388637800CB8621 /* Storyboarded.swift in Sources */,

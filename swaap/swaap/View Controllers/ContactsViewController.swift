@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccessor {
+class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccessor, AuthAccessor {
 
+	var authManager: AuthManager?
 	var contactsController: ContactsController?
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
@@ -151,6 +152,25 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		profileVC?.userProfile = contact.contactProfile
 		profileVC?.meetingCoordinate = contact.meetingCoordinate
 		return profileVC
+	}
+
+	@IBAction func moreOptionsButtonTapped(_ sender: UIBarButtonItem) {
+		let image = UIImage(systemName: "arrow.uturn.left")
+		let optionController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		let logoutSelection = UIAlertAction(title: "Logout", style: .default) { _ in
+			let logoutController = UIAlertController(title: "Are you sure you want to logout?", message: nil, preferredStyle: .actionSheet)
+			let cancelLogoutAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+			let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { _ in
+				self.authManager?.clearSession()
+			}
+			logoutAction.setValue(image, forKey: "image")
+			[logoutAction, cancelLogoutAction].forEach { logoutController.addAction($0) }
+			self.present(logoutController, animated: true)
+		}
+		logoutSelection.setValue(image, forKey: "image")
+		[logoutSelection, cancelAction].forEach { optionController.addAction($0) }
+		present(optionController, animated: true)
 	}
 }
 
