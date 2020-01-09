@@ -18,6 +18,7 @@ enum ReleaseState: String {
 	// untested as of writing - only once it's on the app store will it be confirmed
 	private static let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
 
+	/// you may set this to return .appStore to test production environment variables. just be certain NOT to commit it though!
 	static var current: ReleaseState {
 		#if DEBUG
 		return .debug

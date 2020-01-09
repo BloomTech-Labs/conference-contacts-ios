@@ -34,6 +34,7 @@ class QRViewController: UIViewController, ProfileAccessor {
 	}
 
 	@IBOutlet private weak var qrImageView: UIImageView!
+	@IBOutlet private weak var stagingIndicatorLabel: UILabel!
 
 	var locationManager: LocationHandler? {
 		profileController?.locationManager
@@ -42,6 +43,12 @@ class QRViewController: UIViewController, ProfileAccessor {
 	private func updateViews() {
 		guard let id = profileController?.userProfile?.qrCodes.first?.id else { return }
 		guard isViewLoaded else { return }
+		// hide staging label when on app store
+		if ReleaseState.current == .appStore {
+			stagingIndicatorLabel.isHidden = true
+		} else {
+			stagingIndicatorLabel.isVisible = true
+		}
 		let data = QRViewController.baseURL
 			.appendingPathComponent("qrLink")
 			.appendingPathComponent(id)
