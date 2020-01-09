@@ -14,7 +14,7 @@ import CoreData
 extension ConnectionContact {
 
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<ConnectionContact> {
-		return NSFetchRequest<ConnectionContact>(entityName: "ConnectionContact")
+		NSFetchRequest<ConnectionContact>(entityName: "ConnectionContact")
 	}
 
 	@NSManaged public var authID: String?

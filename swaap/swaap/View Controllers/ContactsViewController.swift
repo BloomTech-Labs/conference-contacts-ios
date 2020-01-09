@@ -255,7 +255,7 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return fetchedResultsController.sections?[section].name
+		fetchedResultsController.sections?[section].name
 	}
 
 	private func contactCell(on tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {

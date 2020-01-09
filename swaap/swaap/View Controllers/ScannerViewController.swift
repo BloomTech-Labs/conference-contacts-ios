@@ -18,9 +18,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 	}
 
 	// MARK: - System Overrides
-	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-		return .portrait
-	}
+	override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
 
 	// MARK: - Properties and Outlets
 	@IBOutlet private weak var cameraView: UIView!

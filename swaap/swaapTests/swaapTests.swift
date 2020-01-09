@@ -5,7 +5,7 @@
 //  Created by Marlon Raskin on 11/11/19.
 //  Copyright © 2019 swaap. All rights reserved.
 //
-//swiftlint:disable force_try large_tuple
+//swiftlint:disable large_tuple
 
 import XCTest
 @testable import swaap

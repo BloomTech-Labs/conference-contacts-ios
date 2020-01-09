@@ -224,7 +224,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 
 	// MARK: Saving Helpers
 	private func concurrentCompletion(with semaphore: DispatchSemaphore) -> (Result<GQLMutationResponse, NetworkError>) -> Void {
-		return { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
+		let closure = { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
 			switch result {
 			case .success:
 				break
@@ -233,6 +233,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			}
 			semaphore.signal()
 		}
+		return closure
 	}
 
 	private func profileUpdateOperation(newProfile: UserProfile, imageUpdateOperation: ImageUpdateOperation?) -> ConcurrentOperation {

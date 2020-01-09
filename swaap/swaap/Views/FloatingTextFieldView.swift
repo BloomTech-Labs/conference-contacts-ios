@@ -245,13 +245,9 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 
 	// MARK: - CollectionView Methods
 
-	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return 1
-	}
+	func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
 
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return ProfileFieldType.allCases.count
-	}
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { ProfileFieldType.allCases.count }
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SocialButtonCell",

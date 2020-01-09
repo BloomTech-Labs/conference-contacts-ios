@@ -20,6 +20,7 @@ enum ReleaseState: String {
 
 	/// you may set this to return .appStore to test production environment variables. just be certain NOT to commit it though!
 	static var current: ReleaseState {
+//		return .appStore
 		#if DEBUG
 		return .debug
 		#else

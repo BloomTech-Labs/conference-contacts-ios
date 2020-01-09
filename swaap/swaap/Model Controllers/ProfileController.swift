@@ -379,12 +379,12 @@ class ProfileController {
 		}
 	}
 
-	private func networkAuthRequestCommon() -> NetworkRequest? {
-		return authManager.networkAuthRequestCommon(for: graphqlURL)
-	}
+	private func networkAuthRequestCommon() -> NetworkRequest? { authManager.networkAuthRequestCommon(for: graphqlURL) }
 
-	@discardableResult func fetchImage(url: URL, session: NetworkLoader = URLSession.shared, completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask? {
-		return networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
+	@discardableResult func fetchImage(url: URL,
+									   session: NetworkLoader = URLSession.shared,
+									   completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask? {
+		networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
 	}
 
 	/// By default, only updates if photo is nil. `force` will force it to download, even if there's already data.

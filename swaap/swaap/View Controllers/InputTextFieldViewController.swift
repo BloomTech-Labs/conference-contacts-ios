@@ -78,7 +78,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 
 extension InputTextFieldViewController: UIGestureRecognizerDelegate {
 	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-		return touch.view == gestureRecognizer.view
+		touch.view == gestureRecognizer.view
 	}
 }
 
