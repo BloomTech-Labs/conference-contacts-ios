@@ -103,15 +103,19 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
 	}
 
 	func imageActionSheet() {
+		let libraryImage = UIImage(systemName: "photo.fill")
+		let cameraImage = UIImage(systemName: "camera.fill")
 		let photoOptionsController = UIAlertController(title: "Choose how you'd like to add a photo", message: nil, preferredStyle: .actionSheet)
 
 		let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { _ in
 			self.requestPhotoLibraryAccess()
 		}
+		libraryAction.setValue(libraryImage, forKey: "image")
 
 		let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
 			self.requestCameraAccess()
 		}
+		cameraAction.setValue(cameraImage, forKey: "image")
 
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		[libraryAction, cameraAction, cancelAction].forEach { photoOptionsController.addAction($0) }
