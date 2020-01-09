@@ -17,6 +17,10 @@ struct Contact: Codable, Hashable {
 		// there has to be one or the other...
 		sender ?? receiver ?? .zombie
 	}
+	let senderLat: Float?
+	let senderLon: Float?
+	let receiverLat: Float?
+	let receiverLon: Float?
 }
 
 

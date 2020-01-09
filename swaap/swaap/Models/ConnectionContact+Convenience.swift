@@ -10,6 +10,7 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 
 enum ContactPendingStatus: Int16 {
 	case pendingSent
@@ -28,9 +29,25 @@ enum ContactPendingStatus: Int16 {
 	}
 }
 
+struct MeetingCoordinate {
+	let coordinate: CLLocationCoordinate2D
+	let distance: CLLocationDistance
+
+	init?(coordinate: CLLocationCoordinate2D?, dist: Double?) {
+		guard let coordinate = coordinate, let dist = dist else { return nil }
+		guard dist >= 0 else { return nil }
+		self.coordinate = coordinate
+		distance = dist
+	}
+}
+
 extension ConnectionContact {
 	var contactProfile: UserProfile? {
 		UserProfile(from: self)
+	}
+
+	var meetingCoordinate: MeetingCoordinate? {
+		MeetingCoordinate(coordinate: CLLocationCoordinate2D(latitude: meetingLat, longitude: meetingLong), dist: meetingDistance)
 	}
 
 	private convenience init(id: String,
@@ -45,6 +62,7 @@ extension ConnectionContact {
 							 jobTitle: String?,
 							 tagline: String?,
 							 bio: String?,
+							 meetingCoordinate: MeetingCoordinate?,
 							 connectionMethods: [ConnectionContactMethod],
 							 context: NSManagedObjectContext) {
 		self.init(context: context)
@@ -60,11 +78,16 @@ extension ConnectionContact {
 		self.jobTitle = jobTitle
 		self.tagline = tagline
 		self.bio = bio
+		if let meetingCoordinate = meetingCoordinate {
+			self.meetingLat = meetingCoordinate.coordinate.latitude
+			self.meetingLong = meetingCoordinate.coordinate.longitude
+			self.meetingDistance = meetingCoordinate.distance
+		}
 		let profileConnectionMethods = NSOrderedSet(array: connectionMethods)
 		addToProfileContactMethods(profileConnectionMethods)
 	}
 
-	convenience init(connectionProfile: UserProfile, connectionStatus: ContactPendingStatus, connectionID: String, context: NSManagedObjectContext) {
+	convenience init(connectionProfile: UserProfile, connectionStatus: ContactPendingStatus, connectionID: String, meetingCoordinate: MeetingCoordinate?, context: NSManagedObjectContext) {
 		let connectionMethods = connectionProfile.profileContactMethods.map { ConnectionContactMethod(profileContactMethod: $0, context: context) }
 		self.init(id: connectionProfile.id,
 				  authID: connectionProfile.authID,
@@ -78,11 +101,12 @@ extension ConnectionContact {
 				  jobTitle: connectionProfile.jobTitle,
 				  tagline: connectionProfile.tagline,
 				  bio: connectionProfile.bio,
+				  meetingCoordinate: meetingCoordinate,
 				  connectionMethods: connectionMethods,
 				  context: context)
 	}
 
-	func updateFromProfile(_ userProfile: UserProfile, connectionStatus: ContactPendingStatus, connectionID: String) {
+	func updateFromProfile(_ userProfile: UserProfile, connectionStatus: ContactPendingStatus, connectionID: String, meetingCoordinate: MeetingCoordinate?) {
 		guard userProfile.id == id else { return }
 		authID = userProfile.authID
 		name = userProfile.name
@@ -93,6 +117,11 @@ extension ConnectionContact {
 		jobTitle = userProfile.jobTitle
 		tagline = userProfile.tagline
 		bio = userProfile.bio
+		if let meetingCoordinate = meetingCoordinate {
+			self.meetingLat = meetingCoordinate.coordinate.latitude
+			self.meetingLong = meetingCoordinate.coordinate.longitude
+			self.meetingDistance = meetingCoordinate.distance
+		}
 		self.connectionStatus = connectionStatus.rawValue
 		self.connectionID = connectionID
 

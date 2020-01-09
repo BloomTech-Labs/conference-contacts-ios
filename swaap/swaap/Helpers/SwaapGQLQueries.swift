@@ -148,6 +148,7 @@ enum SwaapGQLQueries {
 					senderLon
 					receiverLat
 					receiverLon
+					location
 					status
 				}
 				receivedConnections {

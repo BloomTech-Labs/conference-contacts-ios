@@ -18,8 +18,10 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var backButton: UIButton!
 	@IBOutlet private weak var socialButtonsStackView: UIStackView!
 	@IBOutlet private weak var birthdayHeaderContainer: UIView!
+	@IBOutlet private weak var birthdayLabelContainer: UIView!
 	@IBOutlet private weak var birthdayLabel: UILabel!
 	@IBOutlet private weak var bioHeaderContainer: UIView!
+	@IBOutlet private weak var bioLabelContainer: UIView!
 	@IBOutlet private weak var bioLabel: UILabel!
 	@IBOutlet private weak var locationViewContainer: UIView!
 	@IBOutlet private weak var locationView: BasicInfoView!
@@ -28,6 +30,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var modesOfContactHeaderContainer: UIView!
 	@IBOutlet private weak var modesOfContactPreviewStackView: UIStackView!
 	@IBOutlet private weak var modesOfContactImageViewContainer: UIView!
+	@IBOutlet private weak var locationMapViewContainer: UIView!
+	@IBOutlet private weak var locationmapView: MeetingLocationView!
 	@IBOutlet private weak var bottomFadeView: UIView!
 	@IBOutlet private weak var bottomFadeviewBottomConstraint: NSLayoutConstraint!
 
@@ -45,7 +49,15 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
 	}
+
+	var meetingCoordinate: MeetingCoordinate? {
+		didSet {
+			updateViews()
+		}
+	}
+
 	var isCurrentUser = false
+	var contentsAreEmpty = false
 
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -67,7 +79,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			appearance.shadowColor = .clear
 			tabBarItem.standardAppearance = appearance
 		}
-		noInfoDescLabel.isHidden = true
+
 		updateFadeViewPosition()
 	}
 
@@ -109,7 +121,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil
 
-
 		editProfileButtonVisualFXContainerView.isVisible = isCurrentUser
 
 		populateSocialButtons()
@@ -120,11 +131,24 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		}
 
 		birthdayImageContainerView.isVisible = shouldShowIllustration(infoValueType: .string(birthdayLabel?.text))
+		[birthdayHeaderContainer, birthdayLabelContainer].forEach {
+			$0?.isVisible = shouldShowLabelInfo(infoValueType: .string(birthdayLabel?.text))
+		}
+
 		bioImageViewContainer.isVisible = shouldShowIllustration(infoValueType: .string(bioLabel?.text))
+		[bioHeaderContainer, bioLabelContainer].forEach {
+			$0?.isVisible = shouldShowLabelInfo(infoValueType: .string(bioLabel?.text))
+		}
 
 		let hasSocialButtons = !socialButtonsStackView.arrangedSubviews.isEmpty
 		socialButtonsStackView.isVisible = hasSocialButtons
-		modesOfContactPreviewStackView.isHidden = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
+		modesOfContactPreviewStackView.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
+		modesOfContactHeaderContainer.isVisible = shouldShowIllustration(infoValueType: .hasContents(hasSocialButtons))
+
+		locationMapViewContainer.isHidden = meetingCoordinate == nil
+		locationmapView.location = meetingCoordinate
+
+		shouldShowNoInfoLabel()
 
 		// the current user image is loaded through the profile controller and shown when populated after a notification comes through, but
 		// that doesn't happen for a user's contacts, so this is set to run when showing a connection's profile
@@ -153,23 +177,28 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		case .string(let labelText):
 			return labelText?.isEmpty ?? true
 		case .hasContents(let hasContents):
+			return !hasContents
+		}
+	}
+
+	private func shouldShowLabelInfo(infoValueType: InfoValueType) -> Bool {
+		guard !isCurrentUser else { return true }
+		switch infoValueType {
+		case .string(let labelText):
+			return labelText?.isNotEmpty ?? false
+		case .hasContents(let hasContents):
 			return hasContents
 		}
 	}
 
 	private func shouldShowNoInfoLabel() {
-		guard isCurrentUser == false else { return }
+		guard !isCurrentUser else { return }
 		let name = userProfile?.name ?? "This user"
 		noInfoDescLabel.text = "\(name) hasn't added any info yet."
-		if birthdayLabel.text == nil &&
-			bioLabel.text == nil &&
-			modesOfContactPreviewStackView.arrangedSubviews.isEmpty {
-			noInfoDescLabel.isHidden = false
-		} else if birthdayLabel.text != nil ||
-			bioLabel.text != nil ||
-			!modesOfContactPreviewStackView.arrangedSubviews.isEmpty {
-			noInfoDescLabel.isHidden = true
+		contentsAreEmpty = [birthdayLabelContainer, bioLabelContainer, modesOfContactHeaderContainer].reduce(true) {
+			($1?.isHidden ?? true) && $0
 		}
+		noInfoDescLabel.isVisible = contentsAreEmpty
 	}
 
 	private func populateSocialButtons() {

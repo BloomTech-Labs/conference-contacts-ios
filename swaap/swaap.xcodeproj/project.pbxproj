@@ -67,6 +67,8 @@
 		37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218AFC238F8750008BFC24 /* ImageHelper.swift */; };
 		37218B03238FA161008BFC24 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218B02238FA161008BFC24 /* FontHelper.swift */; };
 		37305EA223C2E9640089AD17 /* TaglineQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37305EA123C2E9640089AD17 /* TaglineQuoteView.swift */; };
+		3747C28223C4383A00C43317 /* MeetingLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3747C28123C4383A00C43317 /* MeetingLocationView.xib */; };
+		3747C28C23C43C6400C43317 /* MeetingLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747C28B23C43C6400C43317 /* MeetingLocationView.swift */; };
 		3750E8462395C180005BBDA5 /* InteractivePopRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */; };
 		3753DE30239AF3D800C90501 /* StraightLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753DE2F239AF3D800C90501 /* StraightLogic.swift */; };
 		3753DE36239C69B600C90501 /* ContactMethodCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3753DE35239C69B600C90501 /* ContactMethodCellView.xib */; };
@@ -259,6 +261,9 @@
 		37218AFC238F8750008BFC24 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		37218B02238FA161008BFC24 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 		37305EA123C2E9640089AD17 /* TaglineQuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaglineQuoteView.swift; sourceTree = "<group>"; };
+		3747C28123C4383A00C43317 /* MeetingLocationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeetingLocationView.xib; sourceTree = "<group>"; };
+		3747C28B23C43C6400C43317 /* MeetingLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingLocationView.swift; sourceTree = "<group>"; };
+		3747C29023C44D1E00C43317 /* Contacts 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Contacts 4.xcdatamodel"; sourceTree = "<group>"; };
 		3750E8452395C180005BBDA5 /* InteractivePopRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractivePopRecognizer.swift; sourceTree = "<group>"; };
 		3753DE2F239AF3D800C90501 /* StraightLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraightLogic.swift; sourceTree = "<group>"; };
 		3753DE35239C69B600C90501 /* ContactMethodCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactMethodCellView.xib; sourceTree = "<group>"; };
@@ -578,6 +583,8 @@
 				37D1D76023A9651800931BF8 /* BasicInfoView.swift */,
 				37B3959023BEED29001BEE01 /* PendingContactTableViewCell.swift */,
 				37305EA123C2E9640089AD17 /* TaglineQuoteView.swift */,
+				3747C28123C4383A00C43317 /* MeetingLocationView.xib */,
+				3747C28B23C43C6400C43317 /* MeetingLocationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -826,6 +833,7 @@
 				33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */,
 				37D1D75F23A956FA00931BF8 /* BasicInfoView.xib in Resources */,
 				37A185B0237A357C002191B5 /* LaunchScreen.storyboard in Resources */,
+				3747C28223C4383A00C43317 /* MeetingLocationView.xib in Resources */,
 				37A2F40D237CFF0D00C1EF3B /* Login.storyboard in Resources */,
 				375E915423ABE9570038437E /* Connect.storyboard in Resources */,
 				37A185AD237A357C002191B5 /* Assets.xcassets in Resources */,
@@ -950,6 +958,7 @@
 				37F934382396EF3100ACBA23 /* SwipeBackNavigationController.swift in Sources */,
 				37F93466239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift in Sources */,
 				37F934502397399500ACBA23 /* EditProfileViewController+Camera.swift in Sources */,
+				3747C28C23C43C6400C43317 /* MeetingLocationView.swift in Sources */,
 				37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */,
 				33E8C7E023AD884E005E1E2C /* SwaapGQLQueries.swift in Sources */,
 				3377AF8D23AB442E0083EC52 /* ContactConnectionStatus.swift in Sources */,
@@ -1163,7 +1172,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1190,7 +1199,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1349,11 +1358,12 @@
 		33094E6C23AA0AF100D5556B /* Contacts.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3747C29023C44D1E00C43317 /* Contacts 4.xcdatamodel */,
 				3326AEBE23C188D400DA9636 /* Contacts 3.xcdatamodel */,
 				335E563223BF0C74008FE6A6 /* Contacts 2.xcdatamodel */,
 				33094E6D23AA0AF100D5556B /* Contacts.xcdatamodel */,
 			);
-			currentVersion = 3326AEBE23C188D400DA9636 /* Contacts 3.xcdatamodel */;
+			currentVersion = 3747C29023C44D1E00C43317 /* Contacts 4.xcdatamodel */;
 			path = Contacts.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

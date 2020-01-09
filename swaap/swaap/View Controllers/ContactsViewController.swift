@@ -149,6 +149,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		let profileVC = ProfileViewController(coder: coder)
 		profileVC?.isCurrentUser = false
 		profileVC?.userProfile = contact.contactProfile
+		profileVC?.meetingCoordinate = contact.meetingCoordinate
 		return profileVC
 	}
 }
@@ -170,6 +171,21 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 		switch indexPath.section {
 		default:
 			return contactCell(on: tableView, at: indexPath)
+		}
+	}
+
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			let contact = fetchedResultsController.object(at: indexPath)
+			guard let id = contact.connectionID else { return }
+			contactsController?.deleteConnection(toConnectionID: id, completion: { result in
+				switch result {
+				case .success:
+					self.contactsController?.updateContactCache()
+				case .failure(let error):
+					NSLog("Error cancelling/deleting contact: \(error)")
+				}
+			})
 		}
 	}
 

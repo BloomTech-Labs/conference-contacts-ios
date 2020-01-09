@@ -1,0 +1,49 @@
+# Video should highlight the team, the product, the architecture, the goals, the challenges and the implementation
+
+## product
+
+swaap is the brand new app that makes networking and following up at conferences easy!
+
+After signing up, you provide your contact information and anything else you'd like to share with the people you network with. Make it personal by including a special tagline that can make you stand out!
+
+If you prefer people would connect with you through email over phone or texting, you can set your preferred contact method.
+
+Don't forget to show off your pretty face!
+
+
+
+In the connect tab, you can share your QR code with others to 'swaap' with them! `swaaping` is very easy. 
+
+To send a connection request, tap the camera button and simply point at a swaap QR code. Your phone will give you haptic feedback and inform you that a connection request has been sent.
+
+If you wish to share your QR code with others, the QR code button will allow you to do so.
+
+
+When someone sends you a connection request, you will see it in your notifications tab!
+
+Simply tap on "accept" and you will have 'swaaped' your contact information!
+
+Now your new contact will appear in your contacts tab!
+
+Viewing a contact is as easy as touching it in your contacts list. From within this view, you will be able to communicate with them using any of the contact methods they've shared, but it's polite to use their preferred method, if you can aquiesce. 
+
+And once you've made a connection, you can refer to where you met that person to help jog your memory of who they are!
+
+If you don't have an iPhone, we also have a web app..
+
+---
+someone web fill in stuff here
+---
+
+
+## architecture
+
+Our backend consists of a nodejs server using GraphQL and Postgres databased, deployed on heroku. Our frontend is also stuff and uses another thing. Cloudinary is used for image storage and Auth0 is used for authentication.
+
+The phone app is written in Swift and UIKit using many new features in iOS 13, with very few 3rd party dependencies!
+
+
+## goals
+
+Setting out, we wanted to make an app that engaging and gave users a centralized location to keep in contact with all their newly networked connections. 
+
