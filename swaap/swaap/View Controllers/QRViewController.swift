@@ -11,7 +11,18 @@ import CoreLocation
 import QRettyCode
 
 class QRViewController: UIViewController, ProfileAccessor {
-	lazy var qrGen = QRettyCodeImageGenerator(data: "https://swaap.co/".data(using: .utf8), correctionLevel: .H, size: 212, style: .dots)
+	private static let baseURL: URL = {
+		if ReleaseState.current == .appStore {
+			return URL(string: "https://swaap.co/")!
+		} else {
+			return URL(string: "https://staging.swaap.co/")!
+		}
+	}()
+
+	lazy var qrGen = QRettyCodeImageGenerator(data: QRViewController
+		.baseURL
+		.absoluteString
+		.data(using: .utf8), correctionLevel: .H, size: 212, style: .dots)
 
 	var profileController: ProfileController? {
 		didSet {
@@ -28,7 +39,8 @@ class QRViewController: UIViewController, ProfileAccessor {
 	private func updateViews() {
 		guard let id = profileController?.userProfile?.qrCodes.first?.id else { return }
 		guard isViewLoaded else { return }
-		let data = URL(string: "https://swaap.co/qrLink/")!
+		let data = QRViewController.baseURL
+			.appendingPathComponent("qrLink")
 			.appendingPathComponent(id)
 			.absoluteString
 			.data(using: .utf8)

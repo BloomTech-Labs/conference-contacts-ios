@@ -183,7 +183,7 @@ class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor
 		// Do something with metaData stringValue here
 		guard foundQRCodeData.isEmpty || code == foundQRCodeData else { return }
 		guard let url = URL(string: code),
-			url.host == "swaap.co",
+			(url.host == "swaap.co" || url.host == "staging.swaap.co"),
 			url.pathComponents.count == 3,
 			url.pathComponents[1] == "qrLink" else { return }
 		triggerHapticFeedback(code)

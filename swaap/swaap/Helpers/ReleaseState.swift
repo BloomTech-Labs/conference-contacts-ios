@@ -10,7 +10,7 @@ import Foundation
 
 /// To be used in determining the current release state of the build. For example, if it's in debug or on testflight,
 /// it should use the staging backend server, but if it's on the app store it should use the production server.
-enum ReleaseState {
+enum ReleaseState: String {
 	case debug
 	case testFlight
 	case appStore
