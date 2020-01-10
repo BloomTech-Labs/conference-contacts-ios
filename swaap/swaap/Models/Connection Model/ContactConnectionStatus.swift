@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Specifically used for encoding and decoding JSON for GraphQL. Not to be confused with ContactPendingStatus.
 enum ContactConnectionStatus: String, Codable, Hashable, CaseIterable {
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()

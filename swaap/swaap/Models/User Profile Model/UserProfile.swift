@@ -9,6 +9,7 @@
 
 import Foundation
 
+/// Used only for fetching and decoding JSON from the server.
 struct UserProfileContainer: Decodable {
 	let userProfile: UserProfile
 
@@ -24,6 +25,10 @@ struct UserProfileContainer: Decodable {
 	}
 }
 
+
+/// Used both for decoding JSON from the server and passing data around the app. Note that while the ProfileViewController
+/// utilizes this for displaying both user and contact data, contacts are not cached on disk in this format. Instead,
+/// they are cached as a CoreData class. Convenience methods are available to convert between them, but be aware that they are not lossless.
 struct UserProfile: Codable, Hashable {
 
 	enum CodingKeys: String, CodingKey {
@@ -107,12 +112,14 @@ extension UserProfile {
 												 photoData: nil)
 }
 
+/// Used specially for making a createUser mutation on GraphQL
 struct CreateUser: Codable {
 	let name: String
 	let picture: URL?
 	let email: String
 }
 
+/// Used specially for making a updateUser mutation on GraphQL
 struct UpdateUser: Codable {
 	let name: String?
 	let picture: URL?

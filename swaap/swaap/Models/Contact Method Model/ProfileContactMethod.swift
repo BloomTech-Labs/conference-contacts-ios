@@ -50,11 +50,13 @@ struct ProfileInfoNugget {
 }
 
 extension Array where Element == ProfileContactMethod {
+	/// Convenience for getting the preferred contact.
 	var preferredContact: ProfileContactMethod? {
 		first(where: { $0.preferredContact })
 	}
 }
 
+/// Used for creating and updating contact methods on GraphQL.
 struct MutateProfileContactMethod: Codable, Hashable {
 	let id: String?
 	let value: String

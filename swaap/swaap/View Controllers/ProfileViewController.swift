@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// This was originally designed with only displaying the current user in mind. Functionality to display the current
+/// user's contacts was somewhat grafted on, not always elegantly. It could probably use a little refactoring to make
+/// it a bit smoother. (But it works, so don't fret too much)
 class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	@IBOutlet private weak var noInfoDescLabel: UILabel!

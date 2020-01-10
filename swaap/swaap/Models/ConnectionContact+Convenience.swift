@@ -12,6 +12,7 @@ import Foundation
 import CoreData
 import CoreLocation
 
+/// Specifically used to determine if a contact is connected or pending, while differentiating between pending contacts that are both sent and received. Only used locally. Not to be confused with ContactConnectionStatus.
 enum ContactPendingStatus: Int16 {
 	case pendingSent
 	case pendingReceived

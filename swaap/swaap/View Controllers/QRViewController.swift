@@ -10,6 +10,9 @@ import UIKit
 import CoreLocation
 import QRettyCode
 
+/// This is due for a refactor. The best way to do this would be to have the generator render and cache the qr code in
+/// the background, ready to show the image immediately when its ready. The logic flow of this ViewController could use
+/// some refactoring too.
 class QRViewController: UIViewController, ProfileAccessor {
 	lazy var qrGen = QRettyCodeImageGenerator(data: self
 												.profileController?

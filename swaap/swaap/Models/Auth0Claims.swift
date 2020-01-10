@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Model to assist decoding JWT
 struct Auth0IDClaims: Codable {
 	let nickname: String
 	let name: String

@@ -12,6 +12,10 @@ protocol RootAuthViewControllerDelegate: AnyObject {
 	func controllerWillScroll(_ controller: RootAuthViewController)
 }
 
+/// Parent ViewController to the LoginViewController and the SignUpViewController. The UIScrollView is here with both of
+/// those embedded.
+/// An instance of this is modally shown or dismissed by the RootTabBarController as it listens to the Notifications
+/// occurring when user credentials are either populated or depopulated.
 class RootAuthViewController: UIViewController {
 	let profileController: ProfileController
 	let authManager: AuthManager
