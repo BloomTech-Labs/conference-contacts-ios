@@ -10,6 +10,11 @@ import UIKit
 import IBPreview
 import ChevronAnimatable
 
+protocol ProfileCardViewDelegate: AnyObject {
+	func positionDidChange(on view: ProfileCardView)
+	func profileCardDidFinishAnimation(_ card: ProfileCardView)
+}
+
 @IBDesignable
 class ProfileCardView: IBPreviewView {
 
@@ -50,13 +55,21 @@ class ProfileCardView: IBPreviewView {
 		set { industryLabel.text = newValue }
 	}
 
-	var preferredContact: SocialLink? {
-		get { socialButton.socialInfo }
+	var preferredContact: ProfileInfoNugget? {
+		get { socialButton.infoNugget }
 		set {
 			guard let newValue = newValue else { return }
-			socialButton.socialInfo = newValue
+			socialButton.infoNugget = newValue
 		}
 	}
+
+	var isSmallProfileCard: Bool? {
+		didSet {
+			setupSmallCardVersion()
+		}
+	}
+
+	weak var delegate: ProfileCardViewDelegate?
 
 
 	// MARK: - Outlets
@@ -65,14 +78,16 @@ class ProfileCardView: IBPreviewView {
 	@IBOutlet private weak var profileImageView: UIImageView!
 	@IBOutlet private weak var imageMaskView: UIView!
 	@IBOutlet private weak var chevron: ChevronView!
-	@IBOutlet private weak var leftImageOffsetConstraint: NSLayoutConstraint!
-	@IBOutlet private weak var topImageOffsetConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var nameLabel: UILabel!
 	@IBOutlet private weak var jobTitleLabel: UILabel!
+	@IBOutlet private weak var taglineContainer: UIView!
 	@IBOutlet private weak var taglineLabel: UILabel!
 	@IBOutlet private weak var locationLabel: UILabel!
 	@IBOutlet private weak var industryLabel: UILabel!
 	@IBOutlet private weak var socialButton: SocialButton!
+	@IBOutlet private weak var locationStackView: UIStackView!
+	@IBOutlet private weak var industryStackView: UIStackView!
+	@IBOutlet private weak var lackOfInfoDescLabel: UILabel!
 
 
 	// MARK: - Lifecycle
@@ -86,17 +101,12 @@ class ProfileCardView: IBPreviewView {
 		commonInit()
 	}
 
-	override func updateConstraints() {
-		super.updateConstraints()
-		setupImageView()
-	}
-
 	private func commonInit() {
-		#if TARGET_INTERFACE_BUILDER
-		return
-		#endif
+		guard !isInterfaceBuilder else { return }
 		let nib = UINib(nibName: "ProfileCardView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
+
+		locationStackView.isVisible = UIScreen.main.bounds.height > 667
 
 		contentView.translatesAutoresizingMaskIntoConstraints = false
 		addSubview(contentView)
@@ -107,22 +117,36 @@ class ProfileCardView: IBPreviewView {
 		contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		contentView.layer.cornerCurve = .continuous
 		contentView.layer.cornerRadius = 20
-		taglineLabel.isHidden = true
-		setupImageView()
+
 		profileImageView.mask = imageMaskView
+		setupImageView()
 
 		backgroundColor = .clear
 
 		updateViews()
 	}
 
-	private func setupImageView() {
+	/// This should be private and should be inherently called by resizing the view, but it's not.
+	/// Call externally if needed for different size profilecardViews
+	func setupImageView() {
 		guard !isInterfaceBuilder else { return }
+		guard profileImageView != nil else { return }
 		let size = profileImageView.bounds.size * 1.25
-		let position = (profileImageView.bounds.size * -0.25).toPoint
+		let position = CGPoint(x: 0, y: profileImageView.bounds.height * -0.25)
 		imageMaskView.frame = CGRect(origin: position, size: size)
 		imageMaskView.backgroundColor = .white
 		imageMaskView.layer.cornerRadius = imageMaskView.frame.width / 2
+	}
+
+	private func setupSmallCardVersion() {
+		guard let isSmallVersion = isSmallProfileCard else { return }
+		if isSmallVersion {
+			[socialButton,
+			 jobTitleLabel,
+			 locationStackView,
+			 taglineContainer,
+			 industryStackView].forEach { $0.isHidden = true }
+		}
 	}
 
 	private func updateViews() {
@@ -132,24 +156,53 @@ class ProfileCardView: IBPreviewView {
 			profileImage = nil
 		}
 		name = userProfile?.name
-		jobTitle = userProfile?.jobtitle
+		jobTitle = userProfile?.jobTitle
 		location = userProfile?.location
 		industry = userProfile?.industry
+		tagline = userProfile?.tagline
 
-		guard let pContact = userProfile?.profileNuggets.preferredContact else { return }
-		let socialLink = SocialLink(socialType: pContact.type, value: pContact.value)
-		preferredContact = socialLink
+		lackOfInfoDescLabel.isHidden = true
+		hideUnhideElements()
+
+		guard let pContact = userProfile?.profileContactMethods.preferredContact else { return }
+		let nuggetInfo = ProfileInfoNugget(type: pContact.type, value: pContact.value)
+		preferredContact = nuggetInfo
 	}
 
+	private func hideUnhideElements() {
+		guard isSmallProfileCard == false else { return }
+		jobTitleLabel.isVisible = jobTitle?.isNotEmpty ?? false
+		industryStackView.isVisible = industry?.isNotEmpty ?? false
+		taglineContainer.isVisible = tagline?.isNotEmpty ?? false
+		locationStackView.isVisible = (location?.isNotEmpty ?? false) && (UIScreen.main.bounds.height > 667)
+
+		lackOfInfoDescLabel.isVisible = [locationStackView, taglineContainer, industryStackView, jobTitleLabel].allSatisfy({
+			$0?.isVisible == false
+		})
+
+		let name = userProfile?.name ?? "This user"
+		lackOfInfoDescLabel.text = "\(name) hasn't added any info yet."
+	}
+
+	@IBAction func socialButtonTapped(_ sender: SocialButton) {
+		sender.openLink()
+	}
 
 	// MARK: - Pan Gesture properties
 	private var slideOffset: CGFloat = 0
 	private var maxTranslate: CGFloat {
 		-0.9 * bounds.height
 	}
+
+	var isAtTop: Bool = false {
+		didSet {
+			delegate?.profileCardDidFinishAnimation(self)
+		}
+	}
+
 	private let swipeVelocity: CGFloat = 550
 	/// 0 is when it's slid all the way down, 1.0 when it's slid all the way to its max sliding height
-	private var currentSlidingProgress: Double {
+	var currentSlidingProgress: Double {
 		let range = 0...abs(maxTranslate)
 		return range.normalizedIndex(-transform.ty)
 	}
@@ -180,27 +233,36 @@ class ProfileCardView: IBPreviewView {
 		} else {
 			layer.removeAllAnimations()
 		}
+		delegate?.positionDidChange(on: self)
 	}
 
-	private func animateToPrimaryPosition() {
-		UIView.animate(withDuration: 0.3,
+	func animateToPrimaryPosition() {
+		UIView.animate(withDuration: 0.5,
 					   delay: 0.0,
 					   usingSpringWithDamping: 0.8,
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
 						self.transform = .identity
-		}, completion: nil)
+						self.delegate?.positionDidChange(on: self)
+		}, completion: { finished in
+			guard finished else { return }
+			self.isAtTop = false
+		})
 	}
 
 	private func animateToTopPosition() {
-		UIView.animate(withDuration: 0.3,
+		UIView.animate(withDuration: 0.5,
 					   delay: 0.0,
 					   usingSpringWithDamping: 0.8,
 					   initialSpringVelocity: 0.0,
 					   options: [.allowUserInteraction, .curveEaseOut],
 					   animations: {
 						self.transform.ty = self.maxTranslate
-		}, completion: nil)
+						self.delegate?.positionDidChange(on: self)
+		}, completion: { finished in
+			guard finished else { return }
+			self.isAtTop = true
+		})
 	}
 }

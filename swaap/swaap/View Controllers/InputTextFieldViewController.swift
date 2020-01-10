@@ -19,13 +19,19 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 	var placeholderStr: String = "enter info"
 	var labelText: String?
 	var socialType: ProfileFieldType?
-	let successfulCompletion: SocialLinkCompletion
+	let successfulCompletion: ProfileInfoNuggetCompletion
+	// `floatingTextFieldView` needs to be initialized before we can pass this through
+	private let enableSaveButtonHandler: FloatingTextFieldView.EnableSaveButtonHandler
 	
-	typealias SocialLinkCompletion = (SocialLink) -> Void
+	typealias ProfileInfoNuggetCompletion = (ProfileInfoNugget) -> Void
 
-	init?(coder: NSCoder, needsSocialTextField: Bool = true, successfulCompletion: @escaping SocialLinkCompletion) {
+	init?(coder: NSCoder,
+		  needsSocialTextField: Bool = true,
+		  successfulCompletion: @escaping ProfileInfoNuggetCompletion,
+		  enableSaveButtonHandler: @escaping FloatingTextFieldView.EnableSaveButtonHandler = { _, _ in true }) {
 		self.needsSocialTextField = needsSocialTextField
 		self.successfulCompletion = successfulCompletion
+		self.enableSaveButtonHandler = enableSaveButtonHandler
 		super.init(coder: coder)
 	}
 
@@ -36,9 +42,9 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+		view.accessibilityIdentifier = "InputTextFieldVC"
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameWillChange), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardFrameWillChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
 		floatingTextFieldView.makeFirstResponder(needsSocialTextField: needsSocialTextField,
 												 placeholderText: placeholderStr,
 												 labelText: labelText,
@@ -46,6 +52,7 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 												 socialType: socialType)
 		floatingTextFieldView.delegate = self
 		tapToDismissGesture.delegate = self
+		floatingTextFieldView.enableSaveButtonClosure = enableSaveButtonHandler
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -53,30 +60,35 @@ class InputTextFieldViewController: UIViewController, Storyboarded {
 		_ = floatingTextFieldView.becomeFirstResponder()
 	}
 
-	@objc func keyboardWillShow(notification: NSNotification) {
+	@objc func keyboardFrameWillChange(notification: NSNotification) {
 		if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-			floatingViewBottomAnchor.constant = keyboardRect.height
+			let duration: NSNumber = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber ?? 0.2
+
+			UIView.animate(withDuration: TimeInterval(truncating: duration)) {
+				self.floatingViewBottomAnchor.constant = keyboardRect.height
+				self.view.layoutSubviews()
+			}
 		}
 	}
 
-	@objc func keyboardWillHide(notification: NSNotification) {
-		dismiss(animated: true)
-	}
-
 	@IBAction func tapToDismiss(_ sender: UITapGestureRecognizer) {
-		floatingTextFieldView.fireFirstResponder()
 		dismiss(animated: true)
 	}
 }
 
 extension InputTextFieldViewController: UIGestureRecognizerDelegate {
 	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-		return touch.view == gestureRecognizer.view
+		touch.view == gestureRecognizer.view
 	}
 }
 
 extension InputTextFieldViewController: FloatingTextFieldViewDelegate {
-	func didFinishEditing(_ view: FloatingTextFieldView, socialLink: SocialLink) {
-		successfulCompletion(socialLink)
+	func didFinishEditing(_ view: FloatingTextFieldView, infoNugget: ProfileInfoNugget) {
+		dismiss(animated: true)
+		successfulCompletion(infoNugget)
+	}
+
+	func didCancelEditing(_ view: FloatingTextFieldView) {
+		dismiss(animated: true)
 	}
 }

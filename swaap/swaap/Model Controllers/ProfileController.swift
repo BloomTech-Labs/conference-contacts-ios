@@ -10,6 +10,7 @@
 import Foundation
 import NetworkHandler
 import Cloudinary
+import CoreLocation
 
 protocol ProfileAccessor: AnyObject {
 	var profileController: ProfileController? { get set }
@@ -17,6 +18,7 @@ protocol ProfileAccessor: AnyObject {
 
 class ProfileController {
 	let authManager: AuthManager
+	let locationManager = LocationHandler()
 
 	/// Automatically sends `userProfileChanged` (all events), `userProfilePopulated` (when nil -> value),
 	/// `userProfileDepopulated` (value -> nil), or `userProfileModified` (value -> value) notifications when modified
@@ -26,10 +28,24 @@ class ProfileController {
 		}
 	}
 
-	let baseURL = URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
+	/// Uses staging backend with debugging and testflight, but use production when a live app store release
+	let apiBaseURL: URL = {
+		if ReleaseState.current == .appStore {
+			return URL(string: "https://lambda-labs-swaap.herokuapp.com/")!
+		} else {
+			return URL(string: "https://lambda-labs-swaap-staging.herokuapp.com/")!
+		}
+	}()
 	var graphqlURL: URL {
-		baseURL.appendingPathComponent("graphql")
+		apiBaseURL.appendingPathComponent("graphql")
 	}
+	let liveSiteBaseURL: URL = {
+		if ReleaseState.current == .appStore {
+			return URL(string: "https://swaap.co/")!
+		} else {
+			return URL(string: "https://staging.swaap.co/")!
+		}
+	}()
 	let networkHandler: NetworkHandler = {
 		let networkHandler = NetworkHandler()
 		networkHandler.graphQLErrorSupport = true
@@ -66,18 +82,23 @@ class ProfileController {
 				}
 			}
 		}
+
+		locationManager.delegate = self
+		locationManager.requestAuth()
+		locationManager.singleLocationRequest()
 	}
 
 	// MARK: - Networking
 	// MARK: - Profile
-	func createProfileOnServer(completion: ((Result<GQLMutationResponse, NetworkError>) -> Void)? = nil) {
-		guard let (idClaims, cRequest) = networkCommon() else {
-			completion?(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+	func createProfileOnServer(session: NetworkLoader = URLSession.shared, completion: ((Result<GQLMutationResponse, NetworkError>) -> Void)? = nil) {
+		guard let idClaims = authManager.idClaims else { return }
+		guard let cRequest = networkAuthRequestCommon() else {
+			completion?(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 		var request = cRequest
 
-		let mutation = "mutation CreateUser($user: CreateUserInput!) { createUser(data: $user) { success code message } }"
+		let mutation = SwaapGQLQueries.userProfileCreateMutation
 		let createUser = CreateUser(name: idClaims.name, picture: idClaims.picture, email: idClaims.email)
 		do {
 			let userDict = try createUser.toDict()
@@ -92,7 +113,7 @@ class ProfileController {
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
@@ -107,15 +128,15 @@ class ProfileController {
 		}
 	}
 
-	func fetchProfileFromServer(completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
-		guard var (_, request) = networkCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+	func fetchProfileFromServer(session: NetworkLoader = URLSession.shared, completion: @escaping (Result<UserProfile, NetworkError>) -> Void) {
+		guard var request = networkAuthRequestCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 		// while networking, load from disk if same user
 		loadCachedProfile()
 
-		let query = "{ user { id authId name picture birthdate location industry jobtitle bio profile { id value type privacy preferredContact } } }"
+		let query = SwaapGQLQueries.userProfileFetchQuery
 		let graphObject = GQuery(query: query)
 
 		do {
@@ -128,7 +149,7 @@ class ProfileController {
 
 		request.expectedResponseCodes = [200]
 
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<UserProfileContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<UserProfileContainer, NetworkError>) in
 			do {
 				let userProfileContainer = try result.get()
 				let userProfile = userProfileContainer.userProfile
@@ -141,7 +162,7 @@ class ProfileController {
 				// only attempt creation if error code relating to user not existing ocurrs
 				// I don't know if its guaranteed to be consistent that no user existing will always have an error like this
 				// but it's the best we got right now
-				if graphQLError.message.contains("'authId' of null") && graphQLError.extensions.code == "INTERNAL_SERVER_ERROR" {
+				if graphQLError.message.contains("User does not exist") && graphQLError.extensions.code == "UNAUTHENTICATED" {
 					self.createProfileOnServer { result in
 						do {
 							let response = try result.get()
@@ -168,13 +189,15 @@ class ProfileController {
 		}
 	}
 
-	func updateProfile(_ userProfile: UserProfile, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
-		guard var (_, request) = networkCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+	func updateProfile(_ userProfile: UserProfile,
+					   session: NetworkLoader = URLSession.shared,
+					   completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = networkAuthRequestCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
-		let mutation = "mutation ($data: UpdateUserInput!) { updateUser(data:$data) { success code message } }"
+		let mutation = SwaapGQLQueries.userProfileUpdateMutation
 		let userInfo = UpdateUser(userProfile: userProfile)
 
 		do {
@@ -190,80 +213,148 @@ class ProfileController {
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
 				completion(.success(response))
-			} catch let error as NetworkError {
-				NSLog("Error updating server profile: \(error)")
-				completion(.failure(error))
 			} catch {
-				NSLog("Error updating server profile: \(error)")
-				completion(.failure(NetworkError.otherError(error: error)))
+				NSLog("Error updating server profile \(#line) \(#file): \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
 		}
 	}
 
-	// MARK: - Nuggets
-	/// create or update a profile nugget on the backend contextually. if an id is present, updates. if not, creates.
-	func modifyProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
-		guard var (_, request) = networkCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+	func createQRCode(labeled label: String,
+					  session: NetworkLoader = URLSession.shared,
+					  completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = networkAuthRequestCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
 			return
 		}
 
-		do {
-			let mutation: String
-			let variables: [String: Any]?
-			let nuggetInfo = MutateProfileNugget(nugget: nugget)
-			let nuggetData = try nuggetInfo.toDict()
+		let mutation = SwaapGQLQueries.userProfileCreateQRCodeMutation
+		let variables = ["label": label]
 
-			if let id = nugget.id {
-				mutation = "mutation ($id: ID!, $data: UpdateProfileFieldInput!) { updateProfileField(id:$id,data:$data) { success code message } }"
-				variables = ["data": nuggetData, "id": id]
-			} else {
-				mutation = "mutation ($data: CreateProfileFieldInput!) { createProfileField(data:$data) { success code message } }"
-				variables = ["data": nuggetData]
-			}
+		do {
 			let graphObject = GQMutation(query: mutation, variables: variables)
 
 			request.httpBody = try graphObject.jsonData()
 		} catch {
-			NSLog("Failed encoding user update: \(error)")
+			NSLog("Failed encoding qr code request: \(error)")
 			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
 			return
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch {
+				NSLog("Error creating qr code on server \(#line) \(#file): \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	// MARK: - ContactMethods
+
+	func createContactMethods(_ contactMethods: [ProfileContactMethod],
+							  session: NetworkLoader = URLSession.shared,
+							  completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = networkAuthRequestCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+
+		let mutation = SwaapGQLQueries.userProfileContactMethodsCreateMutation
+
+		do {
+			let contactMethodDicts = try contactMethods.map { try MutateProfileContactMethod(contactMethod: $0).toDict() }
+			let variables = ["data": contactMethodDicts]
+
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding contact methods update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
+			return
+		}
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
 				completion(.success(response))
 			} catch let error as NetworkError {
-				NSLog("Error updating profile nugget: \(error)")
+				NSLog("Error creating profile contact method: \(error)")
 				completion(.failure(error))
 			} catch {
-				NSLog("Error updating profile nugget: \(error)")
+				NSLog("Error creating profile contact method: \(error)")
 				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
 	}
 
-	func deleteProfileNugget(_ nugget: ProfileNugget, completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
-		guard var (_, request) = networkCommon() else {
-			completion(.failure(NetworkError.unspecifiedError(reason: "Either claims or request were not attainable.")))
+	func updateProfileContactMethods(_ contactMethods: [ProfileContactMethod],
+									 session: NetworkLoader = URLSession.shared,
+									 completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = networkAuthRequestCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+		guard (contactMethods.allSatisfy { $0.id != nil }) else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "A contact method without an id attempted update in: \(contactMethods)")))
 			return
 		}
 
-		guard let id = nugget.id else {
-			completion(.failure(.unspecifiedError(reason: "Attempted to delete a nugget without an id: \(nugget)")))
+		let mutation = SwaapGQLQueries.userProfileContactMethodsUpdateMutation
+		do {
+			let contactMethodsDicts = try contactMethods.map { try MutateProfileContactMethod(contactMethod: $0).toDict() }
+			let variables = ["data": contactMethodsDicts]
+
+			let graphObject = GQMutation(query: mutation, variables: variables)
+
+			request.httpBody = try graphObject.jsonData()
+		} catch {
+			NSLog("Failed encoding contact methods update: \(error)")
+			completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
 			return
 		}
-		let mutation = "mutation($id:ID!) { deleteProfileField(id: $id) { success code message } }"
+
+		request.expectedResponseCodes = 200
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+			do {
+				let responseContainer = try result.get()
+				let response = responseContainer.response
+				completion(.success(response))
+			} catch {
+				NSLog("Error updating profile contact method: \(error)")
+				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
+			}
+		}
+	}
+
+	func deleteProfileContactMethods(_ contactMethods: [ProfileContactMethod],
+									 session: NetworkLoader = URLSession.shared,
+									 completion: @escaping (Result<GQLMutationResponse, NetworkError>) -> Void) {
+		guard var request = networkAuthRequestCommon() else {
+			completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
+			return
+		}
+
+		let ids = contactMethods.compactMap { $0.id }
+		guard !ids.isEmpty else {
+			completion(.failure(.unspecifiedError(reason: "No viable contact methods provided for deletion: \(contactMethods)")))
+			return
+		}
+		let mutation = SwaapGQLQueries.userProfileContactMethodsDeleteMutation
 		do {
-			let query = GQuery(query: mutation, variables: ["id": id])
+			let query = GQuery(query: mutation, variables: ["ids": ids])
 
 			request.httpBody = try query.jsonData()
 		} catch {
@@ -273,32 +364,27 @@ class ProfileController {
 		}
 
 		request.expectedResponseCodes = 200
-		networkHandler.transferMahCodableDatas(with: request) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
+		networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
 			do {
 				let responseContainer = try result.get()
 				let response = responseContainer.response
 				completion(.success(response))
 			} catch let error as NetworkError {
-				NSLog("Error updating server profile: \(error)")
+				NSLog("Error deleting profile contact method: \(error)")
 				completion(.failure(error))
 			} catch {
-				NSLog("Error updating server profile: \(error)")
+				NSLog("Error deleting profile contact method: \(error)")
 				completion(.failure(NetworkError.otherError(error: error)))
 			}
 		}
 	}
 
-	private func networkCommon() -> (Auth0IDClaims, NetworkRequest)? {
-		guard let idClaims = authManager.idClaims, let accessToken = authManager.credentials?.accessToken else { return nil }
-		var request = graphqlURL.request
-		request.addValue(.contentType(type: .json), forHTTPHeaderField: .commonKey(key: .contentType))
-		request.addValue(.other(value: accessToken), forHTTPHeaderField: .commonKey(key: .authorization))
-		request.httpMethod = .post
-		return (idClaims, request)
-	}
+	private func networkAuthRequestCommon() -> NetworkRequest? { authManager.networkAuthRequestCommon(for: graphqlURL) }
 
-	func fetchImage(url: URL, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-		networkHandler.transferMahDatas(with: url.request, usingCache: true, completion: completion)
+	@discardableResult func fetchImage(url: URL,
+									   session: NetworkLoader = URLSession.shared,
+									   completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask? {
+		networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
 	}
 
 	/// By default, only updates if photo is nil. `force` will force it to download, even if there's already data.
@@ -310,6 +396,21 @@ class ProfileController {
 				self.userProfile?.photoData = try result.get()
 			} catch {
 				NSLog("Error loading user profile image: \(error)")
+			}
+		}
+	}
+
+	private func checkUserQRCode() {
+		guard let userProfile = userProfile, userProfile.qrCodes.isEmpty else { return }
+
+		self.userProfile?.qrCodes.append(ProfileQRCode(id: "dummy", label: "dummy", scans: 0))
+
+		createQRCode(labeled: "Default") { [weak self] (result: Result<GQLMutationResponse, NetworkError>) in
+			switch result {
+			case .success:
+				self?.fetchProfileFromServer(completion: { _ in })
+			case .failure(let error):
+				NSLog("Error populating QR Code: \(error)")
 			}
 		}
 	}
@@ -393,6 +494,12 @@ class ProfileController {
 	}
 }
 
+extension ProfileController: LocationHandlerDelegate {
+	func locationRequester(_ locationRequester: LocationHandler, didUpdateLocation location: CLLocation) {
+		print(location)
+	}
+}
+
 // MARK: - Notifications
 extension ProfileController {
 	private func checkUserProfileChanged(oldValue: UserProfile?, newValue: UserProfile?) {
@@ -409,6 +516,7 @@ extension ProfileController {
 			nc.post(name: .userProfileChanged, object: nil)
 		}
 		updateUserImage()
+		checkUserQRCode()
 		saveProfileToCache()
 	}
 }

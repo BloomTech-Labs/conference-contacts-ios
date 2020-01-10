@@ -44,14 +44,23 @@ struct GQLMutationResponseContainer: Decodable {
 		case data
 		case createUser
 		case updateUser
+		case createProfileField
 		case updateProfileField
+		case deleteProfileField
+		case createProfileFields
+		case updateProfileFields
+		case deleteProfileFields
+		case createQRCode
+		case createConnection
+		case acceptConnection
+		case deleteConnection
 	}
 
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		let dataContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .data)
 		guard let key = dataContainer.allKeys.first else {
-			throw NetworkError.unspecifiedError(reason: "Error decoding response: \(dataContainer.codingPath) - \(dataContainer)")
+			throw NetworkError.unspecifiedError(reason: "Error decoding response (check coding keys in \(#file)\(#line): \(dataContainer.codingPath) - \(dataContainer)")
 		}
 		response = try dataContainer.decode(GQLMutationResponse.self, forKey: key)
 	}

@@ -63,10 +63,19 @@ class LabelPlaceholder: UILabel {
 		placeholder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 		placeholder.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		placeholder.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+
+		font = UIFont.rounded(from: font)
+
+		passOnSettings()
 		updateViews()
 	}
 
 	private func updateViews() {
 		placeholder.isVisible = text?.isEmpty ?? true
+	}
+
+	private func passOnSettings() {
+		placeholder.font = font
+		placeholder.numberOfLines = numberOfLines
 	}
 }
