@@ -34,13 +34,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs the camera to use this feature</string>
+	<string>$(PRODUCT_NAME) needs the camera to both take profile photos and scan QR codes</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is required to record where you meet your contacts and will be required to be able to proceed using the app.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs access to your Photo Library to use this feature</string>
+	<string>$(PRODUCT_NAME) needs access to your Photo Library to save photos to your library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs access to your Photo Library to use this feature</string>
+	<string>$(PRODUCT_NAME) needs access to your Photo Library to be able to share a profile photo from your library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
