@@ -197,6 +197,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		iOS Developers:
 		Michael Redig
 		Marlon Raskin
+		Chad Rutherford
 
 		Web Developers:
 		Jonathan Picazzo
@@ -204,6 +205,11 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		Tyler Quinn
 		Jarvise Billups
 		Zachary Peasley
+		Tristan Depew
+		Sierra Curtis
+		Erica Ingram
+		Roberto Banbanaste
+		Corey Gumbs
 
 		UX Designers:
 		Tyler Nishida
@@ -242,15 +248,20 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			let contact = fetchedResultsController.object(at: indexPath)
-			guard let id = contact.connectionID else { return }
-			contactsController?.deleteConnection(toConnectionID: id, completion: { result in
-				switch result {
-				case .success:
-					self.contactsController?.updateContactCache()
-				case .failure(let error):
-					NSLog("Error cancelling/deleting contact: \(error)")
+			guard let id = contact.connectionID, let name = contact.name else { return }
+			let alert = UIAlertController(title: "Are you sure?", message: "Do you want to delete \(name)?", preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+				self.contactsController?.deleteConnection(toConnectionID: id) { result in
+					switch result {
+					case .success:
+						self.contactsController?.updateContactCache()
+					case .failure(let error):
+						NSLog("Error cancelling/deleting contact: \(error)")
+					}
 				}
 			})
+			alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+			present(alert, animated: true)
 		}
 	}
 
