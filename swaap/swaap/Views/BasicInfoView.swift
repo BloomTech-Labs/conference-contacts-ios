@@ -86,6 +86,7 @@ class BasicInfoView: IBPreviewControl {
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
+		
 		let nib = UINib(nibName: "BasicInfoView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 

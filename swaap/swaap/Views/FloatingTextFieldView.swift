@@ -55,6 +55,7 @@ class FloatingTextFieldView: IBPreviewView, UICollectionViewDelegate, UICollecti
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
+		
 		let nib = UINib(nibName: "FloatingTextFieldView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 

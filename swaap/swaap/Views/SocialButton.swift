@@ -74,6 +74,7 @@ class SocialButton: IBPreviewControl {
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
+		
 		let nib = UINib(nibName: "SocialButton", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 

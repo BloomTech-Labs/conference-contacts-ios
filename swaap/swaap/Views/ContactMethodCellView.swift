@@ -64,6 +64,7 @@ class ContactMethodCellView: UIView {
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
+		
 		let nib = UINib(nibName: "ContactMethodCellView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 

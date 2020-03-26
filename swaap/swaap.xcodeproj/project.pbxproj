@@ -35,7 +35,6 @@
 		33848F8423C7A06D00803D71 /* ReleaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33848F8323C7A06D00803D71 /* ReleaseState.swift */; };
 		33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33917DF323849A2400BC1501 /* SignUpViewController.swift */; };
 		33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33917DF92384C3B000BC1501 /* Auth0.framework */; };
-		3398329123C5272100F19546 /* TouchVisualizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3398328823C5272100F19546 /* TouchVisualizer.framework */; };
 		3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */; };
 		3399F88123A0B69200A17D0D /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3399F88023A0B69200A17D0D /* RangeTests.swift */; };
 		3399F88B23A0C94F00A17D0D /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88A23A0C94F00A17D0D /* Cloudinary.framework */; };
@@ -184,7 +183,6 @@
 		33848F8323C7A06D00803D71 /* ReleaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseState.swift; sourceTree = "<group>"; };
 		33917DF323849A2400BC1501 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		33917DF92384C3B000BC1501 /* Auth0.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Auth0.framework; path = Carthage/Build/iOS/Auth0.framework; sourceTree = "<group>"; };
-		3398328823C5272100F19546 /* TouchVisualizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TouchVisualizer.framework; path = Carthage/Build/iOS/TouchVisualizer.framework; sourceTree = "<group>"; };
 		3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		3399F88023A0B69200A17D0D /* RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
 		3399F88A23A0C94F00A17D0D /* Cloudinary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cloudinary.framework; path = Carthage/Build/iOS/Cloudinary.framework; sourceTree = "<group>"; };
@@ -286,7 +284,6 @@
 				3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
 				330A720723C7C6E40097B48B /* NetworkHandler.framework in Frameworks */,
-				3398329123C5272100F19546 /* TouchVisualizer.framework in Frameworks */,
 				33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */,
 				33A4BAA123BB29880000E4E1 /* QRettyCode.framework in Frameworks */,
 				3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */,
@@ -566,7 +563,6 @@
 			isa = PBXGroup;
 			children = (
 				330A720823C7C7520097B48B /* ChevronAnimatable.framework */,
-				3398328823C5272100F19546 /* TouchVisualizer.framework */,
 				33A4BAA223BB298E0000E4E1 /* SwiftyBinaryFormatter.framework */,
 				33A4BA9823BB29880000E4E1 /* QRettyCode.framework */,
 				3399F88E23A0CAD900A17D0D /* Alamofire.framework */,
