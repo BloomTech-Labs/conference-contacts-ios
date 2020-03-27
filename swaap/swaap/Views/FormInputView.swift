@@ -69,6 +69,7 @@ class FormInputView: IBPreviewControl {
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
+		
 		let nib = UINib(nibName: "FormInputView", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 
