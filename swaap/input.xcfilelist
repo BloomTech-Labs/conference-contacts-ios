@@ -6,3 +6,4 @@ $(SRCROOT)/Carthage/Build/iOS/Cloudinary.framework
 $(SRCROOT)/Carthage/Build/iOS/Alamofire.framework
 $(SRCROOT)/Carthage/Build/iOS/LoadinationIndicator.framework
 $(SRCROOT)/Carthage/Build/iOS/ChevronAnimatable.framework
+$(SRCROOT)/Carthage/Build/iOS/JWTDecode.framework
