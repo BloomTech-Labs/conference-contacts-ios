@@ -489,16 +489,12 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 	func privacySelectionInvoked(on cellView: ContactMethodCellView) {
 		let eyeImage = UIImage(systemName: "eye")
 		let eyeSlash = UIImage(systemName: "eye.slash")
-		let connectedImage = UIImage(systemName: "checkmark")
 		let privateStr = NSMutableAttributedString(string: "Private",
 												   attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
-		let connectedStr = NSMutableAttributedString(string: "Connected",
-													 attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
 		let publicStr = NSMutableAttributedString(string: "Public",
 												  attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .bold)])
 		let privacyAlertString = """
 								 - only visible to you
-								 - only visible to your connections
 								 - visible to anyone
 								"""
 		let privacyAlertStringAttr = NSMutableAttributedString(string: privacyAlertString)
@@ -506,8 +502,7 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 											value: UIFont.systemFont(ofSize: 15, weight: .regular),
 											range: NSRange(location: 0, length: privacyAlertStringAttr.length))
 		privacyAlertStringAttr.insert(privateStr, at: 0)
-		privacyAlertStringAttr.insert(connectedStr, at: 30)
-		privacyAlertStringAttr.insert(publicStr, at: 75)
+		privacyAlertStringAttr.insert(publicStr, at: 30)
 		let pStyle = NSMutableParagraphStyle()
 		pStyle.alignment = NSTextAlignment.left
 		privacyAlertStringAttr.addAttribute(.paragraphStyle, value: pStyle, range: NSRange(location: 0, length: privacyAlertStringAttr.length))
@@ -524,22 +519,13 @@ extension EditProfileViewController: ContactMethodCellViewDelegate {
 		}
 		privateAction.setValue(eyeSlash, forKey: "image")
 		
-		let connectedAction = UIAlertAction(title: "Connected", style: .default) { _ in
-			guard !cellView.contactMethod.preferredContact else {
-				self.showAlert(titled: "Privacy Notice", message: "Preferred contact must be public.")
-				return
-			}
-			cellView.contactMethod.privacy = .connected
-		}
-		connectedAction.setValue(connectedImage, forKey: "image")
-		
 		let publicAction = UIAlertAction(title: "Public", style: .default) { _ in
 			cellView.contactMethod.privacy = .public
 		}
 		publicAction.setValue(eyeImage, forKey: "image")
 		
 		let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-		[privateAction, connectedAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
+		[privateAction, publicAction, cancel].forEach { privacyAlert.addAction($0) }
 		present(privacyAlert, animated: true)
 		HapticFeedback.produceMediumFeedback()
 	}

@@ -33,7 +33,7 @@ extension ConnectionContactMethod {
 		return ProfileContactMethod(id: id,
 									value: value,
 									type: type,
-									privacy: .connected, // provided just as dummy value - not evaluated when comparing
+									privacy: .private, // provided just as dummy value - not evaluated when comparing
 			preferredContact: preferredContact)
 	}
 }

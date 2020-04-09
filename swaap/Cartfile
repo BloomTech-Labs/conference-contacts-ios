@@ -9,6 +9,5 @@ github "auth0/Auth0.swift" ~> 1.18
 github "marmelroy/PhoneNumberKit" # Not implemented yet
 github "cloudinary/cloudinary_ios"
 github "Alamofire/Alamofire"
-github "mredig/QRettyCode" "master"
 
-github "morizotter/TouchVisualizer"
+#github "morizotter/TouchVisualizer"
