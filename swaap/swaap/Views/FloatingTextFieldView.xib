@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -218,7 +218,7 @@
         </view>
     </objects>
     <resources>
-        <image name="plus.app.fill" catalog="system" width="64" height="56"/>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
         <namedColor name="Swaap Accent Color 1">
             <color red="0.33000001311302185" green="0.64399999380111694" blue="0.89200001955032349" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -226,7 +226,7 @@
             <color red="0.039999999105930328" green="0.49000000953674316" blue="0.68000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Swaap Background Color Burple">
-            <color red="0.23000000417232513" green="0.30000001192092896" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.22745098039215686" green="0.29803921568627451" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="socialButtonInstagramMain">
             <color red="0.8666666666666667" green="0.22745098039215686" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

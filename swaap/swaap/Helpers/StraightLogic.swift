@@ -13,6 +13,7 @@ extension UIView {
 		get {
 			!isHidden
 		}
+		
 		set {
 			guard isHidden != !newValue else { return }
 			isHidden = !newValue

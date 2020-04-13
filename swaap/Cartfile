@@ -1,14 +1,13 @@
 #github "mathiasnagler/SwiftyAcknowledgements" #original project - outdated
 github "calda/SwiftyAcknowledgements" #pull request project with swift 5
 
-github "mredig/NetworkHandler" == 0.9.4
+github "mredig/NetworkHandler"
 github "mredig/IBPreview"
 github "mredig/LoadinationIndicator"
 github "marlonjames71/ChevronAnimatable"
 github "auth0/Auth0.swift" ~> 1.18
 github "marmelroy/PhoneNumberKit" # Not implemented yet
 github "cloudinary/cloudinary_ios"
-github "Alamofire/Alamofire"
-github "mredig/QRettyCode" "master"
+github "Alamofire/Alamofire" ~> 4.9.1
 
-github "morizotter/TouchVisualizer"
+#github "morizotter/TouchVisualizer"
