@@ -211,7 +211,7 @@ class SwaapTests: XCTestCase {
 		}
 	}
 
-	// FIXME: setup mocking - i think this fails because the jwt is too old (mocking would fix)
+	// setup mocking - i think this fails because the jwt is too old (mocking would fix)
 //	func testFetchAllConnections() {
 //		let contactController = getContactController()
 //
@@ -220,7 +220,7 @@ class SwaapTests: XCTestCase {
 //			do {
 //				let response = try result.get()
 //				print(response)
-//				// FIXME: setup mocking
+//				// setup mocking
 //				// this is where confirming good data would go (set up mocking!)
 //			} catch {
 //				XCTFail("Error testing all connection fetch: \(error)")

@@ -34,13 +34,11 @@
 		3377AF9023AB45290083EC52 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3377AF8F23AB45290083EC52 /* Contact.swift */; };
 		33848F8423C7A06D00803D71 /* ReleaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33848F8323C7A06D00803D71 /* ReleaseState.swift */; };
 		33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33917DF323849A2400BC1501 /* SignUpViewController.swift */; };
-		33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33917DF92384C3B000BC1501 /* Auth0.framework */; };
 		3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */; };
 		3399F88123A0B69200A17D0D /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3399F88023A0B69200A17D0D /* RangeTests.swift */; };
 		3399F88B23A0C94F00A17D0D /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88A23A0C94F00A17D0D /* Cloudinary.framework */; };
 		3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88E23A0CAD900A17D0D /* Alamofire.framework */; };
 		3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */; };
-		33A4BAA123BB29880000E4E1 /* QRettyCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A4BA9823BB29880000E4E1 /* QRettyCode.framework */; };
 		33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C00787238FDDEC000D72A7 /* VectorExtensions.swift */; };
 		33CCBABA2398F21200A98C82 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBAB92398F21200A98C82 /* ProfileController.swift */; };
 		33CCBABC2398F3C200A98C82 /* GQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBABB2398F3C200A98C82 /* GQuery.swift */; };
@@ -111,6 +109,9 @@
 		37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934552398716300ACBA23 /* FloatingTextFieldView.swift */; };
 		37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934572398941400ACBA23 /* InputTextFieldViewController.swift */; };
 		37F93466239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */; };
+		6318CBA1243FB90D0035ABA2 /* Auth0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33917DF92384C3B000BC1501 /* Auth0.framework */; };
+		6318CBA5243FBDD00035ABA2 /* QRettyCode in Frameworks */ = {isa = PBXBuildFile; productRef = 6318CBA4243FBDD00035ABA2 /* QRettyCode */; };
+		6318CBA7243FC0490035ABA2 /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6318CBA6243FC0490035ABA2 /* JWTDecode.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,8 +189,6 @@
 		3399F88A23A0C94F00A17D0D /* Cloudinary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cloudinary.framework; path = Carthage/Build/iOS/Cloudinary.framework; sourceTree = "<group>"; };
 		3399F88E23A0CAD900A17D0D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoadinationIndicator.framework; path = Carthage/Build/iOS/LoadinationIndicator.framework; sourceTree = "<group>"; };
-		33A4BA9823BB29880000E4E1 /* QRettyCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QRettyCode.framework; path = Carthage/Build/iOS/QRettyCode.framework; sourceTree = "<group>"; };
-		33A4BAA223BB298E0000E4E1 /* SwiftyBinaryFormatter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBinaryFormatter.framework; path = Carthage/Build/iOS/SwiftyBinaryFormatter.framework; sourceTree = "<group>"; };
 		33C00787238FDDEC000D72A7 /* VectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorExtensions.swift; sourceTree = "<group>"; };
 		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; usesTabs = 1; };
 		33CCBABB2398F3C200A98C82 /* GQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQuery.swift; sourceTree = "<group>"; };
@@ -273,6 +272,7 @@
 		37F934552398716300ACBA23 /* FloatingTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextFieldView.swift; sourceTree = "<group>"; };
 		37F934572398941400ACBA23 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldViewController.swift; sourceTree = "<group>"; };
 		37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		6318CBA6243FC0490035ABA2 /* JWTDecode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWTDecode.framework; path = Carthage/Build/iOS/JWTDecode.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,11 +282,12 @@
 			files = (
 				33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */,
 				3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */,
+				6318CBA7243FC0490035ABA2 /* JWTDecode.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
 				330A720723C7C6E40097B48B /* NetworkHandler.framework in Frameworks */,
-				33917DFA2384C3B000BC1501 /* Auth0.framework in Frameworks */,
-				33A4BAA123BB29880000E4E1 /* QRettyCode.framework in Frameworks */,
 				3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */,
+				6318CBA1243FB90D0035ABA2 /* Auth0.framework in Frameworks */,
+				6318CBA5243FBDD00035ABA2 /* QRettyCode in Frameworks */,
 				330A720923C7C7520097B48B /* ChevronAnimatable.framework in Frameworks */,
 				3399F88B23A0C94F00A17D0D /* Cloudinary.framework in Frameworks */,
 			);
@@ -563,12 +564,11 @@
 			isa = PBXGroup;
 			children = (
 				330A720823C7C7520097B48B /* ChevronAnimatable.framework */,
-				33A4BAA223BB298E0000E4E1 /* SwiftyBinaryFormatter.framework */,
-				33A4BA9823BB29880000E4E1 /* QRettyCode.framework */,
 				3399F88E23A0CAD900A17D0D /* Alamofire.framework */,
 				3399F88A23A0C94F00A17D0D /* Cloudinary.framework */,
 				33917DF92384C3B000BC1501 /* Auth0.framework */,
 				3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */,
+				6318CBA6243FC0490035ABA2 /* JWTDecode.framework */,
 				330A720623C7C6E40097B48B /* NetworkHandler.framework */,
 				33FEE0D62384656A006BE880 /* IBPreview.xcodeproj */,
 				37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */,
@@ -597,6 +597,7 @@
 			);
 			name = swaap;
 			packageProductDependencies = (
+				6318CBA4243FBDD00035ABA2 /* QRettyCode */,
 			);
 			productName = swaap;
 			productReference = 37A185A0237A3579002191B5 /* swaap.app */;
@@ -671,6 +672,7 @@
 			);
 			mainGroup = 37A18597237A3579002191B5;
 			packageReferences = (
+				6318CBA3243FBDD00035ABA2 /* XCRemoteSwiftPackageReference "QRettyCode" */,
 			);
 			productRefGroup = 37A185A1237A3579002191B5 /* Products */;
 			projectDirPath = "";
@@ -1054,9 +1056,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1068,9 +1070,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lambdalabs.swaap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = swaapDistribution;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1083,7 +1086,7 @@
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = VXUQXR6S56;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1095,6 +1098,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lambdalabs.swaap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = swaapDistribution;
@@ -1237,6 +1241,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6318CBA3243FBDD00035ABA2 /* XCRemoteSwiftPackageReference "QRettyCode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mredig/QRettyCode";
+			requirement = {
+				kind = exactVersion;
+				version = 0.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6318CBA4243FBDD00035ABA2 /* QRettyCode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6318CBA3243FBDD00035ABA2 /* XCRemoteSwiftPackageReference "QRettyCode" */;
+			productName = QRettyCode;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		33094E6C23AA0AF100D5556B /* Contacts.xcdatamodeld */ = {
