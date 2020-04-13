@@ -247,10 +247,10 @@ extension AuthManager: ASAuthorizationControllerDelegate, ASAuthorizationControl
 				return
 		}
 
-		Auth0.authentication().tokenExchange(withAppleAuthorizationCode: authCode,
-											 scope: "openid profile email",
-											 audience: "https://api.swaap.co/",
-											 fullName: appleIDCredential.fullName).start { result in
+		Auth0.authentication().login(appleAuthorizationCode: authCode,
+									 fullName: appleIDCredential.fullName,
+									 scope: "openid profile email",
+									 audience: "https://api.swaap.co/").start { result in
 			switch result {
 			case .success(let credentials):
 				print("Auth0 success: \(credentials)")
