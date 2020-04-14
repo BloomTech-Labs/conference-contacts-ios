@@ -28,11 +28,17 @@ class OnboardingPageViewController: UIPageViewController {
 	func getScreenThree() -> ScreenThree {
 		onboardingStoryboard.instantiateViewController(identifier: "ScreenThree") as ScreenThree
 	}
+	
+	func getScreenFour() -> ScreenFour {
+		onboardingStoryboard.instantiateViewController(identifier: "ScreenFour") as ScreenFour
+	}
 }
 
 extension OnboardingPageViewController: UIPageViewControllerDataSource {
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-		if viewController.isKind(of: ScreenThree.self) {
+		if viewController.isKind(of: ScreenFour.self) {
+			return getScreenThree()
+		} else if viewController.isKind(of: ScreenThree.self) {
 			return getScreenTwo()
 		} else if viewController.isKind(of: ScreenTwo.self) {
 			return getScreenOne()
@@ -46,13 +52,15 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
 			return getScreenTwo()
 		} else if viewController.isKind(of: ScreenTwo.self) {
 			return getScreenThree()
+		} else if viewController.isKind(of: ScreenThree.self) {
+			return getScreenFour()
 		} else {
 			return nil
 		}
 	}
 	
 	func presentationCount(for pageViewController: UIPageViewController) -> Int {
-		3
+		4
 	}
 	
 	func presentationIndex(for pageViewController: UIPageViewController) -> Int {

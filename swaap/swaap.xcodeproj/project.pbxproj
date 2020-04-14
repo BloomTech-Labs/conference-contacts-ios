@@ -118,6 +118,7 @@
 		63982195244639A300DBCFD7 /* ScreenThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63982194244639A300DBCFD7 /* ScreenThree.swift */; };
 		63C3BCB5244615B40039634D /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C3BCB4244615B40039634D /* Onboarding.storyboard */; };
 		63C3BCBA24461B1E0039634D /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C3BCB924461B1E0039634D /* OnboardingPageViewController.swift */; };
+		63F3732324464A480071886A /* ScreenFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3732224464A480071886A /* ScreenFour.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +286,7 @@
 		63982194244639A300DBCFD7 /* ScreenThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenThree.swift; sourceTree = "<group>"; };
 		63C3BCB4244615B40039634D /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		63C3BCB924461B1E0039634D /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		63F3732224464A480071886A /* ScreenFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFour.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -606,6 +608,7 @@
 				639821902446399000DBCFD7 /* ScreenOne.swift */,
 				639821922446399900DBCFD7 /* ScreenTwo.swift */,
 				63982194244639A300DBCFD7 /* ScreenThree.swift */,
+				63F3732224464A480071886A /* ScreenFour.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -863,6 +866,7 @@
 				37A185A4237A3579002191B5 /* AppDelegate.swift in Sources */,
 				37D1D76123A9651800931BF8 /* BasicInfoView.swift in Sources */,
 				33E8C7C323AC6025005E1E2C /* LocationHandler.swift in Sources */,
+				63F3732324464A480071886A /* ScreenFour.swift in Sources */,
 				37305EA223C2E9640089AD17 /* TaglineQuoteView.swift in Sources */,
 				37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */,
 				3329A47D23A9546B007F10E2 /* ContactsViewController.swift in Sources */,
