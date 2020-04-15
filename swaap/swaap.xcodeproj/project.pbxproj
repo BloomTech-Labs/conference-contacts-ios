@@ -109,6 +109,7 @@
 		6318CBA5243FBDD00035ABA2 /* QRettyCode in Frameworks */ = {isa = PBXBuildFile; productRef = 6318CBA4243FBDD00035ABA2 /* QRettyCode */; };
 		6318CBA7243FC0490035ABA2 /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6318CBA6243FC0490035ABA2 /* JWTDecode.framework */; };
 		6324013224466EC40072E9DA /* ScreenFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324013124466EC40072E9DA /* ScreenFive.swift */; };
+		636484A62447811D00AE25D0 /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = 636484A52447811D00AE25D0 /* Cloudinary */; };
 		6398218F2446372400DBCFD7 /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398218E2446372400DBCFD7 /* UserDefaultsProtocol.swift */; };
 		639821912446399000DBCFD7 /* ScreenOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639821902446399000DBCFD7 /* ScreenOne.swift */; };
 		639821932446399900DBCFD7 /* ScreenTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639821922446399900DBCFD7 /* ScreenTwo.swift */; };
@@ -295,6 +296,7 @@
 				6318CBA7243FC0490035ABA2 /* JWTDecode.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
 				330A720723C7C6E40097B48B /* NetworkHandler.framework in Frameworks */,
+				636484A62447811D00AE25D0 /* Cloudinary in Frameworks */,
 				6318CBA1243FB90D0035ABA2 /* Auth0.framework in Frameworks */,
 				6318CBA5243FBDD00035ABA2 /* QRettyCode in Frameworks */,
 				330A720923C7C7520097B48B /* ChevronAnimatable.framework in Frameworks */,
@@ -626,6 +628,7 @@
 			name = swaap;
 			packageProductDependencies = (
 				6318CBA4243FBDD00035ABA2 /* QRettyCode */,
+				636484A52447811D00AE25D0 /* Cloudinary */,
 			);
 			productName = swaap;
 			productReference = 37A185A0237A3579002191B5 /* swaap.app */;
@@ -701,6 +704,7 @@
 			mainGroup = 37A18597237A3579002191B5;
 			packageReferences = (
 				6318CBA3243FBDD00035ABA2 /* XCRemoteSwiftPackageReference "QRettyCode" */,
+				636484A42447811D00AE25D0 /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
 			);
 			productRefGroup = 37A185A1237A3579002191B5 /* Products */;
 			projectDirPath = "";
@@ -1287,6 +1291,14 @@
 				version = 0.7.0;
 			};
 		};
+		636484A42447811D00AE25D0 /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cloudinary/cloudinary_ios";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1294,6 +1306,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6318CBA3243FBDD00035ABA2 /* XCRemoteSwiftPackageReference "QRettyCode" */;
 			productName = QRettyCode;
+		};
+		636484A52447811D00AE25D0 /* Cloudinary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 636484A42447811D00AE25D0 /* XCRemoteSwiftPackageReference "cloudinary_ios" */;
+			productName = Cloudinary;
 		};
 /* End XCSwiftPackageProductDependency section */
 
