@@ -19,6 +19,7 @@ class RootTabBarController: UITabBarController {
 	private var windowObserver: NSKeyValueObservation?
 	private var populatedCredentialObserver: NSObjectProtocol?
 	private var depopulatedCredentialObserver: NSObjectProtocol?
+	let userDefaults: UserDefaultsProtocol = UserDefaults.standard
 
 	let authManager: AuthManager
 	let profileController: ProfileController
@@ -64,6 +65,7 @@ class RootTabBarController: UITabBarController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		userDefaults.setObject(true, forKey: "InitialLaunch")
 		
 		_ = NotificationCenter.default.addObserver(forName: .contactsCacheUpdated, object: nil, queue: nil, using: { [weak self] _ in
 			self?.pendingContactsDelegate?.pendingContactsDidRefresh()
