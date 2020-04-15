@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "QRettyCode",
+        "repositoryURL": "https://github.com/mredig/QRettyCode",
+        "state": {
+          "branch": null,
+          "revision": "0d8418654d0ca88611c1ec2fe2773332e9dbee5a",
+          "version": "0.7.0"
+        }
+      },
+      {
+        "package": "SwiftyBinaryFormatter",
+        "repositoryURL": "https://github.com/mredig/SwiftyBinaryFormatter.git",
+        "state": {
+          "branch": null,
+          "revision": "5302aeb83016ce500369ece562186d74c87359fb",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

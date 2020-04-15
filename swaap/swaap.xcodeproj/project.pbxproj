@@ -14,8 +14,6 @@
 		33094E8B23AB316800D5556B /* ProfileContactMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0EA5323984FDB004D1236 /* ProfileContactMethod.swift */; };
 		33094E8C23AB31BB00D5556B /* ProfileQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3329A48623A9F89D007F10E2 /* ProfileQRCode.swift */; };
 		33094E8E23AB327200D5556B /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33094E8D23AB327200D5556B /* TestConstants.swift */; };
-		33094E8F23AB358B00D5556B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88E23A0CAD900A17D0D /* Alamofire.framework */; platformFilter = ios; };
-		33094E9023AB358D00D5556B /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88A23A0C94F00A17D0D /* Cloudinary.framework */; platformFilter = ios; };
 		33094E9123AB358F00D5556B /* LoadinationIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */; platformFilter = ios; };
 		33094E9323AB359A00D5556B /* SwiftyAcknowledgements.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A185E7237A40B8002191B5 /* SwiftyAcknowledgements.framework */; platformFilter = ios; };
 		33094E9423AB359F00D5556B /* IBPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; platformFilter = ios; };
@@ -36,8 +34,6 @@
 		33917DF423849A2400BC1501 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33917DF323849A2400BC1501 /* SignUpViewController.swift */; };
 		3398EDBA237B3D3B00D57DF8 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */; };
 		3399F88123A0B69200A17D0D /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3399F88023A0B69200A17D0D /* RangeTests.swift */; };
-		3399F88B23A0C94F00A17D0D /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88A23A0C94F00A17D0D /* Cloudinary.framework */; };
-		3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F88E23A0CAD900A17D0D /* Alamofire.framework */; };
 		3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */; };
 		33C00788238FDDEC000D72A7 /* VectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C00787238FDDEC000D72A7 /* VectorExtensions.swift */; };
 		33CCBABA2398F21200A98C82 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCBAB92398F21200A98C82 /* ProfileController.swift */; };
@@ -194,8 +190,6 @@
 		33917DF92384C3B000BC1501 /* Auth0.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Auth0.framework; path = Carthage/Build/iOS/Auth0.framework; sourceTree = "<group>"; };
 		3398EDB9237B3D3B00D57DF8 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		3399F88023A0B69200A17D0D /* RangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
-		3399F88A23A0C94F00A17D0D /* Cloudinary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cloudinary.framework; path = Carthage/Build/iOS/Cloudinary.framework; sourceTree = "<group>"; };
-		3399F88E23A0CAD900A17D0D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoadinationIndicator.framework; path = Carthage/Build/iOS/LoadinationIndicator.framework; sourceTree = "<group>"; };
 		33C00787238FDDEC000D72A7 /* VectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorExtensions.swift; sourceTree = "<group>"; };
 		33CCBAB92398F21200A98C82 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; usesTabs = 1; };
@@ -301,11 +295,9 @@
 				6318CBA7243FC0490035ABA2 /* JWTDecode.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
 				330A720723C7C6E40097B48B /* NetworkHandler.framework in Frameworks */,
-				3399F88F23A0CAD900A17D0D /* Alamofire.framework in Frameworks */,
 				6318CBA1243FB90D0035ABA2 /* Auth0.framework in Frameworks */,
 				6318CBA5243FBDD00035ABA2 /* QRettyCode in Frameworks */,
 				330A720923C7C7520097B48B /* ChevronAnimatable.framework in Frameworks */,
-				3399F88B23A0C94F00A17D0D /* Cloudinary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +305,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33094E8F23AB358B00D5556B /* Alamofire.framework in Frameworks */,
-				33094E9023AB358D00D5556B /* Cloudinary.framework in Frameworks */,
 				33094E9123AB358F00D5556B /* LoadinationIndicator.framework in Frameworks */,
 				33094E9323AB359A00D5556B /* SwiftyAcknowledgements.framework in Frameworks */,
 				33094E9423AB359F00D5556B /* IBPreview.framework in Frameworks */,
@@ -583,8 +573,6 @@
 			isa = PBXGroup;
 			children = (
 				330A720823C7C7520097B48B /* ChevronAnimatable.framework */,
-				3399F88E23A0CAD900A17D0D /* Alamofire.framework */,
-				3399F88A23A0C94F00A17D0D /* Cloudinary.framework */,
 				33917DF92384C3B000BC1501 /* Auth0.framework */,
 				3399F89023A0E02B00A17D0D /* LoadinationIndicator.framework */,
 				6318CBA6243FC0490035ABA2 /* JWTDecode.framework */,
