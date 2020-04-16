@@ -19,7 +19,7 @@
 | [<img src="https://github.com/favicon.ico" width="15"> ][ChadLink]	                     					| [<img src="https://github.com/favicon.ico" width="15"> ][CoreyLink]	                               			| [<img src="https://github.com/favicon.ico" width="15"> ][TristanLink]	                     				| [<img src="https://github.com/favicon.ico" width="15"> ][EricaLink]	                               			| [<img src="https://github.com/favicon.ico" width="15"> ][SierraLink]	                     					| [<img src="https://github.com/favicon.ico" width="15"> ][RobertoLink]	                               			| 
 
 
-[![Swift Version][swift-image]][swift-url]	[![License][license-image]][license-url]	[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Version][swift-image]][swift-url]	[![License][license-image]][license-url]	[![Carthage compatible](https://img.shields.io/badge/carthage-required-red)](https://github.com/Carthage/Carthage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/473f9e5268a615be881b/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/conference-contacts-ios/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/473f9e5268a615be881b/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/conference-contacts-ios/test_coverage)
 
