@@ -42,10 +42,10 @@ Swaap is an app to help professional people make great contacts at events such a
 
 ### Features
 
--    Connect to other users easily via NFC or QR code/reader
+-    Connect to other users easily via QR code/reader
 -    Easily keep tabs on how well you are keeping in touch with your professional contacts
 -    Keep track of how you met your contacts and notes about them or how you met
--    swaap acts as a hub for all the ways you can be contacted by the people in your network
+-    Swaap acts as a hub for all the ways you can be contacted by the people in your network
 
 ### Authentication API - Auth0
 
