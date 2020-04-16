@@ -62,6 +62,7 @@ Securely upload & store as many images and videos as needed, at any scale, from 
 -   iOS 13.0+
 -   Xcode 11.0
 -   Carthage
+-   Swift Package Manager
 
 ## Contribution
 
@@ -104,7 +105,7 @@ See [Frontend Here](https://github.com/Lambda-School-Labs/conference-contacts-fe
 [ZackPhoto]: https://ca.slack-edge.com/T4JUEB3ME-UJG8RLWKG-3766d295008c-512
 
 <!-- Badges -->
-[swift-image]: https://img.shields.io/badge/swift-5.1-orange.svg
+[swift-image]: https://img.shields.io/badge/swift-5.2-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
