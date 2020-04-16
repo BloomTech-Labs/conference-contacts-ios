@@ -20,6 +20,7 @@
 
 
 [![Swift Version][swift-image]][swift-url]	[![License][license-image]][license-url]	[![Carthage compatible](https://img.shields.io/badge/carthage-required-red)](https://github.com/Carthage/Carthage)
+[![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/473f9e5268a615be881b/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/conference-contacts-ios/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/473f9e5268a615be881b/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/conference-contacts-ios/test_coverage)
 
@@ -41,10 +42,10 @@ Swaap is an app to help professional people make great contacts at events such a
 
 ### Features
 
--    Connect to other users easily via NFC or QR code/reader
+-    Connect to other users easily via QR code/reader
 -    Easily keep tabs on how well you are keeping in touch with your professional contacts
 -    Keep track of how you met your contacts and notes about them or how you met
--    swaap acts as a hub for all the ways you can be contacted by the people in your network
+-    Swaap acts as a hub for all the ways you can be contacted by the people in your network
 
 ### Authentication API - Auth0
 
@@ -61,6 +62,7 @@ Securely upload & store as many images and videos as needed, at any scale, from 
 -   iOS 13.0+
 -   Xcode 11.0
 -   Carthage
+-   Swift Package Manager
 
 ## Contribution
 
@@ -103,7 +105,7 @@ See [Frontend Here](https://github.com/Lambda-School-Labs/conference-contacts-fe
 [ZackPhoto]: https://ca.slack-edge.com/T4JUEB3ME-UJG8RLWKG-3766d295008c-512
 
 <!-- Badges -->
-[swift-image]: https://img.shields.io/badge/swift-5.1-orange.svg
+[swift-image]: https://img.shields.io/badge/swift-5.2-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE

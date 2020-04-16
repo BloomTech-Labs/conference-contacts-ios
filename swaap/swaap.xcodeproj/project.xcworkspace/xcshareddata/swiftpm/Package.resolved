@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Cloudinary",
+        "repositoryURL": "https://github.com/cloudinary/cloudinary_ios",
+        "state": {
+          "branch": "master",
+          "revision": "353b2d5f1f7309b0f7ca95f76cd941005eae3f84",
+          "version": null
+        }
+      },
+      {
         "package": "QRettyCode",
         "repositoryURL": "https://github.com/mredig/QRettyCode",
         "state": {
