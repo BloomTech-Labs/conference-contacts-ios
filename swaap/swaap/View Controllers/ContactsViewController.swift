@@ -134,7 +134,9 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 
 		let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
 		let predicate = NSPredicate(format: "name contains[cd] %@", trimmedText)
-		let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [connectedStatusPredicate, predicate])
+		let socialPredicate = NSPredicate(format: "ANY profileContactMethods.value contains[cd] %@", trimmedText)
+		let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [predicate, socialPredicate])
+		let combinedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [connectedStatusPredicate, orPredicate])
 		fetchedResultsController.fetchRequest.predicate = combinedPredicate
 	}
 
