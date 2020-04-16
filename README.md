@@ -20,7 +20,7 @@
 
 
 [![Swift Version][swift-image]][swift-url]	[![License][license-image]][license-url]	[![Carthage compatible](https://img.shields.io/badge/carthage-required-red)](https://github.com/Carthage/Carthage)
-[![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-required-red)](https://swift.org/package-manager)
+[![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/473f9e5268a615be881b/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/conference-contacts-ios/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/473f9e5268a615be881b/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/conference-contacts-ios/test_coverage)
 
