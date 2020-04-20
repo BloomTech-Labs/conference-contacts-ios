@@ -46,7 +46,7 @@ class SwaapUITests: XCTestCase {
 
 	// MARK: - Navigate to Detail View
 	func navigateToProfileCardView() {
-		app.tables["Jake Callahan"].staticTexts["ProfileHeaderLabel"].tap()
+		app.tables.staticTexts["ProfileHeaderLabel"].tap()
 	}
 
 	func backToTableViewFromProfileCardView() {
@@ -54,7 +54,7 @@ class SwaapUITests: XCTestCase {
 	}
 
 	func navigateToEditProfileVC() {
-		app.tables["Jake Callahan"].staticTexts["ProfileHeaderLabel"].tap()
+		app.tables.staticTexts["ProfileHeaderLabel"].tap()
 		app.buttons["EditButton"].tap()
 	}
 
