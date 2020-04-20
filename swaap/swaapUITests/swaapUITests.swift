@@ -235,6 +235,13 @@ class SwaapUITests: XCTestCase {
 		XCTAssertFalse(atSymbol.exists)
 		XCTAssertFalse(separator.exists)
 	}
+	
+	func testQRCodeDisplaysUnderConnectCard() {
+		app.tabBars.buttons["Connect"].tap()
+		app.otherElements["smallProfileCard"].swipeUp()
+		XCTAssert(app.images["QRCode"].exists)
+		XCTAssertNotNil(app.images["QRCode"])
+	}
 }
 
 extension XCUIApplication {

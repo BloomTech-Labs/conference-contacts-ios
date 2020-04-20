@@ -47,6 +47,8 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		smallProfileCard.isSmallProfileCard = true
+		smallProfileCard.accessibilityIdentifier = "smallProfileCard"
+		swaapLogo.accessibilityIdentifier = "QRCode"
 		setupUI()
 		updateProfileCard()
 		updateQRCode()
