@@ -12,6 +12,8 @@ protocol PendingContactsUpdateDelegate: AnyObject {
 	func pendingContactsDidRefresh()
 }
 
+/// Obviously a tab bar controller, but this one is the root of the app. It houses the authManager, profileController,
+/// and contactsController; Everything else that uses those access the instances that are instantiated here.
 class RootTabBarController: UITabBarController {
 	
 	/// property observer (cannot present a view when its parent isn't part of the view hierarchy, so we need to watch
@@ -70,10 +72,10 @@ class RootTabBarController: UITabBarController {
 		_ = NotificationCenter.default.addObserver(forName: .contactsCacheUpdated, object: nil, queue: nil, using: { [weak self] _ in
 			self?.pendingContactsDelegate?.pendingContactsDidRefresh()
 		})
-		populatedCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsPopulated, object: nil, queue: nil) { [weak self] _ in
+		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsPopulated, object: nil, queue: nil) { [weak self] _ in
 			self?.dismissAuthViewController()
 		}
-		depopulatedCredentialObserver = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil) { [weak self] _ in
+		_ = NotificationCenter.default.addObserver(forName: .swaapCredentialsDepopulated, object: nil, queue: nil) { [weak self] _ in
 			self?.showAuthViewController()
 		}
 		

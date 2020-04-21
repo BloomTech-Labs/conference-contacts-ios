@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// As the app is, there's not really much point to `public` right now. 
 enum ProfileFieldPrivacy: String, Codable, Hashable {
 	init(from decoder: Decoder) throws {
 		let container = try decoder.singleValueContainer()

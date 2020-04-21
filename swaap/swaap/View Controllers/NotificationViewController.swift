@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+/// Name says it.
 class NotificationViewController: UIViewController, ProfileAccessor, ContactsAccessor {
 
 	var profileController: ProfileController?

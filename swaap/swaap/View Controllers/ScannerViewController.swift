@@ -10,6 +10,9 @@ import UIKit
 import AVFoundation
 import NetworkHandler
 
+
+/// Shows the camera and overlays where the QR code is detected. Would probably be smart to refactor the camera code
+/// into another file.
 class ScannerViewController: UIViewController, ContactsAccessor, ProfileAccessor {
 	private enum ConnectionState {
 		case yourself
