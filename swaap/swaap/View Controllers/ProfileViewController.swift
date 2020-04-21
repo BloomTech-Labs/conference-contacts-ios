@@ -118,7 +118,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		guard isViewLoaded else { return }
 		profileCardView.userProfile = userProfile
 		birthdayLabel.text = userProfile?.birthdate
-		bioLabel.text = userProfile?.bio
+		bioLabel.text = userProfile?.bio ?? "No bio"
 
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil

@@ -19,6 +19,9 @@ class RootTabBarController: UITabBarController {
 	/// property observer (cannot present a view when its parent isn't part of the view hierarchy, so we need to watch
 	/// for when the parent is in the hierarchy
 	private var windowObserver: NSKeyValueObservation?
+	private var populatedCredentialObserver: NSObjectProtocol?
+	private var depopulatedCredentialObserver: NSObjectProtocol?
+	let userDefaults: UserDefaultsProtocol = UserDefaults.standard
 
 	let authManager: AuthManager
 	let profileController: ProfileController
@@ -64,6 +67,7 @@ class RootTabBarController: UITabBarController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		userDefaults.setObject(true, forKey: "InitialLaunch")
 		
 		_ = NotificationCenter.default.addObserver(forName: .contactsCacheUpdated, object: nil, queue: nil, using: { [weak self] _ in
 			self?.pendingContactsDelegate?.pendingContactsDidRefresh()

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2vL-zU-QO1">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Onboarding Page View Controller-->
+        <scene sceneID="W1a-2e-AhL">
+            <objects>
+                <pageViewController storyboardIdentifier="OnboardingPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="2vL-zU-QO1" customClass="OnboardingPageViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cGY-7U-6AG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="138"/>
+        </scene>
+        <!--Screen One-->
+        <scene sceneID="82K-1O-azQ">
+            <objects>
+                <viewController storyboardIdentifier="ScreenOne" id="CYi-Fy-Q8l" customClass="ScreenOne" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yhs-pa-h7F">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ub6-pj-rVk" customClass="GradientView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swaapLogoBlack-whiteThickOutline" translatesAutoresizingMaskIntoConstraints="NO" id="DS4-fL-eCP">
+                                        <rect key="frame" x="65.5" y="52" width="283" height="104"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="283" id="5jf-AI-kN1"/>
+                                            <constraint firstAttribute="height" constant="104" id="h3l-yn-bQv"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Swaap!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdE-vj-82C">
+                                        <rect key="frame" x="63" y="215" width="288.5" height="41"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left to get started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ibU-Qv-xu0">
+                                        <rect key="frame" x="115" y="278" width="184" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.left" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HYj-pq-jtI">
+                                        <rect key="frame" x="115" y="317.5" width="184" height="41"/>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="i8a-Yo-MBG"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khb-z3-etG">
+                                        <rect key="frame" x="192" y="824" width="30" height="30"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="B4E-w3-RFS" kind="show" id="cEy-9A-AXe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="ibU-Qv-xu0" firstAttribute="top" secondItem="FdE-vj-82C" secondAttribute="bottom" constant="22" id="4sg-aQ-NFB"/>
+                                    <constraint firstItem="DS4-fL-eCP" firstAttribute="centerX" secondItem="ub6-pj-rVk" secondAttribute="centerX" id="EcT-Mn-zWK"/>
+                                    <constraint firstItem="HYj-pq-jtI" firstAttribute="trailing" secondItem="ibU-Qv-xu0" secondAttribute="trailing" id="HJS-l5-Nf6"/>
+                                    <constraint firstItem="FdE-vj-82C" firstAttribute="centerX" secondItem="ub6-pj-rVk" secondAttribute="centerX" id="KSD-6J-8I8"/>
+                                    <constraint firstAttribute="bottom" secondItem="Khb-z3-etG" secondAttribute="bottom" constant="42" id="WeP-It-KA7"/>
+                                    <constraint firstItem="DS4-fL-eCP" firstAttribute="top" secondItem="ub6-pj-rVk" secondAttribute="top" constant="52" id="XQ5-3a-taU"/>
+                                    <constraint firstItem="FdE-vj-82C" firstAttribute="top" secondItem="DS4-fL-eCP" secondAttribute="bottom" constant="59" id="bLl-Ti-YE3"/>
+                                    <constraint firstItem="Khb-z3-etG" firstAttribute="centerX" secondItem="ub6-pj-rVk" secondAttribute="centerX" id="bq3-A0-X2r"/>
+                                    <constraint firstItem="ibU-Qv-xu0" firstAttribute="centerX" secondItem="ub6-pj-rVk" secondAttribute="centerX" id="fZo-SU-CrE"/>
+                                    <constraint firstItem="HYj-pq-jtI" firstAttribute="leading" secondItem="ibU-Qv-xu0" secondAttribute="leading" id="jjc-dJ-pik"/>
+                                    <constraint firstItem="HYj-pq-jtI" firstAttribute="top" secondItem="ibU-Qv-xu0" secondAttribute="bottom" constant="16" id="vnt-na-0Cf"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" name="Swaap Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" name="Swaap Secondary Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ub6-pj-rVk" firstAttribute="leading" secondItem="vQU-zU-kPj" secondAttribute="leading" id="FoR-dJ-8sz"/>
+                            <constraint firstAttribute="bottom" secondItem="ub6-pj-rVk" secondAttribute="bottom" id="eu2-pJ-94r"/>
+                            <constraint firstItem="ub6-pj-rVk" firstAttribute="top" secondItem="Yhs-pa-h7F" secondAttribute="top" id="h70-IP-Gc0"/>
+                            <constraint firstItem="ub6-pj-rVk" firstAttribute="trailing" secondItem="vQU-zU-kPj" secondAttribute="trailing" id="l3y-Qo-stS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vQU-zU-kPj"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tZN-JN-FUE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="808.69565217391312" y="137.94642857142856"/>
+        </scene>
+        <!--Screen Two-->
+        <scene sceneID="oJA-mt-e42">
+            <objects>
+                <viewController storyboardIdentifier="ScreenTwo" id="1vf-WW-2YN" customClass="ScreenTwo" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MPs-eR-bc9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7y9-Uy-Czz" customClass="GradientView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YhQ-Ap-MpO">
+                                        <rect key="frame" x="192" y="824" width="30" height="30"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="B4E-w3-RFS" kind="show" id="dCZ-oo-0Kb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="YhQ-Ap-MpO" firstAttribute="centerX" secondItem="7y9-Uy-Czz" secondAttribute="centerX" id="LqF-9T-evb"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" name="Swaap Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" name="Swaap Secondary Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="contactsScreen" translatesAutoresizingMaskIntoConstraints="NO" id="t3b-i5-pvm">
+                                <rect key="frame" x="0.0" y="49" width="414" height="773"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ElR-rd-UhB">
+                                <rect key="frame" x="177" y="295.5" width="60" height="44"/>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="cRG-3d-tCY"/>
+                                    <constraint firstAttribute="height" constant="46" id="xvk-EA-Lb4"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click on your profile to edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGk-Im-2Rf">
+                                <rect key="frame" x="104.5" y="352" width="205" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ElR-rd-UhB" firstAttribute="top" secondItem="VrX-Cu-JLL" secondAttribute="top" constant="250.5" id="1L1-Nd-5vh"/>
+                            <constraint firstItem="7y9-Uy-Czz" firstAttribute="top" secondItem="MPs-eR-bc9" secondAttribute="top" id="3mG-38-yWS"/>
+                            <constraint firstItem="UGk-Im-2Rf" firstAttribute="top" secondItem="ElR-rd-UhB" secondAttribute="bottom" constant="11.5" id="7bW-4J-Rm3"/>
+                            <constraint firstItem="t3b-i5-pvm" firstAttribute="top" secondItem="VrX-Cu-JLL" secondAttribute="top" constant="5" id="HXn-r7-ONI"/>
+                            <constraint firstAttribute="bottom" secondItem="7y9-Uy-Czz" secondAttribute="bottom" id="Say-jX-sl1"/>
+                            <constraint firstItem="VrX-Cu-JLL" firstAttribute="bottom" secondItem="YhQ-Ap-MpO" secondAttribute="bottom" constant="8" id="VIR-GN-LcW"/>
+                            <constraint firstItem="t3b-i5-pvm" firstAttribute="leading" secondItem="VrX-Cu-JLL" secondAttribute="leading" id="XYm-kY-xiY"/>
+                            <constraint firstItem="t3b-i5-pvm" firstAttribute="trailing" secondItem="VrX-Cu-JLL" secondAttribute="trailing" id="YOL-Vl-wEK"/>
+                            <constraint firstItem="UGk-Im-2Rf" firstAttribute="centerX" secondItem="t3b-i5-pvm" secondAttribute="centerX" id="Zf6-fM-kLT"/>
+                            <constraint firstItem="7y9-Uy-Czz" firstAttribute="trailing" secondItem="VrX-Cu-JLL" secondAttribute="trailing" id="ckS-9p-6Z0"/>
+                            <constraint firstItem="ElR-rd-UhB" firstAttribute="centerX" secondItem="t3b-i5-pvm" secondAttribute="centerX" id="iAN-iO-V9W"/>
+                            <constraint firstItem="7y9-Uy-Czz" firstAttribute="leading" secondItem="VrX-Cu-JLL" secondAttribute="leading" id="kxs-XF-AzH"/>
+                            <constraint firstItem="YhQ-Ap-MpO" firstAttribute="top" secondItem="t3b-i5-pvm" secondAttribute="bottom" constant="2" id="tgi-e9-i1T"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VrX-Cu-JLL"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rob-yG-ZgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1502.8985507246377" y="137.94642857142856"/>
+        </scene>
+        <!--Screen Three-->
+        <scene sceneID="i3g-6x-IDt">
+            <objects>
+                <viewController storyboardIdentifier="ScreenThree" id="opG-lP-rwf" customClass="ScreenThree" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yHt-tg-n0r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5l-Zf-RNv" customClass="GradientView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EditProfile" translatesAutoresizingMaskIntoConstraints="NO" id="7mi-yk-OOa">
+                                        <rect key="frame" x="20" y="52" width="374" height="753"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="753" id="8Tk-Kj-vi9"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="00z-BF-Gzs">
+                                        <rect key="frame" x="284" y="373" width="60" height="44"/>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="mfU-PW-FBo"/>
+                                            <constraint firstAttribute="height" constant="46" id="wYK-Ol-UhX"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click here to edit photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQf-YP-ryh">
+                                        <rect key="frame" x="205.5" y="426" width="178.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y81-Uq-0OC">
+                                        <rect key="frame" x="192" y="824" width="30" height="30"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="B4E-w3-RFS" kind="show" id="zs4-AR-vaY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="Y81-Uq-0OC" firstAttribute="centerX" secondItem="b5l-Zf-RNv" secondAttribute="centerX" id="0LJ-7G-7lR"/>
+                                    <constraint firstAttribute="trailing" secondItem="7mi-yk-OOa" secondAttribute="trailing" constant="20" id="A9R-tr-gqv"/>
+                                    <constraint firstItem="LQf-YP-ryh" firstAttribute="top" secondItem="00z-BF-Gzs" secondAttribute="bottom" constant="8" id="CiI-rU-Rd9"/>
+                                    <constraint firstItem="00z-BF-Gzs" firstAttribute="top" secondItem="7mi-yk-OOa" secondAttribute="top" constant="320" id="IX6-W5-GW1"/>
+                                    <constraint firstItem="LQf-YP-ryh" firstAttribute="trailing" secondItem="7mi-yk-OOa" secondAttribute="trailing" constant="-10" id="cRy-SV-5rK"/>
+                                    <constraint firstItem="Y81-Uq-0OC" firstAttribute="top" secondItem="7mi-yk-OOa" secondAttribute="bottom" constant="19" id="dBu-Sq-kZ4"/>
+                                    <constraint firstItem="00z-BF-Gzs" firstAttribute="trailing" secondItem="7mi-yk-OOa" secondAttribute="trailing" constant="-50" id="iK2-ta-kal"/>
+                                    <constraint firstItem="7mi-yk-OOa" firstAttribute="leading" secondItem="b5l-Zf-RNv" secondAttribute="leading" constant="20" id="xVe-FB-Plf"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" name="Swaap Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" name="Swaap Secondary Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="XEZ-aH-tEu" firstAttribute="bottom" secondItem="Y81-Uq-0OC" secondAttribute="bottom" constant="8" id="9rT-zA-HTa"/>
+                            <constraint firstItem="7mi-yk-OOa" firstAttribute="top" secondItem="XEZ-aH-tEu" secondAttribute="top" constant="8" id="PcR-w9-3GI"/>
+                            <constraint firstAttribute="bottom" secondItem="b5l-Zf-RNv" secondAttribute="bottom" id="XHO-ga-3Gi"/>
+                            <constraint firstItem="b5l-Zf-RNv" firstAttribute="leading" secondItem="XEZ-aH-tEu" secondAttribute="leading" id="ceO-Ip-gF7"/>
+                            <constraint firstItem="b5l-Zf-RNv" firstAttribute="trailing" secondItem="XEZ-aH-tEu" secondAttribute="trailing" id="gdP-Tk-e4W"/>
+                            <constraint firstItem="b5l-Zf-RNv" firstAttribute="top" secondItem="yHt-tg-n0r" secondAttribute="top" id="j3i-Mq-gLL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XEZ-aH-tEu"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F8g-yL-BaG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2189.8550724637685" y="137.94642857142856"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="uPL-ES-Zu9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="B4E-w3-RFS" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Fps-ZB-JqT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uOj-3e-WcS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4503" y="138"/>
+        </scene>
+        <!--Screen Five-->
+        <scene sceneID="bZC-Zf-aw9">
+            <objects>
+                <viewController storyboardIdentifier="ScreenFive" id="OTl-XV-4qn" customClass="ScreenFive" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oxg-xw-7Nr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wtx-aI-Xcw" customClass="GradientView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Om9-rk-C8y">
+                                        <rect key="frame" x="8" y="84" width="398" height="412"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ConnectCard" translatesAutoresizingMaskIntoConstraints="NO" id="14r-Ql-POF">
+                                                <rect key="frame" x="0.0" y="0.0" width="189" height="412"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QRCode" translatesAutoresizingMaskIntoConstraints="NO" id="3f5-q2-DEd">
+                                                <rect key="frame" x="209" y="0.0" width="189" height="412"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe up on the Connection Card to reveal the QR Code underneath, or Tap the Camera button to scan someone else's QR Code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zND-r5-J9g">
+                                        <rect key="frame" x="16" y="520" width="382" height="96"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pm4-m7-BIg" customClass="ButtonHelper" customModule="swaap" customModuleProvider="target">
+                                        <rect key="frame" x="107" y="814" width="200" height="40"/>
+                                        <color key="backgroundColor" name="Swaap Background Color Burple"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="6YM-A9-gD6"/>
+                                            <constraint firstAttribute="width" constant="200" id="faB-7R-LDV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Get Started">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="B4E-w3-RFS" kind="show" id="yuQ-sr-b0T"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="zND-r5-J9g" secondAttribute="trailing" constant="16" id="FUS-yW-j6N"/>
+                                    <constraint firstItem="zND-r5-J9g" firstAttribute="top" secondItem="Om9-rk-C8y" secondAttribute="bottom" constant="24" id="J0m-zp-3WL"/>
+                                    <constraint firstItem="zND-r5-J9g" firstAttribute="leading" secondItem="Wtx-aI-Xcw" secondAttribute="leading" constant="16" id="Pqs-Ss-SUy"/>
+                                    <constraint firstAttribute="bottom" secondItem="Om9-rk-C8y" secondAttribute="bottom" constant="400" id="WSl-Qp-sig"/>
+                                    <constraint firstAttribute="bottom" secondItem="zND-r5-J9g" secondAttribute="bottom" constant="280" id="ZDX-cY-hmE"/>
+                                    <constraint firstItem="Pm4-m7-BIg" firstAttribute="centerX" secondItem="Wtx-aI-Xcw" secondAttribute="centerX" id="dXQ-6Z-Dh2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pm4-m7-BIg" secondAttribute="bottom" constant="42" id="sKe-A2-Uhp"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" name="Swaap Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" name="Swaap Secondary Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Wtx-aI-Xcw" secondAttribute="bottom" id="2wp-Ji-hqz"/>
+                            <constraint firstItem="Om9-rk-C8y" firstAttribute="leading" secondItem="hGm-zd-f2t" secondAttribute="leading" constant="8" id="7ng-Wc-1ZO"/>
+                            <constraint firstItem="Wtx-aI-Xcw" firstAttribute="leading" secondItem="hGm-zd-f2t" secondAttribute="leading" id="DlB-Gb-soT"/>
+                            <constraint firstItem="Om9-rk-C8y" firstAttribute="top" secondItem="hGm-zd-f2t" secondAttribute="top" constant="40" id="S61-MO-lob"/>
+                            <constraint firstItem="Wtx-aI-Xcw" firstAttribute="top" secondItem="oxg-xw-7Nr" secondAttribute="top" id="a2j-cm-VUv"/>
+                            <constraint firstItem="hGm-zd-f2t" firstAttribute="trailing" secondItem="Om9-rk-C8y" secondAttribute="trailing" constant="8" id="irt-Rn-p3s"/>
+                            <constraint firstItem="Wtx-aI-Xcw" firstAttribute="trailing" secondItem="hGm-zd-f2t" secondAttribute="trailing" id="kR6-9O-zea"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hGm-zd-f2t"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ssQ-Kp-3h2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3548" y="138"/>
+        </scene>
+        <!--Screen Four-->
+        <scene sceneID="LOB-eY-zDB">
+            <objects>
+                <viewController storyboardIdentifier="ScreenFour" id="VDj-Ts-kMj" customClass="ScreenFour" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Ru-UR-JZ7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yw-a8-JRx" customClass="GradientView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tq7-G0-4cB">
+                                        <rect key="frame" x="20" y="71" width="374" height="791"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EditProfile2" translatesAutoresizingMaskIntoConstraints="NO" id="njT-KX-X09">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="430"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="430" id="sD2-mw-cV2"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click on Add Contact Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6t-mK-vR6">
+                                                <rect key="frame" x="0.0" y="461.5" width="225" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20.5" id="BV6-mk-c3s"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Contact Icons" translatesAutoresizingMaskIntoConstraints="NO" id="jYc-f8-A9n">
+                                                <rect key="frame" x="0.0" y="513" width="374" height="165"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="165" id="D8w-gX-JCc"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter username and choose icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azN-pR-ffq">
+                                                <rect key="frame" x="0.0" y="709.5" width="250.5" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20.5" id="gm8-gJ-zCY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PrN-tJ-2jX">
+                                                <rect key="frame" x="0.0" y="761" width="374" height="30"/>
+                                                <state key="normal" title="Skip">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="B4E-w3-RFS" kind="show" id="NKz-VJ-dDk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="PrN-tJ-2jX" firstAttribute="centerX" secondItem="tq7-G0-4cB" secondAttribute="centerX" id="Kfw-ew-qZ4"/>
+                                            <constraint firstItem="azN-pR-ffq" firstAttribute="leading" secondItem="tq7-G0-4cB" secondAttribute="leading" id="Q8z-Uh-Utj"/>
+                                        </constraints>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NNP-cs-Cm8">
+                                        <rect key="frame" x="15" y="406" width="60" height="44"/>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="cTj-zi-hI4"/>
+                                            <constraint firstAttribute="width" constant="60" id="gUX-II-Fmb"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="NNP-cs-Cm8" firstAttribute="leading" secondItem="njT-KX-X09" secondAttribute="leading" constant="-5" id="4nt-Fq-oDd"/>
+                                    <constraint firstItem="NNP-cs-Cm8" firstAttribute="bottom" secondItem="njT-KX-X09" secondAttribute="bottom" constant="-50" id="6MJ-kn-NCq"/>
+                                    <constraint firstAttribute="trailing" secondItem="tq7-G0-4cB" secondAttribute="trailing" constant="20" id="gPg-HV-uBW"/>
+                                    <constraint firstItem="tq7-G0-4cB" firstAttribute="leading" secondItem="1yw-a8-JRx" secondAttribute="leading" constant="20" id="rw4-tW-DKA"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" name="Swaap Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" name="Swaap Secondary Background Color Burple"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1yw-a8-JRx" secondAttribute="bottom" id="TIj-QD-Sbl"/>
+                            <constraint firstItem="1yw-a8-JRx" firstAttribute="top" secondItem="3Ru-UR-JZ7" secondAttribute="top" id="YHx-3u-LYE"/>
+                            <constraint firstItem="1yw-a8-JRx" firstAttribute="trailing" secondItem="xdS-60-BRt" secondAttribute="trailing" id="ZAW-HC-kbu"/>
+                            <constraint firstItem="1yw-a8-JRx" firstAttribute="leading" secondItem="xdS-60-BRt" secondAttribute="leading" id="li2-Yj-pHR"/>
+                            <constraint firstItem="xdS-60-BRt" firstAttribute="bottom" secondItem="tq7-G0-4cB" secondAttribute="bottom" id="mep-8s-IRl"/>
+                            <constraint firstItem="tq7-G0-4cB" firstAttribute="top" secondItem="xdS-60-BRt" secondAttribute="top" constant="27" id="yUf-9B-3Sw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xdS-60-BRt"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w3e-SQ-33V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2871.0144927536235" y="137.94642857142856"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="zs4-AR-vaY"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="ConnectCard" width="1125" height="1532"/>
+        <image name="Contact Icons" width="828" height="365"/>
+        <image name="EditProfile" width="828" height="1666"/>
+        <image name="EditProfile2" width="828" height="1052"/>
+        <image name="QRCode" width="1125" height="1328"/>
+        <image name="arrow.down" catalog="system" width="120" height="128"/>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="arrow.up" catalog="system" width="120" height="128"/>
+        <image name="contactsScreen" width="1125" height="2436"/>
+        <image name="swaapLogoBlack-whiteThickOutline" width="545" height="240"/>
+        <namedColor name="Swaap Background Color Burple">
+            <color red="0.22745098039215686" green="0.29803921568627451" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Swaap Secondary Background Color Burple">
+            <color red="0.61960784313725492" green="0.26666666666666666" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

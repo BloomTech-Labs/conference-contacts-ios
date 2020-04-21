@@ -28,5 +28,4 @@ enum ProfileFieldPrivacy: String, Codable, Hashable {
 
 	case `public`
 	case `private`
-	case connected
 }

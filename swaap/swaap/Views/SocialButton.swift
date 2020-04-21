@@ -30,7 +30,7 @@ class SocialButton: IBPreviewControl {
 		}
 	}
 
-	var infoNugget: ProfileInfoNugget = ProfileInfoNugget(type: .twitter, value: "@swaapApp") {
+	var infoNugget: ProfileInfoNugget = ProfileInfoNugget(type: .email, value: "unspecified") {
 		didSet {
 			updateSocialPlatformType()
 		}
@@ -74,6 +74,7 @@ class SocialButton: IBPreviewControl {
 		#if TARGET_INTERFACE_BUILDER
 		return
 		#endif
+		
 		let nib = UINib(nibName: "SocialButton", bundle: nil)
 		nib.instantiate(withOwner: self, options: nil)
 
