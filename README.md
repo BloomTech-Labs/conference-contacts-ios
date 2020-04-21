@@ -26,7 +26,9 @@
 
 ## Project Overview
 
-* You can find the deployed project at [Swaap on TestFlight](https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1489988902/testflight?section=build&subsection=testers&id=58839d93-df6a-4175-9163-018050500150).
+* You can find the deployed project [the iOS App Store](https://apple.co/37dNMdI) or the deployed [website](htt[s://swaap.co]).
+
+* [Project Video](https://www.youtube.com/watch?v=udMbmjqXUrc)
 
 * [Trello Board](https://trello.com/b/Jh8cS46t/conference-contacts)
 

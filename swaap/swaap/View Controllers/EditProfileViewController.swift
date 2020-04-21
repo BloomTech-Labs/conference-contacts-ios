@@ -157,6 +157,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	
 	// MARK: - Helper Methods
 	// MARK: Saving
+	/// gathers all the saved values, configures operations to update everything, and prioritizes the operations so that
+	/// the updates happen before fetching data from the server (otherwise you might get old data!)
 	private func saveProfile() {
 		//no image handling
 		guard let name = nameField.valueText else { return }
@@ -228,6 +230,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	}
 	
 	// MARK: Saving Helpers
+	/// This generates a generic completion closure to avoid repeating it every time an update operation completes.
 	private func concurrentCompletion(with semaphore: DispatchSemaphore) -> (Result<GQLMutationResponse, NetworkError>) -> Void {
 		let closure = { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
 			switch result {
@@ -240,7 +243,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 		return closure
 	}
-	
+
+	/// Generates a concurrent update operation for the user profile. This means fields like the user's name, location, tagline, etc.
+
 	private func profileUpdateOperation(newProfile: UserProfile, imageUpdateOperation: ImageUpdateOperation?) -> ConcurrentOperation {
 		let semaphore = DispatchSemaphore(value: 0)
 		let completion = concurrentCompletion(with: semaphore)
@@ -255,7 +260,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 		return profileUpdate
 	}
-	
+
+	/// Generates a concurrent fetch of the user profile. Must run after all the other updates complete.
+
 	private func profileRefreshOperation() -> ConcurrentOperation {
 		let profileRefresh = ConcurrentOperation { [weak self] in
 			let semaphore = DispatchSemaphore(value: 0)
@@ -273,7 +280,10 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 		return profileRefresh
 	}
-	
+
+	/// Generates a concurrent operation to create the user's new social media and contact methods, as those are
+	/// handled separately from the user's profile.
+
 	private func createContactMethodsOperation(createdMethods: [ProfileContactMethod]) -> ConcurrentOperation {
 		let semaphore = DispatchSemaphore(value: 0)
 		let completion = concurrentCompletion(with: semaphore)
@@ -286,8 +296,10 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 		return createContactMethods
 	}
-	
-	private func updateContactMethodsOperation(updatedMethods: [ProfileContactMethod]) -> ConcurrentOperation {
+
+	/// Generates a concurrent operation to update the existing the user's new social media and contact methods, as those are
+	/// handled separately from the user's profile.
+		private func updateContactMethodsOperation(updatedMethods: [ProfileContactMethod]) -> ConcurrentOperation {
 		let semaphore = DispatchSemaphore(value: 0)
 		let completion = concurrentCompletion(with: semaphore)
 		let updateContactMethods = ConcurrentOperation { [weak self] in
@@ -299,7 +311,9 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		}
 		return updateContactMethods
 	}
-	
+
+	/// Generates a concurrent operation to delete the user's removed social media and contact methods, as those are
+	/// handled separately from the user's profile.
 	private func deleteContactMethodsOperation(deletedContactMethods: [ProfileContactMethod]) -> ConcurrentOperation {
 		let semaphore = DispatchSemaphore(value: 0)
 		let completion = concurrentCompletion(with: semaphore)
