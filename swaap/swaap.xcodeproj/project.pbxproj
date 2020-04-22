@@ -105,6 +105,7 @@
 		37F934562398716300ACBA23 /* FloatingTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934552398716300ACBA23 /* FloatingTextFieldView.swift */; };
 		37F934582398941400ACBA23 /* InputTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F934572398941400ACBA23 /* InputTextFieldViewController.swift */; };
 		37F93466239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */; };
+		63099576244E13DF001CB9F1 /* isUITesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63099575244E13DF001CB9F1 /* isUITesting.swift */; };
 		6318CBA1243FB90D0035ABA2 /* Auth0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33917DF92384C3B000BC1501 /* Auth0.framework */; };
 		6318CBA5243FBDD00035ABA2 /* QRettyCode in Frameworks */ = {isa = PBXBuildFile; productRef = 6318CBA4243FBDD00035ABA2 /* QRettyCode */; };
 		6318CBA7243FC0490035ABA2 /* JWTDecode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6318CBA6243FC0490035ABA2 /* JWTDecode.framework */; };
@@ -116,6 +117,8 @@
 		63982195244639A300DBCFD7 /* ScreenThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63982194244639A300DBCFD7 /* ScreenThree.swift */; };
 		63C3BCB5244615B40039634D /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C3BCB4244615B40039634D /* Onboarding.storyboard */; };
 		63C3BCBA24461B1E0039634D /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C3BCB924461B1E0039634D /* OnboardingPageViewController.swift */; };
+		63E6D13D244E0BF60052DFB5 /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E6D13C244E0BF60052DFB5 /* UserDefaultsTests.swift */; };
+		63E6D141244E0C610052DFB5 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E6D140244E0C610052DFB5 /* UserDefaultsMock.swift */; };
 		63F3732324464A480071886A /* ScreenFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3732224464A480071886A /* ScreenFour.swift */; };
 /* End PBXBuildFile section */
 
@@ -275,6 +278,7 @@
 		37F934552398716300ACBA23 /* FloatingTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextFieldView.swift; sourceTree = "<group>"; };
 		37F934572398941400ACBA23 /* InputTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldViewController.swift; sourceTree = "<group>"; };
 		37F93465239A1D0F00ACBA23 /* SocialButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		63099575244E13DF001CB9F1 /* isUITesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isUITesting.swift; sourceTree = "<group>"; };
 		6318CBA6243FC0490035ABA2 /* JWTDecode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWTDecode.framework; path = Carthage/Build/iOS/JWTDecode.framework; sourceTree = "<group>"; };
 		6324013124466EC40072E9DA /* ScreenFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFive.swift; sourceTree = "<group>"; };
 		6398218E2446372400DBCFD7 /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 		63982194244639A300DBCFD7 /* ScreenThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenThree.swift; sourceTree = "<group>"; };
 		63C3BCB4244615B40039634D /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		63C3BCB924461B1E0039634D /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		63E6D13C244E0BF60052DFB5 /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
+		63E6D140244E0C610052DFB5 /* UserDefaultsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMock.swift; sourceTree = "<group>"; };
 		63F3732224464A480071886A /* ScreenFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFour.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -382,6 +388,7 @@
 				33E8C7C223AC6025005E1E2C /* LocationHandler.swift */,
 				33E8C7DF23AD884D005E1E2C /* SwaapGQLQueries.swift */,
 				33848F8323C7A06D00803D71 /* ReleaseState.swift */,
+				63099575244E13DF001CB9F1 /* isUITesting.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -446,6 +453,8 @@
 				3399F88023A0B69200A17D0D /* RangeTests.swift */,
 				33094E8D23AB327200D5556B /* TestConstants.swift */,
 				37A185BC237A357C002191B5 /* Info.plist */,
+				63E6D13C244E0BF60052DFB5 /* UserDefaultsTests.swift */,
+				63E6D140244E0C610052DFB5 /* UserDefaultsMock.swift */,
 			);
 			path = swaapTests;
 			sourceTree = "<group>";
@@ -871,6 +880,7 @@
 				33094E7C23AA13B700D5556B /* CoreDataStack.swift in Sources */,
 				332FD21123A031C800074F28 /* Codable+ToDict.swift in Sources */,
 				3377AF9023AB45290083EC52 /* Contact.swift in Sources */,
+				63099576244E13DF001CB9F1 /* isUITesting.swift in Sources */,
 				3797A56E23885E9C00CB8621 /* ProfileViewController.swift in Sources */,
 				63C3BCBA24461B1E0039634D /* OnboardingPageViewController.swift in Sources */,
 				33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */,
@@ -926,8 +936,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E6D13D244E0BF60052DFB5 /* UserDefaultsTests.swift in Sources */,
 				3399F88123A0B69200A17D0D /* RangeTests.swift in Sources */,
 				3345A34F2390C6B700859F29 /* VectorTests.swift in Sources */,
+				63E6D141244E0C610052DFB5 /* UserDefaultsMock.swift in Sources */,
 				33E8C7EA23AD898C005E1E2C /* QueryTests.swift in Sources */,
 				37A185BB237A357C002191B5 /* swaapTests.swift in Sources */,
 				33094E8E23AB327200D5556B /* TestConstants.swift in Sources */,
