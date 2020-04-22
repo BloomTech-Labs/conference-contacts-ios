@@ -9,6 +9,7 @@
 import UIKit
 import QRettyCode
 
+/// Originally we meant to have NFC to swap info when you swipe your card up. Definitely a good release canvas item.
 class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor {
 	
 	@IBOutlet private weak var connectLabel: UILabel!
@@ -36,8 +37,10 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 	}
 	
 	var contactsController: ContactsController?
-	
-	/// '"push" notification timer - just refreshses frequently to give the appearance that there are push notifications to notifiy you when you get a request
+
+	/// '"push" notification timer - just refreshses frequently to give the appearance that there are push notifications
+	/// to notifiy you when you get a request - should definitely get updated to use real push notifications
+
 	var pushNotificationTimer: Timer?
 	
 	override var prefersStatusBarHidden: Bool {
@@ -47,6 +50,8 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		smallProfileCard.isSmallProfileCard = true
+		smallProfileCard.accessibilityIdentifier = "smallProfileCard"
+		swaapLogo.accessibilityIdentifier = "QRCode"
 		setupUI()
 		updateProfileCard()
 		updateQRCode()

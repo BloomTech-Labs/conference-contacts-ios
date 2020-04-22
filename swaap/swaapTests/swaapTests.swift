@@ -59,14 +59,6 @@ class SwaapTests: XCTestCase {
 		(nil, 500, NetworkError.unspecifiedError(reason: "bad input"))
 	}
 
-//	override func setUp() {
-//		// Put setup code here. This method is called before the invocation of each test method in the class.
-//	}
-//
-//	override func tearDown() {
-//		// Put teardown code here. This method is called after the invocation of each test method in the class.
-//	}
-
 	// MARK: - Profile Controller tests
 	func testFetchCurrentUser() {
 		let profileController = getProfileController()
@@ -210,27 +202,4 @@ class SwaapTests: XCTestCase {
 			}
 		}
 	}
-
-	// setup mocking - i think this fails because the jwt is too old (mocking would fix)
-//	func testFetchAllConnections() {
-//		let contactController = getContactController()
-//
-//		let waitForNetwork = expectation(description: "test")
-//		contactController.fetchAllContacts { result in
-//			do {
-//				let response = try result.get()
-//				print(response)
-//				// setup mocking
-//				// this is where confirming good data would go (set up mocking!)
-//			} catch {
-//				XCTFail("Error testing all connection fetch: \(error)")
-//			}
-//			waitForNetwork.fulfill()
-//		}
-//		waitForExpectations(timeout: 10) { error in
-//			if let error = error {
-//				XCTFail("Timed out waiting for an expectation: \(error)")
-//			}
-//		}
-//	}
 }

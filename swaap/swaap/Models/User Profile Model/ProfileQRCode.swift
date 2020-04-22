@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Used specially for retrieving QR data from GraphQL
 struct ProfileQRCodeContainer: Decodable {
 	let qrCode: ProfileQRCode
 
@@ -23,6 +24,7 @@ struct ProfileQRCodeContainer: Decodable {
 	}
 }
 
+/// Stores data for generating a QR code.
 struct ProfileQRCode: Codable, Hashable {
 	let id: String
 	let label: String

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Currently used ephemerally. JSON arrives in this form, its data is cached in CoreData, then the instances are discarded.
 struct Contact: Codable, Hashable {
 	let id: String
 	let sender: UserProfile?

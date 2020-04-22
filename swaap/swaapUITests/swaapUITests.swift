@@ -46,7 +46,7 @@ class SwaapUITests: XCTestCase {
 
 	// MARK: - Navigate to Detail View
 	func navigateToProfileCardView() {
-		app.tables["Jake Callahan"].staticTexts["ProfileHeaderLabel"].tap()
+		app.tables.staticTexts["ProfileHeaderLabel"].tap()
 	}
 
 	func backToTableViewFromProfileCardView() {
@@ -54,7 +54,7 @@ class SwaapUITests: XCTestCase {
 	}
 
 	func navigateToEditProfileVC() {
-		app.tables["Jake Callahan"].staticTexts["ProfileHeaderLabel"].tap()
+		app.tables.staticTexts["ProfileHeaderLabel"].tap()
 		app.buttons["EditButton"].tap()
 	}
 
@@ -234,6 +234,13 @@ class SwaapUITests: XCTestCase {
 		XCTAssertFalse(plusButton.exists)
 		XCTAssertFalse(atSymbol.exists)
 		XCTAssertFalse(separator.exists)
+	}
+	
+	func testQRCodeDisplaysUnderConnectCard() {
+		app.tabBars.buttons["Connect"].tap()
+		app.otherElements["smallProfileCard"].swipeUp()
+		XCTAssert(app.images["QRCode"].exists)
+		XCTAssertNotNil(app.images["QRCode"])
 	}
 }
 

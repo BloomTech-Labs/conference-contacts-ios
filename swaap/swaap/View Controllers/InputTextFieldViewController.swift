@@ -8,6 +8,8 @@
 
 import UIKit
 
+/// Presented when the user needs to edit text on their profile. It's a clean way of getting around the whole textview
+/// behind the keyboard issue.
 class InputTextFieldViewController: UIViewController, Storyboarded {
 
 	@IBOutlet private weak var floatingTextFieldView: FloatingTextFieldView!
