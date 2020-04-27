@@ -168,11 +168,19 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 	}
 	
 	@objc private func shareURL() {
-		guard let url = exportShareURL() else { return }
-		let activity = UIActivityViewController(activityItems: [
-			"Check out this link, it will take you to my Swaap Profile", url
-		], applicationActivities: nil)
-		activity.popoverPresentationController?.sourceView = shareButton
-		present(activity, animated: true)
+		if !isUITesting {
+			guard let url = exportShareURL() else { return }
+			let activity = UIActivityViewController(activityItems: [
+				"Check out this link, it will take you to my Swaap Profile", url
+			], applicationActivities: nil)
+			activity.popoverPresentationController?.sourceView = shareButton
+			present(activity, animated: true)
+		} else {
+			let activity = UIActivityViewController(activityItems: [
+				"Check out this link, it will take you to my Swaap Profile", ""
+			], applicationActivities: nil)
+			activity.popoverPresentationController?.sourceView = shareButton
+			present(activity, animated: true)
+		}
 	}
 }
