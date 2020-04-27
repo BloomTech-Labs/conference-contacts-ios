@@ -202,4 +202,11 @@ class SwaapTests: XCTestCase {
 			}
 		}
 	}
+	
+	func testShareURL() {
+		let profileController = getProfileController()
+		XCTAssertNotNil(profileController.exportShareURL())
+		let url = URL(string: "\(profileController.liveSiteBaseURL)card/\(neUserID)")
+		XCTAssertEqual(profileController.exportShareURL(), url)
+	}
 }

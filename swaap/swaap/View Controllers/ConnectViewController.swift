@@ -159,20 +159,20 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 		swaapLogo.image = qrGen.image
 	}
 	
-	private func exportShareURL() -> URL? {
-		guard let userID = profileController?.userProfile?.id,
-			let baseURL = profileController?.liveSiteBaseURL
-			.appendingPathComponent("card")
-			.appendingPathComponent(userID) else { return nil }
-		return baseURL
-	}
-	
 	@objc private func shareURL() {
-		guard let url = exportShareURL() else { return }
-		let activity = UIActivityViewController(activityItems: [
-			"Check out this link, it will take you to my Swaap Profile", url
-		], applicationActivities: nil)
-		activity.popoverPresentationController?.sourceView = shareButton
-		present(activity, animated: true)
+		if !isUITesting {
+			guard let url = profileController?.exportShareURL() else { return }
+			let activity = UIActivityViewController(activityItems: [
+				"Check out this link, it will take you to my Swaap Profile", url
+			], applicationActivities: nil)
+			activity.popoverPresentationController?.sourceView = shareButton
+			present(activity, animated: true)
+		} else {
+			let activity = UIActivityViewController(activityItems: [
+				"Check out this link, it will take you to my Swaap Profile", ""
+			], applicationActivities: nil)
+			activity.popoverPresentationController?.sourceView = shareButton
+			present(activity, animated: true)
+		}
 	}
 }
