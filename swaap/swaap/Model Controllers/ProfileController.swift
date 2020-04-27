@@ -258,6 +258,15 @@ class ProfileController {
 			}
 		}
 	}
+	
+	// MARK: - Sharing
+	func exportShareURL() -> URL? {
+		guard let userID = self.userProfile?.id else { return nil }
+		let baseURL = self.liveSiteBaseURL
+		.appendingPathComponent("card")
+		.appendingPathComponent(userID)
+		return baseURL
+	}
 
 	// MARK: - ContactMethods
 
