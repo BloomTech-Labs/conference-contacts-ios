@@ -242,6 +242,14 @@ class SwaapUITests: XCTestCase {
 		XCTAssert(app.images["QRCode"].exists)
 		XCTAssertNotNil(app.images["QRCode"])
 	}
+	
+	func testShareSheet() {
+		app.tabBars.buttons["Connect"].tap()
+		app.buttons["Share"].tap()
+		sleep(2)
+		XCTAssert(app.otherElements["ActivityListView"].cells.containing(.staticText, identifier: "Copy").element(boundBy: 0).exists)
+		XCTAssert(app.otherElements["ActivityListView"].cells.containing(.staticText, identifier: "Messages").element(boundBy: 0).exists)
+	}
 }
 
 extension XCUIApplication {

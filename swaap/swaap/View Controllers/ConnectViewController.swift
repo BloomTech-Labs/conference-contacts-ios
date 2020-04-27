@@ -21,11 +21,20 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 	@IBOutlet private weak var buttonContainerBottomConstraint: NSLayoutConstraint!
 	@IBOutlet private weak var instructionsLabel: UILabel!
 	
+	let shareButton: UIButton = {
+		let button = UIButton()
+		button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+		button.tintColor = .swaapAccentColorOne
+		button.translatesAutoresizingMaskIntoConstraints = false
+		button.addTarget(self, action: #selector(shareURL), for: .touchUpInside)
+		return button
+	}()
+	
 	lazy var qrGen = QRettyCodeImageGenerator(data: self
-												.profileController?
-												.liveSiteBaseURL
-												.absoluteString
-												.data(using: .utf8),
+		.profileController?
+		.liveSiteBaseURL
+		.absoluteString
+		.data(using: .utf8),
 											  correctionLevel: .H,
 											  size: 212,
 											  style: .dots)
@@ -37,10 +46,10 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 	}
 	
 	var contactsController: ContactsController?
-
+	
 	/// '"push" notification timer - just refreshses frequently to give the appearance that there are push notifications
 	/// to notifiy you when you get a request - should definitely get updated to use real push notifications
-
+	
 	var pushNotificationTimer: Timer?
 	
 	override var prefersStatusBarHidden: Bool {
@@ -103,6 +112,11 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 			swipeUpLabelBottomConstraint.constant = 40
 			buttonContainerBottomConstraint.constant = 30
 		}
+		view.addSubview(shareButton)
+		NSLayoutConstraint.activate([
+			shareButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+			shareButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+		])
 		
 		swaapLogo.translatesAutoresizingMaskIntoConstraints = false
 		swaapLogo.centerYAnchor.constraint(equalTo: smallProfileCard.centerYAnchor).isActive = true
@@ -126,11 +140,11 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 			.appendingPathComponent(id)
 			.absoluteString
 			.data(using: .utf8)
-
+		
 		// variable properties
 		qrGen.data = data
 		qrGen.size = swaapLogo.bounds.maxX
-
+		
 		// static properties
 		qrGen.renderEffects = true
 		qrGen.gradientStyle = .linear
@@ -141,7 +155,24 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 		qrGen.gradientEndPoint = CGPoint(x: 1, y: 1)
 		qrGen.iconImage = .swaapLogoIconOnly
 		qrGen.iconImageScale = 0.7
-
+		
 		swaapLogo.image = qrGen.image
+	}
+	
+	@objc private func shareURL() {
+		if !isUITesting {
+			guard let url = profileController?.exportShareURL() else { return }
+			let activity = UIActivityViewController(activityItems: [
+				"Check out this link, it will take you to my Swaap Profile", url
+			], applicationActivities: nil)
+			activity.popoverPresentationController?.sourceView = shareButton
+			present(activity, animated: true)
+		} else {
+			let activity = UIActivityViewController(activityItems: [
+				"Check out this link, it will take you to my Swaap Profile", ""
+			], applicationActivities: nil)
+			activity.popoverPresentationController?.sourceView = shareButton
+			present(activity, animated: true)
+		}
 	}
 }
