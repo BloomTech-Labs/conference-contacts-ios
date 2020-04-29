@@ -28,7 +28,9 @@
 
 * You can find the deployed project [the iOS App Store](https://apple.co/37dNMdI) or the deployed [website](htt[s://swaap.co]).
 
-* [Project Video](https://www.youtube.com/watch?v=udMbmjqXUrc)
+* Project Videos:
+	* [Labs 18](https://www.youtube.com/watch?v=udMbmjqXUrc)
+	* [Labs 22]("https://www.youtube.com/watch?v=dmQT35PXuck")
 
 * Trello Board:
 	* [Labs 18](https://trello.com/b/Jh8cS46t/conference-contacts)
