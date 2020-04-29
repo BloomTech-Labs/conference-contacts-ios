@@ -30,7 +30,7 @@
 
 * Project Videos:
 	* [Labs 18](https://www.youtube.com/watch?v=udMbmjqXUrc)
-	* [Labs 22]("https://www.youtube.com/watch?v=dmQT35PXuck")
+	* [Labs 22](https://www.youtube.com/watch?v=dmQT35PXuck)
 
 * Trello Board:
 	* [Labs 18](https://trello.com/b/Jh8cS46t/conference-contacts)
