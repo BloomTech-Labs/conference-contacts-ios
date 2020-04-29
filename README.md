@@ -28,9 +28,13 @@
 
 * You can find the deployed project [the iOS App Store](https://apple.co/37dNMdI) or the deployed [website](htt[s://swaap.co]).
 
-* [Project Video](https://www.youtube.com/watch?v=udMbmjqXUrc)
+* Project Videos:
+	* [Labs 18](https://www.youtube.com/watch?v=udMbmjqXUrc)
+	* [Labs 22](https://www.youtube.com/watch?v=dmQT35PXuck)
 
-* [Trello Board](https://trello.com/b/Jh8cS46t/conference-contacts)
+* Trello Board:
+	* [Labs 18](https://trello.com/b/Jh8cS46t/conference-contacts)
+	* [Labs 22](https://trello.com/b/PSg0U9VH/labs-22-swaap)
 
 * [Product Canvas](https://www.notion.so/Release-1-0-Auth-User-Profile-7abf0ffafe804fc88e9af40ed335f17b)
 
@@ -38,8 +42,8 @@
 
 Swaap is an app to help professional people make great contacts at events such as conferences, conventions, or trade shows. A lot of times it can be difficult to keep track of the people you've added to your network. Swaap makes it super easy to swap contact information with others and keep in touch. Easy QR code reader or NFC will automatically redirect you to that person's profile page where you are shown many different ways to connect with that person. Their profile will even let you know what the best way to get in touch with them.
 
-<img src="Screenshots/girlLightFrontOfCard.png" width="400"> <img src="Screenshots/guyDarkFronOfCard.png" width="400">
-<img src="Screenshots/girlLightBackOfCard.png" width="400"> <img src="Screenshots/guyDarkBackOfcard.png" width="400">
+<img src="Screenshots/labs22LightProfile.png" width="400"> <img src="Screenshots/labs22DarkProfile.png" width="400">
+<img src="Screenshots/labs22LightQRCode.png" width="400"> <img src="Screenshots/labs22DarkQRCode.png" width="400">
 
 
 ### Features

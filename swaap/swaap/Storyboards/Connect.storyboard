@@ -238,66 +238,6 @@ tap button for camera</string>
             </objects>
             <point key="canvasLocation" x="1353.6231884057972" y="561.83035714285711"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="yxI-M4-SN8">
-            <objects>
-                <viewController storyboardIdentifier="QRViewController" id="BaM-Hi-uyt" customClass="QRViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cgi-jh-UfU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="chevron.compact.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Afz-eK-ifu">
-                                <rect key="frame" x="162.66666666666666" y="71" width="50" height="21"/>
-                                <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="cgF-uO-DwT"/>
-                                    <constraint firstAttribute="height" constant="35" id="ynj-Jk-ibd"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7D7-BL-Dvg">
-                                <rect key="frame" x="64" y="282.66666666666669" width="247" height="247.00000000000006"/>
-                                <accessibility key="accessibilityConfiguration" identifier="QRVC.QRImageView"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7D7-BL-Dvg" secondAttribute="height" multiplier="1:1" id="RmW-gM-qHz"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Once your new connection has their swaap app open to the camera, show them this QR code!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tep-kJ-WHZ">
-                                <rect key="frame" x="60" y="167.66666666666666" width="255" height="81.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Staging Environment)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OW-zh-r36">
-                                <rect key="frame" x="102" y="537.66666666666663" width="171" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="tep-kJ-WHZ" firstAttribute="leading" secondItem="oYF-fr-cMY" secondAttribute="leading" constant="60" id="L7C-gF-KNh"/>
-                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="centerY" secondItem="cgi-jh-UfU" secondAttribute="centerY" id="Tvj-T9-OBy"/>
-                            <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="7D7-BL-Dvg" secondAttribute="trailing" constant="64" id="XfA-vd-keZ"/>
-                            <constraint firstItem="Afz-eK-ifu" firstAttribute="centerX" secondItem="cgi-jh-UfU" secondAttribute="centerX" id="aMf-iu-b0Q"/>
-                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="top" secondItem="tep-kJ-WHZ" secondAttribute="bottom" constant="33.666666666666629" id="aTx-YL-Hiy"/>
-                            <constraint firstItem="8OW-zh-r36" firstAttribute="top" secondItem="7D7-BL-Dvg" secondAttribute="bottom" constant="8" id="ecd-xQ-MAn"/>
-                            <constraint firstItem="8OW-zh-r36" firstAttribute="centerX" secondItem="7D7-BL-Dvg" secondAttribute="centerX" id="gQr-mL-TcG"/>
-                            <constraint firstItem="oYF-fr-cMY" firstAttribute="trailing" secondItem="tep-kJ-WHZ" secondAttribute="trailing" constant="60" id="jOK-BD-kL7"/>
-                            <constraint firstItem="Afz-eK-ifu" firstAttribute="top" secondItem="oYF-fr-cMY" secondAttribute="top" constant="20" id="kLA-IL-edd"/>
-                            <constraint firstItem="7D7-BL-Dvg" firstAttribute="leading" secondItem="oYF-fr-cMY" secondAttribute="leading" constant="64" id="r0g-jA-DIq"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="oYF-fr-cMY"/>
-                    </view>
-                    <connections>
-                        <outlet property="qrImageView" destination="7D7-BL-Dvg" id="Pw7-dp-WUt"/>
-                        <outlet property="stagingIndicatorLabel" destination="8OW-zh-r36" id="avs-K6-bFJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="m22-3r-njp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="587" y="-195"/>
-        </scene>
         <!--Swipe Back Navigation Controller-->
         <scene sceneID="IB4-Tw-Dff">
             <objects>
@@ -320,7 +260,6 @@ tap button for camera</string>
     </scenes>
     <resources>
         <image name="camera.viewfinder" catalog="system" width="128" height="114"/>
-        <image name="chevron.compact.down" catalog="system" width="128" height="43"/>
         <image name="dot.radiowaves.left.and.right" catalog="system" width="128" height="89"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="swaaplogoblues" width="233" height="333"/>
