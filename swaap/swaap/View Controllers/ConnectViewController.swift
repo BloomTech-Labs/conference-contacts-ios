@@ -87,10 +87,6 @@ class ConnectViewController: UIViewController, ProfileAccessor, ContactsAccessor
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let qrVC = segue.destination as? QRViewController {
-			qrVC.profileController = profileController
-		}
-		
 		if let swipebackVC = segue.destination as? SwipeBackNavigationController {
 			swipebackVC.contactsController = contactsController
 			swipebackVC.profileController = profileController

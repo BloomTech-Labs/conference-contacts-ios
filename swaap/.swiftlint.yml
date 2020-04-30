@@ -11,6 +11,7 @@
 disabled_rules: # rule identifiers to exclude from running
   - class_delegate_protocol # This breaks if you have a delegate protocol that inherits from a class-bound protocol (see: SwiftyTables DataSourceDelegate)
   - redundant_objc_attribute
+  - implicit_getter
 #  - todo
   - trailing_comma
   - vertical_parameter_alignment
