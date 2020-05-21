@@ -240,7 +240,7 @@ class ContactsController {
 				NSLog("Error fetching requested user: \(error)")
 				completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
 			}
-		}
+            } as? URLSessionDataTask
 	}
 
 	// MARK: - Connections (between users)

@@ -393,7 +393,7 @@ class ProfileController {
 	@discardableResult func fetchImage(url: URL,
 									   session: NetworkLoader = URLSession.shared,
 									   completion: @escaping (Result<Data, NetworkError>) -> Void) -> URLSessionDataTask? {
-		networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion)
+		networkHandler.transferMahDatas(with: url.request, usingCache: true, session: session, completion: completion) as? URLSessionDataTask
 	}
 
 	/// By default, only updates if photo is nil. `force` will force it to download, even if there's already data.
