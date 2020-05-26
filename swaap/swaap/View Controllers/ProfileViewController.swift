@@ -26,6 +26,9 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var bioHeaderContainer: UIView!
 	@IBOutlet private weak var bioLabelContainer: UIView!
 	@IBOutlet private weak var bioLabel: UILabel!
+    @IBOutlet private weak var notesHeaderContainer: UIView!
+    @IBOutlet private weak var notesLabelContainer: UIView!
+    @IBOutlet private weak var notesLabel: UILabel!
 	@IBOutlet private weak var locationViewContainer: UIView!
 	@IBOutlet private weak var locationView: BasicInfoView!
 	@IBOutlet private weak var birthdayImageContainerView: UIView!
@@ -119,6 +122,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		profileCardView.userProfile = userProfile
 		birthdayLabel.text = userProfile?.birthdate
 		bioLabel.text = userProfile?.bio ?? "No bio"
+        notesLabel.text = userProfile?.notes ?? "Make a note about a connection!" //added notes here
 
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil
@@ -141,6 +145,10 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		[bioHeaderContainer, bioLabelContainer].forEach {
 			$0?.isVisible = shouldShowLabelInfo(infoValueType: .string(bioLabel?.text))
 		}
+        //this makes the notes visible or not (test)
+        [notesHeaderContainer, notesLabelContainer].forEach {
+            $0?.isVisible = shouldShowLabelInfo(infoValueType: .string(notesLabel?.text))
+        }
 
 		let hasSocialButtons = !socialButtonsStackView.arrangedSubviews.isEmpty
 		socialButtonsStackView.isVisible = hasSocialButtons

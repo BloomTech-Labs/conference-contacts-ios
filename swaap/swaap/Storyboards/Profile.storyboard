@@ -170,6 +170,12 @@
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Browsing" translatesAutoresizingMaskIntoConstraints="NO" id="ISy-gp-OoL">
                                                         <rect key="frame" x="20" y="20" width="335" height="160"/>
                                                     </imageView>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="-287" width="335" height="645"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="ProfileVC.ProfileCard"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -178,6 +184,47 @@
                                                     <constraint firstItem="ISy-gp-OoL" firstAttribute="leading" secondItem="nPG-kz-aqn" secondAttribute="leading" constant="20" symbolic="YES" id="gWT-W0-4Jv"/>
                                                     <constraint firstAttribute="trailing" secondItem="ISy-gp-OoL" secondAttribute="trailing" constant="20" symbolic="YES" id="smv-O6-lH3"/>
                                                     <constraint firstAttribute="bottom" secondItem="ISy-gp-OoL" secondAttribute="bottom" constant="20" symbolic="YES" id="zPi-Ed-Mfx"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Znd-h1-fEB" userLabel="NOTES HEADER">
+                                                <rect key="frame" x="0.0" y="639" width="375" height="30"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="NOTES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6a-S9-l8g">
+                                                        <rect key="frame" x="30" y="7.3333333333333703" width="337" height="15.666666666666664"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="W6a-S9-l8g" firstAttribute="centerY" secondItem="Znd-h1-fEB" secondAttribute="centerY" id="dKZ-yN-4Pi"/>
+                                                    <constraint firstItem="W6a-S9-l8g" firstAttribute="leading" secondItem="Znd-h1-fEB" secondAttribute="leading" constant="30" id="j4C-Nk-rDu"/>
+                                                    <constraint firstAttribute="height" constant="30" id="ovh-G7-0t2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="W6a-S9-l8g" secondAttribute="trailing" constant="8" id="vaF-fc-xIZ"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="PRq-M3-AxR" userLabel="Notes Label Container">
+                                                <rect key="frame" x="0.0" y="629" width="375" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8da-Ay-Wys" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="30" y="6" width="315" height="38"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Make a note about a connection!"/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
+                                                                <color key="value" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="8da-Ay-Wys" secondAttribute="bottom" constant="6" id="0cV-pU-J8S"/>
+                                                    <constraint firstItem="8da-Ay-Wys" firstAttribute="top" secondItem="PRq-M3-AxR" secondAttribute="top" constant="6" id="Aw7-9m-cxz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8da-Ay-Wys" secondAttribute="trailing" constant="30" id="aZN-gJ-mzg"/>
+                                                    <constraint firstItem="8da-Ay-Wys" firstAttribute="leading" secondItem="PRq-M3-AxR" secondAttribute="leading" constant="30" id="hUm-DR-Yfq"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="uCD-iQ-yce" userLabel="Spacer View">
@@ -324,11 +371,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVY-7s-0Rc" customClass="ProfileCardView" customModule="swaap" customModuleProvider="target">
-                                <rect key="frame" x="20" y="44" width="335" height="645"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <accessibility key="accessibilityConfiguration" identifier="ProfileVC.ProfileCard"/>
-                            </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPr-IH-wav">
                                 <rect key="frame" x="307" y="52" width="40" height="40"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9Nk-BE-61X">
@@ -414,17 +456,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="mJq-vT-FfX" secondAttribute="bottom" id="1ze-mp-8ta"/>
-                            <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="uVY-7s-0Rc" secondAttribute="trailing" constant="20" id="6Sl-1R-mkM"/>
                             <constraint firstItem="AHm-Lv-sar" firstAttribute="centerY" secondItem="UHq-o5-Toi" secondAttribute="centerY" id="6xX-tE-A1F"/>
-                            <constraint firstItem="uVY-7s-0Rc" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" id="7Aj-MN-apA"/>
-                            <constraint firstItem="2AK-bp-vhK" firstAttribute="bottom" secondItem="uVY-7s-0Rc" secondAttribute="bottom" constant="40" id="7dD-mx-ibr"/>
                             <constraint firstItem="Emm-zV-NSj" firstAttribute="bottom" secondItem="UHq-o5-Toi" secondAttribute="bottom" id="AAX-ko-z2u"/>
                             <constraint firstItem="e8g-r6-4Ad" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="28" id="B6B-uy-t7H"/>
                             <constraint firstAttribute="trailing" secondItem="mJq-vT-FfX" secondAttribute="trailing" id="GvS-Rs-CFe"/>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="AHm-Lv-sar" secondAttribute="trailing" constant="50" id="L7d-h3-mDA"/>
                             <constraint firstItem="HPr-IH-wav" firstAttribute="top" secondItem="2AK-bp-vhK" secondAttribute="top" constant="8" id="Q8H-z6-JpE"/>
                             <constraint firstItem="AHm-Lv-sar" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="50" id="Rxp-Yk-TaQ"/>
-                            <constraint firstItem="uVY-7s-0Rc" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" constant="20" id="awe-CX-foi"/>
                             <constraint firstItem="2AK-bp-vhK" firstAttribute="trailing" secondItem="HPr-IH-wav" secondAttribute="trailing" constant="28" id="iM6-NL-2gK"/>
                             <constraint firstItem="Emm-zV-NSj" firstAttribute="leading" secondItem="2AK-bp-vhK" secondAttribute="leading" id="k3Z-UP-rGf"/>
                             <constraint firstItem="mJq-vT-FfX" firstAttribute="leading" secondItem="UHq-o5-Toi" secondAttribute="leading" id="pg8-sS-Pkw"/>
@@ -459,6 +497,9 @@
                         <outlet property="modesOfContactImageViewContainer" destination="kxb-bX-n7D" id="It2-pL-gHH"/>
                         <outlet property="modesOfContactPreviewStackView" destination="1vv-7w-fJ6" id="xAZ-ym-94O"/>
                         <outlet property="noInfoDescLabel" destination="AHm-Lv-sar" id="Nnv-jR-H4W"/>
+                        <outlet property="notesHeaderContainer" destination="Znd-h1-fEB" id="8Wb-lB-cqe"/>
+                        <outlet property="notesLabel" destination="8da-Ay-Wys" id="tgo-Dq-fl4"/>
+                        <outlet property="notesLabelContainer" destination="PRq-M3-AxR" id="PYi-J5-Pfj"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
                         <outlet property="scrollView" destination="Emm-zV-NSj" id="dCa-XL-gzp"/>
                         <outlet property="socialButtonsStackView" destination="5M8-KJ-9Zb" id="jTG-SD-nth"/>
@@ -480,7 +521,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0hM-cf-eNF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1360"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1428"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cC-yU-gWy" userLabel="Top Spacer">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
@@ -565,10 +606,10 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3QS-WX-1LM" userLabel="Contact Stack View">
-                                                <rect key="frame" x="0.0" y="392.66666666666669" width="375" height="967.33333333333326"/>
+                                                <rect key="frame" x="0.0" y="392.66666666666663" width="375" height="1035.3333333333335"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jfC-Cn-fEj" userLabel="Personal StackView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="526"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWf-ev-cbw" userLabel="about you title">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -715,10 +756,28 @@
                                                                     <outletCollection property="gestureRecognizers" destination="zP2-nK-2BY" appends="YES" id="MVP-gR-TLi"/>
                                                                 </connections>
                                                             </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jd0-v7-gJi" userLabel="Notes Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="534" width="375" height="60"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="EditVC.BioField"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="60" placeholder="YES" id="5pC-1X-5su"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Notes Field"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="valuePlaceholder" value="Tap to add notes"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="headerText" value="Notes"/>
+                                                                    <userDefinedRuntimeAttribute type="image" keyPath="icon" value="text.bubble" catalog="system"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="6bN-SF-Rlr" appends="YES" id="x91-XZ-rnU"/>
+                                                                </connections>
+                                                            </view>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ld0-lc-wax" userLabel="Social StackView">
-                                                        <rect key="frame" x="0.0" y="546" width="375" height="421.33333333333326"/>
+                                                        <rect key="frame" x="0.0" y="614" width="375" height="421.33333333333326"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGM-Ty-cAK" userLabel="title container">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="213.33333333333334"/>
@@ -733,7 +792,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="31V-iE-jq4">
-                                                                                <rect key="frame" x="0.0" y="26" width="359" height="171.33333333333334"/>
+                                                                                <rect key="frame" x="0.0" y="26.000000000000114" width="359" height="171.33333333333334"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3e-gB-N38" userLabel="Desc Label">
                                                                                         <rect key="frame" x="16" y="0.0" width="327" height="171.33333333333334"/>
@@ -944,6 +1003,7 @@ Long pressing one of contact methods will bring up privacy options:
                         <outlet property="jobTitleField" destination="MHK-cO-nG2" id="y0e-wz-MRq"/>
                         <outlet property="locationField" destination="e2d-l3-Sbb" id="qVP-QV-dLb"/>
                         <outlet property="nameField" destination="IsL-lI-ehj" id="9p8-Ky-oA7"/>
+                        <outlet property="notesField" destination="Jd0-v7-gJi" id="cdA-8U-M3D"/>
                         <outlet property="offScreenAnchor" destination="Ggx-g6-UZ4" id="CAQ-Sf-PN3"/>
                         <outlet property="onScreenAnchor" destination="H5k-e3-Mv8" id="arG-lh-hlz"/>
                         <outlet property="profileImageView" destination="pqy-Vz-bUe" id="G2J-gC-tTb"/>
@@ -985,6 +1045,12 @@ Long pressing one of contact methods will bring up privacy options:
                         <segue destination="UwA-CL-fsQ" kind="presentation" destinationCreationSelector="bioTextFieldViewController:" modalPresentationStyle="overFullScreen" id="KrJ-fd-45x"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="6bN-SF-Rlr" userLabel="Notes Tap Gesture">
+                    <connections>
+                        <action selector="notesTextFieldViewController:" destination="QhS-Jn-uwM" id="5QP-v1-1yI"/>
+                        <segue destination="UwA-CL-fsQ" kind="presentation" id="qpC-cg-dTk"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <tapGestureRecognizer id="xUr-AK-Nlh" userLabel="Tagline Tap Gesture">
                     <connections>
                         <segue destination="UwA-CL-fsQ" kind="presentation" destinationCreationSelector="taglineTextFieldViewController:" modalPresentationStyle="overFullScreen" id="LSS-ON-Zbq"/>
@@ -998,11 +1064,11 @@ Long pressing one of contact methods will bring up privacy options:
             <objects>
                 <viewController storyboardIdentifier="InputTextFieldViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UwA-CL-fsQ" customClass="InputTextFieldViewController" customModule="swaap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SmA-dc-CB8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BEE-EU-7ve" customClass="FloatingTextFieldView" customModule="swaap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="693" width="375" height="119"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BEE-EU-7ve" customClass="FloatingTextFieldView" customModule="swaap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="695" width="375" height="119"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="119" placeholder="YES" id="y0u-Wr-Sxq"/>
@@ -1189,7 +1255,7 @@ Long pressing one of contact methods will bring up privacy options:
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LSS-ON-Zbq"/>
+        <segue reference="qpC-cg-dTk"/>
         <segue reference="O5N-b6-MxP"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1211,6 +1277,7 @@ Long pressing one of contact methods will bring up privacy options:
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="quote.bubble" catalog="system" width="128" height="110"/>
         <image name="signature" catalog="system" width="128" height="90"/>
+        <image name="text.bubble" catalog="system" width="128" height="110"/>
         <namedColor name="Clear Gradient">
             <color red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

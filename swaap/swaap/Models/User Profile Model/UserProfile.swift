@@ -42,6 +42,7 @@ struct UserProfile: Codable, Hashable {
 		case jobTitle = "jobtitle"
 		case tagline
 		case bio
+        case notes //added here
 		case _profileContactMethods = "profile"
 		case _qrCodes = "qrcodes"
 	}
@@ -56,6 +57,7 @@ struct UserProfile: Codable, Hashable {
 	var jobTitle: String?
 	var tagline: String?
 	var bio: String?
+    var notes: String? //added here
 	private var _profileContactMethods: [ProfileContactMethod]?
 	var profileContactMethods: [ProfileContactMethod] {
 		get { _profileContactMethods ?? [] }
@@ -87,6 +89,7 @@ extension UserProfile {
 		self.id = id
 		self.authID = connectionContact.authID
 		self.bio = connectionContact.bio
+        self.notes = connectionContact.notes //added here
 		self.birthdate = connectionContact.birthdate
 		self.industry = connectionContact.industry
 		self.jobTitle = connectionContact.jobTitle
@@ -107,6 +110,7 @@ extension UserProfile {
 												 jobTitle: nil,
 												 tagline: nil,
 												 bio: nil,
+                                                 notes: nil, // added here
 												 _profileContactMethods: nil,
 												 _qrCodes: nil,
 												 photoData: nil)
@@ -129,6 +133,7 @@ struct UpdateUser: Codable {
 	let jobtitle: String?
 	let tagline: String?
 	let bio: String?
+    let notes: String? //added here
 
 	init(name: String? = nil,
 		 picture: URL? = nil,
@@ -137,7 +142,8 @@ struct UpdateUser: Codable {
 		 industry: String? = nil,
 		 jobtitle: String? = nil,
 		 tagline: String? = nil,
-		 bio: String? = nil) {
+		 bio: String? = nil,
+         notes: String?) {
 		self.name = name
 		self.picture = picture
 		self.birthdate = birthdate
@@ -146,6 +152,7 @@ struct UpdateUser: Codable {
 		self.jobtitle = jobtitle
 		self.tagline = tagline
 		self.bio = bio
+        self.notes = notes //added here
 	}
 
 	init(userProfile: UserProfile) {
@@ -157,5 +164,6 @@ struct UpdateUser: Codable {
 		jobtitle = userProfile.jobTitle
 		tagline = userProfile.tagline
 		bio = userProfile.bio
+        notes = userProfile.notes // added here
 	}
 }
