@@ -42,6 +42,8 @@ struct UserProfile: Codable, Hashable {
 		case jobTitle = "jobtitle"
 		case tagline
 		case bio
+        case notes //added here
+        case events // added events here
 		case _profileContactMethods = "profile"
 		case _qrCodes = "qrcodes"
 	}
@@ -56,6 +58,8 @@ struct UserProfile: Codable, Hashable {
 	var jobTitle: String?
 	var tagline: String?
 	var bio: String?
+    var notes: String? //added here
+    var events: String? // added events here
 	private var _profileContactMethods: [ProfileContactMethod]?
 	var profileContactMethods: [ProfileContactMethod] {
 		get { _profileContactMethods ?? [] }
@@ -87,6 +91,8 @@ extension UserProfile {
 		self.id = id
 		self.authID = connectionContact.authID
 		self.bio = connectionContact.bio
+        self.notes = connectionContact.notes //added here
+        self.events = connectionContact.events // added events here
 		self.birthdate = connectionContact.birthdate
 		self.industry = connectionContact.industry
 		self.jobTitle = connectionContact.jobTitle
@@ -107,6 +113,8 @@ extension UserProfile {
 												 jobTitle: nil,
 												 tagline: nil,
 												 bio: nil,
+                                                 notes: nil, // added here
+                                                 events: nil, // added evnets here
 												 _profileContactMethods: nil,
 												 _qrCodes: nil,
 												 photoData: nil)
@@ -129,6 +137,8 @@ struct UpdateUser: Codable {
 	let jobtitle: String?
 	let tagline: String?
 	let bio: String?
+    let notes: String?//added here
+    let events: String? //added events here
 
 	init(name: String? = nil,
 		 picture: URL? = nil,
@@ -137,7 +147,9 @@ struct UpdateUser: Codable {
 		 industry: String? = nil,
 		 jobtitle: String? = nil,
 		 tagline: String? = nil,
-		 bio: String? = nil) {
+		 bio: String? = nil,
+         notes: String?,
+         events: String?) {
 		self.name = name
 		self.picture = picture
 		self.birthdate = birthdate
@@ -146,6 +158,8 @@ struct UpdateUser: Codable {
 		self.jobtitle = jobtitle
 		self.tagline = tagline
 		self.bio = bio
+        self.notes = notes //added here
+        self.events = events //added events here
 	}
 
 	init(userProfile: UserProfile) {
@@ -157,5 +171,7 @@ struct UpdateUser: Codable {
 		jobtitle = userProfile.jobTitle
 		tagline = userProfile.tagline
 		bio = userProfile.bio
+        notes = userProfile.notes // added here
+        events = userProfile.events // added events 
 	}
 }
