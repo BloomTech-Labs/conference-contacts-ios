@@ -19,7 +19,8 @@ extension ConnectionContact {
 
 	@NSManaged public var authID: String?
 	@NSManaged public var bio: String?
-    @NSManaged public var notes: String? //added here 
+    @NSManaged public var notes: String? //added here
+    @NSManaged public var events: String? //added events here
 	@NSManaged public var birthdate: String?
 	@NSManaged public var connectionID: String?
 	@NSManaged public var connectionStatus: Int16

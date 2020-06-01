@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F96" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ConnectionContact" representedClassName="ConnectionContact" syncable="YES">
         <attribute name="authID" optional="YES" attributeType="String"/>
         <attribute name="bio" optional="YES" attributeType="String"/>
         <attribute name="birthdate" optional="YES" attributeType="String"/>
         <attribute name="connectionID" optional="YES" attributeType="String"/>
         <attribute name="connectionStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="events" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="industry" optional="YES" attributeType="String"/>
         <attribute name="jobTitle" optional="YES" attributeType="String"/>
@@ -28,7 +29,7 @@
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConnectionContact" inverseName="profileContactMethods" inverseEntity="ConnectionContact"/>
     </entity>
     <elements>
-        <element name="ConnectionContact" positionX="-126.6796875" positionY="-97.8046875" width="128" height="313"/>
+        <element name="ConnectionContact" positionX="-126.6796875" positionY="-97.8046875" width="128" height="328"/>
         <element name="ConnectionContactMethod" positionX="266.0859375" positionY="55.0703125" width="128" height="118"/>
     </elements>
 </model>
