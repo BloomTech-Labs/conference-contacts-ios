@@ -1,4 +1,4 @@
-github "auth0/Auth0.swift" "1.24.1"
+github "auth0/Auth0.swift" "1.25.0"
 github "auth0/JWTDecode.swift" "2.4.1"
 github "auth0/SimpleKeychain" "0.11.1"
 github "calda/SwiftyAcknowledgements" "0.4"
