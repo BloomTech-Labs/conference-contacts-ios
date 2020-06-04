@@ -6,5 +6,7 @@
 	<string>hrYC413DOYYljvgIx2zKfQhqFhH0VCLA</string>
 	<key>Domain</key>
 	<string>dev-1lez5gah.auth0.com</string>
+	<key>ClientSecret</key>
+	<string>OpqTXcGHZVwbtDlvXIs32hkmfpqmnOZZDJiYMIJsHgu2UziqAWYQjDAB3jwx90eH</string>
 </dict>
 </plist>

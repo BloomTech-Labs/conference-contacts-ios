@@ -51,8 +51,6 @@
 		33FEE0C923836AC3006BE880 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0C823836AC3006BE880 /* Auth0.plist */; };
 		33FEE0CF23837D8D006BE880 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0CE23837D8D006BE880 /* GradientView.swift */; };
 		33FEE0D223838ADD006BE880 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0D123838ADD006BE880 /* ColorHelper.swift */; };
-		33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; };
-		33FEE0E02384657D006BE880 /* IBPreview.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33FEE0E2238465A9006BE880 /* FormInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEE0E1238465A8006BE880 /* FormInputView.swift */; };
 		33FEE0E4238466AE006BE880 /* FormInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33FEE0E3238466AE006BE880 /* FormInputView.xib */; };
 		37218AFD238F8750008BFC24 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37218AFC238F8750008BFC24 /* ImageHelper.swift */; };
@@ -119,6 +117,8 @@
 		63E6D13D244E0BF60052DFB5 /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E6D13C244E0BF60052DFB5 /* UserDefaultsTests.swift */; };
 		63E6D141244E0C610052DFB5 /* UserDefaultsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E6D140244E0C610052DFB5 /* UserDefaultsMock.swift */; };
 		63F3732324464A480071886A /* ScreenFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F3732224464A480071886A /* ScreenFour.swift */; };
+		80F32C692472F326003F3411 /* IBPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; };
+		80F32C6A2472F326003F3411 /* IBPreview.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEE0DC2384656A006BE880 /* IBPreview.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,13 +153,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		37A2F419237CFF5E00C1EF3B /* Embed Frameworks */ = {
+		80F32C6B2472F326003F3411 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				33FEE0E02384657D006BE880 /* IBPreview.framework in Embed Frameworks */,
+				80F32C6A2472F326003F3411 /* IBPreview.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,10 +295,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33FEE0DF2384657D006BE880 /* IBPreview.framework in Frameworks */,
 				3399F89123A0E02B00A17D0D /* LoadinationIndicator.framework in Frameworks */,
 				6318CBA7243FC0490035ABA2 /* JWTDecode.framework in Frameworks */,
 				37A185EA237A40B8002191B5 /* SwiftyAcknowledgements.framework in Frameworks */,
+				80F32C692472F326003F3411 /* IBPreview.framework in Frameworks */,
 				330A720723C7C6E40097B48B /* NetworkHandler.framework in Frameworks */,
 				636484A62447811D00AE25D0 /* Cloudinary in Frameworks */,
 				6318CBA1243FB90D0035ABA2 /* Auth0.framework in Frameworks */,
@@ -625,7 +625,7 @@
 				37A185DE237A39EA002191B5 /* Run Script - swiftlint */,
 				37A185DF237A3A4D002191B5 /* Run Script - Generate Acknowledgments */,
 				37A185E0237A3AAA002191B5 /* Run Script - Carthage */,
-				37A2F419237CFF5E00C1EF3B /* Embed Frameworks */,
+				80F32C6B2472F326003F3411 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -826,7 +826,7 @@
 		};
 		37A185E0237A3AAA002191B5 /* Run Script - Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -1104,10 +1104,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 17;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 5792949ZYF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1119,9 +1119,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lambdalabs.swaap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jesseruiz.swaap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = swaapDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1132,10 +1132,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = swaap/swaap.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 17;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 5792949ZYF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1147,9 +1147,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.lambdalabs.swaap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jesseruiz.swaap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = swaapDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

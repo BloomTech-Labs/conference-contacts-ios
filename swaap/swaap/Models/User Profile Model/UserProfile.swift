@@ -44,6 +44,7 @@ struct UserProfile: Codable, Hashable {
 		case bio
         case notes //added here
         case events // added events here
+        // TODO: - ADD USERNAME
 		case _profileContactMethods = "profile"
 		case _qrCodes = "qrcodes"
 	}
@@ -172,6 +173,6 @@ struct UpdateUser: Codable {
 		tagline = userProfile.tagline
 		bio = userProfile.bio
         notes = userProfile.notes // added here
-        events = userProfile.events // added events 
+        events = userProfile.events // added events
 	}
 }

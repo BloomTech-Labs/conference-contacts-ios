@@ -63,6 +63,8 @@ extension ConnectionContact {
 							 jobTitle: String?,
 							 tagline: String?,
 							 bio: String?,
+                             notes: String?,
+                             events: String?,
 							 meetingCoordinate: MeetingCoordinate?,
 							 connectionMethods: [ConnectionContactMethod],
 							 context: NSManagedObjectContext) {
@@ -79,6 +81,8 @@ extension ConnectionContact {
 		self.jobTitle = jobTitle
 		self.tagline = tagline
 		self.bio = bio
+        self.notes = notes
+        self.events = events
 		if let meetingCoordinate = meetingCoordinate {
 			self.meetingLat = meetingCoordinate.coordinate.latitude
 			self.meetingLong = meetingCoordinate.coordinate.longitude
@@ -106,6 +110,8 @@ extension ConnectionContact {
 				  jobTitle: connectionProfile.jobTitle,
 				  tagline: connectionProfile.tagline,
 				  bio: connectionProfile.bio,
+                  notes: connectionProfile.notes,
+                  events: connectionProfile.events,
 				  meetingCoordinate: meetingCoordinate,
 				  connectionMethods: connectionMethods,
 				  context: context)
@@ -122,6 +128,8 @@ extension ConnectionContact {
 		jobTitle = userProfile.jobTitle
 		tagline = userProfile.tagline
 		bio = userProfile.bio
+        notes = userProfile.notes
+        events = userProfile.events
 		if let meetingCoordinate = meetingCoordinate {
 			self.meetingLat = meetingCoordinate.coordinate.latitude
 			self.meetingLong = meetingCoordinate.coordinate.longitude
@@ -152,6 +160,8 @@ func == (lhs: ConnectionContact, rhs: UserProfile) -> Bool {
 		lhs.jobTitle == rhs.jobTitle &&
 		lhs.tagline == rhs.tagline &&
 		lhs.bio == rhs.bio &&
+        lhs.notes == rhs.notes &&
+        lhs.events == rhs.events &&
 		contactMethods == rhs.profileContactMethods
 }
 

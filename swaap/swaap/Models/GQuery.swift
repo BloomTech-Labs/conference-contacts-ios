@@ -54,6 +54,8 @@ struct GQLMutationResponseContainer: Decodable {
 		case createConnection
 		case acceptConnection
 		case deleteConnection
+        case updateConnectionNote
+        case updateConnectionEvent
 	}
 
 	init(from decoder: Decoder) throws {

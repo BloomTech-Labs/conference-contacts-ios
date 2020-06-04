@@ -11,7 +11,7 @@ import UIKit
 /// This was originally designed with only displaying the current user in mind. Functionality to display the current
 /// user's contacts was somewhat grafted on, not always elegantly. It could probably use a little refactoring to make
 /// it a bit smoother. (But it works, so don't fret too much)
-class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
+class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, ContactsAccessor {
 
 	@IBOutlet private weak var noInfoDescLabel: UILabel!
 	@IBOutlet private weak var profileCardView: ProfileCardView!
@@ -28,10 +28,10 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBOutlet private weak var bioLabel: UILabel!
     @IBOutlet private weak var notesHeaderContainer: UIView!
     @IBOutlet private weak var notesLabelContainer: UIView!
-    @IBOutlet private weak var notesLabel: UILabel!
+    @IBOutlet private weak var notesField: BasicInfoView!
     @IBOutlet private weak var eventsHeaderContainer: UIView!
     @IBOutlet private weak var eventsLabelContainer: UIView!
-    @IBOutlet private weak var eventsLabel: UILabel!
+    @IBOutlet private weak var eventsField: BasicInfoView!
     @IBOutlet private weak var locationViewContainer: UIView!
 	@IBOutlet private weak var locationView: BasicInfoView!
 	@IBOutlet private weak var birthdayImageContainerView: UIView!
@@ -46,6 +46,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
+    var contactsController: ContactsController?
 
 	override var prefersStatusBarHidden: Bool {
 		profileCardView?.isAtTop ?? false
@@ -55,6 +56,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		.slide
 	}
 
+    var contact: ConnectionContact?
+    
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
 	}
@@ -125,8 +128,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		profileCardView.userProfile = userProfile
 		birthdayLabel.text = userProfile?.birthdate
 		bioLabel.text = userProfile?.bio ?? "No bio"
-        notesLabel.text = userProfile?.notes ?? "Make a note about a connection!" //added notes here
-        eventsLabel.text = userProfile?.events ?? "Create an event for a connection!"
+        notesField.valueText = userProfile?.notes
+        eventsField.valueText = userProfile?.events
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil
 
@@ -149,13 +152,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 			$0?.isVisible = shouldShowLabelInfo(infoValueType: .string(bioLabel?.text))
 		}
         //this makes the notes visible or not (test)
-        [notesHeaderContainer, notesLabelContainer].forEach {
-            $0?.isVisible = shouldShowLabelInfo(infoValueType: .string(notesLabel?.text))
-        }
-        // events 
-        [eventsHeaderContainer, eventsLabelContainer].forEach {
-            $0?.isVisible = shouldShowLabelInfo(infoValueType: .string(eventsLabel?.text))
-        }
+//        [notesHeaderContainer, notesLabelContainer].forEach {
+//            $0?.isVisible = shouldShowLabelInfo(infoValueType: .string(notesLabel?.text))
+//        }
+        //events
+//        [eventsHeaderContainer, eventsLabelContainer].forEach {
+//            $0?.isVisible = shouldShowLabelInfo(infoValueType: .string(eventsLabel?.text))
+//        }
 
 		let hasSocialButtons = !socialButtonsStackView.arrangedSubviews.isEmpty
 		socialButtonsStackView.isVisible = hasSocialButtons
@@ -181,6 +184,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 				}
 			})
 		}
+        
+        if isCurrentUser {
+            notesHeaderContainer.isHidden = true
+            notesField.isHidden = true
+            eventsHeaderContainer.isHidden = true
+            eventsField.isHidden = true
+        }
 	}
 
 	enum InfoValueType {
@@ -215,7 +225,12 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 		let contentsAreEmpty = [birthdayLabelContainer, bioLabelContainer, modesOfContactHeaderContainer].allSatisfy({ $0?.isVisible == false })
 		noInfoDescLabel.isVisible = contentsAreEmpty
 	}
-
+    
+    private func shouldShowNotesAndEvents() {
+        guard !isCurrentUser else { return }
+        
+    }
+    
 	private func populateSocialButtons() {
 		guard let profileContactMethods = userProfile?.profileContactMethods else { return }
 		socialButtonsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -260,6 +275,26 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor {
 	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
 		SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
+    
+    @IBSegueAction func notesTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+        let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+            self.notesField.valueText = infoNugget.value
+        })
+        inputVC?.placeholderStr = "Add notes"
+        inputVC?.labelText = notesField.valueText
+        inputVC?.autoCapitalizationType = .sentences
+        return inputVC
+    }
+    
+    @IBSegueAction func eventsTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+        let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
+            self.eventsField.valueText = infoNugget.value
+        })
+        inputVC?.placeholderStr = "Add an event"
+        inputVC?.labelText = eventsField.valueText
+        inputVC?.autoCapitalizationType = .sentences
+        return inputVC
+    }
 }
 
 extension ProfileViewController: ProfileCardViewDelegate {

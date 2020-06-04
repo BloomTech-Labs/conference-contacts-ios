@@ -137,8 +137,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		industryField.valueText = userProfile.industry
 		birthdayField.valueText = userProfile.birthdate
 		bioField.valueText = userProfile.bio
-        notesField.valueText = userProfile.notes //added here
-        eventsField.valueText = userProfile.events // added events here
+//        notesField.valueText = userProfile.notes
+//        eventsField.valueText = userProfile.events
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
 		}
@@ -174,8 +174,8 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.industry = industryField.valueText
 		newProfile.birthdate = birthdayField.valueText
 		newProfile.bio = bioField.valueText
-        newProfile.notes = notesField.valueText //added here
-        newProfile.events = eventsField.valueText // added events here
+//        newProfile.notes = notesField.valueText
+//        newProfile.events = eventsField.valueText
 		newProfile.profileContactMethods = contactMethods
 		
 		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
@@ -444,30 +444,29 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 //        inputVC?.autoCapitalizationType = .sentences
 //        return inputVC
 //    } //added this
-    @IBSegueAction func notesTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-    let inputVC = InputTextFieldViewController(coder: coder,
-                                               needsSocialTextField: false,
-                                               successfulCompletion: { infoNugget in
-                                               self.notesField.valueText = infoNugget.value
-    })
-        inputVC?.placeholderStr = "Add a note"
-        inputVC?.labelText = notesField.valueText
-        inputVC?.autoCapitalizationType = .sentences
-        return inputVC
-    }
-    @IBSegueAction func eventsTextFieldViewController(_ coder: NSCoder)  -> InputTextFieldViewController? {
-        let inputVC = InputTextFieldViewController(coder: coder,
-                                                   needsSocialTextField: false,
-                                                   successfulCompletion: {infoNugget in
-                                                   self.eventsField.valueText = infoNugget.value
-        })
-        inputVC?.placeholderStr = "Add a event"
-               inputVC?.labelText = notesField.valueText
-               inputVC?.autoCapitalizationType = .sentences
-               return inputVC
-        
-    }
-    
+//    @IBSegueAction func notesTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+//    let inputVC = InputTextFieldViewController(coder: coder,
+//                                               needsSocialTextField: false,
+//                                               successfulCompletion: { infoNugget in
+//                                               self.notesField.valueText = infoNugget.value
+//    })
+//        inputVC?.placeholderStr = "Add a note"
+//        inputVC?.labelText = notesField.valueText
+//        inputVC?.autoCapitalizationType = .sentences
+//        return inputVC
+//    }
+//
+//    @IBSegueAction func eventsTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
+//        let inputVC = InputTextFieldViewController(coder: coder,
+//                                                   needsSocialTextField: false,
+//                                                   successfulCompletion: {infoNugget in
+//                                                   self.eventsField.valueText = infoNugget.value
+//        })
+//        inputVC?.placeholderStr = "Add a event"
+//               inputVC?.labelText = notesField.valueText
+//               inputVC?.autoCapitalizationType = .sentences
+//               return inputVC
+//    }
     
 	@IBSegueAction func editJobTitleSegue(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
@@ -479,7 +478,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		return inputVC
 	}
 	
-	
 	@IBSegueAction func createContactMethodTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: true, successfulCompletion: { infoNugget in
 			guard let contactMethod = infoNugget.contactMethod else { return }
@@ -489,8 +487,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		})
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
-	}
-	
+	}	
 }
 
 // MARK: - ContactMethodCellViewDelegate conformance
