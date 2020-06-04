@@ -166,6 +166,48 @@ enum SwaapGQLQueries {
 			}
 		}
 		""".singleLine
+    
+    // MARK: - Notes and Events
+    static let connectionUpdateSenderNote = """
+    mutation ($id: ID!, $sendNote: String!) {
+        updateConnectionNote(id: $id, senderNote: $sendNote) {
+            success
+            code
+            message
+        }
+    }
+    """.singleLine
+    
+    static let connectionUpdateReceiverNote = """
+    mutation ($id: ID!, $receiveNote: String!) {
+        updateConnectionNote(id: $id, receiverNote: $receiveNote) {
+            success
+            code
+            message
+        }
+    }
+    """.singleLine
+    
+    static let connectionUpdateSenderEvent = """
+    mutation ($id: ID!, $sendEvent: String!) {
+        updateConnectionEvent(id: $id, senderEvent: $sendEvent) {
+            success
+            code
+            message
+            connection
+        }
+    }
+    """.singleLine
+    
+    static let connectionUpdateReceiverEvent = """
+    mutation ($id: ID!, $receiveEvent: String!) {
+        updateConnectionEvent(id: $id, receiverEvent: $receiveEvent) {
+            success
+            code
+            message
+        }
+    }
+    """.singleLine
 
 	// MARK: - Common
 	private static let commonUserFields = """

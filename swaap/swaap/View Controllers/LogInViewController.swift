@@ -108,8 +108,10 @@ class LogInViewController: UIViewController {
 	}
 
 	private func showErrorAlert(_ error: Error) {
-		let alertVC = UIAlertController(error: error)
-		self.present(alertVC, animated: true)
+        DispatchQueue.main.async {
+            let alertVC = UIAlertController(error: error)
+            self.present(alertVC, animated: true)
+        }
 	}
 
 	@IBAction func logoutTapped(_ sender: ButtonHelper) {
