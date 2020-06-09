@@ -353,13 +353,13 @@ class ContactsController {
 
     // MARK: - Notes & Events
     //swiftlint:disable:next line_length
-    func updateSenderNotes(toConnectionID connectionID: String, senderNote: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
+    func updateSenderNotes(toUserID userID: String, senderNote: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
         guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
             completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
             return
         }
         let query = SwaapGQLQueries.connectionUpdateSenderNote
-        let variables = ["id": connectionID,
+        let variables = ["id": userID,
                          "sendNote": senderNote] as [String: Any]
         
         let graphObject = GQuery(query: query, variables: variables)
@@ -384,13 +384,13 @@ class ContactsController {
     }
     
     //swiftlint:disable:next line_length
-    func updateReceiverNotes(toConnectionID connectionID: String, receiverNote: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
+    func updateReceiverNotes(toUserID userID: String, receiverNote: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
         guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
             completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
             return
         }
         let query = SwaapGQLQueries.connectionUpdateReceiverNote
-        let variables = ["id": connectionID,
+        let variables = ["id": userID,
                          "receiveNote": receiverNote] as [String: Any]
         
         let graphObject = GQuery(query: query, variables: variables)
@@ -415,13 +415,13 @@ class ContactsController {
     }
     
     //swiftlint:disable:next line_length
-    func updateSenderEvents(toConnectionID connectionID: String, senderEvent: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
+    func updateSenderEvents(toUserID userID: String, senderEvent: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
         guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
             completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
             return
         }
         let query = SwaapGQLQueries.connectionUpdateSenderNote
-        let variables = ["id": connectionID,
+        let variables = ["id": userID,
                          "sendEvent": senderEvent] as [String: Any]
         
         let graphObject = GQuery(query: query, variables: variables)
@@ -446,13 +446,13 @@ class ContactsController {
     }
     
     //swiftlint:disable:next line_length
-    func updateReceiverEvents(toConnectionID connectionID: String, receiverEvent: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
+    func updateReceiverEvents(toUserID userID: String, receiverEvent: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
         guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
             completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
             return
         }
         let query = SwaapGQLQueries.connectionUpdateReceiverNote
-        let variables = ["id": connectionID,
+        let variables = ["id": userID,
                          "receiveEvent": receiverEvent] as [String: Any]
         
         let graphObject = GQuery(query: query, variables: variables)

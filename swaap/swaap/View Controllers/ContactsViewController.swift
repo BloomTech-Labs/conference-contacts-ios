@@ -66,7 +66,6 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		contactsController?.updateContactCache()
 
 		configureSearch()
-
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -154,6 +153,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		profileVC?.isCurrentUser = false
 		profileVC?.userProfile = contact.contactProfile
 		profileVC?.meetingCoordinate = contact.meetingCoordinate
+        profileVC?.contact = contact
 		return profileVC
 	}
 
