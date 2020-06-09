@@ -487,7 +487,7 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		})
 		inputVC?.autoCapitalizationType = .none
 		return inputVC
-	}	
+	}
 }
 
 // MARK: - ContactMethodCellViewDelegate conformance

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NetworkHandler
 
 /// This was originally designed with only displaying the current user in mind. Functionality to display the current
 /// user's contacts was somewhat grafted on, not always elegantly. It could probably use a little refactoring to make
@@ -47,6 +48,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 	var profileController: ProfileController?
 	var profileChangedObserver: NSObjectProtocol?
     var contactsController: ContactsController?
+    var floatingTextField: FloatingTextFieldView?
 
 	override var prefersStatusBarHidden: Bool {
 		profileCardView?.isAtTop ?? false
@@ -57,6 +59,15 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 	}
 
     var contact: ConnectionContact?
+    var aContact: Contact? {
+        willSet {
+            print("Contact is nil.")
+        }
+        didSet {
+            guard let contact = aContact else { print("No contact"); return }
+            print("Contact: \(contact.id)")
+        }
+    }
     
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
@@ -191,7 +202,49 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
             eventsHeaderContainer.isHidden = true
             eventsField.isHidden = true
         }
+        
+//        guard let userProfile = userProfile,
+//            let contact = contact else { return }
+//        if userProfile.id == contact.id {
+//            contactsController?.updateSenderNotes(toConnectionID: contact.id!, senderNote: notesField.valueText ?? "Tap to add a note", completion: completionBlock())
+//            contactsController?.updateSenderEvents(toConnectionID: contact.id!, senderEvent: eventsField.valueText ?? "Tap to add an event", completion: completionBlock())
+//        } else {
+//            contactsController?.updateReceiverNotes(toConnectionID: contact.id!, receiverNote: notesField.valueText ?? "Tap to add a note", completion: completionBlock())
+//            contactsController?.updateReceiverEvents(toConnectionID: contact.id!, receiverEvent: eventsField.valueText ?? "Tap to add an event", completion: completionBlock())
+//        }
 	}
+    
+    func updateNotes() {
+        guard let userProfile = userProfile else { return }
+        if !isCurrentUser {
+            contactsController?.updateSenderNotes(toUserID: userProfile.id, senderNote: notesField.valueText ?? "Add a note", completion: completionBlock())
+        } else {
+            contactsController?.updateReceiverNotes(toUserID: userProfile.id, receiverNote: notesField.valueText ?? "Add a note", completion: completionBlock())
+        }
+    }
+    
+    func updateEvents() {
+//        guard let connectionID = contact?.connectionID else { return }
+        guard let userProfile = userProfile else { return }
+        guard let contact = contact else { return }
+        if userProfile.id == contact.id {
+            contactsController?.updateSenderEvents(toUserID: contact.connectionID ?? "", senderEvent: eventsField.valueText ?? "", completion: completionBlock())
+        } else {
+            contactsController?.updateReceiverEvents(toUserID: contact.connectionID ?? "", receiverEvent: eventsField.valueText ?? "", completion: completionBlock())
+        }
+    }
+    
+    func completionBlock() -> (Result<GQLMutationResponse, NetworkError>) -> Void {
+        let closure = { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
+                NSLog("Error: \(error)")
+            }
+        }
+        return closure
+    }
 
 	enum InfoValueType {
 		case string(String?)
@@ -279,6 +332,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
     @IBSegueAction func notesTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
         let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
             self.notesField.valueText = infoNugget.value
+            self.updateNotes()
         })
         inputVC?.placeholderStr = "Add notes"
         inputVC?.labelText = notesField.valueText
@@ -289,6 +343,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
     @IBSegueAction func eventsTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
         let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
             self.eventsField.valueText = infoNugget.value
+            self.updateEvents()
         })
         inputVC?.placeholderStr = "Add an event"
         inputVC?.labelText = eventsField.valueText

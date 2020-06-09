@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="1456"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7dm-QL-DOB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1528.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1508.6666666666667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jKR-Nf-fxg" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -208,13 +208,12 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="0oE-fO-WIR" userLabel="Notes Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="838" width="375" height="60"/>
+                                                <rect key="frame" x="0.0" y="838" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="1MD-eD-7mu"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="valuePlaceholder" value="Tap to add a note"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Events Field"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="headerText" value=" "/>
                                                 </userDefinedRuntimeAttributes>
@@ -223,14 +222,14 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="RF9-pv-4Lg" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="898" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="888" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="A37-Uf-D15"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="B4z-jT-1iH" userLabel="EVENTS HEADER">
-                                                <rect key="frame" x="0.0" y="918" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="908" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="EVENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmm-tK-EMm">
                                                         <rect key="frame" x="30" y="7.3333333333333703" width="337" height="15.666666666666664"/>
@@ -248,13 +247,12 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Mis-IY-Met" userLabel="Events Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="948" width="375" height="60"/>
+                                                <rect key="frame" x="0.0" y="938" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="zqo-6R-00B"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="valuePlaceholder" value="Tap to add an event"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Events Field"/>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="headerText" value=" "/>
                                                 </userDefinedRuntimeAttributes>
@@ -263,14 +261,14 @@
                                                 </connections>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="4sE-WL-9ae" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="1008" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="988" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="7jk-xP-q7I"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9JY-pb-gIG">
-                                                <rect key="frame" x="0.0" y="1028" width="375" height="128"/>
+                                                <rect key="frame" x="0.0" y="1008" width="375" height="128"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iWY-gT-ljC" customClass="MeetingLocationView" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="8" width="315" height="112"/>
@@ -289,7 +287,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pAR-Wf-Azl" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="1156" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="1136" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="9UM-5f-ZyM"/>
@@ -297,7 +295,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FX6-cO-zr2" userLabel="MODES OF CONTACT CONTAINER">
-                                                <rect key="frame" x="0.0" y="1176" width="375" height="30"/>
+                                                <rect key="frame" x="0.0" y="1156" width="375" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MODES OF CONTACT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4y-bX-lig">
                                                         <rect key="frame" x="30" y="7.3333333333332567" width="337" height="15.666666666666664"/>
@@ -316,7 +314,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1vv-7w-fJ6">
-                                                <rect key="frame" x="0.0" y="1206" width="375" height="252.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="1186" width="375" height="252.66666666666674"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="RdD-qC-Rsm" userLabel="Modes Of Contact Label">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="52.666666666666664"/>
@@ -360,14 +358,14 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1O1-L0-Q9A" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="1458.6666666666667" width="375" height="20"/>
+                                                <rect key="frame" x="0.0" y="1438.6666666666667" width="375" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="fmU-Iz-cs3"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0r-cw-Iou">
-                                                <rect key="frame" x="0.0" y="1478.6666666666667" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="1458.6666666666667" width="375" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5M8-KJ-9Zb">
                                                         <rect key="frame" x="30" y="0.0" width="315" height="50"/>
