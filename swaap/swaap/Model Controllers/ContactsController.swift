@@ -20,6 +20,7 @@ class ContactsController {
 	// MARK: - Properties
 	let profileController: ProfileController
 	let authManager: AuthManager
+//    let contact: ConnectionContact?
 
 	let networkHandler: NetworkHandler = {
 		let networkHandler = NetworkHandler()
@@ -477,17 +478,40 @@ class ContactsController {
         }
     }
     
+    func completionBlock() -> (Result<GQLMutationResponse, NetworkError>) -> Void {
+        let closure = { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
+                NSLog("Error: \(error)")
+            }
+        }
+        return closure
+    }
+    
     func createNote(with text: String, context: NSManagedObjectContext) {
         let note = ConnectionContact(notes: text, context: context)
         try? CoreDataStack.shared.save(context: context)
+        guard let connectionID = contact?.connectionID,
+            let notes = note.notes else { return }
+        if profileController.userProfile?.id == connectionID {
+            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
+        } else {
+            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
+        }
     }
     
     func updateNote(note: ConnectionContact, with text: String, context: NSManagedObjectContext) {
-        
-    }
-    
-    func deleteNote(note: ConnectionContact, context: NSManagedObjectContext) {
-        
+        note.notes = text
+        try? CoreDataStack.shared.save(context: context)
+        guard let connectionID = contact?.connectionID,
+            let notes = note.notes else { return }
+        if profileController.userProfile?.id == connectionID {
+            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
+        } else {
+            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
+        }
     }
 
 	// MARK: - Utility
