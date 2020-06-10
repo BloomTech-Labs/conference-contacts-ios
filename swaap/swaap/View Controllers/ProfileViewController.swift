@@ -353,7 +353,50 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
         inputVC?.autoCapitalizationType = .sentences
         return inputVC
     }
+    //notes
+    @IBAction func updateNoteButton(_ sender: Any) {
+       let alertController = UIAlertController(title: "Create a note", message: "", preferredStyle: .alert)
+
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "add a note"
+        }
+
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
+            _ = alertController.textFields![0] as UITextField
+        })
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )
+
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+
+        self.present(alertController, animated: true, completion: nil)
+    }
+    //crashes when u tap save because saving doesnt actually save yet?
+    
+    //events
+    @IBAction func updateEventButton(_ sender: Any) {
+        let alertController = UIAlertController(title: "Create an event", message: "", preferredStyle: .alert)
+
+              alertController.addTextField { (textField : UITextField!) -> Void in
+                  textField.placeholder = "add event"
+              }
+
+              let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
+                  _ = alertController.textFields![0] as UITextField
+              })
+
+              let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )
+
+              alertController.addAction(saveAction)
+              alertController.addAction(cancelAction)
+
+              self.present(alertController, animated: true, completion: nil)
+        
+    }
 }
+
+
 
 extension ProfileViewController: ProfileCardViewDelegate {
 	func updateFadeViewPosition() {

@@ -203,6 +203,9 @@
                                                         <state key="normal" title="Update Note">
                                                             <color key="titleColor" name="Swaap Accent color 2"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="updateNoteButton:" destination="j9t-B2-wS8" eventType="touchUpInside" id="dgX-nQ-1Qz"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -272,6 +275,9 @@
                                                         <state key="normal" title="Update Event">
                                                             <color key="titleColor" name="Swaap Accent color 2"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="updateEventButton:" destination="j9t-B2-wS8" eventType="touchUpInside" id="TKo-QV-mbc"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
