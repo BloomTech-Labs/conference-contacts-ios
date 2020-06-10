@@ -215,11 +215,14 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 	}
     
     func updateNotes() {
-        guard let userProfile = userProfile else { return }
-        if !isCurrentUser {
-            contactsController?.updateSenderNotes(toUserID: userProfile.id, senderNote: notesField.valueText ?? "Add a note", completion: completionBlock())
+        guard let userProfile = userProfile,
+            let contact = contact,
+            let connectionID = contact.connectionID,
+            let notes = notesField.valueText else { return }
+        if userProfile.id == contact.id {
+            contactsController?.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: completionBlock())
         } else {
-            contactsController?.updateReceiverNotes(toUserID: userProfile.id, receiverNote: notesField.valueText ?? "Add a note", completion: completionBlock())
+            contactsController?.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: completionBlock())
         }
     }
     

@@ -169,8 +169,8 @@ enum SwaapGQLQueries {
     
     // MARK: - Notes and Events
     static let connectionUpdateSenderNote = """
-    mutation ($id: ID!, $sendNote: String) {
-        updateConnectionNote(id: $id, senderNote: $sendNote) {
+    mutation ($id: ID!, $sendNote: String, $receiveNote: String) {
+        updateConnectionNote(id: $id, senderNote: $sendNote, receiverNote: $receiveNote) {
             success
             code
             message
@@ -189,8 +189,8 @@ enum SwaapGQLQueries {
     """.singleLine
     
     static let connectionUpdateSenderEvent = """
-    mutation ($id: ID!, $sendEvent: String) {
-        updateConnectionEvent(id: $id, senderEvent: $sendEvent) {
+    mutation ($id: ID!, $sendEvent: String, $receiveEvent: String) {
+        updateConnectionEvent(id: $id, senderEvent: $sendEvent, receiverEvent: $receiveEvent) {
             success
             code
             message
@@ -228,12 +228,6 @@ enum SwaapGQLQueries {
 			privacy
 			preferredContact
 		}
-        connection {
-            senderNote
-            receiverNote
-            senderEvent
-            receiverEvent
-        }
 		"""
 }
 

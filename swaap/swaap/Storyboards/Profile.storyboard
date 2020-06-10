@@ -198,17 +198,47 @@
                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyA-EH-M1Y">
+                                                        <rect key="frame" x="257" y="0.0" width="88" height="30"/>
+                                                        <state key="normal" title="Update Note">
+                                                            <color key="titleColor" name="Swaap Accent color 2"/>
+                                                        </state>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="dgx-m7-h3P" secondAttribute="trailing" constant="8" id="4fr-a4-eql"/>
                                                     <constraint firstAttribute="height" constant="30" id="6ag-lk-bBU"/>
                                                     <constraint firstItem="dgx-m7-h3P" firstAttribute="leading" secondItem="nar-nd-X8m" secondAttribute="leading" constant="30" id="8eu-aa-kG4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="YyA-EH-M1Y" secondAttribute="trailing" constant="30" id="NdQ-6j-5em"/>
                                                     <constraint firstItem="dgx-m7-h3P" firstAttribute="centerY" secondItem="nar-nd-X8m" secondAttribute="centerY" id="SZS-du-hR9"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="0oE-fO-WIR" userLabel="Notes Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="A5t-2F-526" userLabel="Notes Label Container">
                                                 <rect key="frame" x="0.0" y="838" width="375" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Bobby is a super cool guy. He knows a lot about testing, frontend and GraphQL. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuI-Ke-ui2" userLabel="Notes Label" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="30" y="6" width="315" height="38"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Add a note to a contact to remind yourself about them."/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
+                                                                <color key="value" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="tuI-Ke-ui2" secondAttribute="bottom" constant="6" id="PEh-OA-AwP"/>
+                                                    <constraint firstItem="tuI-Ke-ui2" firstAttribute="top" secondItem="A5t-2F-526" secondAttribute="top" constant="6" id="csC-Mu-sQB"/>
+                                                    <constraint firstItem="tuI-Ke-ui2" firstAttribute="leading" secondItem="A5t-2F-526" secondAttribute="leading" constant="30" id="gLo-Wz-mpW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="tuI-Ke-ui2" secondAttribute="trailing" constant="30" id="iRz-f5-7s8"/>
+                                                </constraints>
+                                            </view>
+                                            <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="0oE-fO-WIR" userLabel="Notes Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="888" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="1MD-eD-7mu"/>
@@ -237,6 +267,12 @@
                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8g-pG-pm0">
+                                                        <rect key="frame" x="252" y="0.0" width="93" height="30"/>
+                                                        <state key="normal" title="Update Event">
+                                                            <color key="titleColor" name="Swaap Accent color 2"/>
+                                                        </state>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -244,10 +280,34 @@
                                                     <constraint firstItem="lmm-tK-EMm" firstAttribute="centerY" secondItem="B4z-jT-1iH" secondAttribute="centerY" id="1wU-FG-rn6"/>
                                                     <constraint firstItem="lmm-tK-EMm" firstAttribute="leading" secondItem="B4z-jT-1iH" secondAttribute="leading" constant="30" id="9WO-2l-tfw"/>
                                                     <constraint firstAttribute="trailing" secondItem="lmm-tK-EMm" secondAttribute="trailing" constant="8" id="Dfs-MD-ipY"/>
+                                                    <constraint firstAttribute="trailing" secondItem="J8g-pG-pm0" secondAttribute="trailing" constant="30" id="PlO-OS-U7X"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Mis-IY-Met" userLabel="Events Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="KO4-ki-hi8" userLabel="Events Label Container">
                                                 <rect key="frame" x="0.0" y="938" width="375" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Twitch Convention 2020" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BW6-bS-Ydf" userLabel="Events Label" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
+                                                        <rect key="frame" x="30" y="6" width="315" height="38"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Add your own title to how and where you met."/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
+                                                                <color key="value" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="BW6-bS-Ydf" secondAttribute="trailing" constant="30" id="8OC-L0-8jG"/>
+                                                    <constraint firstItem="BW6-bS-Ydf" firstAttribute="top" secondItem="KO4-ki-hi8" secondAttribute="top" constant="6" id="QZH-lg-pwg"/>
+                                                    <constraint firstItem="BW6-bS-Ydf" firstAttribute="leading" secondItem="KO4-ki-hi8" secondAttribute="leading" constant="30" id="TJ2-dl-lD3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="BW6-bS-Ydf" secondAttribute="bottom" constant="6" id="Y9X-JB-30a"/>
+                                                </constraints>
+                                            </view>
+                                            <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Mis-IY-Met" userLabel="Events Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="988" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="zqo-6R-00B"/>
