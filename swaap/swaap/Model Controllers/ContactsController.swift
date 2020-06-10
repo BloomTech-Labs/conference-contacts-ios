@@ -490,29 +490,29 @@ class ContactsController {
         return closure
     }
     
-    func createNote(with text: String, context: NSManagedObjectContext) {
-        let note = ConnectionContact(notes: text, context: context)
-        try? CoreDataStack.shared.save(context: context)
-        guard let connectionID = contact?.connectionID,
-            let notes = note.notes else { return }
-        if profileController.userProfile?.id == connectionID {
-            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
-        } else {
-            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
-        }
-    }
-    
-    func updateNote(note: ConnectionContact, with text: String, context: NSManagedObjectContext) {
-        note.notes = text
-        try? CoreDataStack.shared.save(context: context)
-        guard let connectionID = contact?.connectionID,
-            let notes = note.notes else { return }
-        if profileController.userProfile?.id == connectionID {
-            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
-        } else {
-            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
-        }
-    }
+//    func createNote(with text: String, context: NSManagedObjectContext) {
+//        let note = ConnectionContact(notes: text, context: context)
+//        try? CoreDataStack.shared.save(context: context)
+//        guard let connectionID = contact?.connectionID,
+//            let notes = note.notes else { return }
+//        if profileController.userProfile?.id == connectionID {
+//            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
+//        } else {
+//            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
+//        }
+//    }
+//    
+//    func updateNote(note: ConnectionContact, with text: String, context: NSManagedObjectContext) {
+//        note.notes = text
+//        try? CoreDataStack.shared.save(context: context)
+//        guard let connectionID = contact?.connectionID,
+//            let notes = note.notes else { return }
+//        if profileController.userProfile?.id == connectionID {
+//            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
+//        } else {
+//            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
+//        }
+//    }
 
 	// MARK: - Utility
 	func clearCache(completion: ((Error?) -> Void)? = nil) {

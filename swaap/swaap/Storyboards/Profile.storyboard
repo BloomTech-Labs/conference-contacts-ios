@@ -220,7 +220,7 @@
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="A5t-2F-526" userLabel="Notes Label Container">
                                                 <rect key="frame" x="0.0" y="838" width="375" height="52.666666666666629"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Bobby is a super cool guy. He knows a lot about testing, frontend and GraphQL. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuI-Ke-ui2" userLabel="Notes Label" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuI-Ke-ui2" userLabel="Notes Label" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="6" width="315" height="40.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
@@ -292,7 +292,7 @@
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="KO4-ki-hi8" userLabel="Events Label Container">
                                                 <rect key="frame" x="0.0" y="940.66666666666663" width="375" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Twitch Convention 2020" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BW6-bS-Ydf" userLabel="Events Label" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BW6-bS-Ydf" userLabel="Events Label" customClass="LabelPlaceholder" customModule="swaap" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="6" width="315" height="38"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
@@ -602,6 +602,7 @@
                         <outlet property="editProfileButtonVisualFXContainerView" destination="HPr-IH-wav" id="JJ6-u7-13f"/>
                         <outlet property="eventsField" destination="Mis-IY-Met" id="Wbl-R0-XWf"/>
                         <outlet property="eventsHeaderContainer" destination="B4z-jT-1iH" id="1ni-yP-3PI"/>
+                        <outlet property="eventsLabel" destination="BW6-bS-Ydf" id="dSG-30-qld"/>
                         <outlet property="locationMapViewContainer" destination="9JY-pb-gIG" id="iLE-5B-Uun"/>
                         <outlet property="locationView" destination="UrP-3A-tXd" id="GnF-fj-6Bl"/>
                         <outlet property="locationViewContainer" destination="BYo-bM-3Qw" id="J2j-P5-3t3"/>
@@ -612,6 +613,7 @@
                         <outlet property="noInfoDescLabel" destination="AHm-Lv-sar" id="Nnv-jR-H4W"/>
                         <outlet property="notesField" destination="0oE-fO-WIR" id="sTe-3d-ftk"/>
                         <outlet property="notesHeaderContainer" destination="nar-nd-X8m" id="M1V-JK-Tch"/>
+                        <outlet property="notesLabel" destination="tuI-Ke-ui2" id="pgR-5X-Y7W"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>
                         <outlet property="scrollView" destination="Emm-zV-NSj" id="dCa-XL-gzp"/>
                         <outlet property="socialButtonsStackView" destination="5M8-KJ-9Zb" id="jTG-SD-nth"/>
