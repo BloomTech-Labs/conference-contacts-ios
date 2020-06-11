@@ -27,3 +27,20 @@ extension ConnectionContact {
     }
 }
 
+extension ConnectionContact {
+    var eventRepresentation: EventRepresentation? {
+        guard let events = events else { return nil }
+        return EventRepresentation(events: events)
+    }
+    
+    @discardableResult convenience init(events: String,
+                                        context: NSManagedObjectContext) {
+        self.init(context: context)
+        self.events = events
+    }
+    
+    @discardableResult convenience init?(eventRepresentation: EventRepresentation, context: NSManagedObjectContext) {
+        self.init(events: eventRepresentation.events,
+                  context: context)
+    }
+}

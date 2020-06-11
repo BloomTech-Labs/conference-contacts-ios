@@ -142,7 +142,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 		birthdayLabel.text = userProfile?.birthdate
 		bioLabel.text = userProfile?.bio ?? "No bio"
         notesLabel.text = contact?.notes
-        eventsLabel.text = userProfile?.events
+        eventsLabel.text = contact?.events
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil
 
@@ -327,6 +327,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 	// MARK: - Actions
 	@IBAction func backbuttonTapped(_ sender: UIButton) {
 		navigationController?.popViewController(animated: true)
+        try? CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
 	}
 
 	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
@@ -347,7 +348,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
                 let enteredText = textFields[0].text
                 self.notesLabel.text = enteredText
                 self.updateNotes()
-                try? CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
+                if let notes = self.notesLabel.text {
+                    if let contact = self.contact {
+                        self.contactsController?.updateNote(note: contact, with: notes, context: CoreDataStack.shared.mainContext)
+                    } else {
+                        self.contactsController?.createNote(with: notes, context: CoreDataStack.shared.mainContext)
+                    }
+                }
             }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )
@@ -372,7 +379,13 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
                     let textFields = eventTextField as [UITextField]
                     let enteredText = textFields[0].text
                     self.eventsLabel.text = enteredText
-                    try? CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
+                    if let events = self.eventsLabel.text {
+                        if let contact = self.contact {
+                            self.contactsController?.updateEvent(event: contact, with: events, context: CoreDataStack.shared.mainContext)
+                        } else {
+                            self.contactsController?.createEvent(with: events, context: CoreDataStack.shared.mainContext)
+                        }
+                    }
                 }
               })
               let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )

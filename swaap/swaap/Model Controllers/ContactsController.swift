@@ -478,41 +478,25 @@ class ContactsController {
         }
     }
     
-    func completionBlock() -> (Result<GQLMutationResponse, NetworkError>) -> Void {
-        let closure = { (result: Result<GQLMutationResponse, NetworkError>) -> Void in
-            switch result {
-            case .success:
-                break
-            case .failure(let error):
-                NSLog("Error: \(error)")
-            }
-        }
-        return closure
+    func createNote(with text: String, context: NSManagedObjectContext) {
+        let note = ConnectionContact(notes: text, context: context)
+        try? CoreDataStack.shared.save(context: context)
+    }
+
+    func updateNote(note: ConnectionContact, with text: String, context: NSManagedObjectContext) {
+        note.notes = text
+        try? CoreDataStack.shared.save(context: context)
     }
     
-//    func createNote(with text: String, context: NSManagedObjectContext) {
-//        let note = ConnectionContact(notes: text, context: context)
-//        try? CoreDataStack.shared.save(context: context)
-//        guard let connectionID = contact?.connectionID,
-//            let notes = note.notes else { return }
-//        if profileController.userProfile?.id == connectionID {
-//            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
-//        } else {
-//            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
-//        }
-//    }
-//    
-//    func updateNote(note: ConnectionContact, with text: String, context: NSManagedObjectContext) {
-//        note.notes = text
-//        try? CoreDataStack.shared.save(context: context)
-//        guard let connectionID = contact?.connectionID,
-//            let notes = note.notes else { return }
-//        if profileController.userProfile?.id == connectionID {
-//            self.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: self.completionBlock())
-//        } else {
-//            self.updateSenderNotes(toConnectionID: connectionID, receiverNote: notes, completion: self.completionBlock())
-//        }
-//    }
+    func createEvent(with text: String, context: NSManagedObjectContext) {
+        let event = ConnectionContact(events: text, context: context)
+        try? CoreDataStack.shared.save(context: context)
+    }
+    
+    func updateEvent(event: ConnectionContact, with text: String, context: NSManagedObjectContext) {
+        event.events = text
+        try? CoreDataStack.shared.save(context: context)
+    }
 
 	// MARK: - Utility
 	func clearCache(completion: ((Error?) -> Void)? = nil) {
