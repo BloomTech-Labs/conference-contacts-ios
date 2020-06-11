@@ -20,6 +20,7 @@ class ContactsController {
 	// MARK: - Properties
 	let profileController: ProfileController
 	let authManager: AuthManager
+//    let contact: ConnectionContact?
 
 	let networkHandler: NetworkHandler = {
 		let networkHandler = NetworkHandler()
@@ -481,13 +482,20 @@ class ContactsController {
         let note = ConnectionContact(notes: text, context: context)
         try? CoreDataStack.shared.save(context: context)
     }
-    
+
     func updateNote(note: ConnectionContact, with text: String, context: NSManagedObjectContext) {
-        
+        note.notes = text
+        try? CoreDataStack.shared.save(context: context)
     }
     
-    func deleteNote(note: ConnectionContact, context: NSManagedObjectContext) {
-        
+    func createEvent(with text: String, context: NSManagedObjectContext) {
+        let event = ConnectionContact(events: text, context: context)
+        try? CoreDataStack.shared.save(context: context)
+    }
+    
+    func updateEvent(event: ConnectionContact, with text: String, context: NSManagedObjectContext) {
+        event.events = text
+        try? CoreDataStack.shared.save(context: context)
     }
 
 	// MARK: - Utility

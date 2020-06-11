@@ -29,9 +29,11 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 	@IBOutlet private weak var bioLabel: UILabel!
     @IBOutlet private weak var notesHeaderContainer: UIView!
     @IBOutlet private weak var notesLabelContainer: UIView!
+    @IBOutlet private weak var notesLabel: UILabel!
     @IBOutlet private weak var notesField: BasicInfoView!
     @IBOutlet private weak var eventsHeaderContainer: UIView!
     @IBOutlet private weak var eventsLabelContainer: UIView!
+    @IBOutlet private weak var eventsLabel: UILabel!
     @IBOutlet private weak var eventsField: BasicInfoView!
     @IBOutlet private weak var locationViewContainer: UIView!
 	@IBOutlet private weak var locationView: BasicInfoView!
@@ -139,8 +141,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 		profileCardView.userProfile = userProfile
 		birthdayLabel.text = userProfile?.birthdate
 		bioLabel.text = userProfile?.bio ?? "No bio"
-        notesField.valueText = userProfile?.notes
-        eventsField.valueText = userProfile?.events
+        notesLabel.text = contact?.notes
+        eventsLabel.text = contact?.events
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil
 
@@ -218,7 +220,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
         guard let userProfile = userProfile,
             let contact = contact,
             let connectionID = contact.connectionID,
-            let notes = notesField.valueText else { return }
+            let notes = notesLabel.text else { return }
         if userProfile.id == contact.id {
             contactsController?.updateSenderNotes(toConnectionID: connectionID, senderNote: notes, completion: completionBlock())
         } else {
@@ -227,7 +229,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
     }
     
     func updateEvents() {
-//        guard let connectionID = contact?.connectionID else { return }
         guard let userProfile = userProfile else { return }
         guard let contact = contact else { return }
         if userProfile.id == contact.id {
@@ -326,50 +327,41 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 	// MARK: - Actions
 	@IBAction func backbuttonTapped(_ sender: UIButton) {
 		navigationController?.popViewController(animated: true)
+        try? CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
 	}
 
 	@IBSegueAction func editButtonTappedSegue(_ coder: NSCoder) -> UINavigationController? {
 		SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
     
-    @IBSegueAction func notesTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-        let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-            self.notesField.valueText = infoNugget.value
-            self.updateNotes()
-        })
-        inputVC?.placeholderStr = "Add notes"
-        inputVC?.labelText = notesField.valueText
-        inputVC?.autoCapitalizationType = .sentences
-        return inputVC
-    }
-    
-    @IBSegueAction func eventsTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-        let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-            self.eventsField.valueText = infoNugget.value
-            self.updateEvents()
-        })
-        inputVC?.placeholderStr = "Add an event"
-        inputVC?.labelText = eventsField.valueText
-        inputVC?.autoCapitalizationType = .sentences
-        return inputVC
-    }
     //notes
     @IBAction func updateNoteButton(_ sender: Any) {
-       let alertController = UIAlertController(title: "Create a note", message: "", preferredStyle: .alert)
-
-        alertController.addTextField { (textField : UITextField!) -> Void in
-            textField.placeholder = "add a note"
+        let alertController = UIAlertController(title: "Create a note", message: "", preferredStyle: .alert)
+        
+        alertController.addTextField { (textField: UITextField!) -> Void in
+            textField.placeholder = "Add note"
         }
-
-        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
-            _ = alertController.textFields![0] as UITextField
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ -> Void in
+            if let noteTextField = alertController.textFields {
+                let textFields = noteTextField as [UITextField]
+                let enteredText = textFields[0].text
+                self.notesLabel.text = enteredText
+                self.updateNotes()
+                if let notes = self.notesLabel.text {
+                    if let contact = self.contact {
+                        self.contactsController?.updateNote(note: contact, with: notes, context: CoreDataStack.shared.mainContext)
+                    } else {
+                        self.contactsController?.createNote(with: notes, context: CoreDataStack.shared.mainContext)
+                    }
+                }
+            }
         })
-
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )
-
+        
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
-
+        
         self.present(alertController, animated: true, completion: nil)
     }
     //crashes when u tap save because saving doesnt actually save yet?
@@ -378,25 +370,32 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
     @IBAction func updateEventButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Create an event", message: "", preferredStyle: .alert)
 
-              alertController.addTextField { (textField : UITextField!) -> Void in
-                  textField.placeholder = "add event"
+              alertController.addTextField { (textField: UITextField!) -> Void in
+                  textField.placeholder = "Add event"
               }
 
-              let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
-                  _ = alertController.textFields![0] as UITextField
+              let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ -> Void in
+                if let eventTextField = alertController.textFields {
+                    let textFields = eventTextField as [UITextField]
+                    let enteredText = textFields[0].text
+                    self.eventsLabel.text = enteredText
+                    if let events = self.eventsLabel.text {
+                        if let contact = self.contact {
+                            self.contactsController?.updateEvent(event: contact, with: events, context: CoreDataStack.shared.mainContext)
+                        } else {
+                            self.contactsController?.createEvent(with: events, context: CoreDataStack.shared.mainContext)
+                        }
+                    }
+                }
               })
-
               let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil )
 
               alertController.addAction(saveAction)
               alertController.addAction(cancelAction)
 
-              self.present(alertController, animated: true, completion: nil)
-        
+            self.present(alertController, animated: true, completion: nil)
     }
 }
-
-
 
 extension ProfileViewController: ProfileCardViewDelegate {
 	func updateFadeViewPosition() {

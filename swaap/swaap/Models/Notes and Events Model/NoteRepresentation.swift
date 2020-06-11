@@ -11,3 +11,7 @@ import Foundation
 struct NoteRepresentation: Codable {
     let notes: String
 }
+
+struct EventRepresentation: Codable {
+    let events: String
+}
