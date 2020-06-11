@@ -8,6 +8,7 @@
 //swiftlint:disable identifier_name
 
 import Foundation
+import CoreData
 
 /// Used only for fetching and decoding JSON from the server.
 struct UserProfileContainer: Decodable {

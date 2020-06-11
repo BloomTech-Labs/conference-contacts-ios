@@ -225,7 +225,6 @@
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Add a note to a contact to remind yourself about them."/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
                                                                 <color key="value" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -239,20 +238,6 @@
                                                     <constraint firstItem="tuI-Ke-ui2" firstAttribute="leading" secondItem="A5t-2F-526" secondAttribute="leading" constant="30" id="gLo-Wz-mpW"/>
                                                     <constraint firstAttribute="trailing" secondItem="tuI-Ke-ui2" secondAttribute="trailing" constant="30" id="iRz-f5-7s8"/>
                                                 </constraints>
-                                            </view>
-                                            <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="0oE-fO-WIR" userLabel="Notes Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="890.66666666666663" width="375" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" placeholder="YES" id="1MD-eD-7mu"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Events Field"/>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="headerText" value=" "/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="gO5-za-HME" appends="YES" id="IXh-3A-d3a"/>
-                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="RF9-pv-4Lg" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="890.66666666666663" width="375" height="20"/>
@@ -297,7 +282,6 @@
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Add your own title to how and where you met."/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
                                                                 <color key="value" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -311,20 +295,6 @@
                                                     <constraint firstItem="BW6-bS-Ydf" firstAttribute="leading" secondItem="KO4-ki-hi8" secondAttribute="leading" constant="30" id="TJ2-dl-lD3"/>
                                                     <constraint firstAttribute="bottom" secondItem="BW6-bS-Ydf" secondAttribute="bottom" constant="6" id="Y9X-JB-30a"/>
                                                 </constraints>
-                                            </view>
-                                            <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Mis-IY-Met" userLabel="Events Field" customClass="BasicInfoView" customModule="swaap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="990.66666666666674" width="375" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" placeholder="YES" id="zqo-6R-00B"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="previewString" value="Events Field"/>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="headerText" value=" "/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="nO6-Nw-GUy" appends="YES" id="ZMy-nw-NRh"/>
-                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="4sE-WL-9ae" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="990.66666666666674" width="375" height="20"/>
@@ -446,9 +416,6 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="0oE-fO-WIR" firstAttribute="leading" secondItem="7dm-QL-DOB" secondAttribute="leading" constant="20" id="60H-WZ-fw2"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -600,7 +567,6 @@
                         <outlet property="bottomFadeView" destination="mJq-vT-FfX" id="w9E-Nn-82w"/>
                         <outlet property="bottomFadeviewBottomConstraint" destination="1ze-mp-8ta" id="gNv-P1-5fK"/>
                         <outlet property="editProfileButtonVisualFXContainerView" destination="HPr-IH-wav" id="JJ6-u7-13f"/>
-                        <outlet property="eventsField" destination="Mis-IY-Met" id="Wbl-R0-XWf"/>
                         <outlet property="eventsHeaderContainer" destination="B4z-jT-1iH" id="1ni-yP-3PI"/>
                         <outlet property="eventsLabel" destination="BW6-bS-Ydf" id="dSG-30-qld"/>
                         <outlet property="locationMapViewContainer" destination="9JY-pb-gIG" id="iLE-5B-Uun"/>
@@ -611,7 +577,6 @@
                         <outlet property="modesOfContactImageViewContainer" destination="kxb-bX-n7D" id="It2-pL-gHH"/>
                         <outlet property="modesOfContactPreviewStackView" destination="1vv-7w-fJ6" id="xAZ-ym-94O"/>
                         <outlet property="noInfoDescLabel" destination="AHm-Lv-sar" id="Nnv-jR-H4W"/>
-                        <outlet property="notesField" destination="0oE-fO-WIR" id="sTe-3d-ftk"/>
                         <outlet property="notesHeaderContainer" destination="nar-nd-X8m" id="M1V-JK-Tch"/>
                         <outlet property="notesLabel" destination="tuI-Ke-ui2" id="pgR-5X-Y7W"/>
                         <outlet property="profileCardView" destination="uVY-7s-0Rc" id="tnX-hZ-BJv"/>

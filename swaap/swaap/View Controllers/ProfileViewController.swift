@@ -334,7 +334,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 		SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
     
-    //notes
     @IBAction func updateNoteButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Create a note", message: "", preferredStyle: .alert)
         
@@ -364,9 +363,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
         
         self.present(alertController, animated: true, completion: nil)
     }
-    //crashes when u tap save because saving doesnt actually save yet?
     
-    //events
     @IBAction func updateEventButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Create an event", message: "", preferredStyle: .alert)
 
