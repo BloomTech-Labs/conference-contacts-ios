@@ -178,30 +178,9 @@ enum SwaapGQLQueries {
     }
     """.singleLine
     
-    static let connectionUpdateReceiverNote = """
-    mutation ($id: ID!, $receiveNote: String) {
-        updateConnectionNote(id: $id, receiverNote: $receiveNote) {
-            success
-            code
-            message
-        }
-    }
-    """.singleLine
-    
     static let connectionUpdateSenderEvent = """
     mutation ($id: ID!, $sendEvent: String, $receiveEvent: String) {
         updateConnectionEvent(id: $id, senderEvent: $sendEvent, receiverEvent: $receiveEvent) {
-            success
-            code
-            message
-            connection
-        }
-    }
-    """.singleLine
-    
-    static let connectionUpdateReceiverEvent = """
-    mutation ($id: ID!, $receiveEvent: String) {
-        updateConnectionEvent(id: $id, receiverEvent: $receiveEvent) {
             success
             code
             message

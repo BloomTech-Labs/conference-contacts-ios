@@ -4,7 +4,7 @@
 //
 //  Created by Michael Redig on 12/17/19.
 //  Copyright © 2019 swaap. All rights reserved.
-//
+// swiftlint:disable all
 
 import UIKit
 import CoreData
@@ -199,7 +199,7 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		iOS Developers:
 		Michael Redig
 		Marlon Raskin
-		Chad Rutherford
+		Chad Rutherford\n Kerianne Levesque\n Jesse Ruiz
 
 		Web Developers:
 		Jonathan Picazzo
@@ -211,11 +211,11 @@ class ContactsViewController: UIViewController, ProfileAccessor, ContactsAccesso
 		Sierra Curtis
 		Erica Ingram
 		Roberto Banbanaste
-		Corey Gumbs
+		Corey Gumbs\n Christine Fletcher\n Christian Rios\n Michael Bailar
 
 		UX Designers:
 		Tyler Nishida
-		Emily Arias
+		Emily Arias\n Frantz-Eder Audige
 
 		Current environment: \(ReleaseState.current == .appStore ? "Production" : "Staging")
 		App version: \(appVersion) (\(buildVersion))

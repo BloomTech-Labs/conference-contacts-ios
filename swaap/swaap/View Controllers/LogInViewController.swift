@@ -46,7 +46,7 @@ class LogInViewController: UIViewController {
 		overrideUserInterfaceStyle = .light
 	}
 
-    //MARK: Actions
+    // MARK: - Actions
 	@IBAction func googleSignInTapped(_ sender: ButtonHelper) {
 		authManager.showWebAuth(completion: { [weak self] error in
 			guard let self = self else { return }
