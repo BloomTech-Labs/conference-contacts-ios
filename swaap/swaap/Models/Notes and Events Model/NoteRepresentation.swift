@@ -9,9 +9,9 @@
 import Foundation
 
 struct NoteRepresentation: Codable {
-    let notes: String
+    var notes: String
 }
 
 struct EventRepresentation: Codable {
-    let events: String
+    var events: String
 }

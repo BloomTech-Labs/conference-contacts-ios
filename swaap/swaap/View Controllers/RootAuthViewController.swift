@@ -51,7 +51,6 @@ class RootAuthViewController: UIViewController {
 		return loginVC
 	}
 
-	
 	@IBSegueAction func showSignupVC(_ coder: NSCoder) -> SignUpViewController? {
 		let signupVC = SignUpViewController(coder: coder, authManager: authManager, profileController: profileController)
 		return signupVC

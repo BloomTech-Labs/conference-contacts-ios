@@ -20,7 +20,6 @@ class ContactsController {
 	// MARK: - Properties
 	let profileController: ProfileController
 	let authManager: AuthManager
-//    let contact: ConnectionContact?
 
 	let networkHandler: NetworkHandler = {
 		let networkHandler = NetworkHandler()
@@ -359,14 +358,13 @@ class ContactsController {
             completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
             return
         }
-        let query = SwaapGQLQueries.connectionUpdateSenderNote
-        let variables = ["id": connectionID,
-                         "sendNote": senderNote,
-                         "receiveNote": receiverNote] as [String: Any]
-        
-        let graphObject = GQuery(query: query, variables: variables)
+        let mutation = SwaapGQLQueries.connectionUpdateSenderNote
         
         do {
+            let variables = ["id": connectionID,
+                             "sendNote": senderNote,
+                             "receiveNote": receiverNote] as [String: Any]
+            let graphObject = GQMutation(query: mutation, variables: variables)
             request.httpBody = try graphObject.jsonData()
         } catch {
             NSLog("Failed encoding graph object: \(error)")
@@ -386,75 +384,14 @@ class ContactsController {
     }
     
     //swiftlint:disable:next line_length
-    func updateReceiverNotes(toUserID userID: String, receiverNote: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
+    func updateSenderEvents(toConnectionID connectionID: String, senderEvent: String = "nil", receiverEvent: String = "nil", session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
         guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
             completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
             return
         }
-        let query = SwaapGQLQueries.connectionUpdateReceiverNote
-        let variables = ["id": userID,
-                         "receiveNote": receiverNote] as [String: Any]
-        
-        let graphObject = GQuery(query: query, variables: variables)
-        
-        do {
-            request.httpBody = try graphObject.jsonData()
-        } catch {
-            NSLog("Failed encoding graph object: \(error)")
-            completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
-            return
-        }
-        request.expectedResponseCodes = [200]
-        networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
-            do {
-                let container = try result.get()
-                completion(.success(container.response))
-            } catch {
-                NSLog("Error updating receiver note: \(error)")
-                completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
-            }
-        }
-    }
-    
-    //swiftlint:disable:next line_length
-    func updateSenderEvents(toUserID userID: String, senderEvent: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
-        guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
-            completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
-            return
-        }
-        let query = SwaapGQLQueries.connectionUpdateSenderNote
-        let variables = ["id": userID,
-                         "sendEvent": senderEvent] as [String: Any]
-        
-        let graphObject = GQuery(query: query, variables: variables)
-        
-        do {
-            request.httpBody = try graphObject.jsonData()
-        } catch {
-            NSLog("Failed encoding graph object: \(error)")
-            completion(.failure(.dataCodingError(specifically: error, sourceData: nil)))
-            return
-        }
-        request.expectedResponseCodes = [200]
-        networkHandler.transferMahCodableDatas(with: request, session: session) { (result: Result<GQLMutationResponseContainer, NetworkError>) in
-            do {
-                let container = try result.get()
-                completion(.success(container.response))
-            } catch {
-                NSLog("Error updating sender event: \(error)")
-                completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
-            }
-        }
-    }
-    
-    //swiftlint:disable:next line_length
-    func updateReceiverEvents(toUserID userID: String, receiverEvent: String, session: NetworkLoader = URLSession.shared, completion: @escaping(Result<GQLMutationResponse, NetworkError>) -> Void) {
-        guard var request = authManager.networkAuthRequestCommon(for: graphqlURL) else {
-            completion(.failure(NetworkError.unspecifiedError(reason: "Request was not attainable.")))
-            return
-        }
-        let query = SwaapGQLQueries.connectionUpdateReceiverNote
-        let variables = ["id": userID,
+        let query = SwaapGQLQueries.connectionUpdateSenderEvent
+        let variables = ["id": connectionID,
+                         "sendEvent": senderEvent,
                          "receiveEvent": receiverEvent] as [String: Any]
         
         let graphObject = GQuery(query: query, variables: variables)
@@ -472,7 +409,7 @@ class ContactsController {
                 let container = try result.get()
                 completion(.success(container.response))
             } catch {
-                NSLog("Error updating receiver event: \(error)")
+                NSLog("Error updating sender event: \(error)")
                 completion(.failure(error as? NetworkError ?? NetworkError.otherError(error: error)))
             }
         }

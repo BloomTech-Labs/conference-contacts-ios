@@ -61,15 +61,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 	}
 
     var contact: ConnectionContact?
-    var aContact: Contact? {
-        willSet {
-            print("Contact is nil.")
-        }
-        didSet {
-            guard let contact = aContact else { print("No contact"); return }
-            print("Contact: \(contact.id)")
-        }
-    }
+    var aContact: Contact?
     
 	var userProfile: UserProfile? {
 		didSet { updateViews() }
@@ -141,8 +133,8 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 		profileCardView.userProfile = userProfile
 		birthdayLabel.text = userProfile?.birthdate
 		bioLabel.text = userProfile?.bio ?? "No bio"
-        notesLabel.text = contact?.notes
-        eventsLabel.text = contact?.events
+        notesLabel.text = userProfile?.notes
+        eventsLabel.text = userProfile?.events
 		locationView.valueText = userProfile?.location
 		locationView.customSubview = nil
 
@@ -164,14 +156,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 		[bioHeaderContainer, bioLabelContainer].forEach {
 			$0?.isVisible = shouldShowLabelInfo(infoValueType: .string(bioLabel?.text))
 		}
-        //this makes the notes visible or not (test)
-//        [notesHeaderContainer, notesLabelContainer].forEach {
-//            $0?.isVisible = shouldShowLabelInfo(infoValueType: .string(notesLabel?.text))
-//        }
-        //events
-//        [eventsHeaderContainer, eventsLabelContainer].forEach {
-//            $0?.isVisible = shouldShowLabelInfo(infoValueType: .string(eventsLabel?.text))
-//        }
 
 		let hasSocialButtons = !socialButtonsStackView.arrangedSubviews.isEmpty
 		socialButtonsStackView.isVisible = hasSocialButtons
@@ -204,16 +188,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
             eventsHeaderContainer.isHidden = true
             eventsField.isHidden = true
         }
-        
-//        guard let userProfile = userProfile,
-//            let contact = contact else { return }
-//        if userProfile.id == contact.id {
-//            contactsController?.updateSenderNotes(toConnectionID: contact.id!, senderNote: notesField.valueText ?? "Tap to add a note", completion: completionBlock())
-//            contactsController?.updateSenderEvents(toConnectionID: contact.id!, senderEvent: eventsField.valueText ?? "Tap to add an event", completion: completionBlock())
-//        } else {
-//            contactsController?.updateReceiverNotes(toConnectionID: contact.id!, receiverNote: notesField.valueText ?? "Tap to add a note", completion: completionBlock())
-//            contactsController?.updateReceiverEvents(toConnectionID: contact.id!, receiverEvent: eventsField.valueText ?? "Tap to add an event", completion: completionBlock())
-//        }
 	}
     
     func updateNotes() {
@@ -229,12 +203,14 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
     }
     
     func updateEvents() {
-        guard let userProfile = userProfile else { return }
-        guard let contact = contact else { return }
+        guard let userProfile = userProfile,
+            let contact = contact,
+            let connectionID = contact.connectionID,
+            let events = eventsLabel.text else { return }
         if userProfile.id == contact.id {
-            contactsController?.updateSenderEvents(toUserID: contact.connectionID ?? "", senderEvent: eventsField.valueText ?? "", completion: completionBlock())
+            contactsController?.updateSenderEvents(toConnectionID: connectionID, senderEvent: events, completion: completionBlock())
         } else {
-            contactsController?.updateReceiverEvents(toUserID: contact.connectionID ?? "", receiverEvent: eventsField.valueText ?? "", completion: completionBlock())
+            contactsController?.updateSenderEvents(toConnectionID: connectionID, receiverEvent: events, completion: completionBlock())
         }
     }
     
@@ -334,7 +310,6 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
 		SwipeBackNavigationController(coder: coder, profileController: profileController)
 	}
     
-    //notes
     @IBAction func updateNoteButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Create a note", message: "", preferredStyle: .alert)
         
@@ -351,8 +326,10 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
                 if let notes = self.notesLabel.text {
                     if let contact = self.contact {
                         self.contactsController?.updateNote(note: contact, with: notes, context: CoreDataStack.shared.mainContext)
+                        self.userProfile?.notes = notes
                     } else {
                         self.contactsController?.createNote(with: notes, context: CoreDataStack.shared.mainContext)
+                        self.userProfile?.notes = notes
                     }
                 }
             }
@@ -364,9 +341,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
         
         self.present(alertController, animated: true, completion: nil)
     }
-    //crashes when u tap save because saving doesnt actually save yet?
     
-    //events
     @IBAction func updateEventButton(_ sender: Any) {
         let alertController = UIAlertController(title: "Create an event", message: "", preferredStyle: .alert)
 

@@ -51,7 +51,6 @@ class SwipeBackNavigationController: UINavigationController, AuthAccessor, Profi
 		fixUINavigationBarHideAndUnhideWhenSwipingBackToPreviousUIViewControllerWhenPoppingTopViewControllerOnNavigationStack()
 	}
 
-	/// Teeehehe
 	private func fixUINavigationBarHideAndUnhideWhenSwipingBackToPreviousUIViewControllerWhenPoppingTopViewControllerOnNavigationStack() {
 		popRecognizer = InteractivePopRecognizer(controller: self)
 		interactivePopGestureRecognizer?.delegate = popRecognizer

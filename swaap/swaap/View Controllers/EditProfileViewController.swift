@@ -30,7 +30,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var choosePhotoButton: UIButton!
 	@IBOutlet private weak var contactMethodsDescLabel: UILabel!
 	
-	
 	@IBOutlet private weak var nameField: BasicInfoView!
 	@IBOutlet private weak var taglineField: BasicInfoView!
 	@IBOutlet private weak var jobTitleField: BasicInfoView!
@@ -38,8 +37,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 	@IBOutlet private weak var industryField: BasicInfoView!
 	@IBOutlet private weak var birthdayField: BasicInfoView!
 	@IBOutlet private weak var bioField: BasicInfoView!
-    @IBOutlet private weak var notesField: BasicInfoView! // added outlet for notes
-    @IBOutlet private weak var eventsField: BasicInfoView! // added outlet for event
     
 	@IBOutlet private weak var contactMethodsStackView: UIStackView!
 	
@@ -113,17 +110,12 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 			self.contactMethodsStackView.layoutSubviews()
 		}
 		
-		//		if photo != nil {
-		//			choosePhotoButton.setImage(nil, for: .normal)
-		//		} else {
 		let image = UIImage(systemName: "camera.fill")
 		choosePhotoButton.setImage(image, for: .normal)
 		choosePhotoButton.tintColor = .label
 		choosePhotoButton.backgroundColor = UIColor.black.withAlphaComponent(0.2)
 		choosePhotoButton.layer.cornerRadius = 20
 		choosePhotoButton.layer.cornerCurve = .continuous
-		
-		//		}
 	}
 	
 	private func populateFromUserProfile() {
@@ -137,8 +129,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		industryField.valueText = userProfile.industry
 		birthdayField.valueText = userProfile.birthdate
 		bioField.valueText = userProfile.bio
-//        notesField.valueText = userProfile.notes
-//        eventsField.valueText = userProfile.events
 		if let imageData = userProfile.photoData {
 			profileImageView.image = UIImage(data: imageData)
 		}
@@ -174,8 +164,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		newProfile.industry = industryField.valueText
 		newProfile.birthdate = birthdayField.valueText
 		newProfile.bio = bioField.valueText
-//        newProfile.notes = notesField.valueText
-//        newProfile.events = eventsField.valueText
 		newProfile.profileContactMethods = contactMethods
 		
 		guard let panel = LoadinationAnimatorView.fullScreenPanel() else { return }
@@ -435,38 +423,6 @@ class EditProfileViewController: UIViewController, ProfileAccessor {
 		inputVC?.autoCapitalizationType = .sentences
 		return inputVC
 	}
-//    @IBSegueAction func notesTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-//        let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
-//            self.notesField.valueText = infoNugget.value
-//        })
-//        inputVC?.placeholderStr = "Add a note"
-//        inputVC?.labelText = notesField.valueText
-//        inputVC?.autoCapitalizationType = .sentences
-//        return inputVC
-//    } //added this
-//    @IBSegueAction func notesTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-//    let inputVC = InputTextFieldViewController(coder: coder,
-//                                               needsSocialTextField: false,
-//                                               successfulCompletion: { infoNugget in
-//                                               self.notesField.valueText = infoNugget.value
-//    })
-//        inputVC?.placeholderStr = "Add a note"
-//        inputVC?.labelText = notesField.valueText
-//        inputVC?.autoCapitalizationType = .sentences
-//        return inputVC
-//    }
-//
-//    @IBSegueAction func eventsTextFieldViewController(_ coder: NSCoder) -> InputTextFieldViewController? {
-//        let inputVC = InputTextFieldViewController(coder: coder,
-//                                                   needsSocialTextField: false,
-//                                                   successfulCompletion: {infoNugget in
-//                                                   self.eventsField.valueText = infoNugget.value
-//        })
-//        inputVC?.placeholderStr = "Add a event"
-//               inputVC?.labelText = notesField.valueText
-//               inputVC?.autoCapitalizationType = .sentences
-//               return inputVC
-//    }
     
 	@IBSegueAction func editJobTitleSegue(_ coder: NSCoder) -> InputTextFieldViewController? {
 		let inputVC = InputTextFieldViewController(coder: coder, needsSocialTextField: false, successfulCompletion: { infoNugget in
