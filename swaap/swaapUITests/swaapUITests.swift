@@ -57,6 +57,10 @@ class SwaapUITests: XCTestCase {
 		app.tables.staticTexts["ProfileHeaderLabel"].tap()
 		app.buttons["EditButton"].tap()
 	}
+    func navigateToContactProfile() {
+        let tables = app.tables.element
+        _ = tables.cells.element(boundBy: 0).tap()
+    }
 
 
 	// MARK: - EditVC Tests
@@ -85,6 +89,16 @@ class SwaapUITests: XCTestCase {
 		scrollUp()
 		XCTAssertFalse(app.buttons["EditVC.AddContactMethodButton"].isHittable)
 	}
+    func testUpdateNotesButton(){
+        navigateToContactProfile()
+        scrollDown()
+        XCTAssertTrue(app.buttons["updateNotesButton"].isHittable)
+    }
+    func testUpdateEventsButton() {
+        navigateToContactProfile()
+        scrollDown()
+        XCTAssertTrue(app.buttons["updateEventsButton"].isHittable)
+    }
 
 	// MARK: - FloatingTextField Tests
 	func testInputVCIsShowing() {
