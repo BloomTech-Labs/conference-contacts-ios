@@ -200,6 +200,7 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyA-EH-M1Y">
                                                         <rect key="frame" x="257" y="0.0" width="88" height="30"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="updateNotesButton"/>
                                                         <state key="normal" title="Update Note">
                                                             <color key="titleColor" name="Swaap Accent color 2"/>
                                                         </state>
@@ -272,6 +273,7 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8g-pG-pm0">
                                                         <rect key="frame" x="252" y="0.0" width="93" height="30"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="updateEventsButton"/>
                                                         <state key="normal" title="Update Event">
                                                             <color key="titleColor" name="Swaap Accent color 2"/>
                                                         </state>
@@ -1290,6 +1292,7 @@ Long pressing one of contact methods will bring up privacy options:
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="contactCell"/>
                                         <connections>
                                             <segue destination="j9t-B2-wS8" kind="show" destinationCreationSelector="showContactProfile:" id="DnX-Ny-7lW"/>
                                         </connections>
