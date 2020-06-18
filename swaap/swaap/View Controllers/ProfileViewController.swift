@@ -314,7 +314,7 @@ class ProfileViewController: UIViewController, Storyboarded, ProfileAccessor, Co
         let alertController = UIAlertController(title: "Create a note", message: "", preferredStyle: .alert)
         
         alertController.addTextField { (textField: UITextField!) -> Void in
-            textField.placeholder = "Add note"
+            textField.placeholder = "Add a note"
         }
         
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ -> Void in
